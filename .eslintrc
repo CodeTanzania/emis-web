@@ -1,0 +1,51 @@
+{
+    "extends": [
+        "airbnb",
+        "prettier",
+        "prettier/react",
+        "plugin:prettier/recommended",
+        "plugin:jest/recommended"
+    ],
+    "plugins": [
+        "prettier",
+        "jest"
+    ],
+    "parser": "babel-eslint",
+    "rules": {
+        "react/destructuring-assignment": [
+            true,
+            "always",
+            {
+                "ignoreClassFields": true
+            }
+        ],
+        "prettier/prettier": "error",
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [
+                    ".js",
+                    ".jsx"
+                ]
+            }
+        ],
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+                "devDependencies": [
+                    "**/*.test.js",
+                    "**/*.spec.js",
+                    "**/stories/*"
+                ]
+            }
+        ],
+        "jest/no-disabled-tests": "warn",
+        "jest/no-focused-tests": "error",
+        "jest/no-identical-title": "error",
+        "jest/prefer-to-have-length": "warn",
+        "jest/valid-expect": "error"
+    },
+    "globals": {
+        "fetch": false
+    }
+}
