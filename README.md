@@ -1,5 +1,7 @@
 # emis-web
 
+[![Build Status](https://travis-ci.org/CodeTanzania/emis-web.svg?branch=develop)](https://travis-ci.org/CodeTanzania/emis-web)
+
 WIP
 
 ## License
