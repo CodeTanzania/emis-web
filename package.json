@@ -8,8 +8,10 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
-    "commit": "git add -A && git-cz",
-    "changelog": ""
+    "commit": "git-cz",
+    "commit:all": "git add -A && git-cz",
+    "lint": "eslint --ext .jsx,.js src/",
+    "changelog": "changelog"
   },
   "keywords": [
     "codetanzania",
@@ -60,13 +62,11 @@
     "prettier": "^1.15.3",
     "react-app-rewired": "^2.0.2"
   },
-  "contributors": [
-    {
-      "name": "Benson Maruchu",
-      "email": "benmaruchu@gmail.com",
-      "url": "https://github.com/BenMaruchu"
-    }
-  ],
+  "contributors": [{
+    "name": "Benson Maruchu",
+    "email": "benmaruchu@gmail.com",
+    "url": "https://github.com/BenMaruchu"
+  }],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/CodeTanzania/emis-web/issues"
