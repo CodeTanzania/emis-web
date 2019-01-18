@@ -1,2 +1,10 @@
-script
-- commitlint-travis
+language: node_js
+
+node_js:
+  - '8'
+
+sudo: false
+
+script:
+  - commitlint-travis
+  - npm run lint -s && npm test
