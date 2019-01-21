@@ -1,0 +1,17 @@
+.BaseLayout {
+  height: 100vh;
+}
+
+.BaseLayoutHeader {
+  background-color: #fff;
+  box-shadow: 0 2px 2px #ceced194;
+  z-index: 1;
+}
+
+.BaseLayoutHeader .Breadcrumb {
+  font-size: 18px;
+}
+
+.BaseLayoutContent {
+  background-color: #fff;
+}
