@@ -14,10 +14,11 @@ import Alerts from '../Alerts';
 import Assessments from '../Assessments';
 import Plans from '../Plans';
 import Stakeholders from '../Stakeholders';
-import './BaseLayout.css';
 import GeographicalFeatures from '../GeographicalFeatures';
 import Incidents from '../Incidents';
 import Resources from '../Resources';
+import Home from '../Home';
+import './styles.css';
 
 const { Header, Content } = Layout;
 const breadcrumbNameMap = {
@@ -108,7 +109,7 @@ const BaseLayout = withRouter(props => {
       </Header>
       <Content className="BaseLayoutContent">
         <Switch>
-          <Route exact path="/" />
+          <Route exact path="/" component={Home} />
           <Route path="/alerts" component={Alerts} />
           <Route path="/assessments" component={Assessments} />
           <Route
