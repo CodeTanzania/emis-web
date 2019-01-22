@@ -1,0 +1,24 @@
+.ModuleNavMenu {
+  width: 200px;
+}
+
+.ModuleNavMenu .NavItem {
+  margin: 10px;
+}
+
+.ModuleNavMenu .NavItem:hover {
+  background-color: #fafafb;
+}
+
+.ModuleNavMenu .NavItem .image {
+  display: block;
+  margin: 0 auto;
+}
+
+.ModuleNavMenu .NavItem .text {
+  font-size: 11px;
+  display: block;
+  text-align: center;
+  text-transform: uppercase;
+  color: #1B98D1
+}
