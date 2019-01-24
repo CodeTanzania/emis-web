@@ -3,8 +3,8 @@ import { Input, List } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import '../styles.css';
-import ActionBar from './ActionBar';
-import ContactListItem from './ListItem';
+import ContactsActionBar from './ActionBar';
+import ContactsListItem from './ListItem';
 
 const { Search } = Input;
 
@@ -12,12 +12,12 @@ const { Search } = Input;
  * Render contact list which have search box, actions and contact list
  *
  * @class
- * @name ContactList
+ * @name ContactsList
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class ContactList extends Component {
+class ContactsList extends Component {
   propTypes = {
     loading: PropTypes.bool.isRequired,
     contacts: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
@@ -33,7 +33,7 @@ class ContactList extends Component {
   render() {
     const { contacts, loading, page, total } = this.props;
     return (
-      <div className="ContactList">
+      <div className="ContactsList">
         {/* search input component */}
         <Search
           size="large"
@@ -42,14 +42,14 @@ class ContactList extends Component {
         />
         {/* end search input component */}
         {/* list header */}
-        <ActionBar total={total} page={page} />
+        <ContactsActionBar total={total} page={page} />
         {/* end list header */}
         {/* list starts */}
         <List
           loading={loading}
           dataSource={contacts}
           renderItem={contact => (
-            <ContactListItem
+            <ContactsListItem
               key={contact.abbreviation}
               abbreviation={contact.abbreviation}
               name={contact.name}
@@ -65,7 +65,7 @@ class ContactList extends Component {
   }
 }
 
-export default Connect(ContactList, {
+export default Connect(ContactsList, {
   contacts: 'stakeholders.list',
   loading: 'stakeholders.loading',
   page: 'stakeholders.page',

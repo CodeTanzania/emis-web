@@ -16,12 +16,12 @@ const types = [
  * Filter modal component for filtering contacts
  *
  * @function
- * @name ContactFilters
+ * @name ContactsFilters
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-const ContactFilters = () => (
+const ContactsFilters = () => (
   <div>
     <Row>
       {phases.map(phase => (
@@ -40,4 +40,4 @@ const ContactFilters = () => (
   </div>
 );
 
-export default ContactFilters;
+export default ContactsFilters;

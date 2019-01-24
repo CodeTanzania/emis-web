@@ -7,7 +7,7 @@ import React from 'react';
  * Render action bar for actions which are applicable to list content
  *
  * @function
- * @name ContactsListHeader
+ * @name ContactsActionBar
  *
  * @param {Object} props
  * @param {page} props.page
@@ -16,8 +16,8 @@ import React from 'react';
  * @version 0.1.0
  * @since 0.1.0
  */
-const ContactsListHeader = ({ page, total }) => (
-  <div className="ContactListHeader">
+const ContactsActionBar = ({ page, total }) => (
+  <div className="ContactsActionBar">
     <Row>
       <Col span={1} xl={1} style={{ paddingLeft: 8 }}>
         <Checkbox />
@@ -55,9 +55,9 @@ const ContactsListHeader = ({ page, total }) => (
 );
 
 /* props validation */
-ContactsListHeader.propTypes = {
+ContactsActionBar.propTypes = {
   page: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
 };
 
-export default ContactsListHeader;
+export default ContactsActionBar;
