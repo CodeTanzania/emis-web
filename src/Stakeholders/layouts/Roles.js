@@ -1,7 +1,7 @@
 import React from 'react';
 // import UIState from '../../components/UIState';
-import ContactList from '../Roles/RoleList';
+import RoleList from '../Roles/List';
 
-const StakeholdersRolesLayout = () => <ContactList />;
+const StakeholdersRolesLayout = () => <RoleList />;
 
 export default StakeholdersRolesLayout;

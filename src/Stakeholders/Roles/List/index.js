@@ -2,9 +2,9 @@ import { Connect, getRoles } from '@codetanzania/emis-api-states';
 import { Input, List } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import RoleListItem from './RoleListItem';
-import RolesListHeader from './ListHeader';
-import './styles.css';
+import RoleListItem from '../ListItem';
+import RolesListHeader from '../Header';
+import '../styles.css';
 
 const { Search } = Input;
 
