@@ -12,6 +12,15 @@ const types = [
   'Other',
 ];
 
+/**
+ * Filter modal component for filtering contacts
+ *
+ * @function
+ * @name ContactFilters
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
 const ContactFilters = () => (
   <div>
     <Row>
