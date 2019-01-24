@@ -1,38 +1,24 @@
-.ContactList {
-  padding: 40px;
-}
-
-.ContactList .searchBox {
-  width: 50%;
-}
-
-.ContactListItem {
+.ContactsListItem {
   width: 100%;
   border-bottom: 1px solid #e8e8e8;
   padding: 15px 0;
   height: 60px;
 }
 
-.ContactListItem .Checkbox {
+.ContactsListItem .Checkbox {
   padding: 0 8px;
 }
 
-.ContactListItem:hover {
+.ContactsListItem:hover {
   background-color: #f5f5f5;
 }
 
-.ContactListItem .actionIcon:hover {
+.ContactsListItem .actionIcon:hover {
   color: #008EFA;
   background-color: #e8e8e8;
 }
 
-.ContactListHeader {
-  border-bottom: 1px solid #e8e8e8;
-  height: 40px;
-  margin-top: 40px;
-}
-
-.ContactListItem .actionIcon {
+.ContactsListItem .actionIcon {
   padding-top: 8px;
   margin-bottom: 5px;
   width: 32px;
@@ -41,16 +27,17 @@
   display: inline-block;
   text-align: center;
   border-radius: 50%;
+  cursor: pointer;
 }
 
-.ContactListItem .actionIcon {
+.ContactsListItem .actionIcon {
   display: inline-block;
   margin: 0 10px;
   font-size: 16px;
 
 }
 
-.ContactListItem .actionIcon:hover {
+.ContactsListItem .actionIcon:hover {
   color: #008EFA;
   background-color: #e8e8e8;
 }

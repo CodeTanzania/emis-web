@@ -56,7 +56,7 @@ const NavItem = ({ name, icon, path }) => (
 );
 
 /**
- * Home component which shows to navigation Nav
+ * Home component which shows to navigation icon
  *
  * @function
  * @name Home

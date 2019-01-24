@@ -1,25 +1,24 @@
 import { Connect, getStakeholders } from '@codetanzania/emis-api-states';
-import { Input, List } from 'antd';
+import { Button, Col, Input, List, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import '../styles.css';
-import ActionBar from './ActionBar';
-import ContactListItem from './ListItem';
+import ContactsActionBar from './ActionBar';
+import ContactsListItem from './ListItem';
+import './styles.css';
 
 const { Search } = Input;
 
 /**
  * Render contact list which have search box, actions and contact list
  *
- * @function
- * @name ContactList
- *
+ * @class
+ * @name ContactsList
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class ContactList extends Component {
-  propTypes = {
+class ContactsList extends Component {
+  static propTypes = {
     loading: PropTypes.bool.isRequired,
     contacts: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
       .isRequired,
@@ -34,23 +33,39 @@ class ContactList extends Component {
   render() {
     const { contacts, loading, page, total } = this.props;
     return (
-      <div className="ContactList">
-        {/* search input component */}
-        <Search
-          size="large"
-          placeholder="Search for stakeholders here ..."
-          className="searchBox"
-        />
-        {/* end search input component */}
+      <div className="ContactsList">
+        <Row>
+          <Col span={12}>
+            {/* search input component */}
+            <Search
+              size="large"
+              placeholder="Search for stakeholders here ..."
+            />
+            {/* end search input component */}
+          </Col>
+          {/* primary actions */}
+          <Col span={3} offset={9}>
+            <Button
+              type="primary"
+              icon="plus"
+              size="large"
+              title="Add New Contact"
+            >
+              New Contact
+            </Button>
+          </Col>
+          {/* end primary actions */}
+        </Row>
+
         {/* list header */}
-        <ActionBar total={total} page={page} />
+        <ContactsActionBar total={total} page={page} />
         {/* end list header */}
         {/* list starts */}
         <List
           loading={loading}
           dataSource={contacts}
           renderItem={contact => (
-            <ContactListItem
+            <ContactsListItem
               key={contact.abbreviation}
               abbreviation={contact.abbreviation}
               name={contact.name}
@@ -66,7 +81,7 @@ class ContactList extends Component {
   }
 }
 
-export default Connect(ContactList, {
+export default Connect(ContactsList, {
   contacts: 'stakeholders.list',
   loading: 'stakeholders.loading',
   page: 'stakeholders.page',
