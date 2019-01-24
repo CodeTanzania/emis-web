@@ -2,9 +2,9 @@ import { Connect, getRoles } from '@codetanzania/emis-api-states';
 import { Input, List } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import RoleListItem from '../ListItem';
-import RolesListHeader from '../Header';
-import '../styles.css';
+import RoleListItem from './ListItem';
+import RolesListHeader from './Header';
+import './styles.css';
 
 const { Search } = Input;
 
@@ -29,6 +29,7 @@ class RoleList extends Component {
       })
     ).isRequired,
     total: PropTypes.number.isRequired,
+    page: PropTypes.number.isRequired,
   };
 
   componentWillMount() {
@@ -36,7 +37,7 @@ class RoleList extends Component {
   }
 
   render() {
-    const { roles, loading, total } = this.props;
+    const { roles, loading, total, page } = this.props;
     return (
       <div className="RoleList">
         {/* search input component */}
@@ -47,7 +48,7 @@ class RoleList extends Component {
         />
         {/* end search input component */}
         {/* list header */}
-        <RolesListHeader total={total} />
+        <RolesListHeader total={total} page={page} />
         {/* end list header */}
         {/* list starts */}
         <List
@@ -71,5 +72,6 @@ class RoleList extends Component {
 export default Connect(RoleList, {
   roles: 'roles.list',
   loading: 'roles.loading',
+  page: 'roles.page',
   total: 'roles.total',
 });
