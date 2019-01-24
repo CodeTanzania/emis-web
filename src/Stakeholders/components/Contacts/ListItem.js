@@ -5,7 +5,7 @@ import React, { Component, Fragment } from 'react';
 /**
  * Single contact list item component. Render single contact details
  *
- * @function
+ * @class
  * @name ContactListItem
  *
  * @param {Object} props

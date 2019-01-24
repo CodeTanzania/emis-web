@@ -51,7 +51,7 @@ import GeographicalFeaturesWarehousesLayout from '../GeographicalFeatures/layout
 import GeographicalFeaturesFacilitiesLayout from '../GeographicalFeatures/layouts/Facilities';
 import GeographicalFeaturesInfrastructureLayout from '../GeographicalFeatures/layouts/Infrastructure';
 import Home from '../Home';
-import ModuleNavMenu from './components/ModuleNavMenu';
+import HeaderNavMenu from './components/HeaderNavMenu';
 import './styles.css';
 
 const { Header, Content } = Layout;
@@ -160,7 +160,7 @@ const BaseLayout = withRouter(props => {
                 <Col span={12}>
                   <Popover
                     placement="bottom"
-                    content={<ModuleNavMenu />}
+                    content={<HeaderNavMenu />}
                     trigger="click"
                   >
                     <Button icon="appstore" />

@@ -11,9 +11,8 @@ const { Search } = Input;
 /**
  * Render contact list which have search box, actions and contact list
  *
- * @function
+ * @class
  * @name ContactList
- *
  *
  * @version 0.1.0
  * @since 0.1.0
