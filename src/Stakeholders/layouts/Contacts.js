@@ -1,7 +1,7 @@
 import React from 'react';
 // import UIState from '../../components/UIState';
-import ContactList from '../components/ContactList';
+import Contacts from '../components/Contacts';
 
-const StakeholdersContactsLayout = () => <ContactList />;
+const StakeholdersContactsLayout = () => <Contacts />;
 
 export default StakeholdersContactsLayout;
