@@ -1,12 +1,13 @@
 import { Avatar, Checkbox, Col, Icon, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
+import './styles.css';
 
 /**
  * Single contact list item component. Render single contact details
  *
- * @function
- * @name ContactListItem
+ * @class
+ * @name ContactsListItem
  *
  * @param {Object} props
  * @param {string} props.abbreviation
@@ -18,9 +19,17 @@ import React, { Component, Fragment } from 'react';
  * @version 0.1.0
  * @since 0.1.0
  */
-class ContactListItem extends Component {
+class ContactsListItem extends Component {
   state = {
     isHovered: false,
+  };
+
+  static propTypes = {
+    abbreviation: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    mobile: PropTypes.string.isRequired,
   };
 
   handleMouseEnter = () => {
@@ -36,7 +45,7 @@ class ContactListItem extends Component {
     const { isHovered } = this.state;
     return (
       <div
-        className="ContactListItem"
+        className="ContactsListItem"
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
@@ -79,13 +88,4 @@ class ContactListItem extends Component {
   }
 }
 
-/* props validation */
-ContactListItem.propTypes = {
-  abbreviation: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  mobile: PropTypes.string.isRequired,
-};
-
-export default ContactListItem;
+export default ContactsListItem;
