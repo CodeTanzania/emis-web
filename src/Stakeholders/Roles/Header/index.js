@@ -15,7 +15,7 @@ import React from 'react';
  * @version 0.1.0
  * @since 0.1.0
  */
-const RolesListHeader = ({ total }) => (
+const RolesListHeader = ({ total, page }) => (
   <div className="RoleListHeader">
     <Row>
       <Col span={1} xl={1} style={{ paddingLeft: 8 }}>
@@ -41,9 +41,9 @@ const RolesListHeader = ({ total }) => (
       <Col span={3} xl={4} xxl={3}>
         <Pagination
           simple
-          defaultCurrent={2}
+          defaultCurrent={page}
           total={total}
-          onChange={page => getRoles({ page })}
+          onChange={nextPage => getRoles({ nextPage })}
         />
       </Col>
     </Row>
@@ -54,6 +54,7 @@ export default RolesListHeader;
 
 RolesListHeader.propTypes = {
   total: PropTypes.number,
+  page: PropTypes.number.isRequired,
 };
 
 RolesListHeader.defaultProps = {
