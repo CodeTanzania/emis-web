@@ -54,11 +54,6 @@ class RoleListItem extends Component {
               <Fragment>
                 <Icon type="edit" title="Update Role" className="actionIcon" />
                 <Icon
-                  type="share-alt"
-                  title="Share Role"
-                  className="actionIcon"
-                />
-                <Icon
                   type="database"
                   title="Archive Role"
                   className="actionIcon"

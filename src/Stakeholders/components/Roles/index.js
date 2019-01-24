@@ -1,9 +1,9 @@
 import { Connect, getRoles } from '@codetanzania/emis-api-states';
-import { Input, List } from 'antd';
+import { Input, List, Col, Row, Button } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import RoleListItem from './ListItem';
-import RolesListHeader from './Header';
+import RolesActionBar from './ActionBar';
 import './styles.css';
 
 const { Search } = Input;
@@ -40,16 +40,31 @@ class RoleList extends Component {
     const { roles, loading, total, page } = this.props;
     return (
       <div className="RoleList">
-        {/* search input component */}
-        <Search
-          size="large"
-          placeholder="Search for roles here ..."
-          className="searchBox"
-        />
-        {/* end search input component */}
-        {/* list header */}
-        <RolesListHeader total={total} page={page} />
-        {/* end list header */}
+        <Row>
+          <Col span={12}>
+            {/* search input component */}
+            <Search
+              size="large"
+              placeholder="Search for stakeholders here ..."
+            />
+            {/* end search input component */}
+          </Col>
+          {/* primary actions */}
+          <Col span={3} offset={9}>
+            <Button
+              type="primary"
+              icon="plus"
+              size="large"
+              title="Add New Contact"
+            >
+              New Contact
+            </Button>
+          </Col>
+          {/* end primary actions */}
+        </Row>
+        {/* list action bar */}
+        <RolesActionBar total={total} page={page} />
+        {/* end list action bar */}
         {/* list starts */}
         <List
           loading={loading}
