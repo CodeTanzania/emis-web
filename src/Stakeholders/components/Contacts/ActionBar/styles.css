@@ -1,0 +1,15 @@
+.ContactsActionBar {
+  border-bottom: 1px solid #e8e8e8;
+  height: 40px;
+  margin-top: 40px;
+}
+
+.ContactsActionBar .actionIcon {
+  padding: 13px 15px;
+}
+
+.ContactsActionBar .actionIcon:hover {
+  background-color: #e8e8e8;
+  border-radius: 50%;
+  cursor: pointer;
+}

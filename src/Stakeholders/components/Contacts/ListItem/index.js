@@ -1,6 +1,7 @@
 import { Avatar, Checkbox, Col, Icon, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
+import './styles.css';
 
 /**
  * Single contact list item component. Render single contact details

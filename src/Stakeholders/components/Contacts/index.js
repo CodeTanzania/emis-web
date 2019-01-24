@@ -2,9 +2,9 @@ import { Connect, getStakeholders } from '@codetanzania/emis-api-states';
 import { Button, Col, Input, List, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import '../styles.css';
 import ContactsActionBar from './ActionBar';
 import ContactsListItem from './ListItem';
+import './styles.css';
 
 const { Search } = Input;
 
