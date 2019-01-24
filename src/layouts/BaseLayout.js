@@ -53,6 +53,7 @@ import GeographicalFeaturesInfrastructureLayout from '../GeographicalFeatures/la
 import Home from '../Home';
 import HeaderNavMenu from './components/HeaderNavMenu';
 import './styles.css';
+import EvacuationCentersLayout from '../GeographicalFeatures/layouts/EvacuationCenters';
 
 const { Header, Content } = Layout;
 const breadcrumbNameMap = {
@@ -310,6 +311,11 @@ const BaseLayout = withRouter(props => {
             exact
             path="/geographicalfeatures/administrativeboundaries"
             component={AdministrativeBoundariesLayout}
+          />
+          <Route
+            exact
+            path="/geographicalfeatures/evacuationcenters"
+            component={EvacuationCentersLayout}
           />
           <Route
             exact

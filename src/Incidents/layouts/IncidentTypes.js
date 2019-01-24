@@ -5,8 +5,8 @@ const IncidentsIncidentTypesLayout = () => (
   <div style={{ marginTop: '20%' }}>
     <UIState
       icon="exclamation-circle"
-      description="No Alerts IncidentTypes yet,but when they are available will appear here"
-      buttonLabel="New Alert"
+      description="No IncidentTypes yet,but when they are available will appear here"
+      buttonLabel="New Incident"
       onClick={() => {}}
     />
   </div>
