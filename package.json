@@ -60,16 +60,15 @@
     "eslint-plugin-react": "^7.12.4",
     "generate-changelog": "^1.7.1",
     "husky": "^1.3.1",
+    "lint-staged": "^8.1.0",
     "prettier": "^1.16.1",
     "react-app-rewired": "^2.0.2"
   },
-  "contributors": [
-    {
-      "name": "Benson Maruchu",
-      "email": "benmaruchu@gmail.com",
-      "url": "https://github.com/BenMaruchu"
-    }
-  ],
+  "contributors": [{
+    "name": "Benson Maruchu",
+    "email": "benmaruchu@gmail.com",
+    "url": "https://github.com/BenMaruchu"
+  }],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/CodeTanzania/emis-web/issues"
@@ -95,8 +94,14 @@
       "@commitlint/config-conventional"
     ]
   },
+  "lint-staged": {
+    "*.js": [
+      "npm run lint"
+    ]
+  },
   "husky": {
     "hooks": {
+      "pre-commit": "lint-staged",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   }
