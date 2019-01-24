@@ -8,7 +8,7 @@ import './styles.css';
  * Render action bar for actions which are applicable to list content
  *
  * @function
- * @name ContactsActionBar
+ * @name RolesActionBar
  *
  * @param {Object} props
  * @param {page} props.page
@@ -18,7 +18,7 @@ import './styles.css';
  * @since 0.1.0
  */
 const RolesActionBar = ({ page, total }) => (
-  <div className="ContactsActionBar">
+  <div className="RolesActionBar">
     <Row>
       <Col span={1} xl={1} className="checkbox">
         <Checkbox />
@@ -28,7 +28,7 @@ const RolesActionBar = ({ page, total }) => (
         <Button
           shape="circle"
           icon="reload"
-          title="Refresh contacts"
+          title="Refresh roles"
           onClick={() => getRoles()}
           className="actionButton"
           size="large"
@@ -39,7 +39,7 @@ const RolesActionBar = ({ page, total }) => (
         <Button
           type="circle"
           icon="hdd"
-          title="Archive selected contacts"
+          title="Archive selected roles"
           className="actionButton"
           size="large"
         />
@@ -54,7 +54,7 @@ const RolesActionBar = ({ page, total }) => (
         <Button
           type="circle"
           icon="filter"
-          title="Filter contacts"
+          title="Filter roles"
           className="actionButton"
           size="large"
         />
