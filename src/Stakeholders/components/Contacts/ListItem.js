@@ -23,6 +23,14 @@ class ContactsListItem extends Component {
     isHovered: false,
   };
 
+  static propTypes = {
+    abbreviation: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    mobile: PropTypes.string.isRequired,
+  };
+
   handleMouseEnter = () => {
     this.setState({ isHovered: true });
   };
@@ -78,14 +86,5 @@ class ContactsListItem extends Component {
     );
   }
 }
-
-/* props validation */
-ContactsListItem.propTypes = {
-  abbreviation: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  mobile: PropTypes.string.isRequired,
-};
 
 export default ContactsListItem;

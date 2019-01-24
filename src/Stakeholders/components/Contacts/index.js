@@ -1,5 +1,5 @@
 import { Connect, getStakeholders } from '@codetanzania/emis-api-states';
-import { Input, List } from 'antd';
+import { Button, Col, Input, List, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import '../styles.css';
@@ -18,7 +18,7 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class ContactsList extends Component {
-  propTypes = {
+  static propTypes = {
     loading: PropTypes.bool.isRequired,
     contacts: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
       .isRequired,
@@ -34,13 +34,29 @@ class ContactsList extends Component {
     const { contacts, loading, page, total } = this.props;
     return (
       <div className="ContactsList">
-        {/* search input component */}
-        <Search
-          size="large"
-          placeholder="Search for stakeholders here ..."
-          className="searchBox"
-        />
-        {/* end search input component */}
+        <Row>
+          <Col span={12}>
+            {/* search input component */}
+            <Search
+              size="large"
+              placeholder="Search for stakeholders here ..."
+            />
+            {/* end search input component */}
+          </Col>
+          {/* primary actions */}
+          <Col span={3} offset={9}>
+            <Button
+              type="primary"
+              icon="plus"
+              size="large"
+              title="Add New Contact"
+            >
+              New Contact
+            </Button>
+          </Col>
+          {/* end primary actions */}
+        </Row>
+
         {/* list header */}
         <ContactsActionBar total={total} page={page} />
         {/* end list header */}
