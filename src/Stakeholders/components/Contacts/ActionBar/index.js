@@ -1,5 +1,5 @@
 import { getStakeholders } from '@codetanzania/emis-api-states';
-import { Checkbox, Col, Icon, Pagination, Row } from 'antd';
+import { Button, Checkbox, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
 import './styles.css';
@@ -20,44 +20,69 @@ import './styles.css';
 const ContactsActionBar = ({ page, total }) => (
   <div className="ContactsActionBar">
     <Row>
-      <Col span={1} xl={1} style={{ paddingLeft: 8 }}>
+      <Col span={1} xl={1} className="checkbox">
         <Checkbox />
       </Col>
 
       <Col span={1} xl={1}>
-        <span className="actionIcon" title="Refresh contacts">
-          <Icon type="reload" onClick={() => getStakeholders()} />
-        </span>
+        <Button
+          shape="circle"
+          icon="reload"
+          title="Refresh contacts"
+          onClick={() => getStakeholders()}
+          className="actionButton"
+          size="large"
+        />
       </Col>
 
       <Col span={1} xl={1}>
-        <span className="actionIcon" title="Send Email to selected contacts">
-          <Icon type="mail" />
-        </span>
+        <Button
+          type="circle"
+          icon="mail"
+          title="Send Email to selected contacts"
+          className="actionButton"
+          size="large"
+        />
       </Col>
 
       <Col span={1} xl={1}>
-        <span className="actionIcon" title="Send SMS to selected contacts">
-          <Icon type="message" />
-        </span>
+        <Button
+          type="circle"
+          icon="message"
+          title="Send SMS to selected contacts"
+          className="actionButton"
+          size="large"
+        />
       </Col>
 
       <Col span={1} xl={1}>
-        <span className="actionIcon" title="Export selected contacts">
-          <Icon type="cloud-download" />
-        </span>
+        <Button
+          type="circle"
+          icon="cloud-download"
+          title="Export selected contacts"
+          className="actionButton"
+          size="large"
+        />
       </Col>
 
       <Col span={1} xl={1}>
-        <span className="actionIcon" title="Share selected contacts">
-          <Icon type="share-alt" />
-        </span>
+        <Button
+          type="circle"
+          icon="share-alt"
+          title="Share selected contacts"
+          className="actionButton"
+          size="large"
+        />
       </Col>
 
       <Col span={1} xl={1}>
-        <span className="actionIcon" title="Archive selected contacts">
-          <Icon type="hdd" />
-        </span>
+        <Button
+          type="circle"
+          icon="hdd"
+          title="Archive selected contacts"
+          className="actionButton"
+          size="large"
+        />
       </Col>
 
       <Col
@@ -66,16 +91,22 @@ const ContactsActionBar = ({ page, total }) => (
         xl={{ span: 1, offset: 12 }}
         xxl={{ span: 1, offset: 13 }}
       >
-        <span className="actionIcon" title="Filter Contacts">
-          <Icon type="filter" />
-        </span>
+        <Button
+          type="circle"
+          icon="filter"
+          title="Filter contacts"
+          className="actionButton"
+          size="large"
+        />
       </Col>
+
       <Col span={3} xl={4} xxl={3}>
         <Pagination
           simple
           defaultCurrent={page}
           total={total}
           onChange={nextPage => getStakeholders({ page: nextPage })}
+          className="pagination"
         />
       </Col>
     </Row>
