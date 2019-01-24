@@ -56,46 +56,136 @@ import './styles.css';
 
 const { Header, Content } = Layout;
 const breadcrumbNameMap = {
-  '/': 'Home',
-  '/alerts': 'Alerts',
-  '/alerts/alerts': 'All Alerts',
-  '/alerts/actions': 'Actions Taken',
-  '/alerts/feeds': 'Feeds',
-  '/alerts/feedback': 'Surveys & Feedback',
-  '/alerts/sources': 'Data Sources',
-  '/alerts/servicerequests': 'Service Requests',
-  '/assessments': 'Assessments',
-  '/assessments/indicators': 'Indicators',
-  '/assessments/questionnaires': 'Questionnaires',
-  '/assessments/questions': 'Questions',
-  '/assessments/responses': 'Responses & Observations',
-  '/incidents': 'Incidents',
-  '/incidents/incidenttypes': 'Incidents Types',
-  '/incidents/commandcenter': 'Command Center',
-  '/incidents/assessments': 'Assessments',
-  '/incidents/lossdatabase': 'Loss Database',
-  '/incidents/feeds': 'Feeds',
-  '/incidents/actions': 'Actions',
-  '/geographicalfeatures': 'Geographical Features',
-  '/geographicalfeatures/administrativeboundaries': 'Administrative Boundaries',
-  '/geographicalfeatures/facilities': 'Facilities',
-  '/geographicalfeatures/infrastructure': 'Critical Infrastructure',
-  '/geographicalfeatures/warehouses': 'Warehouses',
-  '/plans': 'Emergency Plans',
-  '/plans/planner': 'Planner',
-  '/plans/activations': 'Activations',
-  '/plans/drills': 'Drills & Exercises',
-  '/plans/disseminations': 'Disseminations',
-  '/resources': 'Resources',
-  '/resources/stock': 'Stock',
-  '/resources/items': 'Items',
-  '/resources/adjustments': 'Adjustments',
-  '/resources/utilization': 'Utilizations',
-  '/resources/warehouses': 'Warehouses',
-  '/stakeholders': 'Stakeholders',
-  '/stakeholders/contacts': 'Contacts',
-  '/stakeholders/roles': 'roles',
-  '/stakeholders/notifications': 'Notifications',
+  '/': { name: 'Home', title: 'Emis' },
+  /* Alerts components */
+  '/alerts': { name: 'Alerts', title: 'Alerts module' },
+  '/alerts/actions': {
+    name: 'Actions Taken',
+    title: 'List of all perfomed actions',
+  },
+  '/alerts/feedback': {
+    name: 'Surveys & Feedback',
+    title: 'Alerts surveys and feedback',
+  },
+  '/alerts/feeds': { name: 'Feeds', title: 'Alerts feeds' },
+  '/alerts/alerts': { name: 'All Alerts', title: 'List of all alerts' },
+  '/alerts/servicerequests': {
+    name: 'Service Requests',
+    title: 'Alerts service requests',
+  },
+  '/alerts/sources': {
+    name: 'Data Sources',
+    title: ' Data Sources of alerts',
+  },
+  /* end of Alerts components */
+  /* Assessments components */
+  '/assessments': { name: 'Assessments', title: 'Assessments module' },
+  '/assessments/indicators': {
+    name: 'Indicators',
+    title: 'Indicators for monitoring assissment',
+  },
+  '/assessments/questionnaires': {
+    name: 'Questionnaires',
+    title: 'List of questionnaires',
+  },
+  '/assessments/questions': {
+    name: 'Questions',
+    title: 'List of questions',
+  },
+  '/assessments/responses': {
+    name: 'Responses & Observations',
+    title: 'Assissment Responses and observations',
+  },
+  /* end of assissment components */
+  /* Geographicalfeatures */
+  '/geographicalfeatures/administrativeboundaries': {
+    name: 'Administrative Boundaries',
+    title: 'List of administrative boundaries',
+  },
+  '/geographicalfeatures/evacuationcenters': {
+    name: 'Evacuation Centers',
+    title: 'List of Evacuation centers',
+  },
+  '/geographicalfeatures/facilities': {
+    name: 'Facilities',
+    title: 'Facilities available',
+  },
+  '/geographicalfeatures/infrastructure': {
+    name: 'Critical Infrastructure',
+    title: 'Number of critical Infrastructres ',
+  },
+  '/geographicalfeatures': {
+    name: 'Geographical Features',
+    title: 'Geographical features module',
+  },
+  '/geographicalfeatures/warehouses': {
+    name: 'Warehouses',
+    title: 'List of available warehouses',
+  },
+  /* end of Geographicalfeature components */
+  /* Incidents components */
+  '/incidents/actions': {
+    name: 'Actions',
+    title: 'Incident actions performed',
+  },
+  '/incidents/assessments': {
+    name: 'Assessments',
+    title: 'Assessment feedback on incident',
+  },
+  '/incidents/commandcenter': {
+    name: 'Command Center',
+    title: 'Incidents command center',
+  },
+  '/incidents/feeds': { name: 'Feeds', title: 'Incident feeds' },
+  '/incidents': { name: 'Incidents', title: 'Incidents module' },
+  '/incidents/incidenttypes': {
+    name: 'Incidents Types',
+    title: 'Incidents types',
+  },
+  '/incidents/lossdatabase': {
+    name: 'Loss Database',
+    title: 'List of previous incidents',
+  },
+  /* end of Incidents components */
+  /* Plans components */
+  '/plans/activations': { name: 'Activations', title: 'Plans activation' },
+  '/plans/disseminations': {
+    name: 'Disseminations',
+    title: 'Dissemination of plans',
+  },
+  '/plans/drills': {
+    name: 'Drills & Exercises',
+    title: 'List of drills and exrcises',
+  },
+  '/plans': { name: 'Emergency Plans', title: 'Emergency plans module' },
+  '/plans/planner': { name: 'Planner', title: 'Planner' },
+  /* end  Plans components */
+  /* Resources components */
+  '/resources/adjustments': { name: 'Adjustments', title: 'Adjust resources' },
+  '/resources/items': { name: 'Items', title: 'View list of items' },
+  '/resources': { name: 'Resources', title: 'Resource module' },
+  '/resources/stock': { name: 'Stock', title: 'List of available stock' },
+  '/resources/utilization': {
+    name: 'Utilizations',
+    title: 'Resource utilizations',
+  },
+  '/resources/warehouses': {
+    name: 'Warehouses',
+    title: 'List of available warehouses',
+  },
+  /* end of Resources components */
+  /* Stakeholders components */
+  '/stakeholders/contacts': { name: 'Contacts', title: 'List of all contacts' },
+  '/stakeholders/notifications': {
+    name: 'Notifications',
+    title: 'Notify stakeholders',
+  },
+  '/stakeholders/roles': {
+    name: 'Roles',
+    title: 'Roles and responsibilities of Stakeholders',
+  },
+  '/stakeholders': { name: 'Stakeholders', title: 'Stakeholders module' },
+  /* end of Stakeholder components */
 };
 // profile menu
 const userMenu = (
@@ -130,7 +220,9 @@ const BaseLayout = withRouter(props => {
     const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
     return (
       <Breadcrumb.Item key={url}>
-        <Link to={url}>{breadcrumbNameMap[url]}</Link>
+        <Link to={url} title={breadcrumbNameMap[url].title}>
+          {breadcrumbNameMap[url].name}
+        </Link>
       </Breadcrumb.Item>
     );
   });
