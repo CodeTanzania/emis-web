@@ -1,15 +1,7 @@
 import React from 'react';
-import UIState from '../../components/UIState';
+// import UIState from '../../components/UIState';
+import WarehouseList from '../components/Warehouses';
 
-const WarehousesLayout = () => (
-  <div style={{ marginTop: '20%' }}>
-    <UIState
-      icon="exclamation-circle"
-      description="No Alerts Actions yet,but when they are available will appear here"
-      buttonLabel="New Alert"
-      onClick={() => {}}
-    />
-  </div>
-);
+const WarehousesLayout = () => <WarehouseList />;
 
 export default WarehousesLayout;
