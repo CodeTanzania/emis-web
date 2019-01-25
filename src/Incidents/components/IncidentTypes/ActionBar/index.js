@@ -28,7 +28,7 @@ const IncidentTypesActionBar = ({ page, total }) => (
         <Button
           shape="circle"
           icon="reload"
-          title="Refresh contacts"
+          title="Refresh incidenttypes"
           onClick={() => getStakeholders()}
           className="actionButton"
           size="large"
@@ -38,38 +38,8 @@ const IncidentTypesActionBar = ({ page, total }) => (
       <Col span={1} xl={1}>
         <Button
           type="circle"
-          icon="mail"
-          title="Send Email to selected contacts"
-          className="actionButton"
-          size="large"
-        />
-      </Col>
-
-      <Col span={1} xl={1}>
-        <Button
-          type="circle"
-          icon="message"
-          title="Send SMS to selected contacts"
-          className="actionButton"
-          size="large"
-        />
-      </Col>
-
-      <Col span={1} xl={1}>
-        <Button
-          type="circle"
           icon="cloud-download"
-          title="Export selected contacts"
-          className="actionButton"
-          size="large"
-        />
-      </Col>
-
-      <Col span={1} xl={1}>
-        <Button
-          type="circle"
-          icon="share-alt"
-          title="Share selected contacts"
+          title="Export selected incidenttypes"
           className="actionButton"
           size="large"
         />
@@ -79,7 +49,7 @@ const IncidentTypesActionBar = ({ page, total }) => (
         <Button
           type="circle"
           icon="hdd"
-          title="Archive selected contacts"
+          title="Archive selected incidenttypes"
           className="actionButton"
           size="large"
         />
@@ -87,14 +57,14 @@ const IncidentTypesActionBar = ({ page, total }) => (
 
       <Col
         span={1}
-        offset={13}
-        xl={{ span: 1, offset: 12 }}
-        xxl={{ span: 1, offset: 13 }}
+        offset={16}
+        xl={{ span: 1, offset: 16 }}
+        xxl={{ span: 1, offset: 16 }}
       >
         <Button
           type="circle"
           icon="filter"
-          title="Filter contacts"
+          title="Filter incidenttypes"
           className="actionButton"
           size="large"
         />

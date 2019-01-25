@@ -34,13 +34,13 @@ class IncidentTypesList extends Component {
   render() {
     const { contacts, loading, page, total } = this.props;
     return (
-      <div className="ContactsList">
+      <div className="IncidentTypesList">
         <Row>
           <Col span={12}>
             {/* search input component */}
             <Search
               size="large"
-              placeholder="Search for stakeholders here ..."
+              placeholder="Search for incidenttypes here ..."
             />
             {/* end search input component */}
           </Col>
@@ -50,9 +50,9 @@ class IncidentTypesList extends Component {
               type="primary"
               icon="plus"
               size="large"
-              title="Add New Contact"
+              title="Add New Incidenttype"
             >
-              New Contact
+              New Incidenttype
             </Button>
           </Col>
           {/* end primary actions */}
@@ -62,6 +62,21 @@ class IncidentTypesList extends Component {
         <IncidentTypesActionBar total={total} page={page} />
         {/* end list header */}
         {/* list starts */}
+        {/* <List
+          loading={loading}
+          dataSource={incidenttypes}
+          renderItem={incidenttype => (
+            <IncidentTypesListItem
+              key={incidenttype.abbreviation}
+              abbreviation={incidenttype.abbreviation}
+              name={incidenttype.name}
+              nature={incidenttype.nature}
+              family={incidenttype.family}
+              cap={incidenttype.cap}
+              code={incidenttype.mobile}
+
+            /> */}
+
         <List
           loading={loading}
           dataSource={contacts}
@@ -83,8 +98,9 @@ class IncidentTypesList extends Component {
 }
 
 export default Connect(IncidentTypesList, {
+  incidenttypes: 'incidentTypes.list',
   contacts: 'stakeholders.list',
-  loading: 'stakeholders.loading',
-  page: 'stakeholders.page',
-  total: 'stakeholders.total',
+  loading: 'incidentTypes.loading',
+  page: 'incidentTypes.page',
+  total: 'incidentTypes.total',
 });

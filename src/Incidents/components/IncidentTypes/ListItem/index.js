@@ -4,7 +4,7 @@ import React, { Component, Fragment } from 'react';
 import './styles.css';
 
 /**
- * Single contact list item component. Render single contact details
+ * Single incidenttype list item component. Render single incidenttype details
  *
  * @class
  * @name IncidentTypesListItem
@@ -15,7 +15,6 @@ import './styles.css';
  * @param {string} props.title
  * @param {string} props.email
  * @param {string} props.mobile
- *
  * @version 0.1.0
  * @since 0.1.0
  */
@@ -45,7 +44,7 @@ class IncidentTypesListItem extends Component {
     const { isHovered } = this.state;
     return (
       <div
-        className="IncidentTypesListItem"
+        className="ContactsListItem"
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
@@ -57,26 +56,22 @@ class IncidentTypesListItem extends Component {
               <Avatar>{abbreviation}</Avatar>
             )}
           </Col>
-          <Col span={5}>{name}</Col>
-          <Col span={6}>{title}</Col>
+          <Col span={4}>{name}</Col>
+          <Col span={5}>{title}</Col>
           <Col span={4}>{email}</Col>
           <Col span={4}>{mobile}</Col>
-          <Col span={3}>
+          <Col span={4}>{name}</Col>
+          <Col span={2}>
             {isHovered && (
               <Fragment>
                 <Icon
                   type="edit"
-                  title="Update Contact"
-                  className="actionIcon"
-                />
-                <Icon
-                  type="share-alt"
-                  title="Share Contact"
+                  title="Update incidenttypes"
                   className="actionIcon"
                 />
                 <Icon
                   type="database"
-                  title="Archive Contact"
+                  title="Archive incidenttypes"
                   className="actionIcon"
                 />
               </Fragment>
