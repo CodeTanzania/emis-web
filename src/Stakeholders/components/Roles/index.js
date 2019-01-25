@@ -52,7 +52,7 @@ class RoleList extends Component {
               type="primary"
               icon="plus"
               size="large"
-              title="Add New Contact"
+              title="Add New Role"
             >
               New Role
             </Button>
