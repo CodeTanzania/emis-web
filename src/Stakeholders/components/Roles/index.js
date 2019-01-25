@@ -43,10 +43,7 @@ class RoleList extends Component {
         <Row>
           <Col span={12}>
             {/* search input component */}
-            <Search
-              size="large"
-              placeholder="Search for stakeholders here ..."
-            />
+            <Search size="large" placeholder="Search for roles here ..." />
             {/* end search input component */}
           </Col>
           {/* primary actions */}
@@ -57,7 +54,7 @@ class RoleList extends Component {
               size="large"
               title="Add New Contact"
             >
-              New Contact
+              New Role
             </Button>
           </Col>
           {/* end primary actions */}
