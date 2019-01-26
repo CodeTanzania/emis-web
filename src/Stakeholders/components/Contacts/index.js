@@ -1,8 +1,9 @@
 import { Connect, getStakeholders } from '@codetanzania/emis-api-states';
-import { Button, Col, Input, List, Row } from 'antd';
+import { Button, Col, Input, List, Modal, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import ContactsActionBar from './ActionBar';
+import ContactFilters from './Filters';
 import ContactsListItem from './ListItem';
 import './styles.css';
 
@@ -18,6 +19,10 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class ContactsList extends Component {
+  state = {
+    showFilters: false,
+  };
+
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     contacts: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
@@ -30,8 +35,17 @@ class ContactsList extends Component {
     getStakeholders();
   }
 
+  openFiltersModal = () => {
+    this.setState({ showFilters: true });
+  };
+
+  closeFiltersModal = () => {
+    this.setState({ showFilters: false });
+  };
+
   render() {
     const { contacts, loading, page, total } = this.props;
+    const { showFilters } = this.state;
     return (
       <div className="ContactsList">
         <Row>
@@ -58,7 +72,11 @@ class ContactsList extends Component {
         </Row>
 
         {/* list header */}
-        <ContactsActionBar total={total} page={page} />
+        <ContactsActionBar
+          total={total}
+          page={page}
+          onFilter={this.openFiltersModal}
+        />
         {/* end list header */}
         {/* list starts */}
         <List
@@ -76,6 +94,14 @@ class ContactsList extends Component {
           )}
         />
         {/* end list */}
+        <Modal
+          title="Filter Contacts"
+          visible={showFilters}
+          onCancel={this.closeFiltersModal}
+          footer={null}
+        >
+          <ContactFilters onCancel={this.closeFiltersModal} />
+        </Modal>
       </div>
     );
   }
