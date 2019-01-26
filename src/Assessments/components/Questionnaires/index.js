@@ -3,7 +3,7 @@ import { Button, Col, Input, List, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import QuestionsListItem from '../Questions/ListItem';
-import QuestionsActionBar from '../Questions/ActionBar';
+import QuestionnairesActionBar from './ActionBar';
 import './styles.css';
 
 const { Search } = Input;
@@ -39,7 +39,7 @@ class QuestionnairesList extends Component {
             {/* search input component */}
             <Search
               size="large"
-              placeholder="Search for questions here ..."
+              placeholder="Search for questionnaires here ..."
               onChange={({ target: { value } }) =>
                 getQuestions({ q: { value } })
               }
@@ -52,16 +52,16 @@ class QuestionnairesList extends Component {
               type="primary"
               icon="plus"
               size="large"
-              title="Add New Question"
+              title="Add New Questionnaires"
             >
-              New Question
+              New Questionnaires
             </Button>
           </Col>
           {/* end primary actions */}
         </Row>
 
         {/* list header */}
-        <QuestionsActionBar total={total} page={page} />
+        <QuestionnairesActionBar total={total} page={page} />
         {/* end list header */}
         {/* list starts */}
         <List
