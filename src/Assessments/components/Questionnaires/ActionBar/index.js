@@ -28,7 +28,7 @@ const QuestionnairesActionBar = ({ page, total }) => (
         <Button
           shape="circle"
           icon="reload"
-          title="Refresh questionnaires"
+          title="Refresh Questionnaires"
           onClick={() => getQuestions()}
           className="actionButton"
           size="large"
@@ -39,7 +39,7 @@ const QuestionnairesActionBar = ({ page, total }) => (
         <Button
           type="circle"
           icon="cloud-download"
-          title="Export selected questionnaires"
+          title="Export selected Questionnaires"
           className="actionButton"
           size="large"
         />
@@ -49,7 +49,7 @@ const QuestionnairesActionBar = ({ page, total }) => (
         <Button
           type="circle"
           icon="share-alt"
-          title="Share selected questionnaires"
+          title="Share selected Questionnaires"
           className="actionButton"
           size="large"
         />
@@ -59,7 +59,7 @@ const QuestionnairesActionBar = ({ page, total }) => (
         <Button
           type="circle"
           icon="hdd"
-          title="Archive selected questionnaires"
+          title="Archive selected Questionnaires"
           className="actionButton"
           size="large"
         />

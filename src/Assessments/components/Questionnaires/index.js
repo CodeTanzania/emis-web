@@ -2,8 +2,8 @@ import { Connect, getQuestions } from '@codetanzania/emis-api-states';
 import { Button, Col, Input, List, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import QuestionsListItem from '../Questions/ListItem';
 import QuestionnairesActionBar from './ActionBar';
+import QuestionnairesListItem from './ListItem';
 import './styles.css';
 
 const { Search } = Input;
@@ -68,7 +68,7 @@ class QuestionnairesList extends Component {
           loading={loading}
           dataSource={questions}
           renderItem={question => (
-            <QuestionsListItem
+            <QuestionnairesListItem
               key={question.abbreviation}
               abbreviation={question.abbreviation}
               label={question.label}
