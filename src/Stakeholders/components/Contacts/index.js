@@ -35,12 +35,50 @@ class ContactsList extends Component {
     getStakeholders();
   }
 
+  /**
+   * open filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name openFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   openFiltersModal = () => {
     this.setState({ showFilters: true });
   };
 
+  /**
+   * Close filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name closeFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   closeFiltersModal = () => {
     this.setState({ showFilters: false });
+  };
+
+  /**
+   * Search Contacts List based on supplied filter word
+   *
+   * @function
+   * @name searchContacts
+   *
+   * @param {Object} event - Event instance
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  searchContacts = event => {
+    getStakeholders({ q: event.target.value });
   };
 
   render() {
@@ -54,6 +92,7 @@ class ContactsList extends Component {
             <Search
               size="large"
               placeholder="Search for stakeholders here ..."
+              onChange={this.searchContacts}
             />
             {/* end search input component */}
           </Col>
