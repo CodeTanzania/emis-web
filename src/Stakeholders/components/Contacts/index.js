@@ -1,10 +1,10 @@
 import { Connect, getStakeholders } from '@codetanzania/emis-api-states';
-import { Button, Col, Input, List, Modal, Row } from 'antd';
+import { Button, Col, Input, Modal, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import ContactsActionBar from './ActionBar';
 import ContactFilters from './Filters';
-import ContactsListItem from './ListItem';
+import ContactsList from './List';
 import './styles.css';
 
 const { Search } = Input;
@@ -18,7 +18,7 @@ const { Search } = Input;
  * @version 0.1.0
  * @since 0.1.0
  */
-class ContactsList extends Component {
+class Contacts extends Component {
   state = {
     showFilters: false,
   };
@@ -118,20 +118,7 @@ class ContactsList extends Component {
         />
         {/* end list header */}
         {/* list starts */}
-        <List
-          loading={loading}
-          dataSource={contacts}
-          renderItem={contact => (
-            <ContactsListItem
-              key={contact.abbreviation}
-              abbreviation={contact.abbreviation}
-              name={contact.name}
-              title={contact.title}
-              email={contact.email}
-              mobile={contact.mobile}
-            />
-          )}
-        />
+        <ContactsList contacts={contacts} loading={loading} />
         {/* end list */}
         <Modal
           title="Filter Contacts"
@@ -146,7 +133,7 @@ class ContactsList extends Component {
   }
 }
 
-export default Connect(ContactsList, {
+export default Connect(Contacts, {
   contacts: 'stakeholders.list',
   loading: 'stakeholders.loading',
   page: 'stakeholders.page',
