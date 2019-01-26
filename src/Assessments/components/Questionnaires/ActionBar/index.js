@@ -74,7 +74,7 @@ const QuestionnairesActionBar = ({ page, total }) => (
         <Button
           type="circle"
           icon="filter"
-          title="Filter questionnaires"
+          title="Filter Questionnaires"
           className="actionButton"
           size="large"
         />

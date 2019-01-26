@@ -53,9 +53,9 @@ class QuestionnairesList extends Component {
               type="primary"
               icon="plus"
               size="large"
-              title="Add New Questionnaires"
+              title="Add New Questionnaire"
             >
-              New Questionnaires
+              New Questionnaire
             </Button>
           </Col>
           {/* end primary actions */}
