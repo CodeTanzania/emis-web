@@ -41,6 +41,9 @@ class QuestionnairesList extends Component {
             <Search
               size="large"
               placeholder="Search for questionnaires here ..."
+              onChange={({ target: { value } }) =>
+                getQuestionnaires({ q: { value } })
+              }
             />
             {/* end search input component */}
           </Col>
