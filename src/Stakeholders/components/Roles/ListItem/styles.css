@@ -1,0 +1,42 @@
+.RoleListItem {
+  width: 100%;
+  border-bottom: 1px solid #e8e8e8;
+  padding: 15px 0;
+  height: 60px;
+}
+
+.RoleListItem .Checkbox {
+  padding: 0 8px;
+}
+
+.RoleListItem:hover {
+  background-color: #f5f5f5;
+}
+
+.RoleListItem .actionIcon:hover {
+  color: #008EFA;
+  background-color: #e8e8e8;
+}
+
+.RoleListItem .actionIcon {
+  padding-top: 8px;
+  margin-bottom: 5px;
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.RoleListItem .actionIcon {
+  display: inline-block;
+  margin: 0 10px;
+  font-size: 16px;
+
+}
+
+.RoleListItem .actionIcon:hover {
+  color: #008EFA;
+  background-color: #e8e8e8;
+}
