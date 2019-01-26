@@ -58,7 +58,7 @@ import EvacuationCentersLayout from '../GeographicalFeatures/layouts/EvacuationC
 const { Header, Content } = Layout;
 const breadcrumbNameMap = {
   '/': { name: 'Home', title: 'Emis' },
-  /* Alerts components */
+  /* Alerts Routes */
   '/alerts': { name: 'Alerts', title: 'Alerts module' },
   '/alerts/actions': {
     name: 'Actions Taken',
@@ -76,14 +76,13 @@ const breadcrumbNameMap = {
   },
   '/alerts/sources': {
     name: 'Data Sources',
-    title: ' Data Sources of alerts',
+    title: ' Data sources of alerts',
   },
-  /* end of Alerts components */
-  /* Assessments components */
+  /* Assessments Routes */
   '/assessments': { name: 'Assessments', title: 'Assessments module' },
   '/assessments/indicators': {
     name: 'Indicators',
-    title: 'Indicators for monitoring assissment',
+    title: 'Indicators for monitoring assessments',
   },
   '/assessments/questionnaires': {
     name: 'Questionnaires',
@@ -95,17 +94,16 @@ const breadcrumbNameMap = {
   },
   '/assessments/responses': {
     name: 'Responses & Observations',
-    title: 'Assissment Responses and observations',
+    title: 'Responses and observations',
   },
-  /* end of assissment components */
-  /* Geographicalfeatures */
+  /* Geographicalfeatures Routes */
   '/geographicalfeatures/administrativeboundaries': {
     name: 'Administrative Boundaries',
     title: 'List of administrative boundaries',
   },
   '/geographicalfeatures/evacuationcenters': {
     name: 'Evacuation Centers',
-    title: 'List of Evacuation centers',
+    title: 'List of evacuation centers',
   },
   '/geographicalfeatures/facilities': {
     name: 'Facilities',
@@ -113,7 +111,7 @@ const breadcrumbNameMap = {
   },
   '/geographicalfeatures/infrastructure': {
     name: 'Critical Infrastructure',
-    title: 'Number of critical Infrastructres ',
+    title: 'List of critical infrastructres ',
   },
   '/geographicalfeatures': {
     name: 'Geographical Features',
@@ -123,15 +121,14 @@ const breadcrumbNameMap = {
     name: 'Warehouses',
     title: 'List of available warehouses',
   },
-  /* end of Geographicalfeature components */
-  /* Incidents components */
+  /* Incidents Routes */
   '/incidents/actions': {
     name: 'Actions',
     title: 'Incident actions performed',
   },
   '/incidents/assessments': {
     name: 'Assessments',
-    title: 'Assessment feedback on incident',
+    title: 'Assessment of an incident',
   },
   '/incidents/commandcenter': {
     name: 'Command Center',
@@ -141,14 +138,13 @@ const breadcrumbNameMap = {
   '/incidents': { name: 'Incidents', title: 'Incidents module' },
   '/incidents/incidenttypes': {
     name: 'Incidents Types',
-    title: 'Incidents types',
+    title: 'List of Incidents Types',
   },
   '/incidents/lossdatabase': {
     name: 'Loss Database',
     title: 'List of previous incidents',
   },
-  /* end of Incidents components */
-  /* Plans components */
+  /* Plans Routes */
   '/plans/activations': { name: 'Activations', title: 'Plans activation' },
   '/plans/disseminations': {
     name: 'Disseminations',
@@ -160,10 +156,12 @@ const breadcrumbNameMap = {
   },
   '/plans': { name: 'Emergency Plans', title: 'Emergency plans module' },
   '/plans/planner': { name: 'Planner', title: 'Planner' },
-  /* end  Plans components */
-  /* Resources components */
-  '/resources/adjustments': { name: 'Adjustments', title: 'Adjust resources' },
-  '/resources/items': { name: 'Items', title: 'View list of items' },
+  /* Resources Routes */
+  '/resources/adjustments': {
+    name: 'Adjustments',
+    title: 'List of adjusted resources',
+  },
+  '/resources/items': { name: 'Items', title: 'List of available items' },
   '/resources': { name: 'Resources', title: 'Resource module' },
   '/resources/stock': { name: 'Stock', title: 'List of available stock' },
   '/resources/utilization': {
@@ -174,8 +172,7 @@ const breadcrumbNameMap = {
     name: 'Warehouses',
     title: 'List of available warehouses',
   },
-  /* end of Resources components */
-  /* Stakeholders components */
+  /* Stakeholders Routes */
   '/stakeholders/contacts': { name: 'Contacts', title: 'List of all contacts' },
   '/stakeholders/notifications': {
     name: 'Notifications',
@@ -186,7 +183,6 @@ const breadcrumbNameMap = {
     title: 'Roles and responsibilities of Stakeholders',
   },
   '/stakeholders': { name: 'Stakeholders', title: 'Stakeholders module' },
-  /* end of Stakeholder components */
 };
 // profile menu
 const userMenu = (
