@@ -37,7 +37,13 @@ class QuestionsList extends Component {
         <Row>
           <Col span={12}>
             {/* search input component */}
-            <Search size="large" placeholder="Search for questions here ..." />
+            <Search
+              size="large"
+              placeholder="Search for questions here ..."
+              onChange={({ target: { value } }) =>
+                getQuestions({ q: { value } })
+              }
+            />
             {/* end search input component */}
           </Col>
           {/* primary actions */}
