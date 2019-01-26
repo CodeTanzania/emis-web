@@ -41,7 +41,7 @@ class IncidentTypesList extends Component {
             {/* search input component */}
             <Search
               size="large"
-              placeholder="Search for incidenttypes here ..."
+              placeholder="Search for incident types here ..."
               onChange={({ target: { value } }) =>
                 getIncidentTypes({ q: value })
               }
@@ -54,7 +54,7 @@ class IncidentTypesList extends Component {
               type="primary"
               icon="plus"
               size="large"
-              title="Add New Incidenttype"
+              title="Add New Incident Type"
             >
               New Incidenttype
             </Button>
