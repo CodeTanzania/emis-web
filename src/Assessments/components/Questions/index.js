@@ -1,4 +1,4 @@
-import { Connect, getStakeholders } from '@codetanzania/emis-api-states';
+import { Connect, getQuestions } from '@codetanzania/emis-api-states';
 import { Button, Col, Input, List, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
@@ -20,18 +20,18 @@ const { Search } = Input;
 class QuestionsList extends Component {
   static propTypes = {
     loading: PropTypes.bool.isRequired,
-    contacts: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+    questions: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
       .isRequired,
     page: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
   };
 
   componentWillMount() {
-    getStakeholders();
+    getQuestions();
   }
 
   render() {
-    const { contacts, loading, page, total } = this.props;
+    const { questions, loading, page, total } = this.props;
     return (
       <div className="QuestionstsList">
         <Row>
@@ -46,7 +46,7 @@ class QuestionsList extends Component {
               type="primary"
               icon="plus"
               size="large"
-              title="Add New questions"
+              title="Add New question"
             >
               New Question
             </Button>
@@ -60,15 +60,15 @@ class QuestionsList extends Component {
         {/* list starts */}
         <List
           loading={loading}
-          dataSource={contacts}
-          renderItem={contact => (
+          dataSource={questions}
+          renderItem={question => (
             <QuestionsListItem
-              key={contact.abbreviation}
-              abbreviation={contact.abbreviation}
-              name={contact.name}
-              title={contact.title}
-              email={contact.email}
-              mobile={contact.mobile}
+              key={question.abbreviation}
+              abbreviation={question.abbreviation}
+              label={question.label}
+              phase={question.phase}
+              assess={question.assess}
+              stage={question.stage}
             />
           )}
         />
@@ -79,8 +79,8 @@ class QuestionsList extends Component {
 }
 
 export default Connect(QuestionsList, {
-  contacts: 'stakeholders.list',
-  loading: 'stakeholders.loading',
-  page: 'stakeholders.page',
-  total: 'stakeholders.total',
+  questions: 'questions.list',
+  loading: 'questions.loading',
+  page: 'questions.page',
+  total: 'questions.total',
 });

@@ -11,10 +11,10 @@ import './styles.css';
  *
  * @param {Object} props
  * @param {string} props.abbreviation
- * @param {string} props.name
- * @param {string} props.title
- * @param {string} props.email
- * @param {string} props.mobile
+ * @param {string} props.label
+ * @param {string} props.phase
+ * @param {string} props.assess
+ * @param {string} props.stage
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -26,10 +26,10 @@ class QuestionsListItem extends Component {
 
   static propTypes = {
     abbreviation: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    mobile: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    phase: PropTypes.string.isRequired,
+    assess: PropTypes.string.isRequired,
+    stage: PropTypes.string.isRequired,
   };
 
   handleMouseEnter = () => {
@@ -41,7 +41,7 @@ class QuestionsListItem extends Component {
   };
 
   render() {
-    const { abbreviation, name, title, email, mobile } = this.props;
+    const { abbreviation, label, phase, assess, stage } = this.props;
     const { isHovered } = this.state;
     return (
       <div
@@ -57,10 +57,10 @@ class QuestionsListItem extends Component {
               <Avatar>{abbreviation}</Avatar>
             )}
           </Col>
-          <Col span={5}>{name}</Col>
-          <Col span={6}>{title}</Col>
-          <Col span={4}>{email}</Col>
-          <Col span={4}>{mobile}</Col>
+          <Col span={8}>{label}</Col>
+          <Col span={3}>{phase}</Col>
+          <Col span={4}>{assess}</Col>
+          <Col span={3}>{stage}</Col>
           <Col span={3}>
             {isHovered && (
               <Fragment>
