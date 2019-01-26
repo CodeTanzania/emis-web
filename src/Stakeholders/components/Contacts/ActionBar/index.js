@@ -17,7 +17,7 @@ import './styles.css';
  * @version 0.1.0
  * @since 0.1.0
  */
-const ContactsActionBar = ({ page, total }) => (
+const ContactsActionBar = ({ page, total, onFilter }) => (
   <div className="ContactsActionBar">
     <Row>
       <Col span={1} xl={1} className="checkbox">
@@ -97,6 +97,7 @@ const ContactsActionBar = ({ page, total }) => (
           title="Filter contacts"
           className="actionButton"
           size="large"
+          onClick={onFilter}
         />
       </Col>
 
@@ -117,6 +118,7 @@ const ContactsActionBar = ({ page, total }) => (
 ContactsActionBar.propTypes = {
   page: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
+  onFilter: PropTypes.func.isRequired,
 };
 
 export default ContactsActionBar;
