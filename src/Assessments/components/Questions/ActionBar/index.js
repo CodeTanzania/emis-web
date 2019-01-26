@@ -18,7 +18,7 @@ import './styles.css';
  * @since 0.1.0
  */
 const QuestionsActionBar = ({ page, total }) => (
-  <div className="ContactsActionBar">
+  <div className="QuestionsActionBar">
     <Row>
       <Col span={1} xl={1} className="checkbox">
         <Checkbox />
@@ -28,7 +28,7 @@ const QuestionsActionBar = ({ page, total }) => (
         <Button
           shape="circle"
           icon="reload"
-          title="Refresh contacts"
+          title="Refresh questions"
           onClick={() => getStakeholders()}
           className="actionButton"
           size="large"
@@ -38,28 +38,8 @@ const QuestionsActionBar = ({ page, total }) => (
       <Col span={1} xl={1}>
         <Button
           type="circle"
-          icon="mail"
-          title="Send Email to selected contacts"
-          className="actionButton"
-          size="large"
-        />
-      </Col>
-
-      <Col span={1} xl={1}>
-        <Button
-          type="circle"
-          icon="message"
-          title="Send SMS to selected contacts"
-          className="actionButton"
-          size="large"
-        />
-      </Col>
-
-      <Col span={1} xl={1}>
-        <Button
-          type="circle"
           icon="cloud-download"
-          title="Export selected contacts"
+          title="Export selected questions"
           className="actionButton"
           size="large"
         />
@@ -69,7 +49,7 @@ const QuestionsActionBar = ({ page, total }) => (
         <Button
           type="circle"
           icon="share-alt"
-          title="Share selected contacts"
+          title="Share selected questions"
           className="actionButton"
           size="large"
         />
@@ -79,7 +59,7 @@ const QuestionsActionBar = ({ page, total }) => (
         <Button
           type="circle"
           icon="hdd"
-          title="Archive selected contacts"
+          title="Archive selected questions"
           className="actionButton"
           size="large"
         />
@@ -87,14 +67,14 @@ const QuestionsActionBar = ({ page, total }) => (
 
       <Col
         span={1}
-        offset={13}
-        xl={{ span: 1, offset: 12 }}
-        xxl={{ span: 1, offset: 13 }}
+        offset={15}
+        xl={{ span: 1, offset: 14 }}
+        xxl={{ span: 1, offset: 15 }}
       >
         <Button
           type="circle"
           icon="filter"
-          title="Filter contacts"
+          title="Filter questions"
           className="actionButton"
           size="large"
         />

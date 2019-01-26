@@ -37,10 +37,7 @@ class QuestionsList extends Component {
         <Row>
           <Col span={12}>
             {/* search input component */}
-            <Search
-              size="large"
-              placeholder="Search for stakeholders here ..."
-            />
+            <Search size="large" placeholder="Search for questions here ..." />
             {/* end search input component */}
           </Col>
           {/* primary actions */}
@@ -49,9 +46,9 @@ class QuestionsList extends Component {
               type="primary"
               icon="plus"
               size="large"
-              title="Add New Contact"
+              title="Add New questions"
             >
-              New Contact
+              New Question
             </Button>
           </Col>
           {/* end primary actions */}
