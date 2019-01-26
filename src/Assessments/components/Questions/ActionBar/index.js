@@ -28,7 +28,7 @@ const QuestionsActionBar = ({ page, total }) => (
         <Button
           shape="circle"
           icon="reload"
-          title="Refresh questions"
+          title="Refresh Questions"
           onClick={() => getQuestions()}
           className="actionButton"
           size="large"
@@ -39,7 +39,7 @@ const QuestionsActionBar = ({ page, total }) => (
         <Button
           type="circle"
           icon="cloud-download"
-          title="Export selected questions"
+          title="Export selected Questions"
           className="actionButton"
           size="large"
         />
@@ -49,7 +49,7 @@ const QuestionsActionBar = ({ page, total }) => (
         <Button
           type="circle"
           icon="share-alt"
-          title="Share selected questions"
+          title="Share selected Questions"
           className="actionButton"
           size="large"
         />
@@ -59,7 +59,7 @@ const QuestionsActionBar = ({ page, total }) => (
         <Button
           type="circle"
           icon="hdd"
-          title="Archive selected questions"
+          title="Archive selected Questions"
           className="actionButton"
           size="large"
         />
@@ -74,7 +74,7 @@ const QuestionsActionBar = ({ page, total }) => (
         <Button
           type="circle"
           icon="filter"
-          title="Filter questions"
+          title="Filter Questions"
           className="actionButton"
           size="large"
         />

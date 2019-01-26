@@ -52,7 +52,7 @@ class QuestionsList extends Component {
               type="primary"
               icon="plus"
               size="large"
-              title="Add New question"
+              title="Add New Question"
             >
               New Question
             </Button>
