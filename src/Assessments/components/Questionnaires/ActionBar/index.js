@@ -1,4 +1,4 @@
-import { getQuestions } from '@codetanzania/emis-api-states';
+import { getQuestionnaires } from '@codetanzania/emis-api-states';
 import { Button, Checkbox, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -29,7 +29,7 @@ const QuestionnairesActionBar = ({ page, total }) => (
           shape="circle"
           icon="reload"
           title="Refresh Questionnaires"
-          onClick={() => getQuestions()}
+          onClick={() => getQuestionnaires()}
           className="actionButton"
           size="large"
         />
@@ -85,7 +85,7 @@ const QuestionnairesActionBar = ({ page, total }) => (
           simple
           defaultCurrent={page}
           total={total}
-          onChange={nextPage => getQuestions({ page: nextPage })}
+          onChange={nextPage => getQuestionnaires({ page: nextPage })}
           className="pagination"
         />
       </Col>
