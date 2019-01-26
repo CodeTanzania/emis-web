@@ -43,7 +43,11 @@ class RoleList extends Component {
         <Row>
           <Col span={12}>
             {/* search input component */}
-            <Search size="large" placeholder="Search for roles here ..." />
+            <Search
+              size="large"
+              placeholder="Search for roles here ..."
+              onChange={({ target: { value } }) => getRoles({ q: value })}
+            />
             {/* end search input component */}
           </Col>
           {/* primary actions */}
