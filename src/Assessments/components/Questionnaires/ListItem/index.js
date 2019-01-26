@@ -10,8 +10,7 @@ import './styles.css';
  * @name QuestionnairesListItem
  *
  * @param {Object} props
- * @param {string} props.abbreviation
- * @param {string} props.label
+ * @param {string} props.title
  * @param {string} props.phase
  * @param {string} props.assess
  * @param {string} props.stage
@@ -25,8 +24,7 @@ class QuestionnairesListItem extends Component {
   };
 
   static propTypes = {
-    abbreviation: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
     phase: PropTypes.string.isRequired,
     assess: PropTypes.string.isRequired,
     stage: PropTypes.string.isRequired,
@@ -41,7 +39,7 @@ class QuestionnairesListItem extends Component {
   };
 
   render() {
-    const { abbreviation, label, phase, assess, stage } = this.props;
+    const { title, phase, assess, stage } = this.props;
     const { isHovered } = this.state;
     return (
       <div
@@ -54,10 +52,10 @@ class QuestionnairesListItem extends Component {
             {isHovered ? (
               <Checkbox className="Checkbox" />
             ) : (
-              <Avatar>{abbreviation}</Avatar>
+              <Avatar>{title.charAt(0)}</Avatar>
             )}
           </Col>
-          <Col span={8}>{label}</Col>
+          <Col span={8}>{title}</Col>
           <Col span={3}>{phase}</Col>
           <Col span={4}>{assess}</Col>
           <Col span={3}>{stage}</Col>

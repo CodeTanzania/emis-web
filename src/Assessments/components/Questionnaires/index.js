@@ -1,4 +1,4 @@
-import { Connect, getQuestions } from '@codetanzania/emis-api-states';
+import { Connect, getQuestionnaires } from '@codetanzania/emis-api-states';
 import { Button, Col, Input, List, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
@@ -20,18 +20,19 @@ const { Search } = Input;
 class QuestionnairesList extends Component {
   static propTypes = {
     loading: PropTypes.bool.isRequired,
-    questions: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-      .isRequired,
+    questionnaires: PropTypes.arrayOf(
+      PropTypes.shape({ name: PropTypes.string })
+    ).isRequired,
     page: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
   };
 
   componentWillMount() {
-    getQuestions();
+    getQuestionnaires();
   }
 
   render() {
-    const { questions, loading, page, total } = this.props;
+    const { questionnaires, loading, page, total } = this.props;
     return (
       <div className="QuestionnairesList">
         <Row>
@@ -40,9 +41,6 @@ class QuestionnairesList extends Component {
             <Search
               size="large"
               placeholder="Search for questionnaires here ..."
-              onChange={({ target: { value } }) =>
-                getQuestions({ q: { value } })
-              }
             />
             {/* end search input component */}
           </Col>
@@ -66,15 +64,14 @@ class QuestionnairesList extends Component {
         {/* list starts */}
         <List
           loading={loading}
-          dataSource={questions}
-          renderItem={question => (
+          dataSource={questionnaires}
+          renderItem={questionnaire => (
             <QuestionnairesListItem
-              key={question.abbreviation}
-              abbreviation={question.abbreviation}
-              label={question.label}
-              phase={question.phase}
-              assess={question.assess}
-              stage={question.stage}
+              key={questionnaire.title}
+              title={questionnaire.title}
+              phase={questionnaire.phase}
+              assess={questionnaire.assess}
+              stage={questionnaire.stage}
             />
           )}
         />
@@ -85,8 +82,8 @@ class QuestionnairesList extends Component {
 }
 
 export default Connect(QuestionnairesList, {
-  questions: 'questions.list',
-  loading: 'questions.loading',
-  page: 'questions.page',
-  total: 'questions.total',
+  questionnaires: 'questionnaires.list',
+  loading: 'questionnaires.loading',
+  page: 'questionnaires.page',
+  total: 'questionnaires.total',
 });
