@@ -1,15 +1,7 @@
 import React from 'react';
-import UIState from '../../components/UIState';
+// import UIState from '../../components/UIState';
+import AdminstrativeBoundaryList from '../components/AdministrativeBoundaries';
 
-const AdministrativeBoundariesLayout = () => (
-  <div style={{ marginTop: '20%' }}>
-    <UIState
-      icon="exclamation-circle"
-      description="No Administrative Boundaries yet,but when they are available will appear here"
-      buttonLabel="New Feature"
-      onClick={() => {}}
-    />
-  </div>
-);
+const AdministrativeBoundariesLayout = () => <AdminstrativeBoundaryList />;
 
 export default AdministrativeBoundariesLayout;

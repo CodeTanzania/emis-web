@@ -1,15 +1,7 @@
 import React from 'react';
-import UIState from '../../components/UIState';
+// import UIState from '../../components/UIState';
+import IncidentTypes from '../components/IncidentTypes';
 
-const IncidentsIncidentTypesLayout = () => (
-  <div style={{ marginTop: '20%' }}>
-    <UIState
-      icon="exclamation-circle"
-      description="No IncidentTypes yet,but when they are available will appear here"
-      buttonLabel="New Incident"
-      onClick={() => {}}
-    />
-  </div>
-);
+const IncidentsIncidentTypesLayout = () => <IncidentTypes />;
 
 export default IncidentsIncidentTypesLayout;
