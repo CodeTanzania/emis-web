@@ -33,7 +33,7 @@ class QuestionsList extends Component {
   render() {
     const { contacts, loading, page, total } = this.props;
     return (
-      <div className="ContactsList">
+      <div className="QuestionstsList">
         <Row>
           <Col span={12}>
             {/* search input component */}

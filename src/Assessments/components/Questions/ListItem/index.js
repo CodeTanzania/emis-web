@@ -45,7 +45,7 @@ class QuestionsListItem extends Component {
     const { isHovered } = this.state;
     return (
       <div
-        className="ContactsListItem"
+        className="QuestionsListItem"
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
@@ -66,17 +66,17 @@ class QuestionsListItem extends Component {
               <Fragment>
                 <Icon
                   type="edit"
-                  title="Update Contact"
+                  title="Update Question"
                   className="actionIcon"
                 />
                 <Icon
                   type="share-alt"
-                  title="Share Contact"
+                  title="Share Question"
                   className="actionIcon"
                 />
                 <Icon
                   type="database"
-                  title="Archive Contact"
+                  title="Archive Question"
                   className="actionIcon"
                 />
               </Fragment>
