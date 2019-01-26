@@ -10,11 +10,12 @@ import './styles.css';
  * @name IncidentTypesListItem
  *
  * @param {Object} props
- * @param {string} props.abbreviation
+ * @param {string} props.color
  * @param {string} props.name
- * @param {string} props.title
- * @param {string} props.email
- * @param {string} props.mobile
+ * @param {string} props.nature
+ * @param {string} props.cap
+ * @param {string} props.family
+ * @param {string} props.cope
  * @version 0.1.0
  * @since 0.1.0
  */
@@ -24,11 +25,12 @@ class IncidentTypesListItem extends Component {
   };
 
   static propTypes = {
-    abbreviation: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    mobile: PropTypes.string.isRequired,
+    nature: PropTypes.string.isRequired,
+    family: PropTypes.string.isRequired,
+    cap: PropTypes.string.isRequired,
+    code: PropTypes.string.isRequired,
   };
 
   handleMouseEnter = () => {
@@ -40,11 +42,12 @@ class IncidentTypesListItem extends Component {
   };
 
   render() {
-    const { abbreviation, name, title, email, mobile } = this.props;
+    const { color, name, nature, family, cap, code } = this.props;
+
     const { isHovered } = this.state;
     return (
       <div
-        className="ContactsListItem"
+        className="IncidentTypesListItem"
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
@@ -53,14 +56,16 @@ class IncidentTypesListItem extends Component {
             {isHovered ? (
               <Checkbox className="Checkbox" />
             ) : (
-              <Avatar>{abbreviation}</Avatar>
+              <Avatar style={{ backgroundColor: color }}>
+                {name.charAt(0)}
+              </Avatar>
             )}
           </Col>
-          <Col span={4}>{name}</Col>
-          <Col span={5}>{title}</Col>
-          <Col span={4}>{email}</Col>
-          <Col span={4}>{mobile}</Col>
-          <Col span={4}>{name}</Col>
+          <Col span={5}>{name}</Col>
+          <Col span={4}>{nature}</Col>
+          <Col span={4}>{family}</Col>
+          <Col span={4}>{code}</Col>
+          <Col span={4}>{cap}</Col>
           <Col span={2}>
             {isHovered && (
               <Fragment>

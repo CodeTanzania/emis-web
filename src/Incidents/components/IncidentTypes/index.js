@@ -1,4 +1,4 @@
-import { Connect, getStakeholders } from '@codetanzania/emis-api-states';
+import { Connect, getIncidentTypes } from '@codetanzania/emis-api-states';
 import { Button, Col, Input, List, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
@@ -21,18 +21,19 @@ const { Search } = Input;
 class IncidentTypesList extends Component {
   static propTypes = {
     loading: PropTypes.bool.isRequired,
-    contacts: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-      .isRequired,
+    incidenttypes: PropTypes.arrayOf(
+      PropTypes.shape({ name: PropTypes.string })
+    ).isRequired,
     page: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
   };
 
   componentWillMount() {
-    getStakeholders();
+    getIncidentTypes();
   }
 
   render() {
-    const { contacts, loading, page, total } = this.props;
+    const { incidenttypes, loading, page, total } = this.props;
     return (
       <div className="IncidentTypesList">
         <Row>
@@ -62,32 +63,18 @@ class IncidentTypesList extends Component {
         <IncidentTypesActionBar total={total} page={page} />
         {/* end list header */}
         {/* list starts */}
-        {/* <List
+        <List
           loading={loading}
           dataSource={incidenttypes}
           renderItem={incidenttype => (
             <IncidentTypesListItem
-              key={incidenttype.abbreviation}
-              abbreviation={incidenttype.abbreviation}
+              key={incidenttype.color}
+              color={incidenttype.color}
               name={incidenttype.name}
               nature={incidenttype.nature}
               family={incidenttype.family}
               cap={incidenttype.cap}
-              code={incidenttype.mobile}
-
-            /> */}
-
-        <List
-          loading={loading}
-          dataSource={contacts}
-          renderItem={contact => (
-            <IncidentTypesListItem
-              key={contact.abbreviation}
-              abbreviation={contact.abbreviation}
-              name={contact.name}
-              title={contact.title}
-              email={contact.email}
-              mobile={contact.mobile}
+              code={incidenttype.code}
             />
           )}
         />
@@ -99,7 +86,6 @@ class IncidentTypesList extends Component {
 
 export default Connect(IncidentTypesList, {
   incidenttypes: 'incidentTypes.list',
-  contacts: 'stakeholders.list',
   loading: 'incidentTypes.loading',
   page: 'incidentTypes.page',
   total: 'incidentTypes.total',
