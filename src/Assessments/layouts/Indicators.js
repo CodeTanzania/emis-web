@@ -1,15 +1,7 @@
 import React from 'react';
-import UIState from '../../components/UIState';
+// import UIState from '../../components/UIState';
+import IndicatorList from '../components/Indicators';
 
-const AssessmentIndicatorsLayout = () => (
-  <div style={{ marginTop: '20%' }}>
-    <UIState
-      icon="exclamation-circle"
-      description="No Assessments Indicators yet,but when they are available will appear here"
-      buttonLabel="New Assessment"
-      onClick={() => {}}
-    />
-  </div>
-);
+const AssessmentIndicatorsLayout = () => <IndicatorList />;
 
 export default AssessmentIndicatorsLayout;
