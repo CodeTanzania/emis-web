@@ -1,4 +1,4 @@
-import { getStakeholders } from '@codetanzania/emis-api-states';
+import { getQuestions } from '@codetanzania/emis-api-states';
 import { Button, Checkbox, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -29,7 +29,7 @@ const QuestionsActionBar = ({ page, total }) => (
           shape="circle"
           icon="reload"
           title="Refresh questions"
-          onClick={() => getStakeholders()}
+          onClick={() => getQuestions()}
           className="actionButton"
           size="large"
         />
@@ -85,7 +85,7 @@ const QuestionsActionBar = ({ page, total }) => (
           simple
           defaultCurrent={page}
           total={total}
-          onChange={nextPage => getStakeholders({ page: nextPage })}
+          onChange={nextPage => getQuestions({ page: nextPage })}
           className="pagination"
         />
       </Col>
