@@ -33,7 +33,7 @@ class QuestionsList extends Component {
   render() {
     const { questions, loading, page, total } = this.props;
     return (
-      <div className="QuestionstsList">
+      <div className="QuestionsList">
         <Row>
           <Col span={12}>
             {/* search input component */}
