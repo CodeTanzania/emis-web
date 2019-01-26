@@ -69,8 +69,8 @@ class QuestionsList extends Component {
           dataSource={questions}
           renderItem={question => (
             <QuestionsListItem
-              key={question.abbreviation}
-              abbreviation={question.abbreviation}
+              key={question.indicator}
+              color={question.indicator.color}
               label={question.label}
               phase={question.phase}
               assess={question.assess}
