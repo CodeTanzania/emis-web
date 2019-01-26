@@ -1,0 +1,7 @@
+.ItemList {
+  padding: 40px;
+}
+
+.ItemList .searchBox {
+  width: 50%;
+}

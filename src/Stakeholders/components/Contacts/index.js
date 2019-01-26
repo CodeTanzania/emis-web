@@ -1,9 +1,10 @@
 import { Connect, getStakeholders } from '@codetanzania/emis-api-states';
-import { Button, Col, Input, List, Row } from 'antd';
+import { Button, Col, Input, Modal, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import ContactsActionBar from './ActionBar';
-import ContactsListItem from './ListItem';
+import ContactFilters from './Filters';
+import ContactsList from './List';
 import './styles.css';
 
 const { Search } = Input;
@@ -17,7 +18,11 @@ const { Search } = Input;
  * @version 0.1.0
  * @since 0.1.0
  */
-class ContactsList extends Component {
+class Contacts extends Component {
+  state = {
+    showFilters: false,
+  };
+
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     contacts: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
@@ -30,8 +35,55 @@ class ContactsList extends Component {
     getStakeholders();
   }
 
+  /**
+   * open filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name openFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openFiltersModal = () => {
+    this.setState({ showFilters: true });
+  };
+
+  /**
+   * Close filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name closeFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeFiltersModal = () => {
+    this.setState({ showFilters: false });
+  };
+
+  /**
+   * Search Contacts List based on supplied filter word
+   *
+   * @function
+   * @name searchContacts
+   *
+   * @param {Object} event - Event instance
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  searchContacts = event => {
+    getStakeholders({ q: event.target.value });
+  };
+
   render() {
     const { contacts, loading, page, total } = this.props;
+    const { showFilters } = this.state;
     return (
       <div className="ContactsList">
         <Row>
@@ -40,6 +92,7 @@ class ContactsList extends Component {
             <Search
               size="large"
               placeholder="Search for stakeholders here ..."
+              onChange={this.searchContacts}
             />
             {/* end search input component */}
           </Col>
@@ -58,30 +111,29 @@ class ContactsList extends Component {
         </Row>
 
         {/* list header */}
-        <ContactsActionBar total={total} page={page} />
+        <ContactsActionBar
+          total={total}
+          page={page}
+          onFilter={this.openFiltersModal}
+        />
         {/* end list header */}
         {/* list starts */}
-        <List
-          loading={loading}
-          dataSource={contacts}
-          renderItem={contact => (
-            <ContactsListItem
-              key={contact.abbreviation}
-              abbreviation={contact.abbreviation}
-              name={contact.name}
-              title={contact.title}
-              email={contact.email}
-              mobile={contact.mobile}
-            />
-          )}
-        />
+        <ContactsList contacts={contacts} loading={loading} />
         {/* end list */}
+        <Modal
+          title="Filter Contacts"
+          visible={showFilters}
+          onCancel={this.closeFiltersModal}
+          footer={null}
+        >
+          <ContactFilters onCancel={this.closeFiltersModal} />
+        </Modal>
       </div>
     );
   }
 }
 
-export default Connect(ContactsList, {
+export default Connect(Contacts, {
   contacts: 'stakeholders.list',
   loading: 'stakeholders.loading',
   page: 'stakeholders.page',
