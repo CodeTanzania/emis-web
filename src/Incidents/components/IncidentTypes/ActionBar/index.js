@@ -1,4 +1,4 @@
-import { getStakeholders } from '@codetanzania/emis-api-states';
+import { getIncidentTypes } from '@codetanzania/emis-api-states';
 import { Button, Checkbox, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -8,7 +8,7 @@ import './styles.css';
  * Render action bar for actions which are applicable to list content
  *
  * @function
- * @name ContactsActionBar
+ * @name IncidentTypesActionBar
  *
  * @param {Object} props
  * @param {page} props.page
@@ -17,8 +17,8 @@ import './styles.css';
  * @version 0.1.0
  * @since 0.1.0
  */
-const ContactsActionBar = ({ page, total, onFilter }) => (
-  <div className="ContactsActionBar">
+const IncidentTypesActionBar = ({ page, total }) => (
+  <div className="IncidentTypesActionBar">
     <Row>
       <Col span={1} xl={1} className="checkbox">
         <Checkbox />
@@ -28,28 +28,8 @@ const ContactsActionBar = ({ page, total, onFilter }) => (
         <Button
           shape="circle"
           icon="reload"
-          title="Refresh contacts"
-          onClick={() => getStakeholders()}
-          className="actionButton"
-          size="large"
-        />
-      </Col>
-
-      <Col span={1} xl={1}>
-        <Button
-          type="circle"
-          icon="mail"
-          title="Send Email to selected contacts"
-          className="actionButton"
-          size="large"
-        />
-      </Col>
-
-      <Col span={1} xl={1}>
-        <Button
-          type="circle"
-          icon="message"
-          title="Send SMS to selected contacts"
+          title="Refresh Incident Types"
+          onClick={() => getIncidentTypes()}
           className="actionButton"
           size="large"
         />
@@ -59,17 +39,7 @@ const ContactsActionBar = ({ page, total, onFilter }) => (
         <Button
           type="circle"
           icon="cloud-download"
-          title="Export selected contacts"
-          className="actionButton"
-          size="large"
-        />
-      </Col>
-
-      <Col span={1} xl={1}>
-        <Button
-          type="circle"
-          icon="share-alt"
-          title="Share selected contacts"
+          title="Export selected Incident Types"
           className="actionButton"
           size="large"
         />
@@ -79,7 +49,7 @@ const ContactsActionBar = ({ page, total, onFilter }) => (
         <Button
           type="circle"
           icon="hdd"
-          title="Archive selected contacts"
+          title="Archive selected Incident Types"
           className="actionButton"
           size="large"
         />
@@ -87,17 +57,16 @@ const ContactsActionBar = ({ page, total, onFilter }) => (
 
       <Col
         span={1}
-        offset={13}
-        xl={{ span: 1, offset: 12 }}
-        xxl={{ span: 1, offset: 13 }}
+        offset={16}
+        xl={{ span: 1, offset: 16 }}
+        xxl={{ span: 1, offset: 16 }}
       >
         <Button
           type="circle"
           icon="filter"
-          title="Filter contacts"
+          title="Filter Incident Types"
           className="actionButton"
           size="large"
-          onClick={onFilter}
         />
       </Col>
 
@@ -106,7 +75,7 @@ const ContactsActionBar = ({ page, total, onFilter }) => (
           simple
           defaultCurrent={page}
           total={total}
-          onChange={nextPage => getStakeholders({ page: nextPage })}
+          onChange={nextPage => getIncidentTypes({ page: nextPage })}
           className="pagination"
         />
       </Col>
@@ -115,10 +84,9 @@ const ContactsActionBar = ({ page, total, onFilter }) => (
 );
 
 /* props validation */
-ContactsActionBar.propTypes = {
+IncidentTypesActionBar.propTypes = {
   page: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
-  onFilter: PropTypes.func.isRequired,
 };
 
-export default ContactsActionBar;
+export default IncidentTypesActionBar;
