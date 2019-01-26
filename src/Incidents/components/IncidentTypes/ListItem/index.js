@@ -71,12 +71,12 @@ class IncidentTypesListItem extends Component {
               <Fragment>
                 <Icon
                   type="edit"
-                  title="Update incident types"
+                  title="Update Incident Types"
                   className="actionIcon"
                 />
                 <Icon
                   type="database"
-                  title="Archive incident types"
+                  title="Archive Incident Types"
                   className="actionIcon"
                 />
               </Fragment>

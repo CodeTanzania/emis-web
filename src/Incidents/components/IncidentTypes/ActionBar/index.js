@@ -28,7 +28,7 @@ const IncidentTypesActionBar = ({ page, total }) => (
         <Button
           shape="circle"
           icon="reload"
-          title="Refresh incident types"
+          title="Refresh Incident Types"
           onClick={() => getIncidentTypes()}
           className="actionButton"
           size="large"
@@ -39,7 +39,7 @@ const IncidentTypesActionBar = ({ page, total }) => (
         <Button
           type="circle"
           icon="cloud-download"
-          title="Export selected incident types"
+          title="Export selected Incident Types"
           className="actionButton"
           size="large"
         />
@@ -49,7 +49,7 @@ const IncidentTypesActionBar = ({ page, total }) => (
         <Button
           type="circle"
           icon="hdd"
-          title="Archive selected incident types"
+          title="Archive selected Incident Types"
           className="actionButton"
           size="large"
         />
@@ -64,7 +64,7 @@ const IncidentTypesActionBar = ({ page, total }) => (
         <Button
           type="circle"
           icon="filter"
-          title="Filter incident types"
+          title="Filter Incident Types"
           className="actionButton"
           size="large"
         />
