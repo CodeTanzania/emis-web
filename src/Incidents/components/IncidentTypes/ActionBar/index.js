@@ -1,4 +1,4 @@
-import { getStakeholders } from '@codetanzania/emis-api-states';
+import { getIncidentTypes } from '@codetanzania/emis-api-states';
 import { Button, Checkbox, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -29,7 +29,7 @@ const IncidentTypesActionBar = ({ page, total }) => (
           shape="circle"
           icon="reload"
           title="Refresh incidenttypes"
-          onClick={() => getStakeholders()}
+          onClick={() => getIncidentTypes()}
           className="actionButton"
           size="large"
         />
@@ -75,7 +75,7 @@ const IncidentTypesActionBar = ({ page, total }) => (
           simple
           defaultCurrent={page}
           total={total}
-          onChange={nextPage => getStakeholders({ page: nextPage })}
+          onChange={nextPage => getIncidentTypes({ page: nextPage })}
           className="pagination"
         />
       </Col>
