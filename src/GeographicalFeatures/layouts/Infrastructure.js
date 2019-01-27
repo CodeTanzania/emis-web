@@ -5,8 +5,8 @@ const CriticalInfrastructureLayout = () => (
   <div style={{ marginTop: '20%' }}>
     <UIState
       icon="exclamation-circle"
-      description="No Alerts Actions yet,but when they are available will appear here"
-      buttonLabel="New Alert"
+      description="No Critical infrastructures yet,but when they are available will appear here"
+      buttonLabel="New Feature"
       onClick={() => {}}
     />
   </div>

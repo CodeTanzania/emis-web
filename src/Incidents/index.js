@@ -1,22 +1,29 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import alertIcon from '../assets/images/alerts.svg';
+import commandCenterIcon from '../assets/images/commandCentre.svg';
 import assessmentIcon from '../assets/images/assessments.svg';
-import incidentIcon from '../assets/images/incidents.svg';
-import planIcon from '../assets/images/plans.svg';
-import resourceIcon from '../assets/images/resources.svg';
-import stakeholderIcon from '../assets/images/stakeholders.svg';
+import incidentTypeIcon from '../assets/images/incidentsType.svg';
+import lossDatabaseIcon from '../assets/images/lossDatabase.svg';
+import feedIcon from '../assets/images/feed.svg';
+import actionsIcon from '../assets/images/actions.svg';
 import NavigationMenu from '../components/NavigationMenu';
 
 const routes = [
-  { name: 'Incident Command Center', path: '/commandcenter', icon: alertIcon },
+  {
+    name: 'Incident Command Center',
+    path: '/commandcenter',
+    icon: commandCenterIcon,
+  },
+  { name: 'Actions', path: '/actions', icon: actionsIcon },
   { name: 'Assessments', path: '/assessments', icon: assessmentIcon },
-  { name: 'Loss Database/History', path: '/lossdatabase', icon: planIcon },
-  { name: 'Incident Types', path: '/incidenttypes', icon: incidentIcon },
-  { name: 'Feeds', path: '/feeds', icon: resourceIcon },
-  { name: 'Actions', path: '/actions', icon: stakeholderIcon },
+  { name: 'Feeds', path: '/feeds', icon: feedIcon },
+  { name: 'Incident Types', path: '/incidenttypes', icon: incidentTypeIcon },
+  {
+    name: 'Loss Database/History',
+    path: '/lossdatabase',
+    icon: lossDatabaseIcon,
+  },
 ];
-
 /**
  * Home component which shows to navigation Nav
  *

@@ -8,9 +8,9 @@ import warehousesIcon from '../assets/images/warehouses.svg';
 import NavigationMenu from '../components/NavigationMenu';
 
 const routes = [
-  { name: 'Stock', path: '/stock', icon: stockIcon },
-  { name: 'Items', path: '/items', icon: itemsIcon },
   { name: 'Adjustments', path: '/adjustments', icon: adjustmentsIcon },
+  { name: 'Items', path: '/items', icon: itemsIcon },
+  { name: 'Stock', path: '/stock', icon: stockIcon },
   {
     name: 'Utilization/Consumptions',
     path: '/utilization',

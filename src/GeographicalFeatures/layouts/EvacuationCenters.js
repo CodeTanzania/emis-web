@@ -1,15 +1,15 @@
 import React from 'react';
 import UIState from '../../components/UIState';
 
-const ResourcesStockLayout = () => (
+const EvacuationCentersLayout = () => (
   <div style={{ marginTop: '20%' }}>
     <UIState
       icon="exclamation-circle"
-      description="No Resources Stock yet,but when they are available will appear here"
-      buttonLabel="New Resource"
+      description="No Evacuation Centers yet,but when they are available will appear here"
+      buttonLabel="New Feature"
       onClick={() => {}}
     />
   </div>
 );
 
-export default ResourcesStockLayout;
+export default EvacuationCentersLayout;

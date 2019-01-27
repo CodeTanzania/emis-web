@@ -5,8 +5,8 @@ const ResourcesUtilizationLayout = () => (
   <div style={{ marginTop: '20%' }}>
     <UIState
       icon="exclamation-circle"
-      description="No Alerts Actions yet,but when they are available will appear here"
-      buttonLabel="New Alert"
+      description="No Resources Utilization yet,but when they are available will appear here"
+      buttonLabel="New Resource"
       onClick={() => {}}
     />
   </div>

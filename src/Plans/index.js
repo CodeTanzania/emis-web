@@ -1,16 +1,20 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import alertIcon from '../assets/images/alerts.svg';
-import assessmentIcon from '../assets/images/assessments.svg';
-import incidentIcon from '../assets/images/incidents.svg';
-import planIcon from '../assets/images/plans.svg';
+import activationIcon from '../assets/images/activations.svg';
+import plannerIcon from '../assets/images/planner.svg';
+import disseminationIcon from '../assets/images/disseminations.svg';
+import drillsAndExcercisesIcon from '../assets/images/drillsAndExercises.svg';
 import NavigationMenu from '../components/NavigationMenu';
 
 const routes = [
-  { name: 'Emergency Planner', path: '/planner', icon: alertIcon },
-  { name: 'Drills & Exercises', path: '/drills', icon: assessmentIcon },
-  { name: 'Disseminations', path: '/disseminations', icon: planIcon },
-  { name: 'Activations', path: '/activations', icon: incidentIcon },
+  { name: 'Emergency Planner', path: '/planner', icon: plannerIcon },
+  { name: 'Disseminations', path: '/disseminations', icon: disseminationIcon },
+  { name: 'Activations', path: '/activations', icon: activationIcon },
+  {
+    name: 'Drills & Exercises',
+    path: '/drills',
+    icon: drillsAndExcercisesIcon,
+  },
 ];
 
 /**
