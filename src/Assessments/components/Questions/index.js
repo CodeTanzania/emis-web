@@ -33,7 +33,7 @@ class QuestionsList extends Component {
   render() {
     const { questions, loading, page, total } = this.props;
     return (
-      <div className="QuestionstsList">
+      <div className="QuestionsList">
         <Row>
           <Col span={12}>
             {/* search input component */}
@@ -69,8 +69,8 @@ class QuestionsList extends Component {
           dataSource={questions}
           renderItem={question => (
             <QuestionsListItem
-              key={question.abbreviation}
-              abbreviation={question.abbreviation}
+              key={question.indicator}
+              color={question.indicator.color}
               label={question.label}
               phase={question.phase}
               assess={question.assess}
