@@ -129,6 +129,7 @@ class Warehouses extends Component {
           visible={showFilters}
           onCancel={this.closeFiltersModal}
           footer={null}
+          width={800}
         >
           <WarehouseFilters onCancel={this.closeFiltersModal} />
         </Modal>
