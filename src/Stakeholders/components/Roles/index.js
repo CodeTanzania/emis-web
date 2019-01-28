@@ -1,24 +1,24 @@
 import { Connect, getRoles } from '@codetanzania/emis-api-states';
-import { Input, List, Col, Row, Button } from 'antd';
+import { Input, Col, Row, Button } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import RoleListItem from './ListItem';
 import RolesActionBar from './ActionBar';
+import RoleList from './List';
 import './styles.css';
 
 const { Search } = Input;
 
 /**
- * Render role list which have search box and actions
+ * Render role module which has search box, actions and list of roles
  *
  * @class
- * @name RoleList
+ * @name Roles
  *
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class RoleList extends Component {
+class Roles extends Component {
   propTypes = {
     loading: PropTypes.bool.isRequired,
     roles: PropTypes.arrayOf(
@@ -67,25 +67,14 @@ class RoleList extends Component {
         <RolesActionBar total={total} page={page} />
         {/* end list action bar */}
         {/* list starts */}
-        <List
-          loading={loading}
-          dataSource={roles}
-          renderItem={role => (
-            <RoleListItem
-              key={role.abbreviation}
-              abbreviation={role.abbreviation}
-              name={role.name}
-              description={role.description}
-            />
-          )}
-        />
+        <RoleList roles={roles} loading={loading} />
         {/* end list */}
       </div>
     );
   }
 }
 
-export default Connect(RoleList, {
+export default Connect(Roles, {
   roles: 'roles.list',
   loading: 'roles.loading',
   page: 'roles.page',
