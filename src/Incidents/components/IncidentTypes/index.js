@@ -1,10 +1,11 @@
 import { Connect, getIncidentTypes } from '@codetanzania/emis-api-states';
-import { Button, Col, Input, Row } from 'antd';
+import { Button, Col, Input, Row, Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import IncidentTypesActionBar from './ActionBar';
-import './styles.css';
 import IncidentTypesList from './List';
+import IncidentTypesFilters from './Filters';
+import './styles.css';
 
 const { Search } = Input;
 
@@ -19,6 +20,10 @@ const { Search } = Input;
  */
 
 class IncidentTypes extends Component {
+  state = {
+    showFilters: false,
+  };
+
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     incidenttypes: PropTypes.arrayOf(
@@ -32,8 +37,40 @@ class IncidentTypes extends Component {
     getIncidentTypes();
   }
 
+  /**
+   * open filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name openFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openFiltersModal = () => {
+    this.setState({ showFilters: true });
+  };
+
+  /**
+   * Close filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name closeFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeFiltersModal = () => {
+    this.setState({ showFilters: false });
+  };
+
   render() {
     const { incidenttypes, page, total, loading } = this.props;
+    const { showFilters } = this.state;
+
     return (
       <div className="IncidentTypes">
         <Row>
@@ -63,11 +100,23 @@ class IncidentTypes extends Component {
         </Row>
 
         {/* list header */}
-        <IncidentTypesActionBar total={total} page={page} />
+        <IncidentTypesActionBar
+          total={total}
+          page={page}
+          onFilter={this.openFiltersModal}
+        />
         {/* end list header */}
         {/* list starts */}
         <IncidentTypesList incidenttypes={incidenttypes} loading={loading} />
         {/* end list */}
+        <Modal
+          title="Filter Incident Types"
+          visible={showFilters}
+          onCancel={this.closeFiltersModal}
+          footer={null}
+        >
+          <IncidentTypesFilters onCancel={this.closeFiltersModal} />
+        </Modal>
       </div>
     );
   }
