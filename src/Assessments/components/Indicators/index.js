@@ -1,10 +1,10 @@
 import { Connect, getIndicators } from '@codetanzania/emis-api-states';
-import { Input, List, Col, Row, Button } from 'antd';
+import { Input, Col, Row, Button } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import IndicatorListItem from './ListItem';
 import IndicatorsActionBar from './ActionBar';
 import './styles.css';
+import IndicatorsList from './List';
 
 const { Search } = Input;
 
@@ -12,13 +12,13 @@ const { Search } = Input;
  * Render indicator list which have search box and actions
  *
  * @class
- * @name IndicatorList
+ * @name Indicators
  *
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class IndicatorList extends Component {
+class Indicators extends Component {
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     indicators: PropTypes.arrayOf(
@@ -69,26 +69,14 @@ class IndicatorList extends Component {
         <IndicatorsActionBar total={total} page={page} />
         {/* end list action bar */}
         {/* list starts */}
-        <List
-          loading={loading}
-          dataSource={indicators}
-          renderItem={({ subject, topic, description, color, _id: id }) => (
-            <IndicatorListItem
-              key={id}
-              subject={subject}
-              topic={topic}
-              description={description}
-              color={color}
-            />
-          )}
-        />
+        <IndicatorsList indicators={indicators} loading={loading} />
         {/* end list */}
       </div>
     );
   }
 }
 
-export default Connect(IndicatorList, {
+export default Connect(Indicators, {
   indicators: 'indicators.list',
   loading: 'indicators.loading',
   page: 'indicators.page',
