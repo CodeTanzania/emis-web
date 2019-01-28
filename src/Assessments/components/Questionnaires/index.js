@@ -1,9 +1,9 @@
 import { Connect, getQuestionnaires } from '@codetanzania/emis-api-states';
-import { Button, Col, Input, List, Row } from 'antd';
+import { Button, Col, Input, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import QuestionnairesActionBar from './ActionBar';
-import QuestionnairesListItem from './ListItem';
+import QuestionnairesList from './List';
 import './styles.css';
 
 const { Search } = Input;
@@ -12,12 +12,12 @@ const { Search } = Input;
  * Render questionnaire list which have search box, actions and questionnaire list
  *
  * @class
- * @name QuestionnairesList
+ * @name Questionnaires
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class QuestionnairesList extends Component {
+class Questionnaires extends Component {
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     questionnaires: PropTypes.arrayOf(
@@ -34,7 +34,7 @@ class QuestionnairesList extends Component {
   render() {
     const { questionnaires, loading, page, total } = this.props;
     return (
-      <div className="QuestionnairesList">
+      <div className="Questionnaires">
         <Row>
           <Col span={12}>
             {/* search input component */}
@@ -65,26 +65,14 @@ class QuestionnairesList extends Component {
         <QuestionnairesActionBar total={total} page={page} />
         {/* end list header */}
         {/* list starts */}
-        <List
-          loading={loading}
-          dataSource={questionnaires}
-          renderItem={questionnaire => (
-            <QuestionnairesListItem
-              key={questionnaire.title}
-              title={questionnaire.title}
-              phase={questionnaire.phase}
-              assess={questionnaire.assess}
-              stage={questionnaire.stage}
-            />
-          )}
-        />
+        <QuestionnairesList questionnaires={questionnaires} loading={loading} />
         {/* end list */}
       </div>
     );
   }
 }
 
-export default Connect(QuestionnairesList, {
+export default Connect(Questionnaires, {
   questionnaires: 'questionnaires.list',
   loading: 'questionnaires.loading',
   page: 'questionnaires.page',
