@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 
 const phases = ['Mitigation', 'Preparedness', 'Response', 'Recovery'];
 const stages = ['Before', 'During', 'After', 'Other'];
-const assessment = ['Need', 'Situation', 'Others'];
+const assess = ['Need', 'Situation', 'Others'];
 
 /**
  * Filter modal component for filtering questions
@@ -76,7 +76,7 @@ class QuestionsFilters extends Component {
             </Checkbox.Group>
           )}
         </Form.Item>
-        {/* end question type filters */}
+        {/* end stage filters */}
 
         {/* start emergency phase filters */}
         <Form.Item {...formItemLayout} label="By Emergency Phases">
@@ -95,12 +95,12 @@ class QuestionsFilters extends Component {
         {/* end emergency phase filters */}
         {/* start assess filters */}
         <Form.Item {...formItemLayout} label="By Assess">
-          {getFieldDecorator('assessment')(
+          {getFieldDecorator('assess')(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
-                {assessment.map(assess => (
+                {assess.map(type => (
                   <Col span={6} style={{ margin: '10px 0' }}>
-                    <Checkbox value={assess}>{assess}</Checkbox>
+                    <Checkbox value={type}>{type}</Checkbox>
                   </Col>
                 ))}
               </Row>
