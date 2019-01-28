@@ -28,7 +28,7 @@ const ItemsActionBar = ({ page, total }) => (
         <Button
           shape="circle"
           icon="reload"
-          title="Refresh item"
+          title="Refresh items"
           onClick={() => getItems()}
           className="actionButton"
           size="large"
@@ -39,7 +39,7 @@ const ItemsActionBar = ({ page, total }) => (
         <Button
           type="circle"
           icon="hdd"
-          title="Archive selected item"
+          title="Archive selected items"
           className="actionButton"
           size="large"
         />
