@@ -1,9 +1,9 @@
 import { Connect, getQuestions } from '@codetanzania/emis-api-states';
-import { Button, Col, Input, List, Row } from 'antd';
+import { Button, Col, Input, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import QuestionsListItem from './ListItem';
 import QuestionsActionBar from './ActionBar';
+import QuestionsList from './List';
 import './styles.css';
 
 const { Search } = Input;
@@ -12,12 +12,12 @@ const { Search } = Input;
  * Render question list which have search box, actions and question list
  *
  * @class
- * @name QuestionsList
+ * @name Questions
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class QuestionsList extends Component {
+class Questions extends Component {
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     questions: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
@@ -33,7 +33,7 @@ class QuestionsList extends Component {
   render() {
     const { questions, loading, page, total } = this.props;
     return (
-      <div className="QuestionsList">
+      <div className="Questions">
         <Row>
           <Col span={12}>
             {/* search input component */}
@@ -64,27 +64,14 @@ class QuestionsList extends Component {
         <QuestionsActionBar total={total} page={page} />
         {/* end list header */}
         {/* list starts */}
-        <List
-          loading={loading}
-          dataSource={questions}
-          renderItem={question => (
-            <QuestionsListItem
-              key={question.indicator}
-              color={question.indicator.color}
-              label={question.label}
-              phase={question.phase}
-              assess={question.assess}
-              stage={question.stage}
-            />
-          )}
-        />
+        <QuestionsList questions={questions} loading={loading} />
         {/* end list */}
       </div>
     );
   }
 }
 
-export default Connect(QuestionsList, {
+export default Connect(Questions, {
   questions: 'questions.list',
   loading: 'questions.loading',
   page: 'questions.page',
