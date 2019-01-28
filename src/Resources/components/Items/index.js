@@ -1,9 +1,9 @@
 import { Connect, getItems } from '@codetanzania/emis-api-states';
-import { Input, List, Col, Row, Button } from 'antd';
+import { Input, Col, Row, Button } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import ItemsListItem from './ListItem';
 import ItemsActionBar from './ActionBar';
+import ItemsList from './List';
 import './styles.css';
 
 const { Search } = Input;
@@ -12,13 +12,13 @@ const { Search } = Input;
  * Render item list which have search box and actions
  *
  * @class
- * @name ItemList
+ * @name Items
  *
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class ItemList extends Component {
+class Items extends Component {
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     items: PropTypes.arrayOf(
@@ -40,7 +40,7 @@ class ItemList extends Component {
   render() {
     const { items, loading, total, page } = this.props;
     return (
-      <div className="ItemList">
+      <div className="Items">
         <Row>
           <Col span={12}>
             {/* search input component */}
@@ -68,26 +68,14 @@ class ItemList extends Component {
         <ItemsActionBar total={total} page={page} />
         {/* end list action bar */}
         {/* list starts */}
-        <List
-          loading={loading}
-          dataSource={items}
-          renderItem={item => (
-            <ItemsListItem
-              key={item.name}
-              name={item.name}
-              type={item.type}
-              description={item.description}
-              color={item.color}
-            />
-          )}
-        />
+        <ItemsList items={items} loading={loading} />
         {/* end list */}
       </div>
     );
   }
 }
 
-export default Connect(ItemList, {
+export default Connect(Items, {
   items: 'items.list',
   loading: 'items.loading',
   page: 'items.page',
