@@ -2,7 +2,7 @@ import { Button, Checkbox, Col, Form, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-const types = ['Consumable', 'Equipment', 'Other', 'Service', 'Vehicle'];
+const types = ['Consumable', 'Equipment', 'Service', 'Vehicle', 'Other'];
 
 /**
  * Filter modal component for filtering items
@@ -61,7 +61,7 @@ class ItemsFilters extends Component {
     return (
       <Form onSubmit={this.handleSubmit} layout={formItemLayout}>
         {/* start type filters */}
-        <Form.Item {...formItemLayout} label="By Type">
+        <Form.Item {...formItemLayout} label="By Types">
           {getFieldDecorator('types')(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
@@ -78,10 +78,8 @@ class ItemsFilters extends Component {
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
-          <Button style={{ marginLeft: 8 }} onClick={onCancel}>
-            Cancel
-          </Button>
-          <Button type="primary" htmlType="submit">
+          <Button onClick={onCancel}>Cancel</Button>
+          <Button style={{ marginLeft: 8 }} type="primary" htmlType="submit">
             Filter
           </Button>
         </Form.Item>

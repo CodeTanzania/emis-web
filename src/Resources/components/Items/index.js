@@ -101,7 +101,11 @@ class Items extends Component {
           {/* end primary actions */}
         </Row>
         {/* list action bar */}
-        <ItemsActionBar total={total} page={page} />
+        <ItemsActionBar
+          total={total}
+          page={page}
+          onFilter={this.openFiltersModal}
+        />
         {/* end list action bar */}
         {/* list starts */}
         <ItemsList items={items} loading={loading} />
