@@ -1,10 +1,10 @@
 import { Connect, getIncidentTypes } from '@codetanzania/emis-api-states';
-import { Button, Col, Input, List, Row } from 'antd';
+import { Button, Col, Input, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import IncidentTypesActionBar from './ActionBar';
-import IncidentTypesListItem from './ListItem';
 import './styles.css';
+import IncidentTypesList from './List';
 
 const { Search } = Input;
 
@@ -12,13 +12,13 @@ const { Search } = Input;
  * Render IncidentTypes list which have search box, actions and IncidentTypes list
  *
  * @class
- * @name IncidentTypesList
+ * @name IncidentTypes
  *
  * @version 0.1.0
  * @since 0.1.0
  */
 
-class IncidentTypesList extends Component {
+class IncidentTypes extends Component {
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     incidenttypes: PropTypes.arrayOf(
@@ -33,9 +33,9 @@ class IncidentTypesList extends Component {
   }
 
   render() {
-    const { incidenttypes, loading, page, total } = this.props;
+    const { incidenttypes, page, total, loading } = this.props;
     return (
-      <div className="IncidentTypesList">
+      <div className="IncidentTypes">
         <Row>
           <Col span={12}>
             {/* search input component */}
@@ -66,28 +66,14 @@ class IncidentTypesList extends Component {
         <IncidentTypesActionBar total={total} page={page} />
         {/* end list header */}
         {/* list starts */}
-        <List
-          loading={loading}
-          dataSource={incidenttypes}
-          renderItem={incidenttype => (
-            <IncidentTypesListItem
-              key={incidenttype.color}
-              color={incidenttype.color}
-              name={incidenttype.name}
-              nature={incidenttype.nature}
-              family={incidenttype.family}
-              cap={incidenttype.cap}
-              code={incidenttype.code}
-            />
-          )}
-        />
+        <IncidentTypesList incidenttypes={incidenttypes} loading={loading} />
         {/* end list */}
       </div>
     );
   }
 }
 
-export default Connect(IncidentTypesList, {
+export default Connect(IncidentTypes, {
   incidenttypes: 'incidentTypes.list',
   loading: 'incidentTypes.loading',
   page: 'incidentTypes.page',
