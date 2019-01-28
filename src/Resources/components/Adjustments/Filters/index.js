@@ -2,7 +2,7 @@ import { Button, Checkbox, Col, Form, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-const actions = ['Addition', 'Deduction'];
+const types = ['Addition', 'Deduction'];
 const reasons = [
   'Consumed',
   'Cycle Count',
@@ -62,13 +62,13 @@ class AdjustmentsFilters extends Component {
     return (
       <Form onSubmit={this.handleSubmit} layout={formItemLayout}>
         {/* start adjustment actions filters */}
-        <Form.Item {...formItemLayout} label="By Adjustment actions">
-          {getFieldDecorator('actions')(
+        <Form.Item {...formItemLayout} label="By Types">
+          {getFieldDecorator('types')(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
-                {actions.map(action => (
+                {types.map(type => (
                   <Col span={6} style={{ margin: '10px 0' }}>
-                    <Checkbox value={action}>{action}</Checkbox>
+                    <Checkbox value={type}>{type}</Checkbox>
                   </Col>
                 ))}
               </Row>
@@ -78,7 +78,7 @@ class AdjustmentsFilters extends Component {
         {/* end adjustment actions filters */}
 
         {/* start adjustment reasons filters */}
-        <Form.Item {...formItemLayout} label="By Adjustment reasons">
+        <Form.Item {...formItemLayout} label="By  Reasons">
           {getFieldDecorator('reasons')(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>

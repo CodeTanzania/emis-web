@@ -51,7 +51,7 @@ class RolesFilters extends Component {
     return (
       <Form onSubmit={this.handleSubmit} layout={formItemLayout}>
         {/* start role properties filters */}
-        <Form.Item {...formItemLayout} label="By Role properties">
+        <Form.Item {...formItemLayout} label="By Types">
           {getFieldDecorator('types')(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>

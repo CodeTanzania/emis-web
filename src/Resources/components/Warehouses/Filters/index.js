@@ -129,7 +129,7 @@ class WarehousesFilters extends Component {
     return (
       <Form onSubmit={this.handleSubmit} layout={formItemLayout}>
         {/* start warehouses category filters */}
-        <Form.Item {...formItemLayout} label="By Warehouse Category">
+        <Form.Item {...formItemLayout} label="By Category">
           {getFieldDecorator('categories')(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
@@ -145,7 +145,7 @@ class WarehousesFilters extends Component {
         {/* end warehouse category filters */}
 
         {/* start warehouses type filters */}
-        <Form.Item {...formItemLayout} label="By Warehouse Types">
+        <Form.Item {...formItemLayout} label="By Types">
           {getFieldDecorator('types')(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
@@ -161,7 +161,7 @@ class WarehousesFilters extends Component {
         {/* end warehouse type filters */}
 
         {/* start warehouses level filters */}
-        <Form.Item {...formItemLayout} label="By Warehouse Levels">
+        <Form.Item {...formItemLayout} label="By Levels">
           {getFieldDecorator('levels')(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
