@@ -3,6 +3,7 @@ import {
   Connect,
   getStakeholders,
   openStakeholderForm,
+  searchStakeholders,
 } from '@codetanzania/emis-api-states';
 import { Button, Col, Input, Modal, Row } from 'antd';
 import PropTypes from 'prop-types';
@@ -116,7 +117,7 @@ class Contacts extends Component {
    * @since 0.1.0
    */
   searchContacts = event => {
-    getStakeholders({ q: event.target.value });
+    searchStakeholders(event.target.value);
   };
 
   render() {
