@@ -3,10 +3,10 @@ import React from 'react';
 import './styles.css';
 
 const headerLayout = [
-  { span: 5, header: 'Title', offset: 1 },
-  { span: 6, header: 'Phase' },
+  { span: 8, header: 'Title', offset: 1 },
+  { span: 3, header: 'Phase' },
   { span: 4, header: 'Assess' },
-  { span: 4, header: 'Stage' },
+  { span: 3, header: 'Stage' },
 ];
 
 const QuestionnairesListHeader = () => (
