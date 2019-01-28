@@ -1,9 +1,10 @@
 import { Connect, getItems } from '@codetanzania/emis-api-states';
-import { Input, Col, Row, Button } from 'antd';
+import { Input, Col, Row, Button, Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import ItemsActionBar from './ActionBar';
 import ItemsList from './List';
+import ItemsFilters from './Filters';
 import './styles.css';
 
 const { Search } = Input;
@@ -19,6 +20,10 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class Items extends Component {
+  state = {
+    showFilters: false,
+  };
+
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     items: PropTypes.arrayOf(
@@ -37,8 +42,39 @@ class Items extends Component {
     getItems();
   }
 
+  /**
+   * open filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name openFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openFiltersModal = () => {
+    this.setState({ showFilters: true });
+  };
+
+  /**
+   * Close filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name closeFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeFiltersModal = () => {
+    this.setState({ showFilters: false });
+  };
+
   render() {
     const { items, loading, total, page } = this.props;
+    const { showFilters } = this.state;
     return (
       <div className="Items">
         <Row>
@@ -70,6 +106,14 @@ class Items extends Component {
         {/* list starts */}
         <ItemsList items={items} loading={loading} />
         {/* end list */}
+        <Modal
+          title="Filter Items"
+          visible={showFilters}
+          onCancel={this.closeFiltersModal}
+          footer={null}
+        >
+          <ItemsFilters onCancel={this.closeFiltersModal} />
+        </Modal>
       </div>
     );
   }
