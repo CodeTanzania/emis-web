@@ -78,7 +78,7 @@ class Questionnaires extends Component {
               size="large"
               placeholder="Search for questionnaires here ..."
               onChange={({ target: { value } }) =>
-                getQuestionnaires({ q: { value } })
+                getQuestionnaires({ q: value })
               }
             />
             {/* end search input component */}
