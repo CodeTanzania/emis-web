@@ -1,9 +1,10 @@
 import { Connect, getQuestionnaires } from '@codetanzania/emis-api-states';
-import { Button, Col, Input, Row } from 'antd';
+import { Button, Col, Input, Row, Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import QuestionnairesActionBar from './ActionBar';
 import QuestionnairesList from './List';
+import QuestionnairesFilters from './Filters';
 import './styles.css';
 
 const { Search } = Input;
@@ -18,6 +19,10 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class Questionnaires extends Component {
+  state = {
+    showFilters: false,
+  };
+
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     questionnaires: PropTypes.arrayOf(
@@ -31,8 +36,39 @@ class Questionnaires extends Component {
     getQuestionnaires();
   }
 
+  /**
+   * open filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name openFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openFiltersModal = () => {
+    this.setState({ showFilters: true });
+  };
+
+  /**
+   * Close filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name closeFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeFiltersModal = () => {
+    this.setState({ showFilters: false });
+  };
+
   render() {
     const { questionnaires, loading, page, total } = this.props;
+    const { showFilters } = this.state;
     return (
       <div className="Questionnaires">
         <Row>
@@ -62,11 +98,23 @@ class Questionnaires extends Component {
         </Row>
 
         {/* list header */}
-        <QuestionnairesActionBar total={total} page={page} />
+        <QuestionnairesActionBar
+          total={total}
+          page={page}
+          onFilter={this.openFiltersModal}
+        />
         {/* end list header */}
         {/* list starts */}
         <QuestionnairesList questionnaires={questionnaires} loading={loading} />
         {/* end list */}
+        <Modal
+          title="Filter Questionnaires"
+          visible={showFilters}
+          onCancel={this.closeFiltersModal}
+          footer={null}
+        >
+          <QuestionnairesFilters onCancel={this.closeFiltersModal} />
+        </Modal>
       </div>
     );
   }
