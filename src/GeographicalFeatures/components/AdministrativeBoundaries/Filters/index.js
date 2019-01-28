@@ -179,6 +179,9 @@ class AdminstrstiveBoundariesFilters extends Component {
           <Button type="primary" htmlType="submit">
             Filter
           </Button>
+          <Button style={{ marginLeft: 8 }} onClick={() => {}}>
+            Clear
+          </Button>
           <Button style={{ marginLeft: 8 }} onClick={onCancel}>
             Cancel
           </Button>

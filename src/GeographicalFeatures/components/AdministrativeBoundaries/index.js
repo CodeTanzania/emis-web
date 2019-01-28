@@ -119,7 +119,9 @@ class AdminstrativeBoundaries extends Component {
         />
         {/* end list */}
         <Modal
-          title="Filter AdminstrativeBoundaries"
+          title="Filter Adminstrative Boundaries"
+          width={800}
+          maskClosable={false}
           visible={showFilters}
           onCancel={this.closeFiltersModal}
           footer={null}
