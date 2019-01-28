@@ -1,5 +1,6 @@
 .BaseLayout {
   height: 100vh;
+  overflow: hidden;
 }
 
 .BaseLayoutHeader {

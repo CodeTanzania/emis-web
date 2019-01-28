@@ -18,6 +18,11 @@ const routes = [
     icon: infrastructureIcon,
   },
   { name: 'Facilities', path: '/facilities', icon: facilitiesIcon },
+  {
+    name: 'Evacuation Centers',
+    path: '/evacuationcenters',
+    icon: facilitiesIcon,
+  },
   { name: 'Warehouses', path: '/warehouses', icon: warehousesIcon },
 ];
 
