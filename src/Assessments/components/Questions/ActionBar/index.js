@@ -17,7 +17,7 @@ import './styles.css';
  * @version 0.1.0
  * @since 0.1.0
  */
-const QuestionsActionBar = ({ page, total }) => (
+const QuestionsActionBar = ({ page, total, onFilter }) => (
   <div className="QuestionsActionBar">
     <Row>
       <Col span={1} xl={1} className="checkbox">
@@ -77,6 +77,7 @@ const QuestionsActionBar = ({ page, total }) => (
           title="Filter Questions"
           className="actionButton"
           size="large"
+          onClick={onFilter}
         />
       </Col>
 
@@ -97,6 +98,7 @@ const QuestionsActionBar = ({ page, total }) => (
 QuestionsActionBar.propTypes = {
   page: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
+  onFilter: PropTypes.func.isRequired,
 };
 
 export default QuestionsActionBar;
