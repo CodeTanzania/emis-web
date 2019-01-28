@@ -77,9 +77,7 @@ class Questions extends Component {
             <Search
               size="large"
               placeholder="Search for questions here ..."
-              onChange={({ target: { value } }) =>
-                getQuestions({ q: { value } })
-              }
+              onChange={({ target: { value } }) => getQuestions({ q: value })}
             />
             {/* end search input component */}
           </Col>
