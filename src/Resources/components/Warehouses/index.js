@@ -1,24 +1,29 @@
 import { Connect, getWarehouses } from '@codetanzania/emis-api-states';
-import { Input, List, Col, Row, Button } from 'antd';
+import { Input, Modal, Col, Row, Button } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import WarehouseListItem from './ListItem';
+import WarehouseList from './List';
+import WarehouseFilters from './Filters';
 import WarehousesActionBar from './ActionBar';
 import './styles.css';
 
 const { Search } = Input;
 
 /**
- * Render warehouses list which have search box and actions
+ * Render warehouses module which has search box, actions and list of warehouses
  *
  * @class
- * @name WarehouseList
+ * @name Warehouses
  *
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class WarehouseList extends Component {
+class Warehouses extends Component {
+  state = {
+    showFilters: false,
+  };
+
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     warehouses: PropTypes.arrayOf(
@@ -35,8 +40,55 @@ class WarehouseList extends Component {
     getWarehouses();
   }
 
+  /**
+   * open filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name openFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openFiltersModal = () => {
+    this.setState({ showFilters: true });
+  };
+
+  /**
+   * Close filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name closeFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeFiltersModal = () => {
+    this.setState({ showFilters: false });
+  };
+
+  /**
+   * Search Warehouses List based on supplied filter word
+   *
+   * @function
+   * @name searchWarehouses
+   *
+   * @param {Object} event - Event instance
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  searchWarehouses = event => {
+    getWarehouses({ q: event.target.value });
+  };
+
   render() {
     const { warehouses, loading, total, page } = this.props;
+    const { showFilters } = this.state;
     return (
       <div className="WarehouseList">
         <Row>
@@ -45,7 +97,7 @@ class WarehouseList extends Component {
             <Search
               size="large"
               placeholder="Search for warehouses here ..."
-              onChange={({ target: { value } }) => getWarehouses({ q: value })}
+              onChange={getWarehouses}
             />
             {/* end search input component */}
           </Col>
@@ -63,27 +115,29 @@ class WarehouseList extends Component {
           {/* end primary actions */}
         </Row>
         {/* list action bar */}
-        <WarehousesActionBar total={total} page={page} />
+        <WarehousesActionBar
+          total={total}
+          page={page}
+          onFilter={this.openFiltersModal}
+        />
         {/* end list action bar */}
         {/* list starts */}
-        <List
-          loading={loading}
-          dataSource={warehouses}
-          renderItem={warehouse => (
-            <WarehouseListItem
-              key={warehouse.name}
-              name={warehouse.name}
-              level={warehouse.level}
-            />
-          )}
-        />
+        <WarehouseList warehouses={warehouses} loading={loading} />
         {/* end list */}
+        <Modal
+          title="Filter Warehouses"
+          visible={showFilters}
+          onCancel={this.closeFiltersModal}
+          footer={null}
+        >
+          <WarehouseFilters onCancel={this.closeFiltersModal} />
+        </Modal>
       </div>
     );
   }
 }
 
-export default Connect(WarehouseList, {
+export default Connect(Warehouses, {
   warehouses: 'warehouses.list',
   loading: 'warehouses.loading',
   page: 'warehouses.page',
