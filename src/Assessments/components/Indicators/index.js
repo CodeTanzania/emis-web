@@ -1,10 +1,11 @@
 import { Connect, getIndicators } from '@codetanzania/emis-api-states';
-import { Input, Col, Row, Button } from 'antd';
+import { Input, Col, Row, Button, Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import IndicatorsActionBar from './ActionBar';
-import './styles.css';
 import IndicatorsList from './List';
+import IndicatorsFilters from './Filters';
+import './styles.css';
 
 const { Search } = Input;
 
@@ -19,6 +20,10 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class Indicators extends Component {
+  state = {
+    showFilters: false,
+  };
+
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     indicators: PropTypes.arrayOf(
@@ -38,8 +43,40 @@ class Indicators extends Component {
     getIndicators();
   }
 
+  /**
+   * open filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name openFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openFiltersModal = () => {
+    this.setState({ showFilters: true });
+  };
+
+  /**
+   * Close filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name closeFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeFiltersModal = () => {
+    this.setState({ showFilters: false });
+  };
+
   render() {
     const { indicators, loading, total, page } = this.props;
+    const { showFilters } = this.state;
+
     return (
       <div className="IndicatorList">
         <Row>
@@ -66,11 +103,23 @@ class Indicators extends Component {
           {/* end primary actions */}
         </Row>
         {/* list action bar */}
-        <IndicatorsActionBar total={total} page={page} />
+        <IndicatorsActionBar
+          total={total}
+          page={page}
+          onFilter={this.openFiltersModal}
+        />
         {/* end list action bar */}
         {/* list starts */}
         <IndicatorsList indicators={indicators} loading={loading} />
         {/* end list */}
+        <Modal
+          title="Filter Indicators"
+          visible={showFilters}
+          onCancel={this.closeFiltersModal}
+          footer={null}
+        >
+          <IndicatorsFilters onCancel={this.closeFiltersModal} />
+        </Modal>
       </div>
     );
   }
