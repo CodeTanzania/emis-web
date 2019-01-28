@@ -3,10 +3,9 @@ import React from 'react';
 import './styles.css';
 
 const headerLayout = [
-  { span: 5, header: 'Name', offset: 1 },
-  { span: 6, header: 'Designation' },
-  { span: 4, header: 'Email Address' },
-  { span: 4, header: 'Mobile Number' },
+  { span: 6, header: 'Subject', offset: 1 },
+  { span: 6, header: 'Topic' },
+  { span: 8, header: 'Description' },
 ];
 
 const IndicatorsListHeader = () => (
