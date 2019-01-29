@@ -790,15 +790,15 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@codetanzania/emis-api-client@^0.5.1":
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/@codetanzania/emis-api-client/-/emis-api-client-0.5.1.tgz#d3d4d4ce2d38e9bd8e69961b72157cf4bed43203"
-  integrity sha512-YnZnDTCuz0wssxun89MAqzeKWEkGlORBsB44cUIbF0gZVS9W18q6zEPCgSuVj4dHvhcWC5HFW+gq6smompzRPw==
+"@codetanzania/emis-api-client@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@codetanzania/emis-api-client/-/emis-api-client-0.6.0.tgz#ee459d9a1f99e35f2aeea32e649ed7f5aa737f42"
+  integrity sha512-GAaNt2NwsjnmlVKHkX7Q9BVHsJpHguJGAWOAukGS6TytuP2f7BzVUwz+XYu4CT5VczBhpnEZZtp3I+3Id42SQw==
 
-"@codetanzania/emis-api-states@^0.5.3":
-  version "0.5.3"
-  resolved "https://registry.yarnpkg.com/@codetanzania/emis-api-states/-/emis-api-states-0.5.3.tgz#9c56e00bc3dc4a5cff9eb8581a094aabc2eba7bf"
-  integrity sha512-QzRZQF6LY65LZiO3G5GNqoMaxatoB0Q2bEsHVXAnYySPc2Nzm+yQ05tTZCs7IEZG9RfVr/IVESJD90GupchPAA==
+"@codetanzania/emis-api-states@^0.6.1":
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/@codetanzania/emis-api-states/-/emis-api-states-0.6.1.tgz#7941a5b576994253f19c450572786a2cb35f94c6"
+  integrity sha512-mf6BfToGtxwue+EsUtRaXE1GjeIt/BryDN7jDJapniySeeOoJNCBQ2on3VxeshV5BDudeLq7P9RLuxp4ELdGdA==
 
 "@commitlint/cli@^7.4.0":
   version "7.4.0"

@@ -109,6 +109,7 @@ class Contacts extends Component {
    */
   closeContactForm = () => {
     closeStakeholderForm();
+    this.setState({ isEditForm: false });
   };
 
   /**
@@ -220,6 +221,7 @@ class Contacts extends Component {
             isEditForm={isEditForm}
             contact={contact}
             onCancel={this.closeContactForm}
+            destroyOnClose
           />
         </Modal>
         {/* end create/edit form modal */}
