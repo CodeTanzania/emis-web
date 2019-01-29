@@ -6,8 +6,8 @@ const headerLayout = [
   { span: 5, header: 'Name', offset: 1 },
   { span: 4, header: 'Nature' },
   { span: 4, header: 'Family' },
-  { span: 4, header: 'Cap' },
   { span: 4, header: 'Code' },
+  { span: 4, header: 'Cap' },
 ];
 
 const IncidentTypesListHeader = () => (

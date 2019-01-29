@@ -2,9 +2,11 @@ import {
   postIncidentType,
   putIncidentType,
 } from '@codetanzania/emis-api-states';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, Select } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+
+const { Option } = Select;
 
 class IncidentTypeForm extends Component {
   static propTypes = {
@@ -17,6 +19,9 @@ class IncidentTypeForm extends Component {
       code: PropTypes.string,
     }).isRequired,
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+    incidenttypeSchema: PropTypes.shape({
+      properties: PropTypes.string,
+    }).isRequired,
     onCancel: PropTypes.func.isRequired,
     posting: PropTypes.bool.isRequired,
   };
@@ -48,8 +53,15 @@ class IncidentTypeForm extends Component {
       incidenttype,
       posting,
       onCancel,
+      incidenttypeSchema,
       form: { getFieldDecorator },
     } = this.props;
+
+    const { properties } = incidenttypeSchema;
+    const { nature, family, cap } = properties;
+    const { enum: natures } = nature;
+    const { enum: caps } = cap;
+    const { enum: families } = family;
 
     const formItemLayout = {
       labelCol: {
@@ -72,51 +84,75 @@ class IncidentTypeForm extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        {/* contact name */}
+        {/* incident types name */}
         <Form.Item {...formItemLayout} label="Name ">
           {getFieldDecorator('name', {
             initialValue: isEditForm ? incidenttype.name : undefined,
-            rules: [{ required: true, message: 'Type name is required' }],
+            rules: [{ required: true, message: 'name is required' }],
           })(<Input placeholder="e.g Flood" />)}
         </Form.Item>
-        {/* end contact name */}
+        {/* end incident types name */}
 
-        {/* incidenttype nature */}
+        {/* incident types nature */}
         <Form.Item {...formItemLayout} label="Nature">
           {getFieldDecorator('nature', {
             initialValue: isEditForm ? incidenttype.nature : undefined,
             rules: [
               { required: true, message: 'Incident Type nature is required' },
             ],
-          })(<Input placeholder="e.g Natural" />)}
+          })(
+            <Select placeholder="e.g Natural">
+              {natures.map(data => (
+                <Option key={data} value={data}>
+                  {data}
+                </Option>
+              ))}
+            </Select>
+          )}
         </Form.Item>
-        {/* end incidenttype title */}
+        {/* end incidenttype nature */}
 
-        {/* incidenttype nature */}
+        {/* incident types cap */}
         <Form.Item {...formItemLayout} label="Cap">
           {getFieldDecorator('cap', {
             initialValue: isEditForm ? incidenttype.cap : undefined,
             rules: [{ required: true, message: 'Cap is required' }],
-          })(<Input placeholder="e.g NMS" />)}
+          })(
+            <Select placeholder="e.g Geo">
+              {caps.map(capData => (
+                <Option key={capData} value={capData}>
+                  {capData}
+                </Option>
+              ))}
+            </Select>
+          )}
         </Form.Item>
-        {/* end incidenttype title */}
+        {/* end incident types cap */}
 
-        {/* contact email */}
+        {/*  incident types family */}
         <Form.Item {...formItemLayout} label="Family">
           {getFieldDecorator('family', {
             initialValue: isEditForm ? incidenttype.family : undefined,
             rules: [{ required: true, message: 'Family is required' }],
-          })(<Input placeholder="e.g Geographical" />)}
+          })(
+            <Select placeholder="e.g Geographical">
+              {families.map(familyData => (
+                <Option key={familyData} value={familyData}>
+                  {familyData}
+                </Option>
+              ))}
+            </Select>
+          )}
         </Form.Item>
-        {/* end contact email */}
-        {/* contact email */}
+        {/* end incident types family */}
+        {/* incident types code */}
         <Form.Item {...formItemLayout} label="Code">
           {getFieldDecorator('code', {
             initialValue: isEditForm ? incidenttype.code : undefined,
             rules: [{ required: true, message: 'Code is required' }],
-          })(<Input placeholder="e.g Geo" />)}
+          })(<Input placeholder="e.g NMS" />)}
         </Form.Item>
-        {/* end contact email */}
+        {/* end incident types code */}
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
