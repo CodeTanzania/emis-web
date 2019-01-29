@@ -17,7 +17,7 @@ import './styles.css';
  * @version 0.1.0
  * @since 0.1.0
  */
-const AdminstrativeBoundariesActionBar = ({ page, total }) => (
+const AdminstrativeBoundariesActionBar = ({ page, total, onFilter }) => (
   <div className="AdminstrativeBoundariesActionBar">
     <Row>
       <Col span={1} xl={1}>
@@ -43,6 +43,7 @@ const AdminstrativeBoundariesActionBar = ({ page, total }) => (
           title="Filter adminstrative boudaries"
           className="actionButton"
           size="large"
+          onClick={onFilter}
         />
       </Col>
 
@@ -63,6 +64,7 @@ const AdminstrativeBoundariesActionBar = ({ page, total }) => (
 AdminstrativeBoundariesActionBar.propTypes = {
   page: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
+  onFilter: PropTypes.func.isRequired,
 };
 
 export default AdminstrativeBoundariesActionBar;

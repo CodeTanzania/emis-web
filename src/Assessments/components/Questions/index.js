@@ -1,9 +1,10 @@
 import { Connect, getQuestions } from '@codetanzania/emis-api-states';
-import { Button, Col, Input, List, Row } from 'antd';
+import { Button, Col, Input, Row, Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import QuestionsListItem from './ListItem';
 import QuestionsActionBar from './ActionBar';
+import QuestionsList from './List';
+import QuestionFilters from './Filters';
 import './styles.css';
 
 const { Search } = Input;
@@ -12,12 +13,16 @@ const { Search } = Input;
  * Render question list which have search box, actions and question list
  *
  * @class
- * @name QuestionsList
+ * @name Questions
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class QuestionsList extends Component {
+class Questions extends Component {
+  state = {
+    showFilters: false,
+  };
+
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     questions: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
@@ -30,19 +35,49 @@ class QuestionsList extends Component {
     getQuestions();
   }
 
+  /**
+   * open filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name openFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openFiltersModal = () => {
+    this.setState({ showFilters: true });
+  };
+
+  /**
+   * Close filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name closeFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeFiltersModal = () => {
+    this.setState({ showFilters: false });
+  };
+
   render() {
     const { questions, loading, page, total } = this.props;
+    const { showFilters } = this.state;
+
     return (
-      <div className="QuestionsList">
+      <div className="Questions">
         <Row>
           <Col span={12}>
             {/* search input component */}
             <Search
               size="large"
               placeholder="Search for questions here ..."
-              onChange={({ target: { value } }) =>
-                getQuestions({ q: { value } })
-              }
+              onChange={({ target: { value } }) => getQuestions({ q: value })}
             />
             {/* end search input component */}
           </Col>
@@ -61,30 +96,29 @@ class QuestionsList extends Component {
         </Row>
 
         {/* list header */}
-        <QuestionsActionBar total={total} page={page} />
+        <QuestionsActionBar
+          total={total}
+          page={page}
+          onFilter={this.openFiltersModal}
+        />
         {/* end list header */}
         {/* list starts */}
-        <List
-          loading={loading}
-          dataSource={questions}
-          renderItem={question => (
-            <QuestionsListItem
-              key={question.indicator}
-              color={question.indicator.color}
-              label={question.label}
-              phase={question.phase}
-              assess={question.assess}
-              stage={question.stage}
-            />
-          )}
-        />
+        <QuestionsList questions={questions} loading={loading} />
         {/* end list */}
+        <Modal
+          title="Filter Questions"
+          visible={showFilters}
+          onCancel={this.closeFiltersModal}
+          footer={null}
+        >
+          <QuestionFilters onCancel={this.closeFiltersModal} />
+        </Modal>
       </div>
     );
   }
 }
 
-export default Connect(QuestionsList, {
+export default Connect(Questions, {
   questions: 'questions.list',
   loading: 'questions.loading',
   page: 'questions.page',
