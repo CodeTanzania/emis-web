@@ -47,7 +47,7 @@ class Contacts extends Component {
     contact: null,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     getStakeholders();
   }
 
@@ -203,6 +203,7 @@ class Contacts extends Component {
           visible={showFilters}
           onCancel={this.closeFiltersModal}
           footer={null}
+          destroyOnClose
         >
           <ContactFilters onCancel={this.closeFiltersModal} />
         </Modal>
