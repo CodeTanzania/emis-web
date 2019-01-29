@@ -2,6 +2,7 @@ import { postStakeholder, putStakeholder } from '@codetanzania/emis-api-states';
 import { Button, Form, Input } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { notifyError, notifySuccess } from '../../../../util';
 
 class StakeholderForm extends Component {
   static propTypes = {
@@ -31,7 +32,17 @@ class StakeholderForm extends Component {
       if (!error) {
         if (isEditForm) {
           const updatedContact = Object.assign({}, contact, values);
-          putStakeholder(updatedContact);
+          putStakeholder(
+            updatedContact,
+            () => {
+              notifySuccess('Contact was updated successfully');
+            },
+            () => {
+              notifyError(
+                'Something occurred during updating contact, please try again!'
+              );
+            }
+          );
         } else {
           postStakeholder(values);
         }
