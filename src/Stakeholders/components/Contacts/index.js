@@ -1,9 +1,16 @@
-import { Connect, getStakeholders } from '@codetanzania/emis-api-states';
+import {
+  closeStakeholderForm,
+  Connect,
+  getStakeholders,
+  openStakeholderForm,
+  searchStakeholders,
+} from '@codetanzania/emis-api-states';
 import { Button, Col, Input, Modal, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import ContactsActionBar from './ActionBar';
 import ContactFilters from './Filters';
+import ContactForm from './Form';
 import ContactsList from './List';
 import './styles.css';
 
@@ -25,9 +32,11 @@ class Contacts extends Component {
 
   static propTypes = {
     loading: PropTypes.bool.isRequired,
+    posting: PropTypes.bool.isRequired,
     contacts: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
       .isRequired,
     page: PropTypes.number.isRequired,
+    showForm: PropTypes.bool.isRequired,
     total: PropTypes.number.isRequired,
   };
 
@@ -66,6 +75,36 @@ class Contacts extends Component {
   };
 
   /**
+   * Open contact form
+   *
+   * @function
+   * @name openContactForm
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openContactForm = () => {
+    openStakeholderForm();
+  };
+
+  /**
+   * close contact form
+   *
+   * @function
+   * @name openContactForm
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeContactForm = () => {
+    closeStakeholderForm();
+  };
+
+  /**
    * Search Contacts List based on supplied filter word
    *
    * @function
@@ -78,11 +117,11 @@ class Contacts extends Component {
    * @since 0.1.0
    */
   searchContacts = event => {
-    getStakeholders({ q: event.target.value });
+    searchStakeholders(event.target.value);
   };
 
   render() {
-    const { contacts, loading, page, total } = this.props;
+    const { contacts, loading, posting, page, showForm, total } = this.props;
     const { showFilters } = this.state;
     return (
       <div className="ContactsList">
@@ -103,6 +142,7 @@ class Contacts extends Component {
               icon="plus"
               size="large"
               title="Add New Contact"
+              onClick={this.openContactForm}
             >
               New Contact
             </Button>
@@ -120,6 +160,8 @@ class Contacts extends Component {
         {/* list starts */}
         <ContactsList contacts={contacts} loading={loading} />
         {/* end list */}
+
+        {/* filter modal */}
         <Modal
           title="Filter Contacts"
           visible={showFilters}
@@ -128,6 +170,19 @@ class Contacts extends Component {
         >
           <ContactFilters onCancel={this.closeFiltersModal} />
         </Modal>
+        {/* end filter modal */}
+
+        {/* create/edit form modal */}
+        <Modal
+          title="Add New Contact"
+          visible={showForm}
+          footer={null}
+          onCancel={this.closeContactForm}
+          destroyOnClose
+        >
+          <ContactForm posting={posting} />
+        </Modal>
+        {/* end create/edit form modal */}
       </div>
     );
   }
@@ -136,6 +191,8 @@ class Contacts extends Component {
 export default Connect(Contacts, {
   contacts: 'stakeholders.list',
   loading: 'stakeholders.loading',
+  posting: 'stakeholders.posting',
   page: 'stakeholders.page',
   total: 'stakeholders.total',
+  showForm: 'stakeholders.showForm',
 });
