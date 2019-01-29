@@ -1,4 +1,5 @@
 import { Button, Checkbox, Col, Pagination, Row } from 'antd';
+import { getFeatures } from '@codetanzania/emis-api-states';
 import PropTypes from 'prop-types';
 import React from 'react';
 import './styles.css';
@@ -30,6 +31,7 @@ const DistrictsActionBar = ({ page, total }) => (
           title="Refresh Districts"
           className="actionButton"
           size="large"
+          onClick={() => getFeatures()}
         />
       </Col>
 
@@ -84,6 +86,7 @@ const DistrictsActionBar = ({ page, total }) => (
           defaultCurrent={page}
           total={total}
           className="pagination"
+          onChange={nextPage => getFeatures({ page: nextPage })}
         />
       </Col>
     </Row>
