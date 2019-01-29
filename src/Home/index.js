@@ -2,6 +2,7 @@ import React from 'react';
 import alertIcon from '../assets/images/alerts.svg';
 import geographicalFeaturesIcon from '../assets/images/geographicalfeatures.svg';
 import incidentIcon from '../assets/images/incidents.svg';
+import dashboardIcon from '../assets/images/dashboards.svg';
 import stakeholderIcon from '../assets/images/stakeholders.svg';
 import resourceIcon from '../assets/images/resources.svg';
 import planIcon from '../assets/images/plans.svg';
@@ -20,6 +21,7 @@ const routes = [
   { name: 'Incidents', path: '/incidents', icon: incidentIcon },
   { name: 'Resources', path: '/resources', icon: resourceIcon },
   { name: 'Stakeholders', path: '/stakeholders', icon: stakeholderIcon },
+  { name: 'Dashboards', path: '/dashboards', icon: dashboardIcon },
 ];
 
 /**
