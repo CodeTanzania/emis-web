@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import alertIcon from '../assets/images/alerts.svg';
+import issuedAlertsIcon from '../assets/images/issuedalerts.svg';
 import actionsIcon from '../assets/images/actions.svg';
 import surveyAndFeedbackIcon from '../assets/images/surveyAndFeedback.svg';
 import feedIcon from '../assets/images/feed.svg';
@@ -8,7 +8,7 @@ import sourceIcon from '../assets/images/sources.svg';
 import NavigationMenu from '../components/NavigationMenu';
 
 const routes = [
-  { name: 'All Alerts', path: '/alerts', icon: alertIcon },
+  { name: 'Issued Alerts', path: '/alerts', icon: issuedAlertsIcon },
   { name: 'Actions Taken', path: '/actions', icon: actionsIcon },
   { name: 'Alerts Feed', path: '/feeds', icon: feedIcon },
   {
