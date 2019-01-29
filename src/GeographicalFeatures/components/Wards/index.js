@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import './styles.css';
 import WardsActionBar from './ActionBar';
+import WardsList from './List';
 
 const { Search } = Input;
 
@@ -22,9 +23,9 @@ class Wards extends Component {
   // };
 
   static propTypes = {
-    //   loading: PropTypes.bool.isRequired,
-    //   Wards: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-    //     .isRequired,
+    loading: PropTypes.bool.isRequired,
+    wards: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+      .isRequired,
     page: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
   };
@@ -34,7 +35,7 @@ class Wards extends Component {
   }
 
   render() {
-    const { page, total } = this.props;
+    const { page, total, wards, loading } = this.props;
     //   const { showFilters } = this.state;
 
     return (
@@ -64,7 +65,9 @@ class Wards extends Component {
           page={page}
           // onFilter={this.openFiltersModal}
         />
-        {/* end list header */}{' '}
+        {/* end list header */} {/* list starts */}
+        <WardsList wards={wards} loading={loading} />
+        {/* end list */}
       </div>
     );
   }

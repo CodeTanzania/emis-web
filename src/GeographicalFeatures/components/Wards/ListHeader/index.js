@@ -9,8 +9,8 @@ const headerLayout = [
   { span: 4, header: 'Country' },
 ];
 
-const DistrictsListHeader = () => (
-  <Row className="DistrictsListHeader">
+const WardsListHeader = () => (
+  <Row className="WardsListHeader">
     {headerLayout.map(item => (
       <Col key={item.header} {...item}>
         <h4 className="title">{item.header}</h4>
@@ -19,4 +19,4 @@ const DistrictsListHeader = () => (
   </Row>
 );
 
-export default DistrictsListHeader;
+export default WardsListHeader;
