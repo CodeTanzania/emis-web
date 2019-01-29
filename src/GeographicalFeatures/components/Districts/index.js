@@ -3,12 +3,13 @@ import {
   getFeatures,
   searchFeatures,
 } from '@codetanzania/emis-api-states';
-import { Button, Col, Input, Row } from 'antd';
+import { Button, Col, Input, Row, Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import './styles.css';
 import DistrictsActionBar from './ActionBar';
 import DistrictsList from './List';
+import DistrictsFilters from './Filters';
+import './styles.css';
 
 const { Search } = Input;
 
@@ -22,9 +23,9 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class Districts extends Component {
-  //   state = {
-  //     showFilters: false,
-  //   };
+  state = {
+    showFilters: false,
+  };
 
   static propTypes = {
     loading: PropTypes.bool.isRequired,
@@ -37,6 +38,36 @@ class Districts extends Component {
   componentWillMount() {
     getFeatures();
   }
+
+  /**
+   * open filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name openFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openFiltersModal = () => {
+    this.setState({ showFilters: true });
+  };
+
+  /**
+   * Close filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name closeFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeFiltersModal = () => {
+    this.setState({ showFilters: false });
+  };
 
   /**
    * Search Districts List based on supplied filter word
@@ -56,6 +87,7 @@ class Districts extends Component {
 
   render() {
     const { page, total, districts, loading } = this.props;
+    const { showFilters } = this.state;
 
     return (
       <div className="Districts">
@@ -83,11 +115,27 @@ class Districts extends Component {
           {/* end primary actions */}
         </Row>
         {/* list header */}
-        <DistrictsActionBar total={total} page={page} />
+        <DistrictsActionBar
+          total={total}
+          page={page}
+          onFilter={this.openFiltersModal}
+        />
         {/* end list header */}
         {/* list starts */}
         <DistrictsList districts={districts} loading={loading} />
         {/* end list */}
+
+        {/* filter modal */}
+        <Modal
+          title="Filter Districts"
+          visible={showFilters}
+          onCancel={this.closeFiltersModal}
+          footer={null}
+          width={800}
+        >
+          <DistrictsFilters onCancel={this.closeFiltersModal} />
+        </Modal>
+        {/* end filter modal */}
       </div>
     );
   }
