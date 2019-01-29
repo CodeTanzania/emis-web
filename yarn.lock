@@ -744,7 +744,6 @@
 "@babel/runtime@7.0.0":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.0.0.tgz#adeb78fedfc855aa05bc041640f3f6f98e85424c"
-  integrity sha512-7hGhzlcmg01CvH1EHdSPVXYX1aJ8KCEyz6I9xYIi/asDtzBPMyMhVibhM/K6g/5qnKBwjZtp10bNZIEFTRW1MA==
   dependencies:
     regenerator-runtime "^0.12.0"
 
@@ -793,17 +792,14 @@
 "@codetanzania/emis-api-client@^0.6.0":
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/@codetanzania/emis-api-client/-/emis-api-client-0.6.0.tgz#ee459d9a1f99e35f2aeea32e649ed7f5aa737f42"
-  integrity sha512-GAaNt2NwsjnmlVKHkX7Q9BVHsJpHguJGAWOAukGS6TytuP2f7BzVUwz+XYu4CT5VczBhpnEZZtp3I+3Id42SQw==
 
 "@codetanzania/emis-api-states@^0.6.1":
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/@codetanzania/emis-api-states/-/emis-api-states-0.6.1.tgz#7941a5b576994253f19c450572786a2cb35f94c6"
-  integrity sha512-mf6BfToGtxwue+EsUtRaXE1GjeIt/BryDN7jDJapniySeeOoJNCBQ2on3VxeshV5BDudeLq7P9RLuxp4ELdGdA==
 
 "@commitlint/cli@^7.4.0":
   version "7.4.0"
   resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-7.4.0.tgz#18dd304d2e4c87edd5e575f3ae671da6c64b5d7d"
-  integrity sha512-wwjLX+8dkqgiQgIDcKpwSoYC+vWp/njw+Q0f+TPtSB3KCARmb9A4EWmDzFocYzK1goJT+j472ZG87GqUOHmChg==
   dependencies:
     "@commitlint/format" "^7.4.0"
     "@commitlint/lint" "^7.4.0"
@@ -836,7 +832,6 @@
 "@commitlint/format@^7.4.0":
   version "7.4.0"
   resolved "https://registry.yarnpkg.com/@commitlint/format/-/format-7.4.0.tgz#fc927fd99835f73d17076e065296159a41592ee0"
-  integrity sha512-+/ZCR2wWP4XXt7v/+4U6dfnLCh7l/N5IF+nKDJ6r+KsAgNbW85oTsAMpVWE/++fmTMU6CVIt1Rcbex6X06ggVA==
   dependencies:
     babel-runtime "^6.23.0"
     chalk "^2.0.1"
@@ -850,7 +845,6 @@
 "@commitlint/lint@^7.4.0":
   version "7.4.0"
   resolved "https://registry.yarnpkg.com/@commitlint/lint/-/lint-7.4.0.tgz#69a690c37c3fb7f3b55bd7bad24cf018a0b9a19b"
-  integrity sha512-Lp94Mry4AColIW1mZfEZ9YXp7hUc9GewQFcUSEBxfn12l+pUem+6eSyBdNGZpPm3JCAanudkdEey889Hw7QrFA==
   dependencies:
     "@commitlint/is-ignored" "^7.3.1"
     "@commitlint/parse" "^7.3.1"
@@ -903,7 +897,6 @@
 "@commitlint/rules@^7.4.0":
   version "7.4.0"
   resolved "https://registry.yarnpkg.com/@commitlint/rules/-/rules-7.4.0.tgz#282329528faca3a9c1bb608b01a42e02520ec3fd"
-  integrity sha512-ltTKuKhrVgqk4BgmoVWBRLO2LCFU4x3YmMTIMyZeJ6S+WvFLdSPJ2UIxbpoOI5FEsZzcPRRb04Od7SCRXLfwwA==
   dependencies:
     "@commitlint/ensure" "^7.3.1"
     "@commitlint/message" "^7.3.1"
@@ -923,7 +916,6 @@
 "@commitlint/travis-cli@^7.4.0":
   version "7.4.0"
   resolved "https://registry.yarnpkg.com/@commitlint/travis-cli/-/travis-cli-7.4.0.tgz#869bf4653d29aa7a01a30ebebe8126282d1bf1be"
-  integrity sha512-Q+XaNTYhPmazj8qkYoC7jJYQDNR4a/TIqz3ElhXoj7TFq+we0xeCAnVoeih+RpqulglJpP6IoBL3x1AGrxBJvQ==
   dependencies:
     "@commitlint/cli" "^7.4.0"
     babel-runtime "6.26.0"
@@ -1264,7 +1256,6 @@ ant-design-palettes@^1.1.3:
 antd@^3.13.0:
   version "3.13.0"
   resolved "https://registry.yarnpkg.com/antd/-/antd-3.13.0.tgz#ebd4b566ddedf6c7124c0ed1cc9036a85996d46b"
-  integrity sha512-Jt52rCOHpEco+vXjjjjtPozAI7QeX3+GRd+UZtqcZd83/FG3fmSU72kBoC1TYrzMHjPXGz8qBbspx1EDyJkQUg==
   dependencies:
     "@ant-design/icons" "~1.1.16"
     "@ant-design/icons-react" "~1.1.2"
@@ -2861,7 +2852,6 @@ curriable@^1.0.0:
 customize-cra@^0.2.11:
   version "0.2.11"
   resolved "https://registry.yarnpkg.com/customize-cra/-/customize-cra-0.2.11.tgz#eda1cad4e16c958c577fa43c9776ea372e82671d"
-  integrity sha512-Mcmvnzs8hD3PgPzyuBHivcmdRL+HIC5dA46ACZXiK7jBr0dygAVv8CDNBdJBupdWZ2rhSo0oSPYclyNeoF2euA==
   dependencies:
     lodash.flow "^3.5.0"
 
@@ -3388,9 +3378,9 @@ eslint-config-airbnb@^17.1.0:
     object.assign "^4.1.0"
     object.entries "^1.0.4"
 
-eslint-config-prettier@^3.6.0:
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-3.6.0.tgz#8ca3ffac4bd6eeef623a0651f9d754900e3ec217"
+eslint-config-prettier@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-4.0.0.tgz#16cedeea0a56e74de60dcbbe3be0ab2c645405b9"
   dependencies:
     get-stdin "^6.0.0"
 
@@ -4089,7 +4079,6 @@ flush-write-stream@^1.0.0:
 fn-name@~2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/fn-name/-/fn-name-2.0.1.tgz#5214d7537a4d06a4a301c0cc262feb84188002e7"
-  integrity sha1-UhTXU3pNBqSjAcDMJi/rhBiAAuc=
 
 follow-redirects@^1.0.0, follow-redirects@^1.3.0:
   version "1.6.1"
@@ -5947,7 +5936,6 @@ levn@^0.3.0, levn@~0.3.0:
 lint-staged@^8.1.1:
   version "8.1.1"
   resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-8.1.1.tgz#4a9837c75ea23d1ea81f2c5b5f334153cc7f7932"
-  integrity sha512-6C9tmmCedjDYQMzHydT5mXRtmEgpGUQDoIl+Ser8cfI/n9grsRUsuG2jd1BWqGf62OV+BV+6n/Drt82uYTCgJg==
   dependencies:
     "@iamstarkov/listr-update-renderer" "0.4.1"
     chalk "^2.3.1"
@@ -6549,7 +6537,6 @@ moment@2.x, moment@^2.22.2:
 moment@^2.24.0:
   version "2.24.0"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
-  integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
 
 move-concurrently@^1.0.1:
   version "1.0.1"
@@ -7910,7 +7897,6 @@ prop-types@15.x, prop-types@^15.5.0, prop-types@^15.5.10, prop-types@^15.5.4, pr
 property-expr@^1.5.0:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/property-expr/-/property-expr-1.5.1.tgz#22e8706894a0c8e28d58735804f6ba3a3673314f"
-  integrity sha512-CGuc0VUTGthpJXL36ydB6jnbyOf/rAHFvmVrJlH+Rg0DqqLFQGAP6hIaxD/G0OAmBJPhXDHuEJigrp0e0wFV6g==
 
 proxy-addr@~2.0.4:
   version "2.0.4"
@@ -8242,7 +8228,6 @@ rc-pagination@~1.17.7:
 rc-progress@~2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/rc-progress/-/rc-progress-2.3.0.tgz#cfbd07ff9026c450100980de209a92650e24f313"
-  integrity sha512-hYBKFSsNgD7jsF8j+ZC1J8y5UIC2X/ktCYI/OQhQNSX6mGV1IXnUCjAd9gbLmzmpChPvKyymRNfckScUNiTpFQ==
   dependencies:
     babel-runtime "6.x"
     prop-types "^15.5.8"
@@ -8297,7 +8282,6 @@ rc-steps@~3.3.0:
 rc-switch@~1.9.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/rc-switch/-/rc-switch-1.9.0.tgz#ab2b878f2713c681358a453391976c9b95b290f7"
-  integrity sha512-Isas+egaK6qSk64jaEw4GgPStY4umYDbT7ZY93bZF1Af+b/JEsKsJdNOU2qG3WI0Z6tXo2DDq0kJCv8Yhu0zww==
   dependencies:
     classnames "^2.2.1"
     prop-types "^15.5.6"
@@ -8321,7 +8305,6 @@ rc-table@~6.4.0:
 rc-tabs@~9.6.0:
   version "9.6.0"
   resolved "https://registry.yarnpkg.com/rc-tabs/-/rc-tabs-9.6.0.tgz#b212a85f58384897b09f52dd3ee6701fff7fccd5"
-  integrity sha512-Ql1p23rR41I8gJf0EZPA0VTxw4kVfw1rfnufBFvqhq3wkfvojxg6EgDK9I6h7qbUMc1KyDrhRYUzKrDshJ06Bg==
   dependencies:
     babel-runtime "6.x"
     classnames "2.x"
@@ -8336,7 +8319,6 @@ rc-tabs@~9.6.0:
 rc-time-picker@~3.6.1:
   version "3.6.1"
   resolved "https://registry.yarnpkg.com/rc-time-picker/-/rc-time-picker-3.6.1.tgz#d029bd74d17e5d93ab45563a3eed5e96f92c89f5"
-  integrity sha512-+iP+yFh53Pa+19KpsabyFO3+i89CXUFC6Xf+R9XXde5zwcvy/RbsSm36zroFtQSzyxXBvgQL++A51hPYI/tjsA==
   dependencies:
     classnames "2.x"
     moment "2.x"
@@ -8442,7 +8424,6 @@ react-app-polyfill@^0.2.0:
 react-app-rewired@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/react-app-rewired/-/react-app-rewired-2.0.3.tgz#1b5a40ca27c30a6438720c96c96b16c9c46772b9"
-  integrity sha512-IGL8uSMu4cwW2OhpU0Dhe3zCKU1vuuTguM6ZLQI/+70ppO1J6SfRjhjVb5THQTkxToSCLw7DFd4Eltv38yH8WQ==
   dependencies:
     cross-spawn "^6.0.5"
     dotenv "^6.2.0"
@@ -8744,7 +8725,6 @@ redux-immutable-state-invariant@^2.1.0:
 redux-starter-kit@^0.4.3:
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/redux-starter-kit/-/redux-starter-kit-0.4.3.tgz#66a583cde1f1995ae59782d87cc462260ca85fa8"
-  integrity sha512-T3HXtwEGyFLCy63QlZEM95rDzTQ5BKbBhhTINNVFD1yWgHBKtgN3tXw4/sX9+Ve1Y8mAtXbAhep/E7I0YVvZPg==
   dependencies:
     immer "^1.10.5"
     redux "^4.0.0"
@@ -9767,7 +9747,6 @@ symbol-tree@^3.2.2:
 synchronous-promise@^2.0.5:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/synchronous-promise/-/synchronous-promise-2.0.6.tgz#de76e0ea2b3558c1e673942e47e714a930fa64aa"
-  integrity sha512-TyOuWLwkmtPL49LHCX1caIwHjRzcVd62+GF6h8W/jHOeZUFHpnd2XJDVuUlaTaLPH1nuu2M69mfHr5XbQJnf/g==
 
 table@^4.0.3:
   version "4.0.3"
@@ -9921,7 +9900,6 @@ topo@2.x.x:
 toposort@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/toposort/-/toposort-2.0.2.tgz#ae21768175d1559d48bef35420b2f4962f09c330"
-  integrity sha1-riF2gXXRVZ1IvvNUILL0li8JwzA=
 
 tough-cookie@>=2.3.3:
   version "3.0.0"
@@ -10689,7 +10667,6 @@ yargs@^11.0.0:
 yup@^0.26.10:
   version "0.26.10"
   resolved "https://registry.yarnpkg.com/yup/-/yup-0.26.10.tgz#3545839663289038faf25facfc07e11fd67c0cb1"
-  integrity sha512-keuNEbNSnsOTOuGCt3UJW69jDE3O4P+UHAakO7vSeFMnjaitcmlbij/a3oNb9g1Y1KvSKH/7O1R2PQ4m4TRylw==
   dependencies:
     "@babel/runtime" "7.0.0"
     fn-name "~2.0.1"
