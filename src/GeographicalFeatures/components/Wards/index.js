@@ -3,12 +3,13 @@ import {
   getFeatures,
   searchFeatures,
 } from '@codetanzania/emis-api-states';
-import { Button, Col, Input, Row } from 'antd';
+import { Button, Col, Input, Row, Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import './styles.css';
 import WardsActionBar from './ActionBar';
 import WardsList from './List';
+import WardsFilters from './FIlters';
 
 const { Search } = Input;
 
@@ -22,9 +23,9 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class Wards extends Component {
-  // state = {
-  //   showFilters: false,
-  // };
+  state = {
+    showFilters: false,
+  };
 
   static propTypes = {
     loading: PropTypes.bool.isRequired,
@@ -37,6 +38,36 @@ class Wards extends Component {
   componentWillMount() {
     getFeatures();
   }
+
+  /**
+   * open filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name openFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openFiltersModal = () => {
+    this.setState({ showFilters: true });
+  };
+
+  /**
+   * Close filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name closeFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeFiltersModal = () => {
+    this.setState({ showFilters: false });
+  };
 
   /**
    * Search wards List based on supplied filter word
@@ -56,7 +87,7 @@ class Wards extends Component {
 
   render() {
     const { page, total, wards, loading } = this.props;
-    //   const { showFilters } = this.state;
+    const { showFilters } = this.state;
 
     return (
       <div className="Wards">
@@ -87,11 +118,22 @@ class Wards extends Component {
         <WardsActionBar
           total={total}
           page={page}
-          // onFilter={this.openFiltersModal}
+          onFilter={this.openFiltersModal}
         />
         {/* end list header */} {/* list starts */}
         <WardsList wards={wards} loading={loading} />
         {/* end list */}
+        {/* filter modal */}
+        <Modal
+          title="Filter Wards"
+          visible={showFilters}
+          onCancel={this.closeFiltersModal}
+          footer={null}
+          width={800}
+        >
+          <WardsFilters onCancel={this.closeFiltersModal} />
+        </Modal>
+        {/* end filter modal */}
       </div>
     );
   }
