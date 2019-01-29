@@ -1,17 +1,11 @@
+import {
+  clearStakeholderFilters,
+  Connect,
+  filterStakeholders,
+} from '@codetanzania/emis-api-states';
 import { Button, Checkbox, Col, Form, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-
-const phases = ['Mitigation', 'Preparedness', 'Response', 'Recovery'];
-const types = [
-  'Sector',
-  'Individual',
-  'Committee',
-  'Team',
-  'Department',
-  'Agency',
-  'Other',
-];
 
 /**
  * Filter modal component for filtering contacts
@@ -24,28 +18,68 @@ const types = [
  */
 class ContactsFilters extends Component {
   static propTypes = {
+    filter: PropTypes.objectOf(
+      PropTypes.shape({
+        types: PropTypes.arrayOf(PropTypes.string),
+        phases: PropTypes.arrayOf(PropTypes.string),
+      })
+    ),
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
     onCancel: PropTypes.func.isRequired,
+    types: PropTypes.arrayOf(PropTypes.string).isRequired,
+    phases: PropTypes.arrayOf(PropTypes.string).isRequired,
   };
 
+  static defaultProps = {
+    filter: null,
+  };
+
+  /**
+   * Handle filter action
+   *
+   * @function
+   * @name handleSubmit
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleSubmit = e => {
     e.preventDefault();
-    // const {
-    //   form: { validateFields },
-    // } = this.props;
+    const {
+      form: { validateFields },
+      onCancel,
+    } = this.props;
 
-    // validateFields((error, values) => {
-    //   const filter = {
-    //     type: { $in: values.types },
-    //     phases: { $in: phases.phases },
-    //   };
-    // });
+    validateFields((error, values) => {
+      if (!error) {
+        filterStakeholders(values);
+        onCancel();
+      }
+    });
+  };
+
+  /**
+   * Action handle when clear
+   *
+   * @function
+   * @name handleClearFilter
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleClearFilter = () => {
+    const { onCancel } = this.props;
+    clearStakeholderFilters();
+    onCancel();
   };
 
   render() {
     const {
       form: { getFieldDecorator },
       onCancel,
+      types,
+      phases,
+      filter,
     } = this.props;
 
     const formItemLayout = {
@@ -68,10 +102,12 @@ class ContactsFilters extends Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit} layout={formItemLayout}>
+      <Form onSubmit={this.handleSubmit}>
         {/* start contact type filters */}
         <Form.Item {...formItemLayout} label="By Contact type">
-          {getFieldDecorator('types')(
+          {getFieldDecorator('types', {
+            initialValue: filter ? filter.types : [],
+          })(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {types.map(type => (
@@ -87,7 +123,9 @@ class ContactsFilters extends Component {
 
         {/* start emergency phase filters */}
         <Form.Item {...formItemLayout} label="By Emergency Phases">
-          {getFieldDecorator('phases')(
+          {getFieldDecorator('phases', {
+            initialValue: filter ? filter.phases : [],
+          })(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {phases.map(phase => (
@@ -106,6 +144,9 @@ class ContactsFilters extends Component {
           <Button type="primary" htmlType="submit">
             Filter
           </Button>
+          <Button style={{ marginLeft: 8 }} onClick={this.handleClearFilter}>
+            Clear Filters
+          </Button>
           <Button style={{ marginLeft: 8 }} onClick={onCancel}>
             Cancel
           </Button>
@@ -115,4 +156,9 @@ class ContactsFilters extends Component {
     );
   }
 }
-export default Form.create()(ContactsFilters);
+
+export default Connect(Form.create()(ContactsFilters), {
+  types: 'stakeholders.schema.properties.type.enum',
+  phases: 'stakeholders.schema.properties.phases.enum',
+  filter: 'stakeholders.filter',
+});
