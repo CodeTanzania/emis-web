@@ -39,12 +39,22 @@ class StakeholderForm extends Component {
             },
             () => {
               notifyError(
-                'Something occurred during updating contact, please try again!'
+                'Something occurred while updating contact, please try again!'
               );
             }
           );
         } else {
-          postStakeholder(values);
+          postStakeholder(
+            values,
+            () => {
+              notifySuccess('Contact was created successfully');
+            },
+            () => {
+              notifyError(
+                'Something occurred while saving contact, please try again!'
+              );
+            }
+          );
         }
       }
     });
