@@ -4,6 +4,7 @@ import {
   getStakeholders,
   openStakeholderForm,
   searchStakeholders,
+  selectStakeholder,
 } from '@codetanzania/emis-api-states';
 import { Button, Col, Input, Modal, Row } from 'antd';
 import PropTypes from 'prop-types';
@@ -28,6 +29,7 @@ const { Search } = Input;
 class Contacts extends Component {
   state = {
     showFilters: false,
+    isEditForm: false,
   };
 
   static propTypes = {
@@ -35,12 +37,17 @@ class Contacts extends Component {
     posting: PropTypes.bool.isRequired,
     contacts: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
       .isRequired,
+    contact: PropTypes.shape({ name: PropTypes.string }),
     page: PropTypes.number.isRequired,
     showForm: PropTypes.bool.isRequired,
     total: PropTypes.number.isRequired,
   };
 
-  componentWillMount() {
+  static defaultProps = {
+    contact: null,
+  };
+
+  componentDidMount() {
     getStakeholders();
   }
 
@@ -102,6 +109,7 @@ class Contacts extends Component {
    */
   closeContactForm = () => {
     closeStakeholderForm();
+    this.setState({ isEditForm: false });
   };
 
   /**
@@ -120,9 +128,32 @@ class Contacts extends Component {
     searchStakeholders(event.target.value);
   };
 
+  /**
+   * Handle on Edit action for list item
+   *
+   * @function
+   * @name handleEdit
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleEdit = contact => {
+    selectStakeholder(contact);
+    this.setState({ isEditForm: true });
+    openStakeholderForm();
+  };
+
   render() {
-    const { contacts, loading, posting, page, showForm, total } = this.props;
-    const { showFilters } = this.state;
+    const {
+      contacts,
+      contact,
+      loading,
+      posting,
+      page,
+      showForm,
+      total,
+    } = this.props;
+    const { showFilters, isEditForm } = this.state;
     return (
       <div className="ContactsList">
         <Row>
@@ -157,8 +188,13 @@ class Contacts extends Component {
           onFilter={this.openFiltersModal}
         />
         {/* end list header */}
+
         {/* list starts */}
-        <ContactsList contacts={contacts} loading={loading} />
+        <ContactsList
+          contacts={contacts}
+          loading={loading}
+          onEdit={this.handleEdit}
+        />
         {/* end list */}
 
         {/* filter modal */}
@@ -167,6 +203,7 @@ class Contacts extends Component {
           visible={showFilters}
           onCancel={this.closeFiltersModal}
           footer={null}
+          destroyOnClose
         >
           <ContactFilters onCancel={this.closeFiltersModal} />
         </Modal>
@@ -174,13 +211,19 @@ class Contacts extends Component {
 
         {/* create/edit form modal */}
         <Modal
-          title="Add New Contact"
+          title={isEditForm ? 'Edit Contact' : 'Add New Contact'}
           visible={showForm}
           footer={null}
           onCancel={this.closeContactForm}
           destroyOnClose
         >
-          <ContactForm posting={posting} />
+          <ContactForm
+            posting={posting}
+            isEditForm={isEditForm}
+            contact={contact}
+            onCancel={this.closeContactForm}
+            destroyOnClose
+          />
         </Modal>
         {/* end create/edit form modal */}
       </div>
@@ -190,9 +233,10 @@ class Contacts extends Component {
 
 export default Connect(Contacts, {
   contacts: 'stakeholders.list',
+  contact: 'stakeholders.selected',
   loading: 'stakeholders.loading',
   posting: 'stakeholders.posting',
   page: 'stakeholders.page',
-  total: 'stakeholders.total',
   showForm: 'stakeholders.showForm',
+  total: 'stakeholders.total',
 });
