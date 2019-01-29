@@ -7,14 +7,14 @@ import indicatorIcon from '../assets/images/indicators.svg';
 import NavigationMenu from '../components/NavigationMenu';
 
 const routes = [
+  { name: 'Questions', path: '/questions', icon: questionsIcon },
+  { name: 'Questionnaires', path: '/questionnaires', icon: questionnairesIcon },
   { name: 'Indicators', path: '/indicators', icon: indicatorIcon },
   {
     name: 'Observations / Response',
     path: '/responses',
     icon: incidentIcon,
   },
-  { name: 'Questionnaires', path: '/questionnaires', icon: questionnairesIcon },
-  { name: 'Questions', path: '/questions', icon: questionsIcon },
 ];
 
 /**
