@@ -86,6 +86,7 @@ const WardsActionBar = ({ page, total }) => (
           defaultCurrent={page}
           total={total}
           className="pagination"
+          onChange={nextPage => getFeatures({ page: nextPage })}
         />
       </Col>
     </Row>

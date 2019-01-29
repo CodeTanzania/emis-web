@@ -1,4 +1,8 @@
-import { Connect, getFeatures } from '@codetanzania/emis-api-states';
+import {
+  Connect,
+  getFeatures,
+  searchFeatures,
+} from '@codetanzania/emis-api-states';
 import { Button, Col, Input, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
@@ -34,6 +38,22 @@ class Wards extends Component {
     getFeatures();
   }
 
+  /**
+   * Search wards List based on supplied filter word
+   *
+   * @function
+   * @name searchWards
+   *
+   * @param {Object} event - Event instance
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  searchWards = event => {
+    searchFeatures(event.target.value);
+  };
+
   render() {
     const { page, total, wards, loading } = this.props;
     //   const { showFilters } = this.state;
@@ -43,7 +63,11 @@ class Wards extends Component {
         <Row>
           <Col span={12}>
             {/* search input component */}
-            <Search size="large" placeholder="Search for wards here ..." />
+            <Search
+              size="large"
+              placeholder="Search for wards here ..."
+              onChange={this.searchWards}
+            />
             {/* end search input component */}
           </Col>
           {/* primary actions */}
