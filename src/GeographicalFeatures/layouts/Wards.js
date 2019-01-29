@@ -1,15 +1,7 @@
 import React from 'react';
-import UIState from '../../components/UIState';
+// import UIState from '../../components/UIState';
+import Ward from '../components/Wards';
 
-const WardsLayout = () => (
-  <div style={{ marginTop: '20%' }}>
-    <UIState
-      icon="exclamation-circle"
-      description="No Evacuation Centers yet,but when they are available will appear here"
-      buttonLabel="New Feature"
-      onClick={() => {}}
-    />
-  </div>
-);
+const WardsLayout = () => <Ward />;
 
 export default WardsLayout;
