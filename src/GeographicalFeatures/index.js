@@ -1,29 +1,51 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import administrativeBoundariesIcon from '../assets/images/administrativeboundaries.svg';
+// import administrativeBoundariesIcon from '../assets/images/administrativeboundaries.svg';
 import facilitiesIcon from '../assets/images/facilities.svg';
 import infrastructureIcon from '../assets/images/infrastructure.svg';
 import warehousesIcon from '../assets/images/warehouses.svg';
+import districtIcon from '../assets/images/district.svg';
+import wardIcon from '../assets/images/ward.svg';
+import subwardIcon from '../assets/images/subward.svg';
+import EvacuationIcon from '../assets/images/evacuationCenter.svg';
+
 import NavigationMenu from '../components/NavigationMenu';
 
 const routes = [
+  // {
+  //   name: 'Administrative Boundaries',
+  //   path: '/administrativeboundaries',
+  //   icon: administrativeBoundariesIcon,
+  // },
   {
-    name: 'Administrative Boundaries',
-    path: '/administrativeboundaries',
-    icon: administrativeBoundariesIcon,
+    name: 'Districts',
+    path: '/districts',
+    icon: districtIcon,
   },
+  {
+    name: 'Wards',
+    path: '/wards',
+    icon: wardIcon,
+  },
+  {
+    name: 'Subwards',
+    path: '/subwards',
+    icon: subwardIcon,
+  },
+  {
+    name: 'Evacuation Centers',
+    path: '/evacuationcenters',
+    icon: EvacuationIcon,
+  },
+
+  { name: 'Facilities', path: '/facilities', icon: facilitiesIcon },
+
+  { name: 'Warehouses', path: '/warehouses', icon: warehousesIcon },
   {
     name: 'Critical Infrastructure',
     path: '/infrastructure',
     icon: infrastructureIcon,
   },
-  { name: 'Facilities', path: '/facilities', icon: facilitiesIcon },
-  {
-    name: 'Evacuation Centers',
-    path: '/evacuationcenters',
-    icon: facilitiesIcon,
-  },
-  { name: 'Warehouses', path: '/warehouses', icon: warehousesIcon },
 ];
 
 /**
