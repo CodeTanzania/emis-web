@@ -143,6 +143,11 @@ class Contacts extends Component {
     openStakeholderForm();
   };
 
+  handleAfterCloseForm = () => {
+    this.setState({ isEditForm: false });
+    console.log('Closed');
+  };
+
   render() {
     const {
       contacts,
@@ -218,6 +223,7 @@ class Contacts extends Component {
           onCancel={this.closeContactForm}
           destroyOnClose
           maskClosable={false}
+          afterClose={this.handleAfterCloseForm}
         >
           <ContactForm
             posting={posting}
