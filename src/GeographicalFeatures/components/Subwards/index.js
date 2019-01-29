@@ -3,12 +3,13 @@ import {
   getFeatures,
   searchFeatures,
 } from '@codetanzania/emis-api-states';
-import { Button, Col, Input, Row } from 'antd';
+import { Button, Col, Input, Row, Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import './styles.css';
 import SubwardsActionBar from './ActionBar';
 import SubwardsList from './List';
+import SubwardsFilters from './Filters';
+import './styles.css';
 
 const { Search } = Input;
 
@@ -22,9 +23,9 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class Subwards extends Component {
-  // state = {
-  //   showFilters: false,
-  // };
+  state = {
+    showFilters: false,
+  };
 
   static propTypes = {
     loading: PropTypes.bool.isRequired,
@@ -39,6 +40,35 @@ class Subwards extends Component {
   }
 
   /**
+   * open filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name openFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openFiltersModal = () => {
+    this.setState({ showFilters: true });
+  };
+
+  /**
+   * Close filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name closeFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeFiltersModal = () => {
+    this.setState({ showFilters: false });
+  };
+  /**
    * Search Wards List based on supplied filter word
    *
    * @function
@@ -50,13 +80,14 @@ class Subwards extends Component {
    * @version 0.1.0
    * @since 0.1.0
    */
+
   searchWards = event => {
     searchFeatures(event.target.value);
   };
 
   render() {
     const { page, total, subwards, loading } = this.props;
-    // const { showFilters } = this.state;
+    const { showFilters } = this.state;
 
     return (
       <div className="Subwards">
@@ -84,11 +115,26 @@ class Subwards extends Component {
           {/* end primary actions */}
         </Row>
         {/* list header */}
-        <SubwardsActionBar total={total} page={page} />
+        <SubwardsActionBar
+          total={total}
+          page={page}
+          onFilter={this.openFiltersModal}
+        />
         {/* end list header */}
         {/* list starts */}
         <SubwardsList subwards={subwards} loading={loading} />
         {/* end list */}
+        {/* filter modal */}
+        <Modal
+          title="Filter Subwards"
+          visible={showFilters}
+          onCancel={this.closeFiltersModal}
+          footer={null}
+          width={800}
+        >
+          <SubwardsFilters onCancel={this.closeFiltersModal} />
+        </Modal>
+        {/* end filter modal */}
       </div>
     );
   }
