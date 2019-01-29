@@ -181,7 +181,11 @@ class IncidentTypes extends Component {
         />
         {/* end list header */}
         {/* list starts */}
-        <IncidentTypesList incidenttypes={incidenttypes} loading={loading} />
+        <IncidentTypesList
+          incidenttypes={incidenttypes}
+          loading={loading}
+          onEdit={this.handleEdit}
+        />
         {/* end list */}
         <Modal
           title="Filter Incident Types"

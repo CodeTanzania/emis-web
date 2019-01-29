@@ -4,7 +4,7 @@ import React, { Fragment } from 'react';
 import IncidentTypesListHeader from '../ListHeader';
 import IncidentTypesListItem from '../ListItem';
 
-const IncidentTypesList = ({ incidenttypes, loading }) => (
+const IncidentTypesList = ({ incidenttypes, loading, onEdit }) => (
   <Fragment>
     <IncidentTypesListHeader />
     <List
@@ -19,6 +19,7 @@ const IncidentTypesList = ({ incidenttypes, loading }) => (
           family={incidenttype.family}
           cap={incidenttype.cap}
           code={incidenttype.code}
+          onEdit={() => onEdit(incidenttype)}
         />
       )}
     />
@@ -29,6 +30,7 @@ IncidentTypesList.propTypes = {
   loading: PropTypes.bool.isRequired,
   incidenttypes: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
     .isRequired,
+  onEdit: PropTypes.func.isRequired,
 };
 
 export default IncidentTypesList;
