@@ -1,5 +1,5 @@
 import {
-  getStakeholders,
+  paginateStakeholders,
   refreshStakeholders,
 } from '@codetanzania/emis-api-states';
 import { Button, Checkbox, Col, Pagination, Row } from 'antd';
@@ -109,7 +109,7 @@ const ContactsActionBar = ({ page, total, onFilter }) => (
           simple
           defaultCurrent={page}
           total={total}
-          onChange={nextPage => getStakeholders({ page: nextPage })}
+          onChange={nextPage => paginateStakeholders(nextPage)}
           className="pagination"
         />
       </Col>
