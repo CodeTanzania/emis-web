@@ -795,10 +795,10 @@
   resolved "https://registry.yarnpkg.com/@codetanzania/emis-api-client/-/emis-api-client-0.5.1.tgz#d3d4d4ce2d38e9bd8e69961b72157cf4bed43203"
   integrity sha512-YnZnDTCuz0wssxun89MAqzeKWEkGlORBsB44cUIbF0gZVS9W18q6zEPCgSuVj4dHvhcWC5HFW+gq6smompzRPw==
 
-"@codetanzania/emis-api-states@^0.5.2":
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/@codetanzania/emis-api-states/-/emis-api-states-0.5.2.tgz#14b86a5f7b9ba90f053b36f43bb00f4fcda5db59"
-  integrity sha512-m0w7xt4m7ZEuBVqLK8306qAAzVdJ7zHTxNbiiRWqkDcyhAzHDGXu6zC40E9+yCBM/O1X1Q7as8gGNfUVpo4RWQ==
+"@codetanzania/emis-api-states@^0.5.3":
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/@codetanzania/emis-api-states/-/emis-api-states-0.5.3.tgz#9c56e00bc3dc4a5cff9eb8581a094aabc2eba7bf"
+  integrity sha512-QzRZQF6LY65LZiO3G5GNqoMaxatoB0Q2bEsHVXAnYySPc2Nzm+yQ05tTZCs7IEZG9RfVr/IVESJD90GupchPAA==
 
 "@commitlint/cli@^7.4.0":
   version "7.4.0"
