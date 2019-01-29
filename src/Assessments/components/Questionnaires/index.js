@@ -1,9 +1,10 @@
 import { Connect, getQuestionnaires } from '@codetanzania/emis-api-states';
-import { Button, Col, Input, List, Row } from 'antd';
+import { Button, Col, Input, Row, Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import QuestionnairesActionBar from './ActionBar';
-import QuestionnairesListItem from './ListItem';
+import QuestionnairesList from './List';
+import QuestionnairesFilters from './Filters';
 import './styles.css';
 
 const { Search } = Input;
@@ -12,12 +13,16 @@ const { Search } = Input;
  * Render questionnaire list which have search box, actions and questionnaire list
  *
  * @class
- * @name QuestionnairesList
+ * @name Questionnaires
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class QuestionnairesList extends Component {
+class Questionnaires extends Component {
+  state = {
+    showFilters: false,
+  };
+
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     questionnaires: PropTypes.arrayOf(
@@ -31,10 +36,41 @@ class QuestionnairesList extends Component {
     getQuestionnaires();
   }
 
+  /**
+   * open filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name openFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openFiltersModal = () => {
+    this.setState({ showFilters: true });
+  };
+
+  /**
+   * Close filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name closeFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeFiltersModal = () => {
+    this.setState({ showFilters: false });
+  };
+
   render() {
     const { questionnaires, loading, page, total } = this.props;
+    const { showFilters } = this.state;
     return (
-      <div className="QuestionnairesList">
+      <div className="Questionnaires">
         <Row>
           <Col span={12}>
             {/* search input component */}
@@ -62,29 +98,29 @@ class QuestionnairesList extends Component {
         </Row>
 
         {/* list header */}
-        <QuestionnairesActionBar total={total} page={page} />
+        <QuestionnairesActionBar
+          total={total}
+          page={page}
+          onFilter={this.openFiltersModal}
+        />
         {/* end list header */}
         {/* list starts */}
-        <List
-          loading={loading}
-          dataSource={questionnaires}
-          renderItem={questionnaire => (
-            <QuestionnairesListItem
-              key={questionnaire.title}
-              title={questionnaire.title}
-              phase={questionnaire.phase}
-              assess={questionnaire.assess}
-              stage={questionnaire.stage}
-            />
-          )}
-        />
+        <QuestionnairesList questionnaires={questionnaires} loading={loading} />
         {/* end list */}
+        <Modal
+          title="Filter Questionnaires"
+          visible={showFilters}
+          onCancel={this.closeFiltersModal}
+          footer={null}
+        >
+          <QuestionnairesFilters onCancel={this.closeFiltersModal} />
+        </Modal>
       </div>
     );
   }
 }
 
-export default Connect(QuestionnairesList, {
+export default Connect(Questionnaires, {
   questionnaires: 'questionnaires.list',
   loading: 'questionnaires.loading',
   page: 'questionnaires.page',
