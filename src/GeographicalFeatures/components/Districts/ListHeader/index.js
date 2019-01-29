@@ -4,9 +4,9 @@ import './styles.css';
 
 const headerLayout = [
   { span: 5, header: 'Name', offset: 1 },
-  { span: 6, header: 'Designation' },
-  { span: 4, header: 'Email Address' },
-  { span: 4, header: 'Mobile Number' },
+  { span: 6, header: 'category' },
+  { span: 4, header: 'Type' },
+  { span: 4, header: 'Country' },
 ];
 
 const DistrictsListHeader = () => (

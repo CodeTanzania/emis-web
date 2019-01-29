@@ -12,12 +12,11 @@ const DistrictsList = ({ districts, loading }) => (
       dataSource={districts}
       renderItem={district => (
         <DistrictsListItem
-          key={district.abbreviation}
-          abbreviation={district.abbreviation}
+          key={district.name}
           name={district.name}
-          title={district.title}
-          email={district.email}
-          mobile={district.mobile}
+          category={district.category}
+          type={district.type}
+          country={district.country}
         />
       )}
     />

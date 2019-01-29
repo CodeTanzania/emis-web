@@ -1,4 +1,8 @@
-import { Connect, getFeatures } from '@codetanzania/emis-api-states';
+import {
+  Connect,
+  getFeatures,
+  searchFeatures,
+} from '@codetanzania/emis-api-states';
 import { Button, Col, Input, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
@@ -34,6 +38,22 @@ class Districts extends Component {
     getFeatures();
   }
 
+  /**
+   * Search Districts List based on supplied filter word
+   *
+   * @function
+   * @name searchDistrict
+   *
+   * @param {Object} event - Event instance
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  searchDistricts = event => {
+    searchFeatures(event.target.value);
+  };
+
   render() {
     const { page, total, districts, loading } = this.props;
 
@@ -45,7 +65,7 @@ class Districts extends Component {
             <Search
               size="large"
               placeholder="Search for districts here ..."
-              onChange={this.searchContacts}
+              onChange={this.searchDistricts}
             />
             {/* end search input component */}
           </Col>
@@ -55,10 +75,9 @@ class Districts extends Component {
               type="primary"
               icon="plus"
               size="large"
-              title="Add New Contact"
-              onClick={this.openContactForm}
+              title="Add New District"
             >
-              New Contact
+              New District
             </Button>
           </Col>
           {/* end primary actions */}
