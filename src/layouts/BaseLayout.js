@@ -54,6 +54,9 @@ import Home from '../Home';
 import HeaderNavMenu from './components/HeaderNavMenu';
 import './styles.css';
 import EvacuationCentersLayout from '../GeographicalFeatures/layouts/EvacuationCenters';
+import DistrictsLayout from '../GeographicalFeatures/layouts/Districts';
+import SubwardsLayout from '../GeographicalFeatures/layouts/Subwaard';
+import WardsLayout from '../GeographicalFeatures/layouts/Wards';
 
 const { Header, Content } = Layout;
 const breadcrumbNameMap = {
@@ -101,6 +104,10 @@ const breadcrumbNameMap = {
     name: 'Administrative Boundaries',
     title: 'List of administrative boundaries',
   },
+  '/geographicalfeatures/districts': {
+    name: 'Districts',
+    title: 'List of Districts',
+  },
   '/geographicalfeatures/evacuationcenters': {
     name: 'Evacuation Centers',
     title: 'List of evacuation centers',
@@ -117,9 +124,17 @@ const breadcrumbNameMap = {
     name: 'Geographical Features',
     title: 'Geographical features module',
   },
+  '/geographicalfeatures/subwards': {
+    name: 'Subwards',
+    title: 'List of subwards',
+  },
   '/geographicalfeatures/warehouses': {
     name: 'Warehouses',
     title: 'List of available warehouses',
+  },
+  '/geographicalfeatures/wards': {
+    name: 'Wards',
+    title: 'List of all wards',
   },
   /* Incidents Routes */
   '/incidents/actions': {
@@ -310,8 +325,18 @@ const BaseLayout = withRouter(props => {
           />
           <Route
             exact
+            path="/geographicalfeatures/districts"
+            component={DistrictsLayout}
+          />
+          <Route
+            exact
             path="/geographicalfeatures/evacuationcenters"
             component={EvacuationCentersLayout}
+          />
+          <Route
+            exact
+            path="/geographicalfeatures/facilities"
+            component={GeographicalFeaturesFacilitiesLayout}
           />
           <Route
             exact
@@ -320,13 +345,18 @@ const BaseLayout = withRouter(props => {
           />
           <Route
             exact
+            path="/geographicalfeatures/subwards"
+            component={SubwardsLayout}
+          />
+          <Route
+            exact
             path="/geographicalfeatures/warehouses"
             component={GeographicalFeaturesWarehousesLayout}
           />
           <Route
             exact
-            path="/geographicalfeatures/facilities"
-            component={GeographicalFeaturesFacilitiesLayout}
+            path="/geographicalfeatures/wards"
+            component={WardsLayout}
           />
           <Route exact path="/incidents" component={Incidents} />
           <Route
