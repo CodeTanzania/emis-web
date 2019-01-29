@@ -55,7 +55,7 @@ class IndicatorListItem extends Component {
               <Checkbox className="Checkbox" />
             ) : (
               <Avatar style={{ backgroundColor: color }}>
-                {subject.slice(0, 1)}
+                {subject.charAt(0).toUpperCase()}
               </Avatar>
             )}
           </Col>
