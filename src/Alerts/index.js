@@ -17,7 +17,7 @@ const routes = [
     path: '/feedback',
     icon: surveyAndFeedbackIcon,
   },
-  { name: 'Sources', path: '/sources', icon: sourceIcon },
+  { name: 'Alert Sources', path: '/sources', icon: sourceIcon },
   {
     name: 'Service Requests',
     path: '/servicerequests',
