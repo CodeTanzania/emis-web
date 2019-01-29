@@ -1,24 +1,29 @@
 import { Connect, getRoles } from '@codetanzania/emis-api-states';
-import { Input, List, Col, Row, Button } from 'antd';
+import { Input, Col, Row, Button, Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import RoleListItem from './ListItem';
+import RoleFilters from './Filters';
 import RolesActionBar from './ActionBar';
+import RoleList from './List';
 import './styles.css';
 
 const { Search } = Input;
 
 /**
- * Render role list which have search box and actions
+ * Render role module which has search box, actions and list of roles
  *
  * @class
- * @name RoleList
+ * @name Roles
  *
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class RoleList extends Component {
+class Roles extends Component {
+  state = {
+    showFilters: false,
+  };
+
   propTypes = {
     loading: PropTypes.bool.isRequired,
     roles: PropTypes.arrayOf(
@@ -36,17 +41,63 @@ class RoleList extends Component {
     getRoles();
   }
 
+  /**
+   * open filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name openFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openFiltersModal = () => {
+    this.setState({ showFilters: true });
+  };
+
+  /**
+   * Close filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name closeFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeFiltersModal = () => {
+    this.setState({ showFilters: false });
+  };
+
+  /**
+   * Search Roles List based on supplied filter word
+   *
+   * @function
+   * @name searchRoles
+   *
+   * @param {Object} event - Event instance
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  searchRoles = event => {
+    getRoles({ q: event.target.value });
+  };
+
   render() {
     const { roles, loading, total, page } = this.props;
+    const { showFilters } = this.state;
     return (
       <div className="RoleList">
         <Row>
           <Col span={12}>
-            {/* search input component */}
             <Search
               size="large"
               placeholder="Search for roles here ..."
-              onChange={({ target: { value } }) => getRoles({ q: value })}
+              onChange={this.searchRoles}
             />
             {/* end search input component */}
           </Col>
@@ -64,28 +115,29 @@ class RoleList extends Component {
           {/* end primary actions */}
         </Row>
         {/* list action bar */}
-        <RolesActionBar total={total} page={page} />
+        <RolesActionBar
+          total={total}
+          page={page}
+          onFilter={this.openFiltersModal}
+        />
         {/* end list action bar */}
         {/* list starts */}
-        <List
-          loading={loading}
-          dataSource={roles}
-          renderItem={role => (
-            <RoleListItem
-              key={role.abbreviation}
-              abbreviation={role.abbreviation}
-              name={role.name}
-              description={role.description}
-            />
-          )}
-        />
+        <RoleList roles={roles} loading={loading} />
         {/* end list */}
+        <Modal
+          title="Filter Roles"
+          visible={showFilters}
+          onCancel={this.closeFiltersModal}
+          footer={null}
+        >
+          <RoleFilters onCancel={this.closeFiltersModal} />
+        </Modal>
       </div>
     );
   }
 }
 
-export default Connect(RoleList, {
+export default Connect(Roles, {
   roles: 'roles.list',
   loading: 'roles.loading',
   page: 'roles.page',
