@@ -1,9 +1,10 @@
-import { Connect, getStakeholders } from '@codetanzania/emis-api-states';
+import { Connect, getFeatures } from '@codetanzania/emis-api-states';
 import { Button, Col, Input, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import './styles.css';
 import DistrictsActionBar from './ActionBar';
+import DistrictsList from './List';
 
 const { Search } = Input;
 
@@ -22,19 +23,19 @@ class Districts extends Component {
   //   };
 
   static propTypes = {
-    // loading: PropTypes.bool.isRequired,
-    // contacts: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-    //   .isRequired,
+    loading: PropTypes.bool.isRequired,
+    districts: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+      .isRequired,
     page: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
   };
 
   componentWillMount() {
-    getStakeholders();
+    getFeatures();
   }
 
   render() {
-    const { page, total } = this.props;
+    const { page, total, districts, loading } = this.props;
 
     return (
       <div className="Districts">
@@ -66,14 +67,16 @@ class Districts extends Component {
         <DistrictsActionBar total={total} page={page} />
         {/* end list header */}
         {/* list starts */}
+        <DistrictsList districts={districts} loading={loading} />
+        {/* end list */}
       </div>
     );
   }
 }
 
 export default Connect(Districts, {
-  districts: 'districts.list',
-  loading: 'districts.loading',
-  page: 'districts.page',
-  total: 'districts.total',
+  districts: 'features.list',
+  loading: 'features.loading',
+  page: 'features.page',
+  total: 'features.total',
 });
