@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import './styles.css';
 import SubwardsActionBar from './ActionBar';
+import SubwardsList from './List';
 
 const { Search } = Input;
 
@@ -22,9 +23,9 @@ class Subwards extends Component {
   // };
 
   static propTypes = {
-    //   loading: PropTypes.bool.isRequired,
-    //   districts: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-    //     .isRequired,
+    loading: PropTypes.bool.isRequired,
+    subwards: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+      .isRequired,
     page: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
   };
@@ -34,7 +35,7 @@ class Subwards extends Component {
   }
 
   render() {
-    const { page, total } = this.props;
+    const { page, total, subwards, loading } = this.props;
     // const { showFilters } = this.state;
 
     return (
@@ -61,6 +62,9 @@ class Subwards extends Component {
         {/* list header */}
         <SubwardsActionBar total={total} page={page} />
         {/* end list header */}
+        {/* list starts */}
+        <SubwardsList subwards={subwards} loading={loading} />
+        {/* end list */}
       </div>
     );
   }
