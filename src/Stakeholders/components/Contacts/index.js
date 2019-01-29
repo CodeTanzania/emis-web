@@ -145,7 +145,6 @@ class Contacts extends Component {
 
   handleAfterCloseForm = () => {
     this.setState({ isEditForm: false });
-    console.log('Closed');
   };
 
   render() {
