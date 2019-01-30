@@ -23,7 +23,7 @@ class QuestionForm extends Component {
       properties: PropTypes.shape({
         stage: PropTypes.shape({ type: PropTypes.string }).isRequired,
       }),
-    }).isRequired,
+    }),
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
     onCancel: PropTypes.func.isRequired,
     posting: PropTypes.bool.isRequired,
@@ -31,6 +31,7 @@ class QuestionForm extends Component {
 
   static defaultProps = {
     question: null,
+    questionSchema: null,
   };
 
   handleSubmit = e => {

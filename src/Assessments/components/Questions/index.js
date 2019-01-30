@@ -48,12 +48,13 @@ class Questions extends Component {
       properties: PropTypes.shape({
         stage: PropTypes.shape({ type: PropTypes.string }).isRequired,
       }),
-    }).isRequired,
+    }),
     showForm: PropTypes.bool.isRequired,
   };
 
   static defaultProps = {
     question: null,
+    questionSchema: null,
   };
 
   componentDidMount() {
