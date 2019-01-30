@@ -132,6 +132,10 @@ class IncidentTypes extends Component {
     openIncidentTypeForm();
   };
 
+  handleAfterCloseForm = () => {
+    this.setState({ isEditForm: false });
+  };
+
   render() {
     const {
       incidenttypes,
@@ -200,8 +204,10 @@ class IncidentTypes extends Component {
           title={isEditForm ? 'Edit Incident Type' : 'Add New Incident Type'}
           visible={showForm}
           footer={null}
-          onCancel={this.closeIncidentTypeForm}
+          onCancel={this.closeForm}
           destroyOnClose
+          maskClosable={false}
+          afterClose={this.handleAfterCloseForm}
         >
           <IncidentTypeForm
             posting={posting}
