@@ -14,7 +14,7 @@ import RoleListItem from '../ListItem';
  * @version 0.1.0
  * @since 0.1.0
  */
-const RoleList = ({ roles, loading }) => (
+const RoleList = ({ roles, loading, onEdit }) => (
   <Fragment>
     <RoleListHeader />
     <List
@@ -26,6 +26,7 @@ const RoleList = ({ roles, loading }) => (
           abbreviation={role.abbreviation}
           name={role.name}
           description={role.description}
+          onEdit={() => onEdit(role)}
         />
       )}
     />
@@ -34,6 +35,7 @@ const RoleList = ({ roles, loading }) => (
 
 RoleList.propTypes = {
   loading: PropTypes.bool.isRequired,
+  onEdit: PropTypes.func.isRequired,
   roles: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,

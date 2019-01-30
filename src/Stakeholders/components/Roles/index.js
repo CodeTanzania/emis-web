@@ -192,7 +192,7 @@ class Roles extends Component {
         />
         {/* end list action bar */}
         {/* list starts */}
-        <RoleList roles={roles} loading={loading} />
+        <RoleList roles={roles} loading={loading} onEdit={this.handleEdit} />
         {/* end list */}
 
         {/* filter modal */}
