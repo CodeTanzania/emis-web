@@ -3,6 +3,7 @@ import React from 'react';
 import issuedAlertsIcon from '../assets/images/issuedalerts.svg';
 import actionsIcon from '../assets/images/actions.svg';
 import surveyAndFeedbackIcon from '../assets/images/surveyAndFeedback.svg';
+import serviceRequestsIcon from '../assets/images/servicerequests.svg';
 import feedIcon from '../assets/images/feed.svg';
 import sourceIcon from '../assets/images/sources.svg';
 import NavigationMenu from '../components/NavigationMenu';
@@ -16,8 +17,12 @@ const routes = [
     path: '/feedback',
     icon: surveyAndFeedbackIcon,
   },
-  { name: 'Sources', path: '/sources', icon: sourceIcon },
-  { name: 'Service Requests', path: '/servicerequests', icon: sourceIcon },
+  { name: 'Alert Sources', path: '/sources', icon: sourceIcon },
+  {
+    name: 'Service Requests',
+    path: '/servicerequests',
+    icon: serviceRequestsIcon,
+  },
 ];
 
 /**

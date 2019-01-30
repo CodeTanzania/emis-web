@@ -143,6 +143,10 @@ class Contacts extends Component {
     openStakeholderForm();
   };
 
+  handleAfterCloseForm = () => {
+    this.setState({ isEditForm: false });
+  };
+
   render() {
     const {
       contacts,
@@ -204,6 +208,7 @@ class Contacts extends Component {
           onCancel={this.closeFiltersModal}
           footer={null}
           destroyOnClose
+          maskClosable={false}
         >
           <ContactFilters onCancel={this.closeFiltersModal} />
         </Modal>
@@ -216,13 +221,14 @@ class Contacts extends Component {
           footer={null}
           onCancel={this.closeContactForm}
           destroyOnClose
+          maskClosable={false}
+          afterClose={this.handleAfterCloseForm}
         >
           <ContactForm
             posting={posting}
             isEditForm={isEditForm}
             contact={contact}
             onCancel={this.closeContactForm}
-            destroyOnClose
           />
         </Modal>
         {/* end create/edit form modal */}
