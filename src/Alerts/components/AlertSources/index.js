@@ -1,5 +1,6 @@
 import {
   closeAlertSourceForm,
+  selectAlertSource,
   Connect,
   getAlertSources,
   searchAlertSources,
@@ -25,8 +26,20 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class AlertSources extends Component {
+  state = {
+    isEditForm: false,
+  };
+
   static propTypes = {
     loading: PropTypes.bool.isRequired,
+    alertSource: PropTypes.shape({
+      name: PropTypes.string,
+      mobile: PropTypes.string,
+      email: PropTypes.string,
+      url: PropTypes.string,
+      website: PropTypes.string,
+      _id: PropTypes.string,
+    }),
     alertSources: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string,
@@ -41,6 +54,10 @@ class AlertSources extends Component {
     page: PropTypes.number.isRequired,
     showForm: PropTypes.bool.isRequired,
     total: PropTypes.number.isRequired,
+  };
+
+  static defaultProps = {
+    alertSource: null,
   };
 
   componentWillMount() {
@@ -93,6 +110,25 @@ class AlertSources extends Component {
     searchAlertSources(event.target.value);
   };
 
+  /**
+   * Handle on Edit action for list item
+   *
+   * @function
+   * @name handleEdit
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleEdit = alertSource => {
+    selectAlertSource(alertSource);
+    this.setState({ isEditForm: true });
+    openAlertSourceForm();
+  };
+
+  handleAfterCloseForm = () => {
+    this.setState({ isEditForm: false });
+  };
+
   render() {
     const {
       posting,
@@ -100,8 +136,10 @@ class AlertSources extends Component {
       showForm,
       total,
       alertSources,
+      alertSource,
       loading,
     } = this.props;
+    const { isEditForm } = this.state;
     return (
       <div className="AlertSources">
         <Row>
@@ -133,18 +171,28 @@ class AlertSources extends Component {
         <AlertSourcesActionBar total={total} page={page} />
         {/* end list header */}
         {/* list starts */}
-        <AlertSourceList alertSources={alertSources} loading={loading} />
+        <AlertSourceList
+          alertSources={alertSources}
+          loading={loading}
+          onEdit={this.handleEdit}
+        />
         {/* end list */}
 
         {/* create/edit form modal */}
         <Modal
-          title="Add New Alert Source"
+          title={isEditForm ? 'Edit Alert Source' : 'Add New Alert Source'}
           visible={showForm}
           footer={null}
+          maskClosable={false}
           onCancel={this.closeForm}
           destroyOnClose
         >
-          <AlertSourceForm posting={posting} onCancel={this.closeForm} />
+          <AlertSourceForm
+            posting={posting}
+            alertSource={alertSource}
+            onCancel={this.closeForm}
+            isEditForm={isEditForm}
+          />
         </Modal>
         {/* end create/edit form modal */}
       </div>
@@ -154,6 +202,7 @@ class AlertSources extends Component {
 
 export default Connect(AlertSources, {
   alertSources: 'alertSources.list',
+  alertSource: 'alertSources.selected',
   loading: 'alertSources.loading',
   posting: 'alertSources.posting',
   page: 'alertSources.page',

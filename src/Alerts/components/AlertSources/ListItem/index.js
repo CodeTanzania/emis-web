@@ -30,6 +30,8 @@ class AlertSourcesListItem extends Component {
     email: PropTypes.string.isRequired,
     mobile: PropTypes.string.isRequired,
     website: PropTypes.string.isRequired,
+    onEdit: PropTypes.func.isRequired,
+    onArchive: PropTypes.func.isRequired,
   };
 
   handleMouseEnter = () => {
@@ -41,7 +43,7 @@ class AlertSourcesListItem extends Component {
   };
 
   render() {
-    const { name, url, email, mobile, website } = this.props;
+    const { name, url, email, mobile, website, onEdit, onArchive } = this.props;
     const { isHovered } = this.state;
     return (
       <div
@@ -69,6 +71,7 @@ class AlertSourcesListItem extends Component {
                   type="edit"
                   title="Update Alert Source"
                   className="actionIcon"
+                  onClick={onEdit}
                 />
                 <Icon
                   type="share-alt"
@@ -79,6 +82,7 @@ class AlertSourcesListItem extends Component {
                   type="database"
                   title="Archive Source"
                   className="actionIcon"
+                  onClick={onArchive}
                 />
               </Fragment>
             )}

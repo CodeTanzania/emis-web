@@ -16,28 +16,33 @@ import AlertSourcesListItem from '../ListItem';
  * @version 0.1.0
  * @since 0.1.0
  */
-const AlertSourceList = ({ alertSources, loading }) => (
+const AlertSourceList = ({ alertSources, loading, onEdit }) => (
   <Fragment>
     <AlertSourcesListHeader />
     <List
       loading={loading}
       dataSource={alertSources}
-      renderItem={({ _id: id, name, url, email, mobile, website }) => (
-        <AlertSourcesListItem
-          key={id}
-          name={name}
-          url={url}
-          email={email}
-          mobile={mobile}
-          website={website}
-        />
-      )}
+      renderItem={alertSource => {
+        const { _id: id, name, url, email, mobile, website } = alertSource;
+        return (
+          <AlertSourcesListItem
+            key={id}
+            name={name}
+            url={url}
+            email={email}
+            mobile={mobile}
+            website={website}
+            onEdit={() => onEdit(alertSource)}
+          />
+        );
+      }}
     />
   </Fragment>
 );
 
 AlertSourceList.propTypes = {
   loading: PropTypes.bool.isRequired,
+  onEdit: PropTypes.func.isRequired,
   alertSources: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,

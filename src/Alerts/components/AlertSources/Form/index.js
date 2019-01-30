@@ -64,6 +64,8 @@ class AlertSourceForm extends Component {
     const {
       posting,
       onCancel,
+      isEditForm,
+      alertSource,
       form: { getFieldDecorator },
     } = this.props;
 
@@ -91,6 +93,7 @@ class AlertSourceForm extends Component {
         {/* Alert Source name */}
         <Form.Item {...formItemLayout} label="Organisation name">
           {getFieldDecorator('name', {
+            initialValue: isEditForm ? alertSource.name : undefined,
             rules: [
               {
                 required: true,
@@ -103,7 +106,8 @@ class AlertSourceForm extends Component {
 
         {/* Alert source website */}
         <Form.Item {...formItemLayout} label="Website">
-          {getFieldDecorator('title', {
+          {getFieldDecorator('website', {
+            initialValue: isEditForm ? alertSource.website : undefined,
             rules: [
               { required: true, message: 'Alert Source Website is required' },
             ],
@@ -113,7 +117,8 @@ class AlertSourceForm extends Component {
 
         {/* Alert Source url */}
         <Form.Item {...formItemLayout} label="Feed">
-          {getFieldDecorator('title', {
+          {getFieldDecorator('url', {
+            initialValue: isEditForm ? alertSource.url : undefined,
             rules: [
               { required: true, message: 'Alert Source Website is required' },
             ],
@@ -126,6 +131,7 @@ class AlertSourceForm extends Component {
         {/* Alert Source number */}
         <Form.Item {...formItemLayout} label="Phone Number">
           {getFieldDecorator('mobile', {
+            initialValue: isEditForm ? alertSource.mobile : undefined,
             rules: [{ required: true, message: 'Phone number is required' }],
           })(<Input placeholder="e.g 255799999999" />)}
         </Form.Item>
@@ -134,6 +140,7 @@ class AlertSourceForm extends Component {
         {/* Alert Source email */}
         <Form.Item {...formItemLayout} label="Email">
           {getFieldDecorator('email', {
+            initialValue: isEditForm ? alertSource.email : undefined,
             rules: [
               {
                 type: 'email',
