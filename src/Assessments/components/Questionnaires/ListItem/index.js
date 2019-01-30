@@ -52,7 +52,7 @@ class QuestionnairesListItem extends Component {
             {isHovered ? (
               <Checkbox className="Checkbox" />
             ) : (
-              <Avatar>{title.charAt(0)}</Avatar>
+              <Avatar>{phase.charAt(0)}</Avatar>
             )}
           </Col>
           <Col span={8}>{title}</Col>
