@@ -53,11 +53,10 @@ class AlertsListItem extends Component {
    * @version 0.1.0
    * @since 0.1.0
    */
-  toHumanReadableDate = isoFormattDate => {
-    return moment(isoFormattDate)
+  toHumanReadableDate = isoFormattDate =>
+    moment(isoFormattDate)
       .utc()
       .format('dddd, MMMM Do YYYY');
-  };
 
   render() {
     const {
