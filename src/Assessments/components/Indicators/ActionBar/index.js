@@ -1,4 +1,7 @@
-import { getIndicators } from '@codetanzania/emis-api-states';
+import {
+  paginateIndicators,
+  refreshIndicators,
+} from '@codetanzania/emis-api-states';
 import { Button, Col, Pagination, Row, Checkbox } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -29,7 +32,7 @@ const IndicatorsActionBar = ({ page, total }) => (
           shape="circle"
           icon="reload"
           title="Refresh indicator"
-          onClick={() => getIndicators()}
+          onClick={() => refreshIndicators()}
           className="actionButton"
           size="large"
         />
@@ -66,7 +69,7 @@ const IndicatorsActionBar = ({ page, total }) => (
           simple
           defaultCurrent={page}
           total={total}
-          onChange={nextPage => getIndicators({ page: nextPage })}
+          onChange={nextPage => paginateIndicators(nextPage)}
           className="pagination"
         />
       </Col>
