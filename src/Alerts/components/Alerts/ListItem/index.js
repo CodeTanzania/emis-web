@@ -1,35 +1,38 @@
 import { Avatar, Checkbox, Col, Icon, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
+import moment from 'moment';
 import './styles.css';
 
 /**
- * Single contact list item component. Render single contact details
+ * Single alert list item component. Render single alert details
  *
  * @class
- * @name ContactsListItem
+ * @name AlertsListItem
  *
  * @param {Object} props
  * @param {string} props.abbreviation
- * @param {string} props.name
- * @param {string} props.title
- * @param {string} props.email
- * @param {string} props.mobile
+ * @param {string} props.source
+ * @param {string} props.headline
+ * @param {string} props.color
+ * @param {string} props.expectedAt
+ * @param {string} props.expiredAt
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class ContactsListItem extends Component {
+class AlertsListItem extends Component {
   state = {
     isHovered: false,
   };
 
   static propTypes = {
     abbreviation: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    mobile: PropTypes.string.isRequired,
+    source: PropTypes.string.isRequired,
+    headline: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired,
+    expiredAt: PropTypes.string.isRequired,
+    expectedAt: PropTypes.string.isRequired,
     onEdit: PropTypes.func.isRequired,
     onArchive: PropTypes.func.isRequired,
   };
@@ -42,20 +45,38 @@ class ContactsListItem extends Component {
     this.setState({ isHovered: false });
   };
 
+  /**
+   * Tranforms ISO date to human readable date
+   *
+   * @function
+   * @name toHumanReadableDate
+   *
+   * @param {String} isoFormattDate
+   * @returns humanReadableDate
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  toHumanReadableDate = isoFormattDate =>
+    moment(isoFormattDate)
+      .utc()
+      .format('dddd, MMMM Do YYYY');
+
   render() {
     const {
       abbreviation,
-      name,
-      title,
-      email,
-      mobile,
+      source,
+      color,
       onEdit,
       onArchive,
+      headline,
+      expiredAt,
+      expectedAt,
     } = this.props;
     const { isHovered } = this.state;
     return (
       <div
-        className="ContactsListItem"
+        className="AlertsListItem"
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
@@ -64,30 +85,30 @@ class ContactsListItem extends Component {
             {isHovered ? (
               <Checkbox className="Checkbox" />
             ) : (
-              <Avatar>{abbreviation}</Avatar>
+              <Avatar style={{ backgroundColor: color }}>{abbreviation}</Avatar>
             )}
           </Col>
-          <Col span={5}>{name}</Col>
-          <Col span={6}>{title}</Col>
-          <Col span={4}>{email}</Col>
-          <Col span={4}>{mobile}</Col>
+          <Col span={9}>{headline}</Col>
+          <Col span={3}>{this.toHumanReadableDate(expectedAt)}</Col>
+          <Col span={3}>{this.toHumanReadableDate(expiredAt)}</Col>
+          <Col span={5}>{source}</Col>
           <Col span={3}>
             {isHovered && (
               <Fragment>
                 <Icon
                   type="edit"
-                  title="Update Contact"
+                  title="Update Alert"
                   className="actionIcon"
                   onClick={onEdit}
                 />
                 <Icon
                   type="share-alt"
-                  title="Share Contact"
+                  title="Share Alert"
                   className="actionIcon"
                 />
                 <Icon
                   type="database"
-                  title="Archive Contact"
+                  title="Archive Alert"
                   className="actionIcon"
                   onClick={onArchive}
                 />
@@ -100,4 +121,4 @@ class ContactsListItem extends Component {
   }
 }
 
-export default ContactsListItem;
+export default AlertsListItem;

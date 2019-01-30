@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import alertIcon from '../../assets/images/alerts.svg';
+import dashboardIcon from '../../assets/images/dashboards.svg';
 import geographicalFeaturesIcon from '../../assets/images/geographicalfeatures.svg';
 import incidentIcon from '../../assets/images/incidents.svg';
 import stakeholderIcon from '../../assets/images/stakeholders.svg';
@@ -23,6 +24,7 @@ const components = [
   { name: 'Incidents', path: '/incidents', icon: incidentIcon },
   { name: 'Resources', path: '/resources', icon: resourceIcon },
   { name: 'Stakeholders', path: '/stakeholders', icon: stakeholderIcon },
+  { name: 'Dashboards', path: '/dashboards', icon: dashboardIcon },
 ];
 
 /**

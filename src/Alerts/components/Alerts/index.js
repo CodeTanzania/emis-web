@@ -1,32 +1,32 @@
 import {
-  closeStakeholderForm,
+  closeAlertForm,
+  selectAlert,
   Connect,
-  getStakeholders,
-  openStakeholderForm,
-  searchStakeholders,
-  selectStakeholder,
+  getAlerts,
+  openAlertForm,
+  searchAlerts,
 } from '@codetanzania/emis-api-states';
 import { Button, Col, Input, Modal, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import ContactsActionBar from './ActionBar';
-import ContactFilters from './Filters';
-import ContactForm from './Form';
-import ContactsList from './List';
+import AlertsActionBar from './ActionBar';
+import AlertsFilters from './Filters';
+import AlertForm from './Form';
+import AlertList from './List';
 import './styles.css';
 
 const { Search } = Input;
 
 /**
- * Render contact list which have search box, actions and contact list
+ * Render alert module which have search box, actions and alert list
  *
  * @class
- * @name ContactsList
+ * @name Alerts
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class Contacts extends Component {
+class Alerts extends Component {
   state = {
     showFilters: false,
     isEditForm: false,
@@ -35,20 +35,40 @@ class Contacts extends Component {
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     posting: PropTypes.bool.isRequired,
-    contacts: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-      .isRequired,
-    contact: PropTypes.shape({ name: PropTypes.string }),
+    alert: PropTypes.shape({
+      event: PropTypes.string,
+      category: PropTypes.string,
+      urgency: PropTypes.string,
+      area: PropTypes.string,
+      severity: PropTypes.string,
+      certainty: PropTypes.string,
+      instruction: PropTypes.string,
+      headline: PropTypes.string,
+      expiredAt: PropTypes.string,
+      expectedAt: PropTypes.string,
+      _id: PropTypes.string,
+    }),
+    alerts: PropTypes.arrayOf(
+      PropTypes.shape({
+        headline: PropTypes.string,
+        source: PropTypes.string,
+        reportedAt: PropTypes.string,
+        expiredAt: PropTypes.string,
+        expectedAt: PropTypes.string,
+        _id: PropTypes.string,
+      })
+    ).isRequired,
     page: PropTypes.number.isRequired,
     showForm: PropTypes.bool.isRequired,
     total: PropTypes.number.isRequired,
   };
 
   static defaultProps = {
-    contact: null,
+    alert: null,
   };
 
-  componentDidMount() {
-    getStakeholders();
+  componentWillMount() {
+    getAlerts();
   }
 
   /**
@@ -82,41 +102,41 @@ class Contacts extends Component {
   };
 
   /**
-   * Open contact form
+   * Open alert form
    *
    * @function
-   * @name openContactForm
+   * @name openForm
    *
    * @returns {undefined} - Nothing is returned
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  openContactForm = () => {
-    openStakeholderForm();
+  openForm = () => {
+    openAlertForm();
   };
 
   /**
-   * close contact form
+   * close alert form
    *
    * @function
-   * @name openContactForm
+   * @name openForm
    *
    * @returns {undefined} - Nothing is returned
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  closeContactForm = () => {
-    closeStakeholderForm();
+  closeForm = () => {
+    closeAlertForm();
     this.setState({ isEditForm: false });
   };
 
   /**
-   * Search Contacts List based on supplied filter word
+   * Search Alerts List based on supplied filter word
    *
    * @function
-   * @name searchContacts
+   * @name searchAlerts
    *
    * @param {Object} event - Event instance
    * @returns {undefined} - Nothing is returned
@@ -124,8 +144,8 @@ class Contacts extends Component {
    * @version 0.1.0
    * @since 0.1.0
    */
-  searchContacts = event => {
-    searchStakeholders(event.target.value);
+  searchAlerts = event => {
+    searchAlerts(event.target.value);
   };
 
   /**
@@ -137,10 +157,10 @@ class Contacts extends Component {
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleEdit = contact => {
-    selectStakeholder(contact);
+  handleEdit = alert => {
+    selectAlert(alert);
     this.setState({ isEditForm: true });
-    openStakeholderForm();
+    openAlertForm();
   };
 
   handleAfterCloseForm = () => {
@@ -149,8 +169,8 @@ class Contacts extends Component {
 
   render() {
     const {
-      contacts,
-      contact,
+      alerts,
+      alert,
       loading,
       posting,
       page,
@@ -159,14 +179,14 @@ class Contacts extends Component {
     } = this.props;
     const { showFilters, isEditForm } = this.state;
     return (
-      <div className="ContactsList">
+      <div className="Alerts">
         <Row>
           <Col span={12}>
             {/* search input component */}
             <Search
               size="large"
               placeholder="Search for stakeholders here ..."
-              onChange={this.searchContacts}
+              onChange={this.searchAlerts}
             />
             {/* end search input component */}
           </Col>
@@ -176,59 +196,53 @@ class Contacts extends Component {
               type="primary"
               icon="plus"
               size="large"
-              title="Add New Contact"
-              onClick={this.openContactForm}
+              title="Add New Alert"
+              onClick={this.openForm}
             >
-              New Contact
+              New Alert
             </Button>
           </Col>
           {/* end primary actions */}
         </Row>
 
         {/* list header */}
-        <ContactsActionBar
+        <AlertsActionBar
           total={total}
           page={page}
           onFilter={this.openFiltersModal}
         />
         {/* end list header */}
-
         {/* list starts */}
-        <ContactsList
-          contacts={contacts}
-          loading={loading}
-          onEdit={this.handleEdit}
-        />
+        <AlertList alerts={alerts} loading={loading} onEdit={this.handleEdit} />
         {/* end list */}
 
         {/* filter modal */}
         <Modal
-          title="Filter Contacts"
+          title="Filter Alerts"
           visible={showFilters}
           onCancel={this.closeFiltersModal}
-          footer={null}
-          destroyOnClose
           maskClosable={false}
+          width={800}
+          footer={null}
         >
-          <ContactFilters onCancel={this.closeFiltersModal} />
+          <AlertsFilters onCancel={this.closeFiltersModal} />
         </Modal>
         {/* end filter modal */}
 
         {/* create/edit form modal */}
         <Modal
-          title={isEditForm ? 'Edit Contact' : 'Add New Contact'}
+          title={isEditForm ? 'Edit Alert' : 'Add New Alert'}
           visible={showForm}
           footer={null}
-          onCancel={this.closeContactForm}
-          destroyOnClose
           maskClosable={false}
-          afterClose={this.handleAfterCloseForm}
+          onCancel={this.closeForm}
+          destroyOnClose
         >
-          <ContactForm
+          <AlertForm
             posting={posting}
+            onCancel={this.closeForm}
             isEditForm={isEditForm}
-            contact={contact}
-            onCancel={this.closeContactForm}
+            alert={alert}
           />
         </Modal>
         {/* end create/edit form modal */}
@@ -237,12 +251,12 @@ class Contacts extends Component {
   }
 }
 
-export default Connect(Contacts, {
-  contacts: 'stakeholders.list',
-  contact: 'stakeholders.selected',
-  loading: 'stakeholders.loading',
-  posting: 'stakeholders.posting',
-  page: 'stakeholders.page',
-  showForm: 'stakeholders.showForm',
-  total: 'stakeholders.total',
+export default Connect(Alerts, {
+  alerts: 'alerts.list',
+  alert: 'alerts.selected',
+  loading: 'alerts.loading',
+  posting: 'alerts.posting',
+  page: 'alerts.page',
+  total: 'alerts.total',
+  showForm: 'alerts.showForm',
 });
