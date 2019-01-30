@@ -73,6 +73,14 @@ class AlertSourcesListItem extends Component {
                   className="actionIcon"
                   onClick={onEdit}
                 />
+
+                <Icon
+                  type="sync"
+                  title="Reload Alerts"
+                  className="actionIcon"
+                  onClick={() => {}}
+                />
+
                 <Icon
                   type="share-alt"
                   title="Share Alert Source"
