@@ -14,6 +14,7 @@ import './styles.css';
  * @param {string} props.owner
  * @param {string} props.warehouseName
  * @param {string} props.color
+ * @param {string} props.uom
  * @param {string} props.quantity
  *
  * @version 0.1.0
@@ -30,6 +31,7 @@ class StockListItem extends Component {
     warehouseName: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
     quantity: PropTypes.number.isRequired,
+    uom: PropTypes.string.isRequired,
     owner: PropTypes.shape({ name: PropTypes.string }).isRequired,
   };
 
@@ -49,6 +51,7 @@ class StockListItem extends Component {
       quantity,
       owner,
       onEdit,
+      uom,
     } = this.props;
     const { isHovered } = this.state;
     return (
@@ -69,7 +72,7 @@ class StockListItem extends Component {
           </Col>
           <Col span={5}>{owner}</Col>
           <Col span={5}>{itemName}</Col>
-          <Col span={5}>{`${quantity} kg`}</Col>
+          <Col span={5}>{`${quantity} ${uom}`}</Col>
           <Col span={5}>{warehouseName}</Col>
           <Col span={3}>
             {isHovered && (

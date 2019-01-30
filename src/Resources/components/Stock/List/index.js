@@ -19,6 +19,7 @@ const StockList = ({ stocks, loading, onEdit }) => (
             warehouseName={store.name}
             owner={owner.name}
             color={item.color}
+            uom={item.uom}
             quantity={stock.quantity}
             onEdit={() => onEdit(stock)}
           />

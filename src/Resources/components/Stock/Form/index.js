@@ -36,7 +36,6 @@ class StockForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          console.log(values);
           const updatedStock = Object.assign({}, stock, values);
           putStock(
             updatedStock,
