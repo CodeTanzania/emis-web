@@ -1,7 +1,13 @@
 import { postStock, putStock } from '@codetanzania/emis-api-states';
+import {
+  getStakeholders,
+  getWarehouses,
+  getItems,
+} from '@codetanzania/emis-api-client';
 import { Button, Form, Input } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import SearchableSelectInput from '../../../../components/SearchableSelectInput';
 import { notifyError, notifySuccess } from '../../../../util';
 
 class StockForm extends Component {
@@ -91,12 +97,19 @@ class StockForm extends Component {
       <Form onSubmit={this.handleSubmit}>
         {/* stock stakeholder */}
         <Form.Item {...formItemLayout} label="Stakeholder">
-          {getFieldDecorator('stakeholder', {
+          {getFieldDecorator('owner', {
             initialValue: isEditForm ? stock.name : undefined,
             rules: [
               { required: true, message: 'Stock stakeholder is required' },
             ],
-          })(<Input />)}
+          })(
+            <SearchableSelectInput
+              placeholder="Please select stakeholder"
+              onSearch={getStakeholders}
+              optionLabel="name"
+              optionValue="_id"
+            />
+          )}
         </Form.Item>
         {/* end stock stakeholder */}
 
@@ -105,9 +118,32 @@ class StockForm extends Component {
           {getFieldDecorator('item', {
             initialValue: isEditForm ? stock.title : undefined,
             rules: [{ required: true, message: 'Stock item is required' }],
-          })(<Input />)}
+          })(
+            <SearchableSelectInput
+              placeholder="Please select item"
+              onSearch={getItems}
+              optionLabel="name"
+              optionValue="_id"
+            />
+          )}
         </Form.Item>
         {/* end stock Item */}
+
+        {/* stock Warehouse */}
+        <Form.Item {...formItemLayout} label="Warehouse">
+          {getFieldDecorator('store', {
+            initialValue: isEditForm ? stock.mobile : undefined,
+            rules: [{ required: true, message: 'warehouse is required' }],
+          })(
+            <SearchableSelectInput
+              placeholder="Please select warehouse"
+              onSearch={getWarehouses}
+              optionLabel="name"
+              optionValue="_id"
+            />
+          )}
+        </Form.Item>
+        {/* end stock number */}
 
         {/* stock quantity */}
         <Form.Item {...formItemLayout} label="Quantity">
@@ -116,15 +152,6 @@ class StockForm extends Component {
           })(<Input />)}
         </Form.Item>
         {/* end stock quantity */}
-
-        {/* stock Warehouse */}
-        <Form.Item {...formItemLayout} label="Warehouse">
-          {getFieldDecorator('warehouse', {
-            initialValue: isEditForm ? stock.mobile : undefined,
-            rules: [{ required: true, message: 'warehouse is required' }],
-          })(<Input />)}
-        </Form.Item>
-        {/* end stock number */}
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
