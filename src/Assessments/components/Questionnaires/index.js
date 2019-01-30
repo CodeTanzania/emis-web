@@ -191,6 +191,8 @@ class Questionnaires extends Component {
           visible={showFilters}
           onCancel={this.closeFiltersModal}
           footer={null}
+          destroyOnClose
+          maskClosable={false}
         >
           <QuestionnairesFilters onCancel={this.closeFiltersModal} />
         </Modal>
