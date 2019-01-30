@@ -89,7 +89,7 @@ class Items extends Component {
   };
 
   /**
-   * Open question form
+   * Open item form
    *
    * @function
    * @name openForm
@@ -104,7 +104,7 @@ class Items extends Component {
   };
 
   /**
-   * close question form
+   * close item form
    *
    * @function closeForm
    * @name

@@ -15,6 +15,8 @@ const ItemsList = ({ items, loading }) => (
           key={item.name}
           name={item.name}
           type={item.type}
+          maxStockAllowed={item.maxStockAllowed}
+          minStockAllowed={item.minStockAllowed}
           description={item.description}
           color={item.color}
         />

@@ -26,6 +26,8 @@ class ItemsListItem extends Component {
     type: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
+    maxStockAllowed: PropTypes.number.isRequired,
+    minStockAllowed: PropTypes.number.isRequired,
   };
 
   state = {
@@ -41,7 +43,14 @@ class ItemsListItem extends Component {
   };
 
   render() {
-    const { name, type, description, color } = this.props;
+    const {
+      name,
+      type,
+      description,
+      color,
+      maxStockAllowed,
+      minStockAllowed,
+    } = this.props;
     const { isHovered } = this.state;
     return (
       <div
@@ -60,8 +69,10 @@ class ItemsListItem extends Component {
             )}
           </Col>
           <Col span={6}>{name}</Col>
-          <Col span={6}>{type}</Col>
-          <Col span={8}>{description}</Col>
+          <Col span={3}>{type}</Col>
+          <Col span={2}>{maxStockAllowed}</Col>
+          <Col span={2}>{minStockAllowed}</Col>
+          <Col span={7}>{description}</Col>
           <Col span={3}>
             {isHovered && (
               <Fragment>

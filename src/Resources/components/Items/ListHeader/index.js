@@ -4,8 +4,10 @@ import './styles.css';
 
 const headerLayout = [
   { span: 6, header: 'Name', offset: 1 },
-  { span: 6, header: 'Type' },
-  { span: 8, header: 'Description' },
+  { span: 3, header: 'Type' },
+  { span: 2, header: 'Maximum' },
+  { span: 2, header: 'Minimun' },
+  { span: 7, header: 'Description' },
 ];
 
 const ItemsListHeader = () => (

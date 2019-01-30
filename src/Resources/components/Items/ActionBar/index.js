@@ -66,7 +66,7 @@ const ItemsActionBar = ({ page, total, onFilter }) => (
           simple
           defaultCurrent={page}
           total={total}
-          onChange={nextPage => paginateItems({ page: nextPage })}
+          onChange={nextPage => paginateItems(nextPage)}
           className="pagination"
         />
       </Col>
