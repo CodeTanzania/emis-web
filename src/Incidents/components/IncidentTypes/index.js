@@ -204,7 +204,7 @@ class IncidentTypes extends Component {
           title={isEditForm ? 'Edit Incident Type' : 'Add New Incident Type'}
           visible={showForm}
           footer={null}
-          onCancel={this.closeForm}
+          onCancel={this.closeIncidentTypeForm}
           destroyOnClose
           maskClosable={false}
           afterClose={this.handleAfterCloseForm}

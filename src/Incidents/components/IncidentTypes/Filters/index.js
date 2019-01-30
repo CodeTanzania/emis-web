@@ -1,18 +1,11 @@
 import { Button, Checkbox, Col, Form, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-
-const natures = ['Natural', 'Technological'];
-const families = [
-  'Geophysical',
-  'Biological',
-  'Hydrological',
-  'Technological',
-  'Meteorological',
-  'Climatological',
-  'Extra-terrestrial',
-];
-
+import {
+  Connect,
+  clearIncidentTypeFilters,
+  filterIncidentTypes,
+} from '@codetanzania/emis-api-states';
 /**
  * Filter modal component for filtering incident types
  *
@@ -26,26 +19,65 @@ class IncidentTypesFilters extends Component {
   static propTypes = {
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
     onCancel: PropTypes.func.isRequired,
+    families: PropTypes.arrayOf(PropTypes.string).isRequired,
+    natures: PropTypes.arrayOf(PropTypes.string).isRequired,
+    filter: PropTypes.objectOf(
+      PropTypes.shape({
+        families: PropTypes.arrayOf(PropTypes.string).isRequired,
+        natures: PropTypes.arrayOf(PropTypes.string).isRequired,
+      })
+    ),
   };
 
+  static defaultProps = {
+    filter: null,
+  };
+
+  /**
+   * Handle filter action
+   *
+   * @function
+   * @name handleSubmit
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleSubmit = e => {
     e.preventDefault();
-    // const {
-    //   form: { validateFields },
-    // } = this.props;
+    const {
+      form: { validateFields },
+      onCancel,
+    } = this.props;
 
-    // validateFields((error, values) => {
-    //   const filter = {
-    //     type: { $in: values.types },
-    //     phases: { $in: phases.phases },
-    //   };
-    // });
+    validateFields((error, values) => {
+      if (!error) {
+        filterIncidentTypes(values);
+        onCancel();
+      }
+    });
+  };
+
+  /**
+   * Action handle when clear
+   *
+   * @function
+   * @name handleClearFilter
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleClearFilter = () => {
+    const { onCancel } = this.props;
+    clearIncidentTypeFilters();
+    onCancel();
   };
 
   render() {
     const {
       form: { getFieldDecorator },
       onCancel,
+      families,
+      natures,
     } = this.props;
 
     const formItemLayout = {
@@ -71,7 +103,7 @@ class IncidentTypesFilters extends Component {
       <Form onSubmit={this.handleSubmit} layout={formItemLayout}>
         {/* start incident type filters */}
         <Form.Item {...formItemLayout} label="By Family">
-          {getFieldDecorator('families')(
+          {getFieldDecorator('family')(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {families.map(family => (
@@ -87,7 +119,7 @@ class IncidentTypesFilters extends Component {
 
         {/* start emergency phase filters */}
         <Form.Item {...formItemLayout} label="By Nature">
-          {getFieldDecorator('natures')(
+          {getFieldDecorator('nature')(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {natures.map(nature => (
@@ -115,4 +147,9 @@ class IncidentTypesFilters extends Component {
     );
   }
 }
-export default Form.create()(IncidentTypesFilters);
+
+export default Connect(Form.create()(IncidentTypesFilters), {
+  natures: 'incidentTypes.schema.properties.nature.enum',
+  families: 'incidentTypes.schema.properties.family.enum',
+  filter: 'incidentTypes.filter',
+});
