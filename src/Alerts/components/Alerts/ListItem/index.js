@@ -31,6 +31,8 @@ class AlertsListItem extends Component {
     headline: PropTypes.string.isRequired,
     expiredAt: PropTypes.string.isRequired,
     expectedAt: PropTypes.string.isRequired,
+    onEdit: PropTypes.func.isRequired,
+    onArchive: PropTypes.func.isRequired,
   };
 
   handleMouseEnter = () => {
@@ -62,6 +64,8 @@ class AlertsListItem extends Component {
     const {
       abbreviation,
       source,
+      onEdit,
+      onArchive,
       headline,
       expiredAt,
       expectedAt,
@@ -88,7 +92,12 @@ class AlertsListItem extends Component {
           <Col span={3}>
             {isHovered && (
               <Fragment>
-                <Icon type="edit" title="Update Alert" className="actionIcon" />
+                <Icon
+                  type="edit"
+                  title="Update Alert"
+                  className="actionIcon"
+                  onClick={onEdit}
+                />
                 <Icon
                   type="share-alt"
                   title="Share Alert"
@@ -98,6 +107,7 @@ class AlertsListItem extends Component {
                   type="database"
                   title="Archive Alert"
                   className="actionIcon"
+                  onClick={onArchive}
                 />
               </Fragment>
             )}
