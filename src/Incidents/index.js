@@ -14,9 +14,9 @@ const routes = [
     path: '/commandcenter',
     icon: commandCenterIcon,
   },
-  { name: 'Actions', path: '/actions', icon: actionsIcon },
+  { name: 'Incidents Actions', path: '/actions', icon: actionsIcon },
   { name: 'Assessments', path: '/assessments', icon: assessmentIcon },
-  { name: 'Feeds', path: '/feeds', icon: feedIcon },
+  { name: 'Incidents Feeds', path: '/feeds', icon: feedIcon },
   { name: 'Incident Types', path: '/incidenttypes', icon: incidentTypeIcon },
   {
     name: 'Loss Database/History',
