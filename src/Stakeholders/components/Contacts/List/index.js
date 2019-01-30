@@ -1,6 +1,8 @@
+import { deleteStakeholder } from '@codetanzania/emis-api-states';
 import { List } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
+import { notifyError, notifySuccess } from '../../../../util';
 import ContactsListHeader from '../ListHeader';
 import ContactsListItem from '../ListItem';
 
@@ -19,6 +21,19 @@ const ContactsList = ({ contacts, loading, onEdit }) => (
           email={contact.email}
           mobile={contact.mobile}
           onEdit={() => onEdit(contact)}
+          onArchive={() =>
+            deleteStakeholder(
+              contact._id, // eslint-disable-line
+              () => {
+                notifySuccess('Contact was archived successfully');
+              },
+              () => {
+                notifyError(
+                  'An Error occurred while archiving Contact please contact system administrator'
+                );
+              }
+            )
+          }
         />
       )}
     />

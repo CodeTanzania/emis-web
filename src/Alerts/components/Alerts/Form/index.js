@@ -1,56 +1,58 @@
-import {
-  postStakeholder,
-  getFeatures,
-  Connect,
-} from '@codetanzania/emis-api-states';
+import { postAlert, putAlert, Connect } from '@codetanzania/emis-api-states';
+import { getFeatures } from '@codetanzania/emis-api-client';
 import { Button, Form, Input, Select, DatePicker } from 'antd';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import React, { Component } from 'react';
+import SearchableSelectInput from '../../../../components/SearchableSelectInput';
+import { notifyError, notifySuccess } from '../../../../util';
 
 const { Option } = Select;
 const { TextArea } = Input;
-const urgencies = ['Immediate', 'Expected', 'Future', 'Past', 'Unknown'];
-const severities = ['Extreme', 'Severe', 'Moderate', 'Minor', 'Unknown'];
-const certainties = ['Observed', 'Likely', 'Possible', 'Unlikely', 'Unknown'];
-const types = ['Alert', 'Update', 'Cancel', 'Error', 'Ask'];
-const categories = [
-  'Geo',
-  'Met',
-  'Safety',
-  'Security',
-  'Rescue',
-  'Fire',
-  'Health',
-  'Env',
-  'Transport',
-  'Infra',
-  'CBRNE',
-  'Other',
-];
-
-const responses = [
-  'Shelter',
-  'Evacuate',
-  'Prepare',
-  'Execute',
-  'Avoid',
-  'Monitor',
-  'Assess',
-  'AllClear',
-  'None',
-];
 
 class AlertForm extends Component {
   static propTypes = {
-    areas: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string,
-        level: PropTypes.string,
-      })
-    ).isRequired,
+    alertSchema: PropTypes.shape({
+      category: PropTypes.arrayOf(
+        PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
+      ),
+      urgency: PropTypes.arrayOf(
+        PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
+      ),
+      severity: PropTypes.arrayOf(
+        PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
+      ),
+      certainty: PropTypes.arrayOf(
+        PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
+      ),
+      type: PropTypes.arrayOf(
+        PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
+      ),
+      response: PropTypes.arrayOf(
+        PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
+      ),
+    }).isRequired,
+    alert: PropTypes.shape({
+      event: PropTypes.string,
+      category: PropTypes.string,
+      urgency: PropTypes.string,
+      area: PropTypes.string,
+      severity: PropTypes.string,
+      certainty: PropTypes.string,
+      instruction: PropTypes.string,
+      headline: PropTypes.string,
+      expiredAt: PropTypes.string,
+      expectedAt: PropTypes.string,
+      _id: PropTypes.string,
+    }),
     posting: PropTypes.bool.isRequired,
     onCancel: PropTypes.func.isRequired,
+    isEditForm: PropTypes.bool.isRequired,
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+  };
+
+  static defaultProps = {
+    alert: null,
   };
 
   componentDidMount() {
@@ -62,11 +64,64 @@ class AlertForm extends Component {
 
     const {
       form: { validateFieldsAndScroll },
+      alert,
+      isEditForm,
     } = this.props;
 
     validateFieldsAndScroll((error, values) => {
       if (!error) {
-        postStakeholder(values);
+        const {
+          event,
+          area,
+          category,
+          urgency,
+          severity,
+          certainty,
+          instruction,
+          headline,
+          expectedAt,
+          expiredAt,
+        } = values;
+
+        const payload = {
+          category,
+          headline,
+          expectedAt: expectedAt.toISOString(),
+          expiredAt: expiredAt.toISOString(),
+          event,
+          area,
+          urgency,
+          severity,
+          certainty,
+          instruction,
+          source: 'testing',
+        };
+        if (isEditForm) {
+          const updatedAlert = Object.assign({}, alert, payload);
+          putAlert(
+            updatedAlert,
+            () => {
+              notifySuccess('Alert was updated successfully');
+            },
+            () => {
+              notifyError(
+                'Something occurred while updating alert, please try again!'
+              );
+            }
+          );
+        } else {
+          postAlert(
+            payload,
+            () => {
+              notifySuccess('Alert was created successfully');
+            },
+            () => {
+              notifyError(
+                'Something occurred while saving alert, please try again!'
+              );
+            }
+          );
+        }
       }
     });
   };
@@ -89,7 +144,9 @@ class AlertForm extends Component {
     const {
       posting,
       onCancel,
-      areas,
+      alert,
+      isEditForm,
+      alertSchema,
       form: { getFieldDecorator },
     } = this.props;
 
@@ -117,6 +174,7 @@ class AlertForm extends Component {
         {/* Alert event */}
         <Form.Item {...formItemLayout} label="Event">
           {getFieldDecorator('event', {
+            initialValue: isEditForm ? alert.event : undefined,
             rules: [{ required: true, message: 'Alert event is required' }],
           })(<Input placeholder="e.g Flood Tandale" />)}
         </Form.Item>
@@ -125,6 +183,7 @@ class AlertForm extends Component {
         {/* Alert headline */}
         <Form.Item {...formItemLayout} label="Headline">
           {getFieldDecorator('headline', {
+            initialValue: isEditForm ? alert.headline : undefined,
             rules: [{ required: true, message: 'Alert headline is required' }],
           })(
             <Input placeholder="e.g ORANGE WARNING. Strong winds and Large waves" />
@@ -137,9 +196,12 @@ class AlertForm extends Component {
           {getFieldDecorator('area', {
             rules: [{ required: true, message: 'Affected area is required' }],
           })(
-            <Select mode="multiple" showSearch>
-              {this.renderAreaOptions(areas)}
-            </Select>
+            <SearchableSelectInput
+              placeholder="Please select affected area"
+              onSearch={getFeatures}
+              optionLabel="name"
+              optionValue="name"
+            />
           )}
         </Form.Item>
         {/* end alert category */}
@@ -147,9 +209,12 @@ class AlertForm extends Component {
         {/* alert category */}
         <Form.Item {...formItemLayout} label="Category">
           {getFieldDecorator('category', {
+            initialValue: isEditForm ? alert.category : undefined,
             rules: [{ required: true, message: 'Alert category is required' }],
           })(
-            <Select showSearch>{this.renderSelectOptions(categories)}</Select>
+            <Select showSearch>
+              {this.renderSelectOptions(alertSchema.category.enum)}
+            </Select>
           )}
         </Form.Item>
         {/* end alert category */}
@@ -157,17 +222,25 @@ class AlertForm extends Component {
         {/* alert urgency */}
         <Form.Item {...formItemLayout} label="Urgency">
           {getFieldDecorator('urgency', {
+            initialValue: isEditForm ? alert.urgency : undefined,
             rules: [{ required: true, message: 'Alert urgency is required' }],
-          })(<Select showSearch>{this.renderSelectOptions(urgencies)}</Select>)}
+          })(
+            <Select showSearch>
+              {this.renderSelectOptions(alertSchema.urgency.enum)}
+            </Select>
+          )}
         </Form.Item>
         {/* end alert urgency */}
 
         {/* alert severity */}
         <Form.Item {...formItemLayout} label="Severity">
           {getFieldDecorator('severity', {
+            initialValue: isEditForm ? alert.severity : undefined,
             rules: [{ required: true, message: 'Alert severity is required' }],
           })(
-            <Select showSearch>{this.renderSelectOptions(severities)}</Select>
+            <Select showSearch>
+              {this.renderSelectOptions(alertSchema.severity.enum)}
+            </Select>
           )}
         </Form.Item>
         {/* end alert severity */}
@@ -175,9 +248,12 @@ class AlertForm extends Component {
         {/* alert certainty */}
         <Form.Item {...formItemLayout} label="Certainty">
           {getFieldDecorator('certainty', {
+            initialValue: isEditForm ? alert.certainty : undefined,
             rules: [{ required: true, message: 'Alert certainty is required' }],
           })(
-            <Select showSearch>{this.renderSelectOptions(certainties)}</Select>
+            <Select showSearch>
+              {this.renderSelectOptions(alertSchema.certainty.enum)}
+            </Select>
           )}
         </Form.Item>
         {/* end alert certainty */}
@@ -185,26 +261,39 @@ class AlertForm extends Component {
         {/* alert type */}
         <Form.Item {...formItemLayout} label="Type">
           {getFieldDecorator('type', {
+            initialValue: isEditForm ? alert.type : undefined,
             rules: [
               { required: true, message: 'Alert Message Type is required' },
             ],
-          })(<Select showSearch>{this.renderSelectOptions(types)}</Select>)}
+          })(
+            <Select showSearch>
+              {this.renderSelectOptions(alertSchema.type.enum)}
+            </Select>
+          )}
         </Form.Item>
         {/* end alert type */}
 
         {/* alert response type */}
         <Form.Item {...formItemLayout} label="Response Type">
           {getFieldDecorator('response', {
+            initialValue: isEditForm ? alert.response : undefined,
             rules: [
               { required: true, message: 'Alert Response Type is required' },
             ],
-          })(<Select showSearch>{this.renderSelectOptions(responses)}</Select>)}
+          })(
+            <Select showSearch>
+              {this.renderSelectOptions(alertSchema.response.enum)}
+            </Select>
+          )}
         </Form.Item>
         {/* end alert response type */}
 
         {/* alert onset date  */}
         <Form.Item {...formItemLayout} label="OnSet">
           {getFieldDecorator('expectedAt', {
+            initialValue: isEditForm
+              ? moment(alert.expectedAt).utc()
+              : undefined,
             rules: [
               { required: true, message: 'Alert  OnSet date is required' },
             ],
@@ -220,7 +309,10 @@ class AlertForm extends Component {
 
         {/* alert expires date  */}
         <Form.Item {...formItemLayout} label="Expires At">
-          {getFieldDecorator('expiresAt', {
+          {getFieldDecorator('expiredAt', {
+            initialValue: isEditForm
+              ? moment(alert.expiredAt).utc()
+              : undefined,
             rules: [
               { required: true, message: 'Alert Expire date is required' },
             ],
@@ -237,6 +329,7 @@ class AlertForm extends Component {
         {/* alert instructions  */}
         <Form.Item {...formItemLayout} label="Instructions">
           {getFieldDecorator('instruction', {
+            initialValue: isEditForm ? alert.instruction : undefined,
             rules: [
               { required: true, message: 'Alert  Instruction is required' },
             ],
@@ -264,6 +357,6 @@ class AlertForm extends Component {
 
 export default Form.create()(
   Connect(AlertForm, {
-    areas: 'features.list',
+    alertSchema: 'alerts.schema.properties',
   })
 );

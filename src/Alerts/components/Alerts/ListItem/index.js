@@ -14,6 +14,7 @@ import './styles.css';
  * @param {string} props.abbreviation
  * @param {string} props.source
  * @param {string} props.headline
+ * @param {string} props.color
  * @param {string} props.expectedAt
  * @param {string} props.expiredAt
  *
@@ -29,8 +30,11 @@ class AlertsListItem extends Component {
     abbreviation: PropTypes.string.isRequired,
     source: PropTypes.string.isRequired,
     headline: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired,
     expiredAt: PropTypes.string.isRequired,
     expectedAt: PropTypes.string.isRequired,
+    onEdit: PropTypes.func.isRequired,
+    onArchive: PropTypes.func.isRequired,
   };
 
   handleMouseEnter = () => {
@@ -62,6 +66,9 @@ class AlertsListItem extends Component {
     const {
       abbreviation,
       source,
+      color,
+      onEdit,
+      onArchive,
       headline,
       expiredAt,
       expectedAt,
@@ -78,7 +85,7 @@ class AlertsListItem extends Component {
             {isHovered ? (
               <Checkbox className="Checkbox" />
             ) : (
-              <Avatar>{abbreviation}</Avatar>
+              <Avatar style={{ backgroundColor: color }}>{abbreviation}</Avatar>
             )}
           </Col>
           <Col span={9}>{headline}</Col>
@@ -88,7 +95,12 @@ class AlertsListItem extends Component {
           <Col span={3}>
             {isHovered && (
               <Fragment>
-                <Icon type="edit" title="Update Alert" className="actionIcon" />
+                <Icon
+                  type="edit"
+                  title="Update Alert"
+                  className="actionIcon"
+                  onClick={onEdit}
+                />
                 <Icon
                   type="share-alt"
                   title="Share Alert"
@@ -98,6 +110,7 @@ class AlertsListItem extends Component {
                   type="database"
                   title="Archive Alert"
                   className="actionIcon"
+                  onClick={onArchive}
                 />
               </Fragment>
             )}
