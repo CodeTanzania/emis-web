@@ -1,13 +1,10 @@
-import {
-  postAlert,
-  putAlert,
-  getFeatures,
-  Connect,
-} from '@codetanzania/emis-api-states';
+import { postAlert, putAlert, Connect } from '@codetanzania/emis-api-states';
+import { getFeatures } from '@codetanzania/emis-api-client';
 import { Button, Form, Input, Select, DatePicker } from 'antd';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import React, { Component } from 'react';
+import SearchableSelectInput from '../../../../components/SearchableSelectInput';
 import { notifyError, notifySuccess } from '../../../../util';
 
 const { Option } = Select;
@@ -48,12 +45,6 @@ class AlertForm extends Component {
       expectedAt: PropTypes.string,
       _id: PropTypes.string,
     }),
-    areas: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string,
-        level: PropTypes.string,
-      })
-    ).isRequired,
     posting: PropTypes.bool.isRequired,
     onCancel: PropTypes.func.isRequired,
     isEditForm: PropTypes.bool.isRequired,
@@ -155,7 +146,6 @@ class AlertForm extends Component {
       onCancel,
       alert,
       isEditForm,
-      areas,
       alertSchema,
       form: { getFieldDecorator },
     } = this.props;
@@ -204,12 +194,14 @@ class AlertForm extends Component {
         {/* alert area */}
         <Form.Item {...formItemLayout} label="Area(s)">
           {getFieldDecorator('area', {
-            initialValue: isEditForm ? alert.area : undefined,
             rules: [{ required: true, message: 'Affected area is required' }],
           })(
-            <Select mode="multiple" showSearch>
-              {this.renderAreaOptions(areas)}
-            </Select>
+            <SearchableSelectInput
+              placeholder="Please select affected area"
+              onSearch={getFeatures}
+              optionLabel="name"
+              optionValue="name"
+            />
           )}
         </Form.Item>
         {/* end alert category */}
@@ -365,7 +357,6 @@ class AlertForm extends Component {
 
 export default Form.create()(
   Connect(AlertForm, {
-    areas: 'features.list',
     alertSchema: 'alerts.schema.properties',
   })
 );
