@@ -1,0 +1,42 @@
+.AlertsListItem {
+  width: 100%;
+  border-bottom: 1px solid #e8e8e8;
+  padding: 15px 0;
+  height: 60px;
+}
+
+.AlertsListItem .Checkbox {
+  padding: 0 8px;
+}
+
+.AlertsListItem:hover {
+  background-color: #f5f5f5;
+}
+
+.AlertsListItem .actionIcon:hover {
+  color: #008EFA;
+  background-color: #e8e8e8;
+}
+
+.AlertsListItem .actionIcon {
+  padding-top: 8px;
+  margin-bottom: 5px;
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.AlertsListItem .actionIcon {
+  display: inline-block;
+  margin: 0 10px;
+  font-size: 16px;
+}
+
+.AlertsListItem .actionIcon:hover {
+  color: #008EFA;
+  background-color: #e8e8e8;
+}

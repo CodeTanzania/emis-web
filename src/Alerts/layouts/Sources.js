@@ -1,15 +1,7 @@
 import React from 'react';
-import UIState from '../../components/UIState';
+// import UIState from '../../components/UIState';
+import Sources from '../components/Sources';
 
-const AlertSourcesLayout = () => (
-  <div style={{ marginTop: '20%' }}>
-    <UIState
-      icon="exclamation-circle"
-      description="No Alert Sources yet,but when you create an Alert Source it will appear here"
-      buttonLabel="New Alert"
-      onClick={() => {}}
-    />
-  </div>
-);
+const AlertSourcesLayout = () => <Sources />;
 
 export default AlertSourcesLayout;
