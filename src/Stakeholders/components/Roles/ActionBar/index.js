@@ -1,4 +1,4 @@
-import { getRoles } from '@codetanzania/emis-api-states';
+import { refreshRoles, paginateRoles } from '@codetanzania/emis-api-states';
 import { Button, Checkbox, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -29,7 +29,7 @@ const RolesActionBar = ({ page, total, onFilter }) => (
           shape="circle"
           icon="reload"
           title="Refresh roles"
-          onClick={() => getRoles()}
+          onClick={() => refreshRoles()}
           className="actionButton"
           size="large"
         />
@@ -66,7 +66,7 @@ const RolesActionBar = ({ page, total, onFilter }) => (
           simple
           defaultCurrent={page}
           total={total}
-          onChange={nextPage => getRoles({ page: nextPage })}
+          onChange={nextPage => paginateRoles(nextPage)}
           className="pagination"
         />
       </Col>
