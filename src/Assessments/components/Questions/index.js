@@ -204,7 +204,8 @@ class Questions extends Component {
           visible={showFilters}
           onCancel={this.closeFiltersModal}
           footer={null}
-          question={question}
+          destroyOnClose
+          maskClosable={false}
         >
           <QuestionFilters onCancel={this.closeFiltersModal} />
         </Modal>
