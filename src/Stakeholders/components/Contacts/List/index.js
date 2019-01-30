@@ -4,7 +4,7 @@ import React, { Fragment } from 'react';
 import ContactsListHeader from '../ListHeader';
 import ContactsListItem from '../ListItem';
 
-const ContactsList = ({ contacts, loading }) => (
+const ContactsList = ({ contacts, loading, onEdit }) => (
   <Fragment>
     <ContactsListHeader />
     <List
@@ -18,6 +18,7 @@ const ContactsList = ({ contacts, loading }) => (
           title={contact.title}
           email={contact.email}
           mobile={contact.mobile}
+          onEdit={() => onEdit(contact)}
         />
       )}
     />
@@ -28,6 +29,7 @@ ContactsList.propTypes = {
   loading: PropTypes.bool.isRequired,
   contacts: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
     .isRequired,
+  onEdit: PropTypes.func.isRequired,
 };
 
 export default ContactsList;

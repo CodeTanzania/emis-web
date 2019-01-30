@@ -1,24 +1,30 @@
 import { Connect, getAdjustments } from '@codetanzania/emis-api-states';
-import { Input, List, Col, Row, Button } from 'antd';
+import { Input, Col, Row, Modal, Button } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import AdjustmentsListItem from './ListItem';
 import AdjustmentsActionBar from './ActionBar';
+import AdjustmentList from './List';
+import AdjustmentFilters from './Filters';
+
 import './styles.css';
 
 const { Search } = Input;
 
 /**
- * Render adjustment list which have search box and actions
+ * Render adjustments module which has search box, actions and list of adjustments
  *
  * @class
- * @name AdjustmentList
+ * @name Adjustments
  *
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class AdjustmentList extends Component {
+class Adjustments extends Component {
+  state = {
+    showFilters: false,
+  };
+
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     adjustments: PropTypes.arrayOf(
@@ -43,8 +49,55 @@ class AdjustmentList extends Component {
     getAdjustments();
   }
 
+  /**
+   * open filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name openFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openFiltersModal = () => {
+    this.setState({ showFilters: true });
+  };
+
+  /**
+   * Close filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name closeFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeFiltersModal = () => {
+    this.setState({ showFilters: false });
+  };
+
+  /**
+   * Search Roles List based on supplied filter word
+   *
+   * @function
+   * @name searchRoles
+   *
+   * @param {Object} event - Event instance
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  searchAdjustments = event => {
+    getAdjustments({ q: event.target.value });
+  };
+
   render() {
     const { adjustments, loading, total, page } = this.props;
+    const { showFilters } = this.state;
     return (
       <div className="AdjustmentList">
         <Row>
@@ -53,7 +106,7 @@ class AdjustmentList extends Component {
             <Search
               size="large"
               placeholder="Search for adjustments here ..."
-              onChange={({ target: { value } }) => getAdjustments({ q: value })}
+              onChange={this.searchAdjustments}
             />
             {/* end search input component */}
           </Col>
@@ -71,40 +124,31 @@ class AdjustmentList extends Component {
           {/* end primary actions */}
         </Row>
         {/* list action bar */}
-        <AdjustmentsActionBar total={total} page={page} />
+        <AdjustmentsActionBar
+          total={total}
+          page={page}
+          onFilter={this.openFiltersModal}
+        />
         {/* end list action bar */}
         {/* list starts */}
-        <List
-          loading={loading}
-          dataSource={adjustments}
-          renderItem={({
-            _id: id,
-            type,
-            quantity,
-            cost,
-            reason,
-            item: { name: itemName, color },
-            store: { name: warehouseName },
-          }) => (
-            <AdjustmentsListItem
-              key={id}
-              itemName={itemName}
-              warehouseName={warehouseName}
-              type={type}
-              quantity={quantity}
-              cost={cost}
-              reason={reason}
-              color={color}
-            />
-          )}
-        />
+        <AdjustmentList adjustments={adjustments} loading={loading} />
         {/* end list */}
+        <Modal
+          title="Filter Adjustments"
+          visible={showFilters}
+          width={650}
+          maskClosable={false}
+          onCancel={this.closeFiltersModal}
+          footer={null}
+        >
+          <AdjustmentFilters onCancel={this.closeFiltersModal} />
+        </Modal>
       </div>
     );
   }
 }
 
-export default Connect(AdjustmentList, {
+export default Connect(Adjustments, {
   adjustments: 'adjustments.list',
   loading: 'adjustments.loading',
   page: 'adjustments.page',

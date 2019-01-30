@@ -1,7 +1,7 @@
 import React from 'react';
 // import UIState from '../../components/UIState';
-import WarehouseList from '../components/Warehouses';
+import Warehouses from '../components/Warehouses';
 
-const ResourcesWarehousesLayout = () => <WarehouseList />;
+const ResourcesWarehousesLayout = () => <Warehouses />;
 
 export default ResourcesWarehousesLayout;

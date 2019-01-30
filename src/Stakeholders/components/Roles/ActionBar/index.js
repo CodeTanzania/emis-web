@@ -17,7 +17,7 @@ import './styles.css';
  * @version 0.1.0
  * @since 0.1.0
  */
-const RolesActionBar = ({ page, total }) => (
+const RolesActionBar = ({ page, total, onFilter }) => (
   <div className="RolesActionBar">
     <Row>
       <Col span={1} xl={1} className="checkbox">
@@ -57,6 +57,7 @@ const RolesActionBar = ({ page, total }) => (
           title="Filter roles"
           className="actionButton"
           size="large"
+          onClick={onFilter}
         />
       </Col>
 
@@ -77,6 +78,7 @@ const RolesActionBar = ({ page, total }) => (
 RolesActionBar.propTypes = {
   page: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
+  onFilter: PropTypes.func.isRequired,
 };
 
 export default RolesActionBar;

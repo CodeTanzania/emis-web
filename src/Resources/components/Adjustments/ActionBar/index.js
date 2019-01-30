@@ -17,7 +17,7 @@ import './styles.css';
  * @version 0.1.0
  * @since 0.1.0
  */
-const AdjustmentsActionBar = ({ page, total }) => (
+const AdjustmentsActionBar = ({ page, total, onFilter }) => (
   <div className="AdjustmentsActionBar">
     <Row>
       <Col span={1} xl={1} className="checkbox">
@@ -67,6 +67,7 @@ const AdjustmentsActionBar = ({ page, total }) => (
           title="Filter adjustments"
           className="actionButton"
           size="large"
+          onClick={onFilter}
         />
       </Col>
 
@@ -87,6 +88,7 @@ const AdjustmentsActionBar = ({ page, total }) => (
 AdjustmentsActionBar.propTypes = {
   page: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
+  onFilter: PropTypes.func.isRequired,
 };
 
 export default AdjustmentsActionBar;
