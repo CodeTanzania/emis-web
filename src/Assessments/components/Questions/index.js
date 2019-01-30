@@ -138,6 +138,10 @@ class Questions extends Component {
     openQuestionForm();
   };
 
+  handleAfterCloseForm = () => {
+    this.setState({ isEditForm: false });
+  };
+
   render() {
     const {
       questions,
@@ -213,6 +217,7 @@ class Questions extends Component {
           onCancel={this.closeForm}
           destroyOnClose
           maskClosable={false}
+          afterClose={this.handleAfterCloseForm}
         >
           <QuestionForm
             posting={posting}
