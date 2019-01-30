@@ -1,4 +1,4 @@
-import { getItems } from '@codetanzania/emis-api-states';
+import { paginateItems, refreshItems } from '@codetanzania/emis-api-states';
 import { Button, Col, Pagination, Row, Checkbox } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -29,7 +29,7 @@ const ItemsActionBar = ({ page, total, onFilter }) => (
           shape="circle"
           icon="reload"
           title="Refresh items"
-          onClick={() => getItems()}
+          onClick={() => refreshItems()}
           className="actionButton"
           size="large"
         />
@@ -66,7 +66,7 @@ const ItemsActionBar = ({ page, total, onFilter }) => (
           simple
           defaultCurrent={page}
           total={total}
-          onChange={nextPage => getItems({ page: nextPage })}
+          onChange={nextPage => paginateItems({ page: nextPage })}
           className="pagination"
         />
       </Col>
