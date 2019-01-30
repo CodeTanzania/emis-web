@@ -1,27 +1,27 @@
-.SourcesActionBar {
+.AlertSourcesActionBar {
   /* border-bottom: 1px solid #e8e8e8; */
   height: 50px;
   margin-top: 40px;
 }
 
-.SourcesActionBar .actionButton {
+.AlertSourcesActionBar .actionButton {
   border: none;
   box-shadow: none;
   background-color: #f5f5f5;
   color: rgba(0, 0, 0, 0.25)
 }
 
-.SourcesActionBar .actionButton:hover {
+.AlertSourcesActionBar .actionButton:hover {
   background-color: #e8e8e8;
   border-radius: 50%;
   cursor: pointer;
 }
 
-.SourcesActionBar .checkbox {
+.AlertSourcesActionBar .checkbox {
   padding-top: 8px;
   padding-left: 8px;
 }
 
-.SourcesActionBar .pagination {
+.AlertSourcesActionBar .pagination {
   padding-top: 8px;
 }

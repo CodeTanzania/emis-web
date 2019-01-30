@@ -1,24 +1,24 @@
-.SourcesListItem {
+.AlertSourcesListItem {
   width: 100%;
   border-bottom: 1px solid #e8e8e8;
   padding: 15px 0;
   height: 60px;
 }
 
-.SourcesListItem .Checkbox {
+.AlertSourcesListItem .Checkbox {
   padding: 0 8px;
 }
 
-.SourcesListItem:hover {
+.AlertSourcesListItem:hover {
   background-color: #f5f5f5;
 }
 
-.SourcesListItem .actionIcon:hover {
+.AlertSourcesListItem .actionIcon:hover {
   color: #008EFA;
   background-color: #e8e8e8;
 }
 
-.SourcesListItem .actionIcon {
+.AlertSourcesListItem .actionIcon {
   padding-top: 8px;
   margin-bottom: 5px;
   width: 32px;
@@ -30,14 +30,14 @@
   cursor: pointer;
 }
 
-.SourcesListItem .actionIcon {
+.AlertSourcesListItem .actionIcon {
   display: inline-block;
   margin: 0 10px;
   font-size: 16px;
 
 }
 
-.SourcesListItem .actionIcon:hover {
+.AlertSourcesListItem .actionIcon:hover {
   color: #008EFA;
   background-color: #e8e8e8;
 }
