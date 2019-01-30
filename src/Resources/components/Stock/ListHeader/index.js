@@ -3,14 +3,14 @@ import React from 'react';
 import './styles.css';
 
 const headerLayout = [
-  { span: 5, header: 'Name', offset: 1 },
-  { span: 6, header: 'Website' },
-  { span: 4, header: 'Email Address' },
-  { span: 4, header: 'Mobile Number' },
+  { span: 5, header: 'Stakeholder', offset: 1 },
+  { span: 5, header: 'Item' },
+  { span: 5, header: 'Quantity (Unit)' },
+  { span: 5, header: 'Warehouse' },
 ];
 
-const SourcesListHeader = () => (
-  <Row className="SourceListHeader">
+const StockListHeader = () => (
+  <Row className="StockListHeader">
     {headerLayout.map(item => (
       <Col key={item.header} {...item}>
         <h4 className="title">{item.header}</h4>
@@ -19,4 +19,4 @@ const SourcesListHeader = () => (
   </Row>
 );
 
-export default SourcesListHeader;
+export default StockListHeader;

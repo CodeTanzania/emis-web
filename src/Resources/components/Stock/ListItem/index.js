@@ -4,30 +4,35 @@ import React, { Component, Fragment } from 'react';
 import './styles.css';
 
 /**
- * Single source list item component. Render single source details
+ * Single stock list item component. Render single stock details
  *
  * @class
- * @name SourcesListItem
+ * @name StockListItem
  *
  * @param {Object} props
- * @param {string} props.name
- * @param {string} props.url
- * @param {string} props.email
- * @param {string} props.mobile
+ * @param {string} props.itemName
+ * @param {string} props.owner
+ * @param {string} props.warehouseName
+ * @param {string} props.color
+ * @param {string} props.uom
+ * @param {string} props.quantity
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class SourcesListItem extends Component {
+class StockListItem extends Component {
   state = {
     isHovered: false,
   };
 
   static propTypes = {
-    name: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    mobile: PropTypes.string.isRequired,
+    itemName: PropTypes.string.isRequired,
+    onEdit: PropTypes.func.isRequired,
+    warehouseName: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired,
+    quantity: PropTypes.number.isRequired,
+    uom: PropTypes.string.isRequired,
+    owner: PropTypes.shape({ name: PropTypes.string }).isRequired,
   };
 
   handleMouseEnter = () => {
@@ -39,11 +44,19 @@ class SourcesListItem extends Component {
   };
 
   render() {
-    const { name, url, email, mobile } = this.props;
+    const {
+      itemName,
+      warehouseName,
+      color,
+      quantity,
+      owner,
+      onEdit,
+      uom,
+    } = this.props;
     const { isHovered } = this.state;
     return (
       <div
-        className="SourcesListItem"
+        className="StockListItem"
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
@@ -52,29 +65,32 @@ class SourcesListItem extends Component {
             {isHovered ? (
               <Checkbox className="Checkbox" />
             ) : (
-              <Avatar>{name.toUpperCase().charAt(0)}</Avatar>
+              <Avatar style={{ backgroundColor: color }}>
+                {itemName.toUpperCase().charAt(0)}
+              </Avatar>
             )}
           </Col>
-          <Col span={5}>{name}</Col>
-          <Col span={6}>{url}</Col>
-          <Col span={4}>{email}</Col>
-          <Col span={4}>{mobile}</Col>
+          <Col span={5}>{owner}</Col>
+          <Col span={5}>{itemName}</Col>
+          <Col span={5}>{`${quantity} ${uom}`}</Col>
+          <Col span={5}>{warehouseName}</Col>
           <Col span={3}>
             {isHovered && (
               <Fragment>
                 <Icon
                   type="edit"
-                  title="Update Source"
+                  title="Update Stock"
                   className="actionIcon"
+                  onClick={onEdit}
                 />
                 <Icon
                   type="share-alt"
-                  title="Share Source"
+                  title="Share Stock"
                   className="actionIcon"
                 />
                 <Icon
                   type="database"
-                  title="Archive Source"
+                  title="Archive Stock"
                   className="actionIcon"
                 />
               </Fragment>
@@ -86,4 +102,4 @@ class SourcesListItem extends Component {
   }
 }
 
-export default SourcesListItem;
+export default StockListItem;
