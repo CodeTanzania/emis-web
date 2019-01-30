@@ -4,7 +4,7 @@ import React, { Fragment } from 'react';
 import StocksListHeader from '../ListHeader';
 import StockListItem from '../ListItem';
 
-const StockList = ({ stocks, loading }) => (
+const StockList = ({ stocks, loading, onEdit }) => (
   <Fragment>
     <StocksListHeader />
     <List
@@ -20,7 +20,7 @@ const StockList = ({ stocks, loading }) => (
             owner={owner.name}
             color={item.color}
             quantity={stock.quantity}
-            onEdit={() => () => {}}
+            onEdit={() => onEdit(stock)}
           />
         );
       }}
@@ -30,6 +30,7 @@ const StockList = ({ stocks, loading }) => (
 
 StockList.propTypes = {
   loading: PropTypes.bool.isRequired,
+  onEdit: PropTypes.func.isRequired,
   stocks: PropTypes.arrayOf(
     PropTypes.shape({
       stock: PropTypes.object,

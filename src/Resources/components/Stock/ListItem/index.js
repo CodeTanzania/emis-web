@@ -26,6 +26,7 @@ class StockListItem extends Component {
 
   static propTypes = {
     itemName: PropTypes.string.isRequired,
+    onEdit: PropTypes.func.isRequired,
     warehouseName: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
     quantity: PropTypes.number.isRequired,
@@ -41,7 +42,14 @@ class StockListItem extends Component {
   };
 
   render() {
-    const { itemName, warehouseName, color, quantity, owner } = this.props;
+    const {
+      itemName,
+      warehouseName,
+      color,
+      quantity,
+      owner,
+      onEdit,
+    } = this.props;
     const { isHovered } = this.state;
     return (
       <div
@@ -70,7 +78,7 @@ class StockListItem extends Component {
                   type="edit"
                   title="Update Stock"
                   className="actionIcon"
-                  onClick={() => {}}
+                  onClick={onEdit}
                 />
                 <Icon
                   type="share-alt"

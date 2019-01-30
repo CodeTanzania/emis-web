@@ -180,7 +180,7 @@ class Stocks extends Component {
           <StockForm
             posting={posting}
             isEditForm={isEditForm}
-            Stock={stock}
+            stock={stock}
             onCancel={this.closeStockForm}
           />
         </Modal>
@@ -192,7 +192,7 @@ class Stocks extends Component {
 
 export default Connect(Stocks, {
   stocks: 'stocks.list',
-  Stock: 'stocks.selected',
+  stock: 'stocks.selected',
   loading: 'stocks.loading',
   posting: 'stocks.posting',
   page: 'stocks.page',

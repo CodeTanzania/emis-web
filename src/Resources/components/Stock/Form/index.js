@@ -36,6 +36,7 @@ class StockForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
+          console.log(values);
           const updatedStock = Object.assign({}, stock, values);
           putStock(
             updatedStock,
@@ -98,7 +99,7 @@ class StockForm extends Component {
         {/* stock stakeholder */}
         <Form.Item {...formItemLayout} label="Stakeholder">
           {getFieldDecorator('owner', {
-            initialValue: isEditForm ? stock.name : undefined,
+            initialValue: isEditForm ? stock.owner._id : undefined, // eslint-disable-line
             rules: [
               { required: true, message: 'Stock stakeholder is required' },
             ],
@@ -108,6 +109,7 @@ class StockForm extends Component {
               onSearch={getStakeholders}
               optionLabel="name"
               optionValue="_id"
+              initialValue={isEditForm ? stock.owner : undefined}
             />
           )}
         </Form.Item>
@@ -116,7 +118,7 @@ class StockForm extends Component {
         {/* stock Item */}
         <Form.Item {...formItemLayout} label="Item">
           {getFieldDecorator('item', {
-            initialValue: isEditForm ? stock.title : undefined,
+            initialValue: isEditForm ? stock.item._id : undefined, // eslint-disable-line
             rules: [{ required: true, message: 'Stock item is required' }],
           })(
             <SearchableSelectInput
@@ -124,6 +126,7 @@ class StockForm extends Component {
               onSearch={getItems}
               optionLabel="name"
               optionValue="_id"
+              initialValue={isEditForm ? stock.item : undefined}
             />
           )}
         </Form.Item>
@@ -132,7 +135,7 @@ class StockForm extends Component {
         {/* stock Warehouse */}
         <Form.Item {...formItemLayout} label="Warehouse">
           {getFieldDecorator('store', {
-            initialValue: isEditForm ? stock.mobile : undefined,
+            initialValue: isEditForm ? stock.store._id : undefined, // eslint-disable-line
             rules: [{ required: true, message: 'warehouse is required' }],
           })(
             <SearchableSelectInput
@@ -140,6 +143,7 @@ class StockForm extends Component {
               onSearch={getWarehouses}
               optionLabel="name"
               optionValue="_id"
+              initialValue={isEditForm ? stock.store : undefined}
             />
           )}
         </Form.Item>
@@ -148,7 +152,7 @@ class StockForm extends Component {
         {/* stock quantity */}
         <Form.Item {...formItemLayout} label="Quantity">
           {getFieldDecorator('quantity', {
-            initialValue: isEditForm ? stock.abbreviation : undefined,
+            initialValue: isEditForm ? stock.quantity : undefined,
           })(<Input />)}
         </Form.Item>
         {/* end stock quantity */}
