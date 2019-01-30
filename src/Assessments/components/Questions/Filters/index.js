@@ -1,10 +1,7 @@
 import { Button, Checkbox, Col, Form, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-
-const phases = ['Mitigation', 'Preparedness', 'Response', 'Recovery'];
-const stages = ['Before', 'During', 'After', 'Other'];
-const assess = ['Need', 'Situation', 'Others'];
+import { Connect } from '@codetanzania/emis-api-states';
 
 /**
  * Filter modal component for filtering questions
@@ -17,8 +14,21 @@ const assess = ['Need', 'Situation', 'Others'];
  */
 class QuestionsFilters extends Component {
   static propTypes = {
+    filter: PropTypes.objectOf(
+      PropTypes.shape({
+        types: PropTypes.arrayOf(PropTypes.string),
+        phases: PropTypes.arrayOf(PropTypes.string),
+      })
+    ),
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
     onCancel: PropTypes.func.isRequired,
+    assess: PropTypes.arrayOf(PropTypes.string).isRequired,
+    phases: PropTypes.arrayOf(PropTypes.string).isRequired,
+    stages: PropTypes.arrayOf(PropTypes.string).isRequired,
+  };
+
+  static defaultProps = {
+    filter: null,
   };
 
   handleSubmit = e => {
@@ -39,6 +49,9 @@ class QuestionsFilters extends Component {
     const {
       form: { getFieldDecorator },
       onCancel,
+      assess,
+      phases,
+      stages,
     } = this.props;
 
     const formItemLayout = {
@@ -123,4 +136,9 @@ class QuestionsFilters extends Component {
     );
   }
 }
-export default Form.create()(QuestionsFilters);
+export default Connect(Form.create()(QuestionsFilters), {
+  assess: 'questions.schema.properties.assess.enum',
+  phases: 'questions.schema.properties.phase.enum',
+  stages: 'questions.schema.properties.stage.enum',
+  filter: 'questions.filter',
+});
