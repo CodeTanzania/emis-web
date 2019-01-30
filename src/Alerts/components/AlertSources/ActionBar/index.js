@@ -1,3 +1,7 @@
+import {
+  refreshAlertSources,
+  paginateAlertSources,
+} from '@codetanzania/emis-api-states';
 import { Button, Checkbox, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -28,9 +32,9 @@ const AlertSourcesActionBar = ({ page, total }) => (
           shape="circle"
           icon="reload"
           title="Refresh Alert Sources"
-          onClick={() => {}}
           className="actionButton"
           size="large"
+          onClick={() => refreshAlertSources()}
         />
       </Col>
 
@@ -76,7 +80,7 @@ const AlertSourcesActionBar = ({ page, total }) => (
           simple
           defaultCurrent={page}
           total={total}
-          onChange={() => {}}
+          onChange={nextPage => paginateAlertSources(nextPage)}
           className="pagination"
         />
       </Col>
