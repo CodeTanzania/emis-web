@@ -1,10 +1,17 @@
-import { Connect, getRoles } from '@codetanzania/emis-api-states';
+import {
+  Connect,
+  getRoles,
+  openRoleForm,
+  selectRole,
+  closeRoleForm,
+} from '@codetanzania/emis-api-states';
 import { Input, Col, Row, Button, Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import RoleFilters from './Filters';
 import RolesActionBar from './ActionBar';
 import RoleList from './List';
+import RoleForm from './Form';
 import './styles.css';
 
 const { Search } = Input;
@@ -22,10 +29,18 @@ const { Search } = Input;
 class Roles extends Component {
   state = {
     showFilters: false,
+    isEditForm: false,
   };
 
-  propTypes = {
+  static propTypes = {
+    showForm: PropTypes.bool.isRequired,
+    posting: PropTypes.bool.isRequired,
     loading: PropTypes.bool.isRequired,
+    role: PropTypes.shape({
+      name: PropTypes.string,
+      abbreviation: PropTypes.string,
+      description: PropTypes.string,
+    }),
     roles: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string,
@@ -35,6 +50,10 @@ class Roles extends Component {
     ).isRequired,
     total: PropTypes.number.isRequired,
     page: PropTypes.number.isRequired,
+  };
+
+  static defaultProps = {
+    role: null,
   };
 
   componentWillMount() {
@@ -72,6 +91,37 @@ class Roles extends Component {
   };
 
   /**
+   * Open role form
+   *
+   * @function
+   * @name openForm
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openForm = () => {
+    openRoleForm();
+  };
+
+  /**
+   * close role form
+   *
+   * @function
+   * @name openForm
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeForm = () => {
+    closeRoleForm();
+    this.setState({ isEditForm: false });
+  };
+
+  /**
    * Search Roles List based on supplied filter word
    *
    * @function
@@ -87,9 +137,28 @@ class Roles extends Component {
     getRoles({ q: event.target.value });
   };
 
+  /**
+   * Handle on Edit action for list item
+   *
+   * @function
+   * @name handleEdit
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleEdit = role => {
+    selectRole(role);
+    this.setState({ isEditForm: true });
+    openRoleForm();
+  };
+
+  handleAfterCloseForm = () => {
+    this.setState({ isEditForm: false });
+  };
+
   render() {
-    const { roles, loading, total, page } = this.props;
-    const { showFilters } = this.state;
+    const { roles, loading, total, page, showForm, posting, role } = this.props;
+    const { showFilters, isEditForm } = this.state;
     return (
       <div className="RoleList">
         <Row>
@@ -108,6 +177,7 @@ class Roles extends Component {
               icon="plus"
               size="large"
               title="Add New Role"
+              onClick={this.openForm}
             >
               New Role
             </Button>
@@ -124,6 +194,8 @@ class Roles extends Component {
         {/* list starts */}
         <RoleList roles={roles} loading={loading} />
         {/* end list */}
+
+        {/* filter modal */}
         <Modal
           title="Filter Roles"
           visible={showFilters}
@@ -132,6 +204,26 @@ class Roles extends Component {
         >
           <RoleFilters onCancel={this.closeFiltersModal} />
         </Modal>
+        {/* end filter modal */}
+
+        {/* create/edit form modal */}
+        <Modal
+          title={isEditForm ? 'Edit Role' : 'Add New Role'}
+          visible={showForm}
+          footer={null}
+          onCancel={this.closeForm}
+          destroyOnClose
+          maskClosable={false}
+          afterClose={this.handleAfterCloseForm}
+        >
+          <RoleForm
+            posting={posting}
+            isEditForm={isEditForm}
+            role={role}
+            onCancel={this.closeForm}
+          />
+        </Modal>
+        {/* end create/edit form modal */}
       </div>
     );
   }
@@ -139,6 +231,9 @@ class Roles extends Component {
 
 export default Connect(Roles, {
   roles: 'roles.list',
+  role: 'roles.selected',
+  showForm: 'roles.showForm',
+  posting: 'roles.posting',
   loading: 'roles.loading',
   page: 'roles.page',
   total: 'roles.total',
