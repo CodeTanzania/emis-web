@@ -180,7 +180,11 @@ class Questionnaires extends Component {
         />
         {/* end list header */}
         {/* list starts */}
-        <QuestionnairesList questionnaires={questionnaires} loading={loading} />
+        <QuestionnairesList
+          questionnaires={questionnaires}
+          loading={loading}
+          onEdit={this.handleEdit}
+        />
         {/* end list */}
         <Modal
           title="Filter Questionnaires"

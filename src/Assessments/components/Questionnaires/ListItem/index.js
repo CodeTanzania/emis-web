@@ -28,6 +28,7 @@ class QuestionnairesListItem extends Component {
     phase: PropTypes.string.isRequired,
     assess: PropTypes.string.isRequired,
     stage: PropTypes.string.isRequired,
+    onEdit: PropTypes.func.isRequired,
   };
 
   handleMouseEnter = () => {
@@ -39,7 +40,7 @@ class QuestionnairesListItem extends Component {
   };
 
   render() {
-    const { title, phase, assess, stage } = this.props;
+    const { title, phase, assess, stage, onEdit } = this.props;
     const { isHovered } = this.state;
     return (
       <div
@@ -66,6 +67,7 @@ class QuestionnairesListItem extends Component {
                   type="edit"
                   title="Update Questionnaire"
                   className="actionIcon"
+                  onClick={onEdit}
                 />
                 <Icon
                   type="share-alt"
