@@ -1,10 +1,16 @@
-import { Connect, getIndicators } from '@codetanzania/emis-api-states';
+import {
+  Connect,
+  getIndicators,
+  openIndicatorForm,
+  closeIndicatorForm,
+} from '@codetanzania/emis-api-states';
 import { Input, Col, Row, Button, Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import IndicatorsActionBar from './ActionBar';
 import IndicatorsList from './List';
 import IndicatorsFilters from './Filters';
+import IndicatorForm from './Form';
 import './styles.css';
 
 const { Search } = Input;
@@ -22,6 +28,7 @@ const { Search } = Input;
 class Indicators extends Component {
   state = {
     showFilters: false,
+    isEditForm: false,
   };
 
   static propTypes = {
@@ -35,8 +42,15 @@ class Indicators extends Component {
         _id: PropTypes.string,
       })
     ).isRequired,
+    indicator: PropTypes.shape({ subject: PropTypes.string }),
     total: PropTypes.number.isRequired,
     page: PropTypes.number.isRequired,
+    posting: PropTypes.bool.isRequired,
+    showForm: PropTypes.bool.isRequired,
+  };
+
+  static defaultProps = {
+    indicator: null,
   };
 
   componentWillMount() {
@@ -73,9 +87,52 @@ class Indicators extends Component {
     this.setState({ showFilters: false });
   };
 
+  /**
+   * Open indicator form
+   *
+   * @function
+   * @name openForm
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openForm = () => {
+    openIndicatorForm();
+  };
+
+  /**
+   * close indicator form
+   *
+   * @function closeForm
+   * @name
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeForm = () => {
+    closeIndicatorForm();
+    this.setState({ isEditForm: false });
+  };
+
+  handleAfterCloseForm = () => {
+    this.setState({ isEditForm: false });
+  };
+
   render() {
-    const { indicators, loading, total, page } = this.props;
-    const { showFilters } = this.state;
+    const {
+      indicators,
+      loading,
+      total,
+      page,
+      indicator,
+      showForm,
+      posting,
+    } = this.props;
+    const { showFilters, isEditForm } = this.state;
 
     return (
       <div className="IndicatorList">
@@ -96,6 +153,7 @@ class Indicators extends Component {
               icon="plus"
               size="large"
               title="Add New Indicator"
+              onClick={this.openForm}
             >
               New Indicator
             </Button>
@@ -120,6 +178,24 @@ class Indicators extends Component {
         >
           <IndicatorsFilters onCancel={this.closeFiltersModal} />
         </Modal>
+        {/* create/edit form modal */}
+        <Modal
+          title={isEditForm ? 'Edit Indicator' : 'Add New Indicator'}
+          visible={showForm}
+          footer={null}
+          onCancel={this.closeForm}
+          destroyOnClose
+          maskClosable={false}
+          afterClose={this.handleAfterCloseForm}
+        >
+          <IndicatorForm
+            posting={posting}
+            isEditForm={isEditForm}
+            onCancel={this.closeForm}
+            indicator={indicator}
+          />
+        </Modal>
+        {/* end create/edit form modal */}
       </div>
     );
   }
@@ -127,7 +203,10 @@ class Indicators extends Component {
 
 export default Connect(Indicators, {
   indicators: 'indicators.list',
+  indicator: 'indicators.selected',
   loading: 'indicators.loading',
   page: 'indicators.page',
   total: 'indicators.total',
+  posting: 'indicators.posting',
+  showForm: 'indicators.showForm',
 });

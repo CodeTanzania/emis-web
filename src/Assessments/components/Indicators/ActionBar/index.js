@@ -17,7 +17,7 @@ import './styles.css';
  * @version 0.1.0
  * @since 0.1.0
  */
-const IndicatorsActionBar = ({ page, total, onFilter }) => (
+const IndicatorsActionBar = ({ page, total }) => (
   <div className="IndicatorsActionBar">
     <Row>
       <Col span={1} xl={1} className="checkbox">
@@ -51,14 +51,14 @@ const IndicatorsActionBar = ({ page, total, onFilter }) => (
         xl={{ span: 1, offset: 16 }}
         xxl={{ span: 1, offset: 17 }}
       >
-        <Button
+        {/* <Button
           type="circle"
           icon="filter"
           title="Filter Indicators"
           className="actionButton"
           size="large"
           onClick={onFilter}
-        />
+        /> */}
       </Col>
 
       <Col span={3} xl={4} xxl={3}>
@@ -78,7 +78,7 @@ const IndicatorsActionBar = ({ page, total, onFilter }) => (
 IndicatorsActionBar.propTypes = {
   page: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
-  onFilter: PropTypes.func.isRequired,
+  // onFilter: PropTypes.func.isRequired,
 };
 
 export default IndicatorsActionBar;
