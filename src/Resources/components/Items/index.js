@@ -180,11 +180,14 @@ class Items extends Component {
         {/* list starts */}
         <ItemsList items={items} loading={loading} />
         {/* end list */}
+
         <Modal
           title="Filter Items"
           visible={showFilters}
           onCancel={this.closeFiltersModal}
           footer={null}
+          destroyOnClose
+          maskClosable={false}
         >
           <ItemsFilters onCancel={this.closeFiltersModal} />
         </Modal>
