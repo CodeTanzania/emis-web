@@ -142,7 +142,7 @@ class QuestionnairesFilters extends Component {
         </Form.Item>
         {/* end emergency phase filters */}
         {/* start assess filters */}
-        <Form.Item {...formItemLayout} label="By Assessed">
+        <Form.Item {...formItemLayout} label="By Assessment">
           {getFieldDecorator('assess', {
             initialValue: filter ? filter.assess : [],
           })(
