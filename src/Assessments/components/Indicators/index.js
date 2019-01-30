@@ -3,6 +3,7 @@ import {
   getIndicators,
   openIndicatorForm,
   closeIndicatorForm,
+  selectIndicator,
 } from '@codetanzania/emis-api-states';
 import { Input, Col, Row, Button, Modal } from 'antd';
 import PropTypes from 'prop-types';
@@ -122,6 +123,21 @@ class Indicators extends Component {
     this.setState({ isEditForm: false });
   };
 
+  /**
+   * Handle on Edit action for list item
+   *
+   * @function
+   * @name handleEdit
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleEdit = indicator => {
+    selectIndicator(indicator);
+    this.setState({ isEditForm: true });
+    openIndicatorForm();
+  };
+
   render() {
     const {
       indicators,
@@ -168,7 +184,11 @@ class Indicators extends Component {
         />
         {/* end list action bar */}
         {/* list starts */}
-        <IndicatorsList indicators={indicators} loading={loading} />
+        <IndicatorsList
+          indicators={indicators}
+          loading={loading}
+          onEdit={this.handleEdit}
+        />
         {/* end list */}
         <Modal
           title="Filter Indicators"
