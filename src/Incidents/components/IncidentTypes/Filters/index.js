@@ -78,6 +78,7 @@ class IncidentTypesFilters extends Component {
       onCancel,
       families,
       natures,
+      filter,
     } = this.props;
 
     const formItemLayout = {
@@ -100,10 +101,12 @@ class IncidentTypesFilters extends Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit} layout={formItemLayout}>
-        {/* start incident type filters */}
-        <Form.Item {...formItemLayout} label="By Family">
-          {getFieldDecorator('family')(
+      <Form onSubmit={this.handleSubmit}>
+        {/* start families filters */}
+        <Form.Item {...formItemLayout} label="By Emergency Families">
+          {getFieldDecorator('family', {
+            initialValue: filter ? filter.families : [],
+          })(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {families.map(family => (
@@ -115,11 +118,12 @@ class IncidentTypesFilters extends Component {
             </Checkbox.Group>
           )}
         </Form.Item>
-        {/* end Incident type filters */}
-
-        {/* start emergency phase filters */}
-        <Form.Item {...formItemLayout} label="By Nature">
-          {getFieldDecorator('nature')(
+        {/* end families filters */}
+        {/* start natures filters */}
+        <Form.Item {...formItemLayout} label="By Nature ">
+          {getFieldDecorator('nature', {
+            initialValue: filter ? filter.natures : [],
+          })(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {natures.map(nature => (
@@ -131,12 +135,14 @@ class IncidentTypesFilters extends Component {
             </Checkbox.Group>
           )}
         </Form.Item>
-        {/* end emergency phase filters */}
-
+        {/* end nature filters */}
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
           <Button type="primary" htmlType="submit">
             Filter
+          </Button>
+          <Button style={{ marginLeft: 8 }} onClick={this.handleClearFilter}>
+            Clear
           </Button>
           <Button style={{ marginLeft: 8 }} onClick={onCancel}>
             Cancel

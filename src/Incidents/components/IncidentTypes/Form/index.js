@@ -1,6 +1,7 @@
 import {
   postIncidentType,
   putIncidentType,
+  Connect,
 } from '@codetanzania/emis-api-states';
 import { Button, Form, Input, Select } from 'antd';
 import PropTypes from 'prop-types';
@@ -20,9 +21,9 @@ class IncidentTypeForm extends Component {
       code: PropTypes.string,
     }).isRequired,
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
-    incidenttypeSchema: PropTypes.shape({
-      properties: PropTypes.string,
-    }).isRequired,
+    families: PropTypes.arrayOf(PropTypes.string).isRequired,
+    natures: PropTypes.arrayOf(PropTypes.string).isRequired,
+    caps: PropTypes.arrayOf(PropTypes.string).isRequired,
     onCancel: PropTypes.func.isRequired,
     posting: PropTypes.bool.isRequired,
   };
@@ -74,15 +75,11 @@ class IncidentTypeForm extends Component {
       incidenttype,
       posting,
       onCancel,
-      incidenttypeSchema,
+      families,
+      caps,
+      natures,
       form: { getFieldDecorator },
     } = this.props;
-
-    const { properties } = incidenttypeSchema;
-    const { nature, family, cap } = properties;
-    const { enum: natures } = nature;
-    const { enum: caps } = cap;
-    const { enum: families } = family;
 
     const formItemLayout = {
       labelCol: {
@@ -123,9 +120,9 @@ class IncidentTypeForm extends Component {
             ],
           })(
             <Select placeholder="e.g Natural">
-              {natures.map(data => (
-                <Option key={data} value={data}>
-                  {data}
+              {natures.map(nature => (
+                <Option key={nature} value={nature}>
+                  {nature}
                 </Option>
               ))}
             </Select>
@@ -140,9 +137,9 @@ class IncidentTypeForm extends Component {
             rules: [{ required: true, message: 'Cap is required' }],
           })(
             <Select placeholder="e.g Geo">
-              {caps.map(capData => (
-                <Option key={capData} value={capData}>
-                  {capData}
+              {caps.map(cap => (
+                <Option key={cap} value={cap}>
+                  {cap}
                 </Option>
               ))}
             </Select>
@@ -157,9 +154,9 @@ class IncidentTypeForm extends Component {
             rules: [{ required: true, message: 'Family is required' }],
           })(
             <Select placeholder="e.g Geographical">
-              {families.map(familyData => (
-                <Option key={familyData} value={familyData}>
-                  {familyData}
+              {families.map(family => (
+                <Option key={family} value={family}>
+                  {family}
                 </Option>
               ))}
             </Select>
@@ -193,4 +190,8 @@ class IncidentTypeForm extends Component {
   }
 }
 
-export default Form.create()(IncidentTypeForm);
+export default Connect(Form.create()(IncidentTypeForm), {
+  natures: 'incidentTypes.schema.properties.nature.enum',
+  families: 'incidentTypes.schema.properties.family.enum',
+  caps: 'incidentTypes.schema.properties.family.enum',
+});

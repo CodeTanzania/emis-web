@@ -39,10 +39,6 @@ class IncidentTypes extends Component {
       PropTypes.shape({ name: PropTypes.string })
     ).isRequired,
     incidenttype: PropTypes.shape({ name: PropTypes.string }),
-    incidenttypeSchema: PropTypes.shape({
-      properties: PropTypes.string,
-    }).isRequired,
-
     page: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
     posting: PropTypes.bool.isRequired,
@@ -145,7 +141,6 @@ class IncidentTypes extends Component {
       page,
       showForm,
       total,
-      incidenttypeSchema,
     } = this.props;
     const { showFilters, isEditForm } = this.state;
     return (
@@ -196,6 +191,8 @@ class IncidentTypes extends Component {
           visible={showFilters}
           onCancel={this.closeFiltersModal}
           footer={null}
+          destroyOnClose
+          maskClosable={false}
         >
           <IncidentTypesFilters onCancel={this.closeFiltersModal} />
         </Modal>
@@ -214,7 +211,6 @@ class IncidentTypes extends Component {
             isEditForm={isEditForm}
             incidenttype={incidenttype}
             onCancel={this.closeIncidentTypeForm}
-            incidenttypeSchema={incidenttypeSchema}
           />
         </Modal>
         {/* end create/edit form modal */}
@@ -229,7 +225,6 @@ export default Connect(IncidentTypes, {
   page: 'incidentTypes.page',
   total: 'incidentTypes.total',
   incidenttype: 'incidentTypes.selected',
-  incidenttypeSchema: 'incidentTypes.schema',
   posting: 'incidentTypes.posting',
   showForm: 'incidentTypes.showForm',
 });
