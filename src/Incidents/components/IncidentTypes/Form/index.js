@@ -5,6 +5,7 @@ import {
 import { Button, Form, Input, Select } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { notifyError, notifySuccess } from '../../../../util';
 
 const { Option } = Select;
 
@@ -39,9 +40,29 @@ class IncidentTypeForm extends Component {
       if (!error) {
         if (isEditForm) {
           const updatedContact = Object.assign({}, incidenttype, values);
-          putIncidentType(updatedContact);
+          putIncidentType(
+            updatedContact,
+            () => {
+              notifySuccess('Incident Type was updated successfully');
+            },
+            () => {
+              notifyError(
+                'Something occurred while updating Incident Type, please try again!'
+              );
+            }
+          );
         } else {
-          postIncidentType(values);
+          postIncidentType(
+            values,
+            () => {
+              notifySuccess('Incident Type was created successfully');
+            },
+            () => {
+              notifyError(
+                'Something occurred while saving Incident Type, please try again!'
+              );
+            }
+          );
         }
       }
     });
