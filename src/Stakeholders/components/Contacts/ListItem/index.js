@@ -31,6 +31,7 @@ class ContactsListItem extends Component {
     email: PropTypes.string.isRequired,
     mobile: PropTypes.string.isRequired,
     onEdit: PropTypes.func.isRequired,
+    onArchive: PropTypes.func.isRequired,
   };
 
   handleMouseEnter = () => {
@@ -42,7 +43,15 @@ class ContactsListItem extends Component {
   };
 
   render() {
-    const { abbreviation, name, title, email, mobile, onEdit } = this.props;
+    const {
+      abbreviation,
+      name,
+      title,
+      email,
+      mobile,
+      onEdit,
+      onArchive,
+    } = this.props;
     const { isHovered } = this.state;
     return (
       <div
@@ -80,6 +89,7 @@ class ContactsListItem extends Component {
                   type="database"
                   title="Archive Contact"
                   className="actionIcon"
+                  onClick={onArchive}
                 />
               </Fragment>
             )}
