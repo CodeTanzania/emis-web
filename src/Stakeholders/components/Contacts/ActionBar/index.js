@@ -5,6 +5,7 @@ import {
 import { Button, Checkbox, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { notifyError, notifySuccess } from '../../../../util';
 import './styles.css';
 
 /**
@@ -32,7 +33,18 @@ const ContactsActionBar = ({ page, total, onFilter }) => (
           shape="circle"
           icon="reload"
           title="Refresh contacts"
-          onClick={() => refreshStakeholders()}
+          onClick={() =>
+            refreshStakeholders(
+              () => {
+                notifySuccess('Contacts refreshed successfully');
+              },
+              () => {
+                notifyError(
+                  'An Error occurred while refreshing contacts, please contact system administrator!'
+                );
+              }
+            )
+          }
           className="actionButton"
           size="large"
         />
