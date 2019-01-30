@@ -15,6 +15,7 @@ const AlertList = ({ alerts, loading, onEdit }) => (
           _id: id,
           headline,
           source,
+          color,
           reportedAt,
           expiredAt,
           expectedAt,
@@ -25,6 +26,7 @@ const AlertList = ({ alerts, loading, onEdit }) => (
             abbreviation={source.toUpperCase().charAt(0)}
             headline={headline}
             source={source}
+            color={color}
             reportedAt={reportedAt}
             expiredAt={expiredAt}
             expectedAt={expectedAt}
@@ -43,6 +45,7 @@ AlertList.propTypes = {
     PropTypes.shape({
       headline: PropTypes.string,
       source: PropTypes.string,
+      color: PropTypes.string.isRequired,
       reportedAt: PropTypes.string,
       expiredAt: PropTypes.string,
       expectedAt: PropTypes.string,

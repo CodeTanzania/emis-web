@@ -14,6 +14,7 @@ import './styles.css';
  * @param {string} props.abbreviation
  * @param {string} props.source
  * @param {string} props.headline
+ * @param {string} props.color
  * @param {string} props.expectedAt
  * @param {string} props.expiredAt
  *
@@ -29,6 +30,7 @@ class AlertsListItem extends Component {
     abbreviation: PropTypes.string.isRequired,
     source: PropTypes.string.isRequired,
     headline: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired,
     expiredAt: PropTypes.string.isRequired,
     expectedAt: PropTypes.string.isRequired,
     onEdit: PropTypes.func.isRequired,
@@ -64,6 +66,7 @@ class AlertsListItem extends Component {
     const {
       abbreviation,
       source,
+      color,
       onEdit,
       onArchive,
       headline,
@@ -82,7 +85,7 @@ class AlertsListItem extends Component {
             {isHovered ? (
               <Checkbox className="Checkbox" />
             ) : (
-              <Avatar>{abbreviation}</Avatar>
+              <Avatar style={{ backgroundColor: color }}>{abbreviation}</Avatar>
             )}
           </Col>
           <Col span={9}>{headline}</Col>
