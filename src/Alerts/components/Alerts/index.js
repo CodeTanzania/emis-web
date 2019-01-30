@@ -1,5 +1,6 @@
 import {
   closeAlertForm,
+  selectAlert,
   Connect,
   getAlerts,
   openAlertForm,
@@ -28,11 +29,25 @@ const { Search } = Input;
 class Alerts extends Component {
   state = {
     showFilters: false,
+    isEditForm: false,
   };
 
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     posting: PropTypes.bool.isRequired,
+    alert: PropTypes.shape({
+      event: PropTypes.string,
+      category: PropTypes.string,
+      urgency: PropTypes.string,
+      area: PropTypes.string,
+      severity: PropTypes.string,
+      certainty: PropTypes.string,
+      instruction: PropTypes.string,
+      headline: PropTypes.string,
+      expiredAt: PropTypes.string,
+      expectedAt: PropTypes.string,
+      _id: PropTypes.string,
+    }),
     alerts: PropTypes.arrayOf(
       PropTypes.shape({
         headline: PropTypes.string,
@@ -46,6 +61,10 @@ class Alerts extends Component {
     page: PropTypes.number.isRequired,
     showForm: PropTypes.bool.isRequired,
     total: PropTypes.number.isRequired,
+  };
+
+  static defaultProps = {
+    alert: null,
   };
 
   componentWillMount() {
@@ -110,6 +129,7 @@ class Alerts extends Component {
    */
   closeForm = () => {
     closeAlertForm();
+    this.setState({ isEditForm: false });
   };
 
   /**
@@ -128,9 +148,36 @@ class Alerts extends Component {
     searchAlerts(event.target.value);
   };
 
+  /**
+   * Handle on Edit action for list item
+   *
+   * @function
+   * @name handleEdit
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleEdit = alert => {
+    selectAlert(alert);
+    this.setState({ isEditForm: true });
+    openAlertForm();
+  };
+
+  handleAfterCloseForm = () => {
+    this.setState({ isEditForm: false });
+  };
+
   render() {
-    const { alerts, loading, posting, page, showForm, total } = this.props;
-    const { showFilters } = this.state;
+    const {
+      alerts,
+      alert,
+      loading,
+      posting,
+      page,
+      showForm,
+      total,
+    } = this.props;
+    const { showFilters, isEditForm } = this.state;
     return (
       <div className="Alerts">
         <Row>
@@ -166,7 +213,7 @@ class Alerts extends Component {
         />
         {/* end list header */}
         {/* list starts */}
-        <AlertList alerts={alerts} loading={loading} />
+        <AlertList alerts={alerts} loading={loading} onEdit={this.handleEdit} />
         {/* end list */}
 
         {/* filter modal */}
@@ -184,14 +231,19 @@ class Alerts extends Component {
 
         {/* create/edit form modal */}
         <Modal
-          title="Add New Alert"
+          title={isEditForm ? 'Edit Alert' : 'Add New Alert'}
           visible={showForm}
           footer={null}
           maskClosable={false}
           onCancel={this.closeForm}
           destroyOnClose
         >
-          <AlertForm posting={posting} onCancel={this.closeForm} />
+          <AlertForm
+            posting={posting}
+            onCancel={this.closeForm}
+            isEditForm={isEditForm}
+            alert={alert}
+          />
         </Modal>
         {/* end create/edit form modal */}
       </div>
@@ -201,6 +253,7 @@ class Alerts extends Component {
 
 export default Connect(Alerts, {
   alerts: 'alerts.list',
+  alert: 'alerts.selected',
   loading: 'alerts.loading',
   posting: 'alerts.posting',
   page: 'alerts.page',
