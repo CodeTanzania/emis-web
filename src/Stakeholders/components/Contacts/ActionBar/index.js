@@ -1,4 +1,7 @@
-import { getStakeholders } from '@codetanzania/emis-api-states';
+import {
+  paginateStakeholders,
+  refreshStakeholders,
+} from '@codetanzania/emis-api-states';
 import { Button, Checkbox, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -29,7 +32,7 @@ const ContactsActionBar = ({ page, total, onFilter }) => (
           shape="circle"
           icon="reload"
           title="Refresh contacts"
-          onClick={() => getStakeholders()}
+          onClick={() => refreshStakeholders()}
           className="actionButton"
           size="large"
         />
@@ -106,7 +109,7 @@ const ContactsActionBar = ({ page, total, onFilter }) => (
           simple
           defaultCurrent={page}
           total={total}
-          onChange={nextPage => getStakeholders({ page: nextPage })}
+          onChange={nextPage => paginateStakeholders(nextPage)}
           className="pagination"
         />
       </Col>

@@ -1,9 +1,10 @@
 import { Connect, getIncidentTypes } from '@codetanzania/emis-api-states';
-import { Button, Col, Input, List, Row } from 'antd';
+import { Button, Col, Input, Row, Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import IncidentTypesActionBar from './ActionBar';
-import IncidentTypesListItem from './ListItem';
+import IncidentTypesList from './List';
+import IncidentTypesFilters from './Filters';
 import './styles.css';
 
 const { Search } = Input;
@@ -12,13 +13,17 @@ const { Search } = Input;
  * Render IncidentTypes list which have search box, actions and IncidentTypes list
  *
  * @class
- * @name IncidentTypesList
+ * @name IncidentTypes
  *
  * @version 0.1.0
  * @since 0.1.0
  */
 
-class IncidentTypesList extends Component {
+class IncidentTypes extends Component {
+  state = {
+    showFilters: false,
+  };
+
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     incidenttypes: PropTypes.arrayOf(
@@ -32,10 +37,42 @@ class IncidentTypesList extends Component {
     getIncidentTypes();
   }
 
+  /**
+   * open filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name openFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openFiltersModal = () => {
+    this.setState({ showFilters: true });
+  };
+
+  /**
+   * Close filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name closeFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeFiltersModal = () => {
+    this.setState({ showFilters: false });
+  };
+
   render() {
-    const { incidenttypes, loading, page, total } = this.props;
+    const { incidenttypes, page, total, loading } = this.props;
+    const { showFilters } = this.state;
+
     return (
-      <div className="IncidentTypesList">
+      <div className="IncidentTypes">
         <Row>
           <Col span={12}>
             {/* search input component */}
@@ -63,31 +100,29 @@ class IncidentTypesList extends Component {
         </Row>
 
         {/* list header */}
-        <IncidentTypesActionBar total={total} page={page} />
+        <IncidentTypesActionBar
+          total={total}
+          page={page}
+          onFilter={this.openFiltersModal}
+        />
         {/* end list header */}
         {/* list starts */}
-        <List
-          loading={loading}
-          dataSource={incidenttypes}
-          renderItem={incidenttype => (
-            <IncidentTypesListItem
-              key={incidenttype.color}
-              color={incidenttype.color}
-              name={incidenttype.name}
-              nature={incidenttype.nature}
-              family={incidenttype.family}
-              cap={incidenttype.cap}
-              code={incidenttype.code}
-            />
-          )}
-        />
+        <IncidentTypesList incidenttypes={incidenttypes} loading={loading} />
         {/* end list */}
+        <Modal
+          title="Filter Incident Types"
+          visible={showFilters}
+          onCancel={this.closeFiltersModal}
+          footer={null}
+        >
+          <IncidentTypesFilters onCancel={this.closeFiltersModal} />
+        </Modal>
       </div>
     );
   }
 }
 
-export default Connect(IncidentTypesList, {
+export default Connect(IncidentTypes, {
   incidenttypes: 'incidentTypes.list',
   loading: 'incidentTypes.loading',
   page: 'incidentTypes.page',
