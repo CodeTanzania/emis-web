@@ -206,7 +206,7 @@ class WarehouseForm extends Component {
         {/* warehouse type */}
         <Form.Item {...formItemLayout} label="Type">
           {getFieldDecorator('type', {
-            initialValue: isEditForm ? warehouse.level : undefined,
+            initialValue: isEditForm ? warehouse.type : undefined,
             rules: [{ required: true, message: 'Warehouse Type is required' }],
           })(<Select showSearch>{this.renderSelectOptions(stypes)}</Select>)}
         </Form.Item>
@@ -215,7 +215,7 @@ class WarehouseForm extends Component {
         {/* warehouse category */}
         <Form.Item {...formItemLayout} label="Category">
           {getFieldDecorator('category', {
-            initialValue: isEditForm ? warehouse.level : undefined,
+            initialValue: isEditForm ? warehouse.category : undefined,
             rules: [
               { required: true, message: 'Warehouse Category is required' },
             ],
