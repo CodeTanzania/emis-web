@@ -1,6 +1,6 @@
 import { postAlert, putAlert, Connect } from '@codetanzania/emis-api-states';
 import { getFeatures } from '@codetanzania/emis-api-client';
-import { Button, Form, Input, Select, DatePicker } from 'antd';
+import { Button, Form, Input, Select, DatePicker, Row, Col } from 'antd';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import React, { Component } from 'react';
@@ -171,171 +171,191 @@ class AlertForm extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        {/* Alert event */}
-        <Form.Item {...formItemLayout} label="Event">
-          {getFieldDecorator('event', {
-            initialValue: isEditForm ? alert.event : undefined,
-            rules: [{ required: true, message: 'Alert event is required' }],
-          })(<Input placeholder="e.g Flood Tandale" />)}
-        </Form.Item>
-        {/* end Alert event */}
+        <Row justify="space-between" type="flex">
+          <Col span={11}>
+            {/* Alert event */}
+            <Form.Item {...formItemLayout} label="Event">
+              {getFieldDecorator('event', {
+                initialValue: isEditForm ? alert.event : undefined,
+                rules: [{ required: true, message: 'Alert event is required' }],
+              })(<Input placeholder="e.g Flood Tandale" />)}
+            </Form.Item>
+            {/* end Alert event */}
 
-        {/* Alert headline */}
-        <Form.Item {...formItemLayout} label="Headline">
-          {getFieldDecorator('headline', {
-            initialValue: isEditForm ? alert.headline : undefined,
-            rules: [{ required: true, message: 'Alert headline is required' }],
-          })(
-            <Input placeholder="e.g ORANGE WARNING. Strong winds and Large waves" />
-          )}
-        </Form.Item>
-        {/* end Alert headline */}
+            {/* Alert headline */}
+            <Form.Item {...formItemLayout} label="Headline">
+              {getFieldDecorator('headline', {
+                initialValue: isEditForm ? alert.headline : undefined,
+                rules: [
+                  { required: true, message: 'Alert headline is required' },
+                ],
+              })(
+                <Input placeholder="e.g ORANGE WARNING. Strong winds and Large waves" />
+              )}
+            </Form.Item>
+            {/* end Alert headline */}
 
-        {/* alert area */}
-        <Form.Item {...formItemLayout} label="Area(s)">
-          {getFieldDecorator('area', {
-            rules: [{ required: true, message: 'Affected area is required' }],
-          })(
-            <SearchableSelectInput
-              placeholder="Please select affected area"
-              onSearch={getFeatures}
-              optionLabel="name"
-              optionValue="name"
-            />
-          )}
-        </Form.Item>
-        {/* end alert category */}
+            {/* alert area */}
+            <Form.Item {...formItemLayout} label="Area(s)">
+              {getFieldDecorator('area', {
+                rules: [
+                  { required: true, message: 'Affected area is required' },
+                ],
+              })(
+                <SearchableSelectInput
+                  placeholder="Please select affected area"
+                  onSearch={getFeatures}
+                  optionLabel="name"
+                  optionValue="name"
+                />
+              )}
+            </Form.Item>
+            {/* end alert category */}
 
-        {/* alert category */}
-        <Form.Item {...formItemLayout} label="Category">
-          {getFieldDecorator('category', {
-            initialValue: isEditForm ? alert.category : undefined,
-            rules: [{ required: true, message: 'Alert category is required' }],
-          })(
-            <Select showSearch>
-              {this.renderSelectOptions(alertSchema.category.enum)}
-            </Select>
-          )}
-        </Form.Item>
-        {/* end alert category */}
+            {/* alert category */}
+            <Form.Item {...formItemLayout} label="Category">
+              {getFieldDecorator('category', {
+                initialValue: isEditForm ? alert.category : undefined,
+                rules: [
+                  { required: true, message: 'Alert category is required' },
+                ],
+              })(
+                <Select showSearch>
+                  {this.renderSelectOptions(alertSchema.category.enum)}
+                </Select>
+              )}
+            </Form.Item>
+            {/* end alert category */}
 
-        {/* alert urgency */}
-        <Form.Item {...formItemLayout} label="Urgency">
-          {getFieldDecorator('urgency', {
-            initialValue: isEditForm ? alert.urgency : undefined,
-            rules: [{ required: true, message: 'Alert urgency is required' }],
-          })(
-            <Select showSearch>
-              {this.renderSelectOptions(alertSchema.urgency.enum)}
-            </Select>
-          )}
-        </Form.Item>
-        {/* end alert urgency */}
+            {/* alert urgency */}
+            <Form.Item {...formItemLayout} label="Urgency">
+              {getFieldDecorator('urgency', {
+                initialValue: isEditForm ? alert.urgency : undefined,
+                rules: [
+                  { required: true, message: 'Alert urgency is required' },
+                ],
+              })(
+                <Select showSearch>
+                  {this.renderSelectOptions(alertSchema.urgency.enum)}
+                </Select>
+              )}
+            </Form.Item>
+            {/* end alert urgency */}
 
-        {/* alert severity */}
-        <Form.Item {...formItemLayout} label="Severity">
-          {getFieldDecorator('severity', {
-            initialValue: isEditForm ? alert.severity : undefined,
-            rules: [{ required: true, message: 'Alert severity is required' }],
-          })(
-            <Select showSearch>
-              {this.renderSelectOptions(alertSchema.severity.enum)}
-            </Select>
-          )}
-        </Form.Item>
-        {/* end alert severity */}
+            {/* alert severity */}
+            <Form.Item {...formItemLayout} label="Severity">
+              {getFieldDecorator('severity', {
+                initialValue: isEditForm ? alert.severity : undefined,
+                rules: [
+                  { required: true, message: 'Alert severity is required' },
+                ],
+              })(
+                <Select showSearch>
+                  {this.renderSelectOptions(alertSchema.severity.enum)}
+                </Select>
+              )}
+            </Form.Item>
+            {/* end alert severity */}
+          </Col>
+          <Col span={11}>
+            {/* alert certainty */}
+            <Form.Item {...formItemLayout} label="Certainty">
+              {getFieldDecorator('certainty', {
+                initialValue: isEditForm ? alert.certainty : undefined,
+                rules: [
+                  { required: true, message: 'Alert certainty is required' },
+                ],
+              })(
+                <Select showSearch>
+                  {this.renderSelectOptions(alertSchema.certainty.enum)}
+                </Select>
+              )}
+            </Form.Item>
+            {/* end alert certainty */}
 
-        {/* alert certainty */}
-        <Form.Item {...formItemLayout} label="Certainty">
-          {getFieldDecorator('certainty', {
-            initialValue: isEditForm ? alert.certainty : undefined,
-            rules: [{ required: true, message: 'Alert certainty is required' }],
-          })(
-            <Select showSearch>
-              {this.renderSelectOptions(alertSchema.certainty.enum)}
-            </Select>
-          )}
-        </Form.Item>
-        {/* end alert certainty */}
+            {/* alert type */}
+            <Form.Item {...formItemLayout} label="Type">
+              {getFieldDecorator('type', {
+                initialValue: isEditForm ? alert.type : undefined,
+                rules: [
+                  { required: true, message: 'Alert Message Type is required' },
+                ],
+              })(
+                <Select showSearch>
+                  {this.renderSelectOptions(alertSchema.type.enum)}
+                </Select>
+              )}
+            </Form.Item>
+            {/* end alert type */}
 
-        {/* alert type */}
-        <Form.Item {...formItemLayout} label="Type">
-          {getFieldDecorator('type', {
-            initialValue: isEditForm ? alert.type : undefined,
-            rules: [
-              { required: true, message: 'Alert Message Type is required' },
-            ],
-          })(
-            <Select showSearch>
-              {this.renderSelectOptions(alertSchema.type.enum)}
-            </Select>
-          )}
-        </Form.Item>
-        {/* end alert type */}
+            {/* alert response type */}
+            <Form.Item {...formItemLayout} label="Response Type">
+              {getFieldDecorator('response', {
+                initialValue: isEditForm ? alert.response : undefined,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Alert Response Type is required',
+                  },
+                ],
+              })(
+                <Select showSearch>
+                  {this.renderSelectOptions(alertSchema.response.enum)}
+                </Select>
+              )}
+            </Form.Item>
+            {/* end alert response type */}
 
-        {/* alert response type */}
-        <Form.Item {...formItemLayout} label="Response Type">
-          {getFieldDecorator('response', {
-            initialValue: isEditForm ? alert.response : undefined,
-            rules: [
-              { required: true, message: 'Alert Response Type is required' },
-            ],
-          })(
-            <Select showSearch>
-              {this.renderSelectOptions(alertSchema.response.enum)}
-            </Select>
-          )}
-        </Form.Item>
-        {/* end alert response type */}
+            {/* alert onset date  */}
+            <Form.Item {...formItemLayout} label="OnSet">
+              {getFieldDecorator('expectedAt', {
+                initialValue: isEditForm
+                  ? moment(alert.expectedAt).utc()
+                  : undefined,
+                rules: [
+                  { required: true, message: 'Alert  OnSet date is required' },
+                ],
+              })(
+                <DatePicker
+                  style={{ width: '100%' }}
+                  showTime
+                  format="YYYY-MM-DD HH:mm:ss"
+                />
+              )}
+            </Form.Item>
+            {/* end alert onset date */}
 
-        {/* alert onset date  */}
-        <Form.Item {...formItemLayout} label="OnSet">
-          {getFieldDecorator('expectedAt', {
-            initialValue: isEditForm
-              ? moment(alert.expectedAt).utc()
-              : undefined,
-            rules: [
-              { required: true, message: 'Alert  OnSet date is required' },
-            ],
-          })(
-            <DatePicker
-              style={{ width: '100%' }}
-              showTime
-              format="YYYY-MM-DD HH:mm:ss"
-            />
-          )}
-        </Form.Item>
-        {/* end alert onset date */}
+            {/* alert expires date  */}
+            <Form.Item {...formItemLayout} label="Expires At">
+              {getFieldDecorator('expiredAt', {
+                initialValue: isEditForm
+                  ? moment(alert.expiredAt).utc()
+                  : undefined,
+                rules: [
+                  { required: true, message: 'Alert Expire date is required' },
+                ],
+              })(
+                <DatePicker
+                  style={{ width: '100%' }}
+                  showTime
+                  format="YYYY-MM-DD HH:mm:ss"
+                />
+              )}
+            </Form.Item>
+            {/* end alert expire date */}
 
-        {/* alert expires date  */}
-        <Form.Item {...formItemLayout} label="Expires At">
-          {getFieldDecorator('expiredAt', {
-            initialValue: isEditForm
-              ? moment(alert.expiredAt).utc()
-              : undefined,
-            rules: [
-              { required: true, message: 'Alert Expire date is required' },
-            ],
-          })(
-            <DatePicker
-              style={{ width: '100%' }}
-              showTime
-              format="YYYY-MM-DD HH:mm:ss"
-            />
-          )}
-        </Form.Item>
-        {/* end alert expire date */}
-
-        {/* alert instructions  */}
-        <Form.Item {...formItemLayout} label="Instructions">
-          {getFieldDecorator('instruction', {
-            initialValue: isEditForm ? alert.instruction : undefined,
-            rules: [
-              { required: true, message: 'Alert  Instruction is required' },
-            ],
-          })(<TextArea autosize={{ minRows: 2, maxRows: 6 }} />)}
-        </Form.Item>
-        {/* end alert instructions */}
+            {/* alert instructions  */}
+            <Form.Item {...formItemLayout} label="Instructions">
+              {getFieldDecorator('instruction', {
+                initialValue: isEditForm ? alert.instruction : undefined,
+                rules: [
+                  { required: true, message: 'Alert  Instruction is required' },
+                ],
+              })(<TextArea autosize={{ minRows: 2, maxRows: 6 }} />)}
+            </Form.Item>
+            {/* end alert instructions */}
+          </Col>
+        </Row>
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>

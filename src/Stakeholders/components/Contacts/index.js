@@ -31,6 +31,7 @@ class Contacts extends Component {
     showFilters: false,
     isEditForm: false,
     showNotificationForm: false,
+    selectedContacts: [],
   };
 
   static propTypes = {
@@ -153,8 +154,12 @@ class Contacts extends Component {
    * @version 0.1.0
    * @since 0.1.0
    */
-  openNotificationForm = () => {
-    this.setState({ showNotificationForm: true });
+  openNotificationForm = contacts => {
+    console.log(contacts);
+    this.setState({
+      selectedContacts: contacts,
+      showNotificationForm: true,
+    });
   };
 
   /**
@@ -184,7 +189,12 @@ class Contacts extends Component {
       showForm,
       total,
     } = this.props;
-    const { showFilters, isEditForm, showNotificationForm } = this.state;
+    const {
+      showFilters,
+      isEditForm,
+      showNotificationForm,
+      selectedContacts,
+    } = this.state;
     return (
       <div className="ContactsList">
         <Row>
@@ -247,7 +257,10 @@ class Contacts extends Component {
           maskClosable={false}
           width="40%"
         >
-          <NotificationForm onCancel={this.closeNotificationForm} />
+          <NotificationForm
+            onCancel={this.closeNotificationForm}
+            selectedContacts={selectedContacts}
+          />
         </Modal>
         {/* end Notification modal */}
 

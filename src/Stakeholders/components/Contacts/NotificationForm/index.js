@@ -1,5 +1,6 @@
 import { getStakeholders } from '@codetanzania/emis-api-client';
 import { Button, Form, Input } from 'antd';
+import map from 'lodash/map';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import SearchableSelectInput from '../../../../components/SearchableSelectInput';
@@ -8,13 +9,15 @@ const { TextArea } = Input;
 
 class NotificationForm extends Component {
   static propTypes = {
-    contact: PropTypes.shape({
-      name: PropTypes.string,
-      title: PropTypes.string,
-      abbreviation: PropTypes.string,
-      mobile: PropTypes.string,
-      email: PropTypes.string,
-    }).isRequired,
+    selectedContacts: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string,
+        title: PropTypes.string,
+        abbreviation: PropTypes.string,
+        mobile: PropTypes.string,
+        email: PropTypes.string,
+      })
+    ).isRequired,
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
     onCancel: PropTypes.func.isRequired,
   };
@@ -22,31 +25,32 @@ class NotificationForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    // const {
-    //   form: { validateFieldsAndScroll },
-    // } = this.props;
+    const {
+      form: { validateFieldsAndScroll },
+    } = this.props;
 
-    // validateFieldsAndScroll((error, values) => {
-    //   if (!error) {
-    //     const notification = {
-    //       to: {
-    //         _id: {
-    //           $in: values.recipients,
-    //         },
-    //       },
-    //       subject: values.subject,
-    //       body: values.message,
-    //     };
+    validateFieldsAndScroll((error, values) => {
+      if (!error) {
+        const notification = {
+          to: {
+            _id: {
+              $in: values.recipients,
+            },
+          },
+          subject: values.subject,
+          body: values.body,
+        };
 
-    //     console.log(notification);
-    //   }
-    // });
+        console.log(notification);
+      }
+    });
   };
 
   render() {
     const {
       onCancel,
       form: { getFieldDecorator },
+      selectedContacts,
     } = this.props;
 
     const formItemLayout = {
@@ -79,6 +83,7 @@ class NotificationForm extends Component {
                 message: 'Please provide at least one recipient',
               },
             ],
+            initialValue: map(selectedContacts, contact => contact._id), // eslint-disable-line
           })(
             <SearchableSelectInput
               placeholder="Enter notification recipients"
@@ -86,6 +91,7 @@ class NotificationForm extends Component {
               optionLabel="name"
               optionValue="_id"
               mode="multiple"
+              initialValue={selectedContacts}
             />
           )}
         </Form.Item>
@@ -99,9 +105,9 @@ class NotificationForm extends Component {
         </Form.Item>
         {/* notification subject */}
 
-        {/* activity description */}
+        {/* notification body */}
         <Form.Item {...formItemLayout} label="Message">
-          {getFieldDecorator('message', {
+          {getFieldDecorator('body', {
             rules: [
               {
                 required: true,
@@ -115,7 +121,7 @@ class NotificationForm extends Component {
             />
           )}
         </Form.Item>
-        {/* end activity description */}
+        {/* end notification body */}
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>

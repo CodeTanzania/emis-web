@@ -34,6 +34,7 @@
     "moment": "^2.24.0",
     "prop-types": "^15.6.2",
     "rc-color-picker": "^1.2.6",
+    "randomcolor": "^0.5.3",
     "react": "^16.7.0",
     "react-color": "^2.17.0",
     "react-dom": "^16.7.0",
