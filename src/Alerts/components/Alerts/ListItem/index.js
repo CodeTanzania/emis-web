@@ -38,7 +38,6 @@ class AlertsListItem extends Component {
     expiredAt: PropTypes.string.isRequired,
     expectedAt: PropTypes.string.isRequired,
     onEdit: PropTypes.func.isRequired,
-    onArchive: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -77,7 +76,6 @@ class AlertsListItem extends Component {
       source,
       color,
       onEdit,
-      onArchive,
       event,
       headline,
       description,
@@ -115,16 +113,12 @@ class AlertsListItem extends Component {
                   className="actionIcon"
                   onClick={onEdit}
                 />
+
                 <Icon
-                  type="share-alt"
-                  title="Share Alert"
+                  type="mail"
+                  title="Send Alert"
                   className="actionIcon"
-                />
-                <Icon
-                  type="database"
-                  title="Archive Alert"
-                  className="actionIcon"
-                  onClick={onArchive}
+                  onClick={() => {}}
                 />
               </Fragment>
             )}
