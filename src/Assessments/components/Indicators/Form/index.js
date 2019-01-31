@@ -3,10 +3,13 @@ import {
   postIndicator,
   Connect,
 } from '@codetanzania/emis-api-states';
-import { Button, Form, Input, Select } from 'antd';
+import { Button, Form, Input, Select, Row, Col } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import ColorPicker from 'rc-color-picker';
 import { notifyError, notifySuccess } from '../../../../util';
+import 'rc-color-picker/assets/index.css';
+import './styles.css';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -36,6 +39,13 @@ class IndicatorForm extends Component {
 
   static defaultProps = {
     indicator: null,
+  };
+
+  onChangeColor = ({ color }) => {
+    const {
+      form: { setFieldsValue },
+    } = this.props;
+    setFieldsValue({ color });
   };
 
   handleSubmit = e => {
@@ -135,18 +145,37 @@ class IndicatorForm extends Component {
         </Form.Item>
         {/* end topic */}
         {/* indicators description */}
-        <Form.Item {...formItemLayout} label="Description">
+        <Form.Item {...formItemLayout} label="Indicator Summary">
           {getFieldDecorator('description', {
             initialValue: isEditForm ? indicator.description : undefined,
-            rules: [{ required: true, message: 'Description is required' }],
           })(
             <TextArea
-              placeholder="e.g Additional details that clarify about an indicator."
+              placeholder="e.g Additional details about an indicator."
               autosize={{ minRows: 2, maxRows: 6 }}
             />
           )}
         </Form.Item>
-        {/* end indicator */}
+        {/* end description */}
+
+        {/* color code */}
+        <Row>
+          <Col span={19}>
+            <Form.Item {...formItemLayout} label="Color Code">
+              {getFieldDecorator('color', {
+                initialValue: isEditForm ? indicator.color : undefined,
+              })(
+                <Input
+                  placeholder="e.g #36c"
+                  title="Click button to select color"
+                />
+              )}
+            </Form.Item>
+          </Col>
+          <Col span={4} offset={1} className="IndicatorFormColor">
+            <ColorPicker animation="slide-up" onChange={this.onChangeColor} />
+          </Col>
+        </Row>
+        {/* end  color code */}
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>

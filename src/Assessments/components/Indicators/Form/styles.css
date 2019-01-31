@@ -1,5 +1,8 @@
-.rc-color-picker-trigger{
-    width: 10vw;
-    height: 3.9vh;
-    margin-top: 2px;
+.rc-color-picker-trigger {
+    width: 4.8vw;
+    height: 3.8vh;
+}
+
+.IndicatorFormColor {
+    margin-top: 32px;
 }
