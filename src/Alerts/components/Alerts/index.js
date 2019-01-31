@@ -43,14 +43,13 @@ class Alerts extends Component {
       severity: PropTypes.string,
       certainty: PropTypes.string,
       instruction: PropTypes.string,
-      headline: PropTypes.string,
       expiredAt: PropTypes.string,
       expectedAt: PropTypes.string,
       _id: PropTypes.string,
     }),
     alerts: PropTypes.arrayOf(
       PropTypes.shape({
-        headline: PropTypes.string,
+        event: PropTypes.string,
         source: PropTypes.string,
         reportedAt: PropTypes.string,
         expiredAt: PropTypes.string,

@@ -13,7 +13,7 @@ import './styles.css';
  * @param {Object} props
  * @param {string} props.abbreviation
  * @param {string} props.source
- * @param {string} props.headline
+ * @param {string} props.event
  * @param {string} props.color
  * @param {string} props.expectedAt
  * @param {string} props.expiredAt
@@ -29,7 +29,7 @@ class AlertsListItem extends Component {
   static propTypes = {
     abbreviation: PropTypes.string.isRequired,
     source: PropTypes.string.isRequired,
-    headline: PropTypes.string.isRequired,
+    event: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
     expiredAt: PropTypes.string.isRequired,
     expectedAt: PropTypes.string.isRequired,
@@ -69,7 +69,7 @@ class AlertsListItem extends Component {
       color,
       onEdit,
       onArchive,
-      headline,
+      event,
       expiredAt,
       expectedAt,
     } = this.props;
@@ -88,7 +88,7 @@ class AlertsListItem extends Component {
               <Avatar style={{ backgroundColor: color }}>{abbreviation}</Avatar>
             )}
           </Col>
-          <Col span={9}>{headline}</Col>
+          <Col span={9}>{event}</Col>
           <Col span={3}>{this.toHumanReadableDate(expectedAt)}</Col>
           <Col span={3}>{this.toHumanReadableDate(expiredAt)}</Col>
           <Col span={5}>{source}</Col>

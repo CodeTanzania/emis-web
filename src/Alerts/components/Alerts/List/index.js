@@ -13,7 +13,7 @@ const AlertList = ({ alerts, loading, onEdit }) => (
       renderItem={alert => {
         const {
           _id: id,
-          headline,
+          event,
           source,
           color,
           reportedAt,
@@ -24,7 +24,7 @@ const AlertList = ({ alerts, loading, onEdit }) => (
           <AlertListItem
             key={id}
             abbreviation={source.toUpperCase().charAt(0)}
-            headline={headline}
+            event={event}
             source={source}
             color={color}
             reportedAt={reportedAt}
@@ -43,7 +43,7 @@ AlertList.propTypes = {
   onEdit: PropTypes.func.isRequired,
   alerts: PropTypes.arrayOf(
     PropTypes.shape({
-      headline: PropTypes.string,
+      event: PropTypes.string,
       source: PropTypes.string,
       color: PropTypes.string.isRequired,
       reportedAt: PropTypes.string,
