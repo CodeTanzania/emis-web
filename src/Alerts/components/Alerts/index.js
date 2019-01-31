@@ -222,6 +222,7 @@ class Alerts extends Component {
           title="Filter Alerts"
           visible={showFilters}
           onCancel={this.closeFiltersModal}
+          destroyOnClose
           maskClosable={false}
           width={800}
           footer={null}
