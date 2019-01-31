@@ -19,7 +19,7 @@ export const notifyError = error => {
     );
   }
 
-  return message.error(error.message);
+  return message.error(error);
 };
 
 /**
