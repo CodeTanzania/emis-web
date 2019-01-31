@@ -14,6 +14,8 @@ import './styles.css';
  * @param {string} props.abbreviation
  * @param {string} props.source
  * @param {string} props.event
+ * @param {string} props.headline
+ * @param {string} props.description
  * @param {string} props.color
  * @param {string} props.expectedAt
  * @param {string} props.expiredAt
@@ -28,6 +30,8 @@ class AlertsListItem extends Component {
 
   static propTypes = {
     abbreviation: PropTypes.string.isRequired,
+    headline: PropTypes.string,
+    description: PropTypes.string,
     source: PropTypes.string.isRequired,
     event: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
@@ -35,6 +39,11 @@ class AlertsListItem extends Component {
     expectedAt: PropTypes.string.isRequired,
     onEdit: PropTypes.func.isRequired,
     onArchive: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    description: '',
+    headline: '',
   };
 
   handleMouseEnter = () => {
@@ -70,10 +79,13 @@ class AlertsListItem extends Component {
       onEdit,
       onArchive,
       event,
+      headline,
+      description,
       expiredAt,
       expectedAt,
     } = this.props;
     const { isHovered } = this.state;
+    const eventTitle = description || headline;
     return (
       <div
         className="AlertsListItem"
@@ -88,7 +100,9 @@ class AlertsListItem extends Component {
               <Avatar style={{ backgroundColor: color }}>{abbreviation}</Avatar>
             )}
           </Col>
-          <Col span={9}>{event}</Col>
+          <Col span={9} title={eventTitle}>
+            {event}
+          </Col>
           <Col span={3}>{this.toHumanReadableDate(expectedAt)}</Col>
           <Col span={3}>{this.toHumanReadableDate(expiredAt)}</Col>
           <Col span={5}>{source}</Col>

@@ -50,6 +50,8 @@ class Alerts extends Component {
     alerts: PropTypes.arrayOf(
       PropTypes.shape({
         event: PropTypes.string,
+        headline: PropTypes.string,
+        description: PropTypes.string,
         source: PropTypes.string,
         reportedAt: PropTypes.string,
         expiredAt: PropTypes.string,

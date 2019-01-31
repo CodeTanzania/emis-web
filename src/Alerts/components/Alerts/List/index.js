@@ -16,6 +16,8 @@ const AlertList = ({ alerts, loading, onEdit }) => (
           event,
           source,
           color,
+          headline,
+          description,
           reportedAt,
           expiredAt,
           expectedAt,
@@ -25,6 +27,8 @@ const AlertList = ({ alerts, loading, onEdit }) => (
             key={id}
             abbreviation={source.toUpperCase().charAt(0)}
             event={event}
+            headline={headline}
+            description={description}
             source={source}
             color={color}
             reportedAt={reportedAt}
@@ -44,6 +48,8 @@ AlertList.propTypes = {
   alerts: PropTypes.arrayOf(
     PropTypes.shape({
       event: PropTypes.string,
+      headline: PropTypes.string,
+      description: PropTypes.string,
       source: PropTypes.string,
       color: PropTypes.string.isRequired,
       reportedAt: PropTypes.string,
