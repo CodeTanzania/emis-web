@@ -1,8 +1,16 @@
-import { Connect, getWarehouses } from '@codetanzania/emis-api-states';
+import {
+  Connect,
+  getWarehouses,
+  openWarehouseForm,
+  selectWarehouse,
+  closeWarehouseForm,
+  searchWarehouses,
+} from '@codetanzania/emis-api-states';
 import { Input, Modal, Col, Row, Button } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import WarehouseList from './List';
+import WarehouseForm from './Form';
 import WarehouseFilters from './Filters';
 import WarehousesActionBar from './ActionBar';
 import './styles.css';
@@ -22,18 +30,29 @@ const { Search } = Input;
 class Warehouses extends Component {
   state = {
     showFilters: false,
+    isEditForm: false,
   };
 
   static propTypes = {
     loading: PropTypes.bool.isRequired,
+    showForm: PropTypes.bool.isRequired,
+    posting: PropTypes.bool.isRequired,
     warehouses: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string,
         level: PropTypes.string,
       })
     ).isRequired,
+    warehouse: PropTypes.shape({
+      name: PropTypes.string,
+      level: PropTypes.string,
+    }),
     total: PropTypes.number.isRequired,
     page: PropTypes.number.isRequired,
+  };
+
+  static defaultProps = {
+    warehouse: null,
   };
 
   componentWillMount() {
@@ -71,6 +90,37 @@ class Warehouses extends Component {
   };
 
   /**
+   * Open warehouse form
+   *
+   * @function
+   * @name openForm
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openForm = () => {
+    openWarehouseForm();
+  };
+
+  /**
+   * close warehouse form
+   *
+   * @function
+   * @name closeForm
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeForm = () => {
+    closeWarehouseForm();
+    this.setState({ isEditForm: false });
+  };
+
+  /**
    * Search Warehouses List based on supplied filter word
    *
    * @function
@@ -82,13 +132,40 @@ class Warehouses extends Component {
    * @version 0.1.0
    * @since 0.1.0
    */
-  searchWarehouses = event => {
-    getWarehouses({ q: event.target.value });
+  search = event => {
+    searchWarehouses({ q: event.target.value });
+  };
+
+  /**
+   * Handle on Edit action for list item
+   *
+   * @function
+   * @name handleEdit
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleEdit = warehouse => {
+    selectWarehouse(warehouse);
+    this.setState({ isEditForm: true });
+    openWarehouseForm();
+  };
+
+  handleAfterCloseForm = () => {
+    this.setState({ isEditForm: false });
   };
 
   render() {
-    const { warehouses, loading, total, page } = this.props;
-    const { showFilters } = this.state;
+    const {
+      warehouses,
+      loading,
+      total,
+      page,
+      posting,
+      showForm,
+      warehouse,
+    } = this.props;
+    const { showFilters, isEditForm } = this.state;
     return (
       <div className="WarehouseList">
         <Row>
@@ -97,7 +174,7 @@ class Warehouses extends Component {
             <Search
               size="large"
               placeholder="Search for warehouses here ..."
-              onChange={getWarehouses}
+              onChange={this.search}
             />
             {/* end search input component */}
           </Col>
@@ -108,6 +185,7 @@ class Warehouses extends Component {
               icon="plus"
               size="large"
               title="Add New Warehouse"
+              onClick={this.openForm}
             >
               New Warehouse
             </Button>
@@ -122,8 +200,14 @@ class Warehouses extends Component {
         />
         {/* end list action bar */}
         {/* list starts */}
-        <WarehouseList warehouses={warehouses} loading={loading} />
+        <WarehouseList
+          warehouses={warehouses}
+          loading={loading}
+          onEdit={this.handleEdit}
+        />
         {/* end list */}
+
+        {/* filter modal */}
         <Modal
           title="Filter Warehouses"
           visible={showFilters}
@@ -134,6 +218,26 @@ class Warehouses extends Component {
         >
           <WarehouseFilters onCancel={this.closeFiltersModal} />
         </Modal>
+        {/* end filter modal */}
+
+        {/* create/edit form modal */}
+        <Modal
+          title={isEditForm ? 'Edit Warehouse' : 'Add New Warehouse'}
+          visible={showForm}
+          footer={null}
+          onCancel={this.closeForm}
+          destroyOnClose
+          maskClosable={false}
+          afterClose={this.handleAfterCloseForm}
+        >
+          <WarehouseForm
+            posting={posting}
+            isEditForm={isEditForm}
+            warehouse={warehouse}
+            onCancel={this.closeForm}
+          />
+        </Modal>
+        {/* end create/edit form modal */}
       </div>
     );
   }
@@ -141,6 +245,9 @@ class Warehouses extends Component {
 
 export default Connect(Warehouses, {
   warehouses: 'warehouses.list',
+  warehouse: 'warehouses.selected',
+  posting: 'warehouses.posting',
+  showForm: 'warehouses.showForm',
   loading: 'warehouses.loading',
   page: 'warehouses.page',
   total: 'warehouses.total',
