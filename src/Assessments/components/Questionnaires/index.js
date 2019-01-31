@@ -198,7 +198,7 @@ class Questionnaires extends Component {
         </Modal>
         {/* create/edit form modal */}
         <Modal
-          title={isEditForm ? 'Edit Question' : 'Add New Question'}
+          title={isEditForm ? 'Edit Questionnaire' : 'Add New Questionnaire'}
           visible={showForm}
           footer={null}
           onCancel={this.closeForm}

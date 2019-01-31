@@ -11,6 +11,15 @@ import { notifyError, notifySuccess } from '../../../../util';
 const { Option } = Select;
 const { TextArea } = Input;
 
+/**
+ * Questionnaire form component for creating/editing questionnaires
+ *
+ * @class
+ * @name QuestionnairesForm
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
 class QuestionnaireForm extends Component {
   static propTypes = {
     isEditForm: PropTypes.bool.isRequired,
@@ -44,9 +53,9 @@ class QuestionnaireForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedContact = Object.assign({}, questionnaire, values);
+          const updatedQuestionnaire = Object.assign({}, questionnaire, values);
           putQuestionnaire(
-            updatedContact,
+            updatedQuestionnaire,
             () => {
               notifySuccess('Questionnaire was updated successfully');
             },
@@ -114,8 +123,9 @@ class QuestionnaireForm extends Component {
           })(<Input placeholder="e.g Do you have water?" />)}
         </Form.Item>
         {/* end title */}
+
         {/* phase */}
-        <Form.Item {...formItemLayout} label="Phase">
+        <Form.Item {...formItemLayout} label="Emergency Phase">
           {getFieldDecorator('phase', {
             initialValue: isEditForm ? questionnaire.phase : undefined,
             rules: [{ required: true, message: 'Phase is required' }],
@@ -147,6 +157,7 @@ class QuestionnaireForm extends Component {
           )}
         </Form.Item>
         {/* end assess */}
+
         {/* stage */}
         <Form.Item {...formItemLayout} label="Stage">
           {getFieldDecorator('stage', {
@@ -163,8 +174,9 @@ class QuestionnaireForm extends Component {
           )}
         </Form.Item>
         {/* end stage */}
+
         {/* description */}
-        <Form.Item {...formItemLayout} label="Description">
+        <Form.Item {...formItemLayout} label="Questionnaire Summary">
           {getFieldDecorator('description', {
             initialValue: isEditForm ? questionnaire.description : undefined,
             rules: [{ required: true, message: 'Description is required' }],
