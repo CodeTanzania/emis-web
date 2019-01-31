@@ -1,10 +1,10 @@
 import {
   closeAlertForm,
-  selectAlert,
   Connect,
   getAlerts,
   openAlertForm,
   searchAlerts,
+  selectAlert,
 } from '@codetanzania/emis-api-states';
 import { Button, Col, Input, Modal, Row } from 'antd';
 import PropTypes from 'prop-types';
@@ -236,6 +236,7 @@ class Alerts extends Component {
           footer={null}
           maskClosable={false}
           onCancel={this.closeForm}
+          width="60%"
           destroyOnClose
         >
           <AlertForm

@@ -56,7 +56,7 @@ class ContactsList extends Component {
       onNotify,
     } = this.props;
     const { selectedContacts } = this.state;
-    const selectedCount = this.state.selectedContacts.length;
+    const selectedContactsCount = this.state.selectedContacts.length;
 
     return (
       <Fragment>
@@ -65,8 +65,10 @@ class ContactsList extends Component {
           total={total}
           page={page}
           onFilter={onFilter}
-          onNotify={onNotify}
-          totalCount={selectedCount}
+          onNotify={() => {
+            onNotify(selectedContacts);
+          }}
+          selectedItemCount={selectedContactsCount}
         />
         {/* end action bar */}
 
