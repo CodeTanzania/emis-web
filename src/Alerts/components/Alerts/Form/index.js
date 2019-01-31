@@ -1,5 +1,5 @@
 import { postAlert, putAlert, Connect } from '@codetanzania/emis-api-states';
-import { getFeatures } from '@codetanzania/emis-api-client';
+import { getFeatures, getAlertSources } from '@codetanzania/emis-api-client';
 import { Button, Form, Input, Select, DatePicker, Row, Col } from 'antd';
 import PropTypes from 'prop-types';
 import moment from 'moment';
@@ -210,7 +210,24 @@ class AlertForm extends Component {
                 />
               )}
             </Form.Item>
-            {/* end alert category */}
+            {/* end alert area */}
+
+            {/* alert area */}
+            <Form.Item {...formItemLayout} label="Alert Source">
+              {getFieldDecorator('source', {
+                rules: [
+                  { required: true, message: 'Alert Source is required' },
+                ],
+              })(
+                <SearchableSelectInput
+                  placeholder="Please select alert source"
+                  onSearch={getAlertSources}
+                  optionLabel="name"
+                  optionValue="_id"
+                />
+              )}
+            </Form.Item>
+            {/* end alert area */}
 
             {/* alert category */}
             <Form.Item {...formItemLayout} label="Category">
