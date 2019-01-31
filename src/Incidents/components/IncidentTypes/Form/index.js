@@ -3,10 +3,13 @@ import {
   putIncidentType,
   Connect,
 } from '@codetanzania/emis-api-states';
-import { Button, Form, Input, Select } from 'antd';
+import { Button, Form, Input, Select, Col, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import ColorPicker from 'rc-color-picker';
 import { notifyError, notifySuccess } from '../../../../util';
+import 'rc-color-picker/assets/index.css';
+import './styles.css';
 
 const { Option } = Select;
 
@@ -19,13 +22,24 @@ class IncidentTypeForm extends Component {
       color: PropTypes.string,
       cap: PropTypes.string,
       code: PropTypes.string,
-    }).isRequired,
+    }),
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
     families: PropTypes.arrayOf(PropTypes.string).isRequired,
     natures: PropTypes.arrayOf(PropTypes.string).isRequired,
     caps: PropTypes.arrayOf(PropTypes.string).isRequired,
     onCancel: PropTypes.func.isRequired,
     posting: PropTypes.bool.isRequired,
+  };
+
+  static defaultProps = {
+    incidenttype: null,
+  };
+
+  onChangeColor = ({ color }) => {
+    const {
+      form: { setFieldsValue },
+    } = this.props;
+    setFieldsValue({ color });
   };
 
   handleSubmit = e => {
@@ -172,6 +186,24 @@ class IncidentTypeForm extends Component {
           })(<Input placeholder="e.g NMS" />)}
         </Form.Item>
         {/* end incident types code */}
+        <Row>
+          <Col span={19}>
+            <Form.Item {...formItemLayout} label="Color Code">
+              {getFieldDecorator('color', {
+                initialValue: isEditForm ? incidenttype.color : undefined,
+              })(
+                <Input
+                  placeholder="e.g #36c"
+                  title="Click button to select color"
+                />
+              )}
+            </Form.Item>
+          </Col>
+          <Col span={4} offset={1} className="IncidentTypeFormColor">
+            <ColorPicker animation="slide-up" onChange={this.onChangeColor} />
+          </Col>
+        </Row>
+        {/* end incident types color code */}
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
@@ -194,5 +226,5 @@ class IncidentTypeForm extends Component {
 export default Connect(Form.create()(IncidentTypeForm), {
   natures: 'incidentTypes.schema.properties.nature.enum',
   families: 'incidentTypes.schema.properties.family.enum',
-  caps: 'incidentTypes.schema.properties.family.enum',
+  caps: 'incidentTypes.schema.properties.cap.enum',
 });
