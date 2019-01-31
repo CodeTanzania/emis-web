@@ -1,15 +1,7 @@
 import React from 'react';
-import UIState from '../../components/UIState';
+// import UIState from '../../components/UIState';
+import Regions from '../components/Regions';
 
-const RegionsLayout = () => (
-  <div style={{ marginTop: '20%' }}>
-    <UIState
-      icon="exclamation-circle"
-      description="No Evacuation Centers yet,but when they are available will appear here"
-      buttonLabel="New Feature"
-      onClick={() => {}}
-    />
-  </div>
-);
+const RegionsLayout = () => <Regions />;
 
 export default RegionsLayout;
