@@ -40,9 +40,9 @@ class IncidentTypeForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedContact = Object.assign({}, incidenttype, values);
+          const updatedIncidentType = Object.assign({}, incidenttype, values);
           putIncidentType(
-            updatedContact,
+            updatedIncidentType,
             () => {
               notifySuccess('Incident Type was updated successfully');
             },
@@ -163,6 +163,7 @@ class IncidentTypeForm extends Component {
           )}
         </Form.Item>
         {/* end incident types family */}
+
         {/* incident types code */}
         <Form.Item {...formItemLayout} label="Code">
           {getFieldDecorator('code', {
