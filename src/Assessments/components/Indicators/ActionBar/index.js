@@ -5,6 +5,8 @@ import {
 import { Button, Col, Pagination, Row, Checkbox } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { notifyError, notifySuccess } from '../../../../util';
+
 import './styles.css';
 
 /**
@@ -32,7 +34,18 @@ const IndicatorsActionBar = ({ page, total, onFilter }) => (
           shape="circle"
           icon="reload"
           title="Refresh indicator"
-          onClick={() => refreshIndicators()}
+          onClick={() =>
+            refreshIndicators(
+              () => {
+                notifySuccess('Indicator refreshed successfully');
+              },
+              () => {
+                notifyError(
+                  'An Error occurred while refreshing indicators, please contact system administrator!'
+                );
+              }
+            )
+          }
           className="actionButton"
           size="large"
         />
