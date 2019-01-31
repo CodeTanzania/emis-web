@@ -2,6 +2,7 @@ import { paginateItems, refreshItems } from '@codetanzania/emis-api-states';
 import { Button, Col, Pagination, Row, Checkbox } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { notifyError, notifySuccess } from '../../../../util';
 import './styles.css';
 
 /**
@@ -29,7 +30,18 @@ const ItemsActionBar = ({ page, total, onFilter }) => (
           shape="circle"
           icon="reload"
           title="Refresh items"
-          onClick={() => refreshItems()}
+          onClick={() =>
+            refreshItems(
+              () => {
+                notifySuccess('Items refreshed successfully');
+              },
+              () => {
+                notifyError(
+                  'An Error occurred while refreshing items, please contact system administrator!'
+                );
+              }
+            )
+          }
           className="actionButton"
           size="large"
         />
