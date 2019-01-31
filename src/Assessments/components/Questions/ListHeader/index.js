@@ -2,6 +2,15 @@ import { Col, Row } from 'antd';
 import React from 'react';
 import './styles.css';
 
+/**
+ * Question list header component.
+ *
+ * @function
+ * @name QuestionsHeader
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
 const headerLayout = [
   { span: 8, header: 'Label', offset: 1 },
   { span: 3, header: 'Phase' },

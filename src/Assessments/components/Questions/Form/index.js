@@ -1,10 +1,24 @@
-import { postQuestion, putQuestion } from '@codetanzania/emis-api-states';
+import {
+  postQuestion,
+  putQuestion,
+  Connect,
+} from '@codetanzania/emis-api-states';
 import { Button, Form, Input, Select } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { notifyError, notifySuccess } from '../../../../util';
 
 const { Option } = Select;
+
+/**
+ * Question form component for creating/editing questios
+ *
+ * @class
+ * @name QuestionsForm
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
 
 class QuestionForm extends Component {
   static propTypes = {
@@ -19,19 +33,17 @@ class QuestionForm extends Component {
     indicators: PropTypes.arrayOf(
       PropTypes.shape({ subject: PropTypes.string })
     ).isRequired,
-    questionSchema: PropTypes.shape({
-      properties: PropTypes.shape({
-        stage: PropTypes.shape({ type: PropTypes.string }).isRequired,
-      }),
-    }),
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
     onCancel: PropTypes.func.isRequired,
     posting: PropTypes.bool.isRequired,
+    assess: PropTypes.arrayOf(PropTypes.string).isRequired,
+    phases: PropTypes.arrayOf(PropTypes.string).isRequired,
+    stages: PropTypes.arrayOf(PropTypes.string).isRequired,
+    types: PropTypes.arrayOf(PropTypes.string).isRequired,
   };
 
   static defaultProps = {
     question: null,
-    questionSchema: null,
   };
 
   handleSubmit = e => {
@@ -46,9 +58,9 @@ class QuestionForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedContact = Object.assign({}, question, values);
+          const updatedQuestion = Object.assign({}, question, values);
           putQuestion(
-            updatedContact,
+            updatedQuestion,
             () => {
               notifySuccess('Question was updated successfully');
             },
@@ -81,17 +93,13 @@ class QuestionForm extends Component {
       question,
       posting,
       onCancel,
-      questionSchema,
+      assess,
+      phases,
+      stages,
+      types,
       indicators,
       form: { getFieldDecorator },
     } = this.props;
-
-    const { properties } = questionSchema;
-    const { assess, stage, phase, type } = properties;
-    const { enum: assessedData } = assess;
-    const { enum: stages } = stage;
-    const { enum: phases } = phase;
-    const { enum: types } = type;
 
     const formItemLayout = {
       labelCol: {
@@ -122,6 +130,7 @@ class QuestionForm extends Component {
           })(<Input placeholder="e.g Water" />)}
         </Form.Item>
         {/* end name */}
+
         {/* label */}
         <Form.Item {...formItemLayout} label="Label">
           {getFieldDecorator('label', {
@@ -130,6 +139,7 @@ class QuestionForm extends Component {
           })(<Input placeholder="e.g Do you have water?" />)}
         </Form.Item>
         {/* end label */}
+
         {/* indicators */}
         <Form.Item {...formItemLayout} label="Indicator">
           {getFieldDecorator('indicator', {
@@ -171,7 +181,7 @@ class QuestionForm extends Component {
             rules: [{ required: true, message: 'Assess is required' }],
           })(
             <Select placeholder="e.g Need">
-              {assessedData.map(data => (
+              {assess.map(data => (
                 <Option key={data} value={data}>
                   {data}
                 </Option>
@@ -188,15 +198,16 @@ class QuestionForm extends Component {
             rules: [{ required: true, message: 'Type is required' }],
           })(
             <Select placeholder="e.g text">
-              {types.map(data => (
-                <Option key={data} value={data}>
-                  {data}
+              {types.map(type => (
+                <Option key={type} value={type}>
+                  {type}
                 </Option>
               ))}
             </Select>
           )}
         </Form.Item>
         {/* end type */}
+
         {/* stage */}
         <Form.Item {...formItemLayout} label="Stage">
           {getFieldDecorator('stage', {
@@ -232,4 +243,9 @@ class QuestionForm extends Component {
   }
 }
 
-export default Form.create()(QuestionForm);
+export default Connect(Form.create()(QuestionForm), {
+  assess: 'questions.schema.properties.assess.enum',
+  phases: 'questions.schema.properties.phase.enum',
+  stages: 'questions.schema.properties.stage.enum',
+  types: 'questions.schema.properties.type.enum',
+});

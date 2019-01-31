@@ -4,6 +4,20 @@ import React, { Fragment } from 'react';
 import QuestionsListHeader from '../ListHeader';
 import QuestionsListItem from '../ListItem';
 
+/**
+ * question list item component. Render question details
+ *
+ * @function
+ * @name QuestionsList
+ *
+ * @param {Object} props
+ * @param {string} props.loading
+ * @param {string} props.onEdit
+ * @param {string} props.questions
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
 const QuestionsList = ({ questions, loading, onEdit }) => (
   <Fragment>
     <QuestionsListHeader />

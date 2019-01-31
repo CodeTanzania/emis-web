@@ -44,17 +44,11 @@ class Questions extends Component {
     total: PropTypes.number.isRequired,
     posting: PropTypes.bool.isRequired,
     question: PropTypes.shape({ name: PropTypes.string }),
-    questionSchema: PropTypes.shape({
-      properties: PropTypes.shape({
-        stage: PropTypes.shape({ type: PropTypes.string }).isRequired,
-      }),
-    }),
     showForm: PropTypes.bool.isRequired,
   };
 
   static defaultProps = {
     question: null,
-    questionSchema: null,
   };
 
   componentDidMount() {
@@ -151,7 +145,6 @@ class Questions extends Component {
       question,
       posting,
       showForm,
-      questionSchema,
       indicators,
     } = this.props;
     const { showFilters, isEditForm } = this.state;
@@ -170,6 +163,7 @@ class Questions extends Component {
             />
             {/* end search input component */}
           </Col>
+
           {/* primary actions */}
           <Col span={3} offset={9}>
             <Button
@@ -225,7 +219,6 @@ class Questions extends Component {
             isEditForm={isEditForm}
             question={question}
             onCancel={this.closeForm}
-            questionSchema={questionSchema}
             indicators={indicators}
           />
         </Modal>
@@ -238,7 +231,6 @@ class Questions extends Component {
 export default Connect(Questions, {
   questions: 'questions.list',
   question: 'questions.selected',
-  questionSchema: 'questions.schema',
   indicators: 'indicators.list',
   loading: 'questions.loading',
   page: 'questions.page',
