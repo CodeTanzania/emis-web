@@ -212,23 +212,56 @@ class AlertForm extends Component {
             </Form.Item>
             {/* end alert area */}
 
-            {/* alert area */}
-            <Form.Item {...formItemLayout} label="Alert Source">
-              {getFieldDecorator('source', {
+            {/* alert onset date  */}
+            <Form.Item {...formItemLayout} label="OnSet">
+              {getFieldDecorator('expectedAt', {
+                initialValue: isEditForm
+                  ? moment(alert.expectedAt).utc()
+                  : undefined,
                 rules: [
-                  { required: true, message: 'Alert Source is required' },
+                  { required: true, message: 'Alert  OnSet date is required' },
                 ],
               })(
-                <SearchableSelectInput
-                  placeholder="Please select alert source"
-                  onSearch={getAlertSources}
-                  optionLabel="name"
-                  optionValue="_id"
+                <DatePicker
+                  style={{ width: '100%' }}
+                  showTime
+                  format="YYYY-MM-DD HH:mm:ss"
                 />
               )}
             </Form.Item>
-            {/* end alert area */}
+            {/* end alert onset date */}
 
+            {/* alert expires date  */}
+            <Form.Item {...formItemLayout} label="Expires At">
+              {getFieldDecorator('expiredAt', {
+                initialValue: isEditForm
+                  ? moment(alert.expiredAt).utc()
+                  : undefined,
+                rules: [
+                  { required: true, message: 'Alert Expire date is required' },
+                ],
+              })(
+                <DatePicker
+                  style={{ width: '100%' }}
+                  showTime
+                  format="YYYY-MM-DD HH:mm:ss"
+                />
+              )}
+            </Form.Item>
+            {/* end alert expire date */}
+
+            {/* alert instructions  */}
+            <Form.Item {...formItemLayout} label="Instructions">
+              {getFieldDecorator('instruction', {
+                initialValue: isEditForm ? alert.instruction : undefined,
+                rules: [
+                  { required: true, message: 'Alert  Instruction is required' },
+                ],
+              })(<TextArea autosize={{ minRows: 6, maxRows: 8 }} />)}
+            </Form.Item>
+            {/* end alert instructions */}
+          </Col>
+          <Col span={11}>
             {/* alert category */}
             <Form.Item {...formItemLayout} label="Category">
               {getFieldDecorator('category', {
@@ -273,8 +306,6 @@ class AlertForm extends Component {
               )}
             </Form.Item>
             {/* end alert severity */}
-          </Col>
-          <Col span={11}>
             {/* alert certainty */}
             <Form.Item {...formItemLayout} label="Certainty">
               {getFieldDecorator('certainty', {
@@ -323,54 +354,22 @@ class AlertForm extends Component {
             </Form.Item>
             {/* end alert response type */}
 
-            {/* alert onset date  */}
-            <Form.Item {...formItemLayout} label="OnSet">
-              {getFieldDecorator('expectedAt', {
-                initialValue: isEditForm
-                  ? moment(alert.expectedAt).utc()
-                  : undefined,
+            {/* alert source */}
+            <Form.Item {...formItemLayout} label="Alert Source">
+              {getFieldDecorator('source', {
                 rules: [
-                  { required: true, message: 'Alert  OnSet date is required' },
+                  { required: true, message: 'Alert Source is required' },
                 ],
               })(
-                <DatePicker
-                  style={{ width: '100%' }}
-                  showTime
-                  format="YYYY-MM-DD HH:mm:ss"
+                <SearchableSelectInput
+                  placeholder="Please select alert source"
+                  onSearch={getAlertSources}
+                  optionLabel="name"
+                  optionValue="_id"
                 />
               )}
             </Form.Item>
-            {/* end alert onset date */}
-
-            {/* alert expires date  */}
-            <Form.Item {...formItemLayout} label="Expires At">
-              {getFieldDecorator('expiredAt', {
-                initialValue: isEditForm
-                  ? moment(alert.expiredAt).utc()
-                  : undefined,
-                rules: [
-                  { required: true, message: 'Alert Expire date is required' },
-                ],
-              })(
-                <DatePicker
-                  style={{ width: '100%' }}
-                  showTime
-                  format="YYYY-MM-DD HH:mm:ss"
-                />
-              )}
-            </Form.Item>
-            {/* end alert expire date */}
-
-            {/* alert instructions  */}
-            <Form.Item {...formItemLayout} label="Instructions">
-              {getFieldDecorator('instruction', {
-                initialValue: isEditForm ? alert.instruction : undefined,
-                rules: [
-                  { required: true, message: 'Alert  Instruction is required' },
-                ],
-              })(<TextArea autosize={{ minRows: 2, maxRows: 6 }} />)}
-            </Form.Item>
-            {/* end alert instructions */}
+            {/* end alert source */}
           </Col>
         </Row>
 
