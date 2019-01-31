@@ -28,6 +28,7 @@ class ItemsListItem extends Component {
     color: PropTypes.string.isRequired,
     maxStockAllowed: PropTypes.number.isRequired,
     minStockAllowed: PropTypes.number.isRequired,
+    onEdit: PropTypes.func.isRequired,
   };
 
   state = {
@@ -50,6 +51,7 @@ class ItemsListItem extends Component {
       color,
       maxStockAllowed,
       minStockAllowed,
+      onEdit,
     } = this.props;
     const { isHovered } = this.state;
     return (
@@ -76,7 +78,12 @@ class ItemsListItem extends Component {
           <Col span={3}>
             {isHovered && (
               <Fragment>
-                <Icon type="edit" title="Update item" className="actionIcon" />
+                <Icon
+                  type="edit"
+                  title="Update item"
+                  className="actionIcon"
+                  onClick={onEdit}
+                />
                 <Icon
                   type="database"
                   title="Archive item"

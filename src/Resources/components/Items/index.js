@@ -178,7 +178,7 @@ class Items extends Component {
         {/* end list action bar */}
 
         {/* list starts */}
-        <ItemsList items={items} loading={loading} />
+        <ItemsList items={items} loading={loading} onEdit={this.handleEdit} />
         {/* end list */}
 
         <Modal
