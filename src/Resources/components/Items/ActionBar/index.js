@@ -17,7 +17,7 @@ import './styles.css';
  * @version 0.1.0
  * @since 0.1.0
  */
-const ItemsActionBar = ({ page, total }) => (
+const ItemsActionBar = ({ page, total, onFilter }) => (
   <div className="ItemsActionBar">
     <Row>
       <Col span={1} xl={1} className="checkbox">
@@ -28,7 +28,7 @@ const ItemsActionBar = ({ page, total }) => (
         <Button
           shape="circle"
           icon="reload"
-          title="Refresh item"
+          title="Refresh items"
           onClick={() => getItems()}
           className="actionButton"
           size="large"
@@ -39,7 +39,7 @@ const ItemsActionBar = ({ page, total }) => (
         <Button
           type="circle"
           icon="hdd"
-          title="Archive selected item"
+          title="Archive selected items"
           className="actionButton"
           size="large"
         />
@@ -57,6 +57,7 @@ const ItemsActionBar = ({ page, total }) => (
           title="Filter items"
           className="actionButton"
           size="large"
+          onClick={onFilter}
         />
       </Col>
 
@@ -77,6 +78,7 @@ const ItemsActionBar = ({ page, total }) => (
 ItemsActionBar.propTypes = {
   page: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
+  onFilter: PropTypes.func.isRequired,
 };
 
 export default ItemsActionBar;

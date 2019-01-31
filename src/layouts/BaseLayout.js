@@ -60,26 +60,26 @@ import WardsLayout from '../GeographicalFeatures/layouts/Wards';
 
 const { Header, Content } = Layout;
 const breadcrumbNameMap = {
-  '/': { name: 'Home', title: 'Emis' },
+  '/': { name: 'Home', title: 'EMIS' },
   /* Alerts Routes */
   '/alerts': { name: 'Alerts', title: 'Alerts module' },
   '/alerts/actions': {
     name: 'Actions Taken',
-    title: 'List of all perfomed actions',
+    title: 'List of all performed actions',
   },
   '/alerts/feedback': {
     name: 'Surveys & Feedback',
     title: 'Alerts surveys and feedback',
   },
   '/alerts/feeds': { name: 'Feeds', title: 'Alerts feeds' },
-  '/alerts/alerts': { name: 'All Alerts', title: 'List of all alerts' },
+  '/alerts/alerts': { name: 'Issued Alerts', title: 'List of all alerts' },
   '/alerts/servicerequests': {
     name: 'Service Requests',
     title: 'Alerts service requests',
   },
   '/alerts/sources': {
-    name: 'Data Sources',
-    title: ' Data sources of alerts',
+    name: 'Alerts Sources',
+    title: 'Data sources for alerts',
   },
   /* Assessments Routes */
   '/assessments': { name: 'Assessments', title: 'Assessments module' },
@@ -99,7 +99,7 @@ const breadcrumbNameMap = {
     name: 'Responses & Observations',
     title: 'Responses and observations',
   },
-  /* Geographicalfeatures Routes */
+  /* Geographical Features Routes */
   '/geographicalfeatures/administrativeboundaries': {
     name: 'Administrative Boundaries',
     title: 'List of administrative boundaries',
@@ -118,7 +118,7 @@ const breadcrumbNameMap = {
   },
   '/geographicalfeatures/infrastructure': {
     name: 'Critical Infrastructure',
-    title: 'List of critical infrastructres ',
+    title: 'List of critical infrastructures ',
   },
   '/geographicalfeatures': {
     name: 'Geographical Features',
@@ -167,7 +167,7 @@ const breadcrumbNameMap = {
   },
   '/plans/drills': {
     name: 'Drills & Exercises',
-    title: 'List of drills and exrcises',
+    title: 'List of drills and exercises',
   },
   '/plans': { name: 'Emergency Plans', title: 'Emergency plans module' },
   '/plans/planner': { name: 'Planner', title: 'Planner' },

@@ -1,31 +1,87 @@
-import { postStakeholder } from '@codetanzania/emis-api-states';
+import { postStakeholder, putStakeholder } from '@codetanzania/emis-api-states';
 import { Button, Form, Input } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { notifyError, notifySuccess } from '../../../../util';
 
-class StakeholderForm extends Component {
+/**
+ * Render Contact form for creating and updating stakeholder contact details
+ *
+ * @class
+ * @name ContactForm
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
+class ContactForm extends Component {
   static propTypes = {
-    posting: PropTypes.bool.isRequired,
-    onCancel: PropTypes.func.isRequired,
+    isEditForm: PropTypes.bool.isRequired,
+    contact: PropTypes.shape({
+      name: PropTypes.string,
+      title: PropTypes.string,
+      abbreviation: PropTypes.string,
+      mobile: PropTypes.string,
+      email: PropTypes.string,
+    }).isRequired,
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+    onCancel: PropTypes.func.isRequired,
+    posting: PropTypes.bool.isRequired,
   };
 
+  /**
+   * Handle submit form action
+   *
+   * @function
+   * @name handleSubmit
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleSubmit = e => {
     e.preventDefault();
 
     const {
       form: { validateFieldsAndScroll },
+      contact,
+      isEditForm,
     } = this.props;
 
     validateFieldsAndScroll((error, values) => {
       if (!error) {
-        postStakeholder(values);
+        if (isEditForm) {
+          const updatedContact = Object.assign({}, contact, values);
+          putStakeholder(
+            updatedContact,
+            () => {
+              notifySuccess('Contact was updated successfully');
+            },
+            () => {
+              notifyError(
+                'Something occurred while updating contact, please try again!'
+              );
+            }
+          );
+        } else {
+          postStakeholder(
+            values,
+            () => {
+              notifySuccess('Contact was created successfully');
+            },
+            () => {
+              notifyError(
+                'Something occurred while saving contact, please try again!'
+              );
+            }
+          );
+        }
       }
     });
   };
 
   render() {
     const {
+      isEditForm,
+      contact,
       posting,
       onCancel,
       form: { getFieldDecorator },
@@ -51,10 +107,11 @@ class StakeholderForm extends Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* contact name */}
         <Form.Item {...formItemLayout} label="Full Name">
           {getFieldDecorator('name', {
+            initialValue: isEditForm ? contact.name : undefined,
             rules: [
               { required: true, message: 'Contact full name is required' },
             ],
@@ -65,6 +122,7 @@ class StakeholderForm extends Component {
         {/* contact title */}
         <Form.Item {...formItemLayout} label="Title">
           {getFieldDecorator('title', {
+            initialValue: isEditForm ? contact.title : undefined,
             rules: [{ required: true, message: 'Contact time is required' }],
           })(<Input placeholder="e.g Regional Commissioner" />)}
         </Form.Item>
@@ -72,15 +130,16 @@ class StakeholderForm extends Component {
 
         {/* contact abbreviation */}
         <Form.Item {...formItemLayout} label="Abbreviation">
-          {getFieldDecorator('abbreviation')(
-            <Input placeholder="e.g RC, DC, RAS" />
-          )}
+          {getFieldDecorator('abbreviation', {
+            initialValue: isEditForm ? contact.abbreviation : undefined,
+          })(<Input placeholder="e.g RC, DC, RAS" />)}
         </Form.Item>
         {/* end contact abbreviation */}
 
         {/* contact number */}
         <Form.Item {...formItemLayout} label="Phone Number">
           {getFieldDecorator('mobile', {
+            initialValue: isEditForm ? contact.mobile : undefined,
             rules: [{ required: true, message: 'Phone number is required' }],
           })(<Input placeholder="e.g 255799999999" />)}
         </Form.Item>
@@ -89,6 +148,7 @@ class StakeholderForm extends Component {
         {/* contact email */}
         <Form.Item {...formItemLayout} label="Email">
           {getFieldDecorator('email', {
+            initialValue: isEditForm ? contact.email : undefined,
             rules: [
               {
                 type: 'email',
@@ -118,4 +178,4 @@ class StakeholderForm extends Component {
   }
 }
 
-export default Form.create()(StakeholderForm);
+export default Form.create()(ContactForm);

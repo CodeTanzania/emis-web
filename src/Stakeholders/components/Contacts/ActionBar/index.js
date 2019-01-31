@@ -1,7 +1,11 @@
-import { getStakeholders } from '@codetanzania/emis-api-states';
+import {
+  paginateStakeholders,
+  refreshStakeholders,
+} from '@codetanzania/emis-api-states';
 import { Button, Checkbox, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { notifyError, notifySuccess } from '../../../../util';
 import './styles.css';
 
 /**
@@ -17,7 +21,13 @@ import './styles.css';
  * @version 0.1.0
  * @since 0.1.0
  */
-const ContactsActionBar = ({ page, total, onFilter }) => (
+const ContactsActionBar = ({
+  page,
+  total,
+  selectedCount,
+  onFilter,
+  onNotify,
+}) => (
   <div className="ContactsActionBar">
     <Row>
       <Col span={1} xl={1} className="checkbox">
@@ -29,7 +39,18 @@ const ContactsActionBar = ({ page, total, onFilter }) => (
           shape="circle"
           icon="reload"
           title="Refresh contacts"
-          onClick={() => getStakeholders()}
+          onClick={() =>
+            refreshStakeholders(
+              () => {
+                notifySuccess('Contacts refreshed successfully');
+              },
+              () => {
+                notifyError(
+                  'An Error occurred while refreshing contacts, please contact system administrator!'
+                );
+              }
+            )
+          }
           className="actionButton"
           size="large"
         />
@@ -39,57 +60,64 @@ const ContactsActionBar = ({ page, total, onFilter }) => (
         <Button
           type="circle"
           icon="mail"
-          title="Send Email to selected contacts"
+          title={`Send Notification to${
+            selectedCount > 0 ? ' selected' : ''
+          } contacts`}
           className="actionButton"
           size="large"
+          onClick={onNotify}
         />
       </Col>
 
       <Col span={1} xl={1}>
-        <Button
-          type="circle"
-          icon="message"
-          title="Send SMS to selected contacts"
-          className="actionButton"
-          size="large"
-        />
+        {selectedCount > 0 && (
+          <Button
+            type="circle"
+            icon="cloud-download"
+            title="Export selected contacts"
+            className="actionButton"
+            size="large"
+          />
+        )}
       </Col>
 
       <Col span={1} xl={1}>
-        <Button
-          type="circle"
-          icon="cloud-download"
-          title="Export selected contacts"
-          className="actionButton"
-          size="large"
-        />
+        {selectedCount > 0 && (
+          <Button
+            type="circle"
+            icon="share-alt"
+            title="Share selected contacts"
+            className="actionButton"
+            size="large"
+          />
+        )}
       </Col>
 
       <Col span={1} xl={1}>
-        <Button
-          type="circle"
-          icon="share-alt"
-          title="Share selected contacts"
-          className="actionButton"
-          size="large"
-        />
-      </Col>
-
-      <Col span={1} xl={1}>
-        <Button
-          type="circle"
-          icon="hdd"
-          title="Archive selected contacts"
-          className="actionButton"
-          size="large"
-        />
+        {selectedCount > 0 && (
+          <Button
+            type="circle"
+            icon="hdd"
+            title="Archive selected contacts"
+            className="actionButton"
+            size="large"
+          />
+        )}
       </Col>
 
       <Col
+        span={3}
+        offset={7}
+        xl={{ span: 3, offset: 7 }}
+        xxl={{ span: 3, offset: 7 }}
+      >
+        {selectedCount > 0 && <h4>{`${selectedCount} Contact(s) Selected`}</h4>}
+      </Col>
+      <Col
         span={1}
-        offset={13}
-        xl={{ span: 1, offset: 12 }}
-        xxl={{ span: 1, offset: 13 }}
+        offset={4}
+        xl={{ span: 1, offset: 3 }}
+        xxl={{ span: 1, offset: 4 }}
       >
         <Button
           type="circle"
@@ -106,7 +134,7 @@ const ContactsActionBar = ({ page, total, onFilter }) => (
           simple
           defaultCurrent={page}
           total={total}
-          onChange={nextPage => getStakeholders({ page: nextPage })}
+          onChange={nextPage => paginateStakeholders(nextPage)}
           className="pagination"
         />
       </Col>
@@ -118,7 +146,9 @@ const ContactsActionBar = ({ page, total, onFilter }) => (
 ContactsActionBar.propTypes = {
   page: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
+  selectedCount: PropTypes.number.isRequired,
   onFilter: PropTypes.func.isRequired,
+  onNotify: PropTypes.func.isRequired,
 };
 
 export default ContactsActionBar;

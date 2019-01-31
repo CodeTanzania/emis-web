@@ -1,8 +1,7 @@
-.IncidentTypesList {
-    padding: 40px;
-  }
-  
-  .IncidentTypesList .searchBox {
-    width: 50%;
-  }
-  
+.IncidentTypes {
+  padding: 40px;
+}
+
+.IncidentTypes .searchBox {
+  width: 50%;
+}

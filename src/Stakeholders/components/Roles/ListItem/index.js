@@ -22,6 +22,15 @@ class RoleListItem extends Component {
     isHovered: false,
   };
 
+  /* props validation */
+  static propTypes = {
+    abbreviation: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    onEdit: PropTypes.func.isRequired,
+    onArchive: PropTypes.func.isRequired,
+  };
+
   handleMouseEnter = () => {
     this.setState({ isHovered: true });
   };
@@ -31,7 +40,7 @@ class RoleListItem extends Component {
   };
 
   render() {
-    const { abbreviation, name, description } = this.props;
+    const { abbreviation, name, description, onEdit, onArchive } = this.props;
     const { isHovered } = this.state;
     return (
       <div
@@ -52,11 +61,17 @@ class RoleListItem extends Component {
           <Col span={3}>
             {isHovered && (
               <Fragment>
-                <Icon type="edit" title="Update Role" className="actionIcon" />
+                <Icon
+                  type="edit"
+                  title="Update Role"
+                  className="actionIcon"
+                  onClick={onEdit}
+                />
                 <Icon
                   type="database"
                   title="Archive Role"
                   className="actionIcon"
+                  onClick={onArchive}
                 />
               </Fragment>
             )}
@@ -66,12 +81,5 @@ class RoleListItem extends Component {
     );
   }
 }
-
-/* props validation */
-RoleListItem.propTypes = {
-  abbreviation: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-};
 
 export default RoleListItem;

@@ -17,7 +17,7 @@ import './styles.css';
  * @version 0.1.0
  * @since 0.1.0
  */
-const IncidentTypesActionBar = ({ page, total }) => (
+const IncidentTypesActionBar = ({ page, total, onFilter }) => (
   <div className="IncidentTypesActionBar">
     <Row>
       <Col span={1} xl={1} className="checkbox">
@@ -67,6 +67,7 @@ const IncidentTypesActionBar = ({ page, total }) => (
           title="Filter Incident Types"
           className="actionButton"
           size="large"
+          onClick={onFilter}
         />
       </Col>
 
@@ -87,6 +88,7 @@ const IncidentTypesActionBar = ({ page, total }) => (
 IncidentTypesActionBar.propTypes = {
   page: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
+  onFilter: PropTypes.func.isRequired,
 };
 
 export default IncidentTypesActionBar;

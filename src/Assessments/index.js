@@ -1,20 +1,20 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import questionsIcon from '../assets/images/questions.svg';
-import questionnairesIcon from '../assets/images/questionnaires.svg';
 import incidentIcon from '../assets/images/incidents.svg';
 import indicatorIcon from '../assets/images/indicators.svg';
+import questionnairesIcon from '../assets/images/questionnaires.svg';
+import questionsIcon from '../assets/images/questions.svg';
 import NavigationMenu from '../components/NavigationMenu';
 
 const routes = [
-  { name: 'Questions', path: '/questions', icon: questionsIcon },
-  { name: 'Questionnaires', path: '/questionnaires', icon: questionnairesIcon },
-  { name: 'Indicators', path: '/indicators', icon: indicatorIcon },
   {
     name: 'Observations / Response',
     path: '/responses',
     icon: incidentIcon,
   },
+  { name: 'Questionnaires', path: '/questionnaires', icon: questionnairesIcon },
+  { name: 'Questions', path: '/questions', icon: questionsIcon },
+  { name: 'Indicators', path: '/indicators', icon: indicatorIcon },
 ];
 
 /**
