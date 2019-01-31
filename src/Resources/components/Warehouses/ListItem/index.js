@@ -22,6 +22,7 @@ class WarehouseListItem extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     level: PropTypes.string.isRequired,
+    onEdit: PropTypes.func.isRequired,
   };
 
   state = {
@@ -37,7 +38,7 @@ class WarehouseListItem extends Component {
   };
 
   render() {
-    const { name, level } = this.props;
+    const { name, level, onEdit } = this.props;
     const { isHovered } = this.state;
     return (
       <div
@@ -62,6 +63,7 @@ class WarehouseListItem extends Component {
                   type="edit"
                   title="Update warehouse"
                   className="actionIcon"
+                  onClick={onEdit}
                 />
                 <Icon
                   type="database"
