@@ -87,7 +87,7 @@ export default class SearchableSelectInput extends Component {
   handleSearch = value => {
     const { onSearch } = this.props;
     onSearch({ q: value }).then(response => {
-      this.setState({ data: response.data.data, loading: false });
+      this.setState({ data: response.data, loading: false });
     });
   };
 
@@ -125,7 +125,7 @@ export default class SearchableSelectInput extends Component {
       this.setState({ loading: true });
       onSearch()
         .then(response => {
-          this.setState({ data: [...response.data.data], loading: false });
+          this.setState({ data: [...response.data], loading: false });
         })
         .catch(() => {
           // TODO handle error here
@@ -170,6 +170,7 @@ export default class SearchableSelectInput extends Component {
         <Select
           {...otherProps}
           showSearch
+          mode="multiple"
           onSearch={this.handleSearch}
           onChange={this.handleChange}
           allowClear

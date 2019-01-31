@@ -1,5 +1,6 @@
 import { Avatar, Checkbox, Col, Icon, Row } from 'antd';
 import PropTypes from 'prop-types';
+import randomColor from 'randomcolor';
 import React, { Component, Fragment } from 'react';
 import './styles.css';
 
@@ -30,8 +31,11 @@ class ContactsListItem extends Component {
     title: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     mobile: PropTypes.string.isRequired,
-    onEdit: PropTypes.func.isRequired,
     onArchive: PropTypes.func.isRequired,
+    onEdit: PropTypes.func.isRequired,
+    isSelected: PropTypes.bool.isRequired,
+    onSelectItem: PropTypes.func.isRequired,
+    onDeselectItem: PropTypes.func.isRequired,
   };
 
   handleMouseEnter = () => {
@@ -40,6 +44,18 @@ class ContactsListItem extends Component {
 
   handleMouseLeave = () => {
     this.setState({ isHovered: false });
+  };
+
+  handleToggleSelect = event => {
+    const { isSelected } = this.state;
+    const { onSelectItem, onDeselectItem } = this.props;
+
+    this.setState({ isSelected: !isSelected });
+    if (event.target.checked) {
+      onSelectItem();
+    } else {
+      onDeselectItem();
+    }
   };
 
   render() {
@@ -53,6 +69,32 @@ class ContactsListItem extends Component {
       onArchive,
     } = this.props;
     const { isHovered } = this.state;
+    const { isSelected } = this.props;
+    const avatarBackground = randomColor();
+    let sideComponent = null;
+
+    if (isSelected) {
+      sideComponent = (
+        <Checkbox
+          className="Checkbox"
+          onChange={this.handleToggleSelect}
+          checked={isSelected}
+        />
+      );
+    } else {
+      sideComponent = isHovered ? (
+        <Checkbox
+          className="Checkbox"
+          onChange={this.handleToggleSelect}
+          checked={isSelected}
+        />
+      ) : (
+        <Avatar style={{ backgroundColor: avatarBackground }}>
+          {abbreviation}
+        </Avatar>
+      );
+    }
+
     return (
       <div
         className="ContactsListItem"
@@ -60,13 +102,7 @@ class ContactsListItem extends Component {
         onMouseLeave={this.handleMouseLeave}
       >
         <Row>
-          <Col span={1}>
-            {isHovered ? (
-              <Checkbox className="Checkbox" />
-            ) : (
-              <Avatar>{abbreviation}</Avatar>
-            )}
-          </Col>
+          <Col span={1}>{sideComponent}</Col>
           <Col span={5}>{name}</Col>
           <Col span={6}>{title}</Col>
           <Col span={4}>{email}</Col>

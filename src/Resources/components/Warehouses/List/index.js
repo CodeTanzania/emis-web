@@ -14,7 +14,7 @@ import WarehouseListItem from '../ListItem';
  * @version 0.1.0
  * @since 0.1.0
  */
-const WarehouseList = ({ warehouses, loading }) => (
+const WarehouseList = ({ warehouses, loading, onEdit }) => (
   <Fragment>
     <WarehouseListHeader />
     <List
@@ -25,6 +25,7 @@ const WarehouseList = ({ warehouses, loading }) => (
           key={warehouse.name}
           name={warehouse.name}
           level={warehouse.level}
+          onEdit={() => onEdit(warehouse)}
         />
       )}
     />
@@ -32,6 +33,7 @@ const WarehouseList = ({ warehouses, loading }) => (
 );
 
 WarehouseList.propTypes = {
+  onEdit: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   warehouses: PropTypes.arrayOf(
     PropTypes.shape({

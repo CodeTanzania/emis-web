@@ -5,6 +5,7 @@ import {
 import { Button, Checkbox, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { notifyError, notifySuccess } from '../../../../util';
 import './styles.css';
 
 /**
@@ -20,80 +21,120 @@ import './styles.css';
  * @version 0.1.0
  * @since 0.1.0
  */
-const ContactsActionBar = ({ page, total, onFilter }) => (
+const ContactsActionBar = ({
+  page,
+  total,
+  selectedItemCount,
+  onFilter,
+  onNotify,
+}) => (
   <div className="ContactsActionBar">
     <Row>
+      {/* bulk select action */}
       <Col span={1} xl={1} className="checkbox">
         <Checkbox />
       </Col>
+      {/* end bulk select action */}
 
+      {/* refresh contacts action */}
       <Col span={1} xl={1}>
         <Button
           shape="circle"
           icon="reload"
           title="Refresh contacts"
-          onClick={() => refreshStakeholders()}
+          onClick={() =>
+            refreshStakeholders(
+              () => {
+                notifySuccess('Contacts refreshed successfully');
+              },
+              () => {
+                notifyError(
+                  'An Error occurred while refreshing contacts, please contact system administrator!'
+                );
+              }
+            )
+          }
           className="actionButton"
           size="large"
         />
       </Col>
+      {/* end refresh contacts action */}
 
+      {/* notify action */}
       <Col span={1} xl={1}>
         <Button
           type="circle"
           icon="mail"
-          title="Send Email to selected contacts"
+          title={`Send Notification to${
+            selectedItemCount > 0 ? ' selected' : ''
+          } contacts`}
           className="actionButton"
           size="large"
+          onClick={onNotify}
         />
       </Col>
+      {/* end notify action  */}
 
+      {/* export action */}
       <Col span={1} xl={1}>
-        <Button
-          type="circle"
-          icon="message"
-          title="Send SMS to selected contacts"
-          className="actionButton"
-          size="large"
-        />
+        {selectedItemCount > 0 && (
+          <Button
+            type="circle"
+            icon="cloud-download"
+            title="Export selected contacts"
+            className="actionButton"
+            size="large"
+          />
+        )}
       </Col>
+      {/* end export action */}
 
+      {/* bulk share action */}
       <Col span={1} xl={1}>
-        <Button
-          type="circle"
-          icon="cloud-download"
-          title="Export selected contacts"
-          className="actionButton"
-          size="large"
-        />
+        {selectedItemCount > 0 && (
+          <Button
+            type="circle"
+            icon="share-alt"
+            title="Share selected contacts"
+            className="actionButton"
+            size="large"
+          />
+        )}
       </Col>
+      {/* end bulk share action */}
 
+      {/* bulk archive action */}
       <Col span={1} xl={1}>
-        <Button
-          type="circle"
-          icon="share-alt"
-          title="Share selected contacts"
-          className="actionButton"
-          size="large"
-        />
+        {selectedItemCount > 0 && (
+          <Button
+            type="circle"
+            icon="hdd"
+            title="Archive selected contacts"
+            className="actionButton"
+            size="large"
+          />
+        )}
       </Col>
+      {/* end bulk archive action */}
 
-      <Col span={1} xl={1}>
-        <Button
-          type="circle"
-          icon="hdd"
-          title="Archive selected contacts"
-          className="actionButton"
-          size="large"
-        />
-      </Col>
-
+      {/* selected and contacts number summary */}
       <Col
-        span={1}
-        offset={13}
-        xl={{ span: 1, offset: 12 }}
-        xxl={{ span: 1, offset: 13 }}
+        span={5}
+        offset={9}
+        xl={{ span: 4, offset: 9 }}
+        xxl={{ span: 4, offset: 10 }}
       >
+        {selectedItemCount > 0 && (
+          <span
+            style={{ color: '#c5c5c5' }}
+          >{`${selectedItemCount} out of `}</span>
+        )}
+        <span style={{ color: '#c5c5c5' }}>{`${total} contacts`}</span>
+      </Col>
+      {/* end selected and contacts number summary */}
+
+      {/* filter action */}
+      <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}>
         <Button
           type="circle"
           icon="filter"
@@ -103,7 +144,9 @@ const ContactsActionBar = ({ page, total, onFilter }) => (
           onClick={onFilter}
         />
       </Col>
+      {/* end filter action */}
 
+      {/* pagination */}
       <Col span={3} xl={4} xxl={3}>
         <Pagination
           simple
@@ -113,6 +156,7 @@ const ContactsActionBar = ({ page, total, onFilter }) => (
           className="pagination"
         />
       </Col>
+      {/* end pagination */}
     </Row>
   </div>
 );
@@ -121,7 +165,9 @@ const ContactsActionBar = ({ page, total, onFilter }) => (
 ContactsActionBar.propTypes = {
   page: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
+  selectedItemCount: PropTypes.number.isRequired,
   onFilter: PropTypes.func.isRequired,
+  onNotify: PropTypes.func.isRequired,
 };
 
 export default ContactsActionBar;

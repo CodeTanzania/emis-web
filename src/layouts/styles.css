@@ -1,6 +1,7 @@
 .BaseLayout {
   height: 100vh;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .BaseLayoutHeader {
@@ -15,4 +16,6 @@
 
 .BaseLayoutContent {
   background-color: #fff;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
