@@ -1,5 +1,8 @@
 import { Button, Checkbox, Col, Pagination, Row } from 'antd';
-// import { getFeatures } from '@codetanzania/emis-api-states';
+import {
+  paginateFeatures,
+  refreshFeatures,
+} from '@codetanzania/emis-api-states';
 import PropTypes from 'prop-types';
 import React from 'react';
 import './styles.css';
@@ -31,6 +34,7 @@ const RegionsActionBar = ({ page, total, onFilter }) => (
           title="Refresh Regions"
           className="actionButton"
           size="large"
+          onClick={() => refreshFeatures()}
         />
       </Col>
 
@@ -86,6 +90,7 @@ const RegionsActionBar = ({ page, total, onFilter }) => (
           defaultCurrent={page}
           total={total}
           className="pagination"
+          onCange={nextPage => paginateFeatures(nextPage)}
         />
       </Col>
     </Row>
