@@ -4,7 +4,16 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { notifyError, notifySuccess } from '../../../../util';
 
-class StakeholderForm extends Component {
+/**
+ * Render Contact form for creating and updating stakeholder contact details
+ *
+ * @class
+ * @name ContactForm
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
+class ContactForm extends Component {
   static propTypes = {
     isEditForm: PropTypes.bool.isRequired,
     contact: PropTypes.shape({
@@ -19,6 +28,15 @@ class StakeholderForm extends Component {
     posting: PropTypes.bool.isRequired,
   };
 
+  /**
+   * Handle submit form action
+   *
+   * @function
+   * @name handleSubmit
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleSubmit = e => {
     e.preventDefault();
 
@@ -89,7 +107,7 @@ class StakeholderForm extends Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* contact name */}
         <Form.Item {...formItemLayout} label="Full Name">
           {getFieldDecorator('name', {
@@ -160,4 +178,4 @@ class StakeholderForm extends Component {
   }
 }
 
-export default Form.create()(StakeholderForm);
+export default Form.create()(ContactForm);
