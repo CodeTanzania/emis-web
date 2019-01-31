@@ -4,6 +4,7 @@ import React from 'react';
 import facilitiesIcon from '../assets/images/facilities.svg';
 import infrastructureIcon from '../assets/images/infrastructure.svg';
 import warehousesIcon from '../assets/images/warehouses.svg';
+import regionIcon from '../assets/images/region.svg';
 import districtIcon from '../assets/images/district.svg';
 import wardIcon from '../assets/images/ward.svg';
 import subwardIcon from '../assets/images/subward.svg';
@@ -17,6 +18,11 @@ const routes = [
   //   path: '/administrativeboundaries',
   //   icon: administrativeBoundariesIcon,
   // },
+  {
+    name: 'Regions',
+    path: '/regions',
+    icon: regionIcon,
+  },
   {
     name: 'Districts',
     path: '/districts',

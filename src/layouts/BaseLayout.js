@@ -57,6 +57,7 @@ import EvacuationCentersLayout from '../GeographicalFeatures/layouts/EvacuationC
 import DistrictsLayout from '../GeographicalFeatures/layouts/Districts';
 import SubwardsLayout from '../GeographicalFeatures/layouts/Subwaard';
 import WardsLayout from '../GeographicalFeatures/layouts/Wards';
+import RegionsLayout from '../GeographicalFeatures/layouts/Regions';
 
 const { Header, Content } = Layout;
 const breadcrumbNameMap = {
@@ -116,13 +117,17 @@ const breadcrumbNameMap = {
     name: 'Facilities',
     title: 'Facilities available',
   },
+  '/geographicalfeatures': {
+    name: 'Geographical Features',
+    title: 'Geographical features module',
+  },
   '/geographicalfeatures/infrastructure': {
     name: 'Critical Infrastructure',
     title: 'List of critical infrastructures ',
   },
-  '/geographicalfeatures': {
-    name: 'Geographical Features',
-    title: 'Geographical features module',
+  '/geographicalfeatures/regions': {
+    name: 'Regions',
+    title: 'List of Regions',
   },
   '/geographicalfeatures/subwards': {
     name: 'Subwards',
@@ -342,6 +347,11 @@ const BaseLayout = withRouter(props => {
             exact
             path="/geographicalfeatures/infrastructure"
             component={GeographicalFeaturesInfrastructureLayout}
+          />
+          <Route
+            exact
+            path="/geographicalfeatures/regions"
+            component={RegionsLayout}
           />
           <Route
             exact
