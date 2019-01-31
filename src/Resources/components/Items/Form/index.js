@@ -1,8 +1,11 @@
 import { putItem, Connect, postItem } from '@codetanzania/emis-api-states';
-import { Button, Form, Input, Select } from 'antd';
+import { Button, Form, Input, Select, Row, Col } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import ColorPicker from 'rc-color-picker';
 import { notifyError, notifySuccess } from '../../../../util';
+import 'rc-color-picker/assets/index.css';
+import './styles.css';
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -27,6 +30,13 @@ class ItemForm extends Component {
 
   static defaultProps = {
     item: null,
+  };
+
+  onChangeColor = ({ color }) => {
+    const {
+      form: { setFieldsValue },
+    } = this.props;
+    setFieldsValue({ color });
   };
 
   handleSubmit = e => {
@@ -138,7 +148,7 @@ class ItemForm extends Component {
         {/* end type */}
 
         {/* unit of measure */}
-        <Form.Item {...formItemLayout} label="Unit of Measure">
+        <Form.Item {...formItemLayout} label="Unit of Measure/Quality">
           {getFieldDecorator('uom', {
             initialValue: isEditForm ? item.uom : undefined,
             rules: [
@@ -156,24 +166,6 @@ class ItemForm extends Component {
         </Form.Item>
         {/* end unit of measure */}
 
-        {/* maxStockAllowed */}
-        <Form.Item {...formItemLayout} label="Maximum Stock">
-          {getFieldDecorator('maxStockAllowed', {
-            initialValue: isEditForm ? item.maxStockAllowed : undefined,
-            rules: [{ message: 'Maximum stock is required' }],
-          })(<Input placeholder="e.g 123" type="number" />)}
-        </Form.Item>
-        {/* end minStockAllowed */}
-
-        {/* maxStockAllowed */}
-        <Form.Item {...formItemLayout} label="Minimum Stock">
-          {getFieldDecorator('minStockAllowed', {
-            initialValue: isEditForm ? item.minStockAllowed : undefined,
-            rules: [{ message: 'Minimum stock is required' }],
-          })(<Input placeholder="e.g 23" type="number" />)}
-        </Form.Item>
-        {/* end minStockAllowed */}
-
         {/* destription */}
         <Form.Item {...formItemLayout} label="Item Summary">
           {getFieldDecorator('description', {
@@ -182,6 +174,47 @@ class ItemForm extends Component {
           })(<TextArea placeholder="e.g Addition information of item" />)}
         </Form.Item>
         {/* end destription */}
+
+        {/* color code */}
+        <Row>
+          <Col span={19}>
+            <Form.Item {...formItemLayout} label="Color Code">
+              {getFieldDecorator('color', {
+                initialValue: isEditForm ? item.color : undefined,
+              })(
+                <Input
+                  placeholder="e.g #36c"
+                  title="Click button to select color"
+                />
+              )}
+            </Form.Item>
+          </Col>
+          <Col span={4} offset={1} className="ItemFormColor">
+            <ColorPicker animation="slide-up" onChange={this.onChangeColor} />
+          </Col>
+        </Row>
+        {/* end  color code */}
+
+        {/* maxStockAllowed , minStockAllowed */}
+        <Row>
+          <Col span={10}>
+            <Form.Item {...formItemLayout} label="Maximum Stock">
+              {getFieldDecorator('maxStockAllowed', {
+                initialValue: isEditForm ? item.maxStockAllowed : undefined,
+                rules: [{ message: 'Maximum stock is required' }],
+              })(<Input placeholder="e.g 123" type="number" />)}
+            </Form.Item>
+          </Col>
+          <Col span={10} offset={1}>
+            <Form.Item {...formItemLayout} label="Minimum Stock">
+              {getFieldDecorator('minStockAllowed', {
+                initialValue: isEditForm ? item.minStockAllowed : undefined,
+                rules: [{ message: 'Minimum stock is required' }],
+              })(<Input placeholder="e.g 23" type="number" />)}
+            </Form.Item>
+          </Col>
+        </Row>
+        {/* end minStockAllowed & maxStockALlowed */}
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
