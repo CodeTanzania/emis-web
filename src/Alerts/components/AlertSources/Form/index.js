@@ -1,22 +1,22 @@
-import { postStakeholder, putStakeholder } from '@codetanzania/emis-api-states';
+import { postAlertSource, putAlertSource } from '@codetanzania/emis-api-states';
 import { Button, Form, Input } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { notifyError, notifySuccess } from '../../../../util';
 
-class StakeholderForm extends Component {
+class AlertSourceForm extends Component {
   static propTypes = {
-    isEditForm: PropTypes.bool.isRequired,
-    contact: PropTypes.shape({
+    alertSource: PropTypes.shape({
       name: PropTypes.string,
-      title: PropTypes.string,
-      abbreviation: PropTypes.string,
+      url: PropTypes.string,
       mobile: PropTypes.string,
       email: PropTypes.string,
+      _id: PropTypes.string,
     }).isRequired,
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
-    onCancel: PropTypes.func.isRequired,
+    isEditForm: PropTypes.bool.isRequired,
     posting: PropTypes.bool.isRequired,
+    onCancel: PropTypes.func.isRequired,
+    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
   };
 
   handleSubmit = e => {
@@ -24,34 +24,34 @@ class StakeholderForm extends Component {
 
     const {
       form: { validateFieldsAndScroll },
-      contact,
+      alertSource,
       isEditForm,
     } = this.props;
 
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedContact = Object.assign({}, contact, values);
-          putStakeholder(
+          const updatedContact = Object.assign({}, alertSource, values);
+          putAlertSource(
             updatedContact,
             () => {
-              notifySuccess('Contact was updated successfully');
+              notifySuccess('Alert Source was updated successfully');
             },
             () => {
               notifyError(
-                'Something occurred while updating contact, please try again!'
+                'Something occurred while updating Alert Source, please try again!'
               );
             }
           );
         } else {
-          postStakeholder(
+          postAlertSource(
             values,
             () => {
-              notifySuccess('Contact was created successfully');
+              notifySuccess('Alert Source was created successfully');
             },
             () => {
               notifyError(
-                'Something occurred while saving contact, please try again!'
+                'Something occurred while saving Alert Source, please try again!'
               );
             }
           );
@@ -62,10 +62,10 @@ class StakeholderForm extends Component {
 
   render() {
     const {
-      isEditForm,
-      contact,
       posting,
       onCancel,
+      isEditForm,
+      alertSource,
       form: { getFieldDecorator },
     } = this.props;
 
@@ -90,47 +90,57 @@ class StakeholderForm extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        {/* contact name */}
-        <Form.Item {...formItemLayout} label="Full Name">
+        {/* Alert Source name */}
+        <Form.Item {...formItemLayout} label="Organisation name">
           {getFieldDecorator('name', {
-            initialValue: isEditForm ? contact.name : undefined,
+            initialValue: isEditForm ? alertSource.name : undefined,
             rules: [
-              { required: true, message: 'Contact full name is required' },
+              {
+                required: true,
+                message: ' Alert Source organisation name is required',
+              },
             ],
-          })(<Input placeholder="e.g John Doe" />)}
+          })(<Input placeholder="e.g Tanzania Meteorogical Agency" />)}
         </Form.Item>
-        {/* end contact name */}
+        {/* end organisation name */}
 
-        {/* contact title */}
-        <Form.Item {...formItemLayout} label="Title">
-          {getFieldDecorator('title', {
-            initialValue: isEditForm ? contact.title : undefined,
-            rules: [{ required: true, message: 'Contact time is required' }],
-          })(<Input placeholder="e.g Regional Commissioner" />)}
+        {/* Alert source website */}
+        <Form.Item {...formItemLayout} label="Website">
+          {getFieldDecorator('website', {
+            initialValue: isEditForm ? alertSource.website : undefined,
+            rules: [
+              { required: true, message: 'Alert Source Website is required' },
+            ],
+          })(<Input placeholder="e.g tma.com" />)}
         </Form.Item>
-        {/* end contact title */}
+        {/* end Alert source website */}
 
-        {/* contact abbreviation */}
-        <Form.Item {...formItemLayout} label="Abbreviation">
-          {getFieldDecorator('abbreviation', {
-            initialValue: isEditForm ? contact.abbreviation : undefined,
-          })(<Input placeholder="e.g RC, DC, RAS" />)}
+        {/* Alert Source url */}
+        <Form.Item {...formItemLayout} label="Feed">
+          {getFieldDecorator('url', {
+            initialValue: isEditForm ? alertSource.url : undefined,
+            rules: [
+              { required: true, message: 'Alert Source Website is required' },
+            ],
+          })(
+            <Input placeholder="e.g http://tma.meteo.go.tz:8080/feeds/en/alerts/rss.xml" />
+          )}
         </Form.Item>
-        {/* end contact abbreviation */}
+        {/* end Alert Source url */}
 
-        {/* contact number */}
+        {/* Alert Source number */}
         <Form.Item {...formItemLayout} label="Phone Number">
           {getFieldDecorator('mobile', {
-            initialValue: isEditForm ? contact.mobile : undefined,
+            initialValue: isEditForm ? alertSource.mobile : undefined,
             rules: [{ required: true, message: 'Phone number is required' }],
           })(<Input placeholder="e.g 255799999999" />)}
         </Form.Item>
-        {/* end contact number */}
+        {/* end Alert Source number */}
 
-        {/* contact email */}
+        {/* Alert Source email */}
         <Form.Item {...formItemLayout} label="Email">
           {getFieldDecorator('email', {
-            initialValue: isEditForm ? contact.email : undefined,
+            initialValue: isEditForm ? alertSource.email : undefined,
             rules: [
               {
                 type: 'email',
@@ -140,7 +150,7 @@ class StakeholderForm extends Component {
             ],
           })(<Input placeholder="e.g example@mail.com" />)}
         </Form.Item>
-        {/* end contact email */}
+        {/* end Alert Source email */}
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
@@ -160,4 +170,4 @@ class StakeholderForm extends Component {
   }
 }
 
-export default Form.create()(StakeholderForm);
+export default Form.create()(AlertSourceForm);

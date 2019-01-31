@@ -4,29 +4,32 @@ import React, { Component, Fragment } from 'react';
 import './styles.css';
 
 /**
- * Single role list item component. Render single role details
+ * Single Alert Source list item component. Render single Source details
  *
  * @class
- * @name RoleListItem
+ * @name AlertSourcesListItem
  *
  * @param {Object} props
- * @param {string} props.abbreviation
  * @param {string} props.name
- * @param {string} props.description
+ * @param {string} props.url
+ * @param {string} props.email
+ * @param {string} props.mobile
+ * @param {string} prop.website
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class RoleListItem extends Component {
+class AlertSourcesListItem extends Component {
   state = {
     isHovered: false,
   };
 
-  /* props validation */
   static propTypes = {
-    abbreviation: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    mobile: PropTypes.string.isRequired,
+    website: PropTypes.string.isRequired,
     onEdit: PropTypes.func.isRequired,
     onArchive: PropTypes.func.isRequired,
   };
@@ -40,11 +43,11 @@ class RoleListItem extends Component {
   };
 
   render() {
-    const { abbreviation, name, description, onEdit, onArchive } = this.props;
+    const { name, url, email, mobile, website, onEdit, onArchive } = this.props;
     const { isHovered } = this.state;
     return (
       <div
-        className="RoleListItem"
+        className="AlertSourcesListItem"
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
@@ -53,23 +56,39 @@ class RoleListItem extends Component {
             {isHovered ? (
               <Checkbox className="Checkbox" />
             ) : (
-              <Avatar>{abbreviation}</Avatar>
+              <Avatar>{name.toUpperCase().charAt(0)}</Avatar>
             )}
           </Col>
-          <Col span={9}>{name}</Col>
-          <Col span={10}>{description}</Col>
+          <Col span={5}>{name}</Col>
+          <Col span={3}>{email}</Col>
+          <Col span={3}>{mobile}</Col>
+          <Col span={4}>{website}</Col>
+          <Col span={5}>{url}</Col>
           <Col span={3}>
             {isHovered && (
               <Fragment>
                 <Icon
                   type="edit"
-                  title="Update Role"
+                  title="Update Alert Source"
                   className="actionIcon"
                   onClick={onEdit}
                 />
+
+                <Icon
+                  type="sync"
+                  title="Reload Alerts"
+                  className="actionIcon"
+                  onClick={() => {}}
+                />
+
+                <Icon
+                  type="share-alt"
+                  title="Share Alert Source"
+                  className="actionIcon"
+                />
                 <Icon
                   type="database"
-                  title="Archive Role"
+                  title="Archive Source"
                   className="actionIcon"
                   onClick={onArchive}
                 />
@@ -82,4 +101,4 @@ class RoleListItem extends Component {
   }
 }
 
-export default RoleListItem;
+export default AlertSourcesListItem;

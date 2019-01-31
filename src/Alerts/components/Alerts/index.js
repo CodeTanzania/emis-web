@@ -1,63 +1,74 @@
 import {
+  closeAlertForm,
+  selectAlert,
   Connect,
-  getRoles,
-  openRoleForm,
-  selectRole,
-  closeRoleForm,
+  getAlerts,
+  openAlertForm,
+  searchAlerts,
 } from '@codetanzania/emis-api-states';
-import { Input, Col, Row, Button, Modal } from 'antd';
+import { Button, Col, Input, Modal, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import RoleFilters from './Filters';
-import RolesActionBar from './ActionBar';
-import RoleList from './List';
-import RoleForm from './Form';
+import AlertsActionBar from './ActionBar';
+import AlertsFilters from './Filters';
+import AlertForm from './Form';
+import AlertList from './List';
 import './styles.css';
 
 const { Search } = Input;
 
 /**
- * Render role module which has search box, actions and list of roles
+ * Render alert module which have search box, actions and alert list
  *
  * @class
- * @name Roles
- *
+ * @name Alerts
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class Roles extends Component {
+class Alerts extends Component {
   state = {
     showFilters: false,
     isEditForm: false,
   };
 
   static propTypes = {
-    showForm: PropTypes.bool.isRequired,
-    posting: PropTypes.bool.isRequired,
     loading: PropTypes.bool.isRequired,
-    role: PropTypes.shape({
-      name: PropTypes.string,
-      abbreviation: PropTypes.string,
-      description: PropTypes.string,
+    posting: PropTypes.bool.isRequired,
+    alert: PropTypes.shape({
+      event: PropTypes.string,
+      category: PropTypes.string,
+      urgency: PropTypes.string,
+      area: PropTypes.string,
+      severity: PropTypes.string,
+      certainty: PropTypes.string,
+      instruction: PropTypes.string,
+      headline: PropTypes.string,
+      expiredAt: PropTypes.string,
+      expectedAt: PropTypes.string,
+      _id: PropTypes.string,
     }),
-    roles: PropTypes.arrayOf(
+    alerts: PropTypes.arrayOf(
       PropTypes.shape({
-        name: PropTypes.string,
-        abbreviation: PropTypes.string,
-        description: PropTypes.string,
+        headline: PropTypes.string,
+        source: PropTypes.string,
+        reportedAt: PropTypes.string,
+        expiredAt: PropTypes.string,
+        expectedAt: PropTypes.string,
+        _id: PropTypes.string,
       })
     ).isRequired,
-    total: PropTypes.number.isRequired,
     page: PropTypes.number.isRequired,
+    showForm: PropTypes.bool.isRequired,
+    total: PropTypes.number.isRequired,
   };
 
   static defaultProps = {
-    role: null,
+    alert: null,
   };
 
   componentWillMount() {
-    getRoles();
+    getAlerts();
   }
 
   /**
@@ -91,7 +102,7 @@ class Roles extends Component {
   };
 
   /**
-   * Open role form
+   * Open alert form
    *
    * @function
    * @name openForm
@@ -102,11 +113,11 @@ class Roles extends Component {
    * @since 0.1.0
    */
   openForm = () => {
-    openRoleForm();
+    openAlertForm();
   };
 
   /**
-   * close role form
+   * close alert form
    *
    * @function
    * @name openForm
@@ -117,15 +128,15 @@ class Roles extends Component {
    * @since 0.1.0
    */
   closeForm = () => {
-    closeRoleForm();
+    closeAlertForm();
     this.setState({ isEditForm: false });
   };
 
   /**
-   * Search Roles List based on supplied filter word
+   * Search Alerts List based on supplied filter word
    *
    * @function
-   * @name searchRoles
+   * @name searchAlerts
    *
    * @param {Object} event - Event instance
    * @returns {undefined} - Nothing is returned
@@ -133,8 +144,8 @@ class Roles extends Component {
    * @version 0.1.0
    * @since 0.1.0
    */
-  searchRoles = event => {
-    getRoles({ q: event.target.value });
+  searchAlerts = event => {
+    searchAlerts(event.target.value);
   };
 
   /**
@@ -146,10 +157,10 @@ class Roles extends Component {
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleEdit = role => {
-    selectRole(role);
+  handleEdit = alert => {
+    selectAlert(alert);
     this.setState({ isEditForm: true });
-    openRoleForm();
+    openAlertForm();
   };
 
   handleAfterCloseForm = () => {
@@ -157,16 +168,25 @@ class Roles extends Component {
   };
 
   render() {
-    const { roles, loading, total, page, showForm, posting, role } = this.props;
+    const {
+      alerts,
+      alert,
+      loading,
+      posting,
+      page,
+      showForm,
+      total,
+    } = this.props;
     const { showFilters, isEditForm } = this.state;
     return (
-      <div className="RoleList">
+      <div className="Alerts">
         <Row>
           <Col span={12}>
+            {/* search input component */}
             <Search
               size="large"
-              placeholder="Search for roles here ..."
-              onChange={this.searchRoles}
+              placeholder="Search for alerts here ..."
+              onChange={this.searchAlerts}
             />
             {/* end search input component */}
           </Col>
@@ -176,51 +196,53 @@ class Roles extends Component {
               type="primary"
               icon="plus"
               size="large"
-              title="Add New Role"
+              title="Add New Alert"
               onClick={this.openForm}
             >
-              New Role
+              New Alert
             </Button>
           </Col>
           {/* end primary actions */}
         </Row>
-        {/* list action bar */}
-        <RolesActionBar
+
+        {/* list header */}
+        <AlertsActionBar
           total={total}
           page={page}
           onFilter={this.openFiltersModal}
         />
-        {/* end list action bar */}
+        {/* end list header */}
         {/* list starts */}
-        <RoleList roles={roles} loading={loading} onEdit={this.handleEdit} />
+        <AlertList alerts={alerts} loading={loading} onEdit={this.handleEdit} />
         {/* end list */}
 
         {/* filter modal */}
         <Modal
-          title="Filter Roles"
+          title="Filter Alerts"
           visible={showFilters}
           onCancel={this.closeFiltersModal}
+          maskClosable={false}
+          width={800}
           footer={null}
         >
-          <RoleFilters onCancel={this.closeFiltersModal} />
+          <AlertsFilters onCancel={this.closeFiltersModal} />
         </Modal>
         {/* end filter modal */}
 
         {/* create/edit form modal */}
         <Modal
-          title={isEditForm ? 'Edit Role' : 'Add New Role'}
+          title={isEditForm ? 'Edit Alert' : 'Add New Alert'}
           visible={showForm}
           footer={null}
+          maskClosable={false}
           onCancel={this.closeForm}
           destroyOnClose
-          maskClosable={false}
-          afterClose={this.handleAfterCloseForm}
         >
-          <RoleForm
+          <AlertForm
             posting={posting}
-            isEditForm={isEditForm}
-            role={role}
             onCancel={this.closeForm}
+            isEditForm={isEditForm}
+            alert={alert}
           />
         </Modal>
         {/* end create/edit form modal */}
@@ -229,12 +251,12 @@ class Roles extends Component {
   }
 }
 
-export default Connect(Roles, {
-  roles: 'roles.list',
-  role: 'roles.selected',
-  showForm: 'roles.showForm',
-  posting: 'roles.posting',
-  loading: 'roles.loading',
-  page: 'roles.page',
-  total: 'roles.total',
+export default Connect(Alerts, {
+  alerts: 'alerts.list',
+  alert: 'alerts.selected',
+  loading: 'alerts.loading',
+  posting: 'alerts.posting',
+  page: 'alerts.page',
+  total: 'alerts.total',
+  showForm: 'alerts.showForm',
 });

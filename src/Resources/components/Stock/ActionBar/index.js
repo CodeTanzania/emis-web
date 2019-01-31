@@ -1,4 +1,4 @@
-import { refreshRoles, paginateRoles } from '@codetanzania/emis-api-states';
+import { paginateStocks, refreshStocks } from '@codetanzania/emis-api-states';
 import { Button, Checkbox, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -8,7 +8,7 @@ import './styles.css';
  * Render action bar for actions which are applicable to list content
  *
  * @function
- * @name RolesActionBar
+ * @name StocksActionBar
  *
  * @param {Object} props
  * @param {page} props.page
@@ -17,8 +17,8 @@ import './styles.css';
  * @version 0.1.0
  * @since 0.1.0
  */
-const RolesActionBar = ({ page, total, onFilter }) => (
-  <div className="RolesActionBar">
+const StocksActionBar = ({ page, total }) => (
+  <div className="StocksActionBar">
     <Row>
       <Col span={1} xl={1} className="checkbox">
         <Checkbox />
@@ -28,8 +28,28 @@ const RolesActionBar = ({ page, total, onFilter }) => (
         <Button
           shape="circle"
           icon="reload"
-          title="Refresh roles"
-          onClick={() => refreshRoles()}
+          title="Refresh stocks"
+          onClick={() => refreshStocks()}
+          className="actionButton"
+          size="large"
+        />
+      </Col>
+
+      <Col span={1} xl={1}>
+        <Button
+          type="circle"
+          icon="cloud-download"
+          title="Export selected stocks"
+          className="actionButton"
+          size="large"
+        />
+      </Col>
+
+      <Col span={1} xl={1}>
+        <Button
+          type="circle"
+          icon="share-alt"
+          title="Share selected stocks"
           className="actionButton"
           size="large"
         />
@@ -39,7 +59,7 @@ const RolesActionBar = ({ page, total, onFilter }) => (
         <Button
           type="circle"
           icon="hdd"
-          title="Archive selected roles"
+          title="Archive selected stocks"
           className="actionButton"
           size="large"
         />
@@ -47,26 +67,17 @@ const RolesActionBar = ({ page, total, onFilter }) => (
 
       <Col
         span={1}
-        offset={17}
-        xl={{ span: 1, offset: 16 }}
-        xxl={{ span: 1, offset: 17 }}
-      >
-        <Button
-          type="circle"
-          icon="filter"
-          title="Filter roles"
-          className="actionButton"
-          size="large"
-          onClick={onFilter}
-        />
-      </Col>
+        offset={13}
+        xl={{ span: 1, offset: 14 }}
+        xxl={{ span: 1, offset: 15 }}
+      />
 
       <Col span={3} xl={4} xxl={3}>
         <Pagination
           simple
           defaultCurrent={page}
           total={total}
-          onChange={nextPage => paginateRoles(nextPage)}
+          onChange={nextPage => paginateStocks(nextPage)}
           className="pagination"
         />
       </Col>
@@ -75,10 +86,9 @@ const RolesActionBar = ({ page, total, onFilter }) => (
 );
 
 /* props validation */
-RolesActionBar.propTypes = {
+StocksActionBar.propTypes = {
   page: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
-  onFilter: PropTypes.func.isRequired,
 };
 
-export default RolesActionBar;
+export default StocksActionBar;
