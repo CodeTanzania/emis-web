@@ -1,10 +1,15 @@
-import { putIndicator, postIndicator } from '@codetanzania/emis-api-states';
-import { Button, Form, Input } from 'antd';
+import {
+  putIndicator,
+  postIndicator,
+  Connect,
+} from '@codetanzania/emis-api-states';
+import { Button, Form, Input, Select } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { notifyError, notifySuccess } from '../../../../util';
 
 const { TextArea } = Input;
+const { Option } = Select;
 /**
  * Render indicator form for creating/editing indicator
  *
@@ -26,6 +31,7 @@ class IndicatorForm extends Component {
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
     onCancel: PropTypes.func.isRequired,
     posting: PropTypes.bool.isRequired,
+    subjects: PropTypes.arrayOf(PropTypes.string).isRequired,
   };
 
   static defaultProps = {
@@ -79,6 +85,7 @@ class IndicatorForm extends Component {
       indicator,
       posting,
       onCancel,
+      subjects,
       form: { getFieldDecorator },
     } = this.props;
 
@@ -108,7 +115,15 @@ class IndicatorForm extends Component {
           {getFieldDecorator('subject', {
             initialValue: isEditForm ? indicator.subject : undefined,
             rules: [{ required: true, message: 'Subject is required' }],
-          })(<Input placeholder="e.g Shelter" />)}
+          })(
+            <Select placeholder="e.g Water">
+              {subjects.map(subject => (
+                <Option key={subject} value={subject}>
+                  {subject}
+                </Option>
+              ))}
+            </Select>
+          )}
         </Form.Item>
         {/* end subject */}
         {/* Topic */}
@@ -151,4 +166,6 @@ class IndicatorForm extends Component {
   }
 }
 
-export default Form.create()(IndicatorForm);
+export default Connect(Form.create()(IndicatorForm), {
+  subjects: 'indicators.schema.properties.subject.enum',
+});
