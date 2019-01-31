@@ -195,6 +195,8 @@ class Indicators extends Component {
           visible={showFilters}
           onCancel={this.closeFiltersModal}
           footer={null}
+          destroyOnClose
+          maskClosable={false}
         >
           <IndicatorsFilters onCancel={this.closeFiltersModal} />
         </Modal>

@@ -141,7 +141,7 @@ class IndicatorForm extends Component {
           {getFieldDecorator('topic', {
             initialValue: isEditForm ? indicator.topic : undefined,
             rules: [{ required: true, message: 'Topic is required' }],
-          })(<Input placeholder="e.g water?" />)}
+          })(<Input placeholder="e.g Increase of prices" />)}
         </Form.Item>
         {/* end topic */}
         {/* indicators description */}

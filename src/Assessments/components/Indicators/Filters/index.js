@@ -1,17 +1,11 @@
 import { Button, Checkbox, Col, Form, Row } from 'antd';
+import {
+  Connect,
+  filterIndicators,
+  clearIndicatorFilters,
+} from '@codetanzania/emis-api-states';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-
-const phases = ['Mitigation', 'Preparedness', 'Response', 'Recovery'];
-const types = [
-  'Sector',
-  'Individual',
-  'Committee',
-  'Team',
-  'Department',
-  'Agency',
-  'Other',
-];
 
 /**
  * Filter modal component for filtering indicators
@@ -26,26 +20,63 @@ class IndicatorsFilters extends Component {
   static propTypes = {
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
     onCancel: PropTypes.func.isRequired,
+    subjects: PropTypes.arrayOf(PropTypes.string).isRequired,
+    filter: PropTypes.objectOf(
+      PropTypes.shape({
+        families: PropTypes.arrayOf(PropTypes.string).isRequired,
+        natures: PropTypes.arrayOf(PropTypes.string).isRequired,
+      })
+    ),
   };
 
+  static defaultProps = {
+    filter: null,
+  };
+
+  /**
+   * Handle filter action
+   *
+   * @function
+   * @name handleSubmit
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleSubmit = e => {
     e.preventDefault();
-    // const {
-    //   form: { validateFields },
-    // } = this.props;
+    const {
+      form: { validateFields },
+      onCancel,
+    } = this.props;
 
-    // validateFields((error, values) => {
-    //   const filter = {
-    //     type: { $in: values.types },
-    //     phases: { $in: phases.phases },
-    //   };
-    // });
+    validateFields((error, values) => {
+      if (!error) {
+        filterIndicators(values);
+        onCancel();
+      }
+    });
+  };
+
+  /**
+   * Action handle when clear
+   *
+   * @function
+   * @name handleClearFilter
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleClearFilter = () => {
+    const { onCancel } = this.props;
+    clearIndicatorFilters();
+    onCancel();
   };
 
   render() {
     const {
       form: { getFieldDecorator },
       onCancel,
+      subjects,
     } = this.props;
 
     const formItemLayout = {
@@ -68,42 +99,29 @@ class IndicatorsFilters extends Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit} layout={formItemLayout}>
-        {/* start contact type filters */}
-        <Form.Item {...formItemLayout} label="By Contact type">
-          {getFieldDecorator('types')(
+      <Form onSubmit={this.handleSubmit}>
+        {/* start subject filters */}
+        <Form.Item {...formItemLayout} label="By Subject">
+          {getFieldDecorator('subject')(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
-                {types.map(type => (
-                  <Col span={6} style={{ margin: '10px 0' }}>
-                    <Checkbox value={type}>{type}</Checkbox>
+                {subjects.map(subject => (
+                  <Col span={8} style={{ margin: '10px 0' }}>
+                    <Checkbox value={subject}>{subject}</Checkbox>
                   </Col>
                 ))}
               </Row>
             </Checkbox.Group>
           )}
         </Form.Item>
-        {/* end contact type filters */}
-
-        {/* start emergency phase filters */}
-        <Form.Item {...formItemLayout} label="By Emergency Phases">
-          {getFieldDecorator('phases')(
-            <Checkbox.Group style={{ width: '100%' }}>
-              <Row>
-                {phases.map(phase => (
-                  <Col span={6} style={{ margin: '10px 0' }}>
-                    <Checkbox value={phase}>{phase}</Checkbox>
-                  </Col>
-                ))}
-              </Row>
-            </Checkbox.Group>
-          )}
-        </Form.Item>
-        {/* end emergency phase filters */}
+        {/* end subject filters */}
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
           <Button onClick={onCancel}>Cancel</Button>
+          <Button style={{ marginLeft: 8 }} onClick={this.handleClearFilter}>
+            Clear
+          </Button>
           <Button style={{ marginLeft: 8 }} type="primary" htmlType="submit">
             Filter
           </Button>
@@ -113,4 +131,6 @@ class IndicatorsFilters extends Component {
     );
   }
 }
-export default Form.create()(IndicatorsFilters);
+export default Connect(Form.create()(IndicatorsFilters), {
+  subjects: 'indicators.schema.properties.subject.enum',
+});
