@@ -7,7 +7,7 @@ const headerLayout = [
   { span: 3, header: 'Email' },
   { span: 3, header: 'Phone' },
   { span: 4, header: 'Website' },
-  { span: 5, header: 'Feed' },
+  { span: 5, header: 'Feed Url' },
 ];
 
 const AlertSourcesListHeader = () => (
