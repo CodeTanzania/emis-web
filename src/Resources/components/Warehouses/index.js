@@ -4,6 +4,7 @@ import {
   openWarehouseForm,
   selectWarehouse,
   closeWarehouseForm,
+  searchWarehouses,
 } from '@codetanzania/emis-api-states';
 import { Input, Modal, Col, Row, Button } from 'antd';
 import PropTypes from 'prop-types';
@@ -131,8 +132,8 @@ class Warehouses extends Component {
    * @version 0.1.0
    * @since 0.1.0
    */
-  searchWarehouses = event => {
-    getWarehouses({ q: event.target.value });
+  search = event => {
+    searchWarehouses({ q: event.target.value });
   };
 
   /**
@@ -173,7 +174,7 @@ class Warehouses extends Component {
             <Search
               size="large"
               placeholder="Search for warehouses here ..."
-              onChange={getWarehouses}
+              onChange={this.search}
             />
             {/* end search input component */}
           </Col>
