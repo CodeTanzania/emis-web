@@ -82,11 +82,6 @@ class AlertSourcesListItem extends Component {
                 />
 
                 <Icon
-                  type="share-alt"
-                  title="Share Alert Source"
-                  className="actionIcon"
-                />
-                <Icon
                   type="database"
                   title="Archive Source"
                   className="actionIcon"
