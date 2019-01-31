@@ -1,10 +1,18 @@
-import { Connect, getIncidentTypes } from '@codetanzania/emis-api-states';
+import {
+  Connect,
+  getIncidentTypes,
+  searchIncidentTypes,
+  openIncidentTypeForm,
+  closeIncidentTypeForm,
+  selectIncidentType,
+} from '@codetanzania/emis-api-states';
 import { Button, Col, Input, Row, Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import IncidentTypesActionBar from './ActionBar';
 import IncidentTypesList from './List';
 import IncidentTypesFilters from './Filters';
+import IncidentTypeForm from './Form';
 import './styles.css';
 
 const { Search } = Input;
@@ -22,6 +30,7 @@ const { Search } = Input;
 class IncidentTypes extends Component {
   state = {
     showFilters: false,
+    isEditForm: false,
   };
 
   static propTypes = {
@@ -29,8 +38,15 @@ class IncidentTypes extends Component {
     incidenttypes: PropTypes.arrayOf(
       PropTypes.shape({ name: PropTypes.string })
     ).isRequired,
+    incidenttype: PropTypes.shape({ name: PropTypes.string }),
     page: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
+    posting: PropTypes.bool.isRequired,
+    showForm: PropTypes.bool.isRequired,
+  };
+
+  static defaultProps = {
+    incidenttype: null,
   };
 
   componentWillMount() {
@@ -67,10 +83,66 @@ class IncidentTypes extends Component {
     this.setState({ showFilters: false });
   };
 
-  render() {
-    const { incidenttypes, page, total, loading } = this.props;
-    const { showFilters } = this.state;
+  /**
+   * Open incident type form
+   *
+   * @function
+   * @name openIncidentTypeForm
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openIncidentTypeForm = () => {
+    openIncidentTypeForm();
+  };
 
+  /**
+   * close incident type form
+   *
+   * @function
+   * @name closeIncidentTypeForm
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeIncidentTypeForm = () => {
+    closeIncidentTypeForm();
+  };
+
+  /**
+   * Handle on Edit action for list item
+   *
+   * @function
+   * @name handleEdit
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleEdit = incidenttype => {
+    selectIncidentType(incidenttype);
+    this.setState({ isEditForm: true });
+    openIncidentTypeForm();
+  };
+
+  handleAfterCloseForm = () => {
+    this.setState({ isEditForm: false });
+  };
+
+  render() {
+    const {
+      incidenttypes,
+      incidenttype,
+      loading,
+      posting,
+      page,
+      showForm,
+      total,
+    } = this.props;
+    const { showFilters, isEditForm } = this.state;
     return (
       <div className="IncidentTypes">
         <Row>
@@ -80,7 +152,7 @@ class IncidentTypes extends Component {
               size="large"
               placeholder="Search for Incident Types here ..."
               onChange={({ target: { value } }) =>
-                getIncidentTypes({ q: value })
+                searchIncidentTypes({ q: value })
               }
             />
             {/* end search input component */}
@@ -92,6 +164,7 @@ class IncidentTypes extends Component {
               icon="plus"
               size="large"
               title="Add New Incident Type"
+              onClick={this.openIncidentTypeForm}
             >
               New Incident Type
             </Button>
@@ -107,16 +180,40 @@ class IncidentTypes extends Component {
         />
         {/* end list header */}
         {/* list starts */}
-        <IncidentTypesList incidenttypes={incidenttypes} loading={loading} />
+        <IncidentTypesList
+          incidenttypes={incidenttypes}
+          loading={loading}
+          onEdit={this.handleEdit}
+        />
         {/* end list */}
         <Modal
           title="Filter Incident Types"
           visible={showFilters}
           onCancel={this.closeFiltersModal}
           footer={null}
+          destroyOnClose
+          maskClosable={false}
         >
           <IncidentTypesFilters onCancel={this.closeFiltersModal} />
         </Modal>
+        {/* create/edit form modal */}
+        <Modal
+          title={isEditForm ? 'Edit Incident Type' : 'Add New Incident Type'}
+          visible={showForm}
+          footer={null}
+          onCancel={this.closeIncidentTypeForm}
+          destroyOnClose
+          maskClosable={false}
+          afterClose={this.handleAfterCloseForm}
+        >
+          <IncidentTypeForm
+            posting={posting}
+            isEditForm={isEditForm}
+            incidenttype={incidenttype}
+            onCancel={this.closeIncidentTypeForm}
+          />
+        </Modal>
+        {/* end create/edit form modal */}
       </div>
     );
   }
@@ -127,4 +224,7 @@ export default Connect(IncidentTypes, {
   loading: 'incidentTypes.loading',
   page: 'incidentTypes.page',
   total: 'incidentTypes.total',
+  incidenttype: 'incidentTypes.selected',
+  posting: 'incidentTypes.posting',
+  showForm: 'incidentTypes.showForm',
 });

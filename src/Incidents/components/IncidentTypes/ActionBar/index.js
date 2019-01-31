@@ -1,4 +1,7 @@
-import { getIncidentTypes } from '@codetanzania/emis-api-states';
+import {
+  paginateIncidentTypes,
+  refreshIncidentTypes,
+} from '@codetanzania/emis-api-states';
 import { Button, Checkbox, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -29,7 +32,7 @@ const IncidentTypesActionBar = ({ page, total, onFilter }) => (
           shape="circle"
           icon="reload"
           title="Refresh Incident Types"
-          onClick={() => getIncidentTypes()}
+          onClick={() => refreshIncidentTypes()}
           className="actionButton"
           size="large"
         />
@@ -76,7 +79,7 @@ const IncidentTypesActionBar = ({ page, total, onFilter }) => (
           simple
           defaultCurrent={page}
           total={total}
-          onChange={nextPage => getIncidentTypes({ page: nextPage })}
+          onChange={nextPage => paginateIncidentTypes(nextPage)}
           className="pagination"
         />
       </Col>
