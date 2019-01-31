@@ -16,6 +16,8 @@ import './styles.css';
  * @param {string} props.cap
  * @param {string} props.family
  * @param {string} props.cope
+ * @param {string} props.onEdit
+
  * @version 0.1.0
  * @since 0.1.0
  */
@@ -31,6 +33,7 @@ class IncidentTypesListItem extends Component {
     family: PropTypes.string.isRequired,
     cap: PropTypes.string.isRequired,
     code: PropTypes.string.isRequired,
+    onEdit: PropTypes.func.isRequired,
   };
 
   handleMouseEnter = () => {
@@ -42,7 +45,7 @@ class IncidentTypesListItem extends Component {
   };
 
   render() {
-    const { color, name, nature, family, cap, code } = this.props;
+    const { color, name, nature, family, cap, code, onEdit } = this.props;
 
     const { isHovered } = this.state;
     return (
@@ -65,14 +68,15 @@ class IncidentTypesListItem extends Component {
           <Col span={4}>{nature}</Col>
           <Col span={4}>{family}</Col>
           <Col span={4}>{code}</Col>
-          <Col span={4}>{cap}</Col>
-          <Col span={2}>
+          <Col span={3}>{cap}</Col>
+          <Col span={3}>
             {isHovered && (
               <Fragment>
                 <Icon
                   type="edit"
                   title="Update Incident Types"
                   className="actionIcon"
+                  onClick={onEdit}
                 />
                 <Icon
                   type="database"
