@@ -5,6 +5,7 @@ import {
 import { Button, Checkbox, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { notifyError, notifySuccess } from '../../../../util';
 import './styles.css';
 
 /**
@@ -32,7 +33,18 @@ const QuestionnairesActionBar = ({ page, total, onFilter }) => (
           shape="circle"
           icon="reload"
           title="Refresh Questionnaires"
-          onClick={() => refreshQuestionnaires()}
+          onClick={() =>
+            refreshQuestionnaires(
+              () => {
+                notifySuccess('Questionnaires refreshed successfully');
+              },
+              () => {
+                notifyError(
+                  'An Error occurred while refreshing questionnaires, please contact system administrator!'
+                );
+              }
+            )
+          }
           className="actionButton"
           size="large"
         />

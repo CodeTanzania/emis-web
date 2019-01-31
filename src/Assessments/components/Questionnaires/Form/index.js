@@ -120,7 +120,7 @@ class QuestionnaireForm extends Component {
           {getFieldDecorator('title', {
             initialValue: isEditForm ? questionnaire.title : undefined,
             rules: [{ required: true, message: 'Title is required' }],
-          })(<Input placeholder="e.g Do you have water?" />)}
+          })(<Input placeholder="e.g Flood Situtation Analysis" />)}
         </Form.Item>
         {/* end title */}
 

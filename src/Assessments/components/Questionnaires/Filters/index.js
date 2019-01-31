@@ -161,9 +161,9 @@ class QuestionnairesFilters extends Component {
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
-          <Button onClick={this.handleClearFilter}>Clear</Button>
-          <Button onClick={onCancel} style={{ marginLeft: 8 }}>
-            Cancel
+          <Button onClick={onCancel}>Cancel</Button>
+          <Button onClick={this.handleClearFilter} style={{ marginLeft: 8 }}>
+            Clear
           </Button>
           <Button type="primary" htmlType="submit" style={{ marginLeft: 8 }}>
             Filter
