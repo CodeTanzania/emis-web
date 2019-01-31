@@ -9,10 +9,10 @@ import {
 import { Button, Col, Input, Modal, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import ContactsActionBar from './ActionBar';
+import ContactForm from './ContactForm';
 import ContactFilters from './Filters';
-import ContactForm from './Form';
 import ContactsList from './List';
+import NotificationForm from './NotificationForm';
 import './styles.css';
 
 const { Search } = Input;
@@ -30,6 +30,7 @@ class Contacts extends Component {
   state = {
     showFilters: false,
     isEditForm: false,
+    showNotificationForm: false,
   };
 
   static propTypes = {
@@ -143,6 +144,32 @@ class Contacts extends Component {
     openStakeholderForm();
   };
 
+  /**
+   * Handle on notify contacts
+   *
+   * @function
+   * @name openNotificationForm
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openNotificationForm = () => {
+    this.setState({ showNotificationForm: true });
+  };
+
+  /**
+   * Handle on notify contacts
+   *
+   * @function
+   * @name closeNotificationForm
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeNotificationForm = () => {
+    this.setState({ showNotificationForm: false });
+  };
+
   handleAfterCloseForm = () => {
     this.setState({ isEditForm: false });
   };
@@ -157,7 +184,7 @@ class Contacts extends Component {
       showForm,
       total,
     } = this.props;
-    const { showFilters, isEditForm } = this.state;
+    const { showFilters, isEditForm, showNotificationForm } = this.state;
     return (
       <div className="ContactsList">
         <Row>
@@ -185,19 +212,15 @@ class Contacts extends Component {
           {/* end primary actions */}
         </Row>
 
-        {/* list header */}
-        <ContactsActionBar
-          total={total}
-          page={page}
-          onFilter={this.openFiltersModal}
-        />
-        {/* end list header */}
-
         {/* list starts */}
         <ContactsList
+          total={total}
+          page={page}
           contacts={contacts}
           loading={loading}
           onEdit={this.handleEdit}
+          onFilter={this.openFiltersModal}
+          onNotify={this.openNotificationForm}
         />
         {/* end list */}
 
@@ -213,6 +236,20 @@ class Contacts extends Component {
           <ContactFilters onCancel={this.closeFiltersModal} />
         </Modal>
         {/* end filter modal */}
+
+        {/* Notification Modal modal */}
+        <Modal
+          title="Notify Contacts"
+          visible={showNotificationForm}
+          onCancel={this.closeNotificationForm}
+          footer={null}
+          destroyOnClose
+          maskClosable={false}
+          width="40%"
+        >
+          <NotificationForm onCancel={this.closeNotificationForm} />
+        </Modal>
+        {/* end Notification modal */}
 
         {/* create/edit form modal */}
         <Modal

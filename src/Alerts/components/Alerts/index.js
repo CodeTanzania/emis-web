@@ -185,7 +185,7 @@ class Alerts extends Component {
             {/* search input component */}
             <Search
               size="large"
-              placeholder="Search for stakeholders here ..."
+              placeholder="Search for alerts here ..."
               onChange={this.searchAlerts}
             />
             {/* end search input component */}
