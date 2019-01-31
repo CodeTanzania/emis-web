@@ -5,6 +5,7 @@ import {
 import { Button, Checkbox, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { notifyError, notifySuccess } from '../../../../util';
 import './styles.css';
 
 /**
@@ -32,7 +33,18 @@ const IncidentTypesActionBar = ({ page, total, onFilter }) => (
           shape="circle"
           icon="reload"
           title="Refresh Incident Types"
-          onClick={() => refreshIncidentTypes()}
+          onClick={() =>
+            refreshIncidentTypes(
+              () => {
+                notifySuccess('Incident Types refreshed successfully');
+              },
+              () => {
+                notifyError(
+                  'An Error occurred while refreshing incident types, please contact system administrator!'
+                );
+              }
+            )
+          }
           className="actionButton"
           size="large"
         />
