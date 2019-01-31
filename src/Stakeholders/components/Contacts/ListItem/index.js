@@ -1,5 +1,6 @@
 import { Avatar, Checkbox, Col, Icon, Row } from 'antd';
 import PropTypes from 'prop-types';
+import randomColor from 'randomcolor';
 import React, { Component, Fragment } from 'react';
 import './styles.css';
 
@@ -69,7 +70,7 @@ class ContactsListItem extends Component {
     } = this.props;
     const { isHovered } = this.state;
     const { isSelected } = this.props;
-
+    const avatarBackground = randomColor();
     let sideComponent = null;
 
     if (isSelected) {
@@ -88,7 +89,9 @@ class ContactsListItem extends Component {
           checked={isSelected}
         />
       ) : (
-        <Avatar>{abbreviation}</Avatar>
+        <Avatar style={{ backgroundColor: avatarBackground }}>
+          {abbreviation}
+        </Avatar>
       );
     }
 
