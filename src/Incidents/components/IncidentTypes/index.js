@@ -49,7 +49,7 @@ class IncidentTypes extends Component {
     incidenttype: null,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     getIncidentTypes();
   }
 
@@ -157,6 +157,7 @@ class IncidentTypes extends Component {
             />
             {/* end search input component */}
           </Col>
+
           {/* primary actions */}
           <Col span={3} offset={9}>
             <Button
@@ -179,6 +180,7 @@ class IncidentTypes extends Component {
           onFilter={this.openFiltersModal}
         />
         {/* end list header */}
+
         {/* list starts */}
         <IncidentTypesList
           incidenttypes={incidenttypes}
@@ -186,6 +188,8 @@ class IncidentTypes extends Component {
           onEdit={this.handleEdit}
         />
         {/* end list */}
+
+        {/* filter modal */}
         <Modal
           title="Filter Incident Types"
           visible={showFilters}
@@ -196,6 +200,8 @@ class IncidentTypes extends Component {
         >
           <IncidentTypesFilters onCancel={this.closeFiltersModal} />
         </Modal>
+        {/* end of filter modal */}
+
         {/* create/edit form modal */}
         <Modal
           title={isEditForm ? 'Edit Incident Type' : 'Add New Incident Type'}

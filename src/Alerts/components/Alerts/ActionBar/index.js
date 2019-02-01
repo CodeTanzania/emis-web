@@ -39,17 +39,7 @@ const AlertsActionBar = ({ page, total, onFilter }) => (
         <Button
           type="circle"
           icon="mail"
-          title="Send Alerts as Email"
-          className="actionButton"
-          size="large"
-        />
-      </Col>
-
-      <Col span={1} xl={1}>
-        <Button
-          type="circle"
-          icon="message"
-          title="Send Alerts as SMS"
+          title="Send Alerts"
           className="actionButton"
           size="large"
         />
@@ -65,31 +55,11 @@ const AlertsActionBar = ({ page, total, onFilter }) => (
         />
       </Col>
 
-      <Col span={1} xl={1}>
-        <Button
-          type="circle"
-          icon="share-alt"
-          title="Share selected Alerts"
-          className="actionButton"
-          size="large"
-        />
-      </Col>
-
-      <Col span={1} xl={1}>
-        <Button
-          type="circle"
-          icon="hdd"
-          title="Archive selected Alerts"
-          className="actionButton"
-          size="large"
-        />
-      </Col>
-
       <Col
         span={1}
         offset={13}
-        xl={{ span: 1, offset: 12 }}
-        xxl={{ span: 1, offset: 13 }}
+        xl={{ span: 1, offset: 14 }}
+        xxl={{ span: 1, offset: 16 }}
       >
         <Button
           type="circle"
