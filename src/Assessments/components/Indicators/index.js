@@ -1,9 +1,17 @@
-import { Connect, getIndicators } from '@codetanzania/emis-api-states';
-import { Input, List, Col, Row, Button } from 'antd';
+import {
+  Connect,
+  getIndicators,
+  openIndicatorForm,
+  closeIndicatorForm,
+  selectIndicator,
+} from '@codetanzania/emis-api-states';
+import { Input, Col, Row, Button, Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import IndicatorListItem from './ListItem';
 import IndicatorsActionBar from './ActionBar';
+import IndicatorsList from './List';
+import IndicatorsFilters from './Filters';
+import IndicatorForm from './Form';
 import './styles.css';
 
 const { Search } = Input;
@@ -12,13 +20,18 @@ const { Search } = Input;
  * Render indicator list which have search box and actions
  *
  * @class
- * @name IndicatorList
+ * @name Indicators
  *
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class IndicatorList extends Component {
+class Indicators extends Component {
+  state = {
+    showFilters: false,
+    isEditForm: false,
+  };
+
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     indicators: PropTypes.arrayOf(
@@ -30,16 +43,113 @@ class IndicatorList extends Component {
         _id: PropTypes.string,
       })
     ).isRequired,
+    indicator: PropTypes.shape({ subject: PropTypes.string }),
     total: PropTypes.number.isRequired,
     page: PropTypes.number.isRequired,
+    posting: PropTypes.bool.isRequired,
+    showForm: PropTypes.bool.isRequired,
   };
 
-  componentWillMount() {
+  static defaultProps = {
+    indicator: null,
+  };
+
+  componentDidMount() {
     getIndicators();
   }
 
+  /**
+   * open filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name openFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openFiltersModal = () => {
+    this.setState({ showFilters: true });
+  };
+
+  /**
+   * Close filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name closeFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeFiltersModal = () => {
+    this.setState({ showFilters: false });
+  };
+
+  /**
+   * Open indicator form
+   *
+   * @function
+   * @name openForm
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openForm = () => {
+    openIndicatorForm();
+  };
+
+  /**
+   * close indicator form
+   *
+   * @function closeForm
+   * @name
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeForm = () => {
+    closeIndicatorForm();
+    this.setState({ isEditForm: false });
+  };
+
+  handleAfterCloseForm = () => {
+    this.setState({ isEditForm: false });
+  };
+
+  /**
+   * Handle on Edit action for list item
+   *
+   * @function
+   * @name handleEdit
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleEdit = indicator => {
+    selectIndicator(indicator);
+    this.setState({ isEditForm: true });
+    openIndicatorForm();
+  };
+
   render() {
-    const { indicators, loading, total, page } = this.props;
+    const {
+      indicators,
+      loading,
+      total,
+      page,
+      indicator,
+      showForm,
+      posting,
+    } = this.props;
+    const { showFilters, isEditForm } = this.state;
+
     return (
       <div className="IndicatorList">
         <Row>
@@ -52,6 +162,7 @@ class IndicatorList extends Component {
             />
             {/* end search input component */}
           </Col>
+
           {/* primary actions */}
           <Col span={3} offset={9}>
             <Button
@@ -59,38 +170,72 @@ class IndicatorList extends Component {
               icon="plus"
               size="large"
               title="Add New Indicator"
+              onClick={this.openForm}
             >
               New Indicator
             </Button>
           </Col>
           {/* end primary actions */}
         </Row>
+
         {/* list action bar */}
-        <IndicatorsActionBar total={total} page={page} />
+        <IndicatorsActionBar
+          total={total}
+          page={page}
+          onFilter={this.openFiltersModal}
+        />
         {/* end list action bar */}
+
         {/* list starts */}
-        <List
+        <IndicatorsList
+          indicators={indicators}
           loading={loading}
-          dataSource={indicators}
-          renderItem={({ subject, topic, description, color, _id: id }) => (
-            <IndicatorListItem
-              key={id}
-              subject={subject}
-              topic={topic}
-              description={description}
-              color={color}
-            />
-          )}
+          onEdit={this.handleEdit}
         />
         {/* end list */}
+
+        {/* filter modal */}
+        <Modal
+          title="Filter Indicators"
+          visible={showFilters}
+          onCancel={this.closeFiltersModal}
+          footer={null}
+          destroyOnClose
+          maskClosable={false}
+        >
+          <IndicatorsFilters onCancel={this.closeFiltersModal} />
+        </Modal>
+        {/* end of filter modal */}
+
+        {/* create/edit form modal */}
+        <Modal
+          title={isEditForm ? 'Edit Indicator' : 'Add New Indicator'}
+          visible={showForm}
+          footer={null}
+          onCancel={this.closeForm}
+          destroyOnClose
+          maskClosable={false}
+          afterClose={this.handleAfterCloseForm}
+        >
+          <IndicatorForm
+            posting={posting}
+            isEditForm={isEditForm}
+            onCancel={this.closeForm}
+            indicator={indicator}
+          />
+        </Modal>
+        {/* end create/edit form modal */}
       </div>
     );
   }
 }
 
-export default Connect(IndicatorList, {
+export default Connect(Indicators, {
   indicators: 'indicators.list',
+  indicator: 'indicators.selected',
   loading: 'indicators.loading',
   page: 'indicators.page',
   total: 'indicators.total',
+  posting: 'indicators.posting',
+  showForm: 'indicators.showForm',
 });

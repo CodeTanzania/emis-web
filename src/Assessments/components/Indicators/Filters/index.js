@@ -1,26 +1,26 @@
 import { Button, Checkbox, Col, Form, Row } from 'antd';
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
 import {
   Connect,
-  clearIncidentTypeFilters,
-  filterIncidentTypes,
+  filterIndicators,
+  clearIndicatorFilters,
 } from '@codetanzania/emis-api-states';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+
 /**
- * Filter modal component for filtering incident types
+ * Filter modal component for filtering indicators
  *
  * @class
- * @name IncidentTypesFilters
+ * @name IndicatorsFilters
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class IncidentTypesFilters extends Component {
+class IndicatorsFilters extends Component {
   static propTypes = {
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
     onCancel: PropTypes.func.isRequired,
-    families: PropTypes.arrayOf(PropTypes.string).isRequired,
-    natures: PropTypes.arrayOf(PropTypes.string).isRequired,
+    subjects: PropTypes.arrayOf(PropTypes.string).isRequired,
     filter: PropTypes.objectOf(
       PropTypes.shape({
         families: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -51,7 +51,7 @@ class IncidentTypesFilters extends Component {
 
     validateFields((error, values) => {
       if (!error) {
-        filterIncidentTypes(values);
+        filterIndicators(values);
         onCancel();
       }
     });
@@ -68,7 +68,7 @@ class IncidentTypesFilters extends Component {
    */
   handleClearFilter = () => {
     const { onCancel } = this.props;
-    clearIncidentTypeFilters();
+    clearIndicatorFilters();
     onCancel();
   };
 
@@ -76,9 +76,7 @@ class IncidentTypesFilters extends Component {
     const {
       form: { getFieldDecorator },
       onCancel,
-      families,
-      natures,
-      filter,
+      subjects,
     } = this.props;
 
     const formItemLayout = {
@@ -102,47 +100,29 @@ class IncidentTypesFilters extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        {/* start families filters */}
-        <Form.Item {...formItemLayout} label="By Emergency Families">
-          {getFieldDecorator('family', {
-            initialValue: filter ? filter.families : [],
-          })(
+        {/* start subject filters */}
+        <Form.Item {...formItemLayout} label="By Subject">
+          {getFieldDecorator('subject')(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
-                {families.map(family => (
+                {subjects.map(subject => (
                   <Col span={8} style={{ margin: '10px 0' }}>
-                    <Checkbox value={family}>{family}</Checkbox>
+                    <Checkbox value={subject}>{subject}</Checkbox>
                   </Col>
                 ))}
               </Row>
             </Checkbox.Group>
           )}
         </Form.Item>
-        {/* end families filters */}
-        {/* start natures filters */}
-        <Form.Item {...formItemLayout} label="By Nature ">
-          {getFieldDecorator('nature', {
-            initialValue: filter ? filter.natures : [],
-          })(
-            <Checkbox.Group style={{ width: '100%' }}>
-              <Row>
-                {natures.map(nature => (
-                  <Col span={6} style={{ margin: '10px 0' }}>
-                    <Checkbox value={nature}>{nature}</Checkbox>
-                  </Col>
-                ))}
-              </Row>
-            </Checkbox.Group>
-          )}
-        </Form.Item>
-        {/* end nature filters */}
+        {/* end subject filters */}
+
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
           <Button onClick={onCancel}>Cancel</Button>
           <Button style={{ marginLeft: 8 }} onClick={this.handleClearFilter}>
             Clear
           </Button>
-          <Button type="primary" htmlType="submit" style={{ marginLeft: 8 }}>
+          <Button style={{ marginLeft: 8 }} type="primary" htmlType="submit">
             Filter
           </Button>
         </Form.Item>
@@ -151,9 +131,6 @@ class IncidentTypesFilters extends Component {
     );
   }
 }
-
-export default Connect(Form.create()(IncidentTypesFilters), {
-  natures: 'incidentTypes.schema.properties.nature.enum',
-  families: 'incidentTypes.schema.properties.family.enum',
-  filter: 'incidentTypes.filter',
+export default Connect(Form.create()(IndicatorsFilters), {
+  subjects: 'indicators.schema.properties.subject.enum',
 });
