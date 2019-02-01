@@ -1,10 +1,11 @@
+import {
+  Connect,
+  filterQuestions,
+  clearQuestionFilters,
+} from '@codetanzania/emis-api-states';
 import { Button, Checkbox, Col, Form, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-
-const phases = ['Mitigation', 'Preparedness', 'Response', 'Recovery'];
-const stages = ['Before', 'During', 'After', 'Other'];
-const assess = ['Need', 'Situation', 'Others'];
 
 /**
  * Filter modal component for filtering questions
@@ -17,28 +18,71 @@ const assess = ['Need', 'Situation', 'Others'];
  */
 class QuestionsFilters extends Component {
   static propTypes = {
+    filter: PropTypes.objectOf(
+      PropTypes.shape({
+        assess: PropTypes.arrayOf(PropTypes.string).isRequired,
+        phases: PropTypes.arrayOf(PropTypes.string).isRequired,
+        stages: PropTypes.arrayOf(PropTypes.string).isRequired,
+      })
+    ),
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
     onCancel: PropTypes.func.isRequired,
+    assess: PropTypes.arrayOf(PropTypes.string).isRequired,
+    phases: PropTypes.arrayOf(PropTypes.string).isRequired,
+    stages: PropTypes.arrayOf(PropTypes.string).isRequired,
   };
 
+  static defaultProps = {
+    filter: null,
+  };
+
+  /**
+   * Handle filter action
+   *
+   * @function
+   * @name handleSubmit
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleSubmit = e => {
     e.preventDefault();
-    // const {
-    //   form: { validateFields },
-    // } = this.props;
+    const {
+      form: { validateFields },
+      onCancel,
+    } = this.props;
 
-    // validateFields((error, values) => {
-    //   const filter = {
-    //     type: { $in: values.types },
-    //     phases: { $in: phases.phases },
-    //   };
-    // });
+    validateFields((error, values) => {
+      if (!error) {
+        filterQuestions(values);
+        onCancel();
+      }
+    });
+  };
+
+  /**
+   * Action handle when clear
+   *
+   * @function
+   * @name handleClearFilter
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleClearFilter = () => {
+    const { onCancel } = this.props;
+    clearQuestionFilters();
+    onCancel();
   };
 
   render() {
     const {
       form: { getFieldDecorator },
       onCancel,
+      assess,
+      stages,
+      phases,
+      filter,
     } = this.props;
 
     const formItemLayout = {
@@ -61,10 +105,12 @@ class QuestionsFilters extends Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit} layout={formItemLayout}>
+      <Form onSubmit={this.handleSubmit}>
         {/* start stage filters */}
-        <Form.Item {...formItemLayout} label="By Stages">
-          {getFieldDecorator('stages')(
+        <Form.Item {...formItemLayout} label="By Stage ">
+          {getFieldDecorator('stage', {
+            initialValue: filter ? filter.stage : [],
+          })(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {stages.map(stage => (
@@ -76,11 +122,13 @@ class QuestionsFilters extends Component {
             </Checkbox.Group>
           )}
         </Form.Item>
-        {/* end stage filters */}
+        {/* end stages filters */}
 
         {/* start emergency phase filters */}
         <Form.Item {...formItemLayout} label="By Emergency Phases">
-          {getFieldDecorator('phases')(
+          {getFieldDecorator('phase', {
+            initialValue: filter ? filter.phases : [],
+          })(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {phases.map(phase => (
@@ -93,14 +141,17 @@ class QuestionsFilters extends Component {
           )}
         </Form.Item>
         {/* end emergency phase filters */}
+
         {/* start assess filters */}
-        <Form.Item {...formItemLayout} label="By Assess">
-          {getFieldDecorator('assess')(
+        <Form.Item {...formItemLayout} label="By Assessed">
+          {getFieldDecorator('assess', {
+            initialValue: filter ? filter.assess : [],
+          })(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
-                {assess.map(type => (
+                {assess.map(data => (
                   <Col span={6} style={{ margin: '10px 0' }}>
-                    <Checkbox value={type}>{type}</Checkbox>
+                    <Checkbox value={data}>{data}</Checkbox>
                   </Col>
                 ))}
               </Row>
@@ -111,11 +162,12 @@ class QuestionsFilters extends Component {
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
-          <Button type="primary" htmlType="submit">
-            Filter
+          <Button onClick={onCancel}>Cancel</Button>
+          <Button style={{ marginLeft: 8 }} onClick={this.handleClearFilter}>
+            Clear
           </Button>
-          <Button style={{ marginLeft: 8 }} onClick={onCancel}>
-            Cancel
+          <Button style={{ marginLeft: 8 }} type="primary" htmlType="submit">
+            Filter
           </Button>
         </Form.Item>
         {/* end form actions */}
@@ -123,4 +175,10 @@ class QuestionsFilters extends Component {
     );
   }
 }
-export default Form.create()(QuestionsFilters);
+
+export default Connect(Form.create()(QuestionsFilters), {
+  assess: 'questions.schema.properties.assess.enum',
+  phases: 'questions.schema.properties.phase.enum',
+  stages: 'questions.schema.properties.stage.enum',
+  filter: 'questions.filter',
+});
