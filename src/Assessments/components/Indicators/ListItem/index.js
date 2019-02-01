@@ -26,6 +26,7 @@ class IndicatorListItem extends Component {
     topic: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
+    onEdit: PropTypes.func.isRequired,
   };
 
   state = {
@@ -41,7 +42,7 @@ class IndicatorListItem extends Component {
   };
 
   render() {
-    const { subject, topic, description, color } = this.props;
+    const { subject, topic, description, color, onEdit } = this.props;
     const { isHovered } = this.state;
     return (
       <div
@@ -55,7 +56,7 @@ class IndicatorListItem extends Component {
               <Checkbox className="Checkbox" />
             ) : (
               <Avatar style={{ backgroundColor: color }}>
-                {subject.slice(0, 1)}
+                {subject.charAt(0).toUpperCase()}
               </Avatar>
             )}
           </Col>
@@ -69,6 +70,7 @@ class IndicatorListItem extends Component {
                   type="edit"
                   title="Update ndicator"
                   className="actionIcon"
+                  onClick={onEdit}
                 />
                 <Icon
                   type="database"

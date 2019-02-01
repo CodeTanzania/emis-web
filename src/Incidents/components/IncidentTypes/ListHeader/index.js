@@ -2,12 +2,22 @@ import { Col, Row } from 'antd';
 import React from 'react';
 import './styles.css';
 
+/**
+ * Incident Types list item component. Render Incident Type list
+ *
+ * @function
+ * @name IncidentTypesListHeader
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
+
 const headerLayout = [
   { span: 5, header: 'Name', offset: 1 },
   { span: 4, header: 'Nature' },
   { span: 4, header: 'Family' },
-  { span: 4, header: 'Cap' },
   { span: 4, header: 'Code' },
+  { span: 4, header: 'Cap' },
 ];
 
 const IncidentTypesListHeader = () => (
