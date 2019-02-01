@@ -4,7 +4,21 @@ import React, { Fragment } from 'react';
 import QuestionnairesListHeader from '../ListHeader';
 import QuestionnairesListItem from '../ListItem';
 
-const QuestionnairesList = ({ questionnaires, loading }) => (
+/**
+ * Questionaire list item component. Render questionnaire details
+ *
+ * @function
+ * @name QuestionnairesList
+ *
+ * @param {Object} props
+ * @param {string} props.questionnaires
+ * @param {string} props.loading
+ * @param {string} props.onEdit
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
+const QuestionnairesList = ({ questionnaires, loading, onEdit }) => (
   <Fragment>
     <QuestionnairesListHeader />
     <List
@@ -17,6 +31,7 @@ const QuestionnairesList = ({ questionnaires, loading }) => (
           phase={questionnaire.phase}
           assess={questionnaire.assess}
           stage={questionnaire.stage}
+          onEdit={() => onEdit(questionnaire)}
         />
       )}
     />
@@ -27,6 +42,7 @@ QuestionnairesList.propTypes = {
   loading: PropTypes.bool.isRequired,
   questionnaires: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
     .isRequired,
+  onEdit: PropTypes.func.isRequired,
 };
 
 export default QuestionnairesList;

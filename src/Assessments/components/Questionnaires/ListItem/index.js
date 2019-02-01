@@ -1,6 +1,7 @@
 import { Avatar, Checkbox, Col, Icon, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
+import randomColor from 'randomcolor';
 import './styles.css';
 
 /**
@@ -28,6 +29,7 @@ class QuestionnairesListItem extends Component {
     phase: PropTypes.string.isRequired,
     assess: PropTypes.string.isRequired,
     stage: PropTypes.string.isRequired,
+    onEdit: PropTypes.func.isRequired,
   };
 
   handleMouseEnter = () => {
@@ -39,7 +41,8 @@ class QuestionnairesListItem extends Component {
   };
 
   render() {
-    const { title, phase, assess, stage } = this.props;
+    const { title, phase, assess, stage, onEdit } = this.props;
+    const avatarBackground = randomColor();
     const { isHovered } = this.state;
     return (
       <div
@@ -52,7 +55,9 @@ class QuestionnairesListItem extends Component {
             {isHovered ? (
               <Checkbox className="Checkbox" />
             ) : (
-              <Avatar>{title.charAt(0)}</Avatar>
+              <Avatar style={{ backgroundColor: avatarBackground }}>
+                {phase.charAt(0)}
+              </Avatar>
             )}
           </Col>
           <Col span={8}>{title}</Col>
@@ -66,6 +71,7 @@ class QuestionnairesListItem extends Component {
                   type="edit"
                   title="Update Questionnaire"
                   className="actionIcon"
+                  onClick={onEdit}
                 />
                 <Icon
                   type="share-alt"
