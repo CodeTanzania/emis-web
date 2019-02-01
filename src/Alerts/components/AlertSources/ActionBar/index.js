@@ -51,16 +51,6 @@ const AlertSourcesActionBar = ({ page, total }) => (
       <Col span={1} xl={1}>
         <Button
           type="circle"
-          icon="share-alt"
-          title="Share selected Alert Sources"
-          className="actionButton"
-          size="large"
-        />
-      </Col>
-
-      <Col span={1} xl={1}>
-        <Button
-          type="circle"
           icon="hdd"
           title="Archive selected Alert Sources"
           className="actionButton"
@@ -71,8 +61,8 @@ const AlertSourcesActionBar = ({ page, total }) => (
       <Col
         span={1}
         offset={13}
-        xl={{ span: 1, offset: 14 }}
-        xxl={{ span: 1, offset: 15 }}
+        xl={{ span: 1, offset: 15 }}
+        xxl={{ span: 1, offset: 16 }}
       />
 
       <Col span={3} xl={4} xxl={3}>
