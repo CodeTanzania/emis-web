@@ -120,7 +120,7 @@ class ContactForm extends Component {
         {/* end contact name */}
 
         {/* contact title */}
-        <Form.Item {...formItemLayout} label="Title">
+        <Form.Item {...formItemLayout} label="Designation">
           {getFieldDecorator('title', {
             initialValue: isEditForm ? contact.title : undefined,
             rules: [{ required: true, message: 'Contact time is required' }],
