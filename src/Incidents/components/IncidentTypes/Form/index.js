@@ -186,6 +186,7 @@ class IncidentTypeForm extends Component {
           })(<Input placeholder="e.g NMS" />)}
         </Form.Item>
         {/* end incident types code */}
+
         <Row>
           <Col span={19}>
             <Form.Item {...formItemLayout} label="Color Code">
