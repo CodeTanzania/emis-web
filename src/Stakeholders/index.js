@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import contactsIcon from '../assets/images/contacts.svg';
-import notificationsIcon from '../assets/images/notifications.svg';
-import rolesIcon from '../assets/images/roles.svg';
+import contactsIcon from '../assets/icons/stakeholders/contacts.svg';
+import notificationsIcon from '../assets/icons/stakeholders/notifications-disabled.svg';
+import rolesIcon from '../assets/icons/stakeholders/roles.svg';
 import NavigationMenu from '../components/NavigationMenu';
 
 const routes = [
@@ -12,7 +12,12 @@ const routes = [
     path: '/roles',
     icon: rolesIcon,
   },
-  { name: 'Notifications', path: '/notifications', icon: notificationsIcon },
+  {
+    name: 'Notifications',
+    path: '/notifications',
+    icon: notificationsIcon,
+    disabled: true,
+  },
 ];
 
 /**
