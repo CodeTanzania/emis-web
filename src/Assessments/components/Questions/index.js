@@ -1,10 +1,18 @@
-import { Connect, getQuestions } from '@codetanzania/emis-api-states';
+import {
+  Connect,
+  getQuestions,
+  searchQuestions,
+  openQuestionForm,
+  closeQuestionForm,
+  selectQuestion,
+} from '@codetanzania/emis-api-states';
 import { Button, Col, Input, Row, Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import QuestionsActionBar from './ActionBar';
 import QuestionsList from './List';
 import QuestionFilters from './Filters';
+import QuestionForm from './Form';
 import './styles.css';
 
 const { Search } = Input;
@@ -21,6 +29,7 @@ const { Search } = Input;
 class Questions extends Component {
   state = {
     showFilters: false,
+    isEditForm: false,
   };
 
   static propTypes = {
@@ -29,9 +38,16 @@ class Questions extends Component {
       .isRequired,
     page: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
+    posting: PropTypes.bool.isRequired,
+    question: PropTypes.shape({ name: PropTypes.string }),
+    showForm: PropTypes.bool.isRequired,
   };
 
-  componentWillMount() {
+  static defaultProps = {
+    question: null,
+  };
+
+  componentDidMount() {
     getQuestions();
   }
 
@@ -65,9 +81,67 @@ class Questions extends Component {
     this.setState({ showFilters: false });
   };
 
+  /**
+   * Open question form
+   *
+   * @function
+   * @name openForm
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openForm = () => {
+    openQuestionForm();
+  };
+
+  /**
+   * close question form
+   *
+   * @function closeForm
+   * @name
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeForm = () => {
+    closeQuestionForm();
+    this.setState({ isEditForm: false });
+  };
+
+  /**
+   * Handle on Edit action for list item
+   *
+   * @function
+   * @name handleEdit
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleEdit = question => {
+    selectQuestion(question);
+    this.setState({ isEditForm: true });
+    openQuestionForm();
+  };
+
+  handleAfterCloseForm = () => {
+    this.setState({ isEditForm: false });
+  };
+
   render() {
-    const { questions, loading, page, total } = this.props;
-    const { showFilters } = this.state;
+    const {
+      questions,
+      loading,
+      page,
+      total,
+      question,
+      posting,
+      showForm,
+    } = this.props;
+    const { showFilters, isEditForm } = this.state;
 
     return (
       <div className="Questions">
@@ -77,10 +151,13 @@ class Questions extends Component {
             <Search
               size="large"
               placeholder="Search for questions here ..."
-              onChange={({ target: { value } }) => getQuestions({ q: value })}
+              onChange={({ target: { value } }) =>
+                searchQuestions({ q: value })
+              }
             />
             {/* end search input component */}
           </Col>
+
           {/* primary actions */}
           <Col span={3} offset={9}>
             <Button
@@ -88,6 +165,7 @@ class Questions extends Component {
               icon="plus"
               size="large"
               title="Add New Question"
+              onClick={this.openForm}
             >
               New Question
             </Button>
@@ -102,17 +180,46 @@ class Questions extends Component {
           onFilter={this.openFiltersModal}
         />
         {/* end list header */}
+
         {/* list starts */}
-        <QuestionsList questions={questions} loading={loading} />
+        <QuestionsList
+          questions={questions}
+          loading={loading}
+          onEdit={this.handleEdit}
+        />
         {/* end list */}
+
+        {/* filter modal */}
         <Modal
           title="Filter Questions"
           visible={showFilters}
           onCancel={this.closeFiltersModal}
           footer={null}
+          destroyOnClose
+          maskClosable={false}
         >
           <QuestionFilters onCancel={this.closeFiltersModal} />
         </Modal>
+        {/* end of filter modal */}
+
+        {/* create/edit form modal */}
+        <Modal
+          title={isEditForm ? 'Edit Question' : 'Add New Question'}
+          visible={showForm}
+          footer={null}
+          onCancel={this.closeForm}
+          destroyOnClose
+          maskClosable={false}
+          afterClose={this.handleAfterCloseForm}
+        >
+          <QuestionForm
+            posting={posting}
+            isEditForm={isEditForm}
+            question={question}
+            onCancel={this.closeForm}
+          />
+        </Modal>
+        {/* end create/edit form modal */}
       </div>
     );
   }
@@ -120,7 +227,10 @@ class Questions extends Component {
 
 export default Connect(Questions, {
   questions: 'questions.list',
+  question: 'questions.selected',
   loading: 'questions.loading',
   page: 'questions.page',
   total: 'questions.total',
+  posting: 'questions.posting',
+  showForm: 'questions.showForm',
 });
