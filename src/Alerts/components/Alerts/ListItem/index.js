@@ -2,6 +2,7 @@ import { Avatar, Checkbox, Col, Icon, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import moment from 'moment';
+import randomColor from 'randomcolor';
 import './styles.css';
 
 /**
@@ -84,6 +85,7 @@ class AlertsListItem extends Component {
     } = this.props;
     const { isHovered } = this.state;
     const eventTitle = description || headline;
+    const avatarBackgroundColor = color || randomColor();
     return (
       <div
         className="AlertsListItem"
@@ -95,7 +97,9 @@ class AlertsListItem extends Component {
             {isHovered ? (
               <Checkbox className="Checkbox" />
             ) : (
-              <Avatar style={{ backgroundColor: color }}>{abbreviation}</Avatar>
+              <Avatar style={{ backgroundColor: avatarBackgroundColor }}>
+                {abbreviation}
+              </Avatar>
             )}
           </Col>
           <Col span={9} title={eventTitle}>
