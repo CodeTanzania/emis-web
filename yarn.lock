@@ -8486,6 +8486,18 @@ react-app-rewired@^2.0.3:
     dotenv "^6.2.0"
     semver "^5.6.0"
 
+react-color@^2.17.0:
+  version "2.17.0"
+  resolved "https://registry.yarnpkg.com/react-color/-/react-color-2.17.0.tgz#e14b8a11f4e89163f65a34c8b43faf93f7f02aaa"
+  integrity sha512-kJfE5tSaFe6GzalXOHksVjqwCPAsTl+nzS9/BWfP7j3EXbQ4IiLAF9sZGNzk3uq7HfofGYgjmcUgh0JP7xAQ0w==
+  dependencies:
+    "@icons/material" "^0.2.4"
+    lodash ">4.17.4"
+    material-colors "^1.2.1"
+    prop-types "^15.5.10"
+    reactcss "^1.2.0"
+    tinycolor2 "^1.4.1"
+
 react-dev-utils@^7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-7.0.1.tgz#c53e759a22668ee2c0d146c24ce4bdec2b41e3c8"
