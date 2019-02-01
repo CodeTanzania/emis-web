@@ -10,6 +10,16 @@ import ContactsActionBar from '../ActionBar';
 import ContactsListHeader from '../ListHeader';
 import ContactsListItem from '../ListItem';
 
+/**
+ * Render ContactsList component which have actionBar, contacts header and
+ * contacts list components
+ *
+ * @class
+ * @name ContactsList
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
 class ContactsList extends Component {
   static propTypes = {
     loading: PropTypes.bool.isRequired,
@@ -26,13 +36,59 @@ class ContactsList extends Component {
     selectedContacts: [],
   };
 
+  /**
+   * Handle select a single contact action
+   *
+   * @function
+   * @name handleOnSelectContact
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleOnSelectContact = contact => {
     const { selectedContacts } = this.state;
     this.setState({ selectedContacts: concat([], selectedContacts, contact) });
   };
 
+  /**
+   * Handle selected all contacts actions
+   *
+   * @function
+   * @name handleSelectAll
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleSelectAll = () => {};
 
+  /**
+   * Handle filter contacts by status action
+   *
+   * @function
+   * @name handleFilterByStatus
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleFilterByStatus = () => {
+    // if (status === 'All') {
+    //   filterStakeholders({});
+    // } else if (status === 'Active') {
+    //   filterStakeholders({});
+    // } else if (status === 'Archived') {
+    //   filterStakeholders({});
+    // }
+  };
+
+  /**
+   * Handle deselect a single contact action
+   *
+   * @function
+   * @name handleOnDeselectContact
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleOnDeselectContact = contact => {
     const { selectedContacts } = this.state;
     const selectedList = [...selectedContacts];
@@ -69,6 +125,7 @@ class ContactsList extends Component {
             onNotify(selectedContacts);
           }}
           selectedItemCount={selectedContactsCount}
+          onFilterByStatus={this.handleFilterByStatus}
         />
         {/* end action bar */}
 
