@@ -105,8 +105,8 @@ class ContactsFilters extends Component {
       <Form onSubmit={this.handleSubmit}>
         {/* start contact type filters */}
         <Form.Item {...formItemLayout} label="By Contact type">
-          {getFieldDecorator('types', {
-            initialValue: filter ? filter.types : [],
+          {getFieldDecorator('type', {
+            initialValue: filter ? filter.type : [],
           })(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
