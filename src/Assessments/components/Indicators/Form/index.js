@@ -136,6 +136,7 @@ class IndicatorForm extends Component {
           )}
         </Form.Item>
         {/* end subject */}
+
         {/* Topic */}
         <Form.Item {...formItemLayout} label="Topic">
           {getFieldDecorator('topic', {
@@ -144,6 +145,7 @@ class IndicatorForm extends Component {
           })(<Input placeholder="e.g Increase of prices" />)}
         </Form.Item>
         {/* end topic */}
+
         {/* indicators description */}
         <Form.Item {...formItemLayout} label="Indicator Summary">
           {getFieldDecorator('description', {

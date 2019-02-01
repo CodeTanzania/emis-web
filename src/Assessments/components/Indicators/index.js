@@ -54,7 +54,7 @@ class Indicators extends Component {
     indicator: null,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     getIndicators();
   }
 
@@ -162,6 +162,7 @@ class Indicators extends Component {
             />
             {/* end search input component */}
           </Col>
+
           {/* primary actions */}
           <Col span={3} offset={9}>
             <Button
@@ -176,6 +177,7 @@ class Indicators extends Component {
           </Col>
           {/* end primary actions */}
         </Row>
+
         {/* list action bar */}
         <IndicatorsActionBar
           total={total}
@@ -183,6 +185,7 @@ class Indicators extends Component {
           onFilter={this.openFiltersModal}
         />
         {/* end list action bar */}
+
         {/* list starts */}
         <IndicatorsList
           indicators={indicators}
@@ -190,6 +193,8 @@ class Indicators extends Component {
           onEdit={this.handleEdit}
         />
         {/* end list */}
+
+        {/* filter modal */}
         <Modal
           title="Filter Indicators"
           visible={showFilters}
@@ -200,6 +205,8 @@ class Indicators extends Component {
         >
           <IndicatorsFilters onCancel={this.closeFiltersModal} />
         </Modal>
+        {/* end of filter modal */}
+
         {/* create/edit form modal */}
         <Modal
           title={isEditForm ? 'Edit Indicator' : 'Add New Indicator'}
