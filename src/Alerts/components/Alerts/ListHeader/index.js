@@ -3,7 +3,7 @@ import React from 'react';
 import './styles.css';
 
 const headerLayout = [
-  { span: 9, header: 'Headline', offset: 1 },
+  { span: 9, header: 'Event', offset: 1 },
   { span: 3, header: 'Expected At' },
   { span: 3, header: 'Expires At' },
   { span: 5, header: 'Issued By' },
