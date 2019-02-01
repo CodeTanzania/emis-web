@@ -3,9 +3,11 @@ import {
   putQuestion,
   Connect,
 } from '@codetanzania/emis-api-states';
+import { getIndicators } from '@codetanzania/emis-api-client';
 import { Button, Form, Input, Select } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import SearchableSelectInput from '../../../../components/SearchableSelectInput';
 import { notifyError, notifySuccess } from '../../../../util';
 
 const { Option } = Select;
@@ -30,9 +32,6 @@ class QuestionForm extends Component {
       assess: PropTypes.string,
       phase: PropTypes.string,
     }),
-    indicators: PropTypes.arrayOf(
-      PropTypes.shape({ subject: PropTypes.string })
-    ).isRequired,
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
     onCancel: PropTypes.func.isRequired,
     posting: PropTypes.bool.isRequired,
@@ -97,7 +96,6 @@ class QuestionForm extends Component {
       phases,
       stages,
       types,
-      indicators,
       form: { getFieldDecorator },
     } = this.props;
 
@@ -143,16 +141,16 @@ class QuestionForm extends Component {
         {/* indicators */}
         <Form.Item {...formItemLayout} label="Indicator">
           {getFieldDecorator('indicator', {
-            initialValue: isEditForm ? question.indicator.subject : undefined,
+            initialValue: isEditForm ? question.indicator._id : undefined, // eslint-disable-line
             rules: [{ required: true, message: 'Indicator is required' }],
           })(
-            <Select placeholder="e.g Water and Food">
-              {indicators.map(({ subject, _id: id }) => (
-                <Option key={id} value={id}>
-                  {subject}
-                </Option>
-              ))}
-            </Select>
+            <SearchableSelectInput
+              placeholder="e.g Water and Food"
+              onSearch={getIndicators}
+              optionLabel="subject"
+              optionValue="_id"
+              initialValue={isEditForm ? question.indicator : undefined}
+            />
           )}
         </Form.Item>
         {/* end indicator */}

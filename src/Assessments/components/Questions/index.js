@@ -5,7 +5,6 @@ import {
   openQuestionForm,
   closeQuestionForm,
   selectQuestion,
-  getIndicators,
 } from '@codetanzania/emis-api-states';
 import { Button, Col, Input, Row, Modal } from 'antd';
 import PropTypes from 'prop-types';
@@ -37,9 +36,6 @@ class Questions extends Component {
     loading: PropTypes.bool.isRequired,
     questions: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
       .isRequired,
-    indicators: PropTypes.arrayOf(
-      PropTypes.shape({ subject: PropTypes.string })
-    ).isRequired,
     page: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
     posting: PropTypes.bool.isRequired,
@@ -53,7 +49,6 @@ class Questions extends Component {
 
   componentDidMount() {
     getQuestions();
-    getIndicators();
   }
 
   /**
@@ -145,7 +140,6 @@ class Questions extends Component {
       question,
       posting,
       showForm,
-      indicators,
     } = this.props;
     const { showFilters, isEditForm } = this.state;
 
@@ -186,6 +180,7 @@ class Questions extends Component {
           onFilter={this.openFiltersModal}
         />
         {/* end list header */}
+
         {/* list starts */}
         <QuestionsList
           questions={questions}
@@ -193,6 +188,8 @@ class Questions extends Component {
           onEdit={this.handleEdit}
         />
         {/* end list */}
+
+        {/* filter modal */}
         <Modal
           title="Filter Questions"
           visible={showFilters}
@@ -203,6 +200,7 @@ class Questions extends Component {
         >
           <QuestionFilters onCancel={this.closeFiltersModal} />
         </Modal>
+        {/* end of filter modal */}
 
         {/* create/edit form modal */}
         <Modal
@@ -219,7 +217,6 @@ class Questions extends Component {
             isEditForm={isEditForm}
             question={question}
             onCancel={this.closeForm}
-            indicators={indicators}
           />
         </Modal>
         {/* end create/edit form modal */}
@@ -231,7 +228,6 @@ class Questions extends Component {
 export default Connect(Questions, {
   questions: 'questions.list',
   question: 'questions.selected',
-  indicators: 'indicators.list',
   loading: 'questions.loading',
   page: 'questions.page',
   total: 'questions.total',
