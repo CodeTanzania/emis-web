@@ -1,8 +1,8 @@
 import { Avatar, Checkbox, Col, Icon, Row } from 'antd';
-import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 import randomColor from 'randomcolor';
+import React, { Component, Fragment } from 'react';
 import './styles.css';
 
 /**
@@ -36,9 +36,12 @@ class AlertsListItem extends Component {
     source: PropTypes.string.isRequired,
     event: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
+    certainty: PropTypes.string.isRequired,
     expiredAt: PropTypes.string.isRequired,
     expectedAt: PropTypes.string.isRequired,
     onEdit: PropTypes.func.isRequired,
+    severity: PropTypes.func.isRequired,
+    urgency: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -55,33 +58,40 @@ class AlertsListItem extends Component {
   };
 
   /**
-   * Tranforms ISO date to human readable date
+   * Transforms ISO date to human readable date
    *
    * @function
    * @name toHumanReadableDate
    *
-   * @param {String} isoFormattDate
+   * @param {String} isoFormatDate
    * @returns humanReadableDate
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  toHumanReadableDate = isoFormattDate =>
-    moment(isoFormattDate)
+  toHumanReadableDate = isoFormatDate =>
+    moment(isoFormatDate)
       .utc()
-      .format('dddd, MMMM Do YYYY');
+      .format('ddd, MMM DD YYYY hA');
+
+  formatTime = date => moment(date).format('ddd, MMM DD YYYY hA');
+
+  timeAgo = date => moment(date).fromNow();
 
   render() {
     const {
       abbreviation,
       source,
       color,
+      certainty,
       onEdit,
       event,
       headline,
       description,
       expiredAt,
       expectedAt,
+      urgency,
+      severity,
     } = this.props;
     const { isHovered } = this.state;
     const eventTitle = description || headline;
@@ -102,12 +112,19 @@ class AlertsListItem extends Component {
               </Avatar>
             )}
           </Col>
-          <Col span={9} title={eventTitle}>
+          <Col span={7} title={eventTitle}>
             {event}
           </Col>
-          <Col span={3}>{this.toHumanReadableDate(expectedAt)}</Col>
-          <Col span={3}>{this.toHumanReadableDate(expiredAt)}</Col>
-          <Col span={5}>{source}</Col>
+          <Col span={2}>{severity}</Col>
+          <Col span={2}>{certainty}</Col>
+          <Col span={2}>{urgency}</Col>
+          <Col title={this.formatTime(expectedAt)} span={2}>
+            {this.timeAgo(expectedAt)}
+          </Col>
+          <Col title={this.formatTime(expectedAt)} span={2}>
+            {this.timeAgo(expiredAt)}
+          </Col>
+          <Col span={3}>{source}</Col>
           <Col span={3}>
             {isHovered && (
               <Fragment>

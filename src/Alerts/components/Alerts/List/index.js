@@ -1,7 +1,7 @@
 import { List } from 'antd';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
-import moment from 'moment';
 import AlertsListHeader from '../ListHeader';
 import AlertListItem from '../ListItem';
 
@@ -76,19 +76,26 @@ const AlertList = ({ alerts, loading, onEdit }) => {
         renderItem={alert => {
           const {
             _id: id,
+            urgency,
+            area,
+            certainty,
             event,
+            expiredAt,
+            expectedAt,
             source,
             color,
             headline,
             description,
             reportedAt,
-            expiredAt,
-            expectedAt,
+            severity,
           } = alert;
           return (
             <AlertListItem
               key={id}
               abbreviation={source.toUpperCase().charAt(0)}
+              urgency={urgency}
+              area={area}
+              certainty={certainty}
               event={event}
               headline={headline}
               description={description}
@@ -97,6 +104,7 @@ const AlertList = ({ alerts, loading, onEdit }) => {
               reportedAt={reportedAt}
               expiredAt={expiredAt}
               expectedAt={expectedAt}
+              severity={severity}
               onEdit={() => onEdit(alert)}
             />
           );
