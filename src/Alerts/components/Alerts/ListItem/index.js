@@ -2,6 +2,7 @@ import { Avatar, Checkbox, Col, Icon, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import moment from 'moment';
+import randomColor from 'randomcolor';
 import './styles.css';
 
 /**
@@ -13,7 +14,9 @@ import './styles.css';
  * @param {Object} props
  * @param {string} props.abbreviation
  * @param {string} props.source
+ * @param {string} props.event
  * @param {string} props.headline
+ * @param {string} props.description
  * @param {string} props.color
  * @param {string} props.expectedAt
  * @param {string} props.expiredAt
@@ -28,13 +31,19 @@ class AlertsListItem extends Component {
 
   static propTypes = {
     abbreviation: PropTypes.string.isRequired,
+    headline: PropTypes.string,
+    description: PropTypes.string,
     source: PropTypes.string.isRequired,
-    headline: PropTypes.string.isRequired,
+    event: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
     expiredAt: PropTypes.string.isRequired,
     expectedAt: PropTypes.string.isRequired,
     onEdit: PropTypes.func.isRequired,
-    onArchive: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    description: '',
+    headline: '',
   };
 
   handleMouseEnter = () => {
@@ -68,12 +77,15 @@ class AlertsListItem extends Component {
       source,
       color,
       onEdit,
-      onArchive,
+      event,
       headline,
+      description,
       expiredAt,
       expectedAt,
     } = this.props;
     const { isHovered } = this.state;
+    const eventTitle = description || headline;
+    const avatarBackgroundColor = color || randomColor();
     return (
       <div
         className="AlertsListItem"
@@ -85,10 +97,14 @@ class AlertsListItem extends Component {
             {isHovered ? (
               <Checkbox className="Checkbox" />
             ) : (
-              <Avatar style={{ backgroundColor: color }}>{abbreviation}</Avatar>
+              <Avatar style={{ backgroundColor: avatarBackgroundColor }}>
+                {abbreviation}
+              </Avatar>
             )}
           </Col>
-          <Col span={9}>{headline}</Col>
+          <Col span={9} title={eventTitle}>
+            {event}
+          </Col>
           <Col span={3}>{this.toHumanReadableDate(expectedAt)}</Col>
           <Col span={3}>{this.toHumanReadableDate(expiredAt)}</Col>
           <Col span={5}>{source}</Col>
@@ -101,16 +117,12 @@ class AlertsListItem extends Component {
                   className="actionIcon"
                   onClick={onEdit}
                 />
+
                 <Icon
-                  type="share-alt"
-                  title="Share Alert"
+                  type="mail"
+                  title="Send Alert"
                   className="actionIcon"
-                />
-                <Icon
-                  type="database"
-                  title="Archive Alert"
-                  className="actionIcon"
-                  onClick={onArchive}
+                  onClick={() => {}}
                 />
               </Fragment>
             )}
