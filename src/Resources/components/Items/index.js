@@ -54,7 +54,7 @@ class Items extends Component {
     item: null,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     getItems();
   }
 

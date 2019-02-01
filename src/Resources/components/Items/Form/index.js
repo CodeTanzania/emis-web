@@ -151,9 +151,7 @@ class ItemForm extends Component {
         <Form.Item {...formItemLayout} label="Unit of Measure/Quality">
           {getFieldDecorator('uom', {
             initialValue: isEditForm ? item.uom : undefined,
-            rules: [
-              { required: true, message: 'Unit of Measurement is required' },
-            ],
+            rules: [{ required: true, message: 'Unit of Measure is required' }],
           })(
             <Select placeholder="e.g bag">
               {uoms.map(uom => (
@@ -166,14 +164,14 @@ class ItemForm extends Component {
         </Form.Item>
         {/* end unit of measure */}
 
-        {/* destription */}
+        {/* description */}
         <Form.Item {...formItemLayout} label="Item Summary">
           {getFieldDecorator('description', {
             initialValue: isEditForm ? item.description : undefined,
             rules: [{ message: 'Add summaries' }],
           })(<TextArea placeholder="e.g Addition information of item" />)}
         </Form.Item>
-        {/* end destription */}
+        {/* end description */}
 
         {/* color code */}
         <Row>
@@ -195,17 +193,9 @@ class ItemForm extends Component {
         </Row>
         {/* end  color code */}
 
-        {/* maxStockAllowed , minStockAllowed */}
+        {/*  minStockAllowed, maxStockAllowed */}
         <Row>
           <Col span={10}>
-            <Form.Item {...formItemLayout} label="Maximum Stock">
-              {getFieldDecorator('maxStockAllowed', {
-                initialValue: isEditForm ? item.maxStockAllowed : undefined,
-                rules: [{ message: 'Maximum stock is required' }],
-              })(<Input placeholder="e.g 123" type="number" />)}
-            </Form.Item>
-          </Col>
-          <Col span={10} offset={1}>
             <Form.Item {...formItemLayout} label="Minimum Stock">
               {getFieldDecorator('minStockAllowed', {
                 initialValue: isEditForm ? item.minStockAllowed : undefined,
@@ -213,8 +203,16 @@ class ItemForm extends Component {
               })(<Input placeholder="e.g 23" type="number" />)}
             </Form.Item>
           </Col>
+          <Col span={10} offset={1}>
+            <Form.Item {...formItemLayout} label="Maximum Stock">
+              {getFieldDecorator('maxStockAllowed', {
+                initialValue: isEditForm ? item.maxStockAllowed : undefined,
+                rules: [{ message: 'Maximum stock is required' }],
+              })(<Input placeholder="e.g 123" type="number" />)}
+            </Form.Item>
+          </Col>
         </Row>
-        {/* end minStockAllowed & maxStockALlowed */}
+        {/* end minStockAllowed & maxStockAllowed */}
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
