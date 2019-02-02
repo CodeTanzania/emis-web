@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import activationIcon from '../assets/icons/emergencyplans/activations-disabled.svg';
 import disseminationIcon from '../assets/icons/emergencyplans/disseminations-disabled.svg';
-import drillsAndExcercisesIcon from '../assets/icons/emergencyplans/drillsandexercises-disabled.svg';
+import drillsAndExercisesIcon from '../assets/icons/emergencyplans/drillsandexercises-disabled.svg';
 import plannerIcon from '../assets/icons/emergencyplans/planner.svg';
 import NavigationMenu from '../components/NavigationMenu';
 
@@ -23,7 +23,7 @@ const routes = [
   {
     name: 'Drills & Exercises',
     path: '/drills',
-    icon: drillsAndExcercisesIcon,
+    icon: drillsAndExercisesIcon,
     disabled: true,
   },
 ];
