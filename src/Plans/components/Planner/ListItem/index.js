@@ -112,18 +112,18 @@ class PlansListItem extends Component {
               <Fragment>
                 <Icon
                   type="edit"
-                  title="Update Contact"
+                  title="Update Plan"
                   className="actionIcon"
                   onClick={onEdit}
                 />
                 <Icon
                   type="share-alt"
-                  title="Share Contact"
+                  title="Share Plan"
                   className="actionIcon"
                 />
                 <Icon
                   type="database"
-                  title="Archive Contact"
+                  title="Archive Plan"
                   className="actionIcon"
                   onClick={onArchive}
                 />

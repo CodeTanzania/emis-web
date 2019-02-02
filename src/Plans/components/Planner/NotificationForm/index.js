@@ -100,7 +100,7 @@ class NotificationForm extends Component {
         {/* notification subject */}
         <Form.Item {...formItemLayout} label="Subject">
           {getFieldDecorator('subject', {
-            rules: [{ required: true, message: 'Contact time is required' }],
+            rules: [{ required: true, message: 'Plan time is required' }],
           })(<Input placeholder="Applicable for Email notification only" />)}
         </Form.Item>
         {/* notification subject */}

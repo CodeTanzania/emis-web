@@ -9,10 +9,10 @@ import {
 import { Button, Col, Input, Modal, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import PlanForm from './ContactForm';
 import PlanFilters from './Filters';
 import PlansList from './List';
 import NotificationForm from './NotificationForm';
+import PlanForm from './PlanForm';
 import './styles.css';
 
 const { Search } = Input;

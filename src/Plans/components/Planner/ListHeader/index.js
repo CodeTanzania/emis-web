@@ -9,7 +9,7 @@ const headerLayout = [
 ];
 
 const PlansListHeader = () => (
-  <Row className="ContactListHeader">
+  <Row className="PlanListHeader">
     {headerLayout.map(item => (
       <Col key={item.header} {...item}>
         <h4 className="title">{item.header}</h4>

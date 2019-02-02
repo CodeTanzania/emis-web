@@ -40,12 +40,12 @@ class PlansList extends Component {
    * Handle select a single plan action
    *
    * @function
-   * @name handleOnSelectContact
+   * @name handleOnSelectPlan
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleOnSelectContact = plan => {
+  handleOnSelectPlan = plan => {
     const { selectedPlans } = this.state;
     this.setState({ selectedPlans: concat([], selectedPlans, plan) });
   };
@@ -84,12 +84,12 @@ class PlansList extends Component {
    * Handle deselect a single plan action
    *
    * @function
-   * @name handleOnDeselectContact
+   * @name handleOnDeselectPlan
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleOnDeselectContact = plan => {
+  handleOnDeselectPlan = plan => {
     const { selectedPlans } = this.state;
     const selectedList = [...selectedPlans];
 
@@ -150,21 +150,21 @@ class PlansList extends Component {
                 map(selectedPlans, item => item._id).includes(plan._id)
               }
               onSelectItem={() => {
-                this.handleOnSelectContact(plan);
+                this.handleOnSelectPlan(plan);
               }}
               onDeselectItem={() => {
-                this.handleOnDeselectContact(plan);
+                this.handleOnDeselectPlan(plan);
               }}
               onEdit={() => onEdit(plan)}
               onArchive={() =>
                 deletePlan(
                   plan._id, // eslint-disable-line
                   () => {
-                    notifySuccess('Contact was archived successfully');
+                    notifySuccess('Plan was archived successfully');
                   },
                   () => {
                     notifyError(
-                      'An Error occurred while archiving Contact please plan system administrator'
+                      'An Error occurred while archiving Plan please plan system administrator'
                     );
                   }
                 )

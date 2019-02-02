@@ -104,7 +104,7 @@ class PlansFilters extends Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         {/* start plan type filters */}
-        <Form.Item {...formItemLayout} label="By Contact type">
+        <Form.Item {...formItemLayout} label="By Plan type">
           {getFieldDecorator('type', {
             initialValue: filter ? filter.type : [],
           })(

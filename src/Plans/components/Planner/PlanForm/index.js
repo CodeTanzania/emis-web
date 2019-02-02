@@ -5,15 +5,15 @@ import React, { Component } from 'react';
 import { notifyError, notifySuccess } from '../../../../util';
 
 /**
- * Render Contact form for creating and updating plan plan details
+ * Render Plan form for creating and updating plan plan details
  *
  * @class
- * @name ContactForm
+ * @name PlanForm
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class ContactForm extends Component {
+class PlanForm extends Component {
   static propTypes = {
     isEditForm: PropTypes.bool.isRequired,
     plan: PropTypes.shape({
@@ -49,11 +49,11 @@ class ContactForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedContact = Object.assign({}, plan, values);
+          const updatedPlan = Object.assign({}, plan, values);
           putPlan(
-            updatedContact,
+            updatedPlan,
             () => {
-              notifySuccess('Contact was updated successfully');
+              notifySuccess('Plan was updated successfully');
             },
             () => {
               notifyError(
@@ -65,7 +65,7 @@ class ContactForm extends Component {
           postPlan(
             values,
             () => {
-              notifySuccess('Contact was created successfully');
+              notifySuccess('Plan was created successfully');
             },
             () => {
               notifyError(
@@ -112,9 +112,7 @@ class ContactForm extends Component {
         <Form.Item {...formItemLayout} label="Full Name">
           {getFieldDecorator('name', {
             initialValue: isEditForm ? plan.name : undefined,
-            rules: [
-              { required: true, message: 'Contact full name is required' },
-            ],
+            rules: [{ required: true, message: 'Plan full name is required' }],
           })(<Input placeholder="e.g John Doe" />)}
         </Form.Item>
         {/* end plan name */}
@@ -123,7 +121,7 @@ class ContactForm extends Component {
         <Form.Item {...formItemLayout} label="Designation">
           {getFieldDecorator('title', {
             initialValue: isEditForm ? plan.title : undefined,
-            rules: [{ required: true, message: 'Contact time is required' }],
+            rules: [{ required: true, message: 'Plan time is required' }],
           })(<Input placeholder="e.g Regional Commissioner" />)}
         </Form.Item>
         {/* end plan title */}
@@ -178,4 +176,4 @@ class ContactForm extends Component {
   }
 }
 
-export default Form.create()(ContactForm);
+export default Form.create()(PlanForm);
