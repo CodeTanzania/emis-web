@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { notifyError, notifySuccess } from '../../../../util';
 import PlansActionBar from '../ActionBar';
+import PlansGridListItem from '../GridListItem';
 import PlansListHeader from '../ListHeader';
 import PlansListItem from '../ListItem';
 
@@ -34,6 +35,7 @@ class PlansList extends Component {
 
   state = {
     selectedPlans: [],
+    isGridLayout: false,
   };
 
   /**
@@ -80,6 +82,12 @@ class PlansList extends Component {
     // }
   };
 
+  handleToggleLayout = () => {
+    this.setState(previousState => ({
+      isGridLayout: !previousState.isGridLayout,
+    }));
+  };
+
   /**
    * Handle deselect a single plan action
    *
@@ -111,12 +119,12 @@ class PlansList extends Component {
       onFilter,
       onNotify,
     } = this.props;
-    const { selectedPlans } = this.state;
+    const { selectedPlans, isGridLayout } = this.state;
     const selectedPlansCount = this.state.selectedPlans.length;
 
     return (
       <Fragment>
-        {/* list action bar */}
+        {/*  action bar */}
         <PlansActionBar
           total={total}
           page={page}
@@ -125,54 +133,86 @@ class PlansList extends Component {
             onNotify(selectedPlans);
           }}
           selectedItemCount={selectedPlansCount}
+          isGridLayout={isGridLayout}
           onFilterByStatus={this.handleFilterByStatus}
+          onToggleLayout={this.handleToggleLayout}
         />
         {/* end action bar */}
 
-        {/* plan list header */}
-        <PlansListHeader />
-        {/* end plan list header */}
+        {isGridLayout ? (
+          <List
+            grid={{ gutter: 10, xs: 1, sm: 2, md: 3, lg: 3, xl: 3, xxl: 4 }}
+            dataSource={plans}
+            loading={loading}
+            renderItem={plan => (
+              <List.Item>
+                <PlansGridListItem
+                  incidentType={plan.incidentType.name}
+                  jurisdiction={plan.boundary.name}
+                  level={plan.boundary.level}
+                  owner={plan.owner.name}
+                  description={plan.description}
+                  nature={plan.incidentType.nature}
+                  family={plan.incidentType.family}
+                  updatedAt={plan.updatedAt}
+                  color={plan.incidentType.color}
+                  activityCount={20}
+                  onClickPlan={() => {}}
+                  onEditPlan={() => {
+                    this.handleOpenPlanEditForm(plan);
+                  }}
+                />
+              </List.Item>
+            )}
+          />
+        ) : (
+          <Fragment>
+            {/* plan list header */}
+            <PlansListHeader />
+            {/* end plan list header */}
 
-        {/* plans list */}
-        <List
-          loading={loading}
-          dataSource={plans}
-          renderItem={plan => (
-            <PlansListItem
-              key={plan._id} // eslint-disable-line
-              code={plan.incidentType.code}
-              color={plan.incidentType.color}
-              incidentType={plan.incidentType.name}
-              owner={plan.owner.name}
-              boundary={plan.boundary.name}
-              isSelected={
-                // eslint-disable-next-line
-                map(selectedPlans, item => item._id).includes(plan._id)
-              }
-              onSelectItem={() => {
-                this.handleOnSelectPlan(plan);
-              }}
-              onDeselectItem={() => {
-                this.handleOnDeselectPlan(plan);
-              }}
-              onEdit={() => onEdit(plan)}
-              onArchive={() =>
-                deletePlan(
-                  plan._id, // eslint-disable-line
-                  () => {
-                    notifySuccess('Plan was archived successfully');
-                  },
-                  () => {
-                    notifyError(
-                      'An Error occurred while archiving Plan please plan system administrator'
-                    );
+            {/* plan list */}
+            <List
+              loading={loading}
+              dataSource={plans}
+              renderItem={plan => (
+                <PlansListItem
+                  key={plan._id} // eslint-disable-line
+                  code={plan.incidentType.code}
+                  color={plan.incidentType.color}
+                  incidentType={plan.incidentType.name}
+                  owner={plan.owner.name}
+                  boundary={plan.boundary.name}
+                  isSelected={
+                    // eslint-disable-next-line
+                    map(selectedPlans, item => item._id).includes(plan._id)
                   }
-                )
-              }
+                  onSelectItem={() => {
+                    this.handleOnSelectPlan(plan);
+                  }}
+                  onDeselectItem={() => {
+                    this.handleOnDeselectPlan(plan);
+                  }}
+                  onEdit={() => onEdit(plan)}
+                  onArchive={() =>
+                    deletePlan(
+                      plan._id, // eslint-disable-line
+                      () => {
+                        notifySuccess('Plan was archived successfully');
+                      },
+                      () => {
+                        notifyError(
+                          'An Error occurred while archiving Plan please plan system administrator'
+                        );
+                      }
+                    )
+                  }
+                />
+              )}
             />
-          )}
-        />
-        {/* end plans list */}
+            {/* // end plans list */}
+          </Fragment>
+        )}
       </Fragment>
     );
   }

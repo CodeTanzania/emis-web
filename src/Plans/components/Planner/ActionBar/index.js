@@ -22,8 +22,10 @@ const PlansActionBar = ({
   page,
   total,
   selectedItemCount,
+  isGridLayout,
   onFilter,
   onNotify,
+  onToggleLayout,
 }) => (
   <div className="PlansActionBar">
     <Row>
@@ -115,7 +117,7 @@ const PlansActionBar = ({
       {/* end bulk archive action */}
 
       {/* selected and plans number summary */}
-      <Col span={6} xl={{ span: 4, offset: 9 }} xxl={{ span: 5, offset: 9 }}>
+      <Col span={5} xl={{ span: 4, offset: 8 }} xxl={{ span: 5, offset: 8 }}>
         {selectedItemCount > 0 && (
           <span
             style={{ color: '#c5c5c5' }}
@@ -124,6 +126,19 @@ const PlansActionBar = ({
         <span style={{ color: '#c5c5c5' }}>{`${total} plans`}</span>
       </Col>
       {/* end selected and plans number summary */}
+
+      {/* switch list layout action */}
+      <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}>
+        <Button
+          type="circle"
+          icon={isGridLayout ? 'bars' : 'appstore'}
+          title="Switch plans layout to grid"
+          className="actionButton"
+          size="large"
+          onClick={onToggleLayout}
+        />
+      </Col>
+      {/* end switch list layout action */}
 
       {/* filter action */}
       <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}>
@@ -157,9 +172,11 @@ const PlansActionBar = ({
 PlansActionBar.propTypes = {
   page: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
+  isGridLayout: PropTypes.bool.isRequired,
   selectedItemCount: PropTypes.number.isRequired,
   onFilter: PropTypes.func.isRequired,
   onNotify: PropTypes.func.isRequired,
+  onToggleLayout: PropTypes.func.isRequired,
 };
 
 export default PlansActionBar;
