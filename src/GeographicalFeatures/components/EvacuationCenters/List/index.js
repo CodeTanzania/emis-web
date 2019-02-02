@@ -24,7 +24,7 @@ const EvacuationCenterList = ({ evacuationCenters, loading, onEdit }) => (
         <EvacuationCenterListItem
           key={evacuationCenter.name}
           name={evacuationCenter.name}
-          level={evacuationCenter.type}
+          type={evacuationCenter.type}
           onEdit={() => onEdit(evacuationCenter)}
         />
       )}
