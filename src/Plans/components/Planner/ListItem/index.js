@@ -107,19 +107,24 @@ class PlansListItem extends Component {
           <Col span={5}>{incidentType}</Col>
           <Col span={10}>{owner}</Col>
           <Col span={4}>{boundary}</Col>
-          <Col span={3}>
+          <Col span={4}>
             {isHovered && (
               <Fragment>
+                <Icon
+                  type="sound"
+                  title="Disseminate Plan"
+                  className="actionIcon"
+                />
+                <Icon
+                  type="poweroff"
+                  title="Activate Plan"
+                  className="actionIcon"
+                />
                 <Icon
                   type="edit"
                   title="Update Plan"
                   className="actionIcon"
                   onClick={onEdit}
-                />
-                <Icon
-                  type="share-alt"
-                  title="Share Plan"
-                  className="actionIcon"
                 />
                 <Icon
                   type="database"

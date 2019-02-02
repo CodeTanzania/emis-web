@@ -63,10 +63,10 @@ const PlansActionBar = ({
       <Col xl={{ span: 1 }} xxl={{ span: 1 }}>
         <Button
           type="circle"
-          icon="mail"
-          title={`Send Notification to${
+          icon="sound"
+          title={`Disseminate plan to${
             selectedItemCount > 0 ? ' selected' : ''
-          } plans`}
+          } stakeholders`}
           className="actionButton"
           size="large"
           onClick={onNotify}
