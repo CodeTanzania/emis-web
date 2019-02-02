@@ -141,6 +141,7 @@ class PlansList extends Component {
             <PlansListItem
               key={plan._id} // eslint-disable-line
               code={plan.incidentType.code}
+              color={plan.incidentType.color}
               incidentType={plan.incidentType.name}
               owner={plan.owner.name}
               boundary={plan.boundary.name}

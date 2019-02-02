@@ -27,6 +27,7 @@ class PlansListItem extends Component {
   static propTypes = {
     boundary: PropTypes.string.isRequired,
     code: PropTypes.string.isRequired,
+    color: PropTypes.string,
     incidentType: PropTypes.string.isRequired,
     owner: PropTypes.string.isRequired,
     onArchive: PropTypes.func.isRequired,
@@ -34,6 +35,10 @@ class PlansListItem extends Component {
     isSelected: PropTypes.bool.isRequired,
     onSelectItem: PropTypes.func.isRequired,
     onDeselectItem: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    color: undefined,
   };
 
   handleMouseEnter = () => {
@@ -60,6 +65,7 @@ class PlansListItem extends Component {
     const {
       boundary,
       code,
+      color,
       incidentType,
       owner,
       onEdit,
@@ -67,7 +73,7 @@ class PlansListItem extends Component {
     } = this.props;
     const { isHovered } = this.state;
     const { isSelected } = this.props;
-    const avatarBackground = randomColor();
+    const avatarBackground = color || randomColor();
     let sideComponent = null;
 
     if (isSelected) {
