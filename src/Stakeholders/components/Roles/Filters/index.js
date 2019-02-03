@@ -78,6 +78,7 @@ class RolesFilters extends Component {
   render() {
     const {
       properties,
+      filter,
       form: { getFieldDecorator },
       onCancel,
     } = this.props;
@@ -105,7 +106,9 @@ class RolesFilters extends Component {
       <Form onSubmit={this.handleSubmit} layout={formItemLayout}>
         {/* start role properties filters */}
         <Form.Item {...formItemLayout} label="By Types">
-          {getFieldDecorator('types')(
+          {getFieldDecorator('type', {
+            initialValue: filter ? filter.type : [],
+          })(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {properties.map(type => (
