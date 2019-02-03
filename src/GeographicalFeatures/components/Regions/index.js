@@ -2,12 +2,16 @@ import {
   Connect,
   filterFeatures,
   searchFeatures,
+  openFeatureForm,
+  closeFeatureForm,
+  selectFeature,
 } from '@codetanzania/emis-api-states';
-import { Button, Col, Input, Row } from 'antd';
+import { Button, Col, Input, Row, Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import RegionsActionBar from './ActionBar';
 import RegionsList from './List';
+import RegionForm from './Form';
 import './styles.css';
 
 const { Search } = Input;
@@ -22,16 +26,23 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class Regions extends Component {
-  //   state = {
-  //     showFilters: false,
-  //   };
+  state = {
+    isEditForm: false,
+  };
 
   static propTypes = {
     loading: PropTypes.bool.isRequired,
+    posting: PropTypes.bool.isRequired,
     regions: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
       .isRequired,
     page: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
+    region: PropTypes.shape({ name: PropTypes.string }),
+    showForm: PropTypes.bool.isRequired,
+  };
+
+  static defaultProps = {
+    region: null,
   };
 
   componentDidMount() {
@@ -54,9 +65,67 @@ class Regions extends Component {
     searchFeatures(event.target.value);
   };
 
+  /**
+   * Open region form
+   *
+   * @function
+   * @name openContactForm
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openForm = () => {
+    openFeatureForm();
+  };
+
+  /**
+   * close region form
+   *
+   * @function
+   * @name closeForm
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeForm = () => {
+    closeFeatureForm();
+    this.setState({ isEditForm: false });
+  };
+
+  /**
+   * Handle on Edit action for list item
+   *
+   * @function
+   * @name handleEdit
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleEdit = region => {
+    selectFeature(region);
+    this.setState({ isEditForm: true });
+    openFeatureForm();
+  };
+
+  handleAfterCloseForm = () => {
+    this.setState({ isEditForm: false });
+  };
+
   render() {
-    const { page, total, regions, loading } = this.props;
-    // const { showFilters } = this.state;
+    const {
+      page,
+      total,
+      regions,
+      loading,
+      posting,
+      showForm,
+      region,
+    } = this.props;
+    const { isEditForm } = this.state;
 
     return (
       <div className="Regions">
@@ -77,6 +146,7 @@ class Regions extends Component {
               icon="plus"
               size="large"
               title="Add New Region"
+              onClick={this.openForm}
             >
               New Region
             </Button>
@@ -91,6 +161,25 @@ class Regions extends Component {
         {/* list starts */}
         <RegionsList regions={regions} loading={loading} />
         {/* end list */}
+
+        {/* create/edit form modal */}
+        <Modal
+          title={isEditForm ? 'Edit Region' : 'Add New Region'}
+          visible={showForm}
+          footer={null}
+          onCancel={this.closeForm}
+          destroyOnClose
+          maskClosable={false}
+          afterClose={this.handleAfterCloseForm}
+        >
+          <RegionForm
+            posting={posting}
+            isEditForm={isEditForm}
+            region={region}
+            onCancel={this.closeForm}
+          />
+        </Modal>
+        {/* end create/edit form modal */}
       </div>
     );
   }
@@ -101,4 +190,7 @@ export default Connect(Regions, {
   loading: 'features.loading',
   page: 'features.page',
   total: 'features.total',
+  region: 'feature.selected',
+  posting: 'features.posting',
+  showForm: 'features.showForm',
 });
