@@ -1,15 +1,15 @@
 import {
   Connect,
-  getFeatures,
   searchFeatures,
+  filterFeatures,
 } from '@codetanzania/emis-api-states';
 import { Button, Col, Input, Row, Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import './styles.css';
 import WardsActionBar from './ActionBar';
 import WardsList from './List';
 import WardsFilters from './FIlters';
+import './styles.css';
 
 const { Search } = Input;
 
@@ -36,7 +36,7 @@ class Wards extends Component {
   };
 
   componentDidMount() {
-    getFeatures(); // {type:'Ward', family:'Administrative'}
+    filterFeatures({ type: 'Ward', family: 'Administrative' });
   }
 
   /**

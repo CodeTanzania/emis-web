@@ -14,9 +14,9 @@ const WardsList = ({ wards, loading }) => (
         <WardsListItem
           key={ward.name}
           name={ward.name}
-          category={ward.category}
+          nature={ward.nature}
           type={ward.type}
-          country={ward.country}
+          family={ward.family}
         />
       )}
     />
