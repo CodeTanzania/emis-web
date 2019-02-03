@@ -12,6 +12,7 @@ import React, { Component } from 'react';
 import RegionsActionBar from './ActionBar';
 import RegionsList from './List';
 import RegionForm from './Form';
+import RegionsFilters from './Filters';
 import './styles.css';
 
 const { Search } = Input;
@@ -28,6 +29,7 @@ const { Search } = Input;
 class Regions extends Component {
   state = {
     isEditForm: false,
+    showFilters: false,
   };
 
   static propTypes = {
@@ -63,6 +65,36 @@ class Regions extends Component {
    */
   searchRegions = event => {
     searchFeatures(event.target.value);
+  };
+
+  /**
+   * open filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name openFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openFiltersModal = () => {
+    this.setState({ showFilters: true });
+  };
+
+  /**
+   * Close filters modal by setting it's visible property to false via state
+   *
+   * @function
+   * @name closeFiltersModal
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeFiltersModal = () => {
+    this.setState({ showFilters: false });
   };
 
   /**
@@ -125,7 +157,7 @@ class Regions extends Component {
       showForm,
       region,
     } = this.props;
-    const { isEditForm } = this.state;
+    const { isEditForm, showFilters } = this.state;
 
     return (
       <div className="Regions">
@@ -155,7 +187,11 @@ class Regions extends Component {
         </Row>
 
         {/* list header */}
-        <RegionsActionBar total={total} page={page} />
+        <RegionsActionBar
+          total={total}
+          page={page}
+          onFilter={this.openFiltersModal}
+        />
         {/* end list header */}
 
         {/* list starts */}
@@ -165,6 +201,20 @@ class Regions extends Component {
           onEdit={this.handleEdit}
         />
         {/* end list */}
+
+        {/* filter modal */}
+        <Modal
+          title="Filter Region"
+          visible={showFilters}
+          onCancel={this.closeFiltersModal}
+          footer={null}
+          destroyOnClose
+          width={630}
+          maskClosable={false}
+        >
+          <RegionsFilters onCancel={this.closeFiltersModal} />
+        </Modal>
+        {/* end filter modal */}
 
         {/* create/edit form modal */}
         <Modal
