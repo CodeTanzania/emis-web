@@ -11,18 +11,18 @@ import { notifyError, notifySuccess } from '../../../../util';
 const { Option } = Select;
 
 /**
- * Render Region form for creating and updating Region details
+ * Render District form for creating and updating District details
  *
  * @class
- * @name RegionForm
+ * @name DistrictForm
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class RegionForm extends Component {
+class DistrictForm extends Component {
   static propTypes = {
     isEditForm: PropTypes.bool.isRequired,
-    region: PropTypes.shape({
+    district: PropTypes.shape({
       name: PropTypes.string,
       nature: PropTypes.string,
       family: PropTypes.string,
@@ -50,22 +50,22 @@ class RegionForm extends Component {
 
     const {
       form: { validateFieldsAndScroll },
-      region,
+      district,
       isEditForm,
     } = this.props;
 
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedRegion = Object.assign({}, region, values);
+          const updatedRegion = Object.assign({}, district, values);
           putFeature(
             updatedRegion,
             () => {
-              notifySuccess('Region was updated successfully');
+              notifySuccess('District was updated successfully');
             },
             () => {
               notifyError(
-                'Something occurred while updating region, please try again!'
+                'Something occurred while updating district, please try again!'
               );
             }
           );
@@ -73,11 +73,11 @@ class RegionForm extends Component {
           postFeature(
             values,
             () => {
-              notifySuccess('Region was created successfully');
+              notifySuccess('District was created successfully');
             },
             () => {
               notifyError(
-                'Something occurred while saving region, please try again!'
+                'Something occurred while saving district, please try again!'
               );
             }
           );
@@ -89,7 +89,7 @@ class RegionForm extends Component {
   render() {
     const {
       isEditForm,
-      region,
+      district,
       posting,
       onCancel,
       families,
@@ -119,19 +119,19 @@ class RegionForm extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
-        {/* region name */}
+        {/* district name */}
         <Form.Item {...formItemLayout} label="Name">
           {getFieldDecorator('name', {
-            initialValue: isEditForm ? region.name : undefined,
-            rules: [{ required: true, message: 'Region name is required' }],
-          })(<Input placeholder="e.g Dar es Salaam" />)}
+            initialValue: isEditForm ? district.name : undefined,
+            rules: [{ required: true, message: 'District name is required' }],
+          })(<Input placeholder="e.g Ilala" />)}
         </Form.Item>
-        {/* end region name */}
+        {/* end district name */}
 
         {/* nature */}
         <Form.Item {...formItemLayout} label="Nature">
           {getFieldDecorator('nature', {
-            initialValue: isEditForm ? region.nature : undefined,
+            initialValue: isEditForm ? district.nature : undefined,
             rules: [{ required: true, message: 'Nature is required' }],
           })(
             <Select placeholder="e.g Building">
@@ -145,13 +145,13 @@ class RegionForm extends Component {
         </Form.Item>
         {/* end nature */}
 
-        {/* region type */}
+        {/* district type */}
         <Form.Item {...formItemLayout} label="Type">
           {getFieldDecorator('type', {
-            initialValue: isEditForm ? region.type : undefined,
+            initialValue: isEditForm ? district.type : undefined,
             rules: [{ required: true, message: 'Type is required' }],
           })(
-            <Select placeholder="e.g Region">
+            <Select placeholder="e.g District">
               {types.map(type => (
                 <Option key={type} value={type}>
                   {type}
@@ -160,12 +160,12 @@ class RegionForm extends Component {
             </Select>
           )}
         </Form.Item>
-        {/* end region type */}
+        {/* end district type */}
 
-        {/* region family */}
+        {/* district family */}
         <Form.Item {...formItemLayout} label="Family">
           {getFieldDecorator('family', {
-            initialValue: isEditForm ? region.family : undefined,
+            initialValue: isEditForm ? district.family : undefined,
             rules: [{ required: true, message: 'Family is required' }],
           })(
             <Select placeholder="e.g Hospital">
@@ -197,7 +197,7 @@ class RegionForm extends Component {
   }
 }
 
-export default Connect(Form.create()(RegionForm), {
+export default Connect(Form.create()(DistrictForm), {
   natures: 'features.schema.properties.nature.enum',
   families: 'features.schema.properties.family.enum',
   types: 'features.schema.properties.type.enum',

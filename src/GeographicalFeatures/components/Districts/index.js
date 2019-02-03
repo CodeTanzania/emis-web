@@ -2,6 +2,9 @@ import {
   Connect,
   filterFeatures,
   searchFeatures,
+  closeFeatureForm,
+  openFeatureForm,
+  selectFeature,
 } from '@codetanzania/emis-api-states';
 import { Button, Col, Input, Row, Modal } from 'antd';
 import PropTypes from 'prop-types';
@@ -9,6 +12,7 @@ import React, { Component } from 'react';
 import DistrictsActionBar from './ActionBar';
 import DistrictsList from './List';
 import DistrictsFilters from './Filters';
+import DistrictForm from './Form';
 import './styles.css';
 
 const { Search } = Input;
@@ -25,6 +29,7 @@ const { Search } = Input;
 class Districts extends Component {
   state = {
     showFilters: false,
+    isEditForm: false,
   };
 
   static propTypes = {
@@ -33,6 +38,13 @@ class Districts extends Component {
       .isRequired,
     page: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
+    district: PropTypes.shape({ name: PropTypes.string }),
+    showForm: PropTypes.bool.isRequired,
+    posting: PropTypes.bool.isRequired,
+  };
+
+  static defaultProps = {
+    district: null,
   };
 
   componentDidMount() {
@@ -85,9 +97,67 @@ class Districts extends Component {
     searchFeatures(event.target.value);
   };
 
+  /**
+   * Open district form
+   *
+   * @function
+   * @name openContactForm
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openForm = () => {
+    openFeatureForm();
+  };
+
+  /**
+   * close district form
+   *
+   * @function
+   * @name closeForm
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeForm = () => {
+    closeFeatureForm();
+    this.setState({ isEditForm: false });
+  };
+
+  /**
+   * Handle on Edit action for list item
+   *
+   * @function
+   * @name handleEdit
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleEdit = region => {
+    selectFeature(region);
+    this.setState({ isEditForm: true });
+    openFeatureForm();
+  };
+
+  handleAfterCloseForm = () => {
+    this.setState({ isEditForm: false });
+  };
+
   render() {
-    const { page, total, districts, loading } = this.props;
-    const { showFilters } = this.state;
+    const {
+      page,
+      total,
+      districts,
+      loading,
+      posting,
+      showForm,
+      district,
+    } = this.props;
+    const { showFilters, isEditForm } = this.state;
 
     return (
       <div className="Districts">
@@ -109,6 +179,7 @@ class Districts extends Component {
               icon="plus"
               size="large"
               title="Add New District"
+              onClick={this.openForm}
             >
               New District
             </Button>
@@ -141,6 +212,25 @@ class Districts extends Component {
           <DistrictsFilters onCancel={this.closeFiltersModal} />
         </Modal>
         {/* end filter modal */}
+
+        {/* create/edit form modal */}
+        <Modal
+          title={isEditForm ? 'Edit District' : 'Add New District'}
+          visible={showForm}
+          footer={null}
+          onCancel={this.closeForm}
+          destroyOnClose
+          maskClosable={false}
+          afterClose={this.handleAfterCloseForm}
+        >
+          <DistrictForm
+            posting={posting}
+            isEditForm={isEditForm}
+            district={district}
+            onCancel={this.closeForm}
+          />
+        </Modal>
+        {/* end create/edit form modal */}
       </div>
     );
   }
@@ -151,4 +241,7 @@ export default Connect(Districts, {
   loading: 'features.loading',
   page: 'features.page',
   total: 'features.total',
+  district: 'features.selected',
+  posting: 'features.posting',
+  showForm: 'features.showForm',
 });
