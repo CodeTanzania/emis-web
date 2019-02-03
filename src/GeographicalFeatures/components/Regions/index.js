@@ -159,7 +159,11 @@ class Regions extends Component {
         {/* end list header */}
 
         {/* list starts */}
-        <RegionsList regions={regions} loading={loading} />
+        <RegionsList
+          regions={regions}
+          loading={loading}
+          onEdit={this.handleEdit}
+        />
         {/* end list */}
 
         {/* create/edit form modal */}
@@ -190,7 +194,7 @@ export default Connect(Regions, {
   loading: 'features.loading',
   page: 'features.page',
   total: 'features.total',
-  region: 'feature.selected',
+  region: 'features.selected',
   posting: 'features.posting',
   showForm: 'features.showForm',
 });

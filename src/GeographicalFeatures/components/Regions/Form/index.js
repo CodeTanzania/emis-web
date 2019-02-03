@@ -131,7 +131,7 @@ class RegionForm extends Component {
         {/* naature */}
         <Form.Item {...formItemLayout} label="Nature">
           {getFieldDecorator('nature', {
-            initialValue: isEditForm ? region.title : undefined,
+            initialValue: isEditForm ? region.nature : undefined,
             rules: [{ required: true, message: 'Nature is required' }],
           })(
             <Select placeholder="e.g Building">

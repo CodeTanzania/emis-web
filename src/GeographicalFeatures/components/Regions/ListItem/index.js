@@ -29,6 +29,7 @@ class RegionsListItem extends Component {
     category: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     country: PropTypes.string.isRequired,
+    onEdit: PropTypes.func.isRequired,
   };
 
   handleMouseEnter = () => {
@@ -40,7 +41,7 @@ class RegionsListItem extends Component {
   };
 
   render() {
-    const { name, category, country, type } = this.props;
+    const { name, category, country, type, onEdit } = this.props;
     const { isHovered } = this.state;
     const avatarBackground = randomColor();
 
@@ -71,6 +72,7 @@ class RegionsListItem extends Component {
                   type="edit"
                   title="Update Region"
                   className="actionIcon"
+                  onClick={onEdit}
                 />
                 <Icon
                   type="database"
