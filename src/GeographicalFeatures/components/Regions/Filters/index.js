@@ -21,7 +21,8 @@ class RegionsFilters extends Component {
     filter: PropTypes.objectOf(
       PropTypes.shape({
         types: PropTypes.arrayOf(PropTypes.string),
-        phases: PropTypes.arrayOf(PropTypes.string),
+        natures: PropTypes.arrayOf(PropTypes.string),
+        families: PropTypes.arrayOf(PropTypes.string),
       })
     ),
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,

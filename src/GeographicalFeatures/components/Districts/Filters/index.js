@@ -1,84 +1,11 @@
 import { Button, Checkbox, Col, Form, Row } from 'antd';
 import PropTypes from 'prop-types';
+import {
+  clearFeatureFilters,
+  Connect,
+  filterFeatures,
+} from '@codetanzania/emis-api-states';
 import React, { Component } from 'react';
-
-const categories = [
-  'Aerialway',
-  'Aeroway',
-  'Amenity',
-  'Barrier',
-  'Boundary',
-  'Building',
-  'Craft',
-  'Emergency',
-  'Geological',
-  'Highway',
-  'Historic',
-  'Landuse',
-  'Leisure',
-  'Man made',
-  'Military',
-  'Natural',
-  'Office',
-  'Other',
-  'Place',
-  'Power',
-  'Public',
-  'Railway',
-  'Route',
-  'Shop',
-  'Sport',
-  'Telecom',
-  'Tourism',
-  'Transport',
-  'Waterway',
-];
-const types = [
-  'Access Control',
-  'Accommodation',
-  'Administrative',
-  'Arts',
-  'Assembly Point',
-  'Civic',
-  'Commercial',
-  'Culture',
-  'Education',
-  'Entertainment',
-  'Facilities',
-  'Financial',
-  'Firefighters',
-  'Healthcare',
-  'Landform',
-  'Lifecycle',
-  'Lifeguards',
-  'Linear Barriers',
-  'Link Roads',
-  'Medical Rescue',
-  'Other',
-  'Paths',
-  'Religious',
-  'Roads',
-  'Stations',
-  'Stops',
-  'Sustenance',
-  'Tracks',
-  'Transportation',
-  'Vegetation',
-  'Warehouse',
-  'Water',
-  'Watercourses',
-  'Waterways',
-];
-const levels = [
-  'zone',
-  'region',
-  'district',
-  'division',
-  'ward',
-  'village',
-  'shina',
-  'other',
-];
 
 /**
  * Filter modal component for filtering districts
@@ -91,28 +18,71 @@ const levels = [
  */
 class DistrictsFilters extends Component {
   static propTypes = {
+    filter: PropTypes.objectOf(
+      PropTypes.shape({
+        types: PropTypes.arrayOf(PropTypes.string),
+        natures: PropTypes.arrayOf(PropTypes.string),
+        families: PropTypes.arrayOf(PropTypes.string),
+      })
+    ),
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
     onCancel: PropTypes.func.isRequired,
+    types: PropTypes.arrayOf(PropTypes.string).isRequired,
+    natures: PropTypes.arrayOf(PropTypes.string).isRequired,
+    families: PropTypes.arrayOf(PropTypes.string).isRequired,
   };
 
+  static defaultProps = {
+    filter: null,
+  };
+
+  /**
+   * Handle filter action
+   *
+   * @function
+   * @name handleSubmit
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleSubmit = e => {
     e.preventDefault();
-    // const {
-    //   form: { validateFields },
-    // } = this.props;
+    const {
+      form: { validateFields },
+      onCancel,
+    } = this.props;
 
-    // validateFields((error, values) => {
-    //   const filter = {
-    //     type: { $in: values.types },
-    //     phases: { $in: phases.phases },
-    //   };
-    // });
+    validateFields((error, values) => {
+      if (!error) {
+        filterFeatures(values);
+        onCancel();
+      }
+    });
+  };
+
+  /**
+   * Action handle when clear
+   *
+   * @function
+   * @name handleClearFilter
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleClearFilter = () => {
+    const { onCancel } = this.props;
+    clearFeatureFilters();
+    onCancel();
   };
 
   render() {
     const {
       form: { getFieldDecorator },
       onCancel,
+      types,
+      natures,
+      families,
+      filter,
     } = this.props;
 
     const formItemLayout = {
@@ -135,10 +105,30 @@ class DistrictsFilters extends Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit} layout={formItemLayout}>
-        {/* start district type filters */}
-        <Form.Item {...formItemLayout} label="By District type">
-          {getFieldDecorator('types')(
+      <Form onSubmit={this.handleSubmit}>
+        {/* start nature filters */}
+        <Form.Item {...formItemLayout} label="By Region nature">
+          {getFieldDecorator('nature', {
+            initialValue: filter ? filter.nature : [],
+          })(
+            <Checkbox.Group style={{ width: '100%' }}>
+              <Row>
+                {natures.map(nature => (
+                  <Col span={6} style={{ margin: '10px 0' }}>
+                    <Checkbox value={nature}>{nature}</Checkbox>
+                  </Col>
+                ))}
+              </Row>
+            </Checkbox.Group>
+          )}
+        </Form.Item>
+        {/* end nature filters */}
+
+        {/* start type filters */}
+        <Form.Item {...formItemLayout} label="By Region type">
+          {getFieldDecorator('type', {
+            initialValue: filter ? filter.type : [],
+          })(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {types.map(type => (
@@ -150,42 +140,32 @@ class DistrictsFilters extends Component {
             </Checkbox.Group>
           )}
         </Form.Item>
-        {/* end district type filters */}
+        {/* end type filters */}
 
-        {/* start category filters */}
-        <Form.Item {...formItemLayout} label="By Categories">
-          {getFieldDecorator('categories')(
+        {/* start family filters */}
+        <Form.Item {...formItemLayout} label="By Family">
+          {getFieldDecorator('family', {
+            initialValue: filter ? filter.family : [],
+          })(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
-                {categories.map(category => (
+                {families.map(family => (
                   <Col span={6} style={{ margin: '10px 0' }}>
-                    <Checkbox value={category}>{category}</Checkbox>
+                    <Checkbox value={family}>{family}</Checkbox>
                   </Col>
                 ))}
               </Row>
             </Checkbox.Group>
           )}
         </Form.Item>
-        {/* end category filters */}
-        {/* start level filters */}
-        <Form.Item {...formItemLayout} label="By Levels">
-          {getFieldDecorator('levels')(
-            <Checkbox.Group style={{ width: '100%' }}>
-              <Row>
-                {levels.map(level => (
-                  <Col span={6} style={{ margin: '10px 0' }}>
-                    <Checkbox value={level}>{level}</Checkbox>
-                  </Col>
-                ))}
-              </Row>
-            </Checkbox.Group>
-          )}
-        </Form.Item>
-        {/* end level filters */}
+        {/* end family filters */}
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
           <Button onClick={onCancel}>Cancel</Button>
+          <Button style={{ marginLeft: 8 }} onClick={this.handleClearFilter}>
+            Clear
+          </Button>
           <Button style={{ marginLeft: 8 }} type="primary" htmlType="submit">
             Filter
           </Button>
@@ -195,4 +175,9 @@ class DistrictsFilters extends Component {
     );
   }
 }
-export default Form.create()(DistrictsFilters);
+export default Connect(Form.create()(DistrictsFilters), {
+  natures: 'features.schema.properties.nature.enum',
+  families: 'features.schema.properties.family.enum',
+  types: 'features.schema.properties.type.enum',
+  filter: 'features.filter',
+});

@@ -35,7 +35,7 @@ class Districts extends Component {
     total: PropTypes.number.isRequired,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     getFeatures(); // {type:'District', family:'Administrative'}
   }
 
@@ -114,6 +114,7 @@ class Districts extends Component {
           </Col>
           {/* end primary actions */}
         </Row>
+
         {/* list header */}
         <DistrictsActionBar
           total={total}
@@ -121,6 +122,7 @@ class Districts extends Component {
           onFilter={this.openFiltersModal}
         />
         {/* end list header */}
+
         {/* list starts */}
         <DistrictsList districts={districts} loading={loading} />
         {/* end list */}
@@ -131,7 +133,9 @@ class Districts extends Component {
           visible={showFilters}
           onCancel={this.closeFiltersModal}
           footer={null}
-          width={800}
+          destroyOnClose
+          width={630}
+          maskClosable={false}
         >
           <DistrictsFilters onCancel={this.closeFiltersModal} />
         </Modal>
