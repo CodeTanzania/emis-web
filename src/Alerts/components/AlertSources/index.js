@@ -106,7 +106,7 @@ class AlertSources extends Component {
    * @version 0.1.0
    * @since 0.1.0
    */
-  searchAlertSources = event => {
+  search = event => {
     searchAlertSources(event.target.value);
   };
 
@@ -148,7 +148,7 @@ class AlertSources extends Component {
             <Search
               size="large"
               placeholder="Search for alert sources here ..."
-              onChange={this.searchSources}
+              onChange={this.search}
             />
             {/* end search input component */}
           </Col>
