@@ -36,7 +36,7 @@ class Districts extends Component {
   };
 
   componentWillMount() {
-    getFeatures();
+    getFeatures(); // {type:'District', family:'Administrative'}
   }
 
   /**

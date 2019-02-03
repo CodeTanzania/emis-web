@@ -1,6 +1,6 @@
 import {
   Connect,
-  getFeatures,
+  filterFeatures,
   searchFeatures,
 } from '@codetanzania/emis-api-states';
 import { Button, Col, Input, Row } from 'antd';
@@ -34,8 +34,8 @@ class Regions extends Component {
     total: PropTypes.number.isRequired,
   };
 
-  componentWillMount() {
-    getFeatures();
+  componentDidMount() {
+    filterFeatures({ type: 'Region', family: 'Administrative' });
   }
 
   /**

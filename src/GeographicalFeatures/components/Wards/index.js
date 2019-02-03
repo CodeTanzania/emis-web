@@ -35,8 +35,8 @@ class Wards extends Component {
     total: PropTypes.number.isRequired,
   };
 
-  componentWillMount() {
-    getFeatures();
+  componentDidMount() {
+    getFeatures(); // {type:'Ward', family:'Administrative'}
   }
 
   /**

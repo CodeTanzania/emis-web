@@ -68,11 +68,6 @@ class RegionsListItem extends Component {
                   className="actionIcon"
                 />
                 <Icon
-                  type="share-alt"
-                  title="Share Region"
-                  className="actionIcon"
-                />
-                <Icon
                   type="database"
                   title="Archive Region"
                   className="actionIcon"
