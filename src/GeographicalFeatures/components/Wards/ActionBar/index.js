@@ -1,7 +1,11 @@
 import { Button, Checkbox, Col, Pagination, Row } from 'antd';
-import { getFeatures } from '@codetanzania/emis-api-states';
+import {
+  refreshFeatures,
+  paginateFeatures,
+} from '@codetanzania/emis-api-states';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { notifyError, notifySuccess } from '../../../../util';
 import './styles.css';
 
 /**
@@ -31,7 +35,18 @@ const WardsActionBar = ({ page, total, onFilter }) => (
           title="Refresh Wards"
           className="actionButton"
           size="large"
-          onClick={() => getFeatures()}
+          onClick={() =>
+            refreshFeatures(
+              () => {
+                notifySuccess('Ward refreshed successfully');
+              },
+              () => {
+                notifyError(
+                  'An Error occurred while refreshing ward, please contact system administrator!'
+                );
+              }
+            )
+          }
         />
       </Col>
 
@@ -77,7 +92,7 @@ const WardsActionBar = ({ page, total, onFilter }) => (
           defaultCurrent={page}
           total={total}
           className="pagination"
-          onChange={nextPage => getFeatures({ page: nextPage })}
+          onChange={nextPage => paginateFeatures(nextPage)}
         />
       </Col>
     </Row>

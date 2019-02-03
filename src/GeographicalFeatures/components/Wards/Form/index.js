@@ -124,7 +124,7 @@ class WardForm extends Component {
           {getFieldDecorator('name', {
             initialValue: isEditForm ? ward.name : undefined,
             rules: [{ required: true, message: 'Region name is required' }],
-          })(<Input placeholder="e.g Dar es Salaam" />)}
+          })(<Input placeholder="e.g Saranga" />)}
         </Form.Item>
         {/* end ward name */}
 
