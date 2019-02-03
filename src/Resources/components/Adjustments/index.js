@@ -1,5 +1,5 @@
 import { Connect, getAdjustments } from '@codetanzania/emis-api-states';
-import { Input, Col, Row, Modal, Button } from 'antd';
+import { Input, Col, Row, Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import AdjustmentsActionBar from './ActionBar';
@@ -111,16 +111,7 @@ class Adjustments extends Component {
             {/* end search input component */}
           </Col>
           {/* primary actions */}
-          <Col span={3} offset={9}>
-            <Button
-              type="primary"
-              icon="plus"
-              size="large"
-              title="Add New Adjustment"
-            >
-              New Adjustment
-            </Button>
-          </Col>
+          <Col span={3} offset={9} />
           {/* end primary actions */}
         </Row>
         {/* list action bar */}
@@ -138,6 +129,7 @@ class Adjustments extends Component {
           visible={showFilters}
           width={650}
           maskClosable={false}
+          destroyOnClose
           onCancel={this.closeFiltersModal}
           footer={null}
         >
