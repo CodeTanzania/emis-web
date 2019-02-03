@@ -129,6 +129,7 @@ class Adjustments extends Component {
           visible={showFilters}
           width={650}
           maskClosable={false}
+          destroyOnClose
           onCancel={this.closeFiltersModal}
           footer={null}
         >
