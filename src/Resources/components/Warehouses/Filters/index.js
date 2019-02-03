@@ -1,3 +1,8 @@
+import {
+  clearWarehouseFilters,
+  Connect,
+  filterWarehouses,
+} from '@codetanzania/emis-api-states';
 import { Button, Checkbox, Col, Form, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
@@ -93,18 +98,64 @@ const levels = [
  */
 class WarehousesFilters extends Component {
   static propTypes = {
+    filter: PropTypes.objectOf(
+      PropTypes.shape({
+        types: PropTypes.arrayOf(PropTypes.string),
+        phases: PropTypes.arrayOf(PropTypes.string),
+      })
+    ),
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
     onCancel: PropTypes.func.isRequired,
   };
 
+  static defaultProps = {
+    filter: null,
+  };
+
+  /**
+   * Handle filter action
+   *
+   * @function
+   * @name handleSubmit
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleSubmit = e => {
     e.preventDefault();
+    const {
+      form: { validateFields },
+      onCancel,
+    } = this.props;
+
+    validateFields((error, values) => {
+      if (!error) {
+        filterWarehouses(values);
+        onCancel();
+      }
+    });
+  };
+
+  /**
+   * Action handle when clear
+   *
+   * @function
+   * @name handleClearFilter
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleClearFilter = () => {
+    const { onCancel } = this.props;
+    clearWarehouseFilters();
+    onCancel();
   };
 
   render() {
     const {
       form: { getFieldDecorator },
       onCancel,
+      filter,
     } = this.props;
 
     const formItemLayout = {
@@ -130,7 +181,9 @@ class WarehousesFilters extends Component {
       <Form onSubmit={this.handleSubmit} layout={formItemLayout}>
         {/* start warehouses category filters */}
         <Form.Item {...formItemLayout} label="By Category">
-          {getFieldDecorator('categories')(
+          {getFieldDecorator('category', {
+            initialValue: filter ? filter.category : [],
+          })(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {categories.map(category => (
@@ -146,7 +199,9 @@ class WarehousesFilters extends Component {
 
         {/* start warehouses type filters */}
         <Form.Item {...formItemLayout} label="By Types">
-          {getFieldDecorator('types')(
+          {getFieldDecorator('type', {
+            initialValue: filter ? filter.type : [],
+          })(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {types.map(type => (
@@ -162,7 +217,9 @@ class WarehousesFilters extends Component {
 
         {/* start warehouses level filters */}
         <Form.Item {...formItemLayout} label="By Levels">
-          {getFieldDecorator('levels')(
+          {getFieldDecorator('level', {
+            initialValue: filter ? filter.level : [],
+          })(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {levels.map(level => (
@@ -178,14 +235,12 @@ class WarehousesFilters extends Component {
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
-          <Button type="primary" htmlType="submit">
-            Filter
-          </Button>
-          <Button style={{ marginLeft: 8 }} onClick={() => {}}>
+          <Button onClick={onCancel}>Cancel</Button>
+          <Button style={{ marginLeft: 8 }} onClick={this.handleClearFilter}>
             Clear
           </Button>
-          <Button style={{ marginLeft: 8 }} onClick={onCancel}>
-            Cancel
+          <Button style={{ marginLeft: 8 }} type="primary" htmlType="submit">
+            Filter
           </Button>
         </Form.Item>
         {/* end form actions */}
@@ -193,4 +248,8 @@ class WarehousesFilters extends Component {
     );
   }
 }
-export default Form.create()(WarehousesFilters);
+export default Form.create()(
+  Connect(WarehousesFilters, {
+    filter: 'warehouses.filter',
+  })
+);

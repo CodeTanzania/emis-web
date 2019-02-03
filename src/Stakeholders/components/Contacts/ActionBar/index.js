@@ -24,17 +24,20 @@ import './styles.css';
 const ContactsActionBar = ({
   page,
   total,
-  selectedCount,
+  selectedItemCount,
   onFilter,
   onNotify,
 }) => (
   <div className="ContactsActionBar">
     <Row>
-      <Col span={1} xl={1} className="checkbox">
+      {/* bulk select action */}
+      <Col xl={{ span: 1 }} xxl={{ span: 1 }} className="checkbox">
         <Checkbox />
       </Col>
+      {/* end bulk select action */}
 
-      <Col span={1} xl={1}>
+      {/* refresh contacts action */}
+      <Col xl={{ span: 1 }} xxl={{ span: 1 }}>
         <Button
           shape="circle"
           icon="reload"
@@ -55,22 +58,26 @@ const ContactsActionBar = ({
           size="large"
         />
       </Col>
+      {/* end refresh contacts action */}
 
-      <Col span={1} xl={1}>
+      {/* notify action */}
+      <Col xl={{ span: 1 }} xxl={{ span: 1 }}>
         <Button
           type="circle"
           icon="mail"
           title={`Send Notification to${
-            selectedCount > 0 ? ' selected' : ''
+            selectedItemCount > 0 ? ' selected' : ''
           } contacts`}
           className="actionButton"
           size="large"
           onClick={onNotify}
         />
       </Col>
+      {/* end notify action  */}
 
-      <Col span={1} xl={1}>
-        {selectedCount > 0 && (
+      {/* export action */}
+      <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}>
+        {selectedItemCount > 0 && (
           <Button
             type="circle"
             icon="cloud-download"
@@ -80,9 +87,11 @@ const ContactsActionBar = ({
           />
         )}
       </Col>
+      {/* end export action */}
 
-      <Col span={1} xl={1}>
-        {selectedCount > 0 && (
+      {/* bulk share action */}
+      <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}>
+        {selectedItemCount > 0 && (
           <Button
             type="circle"
             icon="share-alt"
@@ -92,9 +101,11 @@ const ContactsActionBar = ({
           />
         )}
       </Col>
+      {/* end bulk share action */}
 
-      <Col span={1} xl={1}>
-        {selectedCount > 0 && (
+      {/* bulk archive action */}
+      <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}>
+        {selectedItemCount > 0 && (
           <Button
             type="circle"
             icon="hdd"
@@ -104,21 +115,21 @@ const ContactsActionBar = ({
           />
         )}
       </Col>
+      {/* end bulk archive action */}
 
-      <Col
-        span={3}
-        offset={7}
-        xl={{ span: 3, offset: 7 }}
-        xxl={{ span: 3, offset: 7 }}
-      >
-        {selectedCount > 0 && <h4>{`${selectedCount} Contact(s) Selected`}</h4>}
+      {/* selected and contacts number summary */}
+      <Col span={6} xl={{ span: 4, offset: 9 }} xxl={{ span: 5, offset: 9 }}>
+        {selectedItemCount > 0 && (
+          <span
+            style={{ color: '#c5c5c5' }}
+          >{`${selectedItemCount} out of `}</span>
+        )}
+        <span style={{ color: '#c5c5c5' }}>{`${total} contacts`}</span>
       </Col>
-      <Col
-        span={1}
-        offset={4}
-        xl={{ span: 1, offset: 3 }}
-        xxl={{ span: 1, offset: 4 }}
-      >
+      {/* end selected and contacts number summary */}
+
+      {/* filter action */}
+      <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}>
         <Button
           type="circle"
           icon="filter"
@@ -128,8 +139,10 @@ const ContactsActionBar = ({
           onClick={onFilter}
         />
       </Col>
+      {/* end filter action */}
 
-      <Col span={3} xl={4} xxl={3}>
+      {/* pagination */}
+      <Col span={1} xl={{ span: 4 }} xxl={{ span: 3 }}>
         <Pagination
           simple
           defaultCurrent={page}
@@ -138,6 +151,7 @@ const ContactsActionBar = ({
           className="pagination"
         />
       </Col>
+      {/* end pagination */}
     </Row>
   </div>
 );
@@ -146,7 +160,7 @@ const ContactsActionBar = ({
 ContactsActionBar.propTypes = {
   page: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
-  selectedCount: PropTypes.number.isRequired,
+  selectedItemCount: PropTypes.number.isRequired,
   onFilter: PropTypes.func.isRequired,
   onNotify: PropTypes.func.isRequired,
 };

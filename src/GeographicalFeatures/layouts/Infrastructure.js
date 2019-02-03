@@ -1,15 +1,7 @@
 import React from 'react';
-import UIState from '../../components/UIState';
+// import UIState from '../../components/UIState';
+import CriticalInfrastructure from '../components/Infrastructure';
 
-const CriticalInfrastructureLayout = () => (
-  <div style={{ marginTop: '20%' }}>
-    <UIState
-      icon="exclamation-circle"
-      description="No Critical infrastructures yet,but when they are available will appear here"
-      buttonLabel="New Feature"
-      onClick={() => {}}
-    />
-  </div>
-);
+const CriticalInfrastructureLayout = () => <CriticalInfrastructure />;
 
 export default CriticalInfrastructureLayout;

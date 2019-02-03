@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import commandCenterIcon from '../assets/images/commandCentre.svg';
-import assessmentIcon from '../assets/images/assessments.svg';
-import incidentTypeIcon from '../assets/images/incidentsType.svg';
-import lossDatabaseIcon from '../assets/images/lossDatabase.svg';
-import feedIcon from '../assets/images/feed.svg';
-import actionsIcon from '../assets/images/actions.svg';
+import commandCenterIcon from '../assets/icons/incidents/incidentcommandcenter-disabled.svg';
+import assessmentIcon from '../assets/icons/incidents/assessments.svg';
+import incidentTypeIcon from '../assets/icons/incidents/incidenttype.svg';
+import lossDatabaseIcon from '../assets/icons/incidents/lossdatabase.svg';
+import feedIcon from '../assets/icons/incidents/feed.svg';
+import actionsIcon from '../assets/icons/incidents/actions.svg';
 import NavigationMenu from '../components/NavigationMenu';
 
 const routes = [

@@ -1,12 +1,12 @@
 import React from 'react';
-import alertIcon from '../assets/images/alerts.svg';
-import geographicalFeaturesIcon from '../assets/images/geographicalfeatures.svg';
-import incidentIcon from '../assets/images/incidents.svg';
-import dashboardIcon from '../assets/images/dashboards.svg';
-import stakeholderIcon from '../assets/images/stakeholders.svg';
-import resourceIcon from '../assets/images/resources.svg';
-import planIcon from '../assets/images/plans.svg';
-import assessmentIcon from '../assets/images/assessments.svg';
+import alertIcon from '../assets/icons/alerts.svg';
+import geographicalFeaturesIcon from '../assets/icons/geographicalfeatures.svg';
+import incidentIcon from '../assets/icons/incidents-disabled.svg';
+import dashboardIcon from '../assets/icons/dashboards-disabled.svg';
+import stakeholderIcon from '../assets/icons/stakeholders.svg';
+import resourceIcon from '../assets/icons/resources.svg';
+import planIcon from '../assets/icons/emergencyplans.svg';
+import assessmentIcon from '../assets/icons/assessments.svg';
 import NavigationMenu from '../components/NavigationMenu';
 
 const routes = [
@@ -18,10 +18,15 @@ const routes = [
     path: '/geographicalfeatures',
     icon: geographicalFeaturesIcon,
   },
-  { name: 'Incidents', path: '/incidents', icon: incidentIcon },
+  { name: 'Incidents', path: '/incidents', icon: incidentIcon, disabled: true },
   { name: 'Resources', path: '/resources', icon: resourceIcon },
   { name: 'Stakeholders', path: '/stakeholders', icon: stakeholderIcon },
-  { name: 'Dashboards', path: '/dashboards', icon: dashboardIcon },
+  {
+    name: 'Dashboards',
+    path: '/dashboards',
+    icon: dashboardIcon,
+    disabled: true,
+  },
 ];
 
 /**

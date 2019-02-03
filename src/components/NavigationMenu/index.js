@@ -19,7 +19,7 @@ import './styles.css';
  * @version 0.1.0
  * @since 0.1.0
  */
-const NavigationMenuItem = ({ name, icon, path }) => (
+const NavigationMenuItem = ({ name, icon, path, disabled }) => (
   <Link to={path}>
     <div className="NavigationMenuItem">
       <img
@@ -29,7 +29,7 @@ const NavigationMenuItem = ({ name, icon, path }) => (
         height={130}
         className="image"
       />
-      <span className="text">{name}</span>
+      <span className={`text ${disabled ? 'text-disabled' : ''}`}>{name}</span>
     </div>
   </Link>
 );
@@ -63,7 +63,8 @@ const NavigationMenu = ({ routes, match }) => {
             <NavigationMenuItem
               name={route.name}
               icon={route.icon}
-              path={url + route.path}
+              path={route.disabled ? '#' : url + route.path}
+              disabled={route.disabled}
             />
           </Col>
         ))}
@@ -77,6 +78,7 @@ NavigationMenuItem.propTypes = {
   name: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
+  disabled: PropTypes.bool,
 };
 NavigationMenu.propTypes = {
   routes: PropTypes.arrayOf(
@@ -88,8 +90,12 @@ NavigationMenu.propTypes = {
   ).isRequired,
   match: PropTypes.shape({ url: PropTypes.string }),
 };
+
 NavigationMenu.defaultProps = {
   match: undefined,
+};
+NavigationMenuItem.defaultProps = {
+  disabled: false,
 };
 
 export default NavigationMenu;

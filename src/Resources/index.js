@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import adjustmentsIcon from '../assets/images/adjustments.svg';
-import itemsIcon from '../assets/images/items.svg';
-import stockIcon from '../assets/images/stock.svg';
-import utilizationIcon from '../assets/images/utilization.svg';
-import warehousesIcon from '../assets/images/warehouses.svg';
+import adjustmentsIcon from '../assets/icons/resources/adjustment.svg';
+import itemsIcon from '../assets/icons/resources/item.svg';
+import stockIcon from '../assets/icons/resources/stock.svg';
+import utilizationIcon from '../assets/icons/resources/utilization-disabled.svg';
+import warehousesIcon from '../assets/icons/resources/warehouse.svg';
 import NavigationMenu from '../components/NavigationMenu';
 
 const routes = [
@@ -15,6 +15,7 @@ const routes = [
     name: 'Utilization/Consumptions',
     path: '/utilization',
     icon: utilizationIcon,
+    disabled: true,
   },
   { name: 'Warehouses', path: '/warehouses', icon: warehousesIcon },
 ];

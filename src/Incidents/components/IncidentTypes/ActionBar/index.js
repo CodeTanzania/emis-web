@@ -1,7 +1,11 @@
-import { getIncidentTypes } from '@codetanzania/emis-api-states';
+import {
+  paginateIncidentTypes,
+  refreshIncidentTypes,
+} from '@codetanzania/emis-api-states';
 import { Button, Checkbox, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { notifyError, notifySuccess } from '../../../../util';
 import './styles.css';
 
 /**
@@ -29,7 +33,18 @@ const IncidentTypesActionBar = ({ page, total, onFilter }) => (
           shape="circle"
           icon="reload"
           title="Refresh Incident Types"
-          onClick={() => getIncidentTypes()}
+          onClick={() =>
+            refreshIncidentTypes(
+              () => {
+                notifySuccess('Incident Types refreshed successfully');
+              },
+              () => {
+                notifyError(
+                  'An Error occurred while refreshing incident types, please contact system administrator!'
+                );
+              }
+            )
+          }
           className="actionButton"
           size="large"
         />
@@ -76,7 +91,7 @@ const IncidentTypesActionBar = ({ page, total, onFilter }) => (
           simple
           defaultCurrent={page}
           total={total}
-          onChange={nextPage => getIncidentTypes({ page: nextPage })}
+          onChange={nextPage => paginateIncidentTypes(nextPage)}
           className="pagination"
         />
       </Col>

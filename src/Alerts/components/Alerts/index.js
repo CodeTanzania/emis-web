@@ -1,10 +1,10 @@
 import {
   closeAlertForm,
-  selectAlert,
   Connect,
   getAlerts,
   openAlertForm,
   searchAlerts,
+  selectAlert,
 } from '@codetanzania/emis-api-states';
 import { Button, Col, Input, Modal, Row } from 'antd';
 import PropTypes from 'prop-types';
@@ -43,14 +43,15 @@ class Alerts extends Component {
       severity: PropTypes.string,
       certainty: PropTypes.string,
       instruction: PropTypes.string,
-      headline: PropTypes.string,
       expiredAt: PropTypes.string,
       expectedAt: PropTypes.string,
       _id: PropTypes.string,
     }),
     alerts: PropTypes.arrayOf(
       PropTypes.shape({
+        event: PropTypes.string,
         headline: PropTypes.string,
+        description: PropTypes.string,
         source: PropTypes.string,
         reportedAt: PropTypes.string,
         expiredAt: PropTypes.string,
@@ -221,6 +222,7 @@ class Alerts extends Component {
           title="Filter Alerts"
           visible={showFilters}
           onCancel={this.closeFiltersModal}
+          destroyOnClose
           maskClosable={false}
           width={800}
           footer={null}
@@ -236,6 +238,7 @@ class Alerts extends Component {
           footer={null}
           maskClosable={false}
           onCancel={this.closeForm}
+          width="60%"
           destroyOnClose
         >
           <AlertForm

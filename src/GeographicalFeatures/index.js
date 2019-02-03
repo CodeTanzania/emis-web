@@ -1,23 +1,16 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-// import administrativeBoundariesIcon from '../assets/images/administrativeboundaries.svg';
-import facilitiesIcon from '../assets/images/facilities.svg';
-import infrastructureIcon from '../assets/images/infrastructure.svg';
-import warehousesIcon from '../assets/images/warehouses.svg';
-import regionIcon from '../assets/images/region.svg';
-import districtIcon from '../assets/images/district.svg';
-import wardIcon from '../assets/images/ward.svg';
-import subwardIcon from '../assets/images/subward.svg';
-import EvacuationIcon from '../assets/images/evacuationCenter.svg';
-
+import regionIcon from '../assets/icons/region.svg';
+import districtIcon from '../assets/icons/district.svg';
+import wardIcon from '../assets/icons/ward.svg';
+import subwardIcon from '../assets/icons/subward.svg';
+import EvacuationIcon from '../assets/icons/evacuationCenter.svg';
+import facilitiesIcon from '../assets/icons/geographicalfeatures/facilities.svg';
+import infrastructureIcon from '../assets/icons/geographicalfeatures/infrastructures.svg';
+import warehousesIcon from '../assets/icons/geographicalfeatures/warehouse.svg';
 import NavigationMenu from '../components/NavigationMenu';
 
 const routes = [
-  // {
-  //   name: 'Administrative Boundaries',
-  //   path: '/administrativeboundaries',
-  //   icon: administrativeBoundariesIcon,
-  // },
   {
     name: 'Regions',
     path: '/regions',

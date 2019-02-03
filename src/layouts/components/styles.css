@@ -22,3 +22,7 @@
   text-transform: uppercase;
   color: #1B98D1
 }
+
+.ModuleNavMenu .NavItem .text-disabled {
+  color: #A0B0B8;
+}

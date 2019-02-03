@@ -1,7 +1,12 @@
-import { getIndicators } from '@codetanzania/emis-api-states';
+import {
+  paginateIndicators,
+  refreshIndicators,
+} from '@codetanzania/emis-api-states';
 import { Button, Col, Pagination, Row, Checkbox } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { notifyError, notifySuccess } from '../../../../util';
+
 import './styles.css';
 
 /**
@@ -17,7 +22,7 @@ import './styles.css';
  * @version 0.1.0
  * @since 0.1.0
  */
-const IndicatorsActionBar = ({ page, total }) => (
+const IndicatorsActionBar = ({ page, total, onFilter }) => (
   <div className="IndicatorsActionBar">
     <Row>
       <Col span={1} xl={1} className="checkbox">
@@ -29,7 +34,18 @@ const IndicatorsActionBar = ({ page, total }) => (
           shape="circle"
           icon="reload"
           title="Refresh indicator"
-          onClick={() => getIndicators()}
+          onClick={() =>
+            refreshIndicators(
+              () => {
+                notifySuccess('Indicator refreshed successfully');
+              },
+              () => {
+                notifyError(
+                  'An Error occurred while refreshing indicators, please contact system administrator!'
+                );
+              }
+            )
+          }
           className="actionButton"
           size="large"
         />
@@ -57,6 +73,7 @@ const IndicatorsActionBar = ({ page, total }) => (
           title="Filter Indicators"
           className="actionButton"
           size="large"
+          onClick={onFilter}
         />
       </Col>
 
@@ -65,7 +82,7 @@ const IndicatorsActionBar = ({ page, total }) => (
           simple
           defaultCurrent={page}
           total={total}
-          onChange={nextPage => getIndicators({ page: nextPage })}
+          onChange={nextPage => paginateIndicators(nextPage)}
           className="pagination"
         />
       </Col>
@@ -77,6 +94,7 @@ const IndicatorsActionBar = ({ page, total }) => (
 IndicatorsActionBar.propTypes = {
   page: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
+  onFilter: PropTypes.func.isRequired,
 };
 
 export default IndicatorsActionBar;

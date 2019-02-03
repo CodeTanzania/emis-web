@@ -31,6 +31,7 @@ class Contacts extends Component {
     showFilters: false,
     isEditForm: false,
     showNotificationForm: false,
+    selectedContacts: [],
   };
 
   static propTypes = {
@@ -153,8 +154,11 @@ class Contacts extends Component {
    * @version 0.1.0
    * @since 0.1.0
    */
-  openNotificationForm = () => {
-    this.setState({ showNotificationForm: true });
+  openNotificationForm = contacts => {
+    this.setState({
+      selectedContacts: contacts,
+      showNotificationForm: true,
+    });
   };
 
   /**
@@ -184,7 +188,12 @@ class Contacts extends Component {
       showForm,
       total,
     } = this.props;
-    const { showFilters, isEditForm, showNotificationForm } = this.state;
+    const {
+      showFilters,
+      isEditForm,
+      showNotificationForm,
+      selectedContacts,
+    } = this.state;
     return (
       <div className="ContactsList">
         <Row>
@@ -192,13 +201,27 @@ class Contacts extends Component {
             {/* search input component */}
             <Search
               size="large"
-              placeholder="Search for stakeholders here ..."
+              placeholder="Search for contacts here ..."
               onChange={this.searchContacts}
             />
             {/* end search input component */}
           </Col>
+
+          {/* <Col span={3} offset={1}>
+            <Select
+              defaultValue="Active"
+              style={{ width: 120 }}
+              size="large"
+              type="primary"
+            >
+              <Option value="All">All</Option>
+              <Option value="Active">Active</Option>
+              <Option value="Archived">Archived</Option>
+            </Select>
+          </Col> */}
+
           {/* primary actions */}
-          <Col span={3} offset={9}>
+          <Col span={2} offset={9}>
             <Button
               type="primary"
               icon="plus"
@@ -247,7 +270,10 @@ class Contacts extends Component {
           maskClosable={false}
           width="40%"
         >
-          <NotificationForm onCancel={this.closeNotificationForm} />
+          <NotificationForm
+            onCancel={this.closeNotificationForm}
+            selectedContacts={selectedContacts}
+          />
         </Modal>
         {/* end Notification modal */}
 
