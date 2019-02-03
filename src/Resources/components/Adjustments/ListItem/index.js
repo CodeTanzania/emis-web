@@ -83,11 +83,6 @@ class AdjustmentListItem extends Component {
             {isHovered && (
               <Fragment>
                 <Icon
-                  type="edit"
-                  title="Update adjustment"
-                  className="actionIcon"
-                />
-                <Icon
                   type="database"
                   title="Archive adjustment"
                   className="actionIcon"
