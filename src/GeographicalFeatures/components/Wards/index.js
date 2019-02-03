@@ -130,6 +130,8 @@ class Wards extends Component {
           onCancel={this.closeFiltersModal}
           footer={null}
           width={800}
+          destroyOnClose
+          maskClosable={false}
         >
           <WardsFilters onCancel={this.closeFiltersModal} />
         </Modal>
