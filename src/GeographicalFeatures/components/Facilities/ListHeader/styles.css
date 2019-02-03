@@ -1,0 +1,9 @@
+.FacilityListHeader {
+  height: 50px;
+  padding-top: 10px;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.FacilityListHeader .title {
+  font-weight: 600;
+}

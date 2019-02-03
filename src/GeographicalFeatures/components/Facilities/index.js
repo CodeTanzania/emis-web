@@ -1,63 +1,62 @@
 import {
   Connect,
-  getRoles,
-  openRoleForm,
-  selectRole,
-  closeRoleForm,
+  getFeatures,
+  openFeatureForm,
+  selectFeature,
+  closeFeatureForm,
+  searchFeatures,
 } from '@codetanzania/emis-api-states';
-import { Input, Col, Row, Button, Modal } from 'antd';
+import { Input, Modal, Col, Row, Button } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import RoleFilters from './Filters';
-import RolesActionBar from './ActionBar';
-import RoleList from './List';
-import RoleForm from './Form';
+import CriticalInfrastructerList from './List';
+import CriticalInfrastructerForm from './Form';
+import CriticalInfrastructerFilters from './Filters';
+import FacilitiesActionBar from './ActionBar';
 import './styles.css';
 
 const { Search } = Input;
 
 /**
- * Render role module which has search box, actions and list of roles
+ * Render Facility module which has search box, actions and list of Facilitys
  *
  * @class
- * @name Roles
+ * @name Facilities
  *
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class Roles extends Component {
+class Facilities extends Component {
   state = {
     showFilters: false,
     isEditForm: false,
   };
 
   static propTypes = {
+    loading: PropTypes.bool.isRequired,
     showForm: PropTypes.bool.isRequired,
     posting: PropTypes.bool.isRequired,
-    loading: PropTypes.bool.isRequired,
-    role: PropTypes.shape({
-      name: PropTypes.string,
-      abbreviation: PropTypes.string,
-      description: PropTypes.string,
-    }),
-    roles: PropTypes.arrayOf(
+    facilities: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string,
-        abbreviation: PropTypes.string,
-        description: PropTypes.string,
+        type: PropTypes.string,
       })
     ).isRequired,
+    facility: PropTypes.shape({
+      name: PropTypes.string,
+      level: PropTypes.string,
+    }),
     total: PropTypes.number.isRequired,
     page: PropTypes.number.isRequired,
   };
 
   static defaultProps = {
-    role: null,
+    facility: null,
   };
 
   componentWillMount() {
-    getRoles();
+    getFeatures();
   }
 
   /**
@@ -91,7 +90,7 @@ class Roles extends Component {
   };
 
   /**
-   * Open role form
+   * Open Facility form
    *
    * @function
    * @name openForm
@@ -102,14 +101,14 @@ class Roles extends Component {
    * @since 0.1.0
    */
   openForm = () => {
-    openRoleForm();
+    openFeatureForm();
   };
 
   /**
-   * close role form
+   * close Facility form
    *
    * @function
-   * @name openForm
+   * @name closeForm
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -117,15 +116,15 @@ class Roles extends Component {
    * @since 0.1.0
    */
   closeForm = () => {
-    closeRoleForm();
+    closeFeatureForm();
     this.setState({ isEditForm: false });
   };
 
   /**
-   * Search Roles List based on supplied filter word
+   * Search Facilitys List based on supplied filter word
    *
    * @function
-   * @name searchRoles
+   * @name searchFeatures
    *
    * @param {Object} event - Event instance
    * @returns {undefined} - Nothing is returned
@@ -133,8 +132,8 @@ class Roles extends Component {
    * @version 0.1.0
    * @since 0.1.0
    */
-  searchRoles = event => {
-    getRoles({ q: event.target.value });
+  search = event => {
+    searchFeatures({ q: event.target.value });
   };
 
   /**
@@ -146,10 +145,10 @@ class Roles extends Component {
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleEdit = role => {
-    selectRole(role);
+  handleEdit = facility => {
+    selectFeature(facility);
     this.setState({ isEditForm: true });
-    openRoleForm();
+    openFeatureForm();
   };
 
   handleAfterCloseForm = () => {
@@ -157,16 +156,25 @@ class Roles extends Component {
   };
 
   render() {
-    const { roles, loading, total, page, showForm, posting, role } = this.props;
+    const {
+      facilities,
+      loading,
+      total,
+      page,
+      posting,
+      showForm,
+      facility,
+    } = this.props;
     const { showFilters, isEditForm } = this.state;
     return (
-      <div className="RoleList">
+      <div className="Facilities">
         <Row>
           <Col span={12}>
+            {/* search input component */}
             <Search
               size="large"
-              placeholder="Search for roles here ..."
-              onChange={this.searchRoles}
+              placeholder="Search for Facilities here ..."
+              onChange={this.search}
             />
             {/* end search input component */}
           </Col>
@@ -176,41 +184,46 @@ class Roles extends Component {
               type="primary"
               icon="plus"
               size="large"
-              title="Add New Role"
+              title="Add New Facility"
               onClick={this.openForm}
             >
-              New Role
+              New Facility
             </Button>
           </Col>
           {/* end primary actions */}
         </Row>
         {/* list action bar */}
-        <RolesActionBar
+        <FacilitiesActionBar
           total={total}
           page={page}
           onFilter={this.openFiltersModal}
         />
         {/* end list action bar */}
         {/* list starts */}
-        <RoleList roles={roles} loading={loading} onEdit={this.handleEdit} />
+        <CriticalInfrastructerList
+          facilities={facilities}
+          loading={loading}
+          onEdit={this.handleEdit}
+        />
         {/* end list */}
 
         {/* filter modal */}
         <Modal
-          title="Filter Roles"
+          title="Filter Facilitys"
           visible={showFilters}
           onCancel={this.closeFiltersModal}
-          maskClosable={false}
           destroyOnClose
+          maskClosable={false}
           footer={null}
+          width={800}
         >
-          <RoleFilters onCancel={this.closeFiltersModal} />
+          <CriticalInfrastructerFilters onCancel={this.closeFiltersModal} />
         </Modal>
         {/* end filter modal */}
 
         {/* create/edit form modal */}
         <Modal
-          title={isEditForm ? 'Edit Role' : 'Add New Role'}
+          title={isEditForm ? 'Edit Facility' : 'Add New Facility'}
           visible={showForm}
           footer={null}
           onCancel={this.closeForm}
@@ -218,10 +231,10 @@ class Roles extends Component {
           maskClosable={false}
           afterClose={this.handleAfterCloseForm}
         >
-          <RoleForm
+          <CriticalInfrastructerForm
             posting={posting}
             isEditForm={isEditForm}
-            role={role}
+            facility={facility}
             onCancel={this.closeForm}
           />
         </Modal>
@@ -231,12 +244,12 @@ class Roles extends Component {
   }
 }
 
-export default Connect(Roles, {
-  roles: 'roles.list',
-  role: 'roles.selected',
-  showForm: 'roles.showForm',
-  posting: 'roles.posting',
-  loading: 'roles.loading',
-  page: 'roles.page',
-  total: 'roles.total',
+export default Connect(Facilities, {
+  facilities: 'features.list',
+  facility: 'features.selected',
+  posting: 'features.posting',
+  showForm: 'features.showForm',
+  loading: 'features.loading',
+  page: 'features.page',
+  total: 'features.total',
 });

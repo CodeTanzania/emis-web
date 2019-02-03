@@ -1,39 +1,35 @@
 import {
-  clearRoleFilters,
+  clearFeatureFilters,
   Connect,
-  filterRoles,
+  filterFeatures,
 } from '@codetanzania/emis-api-states';
 import { Button, Checkbox, Col, Form, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 /**
- * Filter modal component for filtering roles
+ * Filter modal component for filtering facilities
  *
  * @class
- * @name RolesFilters
+ * @name FacilitiesFilters
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class RolesFilters extends Component {
+class FacilitiesFilters extends Component {
   static propTypes = {
+    nature: PropTypes.arrayOf(PropTypes.string).isRequired,
     filter: PropTypes.objectOf(
       PropTypes.shape({
-        types: PropTypes.arrayOf(PropTypes.string),
+        nature: PropTypes.arrayOf(PropTypes.string),
       })
     ),
-    properties: PropTypes.arrayOf(PropTypes.string).isRequired,
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
     onCancel: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
     filter: null,
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
   };
 
   /**
@@ -54,7 +50,7 @@ class RolesFilters extends Component {
 
     validateFields((error, values) => {
       if (!error) {
-        filterRoles(values);
+        filterFeatures(values);
         onCancel();
       }
     });
@@ -71,16 +67,16 @@ class RolesFilters extends Component {
    */
   handleClearFilter = () => {
     const { onCancel } = this.props;
-    clearRoleFilters();
+    clearFeatureFilters();
     onCancel();
   };
 
   render() {
     const {
-      properties,
-      filter,
       form: { getFieldDecorator },
       onCancel,
+      filter,
+      nature,
     } = this.props;
 
     const formItemLayout = {
@@ -104,23 +100,23 @@ class RolesFilters extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit} layout={formItemLayout}>
-        {/* start role properties filters */}
-        <Form.Item {...formItemLayout} label="By Types">
-          {getFieldDecorator('type', {
-            initialValue: filter ? filter.type : [],
+        {/* start facilities nature filters */}
+        <Form.Item {...formItemLayout} label="By Nature">
+          {getFieldDecorator('nature', {
+            initialValue: filter ? filter.nature : [],
           })(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
-                {properties.map(type => (
+                {nature.map(natureItem => (
                   <Col span={6} style={{ margin: '10px 0' }}>
-                    <Checkbox value={type}>{type}</Checkbox>
+                    <Checkbox value={natureItem}>{natureItem}</Checkbox>
                   </Col>
                 ))}
               </Row>
             </Checkbox.Group>
           )}
         </Form.Item>
-        {/* end role properties filters */}
+        {/* end facilities nature filters */}
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
@@ -138,8 +134,8 @@ class RolesFilters extends Component {
   }
 }
 export default Form.create()(
-  Connect(RolesFilters, {
-    properties: 'roles.schema.properties.type.enum',
-    filter: 'roles.filter',
+  Connect(FacilitiesFilters, {
+    filter: 'features.filter',
+    nature: 'features.schema.properties.nature.enum',
   })
 );
