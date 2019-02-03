@@ -1,5 +1,6 @@
 import { Avatar, Checkbox, Col, Icon, Row } from 'antd';
 import PropTypes from 'prop-types';
+import randomColor from 'randomcolor';
 import React, { Component, Fragment } from 'react';
 import './styles.css';
 
@@ -41,6 +42,8 @@ class RegionsListItem extends Component {
   render() {
     const { name, category, country, type } = this.props;
     const { isHovered } = this.state;
+    const avatarBackground = randomColor();
+
     return (
       <div
         className="RegionsListItem"
@@ -52,7 +55,9 @@ class RegionsListItem extends Component {
             {isHovered ? (
               <Checkbox className="Checkbox" />
             ) : (
-              <Avatar>{name.charAt(0)}</Avatar>
+              <Avatar style={{ backgroundColor: avatarBackground }}>
+                {name.charAt(0).toUpperCase()}{' '}
+              </Avatar>
             )}
           </Col>
           <Col span={5}>{name}</Col>
