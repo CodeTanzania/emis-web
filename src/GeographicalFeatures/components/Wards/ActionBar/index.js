@@ -48,16 +48,6 @@ const WardsActionBar = ({ page, total, onFilter }) => (
       <Col span={1} xl={1}>
         <Button
           type="circle"
-          icon="share-alt"
-          title="Share selected Wards"
-          className="actionButton"
-          size="large"
-        />
-      </Col>
-
-      <Col span={1} xl={1}>
-        <Button
-          type="circle"
           icon="hdd"
           title="Archive selected Wards"
           className="actionButton"
@@ -67,9 +57,9 @@ const WardsActionBar = ({ page, total, onFilter }) => (
 
       <Col
         span={1}
-        offset={15}
-        xl={{ span: 1, offset: 14 }}
-        xxl={{ span: 1, offset: 15 }}
+        offset={16}
+        xl={{ span: 1, offset: 15 }}
+        xxl={{ span: 1, offset: 16 }}
       >
         <Button
           type="circle"

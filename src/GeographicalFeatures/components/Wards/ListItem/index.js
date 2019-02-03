@@ -29,6 +29,7 @@ class WardsListItem extends Component {
     nature: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     family: PropTypes.string.isRequired,
+    onEdit: PropTypes.func.isRequired,
   };
 
   handleMouseEnter = () => {
@@ -40,7 +41,7 @@ class WardsListItem extends Component {
   };
 
   render() {
-    const { name, nature, family, type } = this.props;
+    const { name, nature, family, type, onEdit } = this.props;
     const { isHovered } = this.state;
     const avatarBackground = randomColor();
 
@@ -67,11 +68,11 @@ class WardsListItem extends Component {
           <Col span={3}>
             {isHovered && (
               <Fragment>
-                <Icon type="edit" title="Update Ward" className="actionIcon" />
                 <Icon
-                  type="share-alt"
-                  title="Share Ward"
+                  type="edit"
+                  title="Update Ward"
                   className="actionIcon"
+                  onClick={onEdit}
                 />
                 <Icon
                   type="database"

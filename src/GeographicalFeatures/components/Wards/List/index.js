@@ -4,7 +4,7 @@ import React, { Fragment } from 'react';
 import WardsListItem from '../ListItem';
 import WardsListHeader from '../ListHeader';
 
-const WardsList = ({ wards, loading }) => (
+const WardsList = ({ wards, loading, onEdit }) => (
   <Fragment>
     <WardsListHeader />
     <List
@@ -17,6 +17,7 @@ const WardsList = ({ wards, loading }) => (
           nature={ward.nature}
           type={ward.type}
           family={ward.family}
+          onEdit={() => onEdit(ward)}
         />
       )}
     />
@@ -27,6 +28,7 @@ WardsList.propTypes = {
   loading: PropTypes.bool.isRequired,
   wards: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
     .isRequired,
+  onEdit: PropTypes.func.isRequired,
 };
 
 export default WardsList;

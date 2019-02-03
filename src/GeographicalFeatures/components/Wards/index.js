@@ -2,6 +2,9 @@ import {
   Connect,
   searchFeatures,
   filterFeatures,
+  openFeatureForm,
+  closeFeatureForm,
+  selectFeature,
 } from '@codetanzania/emis-api-states';
 import { Button, Col, Input, Row, Modal } from 'antd';
 import PropTypes from 'prop-types';
@@ -9,6 +12,7 @@ import React, { Component } from 'react';
 import WardsActionBar from './ActionBar';
 import WardsList from './List';
 import WardsFilters from './FIlters';
+import WardForm from './Form';
 import './styles.css';
 
 const { Search } = Input;
@@ -25,6 +29,7 @@ const { Search } = Input;
 class Wards extends Component {
   state = {
     showFilters: false,
+    isEditForm: false,
   };
 
   static propTypes = {
@@ -33,6 +38,13 @@ class Wards extends Component {
       .isRequired,
     page: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
+    posting: PropTypes.bool.isRequired,
+    ward: PropTypes.shape({ name: PropTypes.string }),
+    showForm: PropTypes.bool.isRequired,
+  };
+
+  static defaultProps = {
+    ward: null,
   };
 
   componentDidMount() {
@@ -85,9 +97,59 @@ class Wards extends Component {
     searchFeatures(event.target.value);
   };
 
+  /**
+   * Open ward form
+   *
+   * @function
+   * @name openForm
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openForm = () => {
+    openFeatureForm();
+  };
+
+  /**
+   * close ward form
+   *
+   * @function
+   * @name closeForm
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeForm = () => {
+    closeFeatureForm();
+    this.setState({ isEditForm: false });
+  };
+
+  /**
+   * Handle on Edit action for list item
+   *
+   * @function
+   * @name handleEdit
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleEdit = ward => {
+    selectFeature(ward);
+    this.setState({ isEditForm: true });
+    openFeatureForm();
+  };
+
+  handleAfterCloseForm = () => {
+    this.setState({ isEditForm: false });
+  };
+
   render() {
-    const { page, total, wards, loading } = this.props;
-    const { showFilters } = this.state;
+    const { page, total, wards, loading, posting, showForm, ward } = this.props;
+    const { showFilters, isEditForm } = this.state;
 
     return (
       <div className="Wards">
@@ -101,6 +163,7 @@ class Wards extends Component {
             />
             {/* end search input component */}
           </Col>
+
           {/* primary actions */}
           <Col span={3} offset={9}>
             <Button
@@ -108,21 +171,26 @@ class Wards extends Component {
               icon="plus"
               size="large"
               title="Add New Ward"
+              onClick={this.openForm}
             >
               New Ward
             </Button>
           </Col>
           {/* end primary actions */}
         </Row>
+
         {/* list header */}
         <WardsActionBar
           total={total}
           page={page}
           onFilter={this.openFiltersModal}
         />
-        {/* end list header */} {/* list starts */}
-        <WardsList wards={wards} loading={loading} />
+        {/* end list header */}
+
+        {/* list starts */}
+        <WardsList wards={wards} loading={loading} onEdit={this.handleEdit} />
         {/* end list */}
+
         {/* filter modal */}
         <Modal
           title="Filter Wards"
@@ -136,6 +204,25 @@ class Wards extends Component {
           <WardsFilters onCancel={this.closeFiltersModal} />
         </Modal>
         {/* end filter modal */}
+
+        {/* create/edit form modal */}
+        <Modal
+          title={isEditForm ? 'Edit Ward' : 'Add New Ward'}
+          visible={showForm}
+          footer={null}
+          onCancel={this.closeForm}
+          destroyOnClose
+          maskClosable={false}
+          afterClose={this.handleAfterCloseForm}
+        >
+          <WardForm
+            posting={posting}
+            isEditForm={isEditForm}
+            ward={ward}
+            onCancel={this.closeForm}
+          />
+        </Modal>
+        {/* end create/edit form modal */}
       </div>
     );
   }
@@ -146,4 +233,7 @@ export default Connect(Wards, {
   loading: 'features.loading',
   page: 'features.page',
   total: 'features.total',
+  ward: 'features.selected',
+  posting: 'features.posting',
+  showForm: 'features.showForm',
 });

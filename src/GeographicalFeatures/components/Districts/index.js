@@ -137,8 +137,8 @@ class Districts extends Component {
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleEdit = region => {
-    selectFeature(region);
+  handleEdit = district => {
+    selectFeature(district);
     this.setState({ isEditForm: true });
     openFeatureForm();
   };
