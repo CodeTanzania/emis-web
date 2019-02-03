@@ -1,31 +1,29 @@
 import {
-  clearAdjustmentFilters,
+  clearFeatureFilters,
   Connect,
-  filterAdjustments,
+  filterFeatures,
 } from '@codetanzania/emis-api-states';
 import { Button, Checkbox, Col, Form, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 /**
- * Filter modal component for filtering adjustments
+ * Filter modal component for filtering facilities
  *
  * @class
- * @name AdjustmentsFilters
+ * @name FacilitiesFilters
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class AdjustmentsFilters extends Component {
+class FacilitiesFilters extends Component {
   static propTypes = {
+    nature: PropTypes.arrayOf(PropTypes.string).isRequired,
     filter: PropTypes.objectOf(
       PropTypes.shape({
-        type: PropTypes.arrayOf(PropTypes.string),
-        reason: PropTypes.arrayOf(PropTypes.string),
+        nature: PropTypes.arrayOf(PropTypes.string),
       })
     ),
-    types: PropTypes.arrayOf(PropTypes.string).isRequired,
-    reasons: PropTypes.arrayOf(PropTypes.string).isRequired,
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
     onCancel: PropTypes.func.isRequired,
   };
@@ -52,7 +50,7 @@ class AdjustmentsFilters extends Component {
 
     validateFields((error, values) => {
       if (!error) {
-        filterAdjustments(values);
+        filterFeatures(values);
         onCancel();
       }
     });
@@ -69,7 +67,7 @@ class AdjustmentsFilters extends Component {
    */
   handleClearFilter = () => {
     const { onCancel } = this.props;
-    clearAdjustmentFilters();
+    clearFeatureFilters();
     onCancel();
   };
 
@@ -77,9 +75,8 @@ class AdjustmentsFilters extends Component {
     const {
       form: { getFieldDecorator },
       onCancel,
-      types,
       filter,
-      reasons,
+      nature,
     } = this.props;
 
     const formItemLayout = {
@@ -103,41 +100,23 @@ class AdjustmentsFilters extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit} layout={formItemLayout}>
-        {/* start adjustment actions filters */}
-        <Form.Item {...formItemLayout} label="By Types">
-          {getFieldDecorator('type', {
-            initialValue: filter ? filter.type : [],
+        {/* start facilities nature filters */}
+        <Form.Item {...formItemLayout} label="By Nature">
+          {getFieldDecorator('nature', {
+            initialValue: filter ? filter.nature : [],
           })(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
-                {types.map(type => (
+                {nature.map(natureItem => (
                   <Col span={6} style={{ margin: '10px 0' }}>
-                    <Checkbox value={type}>{type}</Checkbox>
+                    <Checkbox value={natureItem}>{natureItem}</Checkbox>
                   </Col>
                 ))}
               </Row>
             </Checkbox.Group>
           )}
         </Form.Item>
-        {/* end adjustment actions filters */}
-
-        {/* start adjustment reasons filters */}
-        <Form.Item {...formItemLayout} label="By  Reasons">
-          {getFieldDecorator('reason', {
-            initialValue: filter ? filter.reason : [],
-          })(
-            <Checkbox.Group style={{ width: '100%' }}>
-              <Row>
-                {reasons.map(reason => (
-                  <Col span={6} style={{ margin: '10px 0' }}>
-                    <Checkbox value={reason}>{reason}</Checkbox>
-                  </Col>
-                ))}
-              </Row>
-            </Checkbox.Group>
-          )}
-        </Form.Item>
-        {/* end adjustment reason filters */}
+        {/* end facilities nature filters */}
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
@@ -155,9 +134,8 @@ class AdjustmentsFilters extends Component {
   }
 }
 export default Form.create()(
-  Connect(AdjustmentsFilters, {
-    types: 'adjustments.schema.properties.type.enum',
-    reasons: 'adjustments.schema.properties.reason.enum',
-    filter: 'adjustments.filter',
+  Connect(FacilitiesFilters, {
+    filter: 'features.filter',
+    nature: 'features.schema.properties.nature.enum',
   })
 );
