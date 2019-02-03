@@ -14,9 +14,9 @@ const DistrictsList = ({ districts, loading }) => (
         <DistrictsListItem
           key={district.name}
           name={district.name}
-          category={district.category}
+          nature={district.nature}
           type={district.type}
-          country={district.country}
+          family={district.family}
         />
       )}
     />

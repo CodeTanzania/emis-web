@@ -1,6 +1,6 @@
 import {
   Connect,
-  getFeatures,
+  filterFeatures,
   searchFeatures,
 } from '@codetanzania/emis-api-states';
 import { Button, Col, Input, Row, Modal } from 'antd';
@@ -36,7 +36,7 @@ class Districts extends Component {
   };
 
   componentDidMount() {
-    getFeatures(); // {type:'District', family:'Administrative'}
+    filterFeatures({ type: 'District', family: 'Administrative' });
   }
 
   /**
@@ -101,6 +101,7 @@ class Districts extends Component {
             />
             {/* end search input component */}
           </Col>
+
           {/* primary actions */}
           <Col span={3} offset={9}>
             <Button

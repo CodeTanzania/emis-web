@@ -1,5 +1,6 @@
 import { Avatar, Checkbox, Col, Icon, Row } from 'antd';
 import PropTypes from 'prop-types';
+import randomColor from 'randomcolor';
 import React, { Component, Fragment } from 'react';
 import './styles.css';
 
@@ -25,9 +26,9 @@ class DistrictsListItem extends Component {
 
   static propTypes = {
     name: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
+    nature: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    country: PropTypes.string.isRequired,
+    family: PropTypes.string.isRequired,
   };
 
   handleMouseEnter = () => {
@@ -39,8 +40,10 @@ class DistrictsListItem extends Component {
   };
 
   render() {
-    const { name, category, country, type } = this.props;
+    const { name, nature, family, type } = this.props;
     const { isHovered } = this.state;
+    const avatarBackground = randomColor();
+
     return (
       <div
         className="DistrictsListItem"
@@ -52,24 +55,21 @@ class DistrictsListItem extends Component {
             {isHovered ? (
               <Checkbox className="Checkbox" />
             ) : (
-              <Avatar>{name.charAt(0)}</Avatar>
+              <Avatar style={{ backgroundColor: avatarBackground }}>
+                {name.charAt(0).toUpperCase()}
+              </Avatar>
             )}
           </Col>
           <Col span={5}>{name}</Col>
-          <Col span={6}>{category}</Col>
+          <Col span={6}>{nature}</Col>
           <Col span={4}>{type}</Col>
-          <Col span={4}>{country}</Col>
+          <Col span={4}>{family}</Col>
           <Col span={3}>
             {isHovered && (
               <Fragment>
                 <Icon
                   type="edit"
                   title="Update District"
-                  className="actionIcon"
-                />
-                <Icon
-                  type="share-alt"
-                  title="Share District"
                   className="actionIcon"
                 />
                 <Icon
