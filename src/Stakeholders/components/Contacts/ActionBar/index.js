@@ -31,13 +31,13 @@ const ContactsActionBar = ({
   <div className="ContactsActionBar">
     <Row>
       {/* bulk select action */}
-      <Col span={1} xl={1} className="checkbox">
+      <Col xl={{ span: 1 }} xxl={{ span: 1 }} className="checkbox">
         <Checkbox />
       </Col>
       {/* end bulk select action */}
 
       {/* refresh contacts action */}
-      <Col span={1} xl={1}>
+      <Col xl={{ span: 1 }} xxl={{ span: 1 }}>
         <Button
           shape="circle"
           icon="reload"
@@ -61,7 +61,7 @@ const ContactsActionBar = ({
       {/* end refresh contacts action */}
 
       {/* notify action */}
-      <Col span={1} xl={1}>
+      <Col xl={{ span: 1 }} xxl={{ span: 1 }}>
         <Button
           type="circle"
           icon="mail"
@@ -76,7 +76,7 @@ const ContactsActionBar = ({
       {/* end notify action  */}
 
       {/* export action */}
-      <Col span={1} xl={1}>
+      <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}>
         {selectedItemCount > 0 && (
           <Button
             type="circle"
@@ -90,7 +90,7 @@ const ContactsActionBar = ({
       {/* end export action */}
 
       {/* bulk share action */}
-      <Col span={1} xl={1}>
+      <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}>
         {selectedItemCount > 0 && (
           <Button
             type="circle"
@@ -104,7 +104,7 @@ const ContactsActionBar = ({
       {/* end bulk share action */}
 
       {/* bulk archive action */}
-      <Col span={1} xl={1}>
+      <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}>
         {selectedItemCount > 0 && (
           <Button
             type="circle"
@@ -118,12 +118,7 @@ const ContactsActionBar = ({
       {/* end bulk archive action */}
 
       {/* selected and contacts number summary */}
-      <Col
-        span={5}
-        offset={9}
-        xl={{ span: 4, offset: 9 }}
-        xxl={{ span: 4, offset: 10 }}
-      >
+      <Col span={6} xl={{ span: 4, offset: 9 }} xxl={{ span: 5, offset: 9 }}>
         {selectedItemCount > 0 && (
           <span
             style={{ color: '#c5c5c5' }}
@@ -147,7 +142,7 @@ const ContactsActionBar = ({
       {/* end filter action */}
 
       {/* pagination */}
-      <Col span={3} xl={4} xxl={3}>
+      <Col span={1} xl={{ span: 4 }} xxl={{ span: 3 }}>
         <Pagination
           simple
           defaultCurrent={page}

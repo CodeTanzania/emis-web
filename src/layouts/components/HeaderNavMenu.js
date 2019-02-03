@@ -2,17 +2,17 @@ import { Col, Row } from 'antd';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import alertIcon from '../../assets/images/alerts.svg';
-import dashboardIcon from '../../assets/images/dashboards.svg';
-import geographicalFeaturesIcon from '../../assets/images/geographicalfeatures.svg';
-import incidentIcon from '../../assets/images/incidents.svg';
-import stakeholderIcon from '../../assets/images/stakeholders.svg';
-import resourceIcon from '../../assets/images/resources.svg';
-import planIcon from '../../assets/images/plans.svg';
-import assessmentIcon from '../../assets/images/assessments.svg';
+import alertIcon from '../../assets/icons/alerts.svg';
+import dashboardIcon from '../../assets/icons/dashboards-disabled.svg';
+import geographicalFeaturesIcon from '../../assets/icons/geographicalfeatures.svg';
+import incidentIcon from '../../assets/icons/incidents.svg';
+import stakeholderIcon from '../../assets/icons/stakeholders.svg';
+import resourceIcon from '../../assets/icons/resources.svg';
+import planIcon from '../../assets/icons/emergencyplans.svg';
+import assessmentIcon from '../../assets/icons/assessments.svg';
 import './styles.css';
 
-const components = [
+const routes = [
   { name: 'Alerts', path: '/alerts', icon: alertIcon },
   { name: 'Assessments', path: '/assessments', icon: assessmentIcon },
   { name: 'Emergency Plans', path: '/plans', icon: planIcon },
@@ -24,7 +24,12 @@ const components = [
   { name: 'Incidents', path: '/incidents', icon: incidentIcon },
   { name: 'Resources', path: '/resources', icon: resourceIcon },
   { name: 'Stakeholders', path: '/stakeholders', icon: stakeholderIcon },
-  { name: 'Dashboards', path: '/dashboards', icon: dashboardIcon },
+  {
+    name: 'Dashboards',
+    path: '/dashboards',
+    icon: dashboardIcon,
+    disabled: true,
+  },
 ];
 
 /**
@@ -42,7 +47,7 @@ const components = [
  * @version 0.1.0
  * @since 0.1.0
  */
-const NavItem = ({ name, icon, path }) => (
+const NavItem = ({ name, icon, path, disabled }) => (
   <Link to={path}>
     <div className="NavItem">
       <img
@@ -52,13 +57,13 @@ const NavItem = ({ name, icon, path }) => (
         height={50}
         className="image"
       />
-      <span className="text">{name}</span>
+      <span className={`text ${disabled ? 'text-disabled' : ''}`}>{name}</span>
     </div>
   </Link>
 );
 
 /**
- * Home component which shows to navigation icon
+ * Home route which shows to navigation icon
  *
  * @function
  * @name Home
@@ -69,12 +74,13 @@ const NavItem = ({ name, icon, path }) => (
 const ModuleNavMenu = () => (
   <div className="ModuleNavMenu">
     <Row type="flex" align="middle">
-      {components.map(component => (
-        <Col key={component.path} span={12}>
+      {routes.map(route => (
+        <Col key={route.path} span={12}>
           <NavItem
-            name={component.name}
-            icon={component.icon}
-            path={component.path}
+            name={route.name}
+            icon={route.icon}
+            path={route.disabled ? '#' : route.path}
+            disabled={route.disabled}
           />
         </Col>
       ))}
@@ -87,6 +93,7 @@ NavItem.propTypes = {
   name: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
+  disabled: PropTypes.string.isRequired,
 };
 
 export default ModuleNavMenu;

@@ -1,15 +1,7 @@
 import React from 'react';
-import UIState from '../../components/UIState';
+// import UIState from '../../components/UIState';
+import Facilities from '../components/Facilities';
 
-const FacilitiesLayout = () => (
-  <div style={{ marginTop: '20%' }}>
-    <UIState
-      icon="exclamation-circle"
-      description="No Facilities yet,but when they are available will appear here"
-      buttonLabel="New Feature"
-      onClick={() => {}}
-    />
-  </div>
-);
+const FacilitiesLayout = () => <Facilities />;
 
 export default FacilitiesLayout;

@@ -10,9 +10,9 @@ import './styles.css';
  * @name QuestionsListItem
  *
  * @param {Object} props
- * @param {string} props.color
  * @param {string} props.label
  * @param {string} props.phase
+ * @param {string} props.color
  * @param {string} props.assess
  * @param {string} props.stage
  *
@@ -25,11 +25,12 @@ class QuestionsListItem extends Component {
   };
 
   static propTypes = {
-    color: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     phase: PropTypes.string.isRequired,
     assess: PropTypes.string.isRequired,
     stage: PropTypes.string.isRequired,
+    onEdit: PropTypes.func.isRequired,
+    color: PropTypes.string.isRequired,
   };
 
   handleMouseEnter = () => {
@@ -41,8 +42,9 @@ class QuestionsListItem extends Component {
   };
 
   render() {
-    const { color, label, phase, assess, stage } = this.props;
+    const { label, phase, assess, stage, onEdit, color } = this.props;
     const { isHovered } = this.state;
+
     return (
       <div
         className="QuestionsListItem"
@@ -55,7 +57,7 @@ class QuestionsListItem extends Component {
               <Checkbox className="Checkbox" />
             ) : (
               <Avatar style={{ backgroundColor: color }}>
-                {label.charAt(0)}
+                {phase.charAt(0).toUpperCase()}
               </Avatar>
             )}
           </Col>
@@ -70,6 +72,7 @@ class QuestionsListItem extends Component {
                   type="edit"
                   title="Update Question"
                   className="actionIcon"
+                  onClick={onEdit}
                 />
                 <Icon
                   type="share-alt"

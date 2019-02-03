@@ -1,7 +1,11 @@
-import { getQuestions } from '@codetanzania/emis-api-states';
+import {
+  refreshQuestions,
+  paginateQuestions,
+} from '@codetanzania/emis-api-states';
 import { Button, Checkbox, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { notifyError, notifySuccess } from '../../../../util';
 import './styles.css';
 
 /**
@@ -29,7 +33,18 @@ const QuestionsActionBar = ({ page, total, onFilter }) => (
           shape="circle"
           icon="reload"
           title="Refresh Questions"
-          onClick={() => getQuestions()}
+          onClick={() =>
+            refreshQuestions(
+              () => {
+                notifySuccess('Questions refreshed successfully');
+              },
+              () => {
+                notifyError(
+                  'An Error occurred while refreshing questions, please contact system administrator!'
+                );
+              }
+            )
+          }
           className="actionButton"
           size="large"
         />
@@ -86,7 +101,7 @@ const QuestionsActionBar = ({ page, total, onFilter }) => (
           simple
           defaultCurrent={page}
           total={total}
-          onChange={nextPage => getQuestions({ page: nextPage })}
+          onChange={nextPage => paginateQuestions(nextPage)}
           className="pagination"
         />
       </Col>

@@ -3,10 +3,13 @@ import React from 'react';
 import './styles.css';
 
 const headerLayout = [
-  { span: 9, header: 'Event', offset: 1 },
-  { span: 3, header: 'Expected At' },
-  { span: 3, header: 'Expires At' },
-  { span: 5, header: 'Issued By' },
+  { span: 7, header: 'Event', offset: 1 },
+  { span: 2, header: 'Severity' },
+  { span: 2, header: 'Certainty' },
+  { span: 2, header: 'Urgency' },
+  { span: 2, header: 'Expected' },
+  { span: 2, header: 'Expires' },
+  { span: 3, header: 'Source' },
 ];
 
 const AlertsListHeader = () => (
