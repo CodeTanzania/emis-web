@@ -4,7 +4,7 @@ import React, { Fragment } from 'react';
 import DistrictsListItem from '../ListItem';
 import DistrictsListHeader from '../ListHeader';
 
-const DistrictsList = ({ districts, loading }) => (
+const DistrictsList = ({ districts, loading, onEdit }) => (
   <Fragment>
     <DistrictsListHeader />
     <List
@@ -17,6 +17,7 @@ const DistrictsList = ({ districts, loading }) => (
           nature={district.nature}
           type={district.type}
           family={district.family}
+          onEdit={() => onEdit(district)}
         />
       )}
     />
@@ -27,6 +28,7 @@ DistrictsList.propTypes = {
   loading: PropTypes.bool.isRequired,
   districts: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
     .isRequired,
+  onEdit: PropTypes.func.isRequired,
 };
 
 export default DistrictsList;

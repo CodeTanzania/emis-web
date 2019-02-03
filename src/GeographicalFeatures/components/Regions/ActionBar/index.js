@@ -5,6 +5,7 @@ import {
 } from '@codetanzania/emis-api-states';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { notifyError, notifySuccess } from '../../../../util';
 import './styles.css';
 
 /**
@@ -34,7 +35,18 @@ const RegionsActionBar = ({ page, total, onFilter }) => (
           title="Refresh Regions"
           className="actionButton"
           size="large"
-          onClick={() => refreshFeatures()}
+          onClick={() =>
+            refreshFeatures(
+              () => {
+                notifySuccess('Regions refreshed successfully');
+              },
+              () => {
+                notifyError(
+                  'An Error occurred while refreshing regions, please contact system administrator!'
+                );
+              }
+            )
+          }
         />
       </Col>
 

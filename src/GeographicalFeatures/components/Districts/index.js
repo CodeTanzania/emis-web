@@ -196,7 +196,11 @@ class Districts extends Component {
         {/* end list header */}
 
         {/* list starts */}
-        <DistrictsList districts={districts} loading={loading} />
+        <DistrictsList
+          districts={districts}
+          loading={loading}
+          onEdit={this.handleEdit}
+        />
         {/* end list */}
 
         {/* filter modal */}

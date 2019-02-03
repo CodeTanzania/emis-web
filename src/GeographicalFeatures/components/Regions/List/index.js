@@ -14,9 +14,9 @@ const RegionsList = ({ regions, loading, onEdit }) => (
         <RegionsListItem
           key={region.name}
           name={region.name}
-          category={region.category}
+          nature={region.nature}
           type={region.type}
-          country={region.country}
+          family={region.family}
           onEdit={() => onEdit(region)}
         />
       )}

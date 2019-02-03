@@ -26,9 +26,9 @@ class RegionsListItem extends Component {
 
   static propTypes = {
     name: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
+    nature: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    country: PropTypes.string.isRequired,
+    family: PropTypes.string.isRequired,
     onEdit: PropTypes.func.isRequired,
   };
 
@@ -41,7 +41,7 @@ class RegionsListItem extends Component {
   };
 
   render() {
-    const { name, category, country, type, onEdit } = this.props;
+    const { name, family, nature, type, onEdit } = this.props;
     const { isHovered } = this.state;
     const avatarBackground = randomColor();
 
@@ -62,9 +62,9 @@ class RegionsListItem extends Component {
             )}
           </Col>
           <Col span={5}>{name}</Col>
-          <Col span={6}>{category}</Col>
+          <Col span={6}>{nature}</Col>
           <Col span={4}>{type}</Col>
-          <Col span={4}>{country}</Col>
+          <Col span={4}>{family}</Col>
           <Col span={3}>
             {isHovered && (
               <Fragment>

@@ -29,6 +29,7 @@ class DistrictsListItem extends Component {
     nature: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     family: PropTypes.string.isRequired,
+    onEdit: PropTypes.func.isRequired,
   };
 
   handleMouseEnter = () => {
@@ -40,7 +41,7 @@ class DistrictsListItem extends Component {
   };
 
   render() {
-    const { name, nature, family, type } = this.props;
+    const { name, nature, family, type, onEdit } = this.props;
     const { isHovered } = this.state;
     const avatarBackground = randomColor();
 
@@ -71,6 +72,7 @@ class DistrictsListItem extends Component {
                   type="edit"
                   title="Update District"
                   className="actionIcon"
+                  onClick={onEdit}
                 />
                 <Icon
                   type="database"
