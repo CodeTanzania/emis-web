@@ -79,6 +79,7 @@ class ItemsFilters extends Component {
       onCancel,
       types,
       uoms,
+      filter,
     } = this.props;
 
     const formItemLayout = {
@@ -101,10 +102,12 @@ class ItemsFilters extends Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit} layout={formItemLayout}>
+      <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* start type filters */}
         <Form.Item {...formItemLayout} label="By Types">
-          {getFieldDecorator('type')(
+          {getFieldDecorator('type', {
+            initialValue: filter ? filter.type : [],
+          })(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {types.map(type => (
@@ -120,7 +123,9 @@ class ItemsFilters extends Component {
 
         {/* start unit of measure filters */}
         <Form.Item {...formItemLayout} label="By Unit of Measurement">
-          {getFieldDecorator('uom')(
+          {getFieldDecorator('uom', {
+            initialValue: filter ? filter.uom : [],
+          })(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {uoms.map(uom => (
@@ -152,4 +157,5 @@ class ItemsFilters extends Component {
 export default Connect(Form.create()(ItemsFilters), {
   types: 'items.schema.properties.type.enum',
   uoms: 'items.schema.properties.uom.enum',
+  filter: 'items.filter',
 });

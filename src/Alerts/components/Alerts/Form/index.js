@@ -195,7 +195,7 @@ class AlertForm extends Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit} autoComplete="off">
         <Row justify="space-between" type="flex">
           <Col span={11}>
             {/* Alert event */}

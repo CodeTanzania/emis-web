@@ -5,6 +5,7 @@ import {
 import { Button, Checkbox, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { notifyError, notifySuccess } from '../../../../util';
 import './styles.css';
 
 /**
@@ -34,7 +35,18 @@ const AlertSourcesActionBar = ({ page, total }) => (
           title="Refresh Alert Sources"
           className="actionButton"
           size="large"
-          onClick={() => refreshAlertSources()}
+          onClick={() =>
+            refreshAlertSources(
+              () => {
+                notifySuccess('Alert Sources refreshed successfully');
+              },
+              () => {
+                notifyError(
+                  'An Error occurred while refreshing alert sources, please alert sources system administrator!'
+                );
+              }
+            )
+          }
         />
       </Col>
 
