@@ -1,7 +1,7 @@
 import {
   getFeatures,
   getIncidentTypes,
-  getActivities,
+  getStakeholders,
 } from '@codetanzania/emis-api-client';
 import { postPlan, putPlan } from '@codetanzania/emis-api-states';
 import { Button, Form } from 'antd';
@@ -150,7 +150,7 @@ class PlanForm extends Component {
           })(
             <SearchableSelectInput
               placeholder="Select Plan Owner ..."
-              onSearch={getActivities}
+              onSearch={getStakeholders}
               optionLabel="name"
               optionValue="_id"
               initialValue={isEditForm ? plan.owner : undefined}
