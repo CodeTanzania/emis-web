@@ -30,8 +30,10 @@ import AssessmentsIndicatorsLayout from '../Assessments/layouts/Indicators';
 import AssessmentsResponsesLayout from '../Assessments/layouts/Responses';
 import EmergencyPlanPlannerLayout from '../Plans/layouts/Planner';
 import EmergencyPlanActivationsLayout from '../Plans/layouts/Activations';
+import EmergencyPlanActivitiesLayout from '../Plans/layouts/Activities';
 import EmergencyPlanDisseminationsLayout from '../Plans/layouts/Disseminations';
 import EmergencyPlanDrillsLayout from '../Plans/layouts/Drills';
+import EmergencyPlanProceduresLayout from '../Plans/layouts/Procedures';
 import IncidentsCommandCenterLayout from '../Incidents/layouts/CommandCenter';
 import IncidentsAssessmentsLayout from '../Incidents/layouts/Assessments';
 import IncidentsActionsLayout from '../Incidents/layouts/Actions';
@@ -166,6 +168,7 @@ const breadcrumbNameMap = {
   },
   /* Plans Routes */
   '/plans/activations': { name: 'Activations', title: 'Plans activation' },
+  '/plans/activities': { name: 'Activities', title: 'Plans Activities' },
   '/plans/disseminations': {
     name: 'Disseminations',
     title: 'Dissemination of plans',
@@ -176,6 +179,10 @@ const breadcrumbNameMap = {
   },
   '/plans': { name: 'Emergency Plans', title: 'Emergency plans module' },
   '/plans/planner': { name: 'Planner', title: 'Planner' },
+  '/plans/procedures': {
+    name: 'Standard Operating Procedures',
+    title: 'Standard Operating Procedures(SOP)',
+  },
   /* Resources Routes */
   '/resources/adjustments': {
     name: 'Adjustments',
@@ -204,6 +211,7 @@ const breadcrumbNameMap = {
   },
   '/stakeholders': { name: 'Stakeholders', title: 'Stakeholders module' },
 };
+
 // profile menu
 const userMenu = (
   <Menu>
@@ -231,15 +239,25 @@ const BaseLayout = withRouter(props => {
   const { location } = props;
 
   const pathSnippets = location.pathname.split('/').filter(i => i);
+  const lastPath = pathSnippets[pathSnippets.length - 1];
 
   // generate dynamic breadcrumb items
   const extraBreadcrumbItems = pathSnippets.map((_, index) => {
     const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
+
+    if (breadcrumbNameMap[url]) {
+      return (
+        <Breadcrumb.Item key={url}>
+          <Link to={url} title={breadcrumbNameMap[url].title}>
+            {breadcrumbNameMap[url].name}
+          </Link>
+        </Breadcrumb.Item>
+      );
+    }
+
     return (
       <Breadcrumb.Item key={url}>
-        <Link to={url} title={breadcrumbNameMap[url].title}>
-          {breadcrumbNameMap[url].name}
-        </Link>
+        <span title={lastPath}>{lastPath}</span>
       </Breadcrumb.Item>
     );
   });
@@ -407,8 +425,28 @@ const BaseLayout = withRouter(props => {
           />
           <Route
             exact
+            path="/plans/planner/:planId/:activityId"
+            component={EmergencyPlanProceduresLayout}
+          />
+          <Route
+            exact
             path="/plans/activations"
             component={EmergencyPlanActivationsLayout}
+          />
+          <Route
+            exact
+            path="/plans/activities"
+            component={EmergencyPlanActivitiesLayout}
+          />
+          <Route
+            exact
+            path="/plans/activities/:activityId"
+            component={EmergencyPlanProceduresLayout}
+          />
+          <Route
+            exact
+            path="/plans/planner/:planId"
+            component={EmergencyPlanActivitiesLayout}
           />
           <Route
             exact
@@ -419,6 +457,11 @@ const BaseLayout = withRouter(props => {
             exact
             path="/plans/drills"
             component={EmergencyPlanDrillsLayout}
+          />
+          <Route
+            exact
+            path="/plans/procedures"
+            component={EmergencyPlanProceduresLayout}
           />
           <Route exact path="/resources" component={Resources} />
           <Route
