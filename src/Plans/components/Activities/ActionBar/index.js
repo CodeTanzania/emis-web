@@ -1,4 +1,7 @@
-import { paginatePlans, refreshPlans } from '@codetanzania/emis-api-states';
+import {
+  paginateActivities,
+  refreshActivities,
+} from '@codetanzania/emis-api-states';
 import { Button, Checkbox, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -9,7 +12,7 @@ import './styles.css';
  * Render action bar for actions which are applicable to list content
  *
  * @function
- * @name PlansActionBar
+ * @name ActivitiesActionBar
  *
  * @param {Object} props
  * @param {page} props.page
@@ -18,15 +21,14 @@ import './styles.css';
  * @version 0.1.0
  * @since 0.1.0
  */
-const PlansActionBar = ({
+const ActivitiesActionBar = ({
   page,
   total,
   selectedItemCount,
-  isGridLayout,
+  onFilter,
   onNotify,
-  onToggleLayout,
 }) => (
-  <div className="PlansActionBar">
+  <div className="ActivitiesActionBar">
     <Row>
       {/* bulk select action */}
       <Col xl={{ span: 1 }} xxl={{ span: 1 }} className="checkbox">
@@ -34,20 +36,20 @@ const PlansActionBar = ({
       </Col>
       {/* end bulk select action */}
 
-      {/* refresh plans action */}
+      {/* refresh activities action */}
       <Col xl={{ span: 1 }} xxl={{ span: 1 }}>
         <Button
           shape="circle"
           icon="reload"
-          title="Refresh plans"
+          title="Refresh activities"
           onClick={() =>
-            refreshPlans(
+            refreshActivities(
               () => {
-                notifySuccess('Plans refreshed successfully');
+                notifySuccess('Activities refreshed successfully');
               },
               () => {
                 notifyError(
-                  'An Error occurred while refreshing plans, please plan system administrator!'
+                  'An Error occurred while refreshing activities, please activity system administrator!'
                 );
               }
             )
@@ -56,16 +58,16 @@ const PlansActionBar = ({
           size="large"
         />
       </Col>
-      {/* end refresh plans action */}
+      {/* end refresh activities action */}
 
       {/* notify action */}
       <Col xl={{ span: 1 }} xxl={{ span: 1 }}>
         <Button
           type="circle"
-          icon="sound"
-          title={`Disseminate plan to${
+          icon="mail"
+          title={`Send Notification to${
             selectedItemCount > 0 ? ' selected' : ''
-          } activity`}
+          } activities`}
           className="actionButton"
           size="large"
           onClick={onNotify}
@@ -79,7 +81,7 @@ const PlansActionBar = ({
           <Button
             type="circle"
             icon="cloud-download"
-            title="Export selected plans"
+            title="Export selected activities"
             className="actionButton"
             size="large"
           />
@@ -93,7 +95,7 @@ const PlansActionBar = ({
           <Button
             type="circle"
             icon="share-alt"
-            title="Share selected plans"
+            title="Share selected activities"
             className="actionButton"
             size="large"
           />
@@ -107,7 +109,7 @@ const PlansActionBar = ({
           <Button
             type="circle"
             icon="hdd"
-            title="Archive selected plans"
+            title="Archive selected activities"
             className="actionButton"
             size="large"
           />
@@ -115,42 +117,29 @@ const PlansActionBar = ({
       </Col>
       {/* end bulk archive action */}
 
-      {/* selected and plans number summary */}
-      <Col span={5} xl={{ span: 4, offset: 8 }} xxl={{ span: 5, offset: 8 }}>
+      {/* selected and activities number summary */}
+      <Col span={6} xl={{ span: 4, offset: 9 }} xxl={{ span: 5, offset: 9 }}>
         {selectedItemCount > 0 && (
           <span
             style={{ color: '#c5c5c5' }}
           >{`${selectedItemCount} out of `}</span>
         )}
-        <span style={{ color: '#c5c5c5' }}>{`${total} plans`}</span>
+        <span style={{ color: '#c5c5c5' }}>{`${total} activities`}</span>
       </Col>
-      {/* end selected and plans number summary */}
+      {/* end selected and activities number summary */}
 
       {/* filter action */}
       <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}>
-        {/* <Button
+        <Button
           type="circle"
           icon="filter"
-          title="Filter plans"
+          title="Filter activities"
           className="actionButton"
           size="large"
           onClick={onFilter}
-        /> */}
-      </Col>
-      {/* end filter action */}
-
-      {/* switch list layout action */}
-      <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}>
-        <Button
-          type="circle"
-          icon={isGridLayout ? 'bars' : 'appstore'}
-          title="Switch plans layout to grid"
-          className="actionButton"
-          size="large"
-          onClick={onToggleLayout}
         />
       </Col>
-      {/* end switch list layout action */}
+      {/* end filter action */}
 
       {/* pagination */}
       <Col span={1} xl={{ span: 4 }} xxl={{ span: 3 }}>
@@ -158,7 +147,7 @@ const PlansActionBar = ({
           simple
           defaultCurrent={page}
           total={total}
-          onChange={nextPage => paginatePlans(nextPage)}
+          onChange={nextPage => paginateActivities(nextPage)}
           className="pagination"
         />
       </Col>
@@ -168,13 +157,12 @@ const PlansActionBar = ({
 );
 
 /* props validation */
-PlansActionBar.propTypes = {
+ActivitiesActionBar.propTypes = {
   page: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
-  isGridLayout: PropTypes.bool.isRequired,
   selectedItemCount: PropTypes.number.isRequired,
+  onFilter: PropTypes.func.isRequired,
   onNotify: PropTypes.func.isRequired,
-  onToggleLayout: PropTypes.func.isRequired,
 };
 
-export default PlansActionBar;
+export default ActivitiesActionBar;

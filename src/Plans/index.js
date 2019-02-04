@@ -9,6 +9,16 @@ import NavigationMenu from '../components/NavigationMenu';
 const routes = [
   { name: 'Emergency Planner', path: '/planner', icon: plannerIcon },
   {
+    name: 'Emergency Plans Activities',
+    path: '/activities',
+    icon: plannerIcon,
+  },
+  {
+    name: 'Emergency Plans Procedures',
+    path: '/procedures',
+    icon: plannerIcon,
+  },
+  {
     name: 'Disseminations',
     path: '/disseminations',
     icon: disseminationIcon,

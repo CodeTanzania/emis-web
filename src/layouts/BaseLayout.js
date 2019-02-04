@@ -30,8 +30,10 @@ import AssessmentsIndicatorsLayout from '../Assessments/layouts/Indicators';
 import AssessmentsResponsesLayout from '../Assessments/layouts/Responses';
 import EmergencyPlanPlannerLayout from '../Plans/layouts/Planner';
 import EmergencyPlanActivationsLayout from '../Plans/layouts/Activations';
+import EmergencyPlanActivitiesLayout from '../Plans/layouts/Activities';
 import EmergencyPlanDisseminationsLayout from '../Plans/layouts/Disseminations';
 import EmergencyPlanDrillsLayout from '../Plans/layouts/Drills';
+import EmergencyPlanProceduresLayout from '../Plans/layouts/Procedures';
 import IncidentsCommandCenterLayout from '../Incidents/layouts/CommandCenter';
 import IncidentsAssessmentsLayout from '../Incidents/layouts/Assessments';
 import IncidentsActionsLayout from '../Incidents/layouts/Actions';
@@ -146,6 +148,7 @@ const breadcrumbNameMap = {
   },
   /* Plans Routes */
   '/plans/activations': { name: 'Activations', title: 'Plans activation' },
+  '/plans/activities': { name: 'Activities', title: 'Plans Activities' },
   '/plans/disseminations': {
     name: 'Disseminations',
     title: 'Dissemination of plans',
@@ -156,6 +159,10 @@ const breadcrumbNameMap = {
   },
   '/plans': { name: 'Emergency Plans', title: 'Emergency plans module' },
   '/plans/planner': { name: 'Planner', title: 'Planner' },
+  '/plans/procedures': {
+    name: 'Standard Operating Procedures',
+    title: 'Standard Operating Procedures(SOP)',
+  },
   /* Resources Routes */
   '/resources/adjustments': {
     name: 'Adjustments',
@@ -372,6 +379,11 @@ const BaseLayout = withRouter(props => {
           />
           <Route
             exact
+            path="/plans/activities"
+            component={EmergencyPlanActivitiesLayout}
+          />
+          <Route
+            exact
             path="/plans/disseminations"
             component={EmergencyPlanDisseminationsLayout}
           />
@@ -379,6 +391,11 @@ const BaseLayout = withRouter(props => {
             exact
             path="/plans/drills"
             component={EmergencyPlanDrillsLayout}
+          />
+          <Route
+            exact
+            path="/plans/procedures"
+            component={EmergencyPlanProceduresLayout}
           />
           <Route exact path="/resources" component={Resources} />
           <Route
