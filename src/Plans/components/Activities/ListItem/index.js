@@ -2,6 +2,7 @@ import { Avatar, Checkbox, Col, Icon, Row } from 'antd';
 import PropTypes from 'prop-types';
 import randomColor from 'randomcolor';
 import React, { Component, Fragment } from 'react';
+import { Link, withRouter } from 'react-router-dom';
 import './styles.css';
 
 /**
@@ -13,9 +14,10 @@ import './styles.css';
  * @param {Object} props
  * @param {string} props.code
  * @param {string} props.color
- * @param {string} props.name
- * @param {string} props.incidentType
  * @param {string} props.description
+ * @param {string} props.id
+ * @param {string} props.incidentType
+ * @param {string} props.name
  * @param {string} props.phase
  *
  * @version 0.1.0
@@ -31,6 +33,8 @@ class ActivitiesListItem extends Component {
     color: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     incidentType: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    match: PropTypes.shape({ url: PropTypes.string.isRequired }).isRequired,
     name: PropTypes.string.isRequired,
     phase: PropTypes.string.isRequired,
     onArchive: PropTypes.func.isRequired,
@@ -62,6 +66,7 @@ class ActivitiesListItem extends Component {
 
   render() {
     const {
+      id,
       code,
       color,
       name,
@@ -70,6 +75,7 @@ class ActivitiesListItem extends Component {
       phase,
       onEdit,
       onArchive,
+      match,
     } = this.props;
     const { isHovered } = this.state;
     const { isSelected } = this.props;
@@ -112,6 +118,14 @@ class ActivitiesListItem extends Component {
           <Col span={3}>
             {isHovered && (
               <Fragment>
+                <Link to={`${match.url}/${id}`}>
+                  <Icon
+                    type="bars"
+                    title="View Plan Activities"
+                    className="actionIcon"
+                  />
+                </Link>
+
                 <Icon
                   type="edit"
                   title="Update Activity"
@@ -138,4 +152,4 @@ class ActivitiesListItem extends Component {
   }
 }
 
-export default ActivitiesListItem;
+export default withRouter(ActivitiesListItem);

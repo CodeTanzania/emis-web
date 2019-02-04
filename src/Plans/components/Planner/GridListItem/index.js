@@ -1,7 +1,7 @@
 import { Badge, Button, Card, Col, Popover, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import './styles.css';
 
 /**
@@ -47,6 +47,7 @@ const PlanOptions = ({ onEditPlan }) => (
  * @name PlansGridListItem
  *
  * @param {Object} props
+ * @param {string} props.id
  * @param {string} props.incidentType
  * @param {string} props.jurisdiction
  * @param {string} props.description
@@ -64,18 +65,19 @@ class PlansGridListItem extends Component {
   state = { showPopover: false };
 
   static propTypes = {
+    activityCount: PropTypes.number,
+    color: PropTypes.string,
+    description: PropTypes.string,
+    family: PropTypes.string,
+    id: PropTypes.string.isRequired,
     incidentType: PropTypes.string.isRequired,
     jurisdiction: PropTypes.string.isRequired,
     level: PropTypes.string.isRequired,
-    description: PropTypes.string,
+    match: PropTypes.shape({ url: PropTypes.string }).isRequired,
     nature: PropTypes.string,
-    family: PropTypes.string,
-    activityCount: PropTypes.number,
-    color: PropTypes.string,
-    updatedAt: PropTypes.string.isRequired,
-    onClickPlan: PropTypes.func.isRequired,
     onEditPlan: PropTypes.func.isRequired,
     owner: PropTypes.string,
+    updatedAt: PropTypes.string.isRequired,
   };
 
   static defaultProps = {
@@ -161,17 +163,18 @@ class PlansGridListItem extends Component {
     const { showPopover } = this.state;
 
     const {
+      id,
       incidentType,
       jurisdiction,
       level,
       description,
+      match,
       nature,
       family,
       owner,
       activityCount,
       color,
       updatedAt,
-      onClickPlan,
     } = this.props;
 
     return (
@@ -182,11 +185,7 @@ class PlansGridListItem extends Component {
           padding: 0,
         }}
       >
-        <Link
-          to="/plans/plan/activities"
-          title={description}
-          onClick={onClickPlan}
-        >
+        <Link to={`${match.url}/${id}`} title={description}>
           <Row justify="space-between">
             <Col span={21} xl={18} xxl={20}>
               <h3 title={incidentType}>{incidentType}</h3>
@@ -234,4 +233,4 @@ PlanOptions.propTypes = {
   onEditPlan: PropTypes.func.isRequired,
 };
 
-export default PlansGridListItem;
+export default withRouter(PlansGridListItem);

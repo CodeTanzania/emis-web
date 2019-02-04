@@ -2,6 +2,7 @@ import { Avatar, Checkbox, Col, Icon, Row } from 'antd';
 import PropTypes from 'prop-types';
 import randomColor from 'randomcolor';
 import React, { Component, Fragment } from 'react';
+import { Link, withRouter } from 'react-router-dom';
 import './styles.css';
 
 /**
@@ -29,12 +30,14 @@ class PlansListItem extends Component {
     code: PropTypes.string.isRequired,
     color: PropTypes.string,
     incidentType: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     owner: PropTypes.string.isRequired,
     onArchive: PropTypes.func.isRequired,
     onEdit: PropTypes.func.isRequired,
     isSelected: PropTypes.bool.isRequired,
     onSelectItem: PropTypes.func.isRequired,
     onDeselectItem: PropTypes.func.isRequired,
+    match: PropTypes.shape({ url: PropTypes.string }).isRequired,
   };
 
   static defaultProps = {
@@ -67,9 +70,11 @@ class PlansListItem extends Component {
       code,
       color,
       incidentType,
+      id,
       owner,
       onEdit,
       onArchive,
+      match,
     } = this.props;
     const { isHovered } = this.state;
     const { isSelected } = this.props;
@@ -105,11 +110,19 @@ class PlansListItem extends Component {
         <Row>
           <Col span={1}>{sideComponent}</Col>
           <Col span={5}>{incidentType}</Col>
-          <Col span={10}>{owner}</Col>
+          <Col span={9}>{owner}</Col>
           <Col span={4}>{boundary}</Col>
-          <Col span={4}>
+          <Col span={5}>
             {isHovered && (
               <Fragment>
+                <Link to={`${match.url}/${id}`}>
+                  <Icon
+                    type="bars"
+                    title="View Plan Activities"
+                    className="actionIcon"
+                  />
+                </Link>
+
                 <Icon
                   type="sound"
                   title="Disseminate Plan"
@@ -141,4 +154,4 @@ class PlansListItem extends Component {
   }
 }
 
-export default PlansListItem;
+export default withRouter(PlansListItem);

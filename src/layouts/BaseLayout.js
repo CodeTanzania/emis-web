@@ -191,6 +191,7 @@ const breadcrumbNameMap = {
   },
   '/stakeholders': { name: 'Stakeholders', title: 'Stakeholders module' },
 };
+
 // profile menu
 const userMenu = (
   <Menu>
@@ -218,15 +219,25 @@ const BaseLayout = withRouter(props => {
   const { location } = props;
 
   const pathSnippets = location.pathname.split('/').filter(i => i);
+  const lastPath = pathSnippets[pathSnippets.length - 1];
 
   // generate dynamic breadcrumb items
   const extraBreadcrumbItems = pathSnippets.map((_, index) => {
     const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
+
+    if (breadcrumbNameMap[url]) {
+      return (
+        <Breadcrumb.Item key={url}>
+          <Link to={url} title={breadcrumbNameMap[url].title}>
+            {breadcrumbNameMap[url].name}
+          </Link>
+        </Breadcrumb.Item>
+      );
+    }
+
     return (
       <Breadcrumb.Item key={url}>
-        <Link to={url} title={breadcrumbNameMap[url].title}>
-          {breadcrumbNameMap[url].name}
-        </Link>
+        <span title={lastPath}>{lastPath}</span>
       </Breadcrumb.Item>
     );
   });
@@ -380,6 +391,16 @@ const BaseLayout = withRouter(props => {
           <Route
             exact
             path="/plans/activities"
+            component={EmergencyPlanActivitiesLayout}
+          />
+          <Route
+            exact
+            path="/plans/activities/:activityId"
+            component={EmergencyPlanProceduresLayout}
+          />
+          <Route
+            exact
+            path="/plans/planner/:planId"
             component={EmergencyPlanActivitiesLayout}
           />
           <Route

@@ -147,6 +147,7 @@ class PlansList extends Component {
             renderItem={plan => (
               <List.Item>
                 <PlansGridListItem
+                  id={plan._id} // eslint-disable-line
                   incidentType={plan.incidentType.name}
                   jurisdiction={plan.boundary.name}
                   level={plan.boundary.level}
@@ -157,7 +158,6 @@ class PlansList extends Component {
                   updatedAt={plan.updatedAt}
                   color={plan.incidentType.color}
                   activityCount={20}
-                  onClickPlan={() => {}}
                   onEditPlan={() => {
                     this.handleOpenPlanEditForm(plan);
                   }}
@@ -177,6 +177,7 @@ class PlansList extends Component {
               dataSource={plans}
               renderItem={plan => (
                 <PlansListItem
+                  id={plan._id} // eslint-disable-line
                   key={plan._id} // eslint-disable-line
                   code={plan.incidentType.code}
                   color={plan.incidentType.color}

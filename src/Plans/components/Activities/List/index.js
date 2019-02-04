@@ -141,7 +141,8 @@ class ActivitiesList extends Component {
           dataSource={activities}
           renderItem={activity => (
             <ActivitiesListItem
-              key={activity.abbreviation}
+              id={activity._id} // eslint-disable-line
+              key={activity._id} // eslint-disable-line
               code={activity.incidentType.code}
               color={activity.incidentType.color}
               name={activity.name}

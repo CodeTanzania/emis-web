@@ -1,6 +1,7 @@
 import {
   closeActivityForm,
   Connect,
+  filterActivities,
   getActivities,
   openActivityForm,
   searchActivities,
@@ -9,6 +10,7 @@ import {
 import { Button, Col, Input, Modal, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import ActivityForm from './ActivityForm';
 import ActivityFilters from './Filters';
 import ActivitiesList from './List';
@@ -43,6 +45,7 @@ class Activities extends Component {
     page: PropTypes.number.isRequired,
     showForm: PropTypes.bool.isRequired,
     total: PropTypes.number.isRequired,
+    match: PropTypes.shape({ url: PropTypes.string }).isRequired,
   };
 
   static defaultProps = {
@@ -50,7 +53,12 @@ class Activities extends Component {
   };
 
   componentDidMount() {
-    getActivities();
+    const { match } = this.props;
+    if (match.params.planId) {
+      filterActivities({ plan: match.params.planId }); // eslint-disable-line
+    } else {
+      getActivities();
+    }
   }
 
   /**
@@ -300,7 +308,7 @@ class Activities extends Component {
   }
 }
 
-export default Connect(Activities, {
+export default Connect(withRouter(Activities), {
   activities: 'activities.list',
   activity: 'activities.selected',
   loading: 'activities.loading',
@@ -308,4 +316,5 @@ export default Connect(Activities, {
   page: 'activities.page',
   showForm: 'activities.showForm',
   total: 'activities.total',
+  activePlan: 'plans.selected',
 });

@@ -1,6 +1,7 @@
 import {
   closeProcedureForm,
   Connect,
+  filterProcedures,
   getProcedures,
   openProcedureForm,
   searchProcedures,
@@ -9,6 +10,7 @@ import {
 import { Button, Col, Input, Modal, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import ProcedureFilters from './Filters';
 import ProceduresList from './List';
 import NotificationForm from './NotificationForm';
@@ -43,6 +45,7 @@ class Procedures extends Component {
     page: PropTypes.number.isRequired,
     showForm: PropTypes.bool.isRequired,
     total: PropTypes.number.isRequired,
+    match: PropTypes.shape({ url: PropTypes.string }).isRequired,
   };
 
   static defaultProps = {
@@ -50,7 +53,13 @@ class Procedures extends Component {
   };
 
   componentDidMount() {
-    getProcedures();
+    const { match } = this.props;
+
+    if (match.params.activityId) {
+      filterProcedures({ activity: match.params.activityId });
+    } else {
+      getProcedures();
+    }
   }
 
   /**
@@ -300,7 +309,7 @@ class Procedures extends Component {
   }
 }
 
-export default Connect(Procedures, {
+export default Connect(withRouter(Procedures), {
   procedures: 'procedures.list',
   procedure: 'procedures.selected',
   loading: 'procedures.loading',
