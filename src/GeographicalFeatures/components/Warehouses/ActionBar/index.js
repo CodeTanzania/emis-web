@@ -5,6 +5,7 @@ import {
 import { Button, Col, Pagination, Row, Checkbox } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { notifyError, notifySuccess } from '../../../../util';
 import './styles.css';
 
 /**
@@ -32,7 +33,18 @@ const WarehousesActionBar = ({ page, total, onFilter }) => (
           shape="circle"
           icon="reload"
           title="Refresh warehouse"
-          onClick={() => refreshFeatures()}
+          onClick={() =>
+            refreshFeatures(
+              () => {
+                notifySuccess('warehouses refreshed successfully');
+              },
+              () => {
+                notifyError(
+                  'An Error occurred while refreshing warehouses, please warehouses system administrator!'
+                );
+              }
+            )
+          }
           className="actionButton"
           size="large"
         />

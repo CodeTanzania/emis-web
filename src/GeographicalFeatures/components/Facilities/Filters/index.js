@@ -99,7 +99,7 @@ class FacilitiesFilters extends Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit} layout={formItemLayout}>
+      <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* start facilities nature filters */}
         <Form.Item {...formItemLayout} label="By Nature">
           {getFieldDecorator('nature', {

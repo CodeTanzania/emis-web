@@ -2,6 +2,7 @@ import { refreshRoles, paginateRoles } from '@codetanzania/emis-api-states';
 import { Button, Checkbox, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { notifyError, notifySuccess } from '../../../../util';
 import './styles.css';
 
 /**
@@ -29,7 +30,18 @@ const RolesActionBar = ({ page, total, onFilter }) => (
           shape="circle"
           icon="reload"
           title="Refresh roles"
-          onClick={() => refreshRoles()}
+          onClick={() =>
+            refreshRoles(
+              () => {
+                notifySuccess('Roles refreshed successfully');
+              },
+              () => {
+                notifyError(
+                  'An Error occurred while refreshing Roles, please Roles system administrator!'
+                );
+              }
+            )
+          }
           className="actionButton"
           size="large"
         />

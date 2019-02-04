@@ -115,7 +115,7 @@ class IncidentTypeForm extends Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* incident types name */}
         <Form.Item {...formItemLayout} label="Name ">
           {getFieldDecorator('name', {

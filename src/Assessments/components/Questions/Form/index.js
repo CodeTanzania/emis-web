@@ -119,7 +119,7 @@ class QuestionForm extends Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* question name */}
         <Form.Item {...formItemLayout} label="Name">
           {getFieldDecorator('name', {

@@ -103,7 +103,7 @@ class RolesFilters extends Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit} layout={formItemLayout}>
+      <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* start role properties filters */}
         <Form.Item {...formItemLayout} label="By Types">
           {getFieldDecorator('type', {

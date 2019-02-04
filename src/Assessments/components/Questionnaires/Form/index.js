@@ -114,7 +114,7 @@ class QuestionnaireForm extends Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* title */}
         <Form.Item {...formItemLayout} label="Title">
           {getFieldDecorator('title', {

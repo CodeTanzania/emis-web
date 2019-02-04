@@ -2,6 +2,7 @@ import { paginateStocks, refreshStocks } from '@codetanzania/emis-api-states';
 import { Button, Checkbox, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { notifyError, notifySuccess } from '../../../../util';
 import './styles.css';
 
 /**
@@ -29,7 +30,18 @@ const StocksActionBar = ({ page, total }) => (
           shape="circle"
           icon="reload"
           title="Refresh stocks"
-          onClick={() => refreshStocks()}
+          onClick={() =>
+            refreshStocks(
+              () => {
+                notifySuccess('Stocks refreshed successfully');
+              },
+              () => {
+                notifyError(
+                  'An Error occurred while refreshing Stocks, please Stocks system administrator!'
+                );
+              }
+            )
+          }
           className="actionButton"
           size="large"
         />

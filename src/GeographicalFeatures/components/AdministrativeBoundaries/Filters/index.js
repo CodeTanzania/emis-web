@@ -125,7 +125,7 @@ class AdminstrstiveBoundariesFilters extends Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit} layout={formItemLayout}>
+      <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* start AdminstrstiveBoundaries categories filters */}
         <Form.Item {...formItemLayout} label="By Categories">
           {getFieldDecorator('types')(

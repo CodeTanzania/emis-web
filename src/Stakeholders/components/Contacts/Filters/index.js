@@ -102,7 +102,7 @@ class ContactsFilters extends Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* start contact type filters */}
         <Form.Item {...formItemLayout} label="By Contact type">
           {getFieldDecorator('type', {

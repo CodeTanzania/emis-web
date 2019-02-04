@@ -123,7 +123,7 @@ class AlertsFilters extends Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit} layout={formItemLayout}>
+      <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* start alert types filters */}
         <Form.Item {...formItemLayout} label="By  Message Types">
           {getFieldDecorator('type', {

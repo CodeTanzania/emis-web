@@ -105,7 +105,7 @@ class WardsFilters extends Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* start nature filters */}
         <Form.Item {...formItemLayout} label="By Region nature">
           {getFieldDecorator('nature', {
