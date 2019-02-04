@@ -2,9 +2,7 @@ import { putItem, Connect, postItem } from '@codetanzania/emis-api-states';
 import { Button, Form, Input, Select, Row, Col } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import ColorPicker from 'rc-color-picker';
 import { notifyError, notifySuccess } from '../../../../util';
-import 'rc-color-picker/assets/index.css';
 import './styles.css';
 
 const { Option } = Select;
@@ -172,26 +170,6 @@ class ItemForm extends Component {
           })(<TextArea placeholder="e.g Addition information of item" />)}
         </Form.Item>
         {/* end description */}
-
-        {/* color code */}
-        <Row>
-          <Col span={19}>
-            <Form.Item {...formItemLayout} label="Color Code">
-              {getFieldDecorator('color', {
-                initialValue: isEditForm ? item.color : undefined,
-              })(
-                <Input
-                  placeholder="e.g #36c"
-                  title="Click button to select color"
-                />
-              )}
-            </Form.Item>
-          </Col>
-          <Col span={4} offset={1} className="ItemFormColor">
-            <ColorPicker animation="slide-up" onChange={this.onChangeColor} />
-          </Col>
-        </Row>
-        {/* end  color code */}
 
         {/*  minStockAllowed, maxStockAllowed */}
         <Row>
