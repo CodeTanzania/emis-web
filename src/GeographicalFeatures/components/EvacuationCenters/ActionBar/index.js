@@ -5,6 +5,7 @@ import {
 import { Button, Col, Pagination, Row, Checkbox } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { notifyError, notifySuccess } from '../../../../util';
 import './styles.css';
 
 /**
@@ -32,7 +33,18 @@ const EvacuationCentersActionBar = ({ page, total, onFilter }) => (
           shape="circle"
           icon="reload"
           title="Refresh evacuation center"
-          onClick={() => refreshFeatures()}
+          onClick={() =>
+            refreshFeatures(
+              () => {
+                notifySuccess('Evacuation Centers refreshed successfully');
+              },
+              () => {
+                notifyError(
+                  'An Error occurred while refreshing Evacuation Centers, please Evacuation Centers system administrator!'
+                );
+              }
+            )
+          }
           className="actionButton"
           size="large"
         />
