@@ -119,7 +119,7 @@ class IndicatorForm extends Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/*  subject */}
         <Form.Item {...formItemLayout} label="Subject">
           {getFieldDecorator('subject', {

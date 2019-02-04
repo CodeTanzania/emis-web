@@ -119,7 +119,7 @@ class CriticalInfrastructureForm extends Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* Critical Infrastructure name */}
         <Form.Item {...formItemLayout} label="Name">
           {getFieldDecorator('name', {

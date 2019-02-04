@@ -178,7 +178,11 @@ class WarehousesFilters extends Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit} layout={formItemLayout}>
+      <Form
+        onSubmit={this.handleSubmit}
+        layout={formItemLayout}
+        autoComplete="off"
+      >
         {/* start warehouses category filters */}
         <Form.Item {...formItemLayout} label="By Category">
           {getFieldDecorator('category', {

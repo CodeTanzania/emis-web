@@ -100,7 +100,7 @@ class IndicatorsFilters extends Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* start subject filters */}
         <Form.Item {...formItemLayout} label="By Subject">
           {getFieldDecorator('subject', {

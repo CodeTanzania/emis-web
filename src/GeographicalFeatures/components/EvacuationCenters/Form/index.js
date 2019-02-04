@@ -115,7 +115,7 @@ class EvacuationCenterForm extends Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* Evacuation Center name */}
         <Form.Item {...formItemLayout} label="Name">
           {getFieldDecorator('name', {

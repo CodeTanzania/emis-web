@@ -94,7 +94,7 @@ class StockForm extends Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* stock stakeholder */}
         <Form.Item {...formItemLayout} label="Stakeholder">
           {getFieldDecorator('owner', {
