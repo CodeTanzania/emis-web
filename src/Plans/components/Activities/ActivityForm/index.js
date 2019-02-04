@@ -1,8 +1,22 @@
-import { postActivity, putActivity } from '@codetanzania/emis-api-states';
-import { Button, Form, Input } from 'antd';
+import {
+  getItems,
+  getPlans,
+  getQuestionnaires,
+  getRoles,
+} from '@codetanzania/emis-api-client';
+import {
+  Connect,
+  postActivity,
+  putActivity,
+} from '@codetanzania/emis-api-states';
+import { Button, Form, Input, Radio } from 'antd';
+import map from 'lodash/map';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import SearchableSelectInput from '../../../../components/SearchableSelectInput';
 import { notifyError, notifySuccess } from '../../../../util';
+
+const { TextArea } = Input;
 
 /**
  * Render Activity form for creating and updating activity activity details
@@ -23,6 +37,7 @@ class ActivityForm extends Component {
       mobile: PropTypes.string,
       email: PropTypes.string,
     }).isRequired,
+    phases: PropTypes.arrayOf(PropTypes.string).isRequired,
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
     onCancel: PropTypes.func.isRequired,
     posting: PropTypes.bool.isRequired,
@@ -82,6 +97,7 @@ class ActivityForm extends Component {
     const {
       isEditForm,
       activity,
+      phases,
       posting,
       onCancel,
       form: { getFieldDecorator },
@@ -108,57 +124,150 @@ class ActivityForm extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
+        {/* activity plan select input */}
+        <Form.Item label="Plan" {...formItemLayout}>
+          {getFieldDecorator('plan', {
+            initialValue: isEditForm
+              ? activity.plan._id // eslint-disable-line
+              : undefined,
+            rules: [{ required: true, message: 'Activity Plan is Required' }],
+          })(
+            <SearchableSelectInput
+              placeholder="Select Activity Plan ..."
+              onSearch={getPlans}
+              optionLabel={plan =>
+                `${plan.incidentType.name} (${plan.owner.name})`
+              }
+              optionValue="_id"
+              initialValue={isEditForm ? activity.plan : undefined}
+            />
+          )}
+        </Form.Item>
+        {/* end activity plan select input */}
+
         {/* activity name */}
-        <Form.Item {...formItemLayout} label="Full Name">
+        <Form.Item {...formItemLayout} label="Activity Name">
           {getFieldDecorator('name', {
+            rules: [{ required: true, message: 'Activity Name is Required' }],
             initialValue: isEditForm ? activity.name : undefined,
-            rules: [
-              { required: true, message: 'Activity full name is required' },
-            ],
-          })(<Input placeholder="e.g John Doe" />)}
+          })(
+            <TextArea
+              autosize={{ minRows: 2, maxRows: 6 }}
+              placeholder="Enter Activity Name"
+            />
+          )}
         </Form.Item>
         {/* end activity name */}
 
-        {/* activity title */}
-        <Form.Item {...formItemLayout} label="Designation">
-          {getFieldDecorator('title', {
-            initialValue: isEditForm ? activity.title : undefined,
-            rules: [{ required: true, message: 'Activity time is required' }],
-          })(<Input placeholder="e.g Regional Commissioner" />)}
+        {/* activity description */}
+        <Form.Item {...formItemLayout} label="Activity Description">
+          {getFieldDecorator('description', {
+            initialValue: isEditForm ? activity.description : undefined,
+          })(
+            <TextArea
+              autosize={{ minRows: 3, maxRows: 6 }}
+              placeholder="Enter Activity Description"
+            />
+          )}
         </Form.Item>
-        {/* end activity title */}
+        {/* end activity description */}
 
-        {/* activity abbreviation */}
-        <Form.Item {...formItemLayout} label="Abbreviation">
-          {getFieldDecorator('abbreviation', {
-            initialValue: isEditForm ? activity.abbreviation : undefined,
-          })(<Input placeholder="e.g RC, DC, RAS" />)}
+        {/* activity phase */}
+        <Form.Item label="Phases">
+          {getFieldDecorator('phase', {
+            rules: [{ required: true, message: 'Activity Phase is Required' }],
+            initialValue: isEditForm ? activity.phase : undefined,
+          })(
+            <Radio.Group>
+              {phases.map(phase => (
+                <Radio value={phase}>{phase}</Radio>
+              ))}
+            </Radio.Group>
+          )}
         </Form.Item>
-        {/* end activity abbreviation */}
+        {/* end activity phase */}
 
-        {/* activity number */}
-        <Form.Item {...formItemLayout} label="Phone Number">
-          {getFieldDecorator('mobile', {
-            initialValue: isEditForm ? activity.mobile : undefined,
-            rules: [{ required: true, message: 'Phone number is required' }],
-          })(<Input placeholder="e.g 255799999999" />)}
-        </Form.Item>
-        {/* end activity number */}
-
-        {/* activity email */}
-        <Form.Item {...formItemLayout} label="Email">
-          {getFieldDecorator('email', {
-            initialValue: isEditForm ? activity.email : undefined,
+        {/* responsible roles select input */}
+        <Form.Item label="Primary Responsible Role(s)" {...formItemLayout}>
+          {getFieldDecorator('primary', {
             rules: [
               {
-                type: 'email',
-                message: 'The input is not valid E-mail!',
+                required: true,
+                message: 'Please Select Responsible Role(s)',
               },
-              { required: true, message: 'Email address is required' },
             ],
-          })(<Input placeholder="e.g example@mail.com" />)}
+            initialValue: isEditForm
+              ? map(activity.primary, role => role._id) // eslint-disable-line
+              : [],
+          })(
+            <SearchableSelectInput
+              placeholder="Select Role ..."
+              mode="multiple"
+              onSearch={getRoles}
+              optionLabel="name"
+              optionValue="_id"
+              initialValue={isEditForm ? activity.primary : []}
+            />
+          )}
         </Form.Item>
-        {/* end activity email */}
+        {/* end responsible roles select input */}
+
+        {/* responsible roles select input */}
+        <Form.Item label="Supportive Role(s)" {...formItemLayout}>
+          {getFieldDecorator('supportive', {
+            initialValue: isEditForm
+              ? map(activity.supportive, role => role._id) // eslint-disable-line
+              : [],
+          })(
+            <SearchableSelectInput
+              placeholder="Select Role ..."
+              mode="multiple"
+              onSearch={getRoles}
+              optionLabel="name"
+              optionValue="_id"
+              initialValue={isEditForm ? activity.supportive : []}
+            />
+          )}
+        </Form.Item>
+        {/* end responsible roles select input */}
+
+        {/* resource select input */}
+        <Form.Item label="Resources Needed" {...formItemLayout}>
+          {getFieldDecorator('resources', {
+            initialValue: isEditForm
+              ? map(activity.resources, item => item._id) // eslint-disable-line
+              : [],
+          })(
+            <SearchableSelectInput
+              placeholder="Select Resources Needed ..."
+              mode="multiple"
+              onSearch={getItems}
+              optionLabel="name"
+              optionValue="_id"
+              initialValue={isEditForm ? activity.resources : []}
+            />
+          )}
+        </Form.Item>
+        {/* end resource select input */}
+
+        {/* assessment select input */}
+        <Form.Item label="Assessment(s) to be performed" {...formItemLayout}>
+          {getFieldDecorator('assessments', {
+            initialValue: isEditForm
+              ? map(activity.assessments, item => item._id) // eslint-disable-line
+              : [],
+          })(
+            <SearchableSelectInput
+              placeholder="Select Questionnaires ..."
+              mode="multiple"
+              onSearch={getQuestionnaires}
+              optionLabel="title"
+              optionValue="_id"
+              initialValue={isEditForm ? activity.assessments : []}
+            />
+          )}
+        </Form.Item>
+        {/* end assessment select input */}
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
@@ -178,4 +287,6 @@ class ActivityForm extends Component {
   }
 }
 
-export default Form.create()(ActivityForm);
+export default Connect(Form.create()(ActivityForm), {
+  phases: 'activities.schema.properties.phase.enum',
+});
