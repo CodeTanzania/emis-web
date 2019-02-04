@@ -51,7 +51,6 @@ class Plans extends Component {
 
   componentDidMount() {
     getPlans();
-    getPlans();
   }
 
   /**

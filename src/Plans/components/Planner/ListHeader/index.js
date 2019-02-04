@@ -4,7 +4,7 @@ import './styles.css';
 
 const headerLayout = [
   { span: 5, header: 'Plan For', offset: 1 },
-  { span: 10, header: 'Plan By' },
+  { span: 9, header: 'Plan By' },
   { span: 4, header: 'Location' },
 ];
 
