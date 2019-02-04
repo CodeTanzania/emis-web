@@ -23,7 +23,6 @@ const PlansActionBar = ({
   total,
   selectedItemCount,
   isGridLayout,
-  onFilter,
   onNotify,
   onToggleLayout,
 }) => (
@@ -127,6 +126,19 @@ const PlansActionBar = ({
       </Col>
       {/* end selected and plans number summary */}
 
+      {/* filter action */}
+      <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}>
+        {/* <Button
+          type="circle"
+          icon="filter"
+          title="Filter plans"
+          className="actionButton"
+          size="large"
+          onClick={onFilter}
+        /> */}
+      </Col>
+      {/* end filter action */}
+
       {/* switch list layout action */}
       <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}>
         <Button
@@ -139,19 +151,6 @@ const PlansActionBar = ({
         />
       </Col>
       {/* end switch list layout action */}
-
-      {/* filter action */}
-      <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}>
-        <Button
-          type="circle"
-          icon="filter"
-          title="Filter plans"
-          className="actionButton"
-          size="large"
-          onClick={onFilter}
-        />
-      </Col>
-      {/* end filter action */}
 
       {/* pagination */}
       <Col span={1} xl={{ span: 4 }} xxl={{ span: 3 }}>
@@ -174,7 +173,6 @@ PlansActionBar.propTypes = {
   total: PropTypes.number.isRequired,
   isGridLayout: PropTypes.bool.isRequired,
   selectedItemCount: PropTypes.number.isRequired,
-  onFilter: PropTypes.func.isRequired,
   onNotify: PropTypes.func.isRequired,
   onToggleLayout: PropTypes.func.isRequired,
 };
