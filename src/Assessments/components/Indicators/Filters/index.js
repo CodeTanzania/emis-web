@@ -77,6 +77,7 @@ class IndicatorsFilters extends Component {
       form: { getFieldDecorator },
       onCancel,
       subjects,
+      filter,
     } = this.props;
 
     const formItemLayout = {
@@ -102,7 +103,9 @@ class IndicatorsFilters extends Component {
       <Form onSubmit={this.handleSubmit}>
         {/* start subject filters */}
         <Form.Item {...formItemLayout} label="By Subject">
-          {getFieldDecorator('subject')(
+          {getFieldDecorator('subject', {
+            initialValue: filter ? filter.subject : [],
+          })(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {subjects.map(subject => (
@@ -133,4 +136,5 @@ class IndicatorsFilters extends Component {
 }
 export default Connect(Form.create()(IndicatorsFilters), {
   subjects: 'indicators.schema.properties.subject.enum',
+  filter: 'indicators.filter',
 });
