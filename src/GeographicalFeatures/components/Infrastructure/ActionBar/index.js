@@ -5,6 +5,7 @@ import {
 import { Button, Col, Pagination, Row, Checkbox } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { notifyError, notifySuccess } from '../../../../util';
 import './styles.css';
 
 /**
@@ -32,7 +33,20 @@ const CriticalInfrastructuresActionBar = ({ page, total, onFilter }) => (
           shape="circle"
           icon="reload"
           title="Refresh critical infrastructure"
-          onClick={() => refreshFeatures()}
+          onClick={() =>
+            refreshFeatures(
+              () => {
+                notifySuccess(
+                  'Critical Infrastructures refreshed successfully'
+                );
+              },
+              () => {
+                notifyError(
+                  'An Error occurred while refreshing Critical Infrastructures, please Critical Infrastructures system administrator!'
+                );
+              }
+            )
+          }
           className="actionButton"
           size="large"
         />
