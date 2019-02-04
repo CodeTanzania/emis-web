@@ -3,6 +3,7 @@ import { Button, Checkbox, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
 import './styles.css';
+import { notifyError, notifySuccess } from '../../../../util';
 
 /**
  * Render action bar for actions which are applicable to list content
@@ -29,7 +30,18 @@ const AlertsActionBar = ({ page, total, onFilter }) => (
           shape="circle"
           icon="reload"
           title="Refresh Alerts"
-          onClick={() => refreshAlerts()}
+          onClick={() =>
+            refreshAlerts(
+              () => {
+                notifySuccess('Alerts refreshed successfully');
+              },
+              () => {
+                notifyError(
+                  'An Error occurred while refreshing alerts, please alerts system administrator!'
+                );
+              }
+            )
+          }
           className="actionButton"
           size="large"
         />
