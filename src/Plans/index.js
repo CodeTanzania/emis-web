@@ -4,6 +4,8 @@ import activationIcon from '../assets/icons/emergencyplans/activations-disabled.
 import disseminationIcon from '../assets/icons/emergencyplans/disseminations-disabled.svg';
 import drillsAndExercisesIcon from '../assets/icons/emergencyplans/drillsandexercises-disabled.svg';
 import plannerIcon from '../assets/icons/emergencyplans/planner.svg';
+import proceduresIcon from '../assets/icons/emergencyplans/procedures.svg';
+import activitiesIcon from '../assets/icons/emergencyplans/activities.svg';
 import NavigationMenu from '../components/NavigationMenu';
 
 const routes = [
@@ -11,12 +13,12 @@ const routes = [
   {
     name: 'Emergency Plans Activities',
     path: '/activities',
-    icon: plannerIcon,
+    icon: activitiesIcon,
   },
   {
     name: 'Emergency Plans Procedures',
     path: '/procedures',
-    icon: plannerIcon,
+    icon: proceduresIcon,
   },
   {
     name: 'Disseminations',
