@@ -98,7 +98,7 @@ class StockForm extends Component {
         {/* stock stakeholder */}
         <Form.Item {...formItemLayout} label="Stakeholder">
           {getFieldDecorator('owner', {
-            initialValue: isEditForm ? stock.owner._id : undefined, // eslint-disable-line
+            initialValue: isEditForm && stock.owner ? stock.owner._id : undefined, // eslint-disable-line
             rules: [
               { required: true, message: 'Stock stakeholder is required' },
             ],
@@ -108,7 +108,7 @@ class StockForm extends Component {
               onSearch={getStakeholders}
               optionLabel="name"
               optionValue="_id"
-              initialValue={isEditForm ? stock.owner : undefined}
+              initialValue={isEditForm && stock.owner ? stock.owner : undefined}
             />
           )}
         </Form.Item>
