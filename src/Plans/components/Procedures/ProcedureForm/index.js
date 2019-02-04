@@ -1,8 +1,19 @@
+import {
+  getActivities,
+  getItems,
+  getPlans,
+  getQuestionnaires,
+  getRoles,
+} from '@codetanzania/emis-api-client';
 import { postProcedure, putProcedure } from '@codetanzania/emis-api-states';
 import { Button, Form, Input } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import map from 'lodash/map';
+import SearchableSelectInput from '../../../../components/SearchableSelectInput';
 import { notifyError, notifySuccess } from '../../../../util';
+
+const { TextArea } = Input;
 
 /**
  * Render Procedure form for creating and updating procedure procedure details
@@ -108,57 +119,156 @@ class ProcedureForm extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
-        {/* procedure name */}
-        <Form.Item {...formItemLayout} label="Full Name">
-          {getFieldDecorator('name', {
-            initialValue: isEditForm ? procedure.name : undefined,
+        {/* procedure plan select input */}
+        <Form.Item label="Plan" {...formItemLayout}>
+          {getFieldDecorator('plan', {
+            initialValue: isEditForm
+              ? procedure.plan._id // eslint-disable-line
+              : undefined,
+            rules: [{ required: true, message: 'Procedure Plan is Required' }],
+          })(
+            <SearchableSelectInput
+              placeholder="Select Activity Plan ..."
+              onSearch={getPlans}
+              optionLabel={plan =>
+                `${plan.incidentType.name} (${plan.owner.name})`
+              }
+              optionValue="_id"
+              initialValue={isEditForm ? procedure.plan : undefined}
+            />
+          )}
+        </Form.Item>
+        {/* end procedure plan select input */}
+
+        {/* procedure activity select input */}
+        <Form.Item label="Activity" {...formItemLayout}>
+          {getFieldDecorator('activity', {
+            initialValue: isEditForm
+              ? procedure.activity._id // eslint-disable-line
+              : undefined,
             rules: [
-              { required: true, message: 'Procedure full name is required' },
+              { required: true, message: 'Procedure Activity is Required' },
             ],
-          })(<Input placeholder="e.g John Doe" />)}
+          })(
+            <SearchableSelectInput
+              placeholder="Select Activity Plan ..."
+              onSearch={getActivities}
+              optionLabel={activity => `${activity.name}`}
+              optionValue="_id"
+              initialValue={isEditForm ? procedure.activity : undefined}
+            />
+          )}
+        </Form.Item>
+        {/* end procedure activity select input */}
+
+        {/* procedure name */}
+        <Form.Item {...formItemLayout} label="SOP Name">
+          {getFieldDecorator('name', {
+            rules: [{ required: true, message: 'Procedure name is Required' }],
+            initialValue: isEditForm ? procedure.name : undefined,
+          })(
+            <TextArea
+              autosize={{ minRows: 2, maxRows: 6 }}
+              placeholder="Enter Procedure Name"
+            />
+          )}
         </Form.Item>
         {/* end procedure name */}
 
-        {/* procedure title */}
-        <Form.Item {...formItemLayout} label="Designation">
-          {getFieldDecorator('title', {
-            initialValue: isEditForm ? procedure.title : undefined,
-            rules: [{ required: true, message: 'Procedure time is required' }],
-          })(<Input placeholder="e.g Regional Commissioner" />)}
+        {/* procedure description */}
+        <Form.Item {...formItemLayout} label="SOP Description">
+          {getFieldDecorator('description', {
+            initialValue: isEditForm ? procedure.description : undefined,
+          })(
+            <TextArea
+              autosize={{ minRows: 2, maxRows: 6 }}
+              placeholder="Enter Procedure Description"
+            />
+          )}
         </Form.Item>
-        {/* end procedure title */}
+        {/* end procedure description */}
 
-        {/* procedure abbreviation */}
-        <Form.Item {...formItemLayout} label="Abbreviation">
-          {getFieldDecorator('abbreviation', {
-            initialValue: isEditForm ? procedure.abbreviation : undefined,
-          })(<Input placeholder="e.g RC, DC, RAS" />)}
-        </Form.Item>
-        {/* end procedure abbreviation */}
-
-        {/* procedure number */}
-        <Form.Item {...formItemLayout} label="Phone Number">
-          {getFieldDecorator('mobile', {
-            initialValue: isEditForm ? procedure.mobile : undefined,
-            rules: [{ required: true, message: 'Phone number is required' }],
-          })(<Input placeholder="e.g 255799999999" />)}
-        </Form.Item>
-        {/* end procedure number */}
-
-        {/* procedure email */}
-        <Form.Item {...formItemLayout} label="Email">
-          {getFieldDecorator('email', {
-            initialValue: isEditForm ? procedure.email : undefined,
+        {/* responsible roles select input */}
+        <Form.Item label="Primary Responsible Role(s)" {...formItemLayout}>
+          {getFieldDecorator('primary', {
             rules: [
               {
-                type: 'email',
-                message: 'The input is not valid E-mail!',
+                required: true,
+                message: 'Please Select Responsible Role(s)',
               },
-              { required: true, message: 'Email address is required' },
             ],
-          })(<Input placeholder="e.g example@mail.com" />)}
+            initialValue: isEditForm
+              ? map(procedure.primary, role => role._id) // eslint-disable-line
+              : [],
+          })(
+            <SearchableSelectInput
+              placeholder="Select Role ..."
+              mode="multiple"
+              onSearch={getRoles}
+              optionLabel="name"
+              optionValue="_id"
+              initialValue={isEditForm ? procedure.primary : []}
+            />
+          )}
         </Form.Item>
-        {/* end procedure email */}
+        {/* end responsible roles select input */}
+
+        {/* responsible roles select input */}
+        <Form.Item label="Supportive Role(s)" {...formItemLayout}>
+          {getFieldDecorator('supportive', {
+            initialValue: isEditForm
+              ? map(procedure.supportive, role => role._id) // eslint-disable-line
+              : [],
+          })(
+            <SearchableSelectInput
+              placeholder="Select Role ..."
+              mode="multiple"
+              onSearch={getRoles}
+              optionLabel="name"
+              optionValue="_id"
+              initialValue={isEditForm ? procedure.supportive : []}
+            />
+          )}
+        </Form.Item>
+        {/* end responsible roles select input */}
+
+        {/* resource select input */}
+        <Form.Item label="Resources Needed" {...formItemLayout}>
+          {getFieldDecorator('resources', {
+            initialValue: isEditForm
+              ? map(procedure.resources, item => item._id) // eslint-disable-line
+              : [],
+          })(
+            <SearchableSelectInput
+              placeholder="Select Resource items ..."
+              mode="multiple"
+              onSearch={getItems}
+              optionLabel="name"
+              optionValue="_id"
+              initialValue={isEditForm ? procedure.resources : []}
+            />
+          )}
+        </Form.Item>
+        {/* end resource select input */}
+
+        {/* Questionnaires select input */}
+        <Form.Item label="Assessment(s) to be performed" {...formItemLayout}>
+          {getFieldDecorator('assessments', {
+            initialValue: isEditForm
+              ? map(procedure.assessments, item => item._id) // eslint-disable-line
+              : [],
+          })(
+            <SearchableSelectInput
+              placeholder="Select Questionnaires ..."
+              mode="multiple"
+              onSearch={getQuestionnaires}
+              optionLabel="title"
+              optionValue="_id"
+              initialValue={isEditForm ? procedure.assessments : []}
+            />
+          )}
+        </Form.Item>
+        {/* end Questionnaires select input */}
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
