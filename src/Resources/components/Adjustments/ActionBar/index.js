@@ -1,7 +1,11 @@
-import { getAdjustments } from '@codetanzania/emis-api-states';
+import {
+  refreshAdjustments,
+  paginateAdjustments,
+} from '@codetanzania/emis-api-states';
 import { Button, Col, Pagination, Row, Checkbox } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { notifyError, notifySuccess } from '../../../../util';
 import './styles.css';
 
 /**
@@ -29,7 +33,18 @@ const AdjustmentsActionBar = ({ page, total, onFilter }) => (
           shape="circle"
           icon="reload"
           title="Refresh adjustment"
-          onClick={() => getAdjustments()}
+          onClick={() =>
+            refreshAdjustments(
+              () => {
+                notifySuccess('Adjustments refreshed successfully');
+              },
+              () => {
+                notifyError(
+                  'An Error occurred while refreshing adjustments, please adjustments system administrator!'
+                );
+              }
+            )
+          }
           className="actionButton"
           size="large"
         />
@@ -76,7 +91,7 @@ const AdjustmentsActionBar = ({ page, total, onFilter }) => (
           simple
           defaultCurrent={page}
           total={total}
-          onChange={nextPage => getAdjustments({ page: nextPage })}
+          onChange={nextPage => paginateAdjustments(nextPage)}
           className="pagination"
         />
       </Col>
