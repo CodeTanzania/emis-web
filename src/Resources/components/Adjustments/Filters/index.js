@@ -102,11 +102,7 @@ class AdjustmentsFilters extends Component {
     };
 
     return (
-      <Form
-        onSubmit={this.handleSubmit}
-        layout={formItemLayout}
-        autoComplete="off"
-      >
+      <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* start adjustment actions filters */}
         <Form.Item {...formItemLayout} label="By Types">
           {getFieldDecorator('type', {
