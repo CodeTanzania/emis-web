@@ -385,6 +385,11 @@ const BaseLayout = withRouter(props => {
           />
           <Route
             exact
+            path="/plans/planner/:planId/:activityId"
+            component={EmergencyPlanProceduresLayout}
+          />
+          <Route
+            exact
             path="/plans/activations"
             component={EmergencyPlanActivationsLayout}
           />
