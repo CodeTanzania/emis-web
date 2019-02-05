@@ -1,7 +1,7 @@
 import React from 'react';
 import UIState from '../../components/UIState';
 
-const SubwardsLayout = () => (
+const SubWardsLayout = () => (
   <div style={{ marginTop: '20%' }}>
     <UIState
       icon="exclamation-circle"
@@ -12,4 +12,4 @@ const SubwardsLayout = () => (
   </div>
 );
 
-export default SubwardsLayout;
+export default SubWardsLayout;

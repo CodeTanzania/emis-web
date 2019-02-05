@@ -52,14 +52,14 @@ import AdministrativeBoundariesLayout from '../GeographicalFeatures/layouts/Admi
 import GeographicalFeaturesWarehousesLayout from '../GeographicalFeatures/layouts/Warehouses';
 import GeographicalFeaturesFacilitiesLayout from '../GeographicalFeatures/layouts/Facilities';
 import GeographicalFeaturesInfrastructureLayout from '../GeographicalFeatures/layouts/Infrastructure';
-import Home from '../Home';
 import HeaderNavMenu from './components/HeaderNavMenu';
-import './styles.css';
 import EvacuationCentersLayout from '../GeographicalFeatures/layouts/EvacuationCenters';
 import DistrictsLayout from '../GeographicalFeatures/layouts/Districts';
-import SubwardsLayout from '../GeographicalFeatures/layouts/Subwaard';
+import SubWardsLayout from '../GeographicalFeatures/layouts/SubWards';
 import WardsLayout from '../GeographicalFeatures/layouts/Wards';
 import RegionsLayout from '../GeographicalFeatures/layouts/Regions';
+import Home from '../Home';
+import './styles.css';
 
 const { Header, Content } = Layout;
 const breadcrumbNameMap = {
@@ -374,7 +374,7 @@ const BaseLayout = withRouter(props => {
           <Route
             exact
             path="/geographicalfeatures/subwards"
-            component={SubwardsLayout}
+            component={SubWardsLayout}
           />
           <Route
             exact
