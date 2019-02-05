@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import commandCenterIcon from '../assets/icons/incidents/incidentcommandcenter-disabled.svg';
+import commandCenterIcon from '../assets/icons/incidents/incidentcommandcenter.svg';
 import assessmentIcon from '../assets/icons/incidents/assessments.svg';
 import incidentTypeIcon from '../assets/icons/incidents/incidenttype.svg';
 import lossDatabaseIcon from '../assets/icons/incidents/lossdatabase.svg';

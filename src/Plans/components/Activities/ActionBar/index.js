@@ -25,7 +25,7 @@ const ActivitiesActionBar = ({
   page,
   total,
   selectedItemCount,
-  onFilter,
+  // onFilter,
   onNotify,
 }) => (
   <div className="ActivitiesActionBar">
@@ -130,14 +130,14 @@ const ActivitiesActionBar = ({
 
       {/* filter action */}
       <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}>
-        <Button
+        {/* <Button
           type="circle"
           icon="filter"
           title="Filter activities"
           className="actionButton"
           size="large"
           onClick={onFilter}
-        />
+        /> */}
       </Col>
       {/* end filter action */}
 
@@ -161,7 +161,7 @@ ActivitiesActionBar.propTypes = {
   page: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
   selectedItemCount: PropTypes.number.isRequired,
-  onFilter: PropTypes.func.isRequired,
+  // onFilter: PropTypes.func.isRequired,
   onNotify: PropTypes.func.isRequired,
 };
 
