@@ -7,7 +7,7 @@ A collaboration platform that facilitates communication, planning and actions fo
 
 It incorporates data that can be shared and analyzed in order generate insights for local authorities and communities to better manage disasters and increase resilience to disaster risk. The data is organized in core components.
 
-![EMIS Homepage](docs/home.png "EMIS Homepage")
+![EMIS Homepage](docs/images/home.png "EMIS Homepage")
 
 ## EMIS Components
 
