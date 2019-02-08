@@ -174,6 +174,17 @@ class Plans extends Component {
     this.setState({ showNotificationForm: false });
   };
 
+  /**
+   * Reset isEditForm state to false after closing modal window
+   *
+   * @function
+   * @name handleAfterCloseForm
+   *
+   * @returns {undefined}
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleAfterCloseForm = () => {
     this.setState({ isEditForm: false });
   };
