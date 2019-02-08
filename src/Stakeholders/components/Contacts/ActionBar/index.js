@@ -145,6 +145,7 @@ const ContactsActionBar = ({
       <Col span={1} xl={{ span: 4 }} xxl={{ span: 3 }}>
         <Pagination
           simple
+          current={page}
           defaultCurrent={page}
           total={total}
           onChange={nextPage => paginateStakeholders(nextPage)}

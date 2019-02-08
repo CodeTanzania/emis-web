@@ -200,6 +200,8 @@ class Roles extends Component {
           title="Filter Roles"
           visible={showFilters}
           onCancel={this.closeFiltersModal}
+          maskClosable={false}
+          destroyOnClose
           footer={null}
         >
           <RoleFilters onCancel={this.closeFiltersModal} />

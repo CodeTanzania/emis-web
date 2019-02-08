@@ -101,7 +101,7 @@ class IncidentTypesFilters extends Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* start families filters */}
         <Form.Item {...formItemLayout} label="By Emergency Families">
           {getFieldDecorator('family', {

@@ -11,7 +11,8 @@ const StockList = ({ stocks, loading, onEdit }) => (
       loading={loading}
       dataSource={stocks}
       renderItem={stock => {
-        const { item, store, owner } = stock;
+        const { item, store } = stock;
+        const { owner } = stock.owner ? stock : { owner: { name: 'N/A' } };
         return (
           <StockListItem
             key={stock.name}

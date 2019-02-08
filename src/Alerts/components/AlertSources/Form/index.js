@@ -89,7 +89,7 @@ class AlertSourceForm extends Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* Alert Source name */}
         <Form.Item {...formItemLayout} label="Organisation name">
           {getFieldDecorator('name', {

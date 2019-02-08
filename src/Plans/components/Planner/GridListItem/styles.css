@@ -1,0 +1,62 @@
+/* Styles for Plan Card component */
+.b-0 {
+  border: none;
+}
+
+.PlansGridListItem {
+  width: 90%;
+  margin: 20px auto;
+}
+
+.PlansGridListItem:hover {
+  background-color: #e0e0e04a;
+}
+
+.PlansGridListItem .subtitle {
+  font-size: 12px;
+  line-height: 20px;
+  color: #909090;
+}
+
+.PlansGridListItem .activitiesBadge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.PlansGridListItem .activitiesBadgeCount {
+  background-color: #fff;
+  color: #999;
+  box-shadow: 0 0 0 1px #d9d9d9 inset;
+}
+
+.PlansGridListItem .activitiesBadgeTitle {
+  font-size: 12px;
+  line-height: 20px;
+  margin-top: 5px;
+  color: #909090;
+}
+
+.PlansGridListItem .ActionButton {
+  transform: rotate(90deg);
+  border: none;
+  position: absolute;
+  right: 4px;
+  font-size: 20px;
+  top: 10px;
+  box-shadow: none;
+  padding: 0;
+  background-color: transparent;
+}
+
+.PlansGridListItem .ActionButton:focus {
+  background-color: transparent;
+}
+
+.PlansGridListItem .ActionButton:active {
+  background-color: transparent;
+}
+
+.PlansGridListItem .ActionButton:hover {
+  background-color: transparent;
+}

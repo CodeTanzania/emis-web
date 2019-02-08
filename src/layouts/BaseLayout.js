@@ -30,8 +30,10 @@ import AssessmentsIndicatorsLayout from '../Assessments/layouts/Indicators';
 import AssessmentsResponsesLayout from '../Assessments/layouts/Responses';
 import EmergencyPlanPlannerLayout from '../Plans/layouts/Planner';
 import EmergencyPlanActivationsLayout from '../Plans/layouts/Activations';
+import EmergencyPlanActivitiesLayout from '../Plans/layouts/Activities';
 import EmergencyPlanDisseminationsLayout from '../Plans/layouts/Disseminations';
 import EmergencyPlanDrillsLayout from '../Plans/layouts/Drills';
+import EmergencyPlanProceduresLayout from '../Plans/layouts/Procedures';
 import IncidentsCommandCenterLayout from '../Incidents/layouts/CommandCenter';
 import IncidentsAssessmentsLayout from '../Incidents/layouts/Assessments';
 import IncidentsActionsLayout from '../Incidents/layouts/Actions';
@@ -50,10 +52,14 @@ import AdministrativeBoundariesLayout from '../GeographicalFeatures/layouts/Admi
 import GeographicalFeaturesWarehousesLayout from '../GeographicalFeatures/layouts/Warehouses';
 import GeographicalFeaturesFacilitiesLayout from '../GeographicalFeatures/layouts/Facilities';
 import GeographicalFeaturesInfrastructureLayout from '../GeographicalFeatures/layouts/Infrastructure';
-import Home from '../Home';
 import HeaderNavMenu from './components/HeaderNavMenu';
-import './styles.css';
 import EvacuationCentersLayout from '../GeographicalFeatures/layouts/EvacuationCenters';
+import DistrictsLayout from '../GeographicalFeatures/layouts/Districts';
+import SubWardsLayout from '../GeographicalFeatures/layouts/SubWards';
+import WardsLayout from '../GeographicalFeatures/layouts/Wards';
+import RegionsLayout from '../GeographicalFeatures/layouts/Regions';
+import Home from '../Home';
+import './styles.css';
 
 const { Header, Content } = Layout;
 const breadcrumbNameMap = {
@@ -101,6 +107,10 @@ const breadcrumbNameMap = {
     name: 'Administrative Boundaries',
     title: 'List of administrative boundaries',
   },
+  '/geographicalfeatures/districts': {
+    name: 'Districts',
+    title: 'List of Districts',
+  },
   '/geographicalfeatures/evacuationcenters': {
     name: 'Evacuation Centers',
     title: 'List of evacuation centers',
@@ -109,17 +119,29 @@ const breadcrumbNameMap = {
     name: 'Facilities',
     title: 'Facilities available',
   },
-  '/geographicalfeatures/infrastructure': {
-    name: 'Critical Infrastructure',
-    title: 'List of critical infrastructures ',
-  },
   '/geographicalfeatures': {
     name: 'Geographical Features',
     title: 'Geographical features module',
   },
+  '/geographicalfeatures/infrastructure': {
+    name: 'Critical Infrastructure',
+    title: 'List of critical infrastructures ',
+  },
+  '/geographicalfeatures/regions': {
+    name: 'Regions',
+    title: 'List of Regions',
+  },
+  '/geographicalfeatures/subwards': {
+    name: 'Subwards',
+    title: 'List of subwards',
+  },
   '/geographicalfeatures/warehouses': {
     name: 'Warehouses',
     title: 'List of available warehouses',
+  },
+  '/geographicalfeatures/wards': {
+    name: 'Wards',
+    title: 'List of all wards',
   },
   /* Incidents Routes */
   '/incidents/actions': {
@@ -146,6 +168,7 @@ const breadcrumbNameMap = {
   },
   /* Plans Routes */
   '/plans/activations': { name: 'Activations', title: 'Plans activation' },
+  '/plans/activities': { name: 'Activities', title: 'Plans Activities' },
   '/plans/disseminations': {
     name: 'Disseminations',
     title: 'Dissemination of plans',
@@ -156,6 +179,10 @@ const breadcrumbNameMap = {
   },
   '/plans': { name: 'Emergency Plans', title: 'Emergency plans module' },
   '/plans/planner': { name: 'Planner', title: 'Planner' },
+  '/plans/procedures': {
+    name: 'Standard Operating Procedures',
+    title: 'Standard Operating Procedures(SOP)',
+  },
   /* Resources Routes */
   '/resources/adjustments': {
     name: 'Adjustments',
@@ -184,6 +211,7 @@ const breadcrumbNameMap = {
   },
   '/stakeholders': { name: 'Stakeholders', title: 'Stakeholders module' },
 };
+
 // profile menu
 const userMenu = (
   <Menu>
@@ -211,15 +239,25 @@ const BaseLayout = withRouter(props => {
   const { location } = props;
 
   const pathSnippets = location.pathname.split('/').filter(i => i);
+  const lastPath = pathSnippets[pathSnippets.length - 1];
 
   // generate dynamic breadcrumb items
   const extraBreadcrumbItems = pathSnippets.map((_, index) => {
     const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
+
+    if (breadcrumbNameMap[url]) {
+      return (
+        <Breadcrumb.Item key={url}>
+          <Link to={url} title={breadcrumbNameMap[url].title}>
+            {breadcrumbNameMap[url].name}
+          </Link>
+        </Breadcrumb.Item>
+      );
+    }
+
     return (
       <Breadcrumb.Item key={url}>
-        <Link to={url} title={breadcrumbNameMap[url].title}>
-          {breadcrumbNameMap[url].name}
-        </Link>
+        <span title={lastPath}>{lastPath}</span>
       </Breadcrumb.Item>
     );
   });
@@ -310,8 +348,18 @@ const BaseLayout = withRouter(props => {
           />
           <Route
             exact
+            path="/geographicalfeatures/districts"
+            component={DistrictsLayout}
+          />
+          <Route
+            exact
             path="/geographicalfeatures/evacuationcenters"
             component={EvacuationCentersLayout}
+          />
+          <Route
+            exact
+            path="/geographicalfeatures/facilities"
+            component={GeographicalFeaturesFacilitiesLayout}
           />
           <Route
             exact
@@ -320,13 +368,23 @@ const BaseLayout = withRouter(props => {
           />
           <Route
             exact
+            path="/geographicalfeatures/regions"
+            component={RegionsLayout}
+          />
+          <Route
+            exact
+            path="/geographicalfeatures/subwards"
+            component={SubWardsLayout}
+          />
+          <Route
+            exact
             path="/geographicalfeatures/warehouses"
             component={GeographicalFeaturesWarehousesLayout}
           />
           <Route
             exact
-            path="/geographicalfeatures/facilities"
-            component={GeographicalFeaturesFacilitiesLayout}
+            path="/geographicalfeatures/wards"
+            component={WardsLayout}
           />
           <Route exact path="/incidents" component={Incidents} />
           <Route
@@ -367,8 +425,28 @@ const BaseLayout = withRouter(props => {
           />
           <Route
             exact
+            path="/plans/planner/:planId/:activityId"
+            component={EmergencyPlanProceduresLayout}
+          />
+          <Route
+            exact
             path="/plans/activations"
             component={EmergencyPlanActivationsLayout}
+          />
+          <Route
+            exact
+            path="/plans/activities"
+            component={EmergencyPlanActivitiesLayout}
+          />
+          <Route
+            exact
+            path="/plans/activities/:activityId"
+            component={EmergencyPlanProceduresLayout}
+          />
+          <Route
+            exact
+            path="/plans/planner/:planId"
+            component={EmergencyPlanActivitiesLayout}
           />
           <Route
             exact
@@ -379,6 +457,11 @@ const BaseLayout = withRouter(props => {
             exact
             path="/plans/drills"
             component={EmergencyPlanDrillsLayout}
+          />
+          <Route
+            exact
+            path="/plans/procedures"
+            component={EmergencyPlanProceduresLayout}
           />
           <Route exact path="/resources" component={Resources} />
           <Route

@@ -105,7 +105,7 @@ class QuestionnairesFilters extends Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* start stage filters */}
         <Form.Item {...formItemLayout} label="By Stage ">
           {getFieldDecorator('stage', {
@@ -127,7 +127,7 @@ class QuestionnairesFilters extends Component {
         {/* start emergency phase filters */}
         <Form.Item {...formItemLayout} label="By Emergency Phases">
           {getFieldDecorator('phase', {
-            initialValue: filter ? filter.phases : [],
+            initialValue: filter ? filter.phase : [],
           })(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
