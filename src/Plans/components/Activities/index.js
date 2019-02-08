@@ -62,7 +62,7 @@ class Activities extends Component {
   }
 
   /**
-   * open filters modal by setting it's visible property to false via state
+   * Open filters modal by setting it's visible property to false via state
    *
    * @function
    * @name openFiltersModal
@@ -182,6 +182,17 @@ class Activities extends Component {
     this.setState({ showNotificationForm: false });
   };
 
+  /**
+   * Reset isEditForm state to false when modal is closed
+   *
+   * @function
+   * @name handleAfterCloseForm
+   *
+   * @returns {undefined}
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleAfterCloseForm = () => {
     this.setState({ isEditForm: false });
   };
