@@ -2,6 +2,10 @@
 
 [![Build Status](https://travis-ci.org/CodeTanzania/emis-web.svg?branch=develop)](https://travis-ci.org/CodeTanzania/emis-web)
 
+<img src="docs/images/logo.svg" 
+alt="EMIS Logo" width="100" height="auto" />
+
+
 ## About EMIS
 A collaboration platform that facilitates communication, planning and actions for disaster management. 
 
