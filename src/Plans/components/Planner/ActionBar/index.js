@@ -14,6 +14,10 @@ import './styles.css';
  * @param {Object} props
  * @param {page} props.page
  * @param {number} props.total
+ * @param {number} props.selectedItemCount
+ * @param {bool} props.isGridLayout
+ * @param {Function} props.onNotify
+ * @param {Function} props.onToggleLayout
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -157,6 +161,7 @@ const PlansActionBar = ({
         <Pagination
           simple
           defaultCurrent={page}
+          current={page}
           total={total}
           onChange={nextPage => paginatePlans(nextPage)}
           className="pagination"
