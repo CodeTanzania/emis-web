@@ -281,6 +281,7 @@ class Contacts extends Component {
         <Modal
           title={isEditForm ? 'Edit Contact' : 'Add New Contact'}
           visible={showForm}
+          width="50%"
           footer={null}
           onCancel={this.closeContactForm}
           destroyOnClose
