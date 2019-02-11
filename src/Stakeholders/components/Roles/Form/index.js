@@ -1,9 +1,23 @@
 import { postRole, putRole } from '@codetanzania/emis-api-states';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, Row, Col } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { notifyError, notifySuccess } from '../../../../util';
 
+/* constants */
+const { TextArea } = Input;
+
+/**
+ * Render React Form
+ *
+ * @class
+ * @name RoleForm
+ *
+ * @returns {ReactElement}
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
 class RoleForm extends Component {
   static propTypes = {
     isEditForm: PropTypes.bool.isRequired,
@@ -92,32 +106,39 @@ class RoleForm extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
-        {/* role name */}
-        <Form.Item {...formItemLayout} label=" Name">
-          {getFieldDecorator('name', {
-            initialValue: isEditForm ? role.name : undefined,
-            rules: [{ required: true, message: 'Role  name is required' }],
-          })(<Input placeholder="e.g Adminstrator" />)}
-        </Form.Item>
-        {/* end role name */}
-
-        {/* role abbreviation */}
-        <Form.Item {...formItemLayout} label="Abbreviation">
-          {getFieldDecorator('abbreviation', {
-            initialValue: isEditForm ? role.abbreviation : undefined,
-          })(<Input placeholder="e.g RC, DC, RAS" />)}
-        </Form.Item>
-        {/* end role abbreviation */}
+        {/* role name and abbreviation */}
+        <Row type="flex" justify="space-between">
+          <Col span={17}>
+            {/* role name */}
+            <Form.Item {...formItemLayout} label=" Name">
+              {getFieldDecorator('name', {
+                initialValue: isEditForm ? role.name : undefined,
+                rules: [{ required: true, message: 'Role  name is required' }],
+              })(<Input placeholder="e.g Adminstrator" />)}
+            </Form.Item>
+            {/* end role name */}
+          </Col>
+          <Col span={6}>
+            {/* role abbreviation */}
+            <Form.Item {...formItemLayout} label="Abbreviation">
+              {getFieldDecorator('abbreviation', {
+                initialValue: isEditForm ? role.abbreviation : undefined,
+              })(<Input placeholder="e.g RC,  RAS" />)}
+            </Form.Item>
+            {/* end role abbreviation */}
+          </Col>
+        </Row>
+        {/* end role name and abbreviation */}
 
         {/* role description */}
         <Form.Item {...formItemLayout} label="Description">
           {getFieldDecorator('description', {
             initialValue: isEditForm ? role.description : undefined,
-            rules: [
-              { required: true, message: 'Role description is required' },
-            ],
           })(
-            <Input placeholder="e.g Energy and Water Utilities Regulatory Authority" />
+            <TextArea
+              autosize={{ minRows: 1, maxRows: 10 }}
+              placeholder="e.g Energy and Water Utilities Regulatory Authority"
+            />
           )}
         </Form.Item>
         {/* end role description */}
