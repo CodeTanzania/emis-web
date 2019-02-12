@@ -5,15 +5,9 @@ import toUpper from 'lodash/toUpper';
 import './styles.css';
 
 /**
- * Single role list item component. Render single role details
- *
  * @class
  * @name RoleListItem
- *
- * @param {Object} props
- * @param {string} props.abbreviation
- * @param {string} props.name
- * @param {string} props.description
+ * @description Single role list item component. Render single role details
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -32,10 +26,26 @@ class RoleListItem extends Component {
     onArchive: PropTypes.func.isRequired,
   };
 
+  /**
+   * @function
+   * @name handleMouseEnter
+   * @description Handle on mouse enter role list item
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleMouseEnter = () => {
     this.setState({ isHovered: true });
   };
 
+  /**
+   * @function
+   * @name handleMouseLeave
+   * @description Handle on mouse leave role list item
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleMouseLeave = () => {
     this.setState({ isHovered: false });
   };

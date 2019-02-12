@@ -9,7 +9,6 @@ import './styles.css';
  * @name ContactsListItem
  * @description Single contact list item component. Render single contact details
  *
- *
  * @version 0.1.0
  * @since 0.1.0
  */

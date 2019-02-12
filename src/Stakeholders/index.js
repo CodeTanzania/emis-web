@@ -21,10 +21,12 @@ const routes = [
 ];
 
 /**
- * Stakeholders component which shows to navigation Nav
- *
  * @function
  * @name Stakeholders
+ * @description Stakeholders component which shows to navigation Nav
+ *
+ * @param {Object} props props object
+ * @param {Object} props.match match router object
  *
  * @version 0.1.0
  * @since 0.1.0

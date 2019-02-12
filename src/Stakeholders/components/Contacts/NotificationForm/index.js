@@ -36,7 +36,6 @@ class NotificationForm extends Component {
    * @description Callback to handle form on submit event
    *
    * @param {Object} event onSubmit event
-   * @returns {undefined} undefined
    *
    * @version 0.1.0
    * @since 0.1.0

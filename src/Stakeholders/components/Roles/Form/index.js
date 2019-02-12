@@ -8,12 +8,9 @@ import { notifyError, notifySuccess } from '../../../../util';
 const { TextArea } = Input;
 
 /**
- * Render React Form
- *
  * @class
  * @name RoleForm
- *
- * @returns {ReactElement}
+ * @description Render React Form
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -35,8 +32,18 @@ class RoleForm extends Component {
     role: null,
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
+  /**
+   * @function
+   * @name handleSubmit
+   * @description Handle form submit action
+   *
+   * @param {Object} event onSubmit event
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleSubmit = event => {
+    event.preventDefault();
 
     const {
       form: { validateFieldsAndScroll },

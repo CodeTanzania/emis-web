@@ -16,10 +16,10 @@ import SelectInput from '../../../../components/SelectInput';
 const { TextArea } = Input;
 
 /**
- * Render Contact form for creating and updating stakeholder contact details
- *
  * @class
  * @name ContactForm
+ * @description Render Contact form for creating and updating stakeholder
+ * contact details
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -41,16 +41,17 @@ class ContactForm extends Component {
   };
 
   /**
-   * Handle submit form action
-   *
    * @function
    * @name handleSubmit
+   * @description Handle submit form action
+   *
+   * @param {Object} event onSubmit event object
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleSubmit = e => {
-    e.preventDefault();
+  handleventSubmit = event => {
+    event.preventDefault();
 
     const {
       form: { validateFieldsAndScroll },
