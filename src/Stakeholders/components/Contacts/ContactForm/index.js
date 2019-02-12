@@ -1,16 +1,16 @@
+import { getFeatures, getRoles } from '@codetanzania/emis-api-client';
 import {
   Connect,
   postStakeholder,
   putStakeholder,
 } from '@codetanzania/emis-api-states';
-import { getFeatures, getRoles } from '@codetanzania/emis-api-client';
-import { Button, Form, Input, Row, Col } from 'antd';
+import { Button, Col, Form, Input, Row } from 'antd';
 import upperFirst from 'lodash/upperFirst';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { notifyError, notifySuccess } from '../../../../util';
 import SearchableSelectInput from '../../../../components/SearchableSelectInput';
 import SelectInput from '../../../../components/SelectInput';
+import { notifyError, notifySuccess } from '../../../../util';
 
 /* constants */
 const { TextArea } = Input;
@@ -158,6 +158,10 @@ class ContactForm extends Component {
                       {
                         type: 'email',
                         message: 'The input is not valid E-mail!',
+                      },
+                      {
+                        required: true,
+                        message: 'E-mail address is required',
                       },
                     ],
                   })(<Input />)}
