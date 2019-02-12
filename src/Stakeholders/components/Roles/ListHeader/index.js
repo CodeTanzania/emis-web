@@ -3,8 +3,9 @@ import React from 'react';
 import './styles.css';
 
 const headerLayout = [
-  { span: 5, header: 'Name', offset: 1 },
-  { span: 6, header: 'Description', offset: 4 },
+  { span: 7, header: 'Name', offset: 1 },
+  { span: 3, header: 'Abbreviation' },
+  { span: 10, header: 'Description' },
 ];
 
 const RoleListHeader = () => (

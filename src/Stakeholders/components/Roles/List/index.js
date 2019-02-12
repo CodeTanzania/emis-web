@@ -10,7 +10,6 @@ import RoleListItem from '../ListItem';
  * @class
  * @name RoleList
  *
- *
  * @version 0.1.0
  * @since 0.1.0
  */

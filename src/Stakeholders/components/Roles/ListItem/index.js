@@ -1,6 +1,7 @@
 import { Avatar, Checkbox, Col, Icon, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
+import toUpper from 'lodash/toUpper';
 import './styles.css';
 
 /**
@@ -53,10 +54,11 @@ class RoleListItem extends Component {
             {isHovered ? (
               <Checkbox className="Checkbox" />
             ) : (
-              <Avatar>{abbreviation}</Avatar>
+              <Avatar>{toUpper(name.charAt(0))}</Avatar>
             )}
           </Col>
-          <Col span={9}>{name}</Col>
+          <Col span={7}>{name}</Col>
+          <Col span={3}>{abbreviation}</Col>
           <Col span={10}>{description}</Col>
           <Col span={3}>
             {isHovered && (
