@@ -203,7 +203,10 @@ class ContactForm extends Component {
                 {/* contact location */}
                 <Form.Item {...formItemLayout} label="Area">
                   {getFieldDecorator('location', {
-                    initialValue: isEditForm ? contact.location._id : undefined, // eslint-disable-line
+                    initialValue:
+                      isEditForm && contact.location
+                        ? contact.location._id // eslint-disable-line
+                        : undefined,
                     rules: [
                       { required: true, message: 'Contact area is required' },
                     ],
@@ -215,7 +218,11 @@ class ContactForm extends Component {
                       }
                       optionValue="_id"
                       placeholder="e.g Ilala, Ubungo"
-                      initialValue={isEditForm ? contact.location : undefined}
+                      initialValue={
+                        isEditForm && contact.location
+                          ? contact.location
+                          : undefined
+                      }
                     />
                   )}
                 </Form.Item>
@@ -232,7 +239,8 @@ class ContactForm extends Component {
             {/* contact role */}
             <Form.Item {...formItemLayout} label="Role">
               {getFieldDecorator('role', {
-                initialValue: isEditForm ? contact.role._id : undefined, // eslint-disable-line
+                initialValue:
+                  isEditForm && contact.role ? contact.role._id : undefined, // eslint-disable-line
                 rules: [
                   { required: true, message: 'Contact time is required' },
                 ],
@@ -242,7 +250,9 @@ class ContactForm extends Component {
                   optionLabel="name"
                   optionValue="_id"
                   placeholder="e.g Regional Commissioner"
-                  initialValue={isEditForm ? contact.role : undefined}
+                  initialValue={
+                    isEditForm && contact.role ? contact.role : undefined
+                  }
                 />
               )}
             </Form.Item>
