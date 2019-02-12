@@ -17,11 +17,9 @@ import './styles.css';
 const { Search } = Input;
 
 /**
- * Render indicator list which have search box and actions
- *
  * @class
  * @name Indicators
- *
+ * @description Render indicator list which have search box and actions
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -59,10 +57,10 @@ class Indicators extends Component {
   }
 
   /**
-   * open filters modal by setting it's visible property to false via state
    *
    * @function
    * @name openFiltersModal
+   * @description open filters modal by setting it's visible property to false via state
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -74,10 +72,10 @@ class Indicators extends Component {
   };
 
   /**
-   * Close filters modal by setting it's visible property to false via state
    *
    * @function
    * @name closeFiltersModal
+   * @description Close filters modal by setting it's visible property to false via state
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -89,10 +87,10 @@ class Indicators extends Component {
   };
 
   /**
-   * Open indicator form
    *
    * @function
    * @name openForm
+   * @description Open indicator form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -104,10 +102,10 @@ class Indicators extends Component {
   };
 
   /**
-   * close indicator form
    *
    * @function closeForm
    * @name
+   * @description close indicator form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -124,11 +122,12 @@ class Indicators extends Component {
   };
 
   /**
-   * Handle on Edit action for list item
    *
    * @function
    * @name handleEdit
+   * @description Handle on Edit action for list item
    *
+   * @param {Object} indicator indicator object
    * @version 0.1.0
    * @since 0.1.0
    */

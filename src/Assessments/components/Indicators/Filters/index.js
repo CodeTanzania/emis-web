@@ -8,11 +8,15 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 /**
- * Filter modal component for filtering indicators
- *
  * @class
  * @name IndicatorsFilters
+ * @description Filter modal component for filtering indicators
  *
+ * @param {Object} props props object
+ * @param {Object} props.form antd form
+ * @param {Function} props.onCancel function to cancel indicator filter
+ * @param {Array} props.subjects array of indicator subjects
+ * @param {Object} props.filter indicator filters object
  * @version 0.1.0
  * @since 0.1.0
  */
@@ -34,11 +38,11 @@ class IndicatorsFilters extends Component {
   };
 
   /**
-   * Handle filter action
-   *
    * @function
    * @name handleSubmit
+   * @description Handle filter action
    *
+   * @param {Object} e event object
    * @version 0.1.0
    * @since 0.1.0
    */
@@ -58,10 +62,9 @@ class IndicatorsFilters extends Component {
   };
 
   /**
-   * Action handle when clear
-   *
    * @function
    * @name handleClearFilter
+   * @description Action handle when clear
    *
    * @version 0.1.0
    * @since 0.1.0
