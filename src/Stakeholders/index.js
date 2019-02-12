@@ -6,9 +6,9 @@ import rolesIcon from '../assets/icons/stakeholders/roles.svg';
 import NavigationMenu from '../components/NavigationMenu';
 
 const routes = [
-  { name: 'Contacts', path: '/contacts', icon: contactsIcon },
+  { name: 'Focal Persons', path: '/contacts', icon: contactsIcon },
   {
-    name: 'Roles & Responsibilities',
+    name: 'Roles',
     path: '/roles',
     icon: rolesIcon,
   },
