@@ -105,8 +105,8 @@ class ContactsListItem extends Component {
           <Col span={1}>{sideComponent}</Col>
           <Col span={5}>{name}</Col>
           <Col span={6}>{title}</Col>
-          <Col span={4}>{email}</Col>
           <Col span={4}>{mobile}</Col>
+          <Col span={4}>{email}</Col>
           <Col span={3}>
             {isHovered && (
               <Fragment>

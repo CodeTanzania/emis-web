@@ -139,10 +139,10 @@ class ContactsList extends Component {
           dataSource={contacts}
           renderItem={contact => (
             <ContactsListItem
-              key={contact.abbreviation}
+              key={contact._id} // eslint-disable-line
               abbreviation={contact.abbreviation}
               name={contact.name}
-              title={contact.title}
+              title={contact.role ? contact.role.name : 'N/A'}
               email={contact.email}
               mobile={contact.mobile}
               isSelected={
