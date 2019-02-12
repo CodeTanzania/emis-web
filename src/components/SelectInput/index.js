@@ -1,6 +1,6 @@
-import React from 'react';
 import { Select } from 'antd';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 const { Option } = Select;
 
@@ -27,10 +27,7 @@ const SelectInput = ({ options, ...props }) => (
 
 /* props validation */
 SelectInput.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-    .isRequired,
-  optionValue: PropTypes.string.isRequired,
-  optionLabel: PropTypes.string.isRequired,
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default SelectInput;
