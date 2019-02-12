@@ -111,7 +111,7 @@ class AdjustmentsFilters extends Component {
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {types.map(type => (
-                  <Col span={6} style={{ margin: '10px 0' }}>
+                  <Col span={6} style={{ margin: '10px 0' }} key={type}>
                     <Checkbox value={type}>{type}</Checkbox>
                   </Col>
                 ))}
@@ -129,7 +129,7 @@ class AdjustmentsFilters extends Component {
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {reasons.map(reason => (
-                  <Col span={6} style={{ margin: '10px 0' }}>
+                  <Col span={6} style={{ margin: '10px 0' }} key={reason}>
                     <Checkbox value={reason}>{reason}</Checkbox>
                   </Col>
                 ))}

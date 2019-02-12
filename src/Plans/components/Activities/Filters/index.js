@@ -111,7 +111,7 @@ class ActivitiesFilters extends Component {
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {types.map(type => (
-                  <Col span={6} style={{ margin: '10px 0' }}>
+                  <Col span={6} style={{ margin: '10px 0' }} key={type}>
                     <Checkbox value={type}>{type}</Checkbox>
                   </Col>
                 ))}
@@ -129,7 +129,7 @@ class ActivitiesFilters extends Component {
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {phases.map(phase => (
-                  <Col span={6} style={{ margin: '10px 0' }}>
+                  <Col span={6} style={{ margin: '10px 0' }} key={phase}>
                     <Checkbox value={phase}>{phase}</Checkbox>
                   </Col>
                 ))}

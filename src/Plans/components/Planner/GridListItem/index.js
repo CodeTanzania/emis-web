@@ -8,7 +8,7 @@ import './styles.css';
  * Plan Options
  *
  * @param {Object} props
- * @param {function} props.onEditPlan
+ * @param {Function} props.onEditPlan
  *
  * @version 0.1.0
  * @since 0.1.0

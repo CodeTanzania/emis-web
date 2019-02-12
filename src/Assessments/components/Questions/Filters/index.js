@@ -1,7 +1,7 @@
 import {
+  clearQuestionFilters,
   Connect,
   filterQuestions,
-  clearQuestionFilters,
 } from '@codetanzania/emis-api-states';
 import { Button, Checkbox, Col, Form, Row } from 'antd';
 import PropTypes from 'prop-types';
@@ -114,7 +114,7 @@ class QuestionsFilters extends Component {
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {stages.map(stage => (
-                  <Col span={6} style={{ margin: '10px 0' }}>
+                  <Col span={6} style={{ margin: '10px 0' }} key={stage}>
                     <Checkbox value={stage}>{stage}</Checkbox>
                   </Col>
                 ))}
@@ -132,7 +132,7 @@ class QuestionsFilters extends Component {
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {phases.map(phase => (
-                  <Col span={6} style={{ margin: '10px 0' }}>
+                  <Col span={6} style={{ margin: '10px 0' }} key={phase}>
                     <Checkbox value={phase}>{phase}</Checkbox>
                   </Col>
                 ))}
@@ -150,7 +150,7 @@ class QuestionsFilters extends Component {
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {assess.map(data => (
-                  <Col span={6} style={{ margin: '10px 0' }}>
+                  <Col span={6} style={{ margin: '10px 0' }} key={data}>
                     <Checkbox value={data}>{data}</Checkbox>
                   </Col>
                 ))}

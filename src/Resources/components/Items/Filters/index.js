@@ -1,9 +1,9 @@
-import { Button, Checkbox, Col, Form, Row } from 'antd';
 import {
+  clearItemFilters,
   Connect,
   filterItems,
-  clearItemFilters,
 } from '@codetanzania/emis-api-states';
+import { Button, Checkbox, Col, Form, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
@@ -111,7 +111,7 @@ class ItemsFilters extends Component {
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {types.map(type => (
-                  <Col span={6} style={{ margin: '10px 0' }}>
+                  <Col span={6} style={{ margin: '10px 0' }} key={type}>
                     <Checkbox value={type}>{type}</Checkbox>
                   </Col>
                 ))}
@@ -129,7 +129,7 @@ class ItemsFilters extends Component {
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {uoms.map(uom => (
-                  <Col span={6} style={{ margin: '10px 0' }}>
+                  <Col span={6} style={{ margin: '10px 0' }} key={uom}>
                     <Checkbox value={uom}>{uom}</Checkbox>
                   </Col>
                 ))}

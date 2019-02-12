@@ -187,7 +187,7 @@ class WarehousesFilters extends Component {
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {categories.map(category => (
-                  <Col span={6} style={{ margin: '10px 0' }}>
+                  <Col span={6} style={{ margin: '10px 0' }} key={category}>
                     <Checkbox value={category}>{category}</Checkbox>
                   </Col>
                 ))}
@@ -205,7 +205,7 @@ class WarehousesFilters extends Component {
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {types.map(type => (
-                  <Col span={6} style={{ margin: '10px 0' }}>
+                  <Col span={6} style={{ margin: '10px 0' }} key={type}>
                     <Checkbox value={type}>{type}</Checkbox>
                   </Col>
                 ))}
@@ -223,7 +223,7 @@ class WarehousesFilters extends Component {
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {levels.map(level => (
-                  <Col span={6} style={{ margin: '10px 0' }}>
+                  <Col span={6} style={{ margin: '10px 0' }} key={level}>
                     <Checkbox value={level}>{level}</Checkbox>
                   </Col>
                 ))}

@@ -1,9 +1,9 @@
-import { Button, Checkbox, Col, Form, Row } from 'antd';
 import {
+  clearIndicatorFilters,
   Connect,
   filterIndicators,
-  clearIndicatorFilters,
 } from '@codetanzania/emis-api-states';
+import { Button, Checkbox, Col, Form, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
@@ -109,7 +109,7 @@ class IndicatorsFilters extends Component {
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {subjects.map(subject => (
-                  <Col span={8} style={{ margin: '10px 0' }}>
+                  <Col span={8} style={{ margin: '10px 0' }} key={subject}>
                     <Checkbox value={subject}>{subject}</Checkbox>
                   </Col>
                 ))}

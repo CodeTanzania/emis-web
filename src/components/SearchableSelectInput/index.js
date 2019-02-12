@@ -140,10 +140,10 @@ export default class SearchableSelectInput extends Component {
    * @function
    * @name getOptionProp
    *
-   * @param {string | function} prop - The property name or value return from
+   * @param {string|Function} prop - The property name or value return from
    *                                   a provided function
    * @param {Object} option - A single data item for select options
-   * @returns {String} - Value of the extracted property
+   * @returns {string} - Value of the extracted property
    *
    * @version 0.1.0
    * @since 0.1.0

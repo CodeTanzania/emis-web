@@ -63,7 +63,7 @@ class AlertsListItem extends Component {
    * @function
    * @name toHumanReadableDate
    *
-   * @param {String} isoFormatDate
+   * @param {string} isoFormatDate
    * @returns humanReadableDate
    *
    * @version 0.1.0

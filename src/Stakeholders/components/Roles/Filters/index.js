@@ -112,7 +112,7 @@ class RolesFilters extends Component {
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {properties.map(type => (
-                  <Col span={6} style={{ margin: '10px 0' }}>
+                  <Col span={6} style={{ margin: '10px 0' }} key={type}>
                     <Checkbox value={type}>{type}</Checkbox>
                   </Col>
                 ))}

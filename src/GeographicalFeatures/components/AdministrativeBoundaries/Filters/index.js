@@ -81,7 +81,7 @@ const levels = [
 ];
 
 /**
- * Filter modal component for filtering AdminstrstiveBoundaries
+ * Filter modal component for filtering administrative boundaries
  *
  * @class
  * @name RolesFilters
@@ -89,7 +89,7 @@ const levels = [
  * @version 0.1.0
  * @since 0.1.0
  */
-class AdminstrstiveBoundariesFilters extends Component {
+class AdministrativeBoundariesFilters extends Component {
   static propTypes = {
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
     onCancel: PropTypes.func.isRequired,
@@ -126,13 +126,13 @@ class AdminstrstiveBoundariesFilters extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
-        {/* start AdminstrstiveBoundaries categories filters */}
+        {/* start administrative boundaries categories filters */}
         <Form.Item {...formItemLayout} label="By Categories">
           {getFieldDecorator('types')(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {categories.map(category => (
-                  <Col span={6} style={{ margin: '10px 0' }}>
+                  <Col span={6} style={{ margin: '10px 0' }} key={category}>
                     <Checkbox value={category}>{category}</Checkbox>
                   </Col>
                 ))}
@@ -140,15 +140,15 @@ class AdminstrstiveBoundariesFilters extends Component {
             </Checkbox.Group>
           )}
         </Form.Item>
-        {/* end AdminstrstiveBoundaries categories filters */}
+        {/* end administrative Boundaries categories filters */}
 
-        {/* start AdminstrstiveBoundaries levels filters */}
+        {/* start administrative Boundaries levels filters */}
         <Form.Item {...formItemLayout} label="By Levels">
           {getFieldDecorator('types')(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {levels.map(level => (
-                  <Col span={6} style={{ margin: '10px 0' }}>
+                  <Col span={6} style={{ margin: '10px 0' }} key={level}>
                     <Checkbox value={level}>{level}</Checkbox>
                   </Col>
                 ))}
@@ -156,15 +156,15 @@ class AdminstrstiveBoundariesFilters extends Component {
             </Checkbox.Group>
           )}
         </Form.Item>
-        {/* end AdminstrstiveBoundaries levels filters */}
+        {/* end administrative boundaries levels filters */}
 
-        {/* start AdminstrstiveBoundaries types filters */}
+        {/* start administrative boundaries types filters */}
         <Form.Item {...formItemLayout} label="By Types">
           {getFieldDecorator('types')(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {types.map(type => (
-                  <Col span={6} style={{ margin: '10px 0' }}>
+                  <Col span={6} style={{ margin: '10px 0' }} key={type}>
                     <Checkbox value={type}>{type}</Checkbox>
                   </Col>
                 ))}
@@ -172,7 +172,7 @@ class AdminstrstiveBoundariesFilters extends Component {
             </Checkbox.Group>
           )}
         </Form.Item>
-        {/* end AdminstrstiveBoundaries types filters */}
+        {/* end administrative boundaries types filters */}
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
@@ -191,4 +191,4 @@ class AdminstrstiveBoundariesFilters extends Component {
     );
   }
 }
-export default Form.create()(AdminstrstiveBoundariesFilters);
+export default Form.create()(AdministrativeBoundariesFilters);

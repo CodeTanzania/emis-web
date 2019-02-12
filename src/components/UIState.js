@@ -10,7 +10,7 @@ import './styles.css';
  * @param {string} props.icon
  * @param {string} props.description
  * @param {string} props.buttonLabel
- * @param {function} props.onClick
+ * @param {Function} props.onClick
  *
  * @version 0.1.0
  * @since 0.1.0

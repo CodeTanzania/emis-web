@@ -14,7 +14,7 @@ import AlertListItem from '../ListItem';
  * @param {Object} date1
  * @param {Object} date2
  *
- * @returns {Number} result
+ * @returns {number} result
  *
  * @version 0.1.0
  * @since 0.1.0
