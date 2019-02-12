@@ -3,10 +3,10 @@ import React from 'react';
 import './styles.css';
 
 /**
- * Questionaire list header component.
  *
  * @class
  * @name QuestionnairesListHeader
+ * @description Questionnaire list header component.
  *
  * @version 0.1.0
  * @since 0.1.0

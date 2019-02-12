@@ -12,11 +12,6 @@ import React, { Component } from 'react';
  * @name IndicatorsFilters
  * @description Filter modal component for filtering indicators
  *
- * @param {Object} props props object
- * @param {Object} props.form antd form
- * @param {Function} props.onCancel function to cancel indicator filter
- * @param {Array} props.subjects array of indicator subjects
- * @param {Object} props.filter indicator filters object
  * @version 0.1.0
  * @since 0.1.0
  */

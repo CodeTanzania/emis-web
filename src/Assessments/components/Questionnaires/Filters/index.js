@@ -8,10 +8,10 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 /**
- * Filter modal component for filtering questionnaires
  *
  * @class
  * @name QuestionnairesFilters
+ * @description Filter modal component for filtering questionnaires
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -37,11 +37,11 @@ class QuestionnairesFilters extends Component {
   };
 
   /**
-   * Handle filter action
-   *
    * @function
    * @name handleSubmit
+   * @description Handle filter action
    *
+   * @param {Object} e event object
    * @version 0.1.0
    * @since 0.1.0
    */
@@ -61,10 +61,10 @@ class QuestionnairesFilters extends Component {
   };
 
   /**
-   * Action handle when clear
    *
    * @function
    * @name handleClearFilter
+   * @description Action handle when clear
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -141,6 +141,7 @@ class QuestionnairesFilters extends Component {
           )}
         </Form.Item>
         {/* end emergency phase filters */}
+
         {/* start assess filters */}
         <Form.Item {...formItemLayout} label="By Assessment">
           {getFieldDecorator('assess', {

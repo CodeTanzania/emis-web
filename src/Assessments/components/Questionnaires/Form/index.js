@@ -12,10 +12,10 @@ const { Option } = Select;
 const { TextArea } = Input;
 
 /**
- * Questionnaire form component for creating/editing questionnaires
  *
  * @class
  * @name QuestionnairesForm
+ * @description Questionnaire form component for creating/editing questionnaires
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -41,6 +41,16 @@ class QuestionnaireForm extends Component {
     questionnaire: null,
   };
 
+  /**
+   *
+   * @function
+   * @name handleSubmit
+   * @description Handle create/edit action
+   *
+   * @param {Object} e event object
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleSubmit = e => {
     e.preventDefault();
 
@@ -61,7 +71,8 @@ class QuestionnaireForm extends Component {
             },
             () => {
               notifyError(
-                'Something occurred while updating Questionnaire, please try again!'
+                `Something occurred while updating Questionnaire, please try
+                 again!`
               );
             }
           );
@@ -73,7 +84,8 @@ class QuestionnaireForm extends Component {
             },
             () => {
               notifyError(
-                'Something occurred while saving Questionnaire, please try again!'
+                `Something occurred while saving Questionnaire, please try 
+                again!`
               );
             }
           );
@@ -120,7 +132,7 @@ class QuestionnaireForm extends Component {
           {getFieldDecorator('title', {
             initialValue: isEditForm ? questionnaire.title : undefined,
             rules: [{ required: true, message: 'Title is required' }],
-          })(<Input placeholder="e.g Flood Situtation Analysis" />)}
+          })(<Input placeholder="e.g Flood Situation Analysis" />)}
         </Form.Item>
         {/* end title */}
 
@@ -182,7 +194,7 @@ class QuestionnaireForm extends Component {
             rules: [{ required: true, message: 'Description is required' }],
           })(
             <TextArea
-              placeholder="e.g Summariesed infomation on Questionnaire"
+              placeholder="e.g Summarized information on Questionnaire"
               autosize={{ minRows: 2, maxRows: 6 }}
             />
           )}

@@ -5,16 +5,11 @@ import randomColor from 'randomcolor';
 import './styles.css';
 
 /**
- * Single questionaire list item component. Render single questionnaire details
  *
  * @class
  * @name QuestionnairesListItem
- *
- * @param {Object} props
- * @param {string} props.title
- * @param {string} props.phase
- * @param {string} props.assess
- * @param {string} props.stage
+ * @description Single questionnaire list item component. Render single
+ * questionnaire details
  *
  * @version 0.1.0
  * @since 0.1.0
