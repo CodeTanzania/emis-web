@@ -3,10 +3,10 @@ import React from 'react';
 import './styles.css';
 
 /**
- * Question list header component.
  *
  * @function
  * @name QuestionsHeader
+ * @description Question list header component.
  *
  * @version 0.1.0
  * @since 0.1.0
