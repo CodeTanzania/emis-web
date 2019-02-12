@@ -5,10 +5,18 @@ import map from 'lodash/map';
 import remove from 'lodash/remove';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
+import ListHeader from '../../../../components/ListHeader';
 import { notifyError, notifySuccess } from '../../../../util';
 import ContactsActionBar from '../ActionBar';
-import ContactsListHeader from '../ListHeader';
 import ContactsListItem from '../ListItem';
+
+/* constants */
+const headerLayout = [
+  { span: 5, header: 'Name', offset: 1 },
+  { span: 6, header: 'Role' },
+  { span: 4, header: 'Mobile Number' },
+  { span: 4, header: 'Email Address' },
+];
 
 /**
  * Render ContactsList component which have actionBar, contacts header and
@@ -130,7 +138,7 @@ class ContactsList extends Component {
         {/* end action bar */}
 
         {/* contact list header */}
-        <ContactsListHeader />
+        <ListHeader headerLayout={headerLayout} />
         {/* end contact list header */}
 
         {/* contacts list */}
@@ -150,10 +158,10 @@ class ContactsList extends Component {
                 map(selectedContacts, item => item._id).includes(contact._id)
               }
               onSelectItem={() => {
-                this.handleOnSelectContact(contact); // eslint-disable-line
+                this.handleOnSelectContact(contact);
               }}
               onDeselectItem={() => {
-                this.handleOnDeselectContact(contact); // eslint-disable-line
+                this.handleOnDeselectContact(contact);
               }}
               onEdit={() => onEdit(contact)}
               onArchive={() =>
