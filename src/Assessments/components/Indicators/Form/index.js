@@ -19,13 +19,6 @@ const { Option } = Select;
  * @name IndicatorForm
  * @description Render indicator form for creating/editing indicator
  *
- * @param {Object} props props object
- * @param {boolean} props.isEditForm open edit form
- * @param {Object} props.indicator indicators input field
- * @param {Object} props.form antd form
- * @param {Function} props.onCancel function to cancel indicators filter
- * @param {Array} props.subjects array of indicator subjects
- * @param {boolean} props.posting onSubmit loader
  * @version 0.1.0
  * @since 0.1.0
  */

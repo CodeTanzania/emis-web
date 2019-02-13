@@ -14,6 +14,7 @@ import IndicatorListItem from '../ListItem';
  * @param {boolean} props.loading preload list of indictors
  * @param {Array} props.indicators array list of indictors
  * @param {Function} props.onEdit function for editing single indictor
+ *
  * @version 0.1.0
  * @since 0.1.0
  */

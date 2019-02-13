@@ -4,13 +4,13 @@ import React from 'react';
 import './styles.css';
 
 /**
- * Empty/ Error state component
+ * @description Empty/ Error state component
  *
- * @param {Object} props
- * @param {string} props.icon
- * @param {string} props.description
- * @param {string} props.buttonLabel
- * @param {Function} props.onClick
+ * @param {Object} props props object
+ * @param {string} props.icon state icon
+ * @param {string} props.description description of the component state
+ * @param {string} props.buttonLabel button label
+ * @param {Function} props.onClick function called when button is clicked
  *
  * @version 0.1.0
  * @since 0.1.0

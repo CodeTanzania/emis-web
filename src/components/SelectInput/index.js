@@ -5,12 +5,12 @@ import React from 'react';
 const { Option } = Select;
 
 /**
- * Render Select input wrapper on top of antd select input
  *
  * @function
  * @name SelectInput
+ * @description Render Select input wrapper on top of antd select input
  *
- * @returns {ReactElement}
+ * @param {Object} props props object
  *
  * @version 0.1.0
  * @since 0.1.0

@@ -39,7 +39,7 @@ const routes = [
  * @function
  * @name NavItem
  *
- * @param {Object} props
+ * @param {Object} props props object
  * @param {string} props.name - name/description/label for nav item
  * @param {string} props.icon - path to svg image used as nav icon
  * @param {string} props.path - path to navigate to when clicked

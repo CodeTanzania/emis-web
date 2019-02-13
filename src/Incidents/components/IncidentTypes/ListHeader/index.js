@@ -3,10 +3,10 @@ import React from 'react';
 import './styles.css';
 
 /**
- * Incident Types list item component. Render Incident Type list
  *
  * @function
  * @name IncidentTypesListHeader
+ * @description Incident Types list item component. Render Incident Type list
  *
  * @version 0.1.0
  * @since 0.1.0

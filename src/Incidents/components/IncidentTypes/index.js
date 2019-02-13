@@ -18,10 +18,11 @@ import './styles.css';
 const { Search } = Input;
 
 /**
- * Render IncidentTypes list which have search box, actions and IncidentTypes list
  *
  * @class
  * @name IncidentTypes
+ * @description  Render IncidentTypes list which have search box,
+ * actions and IncidentTypes list
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -54,10 +55,11 @@ class IncidentTypes extends Component {
   }
 
   /**
-   * open filters modal by setting it's visible property to false via state
    *
    * @function
    * @name openFiltersModal
+   * @description open filters modal by setting it's visible property to
+   * false via state
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -69,11 +71,11 @@ class IncidentTypes extends Component {
   };
 
   /**
-   * Close filters modal by setting it's visible property to false via state
    *
    * @function
    * @name closeFiltersModal
-   *
+   * @description Close filters modal by setting it's visible property to
+   * false via state
    * @returns {undefined} - Nothing is returned
    *
    * @version 0.1.0
@@ -84,10 +86,10 @@ class IncidentTypes extends Component {
   };
 
   /**
-   * Open incident type form
    *
    * @function
    * @name openIncidentTypeForm
+   * @description Open incident type form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -99,10 +101,10 @@ class IncidentTypes extends Component {
   };
 
   /**
-   * close incident type form
    *
    * @function
    * @name closeIncidentTypeForm
+   * @description close incident type form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -114,11 +116,13 @@ class IncidentTypes extends Component {
   };
 
   /**
-   * Handle on Edit action for list item
+   *
    *
    * @function
    * @name handleEdit
+   * @description Handle on Edit action for list item
    *
+   * @param {Object} incidenttype incidenttype passed when function is called
    * @version 0.1.0
    * @since 0.1.0
    */
