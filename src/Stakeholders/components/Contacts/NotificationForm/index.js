@@ -17,7 +17,7 @@ const { TextArea } = Input;
  */
 class NotificationForm extends Component {
   static propTypes = {
-    selectedContacts: PropTypes.arrayOf(
+    recipients: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string,
         title: PropTypes.string,
@@ -27,7 +27,12 @@ class NotificationForm extends Component {
       })
     ).isRequired,
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+    body: PropTypes.string,
     onCancel: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    body: undefined,
   };
 
   /**
@@ -68,7 +73,8 @@ class NotificationForm extends Component {
     const {
       onCancel,
       form: { getFieldDecorator },
-      selectedContacts,
+      recipients,
+      body,
     } = this.props;
 
     const formItemLayout = {
@@ -101,7 +107,7 @@ class NotificationForm extends Component {
                 message: 'Please provide at least one recipient',
               },
             ],
-            initialValue: map(selectedContacts, contact => contact._id), // eslint-disable-line
+            initialValue: map(recipients, contact => contact._id), // eslint-disable-line
           })(
             <SearchableSelectInput
               placeholder="Enter notification recipients"
@@ -109,7 +115,7 @@ class NotificationForm extends Component {
               optionLabel="name"
               optionValue="_id"
               mode="multiple"
-              initialValue={selectedContacts}
+              initialValue={recipients}
             />
           )}
         </Form.Item>
@@ -132,6 +138,7 @@ class NotificationForm extends Component {
                 message: 'Please provide notification message',
               },
             ],
+            initialValue: body,
           })(
             <TextArea
               autosize={{ minRows: 6, maxRows: 10 }}

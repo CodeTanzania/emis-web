@@ -201,15 +201,17 @@ const breadcrumbNameMap = {
     title: 'List of available warehouses',
   },
   /* Stakeholders Routes */
-  '/stakeholders/contacts': { name: 'Contacts', title: 'List of all contacts' },
-  '/stakeholders/agencies': { name: 'Agencies', title: 'List of all agencies' },
+  '/stakeholders/contacts': {
+    name: 'Focal Persons',
+    title: 'List of all focal persons',
+  },
   '/stakeholders/notifications': {
     name: 'Notifications',
     title: 'Notify stakeholders',
   },
   '/stakeholders/roles': {
     name: 'Roles',
-    title: 'Roles and responsibilities of Stakeholders',
+    title: 'Roles of Stakeholders',
   },
   '/stakeholders': { name: 'Stakeholders', title: 'Stakeholders module' },
 };
