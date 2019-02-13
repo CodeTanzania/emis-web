@@ -198,7 +198,7 @@ class Contacts extends Component {
             {/* search input component */}
             <Search
               size="large"
-              placeholder="Search for contacts here ..."
+              placeholder="Search for focal persons here ..."
               onChange={this.searchContacts}
               allowClear
               value={searchQuery}
@@ -225,10 +225,10 @@ class Contacts extends Component {
               type="primary"
               icon="plus"
               size="large"
-              title="Add New Contact"
+              title="Add New Focal Person"
               onClick={this.openContactForm}
             >
-              New Contact
+              New Focal Person
             </Button>
           </Col>
           {/* end primary actions */}
@@ -248,7 +248,7 @@ class Contacts extends Component {
 
         {/* filter modal */}
         <Modal
-          title="Filter Contacts"
+          title="Filter Focal Persons"
           visible={showFilters}
           onCancel={this.closeFiltersModal}
           footer={null}
@@ -261,7 +261,7 @@ class Contacts extends Component {
 
         {/* Notification Modal modal */}
         <Modal
-          title="Notify Contacts"
+          title="Notify Focal Persons"
           visible={showNotificationForm}
           onCancel={this.closeNotificationForm}
           footer={null}
@@ -278,7 +278,7 @@ class Contacts extends Component {
 
         {/* create/edit form modal */}
         <Modal
-          title={isEditForm ? 'Edit Contact' : 'Add New Contact'}
+          title={isEditForm ? 'Edit Focal Person' : 'Add New Focal Person'}
           visible={showForm}
           width="50%"
           footer={null}
