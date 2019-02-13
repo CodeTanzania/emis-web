@@ -3,8 +3,8 @@ import {
   Connect,
   getStakeholders,
   openStakeholderForm,
-  searchStakeholders,
   selectStakeholder,
+  searchStakeholders,
 } from '@codetanzania/emis-api-states';
 import { Button, Col, Input, Modal, Row } from 'antd';
 import PropTypes from 'prop-types';
@@ -184,6 +184,7 @@ class Contacts extends Component {
    * @since 0.1.0
    */
   openNotificationForm = contacts => {
+    console.log(contacts);
     this.setState({
       selectedContacts: contacts,
       showNotificationForm: true,
@@ -327,7 +328,7 @@ class Contacts extends Component {
         >
           <NotificationForm
             onCancel={this.closeNotificationForm}
-            selectedContacts={selectedContacts}
+            recipients={selectedContacts}
             body={notificationBody}
           />
         </Modal>
