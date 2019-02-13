@@ -1,21 +1,33 @@
 import { List } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
-import RoleListHeader from '../ListHeader';
+import RoleListHeader from '../../../../components/ListHeader';
 import RoleListItem from '../ListItem';
 
+/* constants */
+const headerLayout = [
+  { span: 7, header: 'Name', offset: 1 },
+  { span: 3, header: 'Abbreviation' },
+  { span: 10, header: 'Description' },
+];
+
+// eslint-disable-next-line jsdoc/require-returns
 /**
- * Render role list which have search box and actions
- *
- * @class
+ * @function
  * @name RoleList
+ * @description Render role list which have search box and actions
+ *
+ * @param {Object} props props object
+ * @param {Object[]} props.roles list of roles
+ * @param {boolean} props.loading loading state of roles list
+ * @param {Function} props.onEdit callaback invoked on edit role
  *
  * @version 0.1.0
  * @since 0.1.0
  */
 const RoleList = ({ roles, loading, onEdit }) => (
   <Fragment>
-    <RoleListHeader />
+    <RoleListHeader headerLayout={headerLayout} />
     <List
       loading={loading}
       dataSource={roles}

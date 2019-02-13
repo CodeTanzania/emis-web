@@ -19,11 +19,10 @@ const headerLayout = [
 ];
 
 /**
- * Render ContactsList component which have actionBar, contacts header and
- * contacts list components
- *
  * @class
  * @name ContactsList
+ * @description Render ContactsList component which have actionBar, contacts header and
+ * contacts list components
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -45,10 +44,11 @@ class ContactsList extends Component {
   };
 
   /**
-   * Handle select a single contact action
-   *
    * @function
    * @name handleOnSelectContact
+   * @description Handle select a single contact action
+   *
+   * @param {Object} contact selected contact object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -59,10 +59,9 @@ class ContactsList extends Component {
   };
 
   /**
-   * Handle selected all contacts actions
-   *
    * @function
    * @name handleSelectAll
+   * @description Handle selected all contacts actions
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -70,10 +69,9 @@ class ContactsList extends Component {
   handleSelectAll = () => {};
 
   /**
-   * Handle filter contacts by status action
-   *
    * @function
    * @name handleFilterByStatus
+   * @description Handle filter contacts by status action
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -89,10 +87,12 @@ class ContactsList extends Component {
   };
 
   /**
-   * Handle deselect a single contact action
-   *
    * @function
    * @name handleOnDeselectContact
+   * @description Handle deselect a single contact action
+   *
+   * @param {Object} contact contact to be removed from selected contacts
+   * @returns {undefined} undefined
    *
    * @version 0.1.0
    * @since 0.1.0

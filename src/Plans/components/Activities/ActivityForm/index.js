@@ -180,7 +180,9 @@ class ActivityForm extends Component {
           })(
             <Radio.Group>
               {phases.map(phase => (
-                <Radio value={phase}>{phase}</Radio>
+                <Radio key={phase} value={phase}>
+                  {phase}
+                </Radio>
               ))}
             </Radio.Group>
           )}

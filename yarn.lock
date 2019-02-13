@@ -2497,6 +2497,11 @@ commander@^2.11.0, commander@^2.14.1, commander@^2.9.0:
   version "2.19.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.19.0.tgz#f6198aa84e5b83c46054b94ddedbfed5ee9ff12a"
 
+comment-parser@^0.5.1:
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/comment-parser/-/comment-parser-0.5.4.tgz#089840b9cccacad2b769b231ed43081d501b9487"
+  integrity sha512-0h7W6Y1Kb6zKQMJqdX41C5qf9ITCVIsD2qP2RaqDF3GFkXFrmuAuv5zUOuo19YzyC9scjBNpqzuaRQ2Sy5pxMQ==
+
 commitizen@^3.0.5:
   version "3.0.5"
   resolved "https://registry.yarnpkg.com/commitizen/-/commitizen-3.0.5.tgz#607e07a6d3f2aa201b91a51607dc4d337c84a0ea"
@@ -3614,6 +3619,15 @@ eslint-plugin-jest@^22.2.2:
   version "22.2.2"
   resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-22.2.2.tgz#2a80d70a20c27dfb1503a6f32cdcb647fe5476df"
   integrity sha512-hnWgh9o39VJfz6lJEyQJdTW7dN2yynlGkmPOlU/oMHh+d7WVMsJP1GeDTB520VCDljEdKExCwD5IBpQIUl4mJg==
+
+eslint-plugin-jsdoc@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-4.1.0.tgz#ed1100a4bef9ab80b78cff9c1512fd9538fea5e8"
+  integrity sha512-XNyl+G2ZtmKXNn/MDGsDVQwgkM81i/hDLwVPc7CPMHrob/0Po0vzKNOvxwIoluBhhigCssvYUg7hg2gN0N2vgw==
+  dependencies:
+    comment-parser "^0.5.1"
+    jsdoctypeparser "^2.0.0-alpha-8"
+    lodash "^4.17.11"
 
 eslint-plugin-jsx-a11y@6.1.2:
   version "6.1.2"
@@ -5836,6 +5850,11 @@ js-yaml@^3.12.0, js-yaml@^3.7.0, js-yaml@^3.9.0:
 jsbn@~0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
+
+jsdoctypeparser@^2.0.0-alpha-8:
+  version "2.0.0-alpha-8"
+  resolved "https://registry.yarnpkg.com/jsdoctypeparser/-/jsdoctypeparser-2.0.0-alpha-8.tgz#baf137fb8e2a558810adcf19d2d2a2f680e90a5f"
+  integrity sha1-uvE3+44qVYgQrc8Z0tKi9oDpCl8=
 
 jsdom@^11.5.1:
   version "11.12.0"

@@ -1,11 +1,11 @@
+import {
+  clearIncidentTypeFilters,
+  Connect,
+  filterIncidentTypes,
+} from '@codetanzania/emis-api-states';
 import { Button, Checkbox, Col, Form, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import {
-  Connect,
-  clearIncidentTypeFilters,
-  filterIncidentTypes,
-} from '@codetanzania/emis-api-states';
 /**
  * Filter modal component for filtering incident types
  *
@@ -110,7 +110,7 @@ class IncidentTypesFilters extends Component {
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {families.map(family => (
-                  <Col span={8} style={{ margin: '10px 0' }}>
+                  <Col span={8} style={{ margin: '10px 0' }} key={family}>
                     <Checkbox value={family}>{family}</Checkbox>
                   </Col>
                 ))}
@@ -127,7 +127,7 @@ class IncidentTypesFilters extends Component {
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {natures.map(nature => (
-                  <Col span={6} style={{ margin: '10px 0' }}>
+                  <Col span={6} style={{ margin: '10px 0' }} key={nature}>
                     <Checkbox value={nature}>{nature}</Checkbox>
                   </Col>
                 ))}

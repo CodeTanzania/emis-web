@@ -1,52 +1,56 @@
 {
-    "extends": [
-        "airbnb",
-        "prettier",
-        "prettier/react",
-        "plugin:prettier/recommended",
-        "plugin:jest/recommended"
+  "extends": [
+    "airbnb",
+    "plugin:react/recommended",
+    "plugin:jsdoc/recommended",
+    "plugin:prettier/recommended",
+    "plugin:jest/recommended",
+    "plugin:jest/style",
+    "prettier/react",
+    "prettier"
+  ],
+  "plugins": [
+    "jest",
+    "jsdoc",
+    "prettier"
+  ],
+  "parser": "babel-eslint",
+  "rules": {
+    "react/destructuring-assignment": [
+      true,
+      "always",
+      {
+        "ignoreClassFields": true
+      }
     ],
-    "plugins": [
-        "prettier",
-        "jest"
+    "prettier/prettier": "error",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
     ],
-    "parser": "babel-eslint",
-    "rules": {
-        "react/destructuring-assignment": [
-            true,
-            "always",
-            {
-                "ignoreClassFields": true
-            }
-        ],
-        "prettier/prettier": "error",
-        "react/jsx-filename-extension": [
-            1,
-            {
-                "extensions": [
-                    ".js",
-                    ".jsx"
-                ]
-            }
-        ],
-        "import/no-extraneous-dependencies": [
-            "error",
-            {
-                "devDependencies": [
-                    "**/*.test.js",
-                    "**/*.spec.js",
-                    "**/stories/*"
-                ]
-            }
-        ],
-        "func-style": ["error", "expression"],
-        "jest/no-disabled-tests": "warn",
-        "jest/no-focused-tests": "error",
-        "jest/no-identical-title": "error",
-        "jest/prefer-to-have-length": "warn",
-        "jest/valid-expect": "error"
-    },
-    "globals": {
-        "fetch": false
-    }
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "**/*.test.js",
+          "**/*.spec.js",
+          "**/stories/*"
+        ]
+      }
+    ],
+    "func-style": ["error", "expression"],
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/prefer-to-have-length": "warn",
+    "jest/valid-expect": "error"
+  },
+  "globals": {
+    "fetch": false
+  }
 }

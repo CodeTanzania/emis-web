@@ -10,7 +10,7 @@
     "eject": "react-scripts eject",
     "commit": "git-cz",
     "commit:all": "git add -A && git-cz",
-    "lint": "eslint --ext .jsx,.js src/",
+    "lint": "eslint --fix --ext .jsx,.js src/",
     "changelog": "changelog"
   },
   "keywords": [
@@ -33,8 +33,8 @@
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
     "prop-types": "^15.7.1",
-    "rc-color-picker": "^1.2.6",
     "randomcolor": "^0.5.3",
+    "rc-color-picker": "^1.2.6",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-redux": "^6.0.0",
@@ -58,6 +58,7 @@
     "eslint-config-prettier": "^3.6.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jest": "^22.2.2",
+    "eslint-plugin-jsdoc": "^4.1.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.12.4",

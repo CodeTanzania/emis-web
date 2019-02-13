@@ -7,6 +7,14 @@ import SearchableSelectInput from '../../../../components/SearchableSelectInput'
 
 const { TextArea } = Input;
 
+/**
+ * @class
+ * @name NotificationForm
+ * @description Render Contacts notification form component
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
 class NotificationForm extends Component {
   static propTypes = {
     selectedContacts: PropTypes.arrayOf(
@@ -22,8 +30,18 @@ class NotificationForm extends Component {
     onCancel: PropTypes.func.isRequired,
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
+  /**
+   * @function
+   * @name handleSubmit
+   * @description Callback to handle form on submit event
+   *
+   * @param {Object} event onSubmit event
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleSubmit = event => {
+    event.preventDefault();
 
     const {
       form: { validateFieldsAndScroll },

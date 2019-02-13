@@ -132,7 +132,7 @@ class AlertsFilters extends Component {
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {alertSchema.type.enum.map(type => (
-                  <Col span={6} style={{ margin: '10px 0' }}>
+                  <Col span={6} style={{ margin: '10px 0' }} key={type}>
                     <Checkbox value={type}>{type}</Checkbox>
                   </Col>
                 ))}
@@ -150,7 +150,7 @@ class AlertsFilters extends Component {
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {alertSchema.category.enum.map(category => (
-                  <Col span={6} style={{ margin: '10px 0' }}>
+                  <Col span={6} style={{ margin: '10px 0' }} key={category}>
                     <Checkbox value={category}>{category}</Checkbox>
                   </Col>
                 ))}
@@ -168,7 +168,7 @@ class AlertsFilters extends Component {
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {alertSchema.response.enum.map(response => (
-                  <Col span={6} style={{ margin: '10px 0' }}>
+                  <Col span={6} style={{ margin: '10px 0' }} key={response}>
                     <Checkbox value={response}>{response}</Checkbox>
                   </Col>
                 ))}
@@ -186,7 +186,7 @@ class AlertsFilters extends Component {
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {alertSchema.urgency.enum.map(urgency => (
-                  <Col span={6} style={{ margin: '10px 0' }}>
+                  <Col span={6} style={{ margin: '10px 0' }} key={urgency}>
                     <Checkbox value={urgency}>{urgency}</Checkbox>
                   </Col>
                 ))}
@@ -204,7 +204,7 @@ class AlertsFilters extends Component {
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {alertSchema.severity.enum.map(severity => (
-                  <Col span={6} style={{ margin: '10px 0' }}>
+                  <Col span={6} style={{ margin: '10px 0' }} key={severity}>
                     <Checkbox value={severity}>{severity}</Checkbox>
                   </Col>
                 ))}
@@ -222,7 +222,7 @@ class AlertsFilters extends Component {
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {alertSchema.certainty.enum.map(certainty => (
-                  <Col span={6} style={{ margin: '10px 0' }}>
+                  <Col span={6} style={{ margin: '10px 0' }} key={certainty}>
                     <Checkbox value={certainty}>{certainty}</Checkbox>
                   </Col>
                 ))}

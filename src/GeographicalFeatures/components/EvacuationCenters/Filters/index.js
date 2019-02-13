@@ -108,7 +108,7 @@ class EvacuationCentersFilters extends Component {
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {nature.map(natureItem => (
-                  <Col span={6} style={{ margin: '10px 0' }}>
+                  <Col span={6} style={{ margin: '10px 0' }} key={natureItem}>
                     <Checkbox value={natureItem}>{natureItem}</Checkbox>
                   </Col>
                 ))}

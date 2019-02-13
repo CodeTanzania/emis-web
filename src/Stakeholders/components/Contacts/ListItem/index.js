@@ -8,17 +8,9 @@ import './styles.css';
 const { confirm } = Modal;
 
 /**
- * Single contact list item component. Render single contact details
- *
  * @class
  * @name ContactsListItem
- *
- * @param {Object} props
- * @param {string} props.abbreviation
- * @param {string} props.name
- * @param {string} props.title
- * @param {string} props.email
- * @param {string} props.mobile
+ * @description Single contact list item component. Render single contact details
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -41,14 +33,40 @@ class ContactsListItem extends Component {
     onDeselectItem: PropTypes.func.isRequired,
   };
 
+  /**
+   * @function
+   * @name handleMouseEnter
+   * @description Handle on MouseEnter ListItem event
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleMouseEnter = () => {
     this.setState({ isHovered: true });
   };
 
+  /**
+   * @function
+   * @name handleMouseEnter
+   * @description Handle on MouseLeave ListItem event
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleMouseLeave = () => {
     this.setState({ isHovered: false });
   };
 
+  /**
+   * @function
+   * @name handleToggleSelect
+   * @description Handle Toggling List Item checkbox
+   *
+   * @param {Object} event - Event object
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleToggleSelect = event => {
     const { isSelected } = this.state;
     const { onSelectItem, onDeselectItem } = this.props;
