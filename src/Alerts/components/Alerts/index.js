@@ -18,10 +18,10 @@ import './styles.css';
 const { Search } = Input;
 
 /**
- * Render alert module which have search box, actions and alert list
- *
  * @class
  * @name Alerts
+ * @description Render alert module which have search box, actions and alert
+ * list
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -73,10 +73,10 @@ class Alerts extends Component {
   }
 
   /**
-   * open filters modal by setting it's visible property to false via state
-   *
    * @function
    * @name openFiltersModal
+   * @description open filters modal by setting it's visible property
+   * to false via state
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -88,10 +88,10 @@ class Alerts extends Component {
   };
 
   /**
-   * Close filters modal by setting it's visible property to false via state
-   *
    * @function
    * @name closeFiltersModal
+   * @description Close filters modal by setting it's visible property
+   *  to false via state
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -150,10 +150,11 @@ class Alerts extends Component {
   };
 
   /**
-   * Handle on Edit action for list item
-   *
    * @function
    * @name handleEdit
+   * @description Handle on Edit action for list item
+   *
+   * @param {Object} alert alert to be edited
    *
    * @version 0.1.0
    * @since 0.1.0
