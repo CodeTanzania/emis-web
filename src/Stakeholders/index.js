@@ -3,11 +3,12 @@ import React from 'react';
 import contactsIcon from '../assets/icons/stakeholders/contacts.svg';
 import notificationsIcon from '../assets/icons/stakeholders/notifications-disabled.svg';
 import rolesIcon from '../assets/icons/stakeholders/roles.svg';
+import agenciesIcon from '../assets/icons/stakeholders/agency.svg';
 import NavigationMenu from '../components/NavigationMenu';
 
 const routes = [
   { name: 'Focal Persons', path: '/contacts', icon: contactsIcon },
-  { name: 'Agencies', path: '/agencies', icon: contactsIcon },
+  { name: 'Agencies', path: '/agencies', icon: agenciesIcon },
   {
     name: 'Roles',
     path: '/roles',
