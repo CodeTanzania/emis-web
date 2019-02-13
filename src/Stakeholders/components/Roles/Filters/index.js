@@ -8,10 +8,9 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 /**
- * Filter modal component for filtering roles
- *
  * @class
  * @name RolesFilters
+ * @description Filter modal component for filtering roles
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -32,21 +31,18 @@ class RolesFilters extends Component {
     filter: null,
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-  };
-
   /**
-   * Handle filter action
-   *
    * @function
    * @name handleSubmit
+   * @description Handle filter action
+   *
+   * @param {Object} event onSubmit event
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleSubmit = e => {
-    e.preventDefault();
+  handleSubmit = event => {
+    event.preventDefault();
     const {
       form: { validateFields },
       onCancel,
@@ -61,10 +57,9 @@ class RolesFilters extends Component {
   };
 
   /**
-   * Action handle when clear
-   *
    * @function
    * @name handleClearFilter
+   * @description Action handle when clear
    *
    * @version 0.1.0
    * @since 0.1.0

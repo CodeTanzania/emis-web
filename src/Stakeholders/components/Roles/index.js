@@ -17,11 +17,9 @@ import './styles.css';
 const { Search } = Input;
 
 /**
- * Render role module which has search box, actions and list of roles
- *
  * @class
  * @name Roles
- *
+ * @description Render role module which has search box, actions and list of roles
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -61,12 +59,9 @@ class Roles extends Component {
   }
 
   /**
-   * open filters modal by setting it's visible property to false via state
-   *
    * @function
    * @name openFiltersModal
-   *
-   * @returns {undefined} - Nothing is returned
+   * @description open filters modal by setting it's visible property to false via state
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -76,12 +71,9 @@ class Roles extends Component {
   };
 
   /**
-   * Close filters modal by setting it's visible property to false via state
-   *
    * @function
    * @name closeFiltersModal
-   *
-   * @returns {undefined} - Nothing is returned
+   * @description Close filters modal by setting it's visible property to false via state
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -91,12 +83,9 @@ class Roles extends Component {
   };
 
   /**
-   * Open role form
-   *
    * @function
    * @name openForm
-   *
-   * @returns {undefined} - Nothing is returned
+   * @description Open role form
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -106,10 +95,9 @@ class Roles extends Component {
   };
 
   /**
-   * close role form
-   *
    * @function
    * @name openForm
+   * @description close role form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -122,13 +110,11 @@ class Roles extends Component {
   };
 
   /**
-   * Search Roles List based on supplied filter word
-   *
    * @function
    * @name searchRoles
+   * @description Search Roles List based on supplied filter word
    *
-   * @param {Object} event - Event instance
-   * @returns {undefined} - Nothing is returned
+   * @param {Object} event Event instance
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -138,10 +124,11 @@ class Roles extends Component {
   };
 
   /**
-   * Handle on Edit action for list item
-   *
    * @function
    * @name handleEdit
+   * @description Handle on Edit action for list item
+   *
+   * @param {Object} role - role to be edited
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -152,6 +139,14 @@ class Roles extends Component {
     openRoleForm();
   };
 
+  /**
+   * @function
+   * @name handleAfterCloseForm
+   * @description Performs after close form cleanups
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleAfterCloseForm = () => {
     this.setState({ isEditForm: false });
   };

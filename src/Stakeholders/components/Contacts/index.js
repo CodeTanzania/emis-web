@@ -18,10 +18,9 @@ import './styles.css';
 const { Search } = Input;
 
 /**
- * Render contact list which have search box, actions and contact list
- *
  * @class
  * @name ContactsList
+ * @description Render contact list which have search box, actions and contact list
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -42,11 +41,13 @@ class Contacts extends Component {
     contact: PropTypes.shape({ name: PropTypes.string }),
     page: PropTypes.number.isRequired,
     showForm: PropTypes.bool.isRequired,
+    searchQuery: PropTypes.string,
     total: PropTypes.number.isRequired,
   };
 
   static defaultProps = {
     contact: null,
+    searchQuery: undefined,
   };
 
   componentDidMount() {
@@ -54,12 +55,9 @@ class Contacts extends Component {
   }
 
   /**
-   * open filters modal by setting it's visible property to false via state
-   *
    * @function
    * @name openFiltersModal
-   *
-   * @returns {undefined} - Nothing is returned
+   * @description open filters modal by setting it's visible property to false via state
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -69,12 +67,9 @@ class Contacts extends Component {
   };
 
   /**
-   * Close filters modal by setting it's visible property to false via state
-   *
    * @function
    * @name closeFiltersModal
-   *
-   * @returns {undefined} - Nothing is returned
+   * @description Close filters modal by setting it's visible property to false via state
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -84,12 +79,9 @@ class Contacts extends Component {
   };
 
   /**
-   * Open contact form
-   *
    * @function
    * @name openContactForm
-   *
-   * @returns {undefined} - Nothing is returned
+   * @description Open contact form
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -99,12 +91,9 @@ class Contacts extends Component {
   };
 
   /**
-   * close contact form
-   *
    * @function
    * @name openContactForm
-   *
-   * @returns {undefined} - Nothing is returned
+   * @description close contact form
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -115,13 +104,11 @@ class Contacts extends Component {
   };
 
   /**
-   * Search Contacts List based on supplied filter word
-   *
    * @function
    * @name searchContacts
+   * @description Search Contacts List based on supplied filter word
    *
    * @param {Object} event - Event instance
-   * @returns {undefined} - Nothing is returned
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -131,10 +118,11 @@ class Contacts extends Component {
   };
 
   /**
-   * Handle on Edit action for list item
-   *
    * @function
    * @name handleEdit
+   * @description Handle on Edit action for list item
+   *
+   * @param {Object} contact contact to be edited
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -146,10 +134,11 @@ class Contacts extends Component {
   };
 
   /**
-   * Handle on notify contacts
-   *
    * @function
    * @name openNotificationForm
+   * @description Handle on notify contacts
+   *
+   * @param {Object[]} contacts List of contacts selected to be notified
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -162,10 +151,9 @@ class Contacts extends Component {
   };
 
   /**
-   * Handle on notify contacts
-   *
    * @function
    * @name closeNotificationForm
+   * @description Handle on notify contacts
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -174,6 +162,14 @@ class Contacts extends Component {
     this.setState({ showNotificationForm: false });
   };
 
+  /**
+   * @function
+   * @name handleAfterCloseForm
+   * @description Perform post close form cleanups
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleAfterCloseForm = () => {
     this.setState({ isEditForm: false });
   };
@@ -186,6 +182,7 @@ class Contacts extends Component {
       posting,
       page,
       showForm,
+      searchQuery,
       total,
     } = this.props;
     const {
@@ -203,6 +200,8 @@ class Contacts extends Component {
               size="large"
               placeholder="Search for contacts here ..."
               onChange={this.searchContacts}
+              allowClear
+              value={searchQuery}
             />
             {/* end search input component */}
           </Col>
@@ -309,4 +308,5 @@ export default Connect(Contacts, {
   page: 'stakeholders.page',
   showForm: 'stakeholders.showForm',
   total: 'stakeholders.total',
+  searchQuery: 'stakeholders.q',
 });

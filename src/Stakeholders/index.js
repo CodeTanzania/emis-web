@@ -6,9 +6,9 @@ import rolesIcon from '../assets/icons/stakeholders/roles.svg';
 import NavigationMenu from '../components/NavigationMenu';
 
 const routes = [
-  { name: 'Contacts', path: '/contacts', icon: contactsIcon },
+  { name: 'Focal Persons', path: '/contacts', icon: contactsIcon },
   {
-    name: 'Roles & Responsibilities',
+    name: 'Roles',
     path: '/roles',
     icon: rolesIcon,
   },
@@ -21,10 +21,12 @@ const routes = [
 ];
 
 /**
- * Stakeholders component which shows to navigation Nav
- *
  * @function
  * @name Stakeholders
+ * @description Stakeholders component which shows to navigation Nav
+ *
+ * @param {Object} props props object
+ * @param {Object} props.match match router object
  *
  * @version 0.1.0
  * @since 0.1.0

@@ -19,11 +19,10 @@ const headerLayout = [
 ];
 
 /**
- * Render ContactsList component which have actionBar, contacts header and
- * contacts list components
- *
  * @class
  * @name ContactsList
+ * @description Render ContactsList component which have actionBar, contacts header and
+ * contacts list components
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -50,7 +49,6 @@ class ContactsList extends Component {
    * @description Handle select a single contact action
    *
    * @param {Object} contact selected contact object
-   * @returns {undefined} returns nothing
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -94,7 +92,7 @@ class ContactsList extends Component {
    * @description Handle deselect a single contact action
    *
    * @param {Object} contact contact to be removed from selected contacts
-   * @returns {undefined} returns nothing
+   * @returns {undefined} undefined
    *
    * @version 0.1.0
    * @since 0.1.0

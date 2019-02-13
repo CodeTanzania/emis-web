@@ -89,6 +89,10 @@ textarea .normal {
     sans-serif;
 }
 
+textarea {
+  resize: none;
+}
+
 body {
   font-family: Lato, sans-serif;
 }
