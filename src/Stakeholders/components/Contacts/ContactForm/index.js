@@ -50,7 +50,7 @@ class ContactForm extends Component {
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleventSubmit = event => {
+  handleSubmit = event => {
     event.preventDefault();
 
     const {
