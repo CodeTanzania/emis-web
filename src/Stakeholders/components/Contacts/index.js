@@ -31,6 +31,7 @@ class Contacts extends Component {
     isEditForm: false,
     showNotificationForm: false,
     selectedContacts: [],
+    notificationBody: undefined,
   };
 
   static propTypes = {
@@ -135,6 +136,45 @@ class Contacts extends Component {
 
   /**
    * @function
+   * @name handleShare
+   * @description Handle share single contact action
+   *
+   * @param {Object} contact contact to be shared
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleShare = contact => {
+    const message = `${contact.name}\nMobile: ${contact.mobile}\nEmail: ${
+      contact.email
+    }`;
+
+    this.setState({ notificationBody: message, showNotificationForm: true });
+  };
+
+  /**
+   * @function
+   * @name handleBulkShare
+   * @description Handle share multiple contacts
+   *
+   * @param {Object[]} contacts contacts list to be shared
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleBulkShare = contacts => {
+    const contactList = contacts.map(
+      contact =>
+        `${contact.name}\nMobile: ${contact.mobile}\nEmail: ${contact.email}`
+    );
+
+    const message = contactList.join('\n\n\n');
+
+    this.setState({ notificationBody: message, showNotificationForm: true });
+  };
+
+  /**
+   * @function
    * @name openNotificationForm
    * @description Handle on notify contacts
    *
@@ -174,6 +214,18 @@ class Contacts extends Component {
     this.setState({ isEditForm: false });
   };
 
+  /**
+   * @function
+   * @name handleAfterCloseNotificationForm
+   * @description Perform post close notification form cleanups
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleAfterCloseNotificationForm = () => {
+    this.setState({ notificationBody: undefined });
+  };
+
   render() {
     const {
       contacts,
@@ -190,6 +242,7 @@ class Contacts extends Component {
       isEditForm,
       showNotificationForm,
       selectedContacts,
+      notificationBody,
     } = this.state;
     return (
       <div className="ContactsList">
@@ -243,6 +296,8 @@ class Contacts extends Component {
           onEdit={this.handleEdit}
           onFilter={this.openFiltersModal}
           onNotify={this.openNotificationForm}
+          onShare={this.handleShare}
+          onBulkShare={this.handleBulkShare}
         />
         {/* end list */}
 
@@ -268,10 +323,12 @@ class Contacts extends Component {
           destroyOnClose
           maskClosable={false}
           width="40%"
+          afterClose={this.handleAfterCloseNotificationForm}
         >
           <NotificationForm
             onCancel={this.closeNotificationForm}
             selectedContacts={selectedContacts}
+            body={notificationBody}
           />
         </Modal>
         {/* end Notification modal */}

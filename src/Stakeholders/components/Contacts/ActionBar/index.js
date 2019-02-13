@@ -20,6 +20,7 @@ import './styles.css';
  * @param {number} props.selectedItemCount total Number of selected items
  * @param {Function} props.onNotify on notify action callback
  * @param {Function} props.onFilter on filter action callback
+ * @param {Function} props.onShare on share action callback
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -30,6 +31,7 @@ const ContactsActionBar = ({
   selectedItemCount,
   onFilter,
   onNotify,
+  onShare,
 }) => (
   <div className="ContactsActionBar">
     <Row>
@@ -101,6 +103,7 @@ const ContactsActionBar = ({
             title="Share selected contacts"
             className="actionButton"
             size="large"
+            onClick={onShare}
           />
         )}
       </Col>
@@ -167,6 +170,7 @@ ContactsActionBar.propTypes = {
   selectedItemCount: PropTypes.number.isRequired,
   onFilter: PropTypes.func.isRequired,
   onNotify: PropTypes.func.isRequired,
+  onShare: PropTypes.func.isRequired,
 };
 
 export default ContactsActionBar;
