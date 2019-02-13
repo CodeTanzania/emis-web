@@ -3,7 +3,7 @@ import React from 'react';
 import Agencies from '../components/Agencies';
 /**
  * @function
- * @name StakeholdersContactsLayout
+ * @name StakeholdersAgenciesLayout
  * @description Renders Stakeholders Agencies Layout
  *
  * @version 0.1.0
