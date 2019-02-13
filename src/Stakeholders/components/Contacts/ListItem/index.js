@@ -1,8 +1,11 @@
-import { Avatar, Checkbox, Col, Icon, Row } from 'antd';
+import { Avatar, Checkbox, Col, Icon, Row, Modal } from 'antd';
 import PropTypes from 'prop-types';
 import randomColor from 'randomcolor';
 import React, { Component, Fragment } from 'react';
 import './styles.css';
+
+/* constants */
+const { confirm } = Modal;
 
 /**
  * Single contact list item component. Render single contact details
@@ -58,16 +61,29 @@ class ContactsListItem extends Component {
     }
   };
 
+  /**
+   * @function
+   * @name showArchiveConfirm
+   * @description show confirm modal before archiving a contact
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  showArchiveConfirm = () => {
+    const { name, onArchive } = this.props;
+    confirm({
+      title: `Are you sure you want to archive ${name} ?`,
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        onArchive();
+      },
+    });
+  };
+
   render() {
-    const {
-      abbreviation,
-      name,
-      title,
-      email,
-      mobile,
-      onEdit,
-      onArchive,
-    } = this.props;
+    const { abbreviation, name, title, email, mobile, onEdit } = this.props;
     const { isHovered } = this.state;
     const { isSelected } = this.props;
     const avatarBackground = randomColor();
@@ -125,7 +141,7 @@ class ContactsListItem extends Component {
                   type="database"
                   title="Archive Contact"
                   className="actionIcon"
-                  onClick={onArchive}
+                  onClick={this.showArchiveConfirm}
                 />
               </Fragment>
             )}
