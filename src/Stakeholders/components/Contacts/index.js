@@ -42,11 +42,13 @@ class Contacts extends Component {
     contact: PropTypes.shape({ name: PropTypes.string }),
     page: PropTypes.number.isRequired,
     showForm: PropTypes.bool.isRequired,
+    searchQuery: PropTypes.string,
     total: PropTypes.number.isRequired,
   };
 
   static defaultProps = {
     contact: null,
+    searchQuery: undefined,
   };
 
   componentDidMount() {
@@ -186,6 +188,7 @@ class Contacts extends Component {
       posting,
       page,
       showForm,
+      searchQuery,
       total,
     } = this.props;
     const {
@@ -203,6 +206,8 @@ class Contacts extends Component {
               size="large"
               placeholder="Search for contacts here ..."
               onChange={this.searchContacts}
+              allowClear
+              value={searchQuery}
             />
             {/* end search input component */}
           </Col>
@@ -309,4 +314,5 @@ export default Connect(Contacts, {
   page: 'stakeholders.page',
   showForm: 'stakeholders.showForm',
   total: 'stakeholders.total',
+  searchQuery: 'stakeholders.q',
 });
