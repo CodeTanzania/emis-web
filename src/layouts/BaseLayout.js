@@ -48,6 +48,7 @@ import ResourcesWarehousesLayout from '../Resources/layouts/Warehouses';
 import StakeholdersContactsLayout from '../Stakeholders/layouts/Contacts';
 import StakeholdersRolesLayout from '../Stakeholders/layouts/Roles';
 import StakeholdersNotificationsLayout from '../Stakeholders/layouts/Notifications';
+import StakeholdersAgenciesLayout from '../Stakeholders/layouts/Agencies';
 import AdministrativeBoundariesLayout from '../GeographicalFeatures/layouts/AdministrativeBoundaries';
 import GeographicalFeaturesWarehousesLayout from '../GeographicalFeatures/layouts/Warehouses';
 import GeographicalFeaturesFacilitiesLayout from '../GeographicalFeatures/layouts/Facilities';
@@ -201,6 +202,7 @@ const breadcrumbNameMap = {
   },
   /* Stakeholders Routes */
   '/stakeholders/contacts': { name: 'Contacts', title: 'List of all contacts' },
+  '/stakeholders/agencies': { name: 'Agencies', title: 'List of all agencies' },
   '/stakeholders/notifications': {
     name: 'Notifications',
     title: 'Notify stakeholders',
@@ -499,6 +501,11 @@ const BaseLayout = withRouter(props => {
             exact
             path="/stakeholders/contacts"
             component={StakeholdersContactsLayout}
+          />
+          <Route
+            exact
+            path="/stakeholders/agencies"
+            component={StakeholdersAgenciesLayout}
           />
           <Route
             exact
