@@ -19,7 +19,7 @@ import './styles.css';
  * @param {Object} props props object
  * @param {number} props.page current page
  * @param {number} props.total total number of indicators
- * @param {Function} props.onFilter function to filters indicators
+ * @param {Function} props.onFilter function for filtering indicators
  *
  * @version 0.1.0
  * @since 0.1.0

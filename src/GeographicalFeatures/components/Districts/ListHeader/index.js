@@ -9,6 +9,14 @@ const headerLayout = [
   { span: 4, header: 'Family' },
 ];
 
+/**
+ * @function
+ * @name DistrictsListHeader
+ * @description Render list headers
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
 const DistrictsListHeader = () => (
   <Row className="DistrictsListHeader">
     {headerLayout.map(item => (

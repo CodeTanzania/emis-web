@@ -10,16 +10,7 @@ import { notifyError, notifySuccess } from '../../../../util';
 
 const { Option } = Select;
 
-/**
- * Facility form component for creating new Facitlities
- *
- * @class
- * @name FacilitiyForm
- *
- * @version 0.1.0
- * @since 0.1.0
- */
-class FacilitiyForm extends Component {
+class FacilityForm extends Component {
   static propTypes = {
     isEditForm: PropTypes.bool.isRequired,
     nature: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -32,6 +23,17 @@ class FacilitiyForm extends Component {
     posting: PropTypes.bool.isRequired,
   };
 
+  /**
+   * Handle submit form action
+   *
+   * @function
+   * @name handleSubmit
+   *
+   * @param {Object} e event object
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleSubmit = e => {
     e.preventDefault();
 
@@ -44,14 +46,14 @@ class FacilitiyForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedFacilitiy = Object.assign({}, facility, {
+          const updatedFacility = Object.assign({}, facility, {
             ...values,
             continent: 'Africa',
             country: 'Tanzania',
-            family: 'Facilitiy',
+            family: 'FacilityForm',
           });
           putFeature(
-            updatedFacilitiy,
+            updatedFacility,
             () => {
               notifySuccess('Facility was updated successfully');
             },
@@ -163,7 +165,7 @@ class FacilitiyForm extends Component {
 }
 
 export default Form.create()(
-  Connect(FacilitiyForm, {
+  Connect(FacilityForm, {
     nature: 'features.schema.properties.nature.enum',
   })
 );

@@ -8,10 +8,10 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 /**
- * Filter modal component for filtering critical infrastructures
  *
  * @class
  * @name CriticalInfrastructuresFilters
+ * @description Filter modal component for filtering critical infrastructures
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -33,10 +33,12 @@ class CriticalInfrastructuresFilters extends Component {
   };
 
   /**
-   * Handle filter action
    *
    * @function
    * @name handleSubmit
+   * @description Handle filter action
+   *
+   * @param {Object} e event object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -57,10 +59,10 @@ class CriticalInfrastructuresFilters extends Component {
   };
 
   /**
-   * Action handle when clear
    *
    * @function
    * @name handleClearFilter
+   * @description Action handle when clear
    *
    * @version 0.1.0
    * @since 0.1.0

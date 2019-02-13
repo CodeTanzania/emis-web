@@ -11,17 +11,17 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import WardsActionBar from './ActionBar';
 import WardsList from './List';
-import WardsFilters from './FIlters';
+import WardsFilters from './Filters';
 import WardForm from './Form';
 import './styles.css';
 
 const { Search } = Input;
 
 /**
- * Render Wards list which have search box, actions and Wards list
  *
  * @class
  * @name Wards
+ * @description Render Wards list which have search box, actions and Wards list
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -52,10 +52,11 @@ class Wards extends Component {
   }
 
   /**
-   * open filters modal by setting it's visible property to false via state
    *
    * @function
    * @name openFiltersModal
+   * @description open filters modal by setting it's visible property to
+   *  false via state
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -67,10 +68,11 @@ class Wards extends Component {
   };
 
   /**
-   * Close filters modal by setting it's visible property to false via state
    *
    * @function
    * @name closeFiltersModal
+   * @description Close filters modal by setting it's visible property to
+   *  false via state
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -82,10 +84,10 @@ class Wards extends Component {
   };
 
   /**
-   * Search wards List based on supplied filter word
    *
    * @function
    * @name searchWards
+   * @description Search wards List based on supplied filter word
    *
    * @param {Object} event - Event instance
    * @returns {undefined} - Nothing is returned
@@ -98,10 +100,10 @@ class Wards extends Component {
   };
 
   /**
-   * Open ward form
    *
    * @function
    * @name openForm
+   * @description Open ward form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -113,10 +115,10 @@ class Wards extends Component {
   };
 
   /**
-   * close ward form
    *
    * @function
    * @name closeForm
+   * @description close ward form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -129,10 +131,12 @@ class Wards extends Component {
   };
 
   /**
-   * Handle on Edit action for list item
    *
    * @function
    * @name handleEdit
+   * @description Handle on Edit action for list item
+   *
+   * @param {Object} ward ward object
    *
    * @version 0.1.0
    * @since 0.1.0

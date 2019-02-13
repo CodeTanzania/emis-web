@@ -5,16 +5,10 @@ import React, { Component, Fragment } from 'react';
 import './styles.css';
 
 /**
- * Single ward list item component. Render single ward details
  *
  * @class
  * @name WardsListItem
- *
- * @param {Object} props
- * @param {string} props.name
- * @param {string} props.category
- * @param {string} props.type
- * @param {string} props.country
+ * @description Single ward list item component. Render single ward details
  *
  * @version 0.1.0
  * @since 0.1.0

@@ -11,10 +11,10 @@ import { notifyError, notifySuccess } from '../../../../util';
 const { Option } = Select;
 
 /**
- * Render Region form for creating and updating Region details
  *
  * @class
  * @name RegionForm
+ * @description Render form for creating and updating ward details
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -42,6 +42,7 @@ class WardForm extends Component {
    * @function
    * @name handleSubmit
    *
+   * @param {Object} e event object
    * @version 0.1.0
    * @since 0.1.0
    */

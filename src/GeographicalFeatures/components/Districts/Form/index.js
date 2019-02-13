@@ -11,10 +11,10 @@ import { notifyError, notifySuccess } from '../../../../util';
 const { Option } = Select;
 
 /**
- * Render District form for creating and updating District details
  *
  * @class
  * @name DistrictForm
+ * @description Render District form for creating and updating District details
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -41,6 +41,8 @@ class DistrictForm extends Component {
    *
    * @function
    * @name handleSubmit
+   *
+   * @param {Object} e event object
    *
    * @version 0.1.0
    * @since 0.1.0

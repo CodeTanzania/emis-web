@@ -4,12 +4,17 @@ import React, { Fragment } from 'react';
 import FacilityListHeader from '../ListHeader';
 import FacilityListItem from '../ListItem';
 
+// eslint-disable-next-line jsdoc/require-returns
 /**
- * Render Facility list which have search box and actions
  *
- * @class
+ * @function
  * @name FacilityList
+ * @description Render facilities list
  *
+ * @param {Object} props props object
+ * @param {boolean} props.loading preload list of facilities
+ * @param {Array} props.districts array list of facilities
+ * @param {Function} props.onEdit function for editing facilities
  *
  * @version 0.1.0
  * @since 0.1.0

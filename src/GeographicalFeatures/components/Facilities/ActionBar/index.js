@@ -8,15 +8,18 @@ import React from 'react';
 import { notifyError, notifySuccess } from '../../../../util';
 import './styles.css';
 
+// eslint-disable-next-line jsdoc/require-returns
 /**
- * Render action bar for actions which are applicable to list content
  *
  * @function
  * @name FacilitiesActionBar
+ * @description Render action bar for actions which are applicable to list
+ * content
  *
- * @param {Object} props
- * @param {page} props.page
- * @param {number} props.total
+ * @param {Object} props props object
+ * @param {number} props.page current page
+ * @param {number} props.total total number of facilities
+ * @param {Function} props.onFilter filters facilities
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -40,7 +43,8 @@ const FacilitiesActionBar = ({ page, total, onFilter }) => (
               },
               () => {
                 notifyError(
-                  'An Error occurred while refreshing Facilities, please Facilities system administrator!'
+                  `An Error occurred while refreshing Facilities, 
+                  please Facilities system administrator!`
                 );
               }
             )

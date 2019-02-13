@@ -18,10 +18,11 @@ import './styles.css';
 const { Search } = Input;
 
 /**
- * Render Regions list which have search box, actions and Regions list
  *
  * @class
  * @name Regions
+ * @description  Render Regions list which have search box,
+ * actions and Regions list
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -52,10 +53,10 @@ class Regions extends Component {
   }
 
   /**
-   * Search Regions List based on supplied filter word
    *
    * @function
    * @name searchDistrict
+   * @description Search Regions List based on supplied filter word
    *
    * @param {Object} event - Event instance
    * @returns {undefined} - Nothing is returned
@@ -68,10 +69,11 @@ class Regions extends Component {
   };
 
   /**
-   * open filters modal by setting it's visible property to false via state
    *
    * @function
    * @name openFiltersModal
+   * @description open filters modal by setting it's visible property to
+   *  false via state
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -83,10 +85,11 @@ class Regions extends Component {
   };
 
   /**
-   * Close filters modal by setting it's visible property to false via state
    *
    * @function
    * @name closeFiltersModal
+   * @description Close filters modal by setting it's visible property to
+   *  false via state
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -98,10 +101,10 @@ class Regions extends Component {
   };
 
   /**
-   * Open region form
    *
    * @function
    * @name openContactForm
+   * @description Open region form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -113,10 +116,10 @@ class Regions extends Component {
   };
 
   /**
-   * close region form
    *
    * @function
    * @name closeForm
+   * @description close region form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -129,10 +132,12 @@ class Regions extends Component {
   };
 
   /**
-   * Handle on Edit action for list item
    *
    * @function
    * @name handleEdit
+   * @description Handle on Edit action for list item
+   *
+   * @param {Object} region region object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -171,6 +176,7 @@ class Regions extends Component {
             />
             {/* end search input component */}
           </Col>
+
           {/* primary actions */}
           <Col span={3} offset={9}>
             <Button

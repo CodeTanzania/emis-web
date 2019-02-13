@@ -5,16 +5,12 @@ import React, { Component, Fragment } from 'react';
 import './styles.css';
 
 /**
- * Single district list item component. Render single district details
  *
  * @class
  * @name DistrictsListItem
+ * @description Single district list item component.
+ *  Render single district details
  *
- * @param {Object} props
- * @param {string} props.name
- * @param {string} props.category
- * @param {string} props.type
- * @param {string} props.country
  *
  * @version 0.1.0
  * @since 0.1.0

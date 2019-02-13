@@ -49,7 +49,7 @@ const types = [
   'Firefighters',
   'Healthcare',
   'Landform',
-  'Lifecycle',
+  'Life cycle',
   'Lifeguards',
   'Linear Barriers',
   'Link Roads',
@@ -81,10 +81,12 @@ const levels = [
 ];
 
 /**
- * Filter modal component for filtering administrative boundaries
  *
  * @class
  * @name RolesFilters
+ * @description Filter modal component for filtering administrative boundaries
+ *
+ * @param {Object} e event object
  *
  * @version 0.1.0
  * @since 0.1.0
