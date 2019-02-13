@@ -8,15 +8,16 @@ import React from 'react';
 import { notifyError, notifySuccess } from '../../../../util';
 import './styles.css';
 
+// eslint-disable-next-line jsdoc/require-returns
 /**
- * Render action bar for actions which are applicable to list content
- *
  * @function
  * @name AlertSourcesActionBar
+ * @description  Render action bar for actions which are applicable
+ *  to list content
  *
- * @param {Object} props
- * @param {page} props.page
- * @param {number} props.total
+ * @param {Object} props props object
+ * @param {page} props.page current  page
+ * @param {number} props.total total number of alert sources
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -42,7 +43,8 @@ const AlertSourcesActionBar = ({ page, total }) => (
               },
               () => {
                 notifyError(
-                  'An Error occurred while refreshing alert sources, please alert sources system administrator!'
+                  `An Error occurred while refreshing alert sources, please
+                   alert sources system administrator!`
                 );
               }
             )

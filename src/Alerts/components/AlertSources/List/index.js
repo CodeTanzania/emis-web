@@ -5,13 +5,15 @@ import AlertSourcesListHeader from '../ListHeader';
 import AlertSourcesListItem from '../ListItem';
 
 /**
- * Render source list which has search box and actions
- *
  * @function
  * @name AlertSourcesList
- * @param {Object} props
- * @param {string} props.sources
- * @param {string} props.loading
+ * @description Render source list which has search box and actions
+ *
+ * @param {Object} props props object
+ * @param {string} props.sources array of alert source objects
+ * @param {string} props.loading represents loading status
+ * @param {Function} props.onEdit call back action called during editing
+ *  alert source
  *
  * @version 0.1.0
  * @since 0.1.0

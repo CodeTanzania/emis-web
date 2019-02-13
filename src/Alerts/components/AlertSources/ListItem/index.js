@@ -4,17 +4,10 @@ import React, { Component, Fragment } from 'react';
 import './styles.css';
 
 /**
- * Single Alert Source list item component. Render single Source details
- *
  * @class
  * @name AlertSourcesListItem
- *
- * @param {Object} props
- * @param {string} props.name
- * @param {string} props.url
- * @param {string} props.email
- * @param {string} props.mobile
- * @param {string} prop.website
+ * @description Single Alert Source list item component. Render
+ * single Source details
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -34,10 +27,26 @@ class AlertSourcesListItem extends Component {
     onArchive: PropTypes.func.isRequired,
   };
 
+  /**
+   * @class
+   * @name handleMouseEnter
+   * @description show item actions on hover
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleMouseEnter = () => {
     this.setState({ isHovered: true });
   };
 
+  /**
+   * @class
+   * @name handleMouseLeave
+   * @description hide item actions on hover
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleMouseLeave = () => {
     this.setState({ isHovered: false });
   };
