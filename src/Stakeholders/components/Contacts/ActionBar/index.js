@@ -107,21 +107,21 @@ const ContactsActionBar = ({
       {/* end bulk share action */}
 
       {/* bulk archive action */}
-      <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}>
-        {selectedItemCount > 0 && (
-          <Button
-            type="circle"
-            icon="hdd"
-            title="Archive selected contacts"
-            className="actionButton"
-            size="large"
-          />
-        )}
-      </Col>
+      {/* <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}> */}
+      {/*   {selectedItemCount > 0 && ( */}
+      {/*     <Button */}
+      {/*       type="circle" */}
+      {/*       icon="hdd" */}
+      {/*       title="Archive selected contacts" */}
+      {/*       className="actionButton" */}
+      {/*       size="large" */}
+      {/*     /> */}
+      {/*   )} */}
+      {/* </Col> */}
       {/* end bulk archive action */}
 
       {/* selected and contacts number summary */}
-      <Col span={6} xl={{ span: 4, offset: 9 }} xxl={{ span: 5, offset: 9 }}>
+      <Col span={6} xl={{ span: 4, offset: 10 }} xxl={{ span: 5, offset: 10 }}>
         {selectedItemCount > 0 && (
           <span
             style={{ color: '#c5c5c5' }}
