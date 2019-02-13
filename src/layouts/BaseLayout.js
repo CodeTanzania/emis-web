@@ -205,6 +205,10 @@ const breadcrumbNameMap = {
     name: 'Focal Persons',
     title: 'List of all focal persons',
   },
+  '/stakeholders/agencies': {
+    name: 'Agencies',
+    title: 'List of all agencies',
+  },
   '/stakeholders/notifications': {
     name: 'Notifications',
     title: 'Notify stakeholders',
