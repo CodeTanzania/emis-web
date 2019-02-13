@@ -9,22 +9,24 @@ import React, { Component } from 'react';
 
 /**
  * @class
- * @name ContactsFilters
- * @description Filter modal component for filtering contacts
+ * @name AgenciesFilters
+ * @description Filter modal component for filtering agencies
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class ContactsFilters extends Component {
+class AgenciesFilters extends Component {
   static propTypes = {
     filter: PropTypes.objectOf(
       PropTypes.shape({
-        groups: PropTypes.arrayOf(PropTypes.string),
+        types: PropTypes.arrayOf(PropTypes.string),
+        phases: PropTypes.arrayOf(PropTypes.string),
       })
     ),
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
     onCancel: PropTypes.func.isRequired,
-    groups: PropTypes.arrayOf(PropTypes.string).isRequired,
+    types: PropTypes.arrayOf(PropTypes.string).isRequired,
+    phases: PropTypes.arrayOf(PropTypes.string).isRequired,
   };
 
   static defaultProps = {
@@ -74,7 +76,8 @@ class ContactsFilters extends Component {
     const {
       form: { getFieldDecorator },
       onCancel,
-      groups,
+      types,
+      phases,
       filter,
     } = this.props;
 
@@ -99,23 +102,41 @@ class ContactsFilters extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
-        {/* start contact group filters */}
-        <Form.Item {...formItemLayout} label="By Person Group">
-          {getFieldDecorator('group', {
-            initialValue: filter ? filter.group : [],
+        {/* start agency type filters */}
+        <Form.Item {...formItemLayout} label="By Agency type">
+          {getFieldDecorator('type', {
+            initialValue: filter ? filter.type : [],
           })(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
-                {groups.map(group => (
-                  <Col span={6} style={{ margin: '10px 0' }} key={group}>
-                    <Checkbox value={group}>{group}</Checkbox>
+                {types.map(type => (
+                  <Col span={6} style={{ margin: '10px 0' }} key={type}>
+                    <Checkbox value={type}>{type}</Checkbox>
                   </Col>
                 ))}
               </Row>
             </Checkbox.Group>
           )}
         </Form.Item>
-        {/* end contact group filters */}
+        {/* end agency type filters */}
+
+        {/* start emergency phase filters */}
+        <Form.Item {...formItemLayout} label="By Emergency Phases">
+          {getFieldDecorator('phases', {
+            initialValue: filter ? filter.phases : [],
+          })(
+            <Checkbox.Group style={{ width: '100%' }}>
+              <Row>
+                {phases.map(phase => (
+                  <Col span={6} style={{ margin: '10px 0' }} key={phase}>
+                    <Checkbox value={phase}>{phase}</Checkbox>
+                  </Col>
+                ))}
+              </Row>
+            </Checkbox.Group>
+          )}
+        </Form.Item>
+        {/* end emergency phase filters */}
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
@@ -133,7 +154,8 @@ class ContactsFilters extends Component {
   }
 }
 
-export default Connect(Form.create()(ContactsFilters), {
-  groups: 'stakeholders.schema.properties.type.enum',
+export default Connect(Form.create()(AgenciesFilters), {
+  types: 'stakeholders.schema.properties.type.enum',
+  phases: 'stakeholders.schema.properties.phases.enum',
   filter: 'stakeholders.filter',
 });
