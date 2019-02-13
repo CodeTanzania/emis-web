@@ -7,6 +7,7 @@ import NavigationMenu from '../components/NavigationMenu';
 
 const routes = [
   { name: 'Focal Persons', path: '/contacts', icon: contactsIcon },
+  { name: 'Agencies', path: '/agencies', icon: contactsIcon },
   {
     name: 'Roles',
     path: '/roles',
