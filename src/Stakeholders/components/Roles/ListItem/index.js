@@ -1,8 +1,10 @@
-import { Avatar, Checkbox, Col, Icon, Row } from 'antd';
+import { Avatar, Checkbox, Col, Icon, Row, Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import toUpper from 'lodash/toUpper';
 import './styles.css';
+
+const { confirm } = Modal;
 
 /**
  * @class
@@ -50,8 +52,29 @@ class RoleListItem extends Component {
     this.setState({ isHovered: false });
   };
 
+  /**
+   * @function
+   * @name showArchiveConfirm
+   * @description show confirm modal before archiving a role
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  showArchiveConfirm = () => {
+    const { name, onArchive } = this.props;
+    confirm({
+      title: `Are you sure you want to archive ${name} ?`,
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        onArchive();
+      },
+    });
+  };
+
   render() {
-    const { abbreviation, name, description, onEdit, onArchive } = this.props;
+    const { abbreviation, name, description, onEdit } = this.props;
     const { isHovered } = this.state;
     return (
       <div
@@ -83,7 +106,7 @@ class RoleListItem extends Component {
                   type="database"
                   title="Archive Role"
                   className="actionIcon"
-                  onClick={onArchive}
+                  onClick={this.showArchiveConfirm}
                 />
               </Fragment>
             )}

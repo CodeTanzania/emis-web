@@ -1,6 +1,8 @@
 import { List } from 'antd';
+import { deleteRole } from '@codetanzania/emis-api-states';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
+import { notifyError, notifySuccess } from '../../../../util';
 import RoleListHeader from '../../../../components/ListHeader';
 import RoleListItem from '../ListItem';
 
@@ -20,7 +22,7 @@ const headerLayout = [
  * @param {Object} props props object
  * @param {Object[]} props.roles list of roles
  * @param {boolean} props.loading loading state of roles list
- * @param {Function} props.onEdit callaback invoked on edit role
+ * @param {Function} props.onEdit callback invoked on edit role
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -38,6 +40,20 @@ const RoleList = ({ roles, loading, onEdit }) => (
           name={role.name}
           description={role.description}
           onEdit={() => onEdit(role)}
+          onArchive={() =>
+            deleteRole(
+              role._id, // eslint-disable-line
+              () => {
+                notifySuccess('Role was archived successfully');
+              },
+              () => {
+                notifyError(
+                  `An Error occurred while archiving role please contact
+                   system administrator`
+                );
+              }
+            )
+          }
         />
       )}
     />
