@@ -9,7 +9,6 @@ import { Input, Col, Row, Button, Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import RoleFilters from './Filters';
-import RolesActionBar from './ActionBar';
 import RoleList from './List';
 import RoleForm from './Form';
 import './styles.css';
@@ -34,6 +33,8 @@ class Roles extends Component {
     showForm: PropTypes.bool.isRequired,
     posting: PropTypes.bool.isRequired,
     loading: PropTypes.bool.isRequired,
+    total: PropTypes.number.isRequired,
+    page: PropTypes.number.isRequired,
     role: PropTypes.shape({
       name: PropTypes.string,
       abbreviation: PropTypes.string,
@@ -46,8 +47,6 @@ class Roles extends Component {
         description: PropTypes.string,
       })
     ).isRequired,
-    total: PropTypes.number.isRequired,
-    page: PropTypes.number.isRequired,
   };
 
   static defaultProps = {
@@ -152,7 +151,7 @@ class Roles extends Component {
   };
 
   render() {
-    const { roles, loading, total, page, showForm, posting, role } = this.props;
+    const { roles, loading, showForm, posting, page, total, role } = this.props;
     const { showFilters, isEditForm } = this.state;
     return (
       <div className="RoleList">
@@ -162,6 +161,7 @@ class Roles extends Component {
               size="large"
               placeholder="Search for roles here ..."
               onChange={this.searchRoles}
+              allowClear
             />
             {/* end search input component */}
           </Col>
@@ -179,15 +179,16 @@ class Roles extends Component {
           </Col>
           {/* end primary actions */}
         </Row>
-        {/* list action bar */}
-        <RolesActionBar
+
+        {/* list starts */}
+        <RoleList
+          roles={roles}
+          loading={loading}
+          onEdit={this.handleEdit}
           total={total}
           page={page}
           onFilter={this.openFiltersModal}
         />
-        {/* end list action bar */}
-        {/* list starts */}
-        <RoleList roles={roles} loading={loading} onEdit={this.handleEdit} />
         {/* end list */}
 
         {/* filter modal */}
