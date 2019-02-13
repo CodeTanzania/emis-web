@@ -10,14 +10,14 @@ const { TextArea } = Input;
 /**
  * @class
  * @name NotificationForm
- * @description Render Contacts notification form component
+ * @description Render Agencies notification form component
  *
  * @version 0.1.0
  * @since 0.1.0
  */
 class NotificationForm extends Component {
   static propTypes = {
-    recipients: PropTypes.arrayOf(
+    selectedAgencies: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string,
         title: PropTypes.string,
@@ -27,12 +27,7 @@ class NotificationForm extends Component {
       })
     ).isRequired,
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
-    body: PropTypes.string,
     onCancel: PropTypes.func.isRequired,
-  };
-
-  static defaultProps = {
-    body: undefined,
   };
 
   /**
@@ -73,8 +68,7 @@ class NotificationForm extends Component {
     const {
       onCancel,
       form: { getFieldDecorator },
-      recipients,
-      body,
+      selectedAgencies,
     } = this.props;
 
     const formItemLayout = {
@@ -107,7 +101,7 @@ class NotificationForm extends Component {
                 message: 'Please provide at least one recipient',
               },
             ],
-            initialValue: map(recipients, contact => contact._id), // eslint-disable-line
+            initialValue: map(selectedAgencies, contact => contact._id), // eslint-disable-line
           })(
             <SearchableSelectInput
               placeholder="Enter notification recipients"
@@ -115,7 +109,7 @@ class NotificationForm extends Component {
               optionLabel="name"
               optionValue="_id"
               mode="multiple"
-              initialValue={recipients}
+              initialValue={selectedAgencies}
             />
           )}
         </Form.Item>
@@ -123,9 +117,9 @@ class NotificationForm extends Component {
 
         {/* notification subject */}
         <Form.Item {...formItemLayout} label="Subject">
-          {getFieldDecorator('subject', {})(
-            <Input placeholder="Applicable for Email notification only" />
-          )}
+          {getFieldDecorator('subject', {
+            rules: [{ required: true, message: 'Agency subject is required' }],
+          })(<Input placeholder="Applicable for Email notification only" />)}
         </Form.Item>
         {/* notification subject */}
 
@@ -138,7 +132,6 @@ class NotificationForm extends Component {
                 message: 'Please provide notification message',
               },
             ],
-            initialValue: body,
           })(
             <TextArea
               autosize={{ minRows: 6, maxRows: 10 }}

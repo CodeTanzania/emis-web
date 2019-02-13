@@ -11,29 +11,27 @@ import './styles.css';
 // eslint-disable-next-line jsdoc/require-returns
 /**
  * @function
- * @name ContactsActionBar
+ * @name AgenciesActionBar
  * @description Render action bar for actions which are applicable to list content
  *
  * @param {Object} props props object
  * @param {number} props.page current page
- * @param {number} props.total total number of contacts
+ * @param {number} props.total total number of agencies
  * @param {number} props.selectedItemCount total Number of selected items
  * @param {Function} props.onNotify on notify action callback
  * @param {Function} props.onFilter on filter action callback
- * @param {Function} props.onShare on share action callback
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-const ContactsActionBar = ({
+const AgenciesActionBar = ({
   page,
   total,
   selectedItemCount,
   onFilter,
   onNotify,
-  onShare,
 }) => (
-  <div className="ContactsActionBar">
+  <div className="AgenciesActionBar">
     <Row>
       {/* bulk select action */}
       <Col xl={{ span: 1 }} xxl={{ span: 1 }} className="checkbox">
@@ -41,20 +39,20 @@ const ContactsActionBar = ({
       </Col>
       {/* end bulk select action */}
 
-      {/* refresh contacts action */}
+      {/* refresh agencies action */}
       <Col xl={{ span: 1 }} xxl={{ span: 1 }}>
         <Button
           shape="circle"
           icon="reload"
-          title="Refresh contacts"
+          title="Refresh agencies"
           onClick={() =>
             refreshStakeholders(
               () => {
-                notifySuccess('Contacts refreshed successfully');
+                notifySuccess('Agencies refreshed successfully');
               },
               () => {
                 notifyError(
-                  'An Error occurred while refreshing contacts, please contact system administrator!'
+                  'An Error occurred while refreshing agencies, please contact system administrator!'
                 );
               }
             )
@@ -63,7 +61,7 @@ const ContactsActionBar = ({
           size="large"
         />
       </Col>
-      {/* end refresh contacts action */}
+      {/* end refresh agencies action */}
 
       {/* notify action */}
       <Col xl={{ span: 1 }} xxl={{ span: 1 }}>
@@ -72,7 +70,7 @@ const ContactsActionBar = ({
           icon="mail"
           title={`Send Notification to${
             selectedItemCount > 0 ? ' selected' : ''
-          } contacts`}
+          } agencies`}
           className="actionButton"
           size="large"
           onClick={onNotify}
@@ -86,7 +84,7 @@ const ContactsActionBar = ({
           <Button
             type="circle"
             icon="cloud-download"
-            title="Export selected contacts"
+            title="Export selected agencies"
             className="actionButton"
             size="large"
           />
@@ -100,10 +98,9 @@ const ContactsActionBar = ({
           <Button
             type="circle"
             icon="share-alt"
-            title="Share selected contacts"
+            title="Share selected agencies"
             className="actionButton"
             size="large"
-            onClick={onShare}
           />
         )}
       </Col>
@@ -115,7 +112,7 @@ const ContactsActionBar = ({
       {/*     <Button */}
       {/*       type="circle" */}
       {/*       icon="hdd" */}
-      {/*       title="Archive selected contacts" */}
+      {/*       title="Archive selected agencies" */}
       {/*       className="actionButton" */}
       {/*       size="large" */}
       {/*     /> */}
@@ -123,23 +120,23 @@ const ContactsActionBar = ({
       {/* </Col> */}
       {/* end bulk archive action */}
 
-      {/* selected and contacts number summary */}
+      {/* selected and agencies number summary */}
       <Col span={6} xl={{ span: 4, offset: 10 }} xxl={{ span: 5, offset: 10 }}>
         {selectedItemCount > 0 && (
           <span
             style={{ color: '#c5c5c5' }}
           >{`${selectedItemCount} out of `}</span>
         )}
-        <span style={{ color: '#c5c5c5' }}>{`${total} contacts`}</span>
+        <span style={{ color: '#c5c5c5' }}>{`${total} agencies`}</span>
       </Col>
-      {/* end selected and contacts number summary */}
+      {/* end selected and agencies number summary */}
 
       {/* filter action */}
       <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}>
         <Button
           type="circle"
           icon="filter"
-          title="Filter contacts"
+          title="Filter agencies"
           className="actionButton"
           size="large"
           onClick={onFilter}
@@ -164,13 +161,12 @@ const ContactsActionBar = ({
 );
 
 /* props validation */
-ContactsActionBar.propTypes = {
+AgenciesActionBar.propTypes = {
   page: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
   selectedItemCount: PropTypes.number.isRequired,
   onFilter: PropTypes.func.isRequired,
   onNotify: PropTypes.func.isRequired,
-  onShare: PropTypes.func.isRequired,
 };
 
-export default ContactsActionBar;
+export default AgenciesActionBar;

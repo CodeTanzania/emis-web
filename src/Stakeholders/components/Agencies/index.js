@@ -3,15 +3,15 @@ import {
   Connect,
   getStakeholders,
   openStakeholderForm,
-  selectStakeholder,
   searchStakeholders,
+  selectStakeholder,
 } from '@codetanzania/emis-api-states';
 import { Button, Col, Input, Modal, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import ContactForm from './ContactForm';
-import ContactFilters from './Filters';
-import ContactsList from './List';
+import AgencyForm from './AgencyForm';
+import AgencyFilters from './Filters';
+import AgencyList from './List';
 import NotificationForm from './NotificationForm';
 import './styles.css';
 
@@ -19,27 +19,26 @@ const { Search } = Input;
 
 /**
  * @class
- * @name ContactsList
- * @description Render contact list which have search box, actions and contact list
+ * @name Agencies
+ * @description Render agency list which have search box, actions and agency list
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class Contacts extends Component {
+class Agencies extends Component {
   state = {
     showFilters: false,
     isEditForm: false,
     showNotificationForm: false,
-    selectedContacts: [],
-    notificationBody: undefined,
+    selectedAgencies: [],
   };
 
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     posting: PropTypes.bool.isRequired,
-    contacts: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+    agencies: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
       .isRequired,
-    contact: PropTypes.shape({ name: PropTypes.string }),
+    agency: PropTypes.shape({ name: PropTypes.string }),
     page: PropTypes.number.isRequired,
     showForm: PropTypes.bool.isRequired,
     searchQuery: PropTypes.string,
@@ -47,7 +46,7 @@ class Contacts extends Component {
   };
 
   static defaultProps = {
-    contact: null,
+    agency: null,
     searchQuery: undefined,
   };
 
@@ -81,40 +80,40 @@ class Contacts extends Component {
 
   /**
    * @function
-   * @name openContactForm
-   * @description Open contact form
+   * @name openAgencyForm
+   * @description Open agency form
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  openContactForm = () => {
+  openAgencyForm = () => {
     openStakeholderForm();
   };
 
   /**
    * @function
-   * @name openContactForm
-   * @description close contact form
+   * @name openAgencyForm
+   * @description close agency form
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  closeContactForm = () => {
+  closeAgencyForm = () => {
     closeStakeholderForm();
     this.setState({ isEditForm: false });
   };
 
   /**
    * @function
-   * @name searchContacts
-   * @description Search Contacts List based on supplied filter word
+   * @name searchAgencies
+   * @description Search Agencies List based on supplied filter word
    *
    * @param {Object} event - Event instance
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  searchContacts = event => {
+  searchAgencies = event => {
     searchStakeholders(event.target.value);
   };
 
@@ -123,70 +122,30 @@ class Contacts extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} contact contact to be edited
+   * @param {Object} agency agency to be edited
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleEdit = contact => {
-    selectStakeholder(contact);
+  handleEdit = agency => {
+    selectStakeholder(agency);
     this.setState({ isEditForm: true });
     openStakeholderForm();
   };
 
   /**
    * @function
-   * @name handleShare
-   * @description Handle share single contact action
-   *
-   * @param {Object} contact contact to be shared
-   *
-   * @version 0.1.0
-   * @since 0.1.0
-   */
-  handleShare = contact => {
-    const message = `${contact.name}\nMobile: ${contact.mobile}\nEmail: ${
-      contact.email
-    }`;
-
-    this.setState({ notificationBody: message, showNotificationForm: true });
-  };
-
-  /**
-   * @function
-   * @name handleBulkShare
-   * @description Handle share multiple contacts
-   *
-   * @param {Object[]} contacts contacts list to be shared
-   *
-   * @version 0.1.0
-   * @since 0.1.0
-   */
-  handleBulkShare = contacts => {
-    const contactList = contacts.map(
-      contact =>
-        `${contact.name}\nMobile: ${contact.mobile}\nEmail: ${contact.email}`
-    );
-
-    const message = contactList.join('\n\n\n');
-
-    this.setState({ notificationBody: message, showNotificationForm: true });
-  };
-
-  /**
-   * @function
    * @name openNotificationForm
-   * @description Handle on notify contacts
+   * @description Handle on notify agencies
    *
-   * @param {Object[]} contacts List of contacts selected to be notified
+   * @param {Object[]} agencies List of agencies selected to be notified
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  openNotificationForm = contacts => {
-    console.log(contacts);
+  openNotificationForm = agencies => {
     this.setState({
-      selectedContacts: contacts,
+      selectedAgencies: agencies,
       showNotificationForm: true,
     });
   };
@@ -194,7 +153,7 @@ class Contacts extends Component {
   /**
    * @function
    * @name closeNotificationForm
-   * @description Handle on notify contacts
+   * @description Handle on notify agencies
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -215,22 +174,10 @@ class Contacts extends Component {
     this.setState({ isEditForm: false });
   };
 
-  /**
-   * @function
-   * @name handleAfterCloseNotificationForm
-   * @description Perform post close notification form cleanups
-   *
-   * @version 0.1.0
-   * @since 0.1.0
-   */
-  handleAfterCloseNotificationForm = () => {
-    this.setState({ notificationBody: undefined });
-  };
-
   render() {
     const {
-      contacts,
-      contact,
+      agencies,
+      agency,
       loading,
       posting,
       page,
@@ -242,18 +189,17 @@ class Contacts extends Component {
       showFilters,
       isEditForm,
       showNotificationForm,
-      selectedContacts,
-      notificationBody,
+      selectedAgencies,
     } = this.state;
     return (
-      <div className="ContactsList">
+      <div className="Agencies">
         <Row>
           <Col span={12}>
             {/* search input component */}
             <Search
               size="large"
-              placeholder="Search for focal persons here ..."
-              onChange={this.searchContacts}
+              placeholder="Search for agencies here ..."
+              onChange={this.searchAgencies}
               allowClear
               value={searchQuery}
             />
@@ -279,77 +225,73 @@ class Contacts extends Component {
               type="primary"
               icon="plus"
               size="large"
-              title="Add New Focal Person"
-              onClick={this.openContactForm}
+              title="Add New Agency"
+              onClick={this.openAgencyForm}
             >
-              New Focal Person
+              New Agency
             </Button>
           </Col>
           {/* end primary actions */}
         </Row>
 
         {/* list starts */}
-        <ContactsList
+        <AgencyList
           total={total}
           page={page}
-          contacts={contacts}
+          agencies={agencies}
           loading={loading}
           onEdit={this.handleEdit}
           onFilter={this.openFiltersModal}
           onNotify={this.openNotificationForm}
-          onShare={this.handleShare}
-          onBulkShare={this.handleBulkShare}
         />
         {/* end list */}
 
         {/* filter modal */}
         <Modal
-          title="Filter Focal Persons"
+          title="Filter Agencies"
           visible={showFilters}
           onCancel={this.closeFiltersModal}
           footer={null}
           destroyOnClose
           maskClosable={false}
         >
-          <ContactFilters onCancel={this.closeFiltersModal} />
+          <AgencyFilters onCancel={this.closeFiltersModal} />
         </Modal>
         {/* end filter modal */}
 
         {/* Notification Modal modal */}
         <Modal
-          title="Notify Focal Persons"
+          title="Notify Agencies"
           visible={showNotificationForm}
           onCancel={this.closeNotificationForm}
           footer={null}
           destroyOnClose
           maskClosable={false}
           width="40%"
-          afterClose={this.handleAfterCloseNotificationForm}
         >
           <NotificationForm
             onCancel={this.closeNotificationForm}
-            recipients={selectedContacts}
-            body={notificationBody}
+            selectedAgencies={selectedAgencies}
           />
         </Modal>
         {/* end Notification modal */}
 
         {/* create/edit form modal */}
         <Modal
-          title={isEditForm ? 'Edit Focal Person' : 'Add New Focal Person'}
+          title={isEditForm ? 'Edit Agency' : 'Add New Agency'}
           visible={showForm}
           width="50%"
           footer={null}
-          onCancel={this.closeContactForm}
+          onCancel={this.closeAgencyForm}
           destroyOnClose
           maskClosable={false}
           afterClose={this.handleAfterCloseForm}
         >
-          <ContactForm
+          <AgencyForm
             posting={posting}
             isEditForm={isEditForm}
-            contact={contact}
-            onCancel={this.closeContactForm}
+            agency={agency}
+            onCancel={this.closeAgencyForm}
           />
         </Modal>
         {/* end create/edit form modal */}
@@ -358,9 +300,9 @@ class Contacts extends Component {
   }
 }
 
-export default Connect(Contacts, {
-  contacts: 'stakeholders.list',
-  contact: 'stakeholders.selected',
+export default Connect(Agencies, {
+  agencies: 'stakeholders.list',
+  agency: 'stakeholders.selected',
   loading: 'stakeholders.loading',
   posting: 'stakeholders.posting',
   page: 'stakeholders.page',

@@ -12,10 +12,11 @@ import ContactsListItem from '../ListItem';
 
 /* constants */
 const headerLayout = [
-  { span: 5, header: 'Name', offset: 1 },
-  { span: 6, header: 'Role' },
-  { span: 4, header: 'Mobile Number' },
-  { span: 4, header: 'Email Address' },
+  { span: 4, header: 'Name', offset: 1 },
+  { span: 5, header: 'Role' },
+  { span: 4, header: 'Area' },
+  { span: 3, header: 'Mobile Number' },
+  { span: 3, header: 'Email Address' },
 ];
 
 /**
@@ -37,6 +38,8 @@ class ContactsList extends Component {
     onEdit: PropTypes.func.isRequired,
     onFilter: PropTypes.func.isRequired,
     onNotify: PropTypes.func.isRequired,
+    onShare: PropTypes.func.isRequired,
+    onBulkShare: PropTypes.func.isRequired,
   };
 
   state = {
@@ -118,6 +121,8 @@ class ContactsList extends Component {
       onEdit,
       onFilter,
       onNotify,
+      onShare,
+      onBulkShare,
     } = this.props;
     const { selectedContacts } = this.state;
     const selectedContactsCount = this.state.selectedContacts.length;
@@ -134,6 +139,9 @@ class ContactsList extends Component {
           }}
           selectedItemCount={selectedContactsCount}
           onFilterByStatus={this.handleFilterByStatus}
+          onShare={() => {
+            onBulkShare(selectedContacts);
+          }}
         />
         {/* end action bar */}
 
@@ -149,8 +157,9 @@ class ContactsList extends Component {
             <ContactsListItem
               key={contact._id} // eslint-disable-line
               abbreviation={contact.abbreviation}
+              location={contact.location.name}
               name={contact.name}
-              title={contact.role ? contact.role.name : 'N/A'}
+              role={contact.role ? contact.role.name : 'N/A'}
               email={contact.email}
               mobile={contact.mobile}
               isSelected={
@@ -177,6 +186,9 @@ class ContactsList extends Component {
                   }
                 )
               }
+              onShare={() => {
+                onShare(contact);
+              }}
             />
           )}
         />

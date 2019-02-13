@@ -9,22 +9,21 @@ const { confirm } = Modal;
 
 /**
  * @class
- * @name ContactsListItem
- * @description Single contact list item component. Render single contact details
+ * @name AgencyListItem
+ * @description Single agency list item component. Render single agency details
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class ContactsListItem extends Component {
+class AgencyListItem extends Component {
   state = {
     isHovered: false,
   };
 
   static propTypes = {
     abbreviation: PropTypes.string.isRequired,
-    location: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    role: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     mobile: PropTypes.string.isRequired,
     onArchive: PropTypes.func.isRequired,
@@ -32,7 +31,6 @@ class ContactsListItem extends Component {
     isSelected: PropTypes.bool.isRequired,
     onSelectItem: PropTypes.func.isRequired,
     onDeselectItem: PropTypes.func.isRequired,
-    onShare: PropTypes.func.isRequired,
   };
 
   /**
@@ -84,7 +82,7 @@ class ContactsListItem extends Component {
   /**
    * @function
    * @name showArchiveConfirm
-   * @description show confirm modal before archiving a contact
+   * @description show confirm modal before archiving a agency
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -103,16 +101,7 @@ class ContactsListItem extends Component {
   };
 
   render() {
-    const {
-      abbreviation,
-      name,
-      role,
-      location,
-      email,
-      mobile,
-      onEdit,
-      onShare,
-    } = this.props;
+    const { abbreviation, name, title, email, mobile, onEdit } = this.props;
     const { isHovered } = this.state;
     const { isSelected } = this.props;
     const avatarBackground = randomColor();
@@ -142,35 +131,33 @@ class ContactsListItem extends Component {
 
     return (
       <div
-        className="ContactsListItem"
+        className="AgencyListItem"
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
         <Row>
           <Col span={1}>{sideComponent}</Col>
-          <Col span={4}>{name}</Col>
-          <Col span={5}>{role}</Col>
-          <Col span={4}>{location}</Col>
-          <Col span={3}>{mobile}</Col>
-          <Col span={3}>{email}</Col>
+          <Col span={5}>{name}</Col>
+          <Col span={6}>{title}</Col>
+          <Col span={4}>{mobile}</Col>
+          <Col span={4}>{email}</Col>
           <Col span={3}>
             {isHovered && (
               <Fragment>
                 <Icon
                   type="edit"
-                  title="Update Contact"
+                  title="Update Agency"
                   className="actionIcon"
                   onClick={onEdit}
                 />
                 <Icon
                   type="share-alt"
-                  title="Share Contact"
+                  title="Share Agency"
                   className="actionIcon"
-                  onClick={onShare}
                 />
                 <Icon
                   type="database"
-                  title="Archive Contact"
+                  title="Archive Agency"
                   className="actionIcon"
                   onClick={this.showArchiveConfirm}
                 />
@@ -183,4 +170,4 @@ class ContactsListItem extends Component {
   }
 }
 
-export default ContactsListItem;
+export default AgencyListItem;
