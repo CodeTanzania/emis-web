@@ -1,8 +1,10 @@
-import { Avatar, Checkbox, Col, Icon, Row } from 'antd';
+import { Avatar, Checkbox, Col, Icon, Row, Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
-import toUpper from 'lodash/toUpper';
+import randomColor from 'randomcolor';
 import './styles.css';
+
+const { confirm } = Modal;
 
 /**
  * @class
@@ -24,6 +26,9 @@ class RoleListItem extends Component {
     description: PropTypes.string.isRequired,
     onEdit: PropTypes.func.isRequired,
     onArchive: PropTypes.func.isRequired,
+    isSelected: PropTypes.bool.isRequired,
+    onSelectItem: PropTypes.func.isRequired,
+    onDeselectItem: PropTypes.func.isRequired,
   };
 
   /**
@@ -50,9 +55,78 @@ class RoleListItem extends Component {
     this.setState({ isHovered: false });
   };
 
+  /**
+   * @function
+   * @name handleToggleSelect
+   * @description Handle Toggling List Item checkbox
+   *
+   * @param {Object} event - Event object
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleToggleSelect = event => {
+    const { isSelected } = this.state;
+    const { onSelectItem, onDeselectItem } = this.props;
+
+    this.setState({ isSelected: !isSelected });
+    if (event.target.checked) {
+      onSelectItem();
+    } else {
+      onDeselectItem();
+    }
+  };
+
+  /**
+   * @function
+   * @name showArchiveConfirm
+   * @description show confirm modal before archiving a role
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  showArchiveConfirm = () => {
+    const { name, onArchive } = this.props;
+    confirm({
+      title: `Are you sure you want to archive ${name} ?`,
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        onArchive();
+      },
+    });
+  };
+
   render() {
-    const { abbreviation, name, description, onEdit, onArchive } = this.props;
+    const { abbreviation, name, description, onEdit } = this.props;
     const { isHovered } = this.state;
+    const { isSelected } = this.props;
+    let sideComponent = null;
+    const avatarBackground = randomColor();
+
+    if (isSelected) {
+      sideComponent = (
+        <Checkbox
+          className="Checkbox"
+          onChange={this.handleToggleSelect}
+          checked={isSelected}
+        />
+      );
+    } else {
+      sideComponent = isHovered ? (
+        <Checkbox
+          className="Checkbox"
+          onChange={this.handleToggleSelect}
+          checked={isSelected}
+        />
+      ) : (
+        <Avatar style={{ backgroundColor: avatarBackground }}>
+          {abbreviation}
+        </Avatar>
+      );
+    }
+
     return (
       <div
         className="RoleListItem"
@@ -60,13 +134,7 @@ class RoleListItem extends Component {
         onMouseLeave={this.handleMouseLeave}
       >
         <Row>
-          <Col span={1}>
-            {isHovered ? (
-              <Checkbox className="Checkbox" />
-            ) : (
-              <Avatar>{toUpper(name.charAt(0))}</Avatar>
-            )}
-          </Col>
+          <Col span={1}>{sideComponent}</Col>
           <Col span={7}>{name}</Col>
           <Col span={3}>{abbreviation}</Col>
           <Col span={10}>{description}</Col>
@@ -83,7 +151,7 @@ class RoleListItem extends Component {
                   type="database"
                   title="Archive Role"
                   className="actionIcon"
-                  onClick={onArchive}
+                  onClick={this.showArchiveConfirm}
                 />
               </Fragment>
             )}
