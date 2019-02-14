@@ -40,6 +40,7 @@ class RoleList extends Component {
     total: PropTypes.number.isRequired,
     page: PropTypes.number.isRequired,
     onFilter: PropTypes.func.isRequired,
+    onNotify: PropTypes.func.isRequired,
   };
 
   state = {
@@ -85,7 +86,15 @@ class RoleList extends Component {
   };
 
   render() {
-    const { roles, loading, page, total, onEdit, onFilter } = this.props;
+    const {
+      roles,
+      loading,
+      page,
+      total,
+      onEdit,
+      onFilter,
+      onNotify,
+    } = this.props;
     const { selectedRoles } = this.state;
     const selectedRolesCount = this.state.selectedRoles.length;
     return (
@@ -96,6 +105,9 @@ class RoleList extends Component {
           page={page}
           onFilter={onFilter}
           selectedItemCount={selectedRolesCount}
+          onNotify={() => {
+            onNotify(selectedRoles);
+          }}
         />
         {/* end list action bar */}
         <RoleListHeader headerLayout={headerLayout} />
@@ -123,6 +135,7 @@ class RoleList extends Component {
                 deleteRole(
                   role._id, // eslint-disable-line
                   () => {
+                    console.log(role._id);// eslint-disable-line
                     notifySuccess('Role was archived successfully');
                   },
                   () => {

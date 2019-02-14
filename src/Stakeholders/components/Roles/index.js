@@ -11,6 +11,7 @@ import React, { Component } from 'react';
 import RoleFilters from './Filters';
 import RoleList from './List';
 import RoleForm from './Form';
+import NotificationForm from './NotificationForm';
 import './styles.css';
 
 const { Search } = Input;
@@ -27,6 +28,9 @@ class Roles extends Component {
   state = {
     showFilters: false,
     isEditForm: false,
+    showNotificationForm: false,
+    selectedRoles: [],
+    notificationBody: undefined,
   };
 
   static propTypes = {
@@ -140,6 +144,35 @@ class Roles extends Component {
 
   /**
    * @function
+   * @name openNotificationForm
+   * @description Handle on notify contacts
+   *
+   * @param {Object[]} role List of contacts selected to be notified
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openNotificationForm = role => {
+    this.setState({
+      selectedRoles: role,
+      showNotificationForm: true,
+    });
+  };
+
+  /**
+   * @function
+   * @name closeNotificationForm
+   * @description Handle on notify contacts
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeNotificationForm = () => {
+    this.setState({ showNotificationForm: false });
+  };
+
+  /**
+   * @function
    * @name handleAfterCloseForm
    * @description Performs after close form cleanups
    *
@@ -152,7 +185,13 @@ class Roles extends Component {
 
   render() {
     const { roles, loading, showForm, posting, page, total, role } = this.props;
-    const { showFilters, isEditForm } = this.state;
+    const {
+      showFilters,
+      isEditForm,
+      showNotificationForm,
+      selectedRoles,
+      notificationBody,
+    } = this.state;
     return (
       <div className="RoleList">
         <Row>
@@ -188,6 +227,7 @@ class Roles extends Component {
           total={total}
           page={page}
           onFilter={this.openFiltersModal}
+          onNotify={this.openNotificationForm}
         />
         {/* end list */}
 
@@ -203,6 +243,25 @@ class Roles extends Component {
           <RoleFilters onCancel={this.closeFiltersModal} />
         </Modal>
         {/* end filter modal */}
+
+        {/* Notification Modal modal */}
+        <Modal
+          title="Notify according to roles"
+          visible={showNotificationForm}
+          onCancel={this.closeNotificationForm}
+          footer={null}
+          destroyOnClose
+          maskClosable={false}
+          width="40%"
+          afterClose={this.handleAfterCloseNotificationForm}
+        >
+          <NotificationForm
+            onCancel={this.closeNotificationForm}
+            recipients={selectedRoles}
+            body={notificationBody}
+          />
+        </Modal>
+        {/* end Notification modal */}
 
         {/* create/edit form modal */}
         <Modal

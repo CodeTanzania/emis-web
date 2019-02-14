@@ -16,6 +16,7 @@ import './styles.css';
  * @param {number} props.total total number of roles
  * @param {number} props.selectedItemCount total Number of selected items
  * @param {Function} props.onFilter callback to be invoked on filter action
+ * @param {Function} props.onNotify on notify action callback
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -25,6 +26,7 @@ const RolesActionBar = ({
   total,
   selectedItemCount,
   // onFilter,
+  onNotify,
 }) => (
   <div className="RolesActionBar">
     <Row>
@@ -63,6 +65,7 @@ const RolesActionBar = ({
             title="Send Notification"
             className="actionButton"
             size="large"
+            onClick={onNotify}
           />
         )}
       </Col>
@@ -111,6 +114,7 @@ RolesActionBar.propTypes = {
   page: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
   selectedItemCount: PropTypes.number.isRequired,
+  onNotify: PropTypes.func.isRequired,
   // onFilter: PropTypes.func.isRequired,
 };
 
