@@ -230,10 +230,9 @@ const userMenu = (
 );
 
 /**
- * Render base layout for EMIS dashboard
- *
  * @function
  * @name BaseLayout
+ * @description Render base layout for EMIS dashboard
  *
  * @version 0.1.0
  * @since 0.1.0

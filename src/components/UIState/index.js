@@ -4,13 +4,15 @@ import React from 'react';
 import './styles.css';
 
 /**
- * Empty/ Error state component
+ * @function
+ * @name UIState
+ * @description Empty/ Error state component
  *
- * @param {Object} props
- * @param {string} props.icon
- * @param {string} props.description
- * @param {string} props.buttonLabel
- * @param {Function} props.onClick
+ * @param {Object} props props object
+ * @param {string} props.icon path to state icon
+ * @param {string} props.description state description
+ * @param {string} props.buttonLabel state button label
+ * @param {Function} props.onClick state button onClick callback
  *
  * @version 0.1.0
  * @since 0.1.0
