@@ -11,8 +11,8 @@ const { Option } = Select;
 const { TextArea } = Input;
 const eventTitle =
   'The text denoting the type of the subject event of the alert message';
-const headlineTitle =
-  'A brief human-readable headline.  it SHOULD be made as direct and actionable as possible while remaining short. 160 characters MAY be a useful target limit for headline length.';
+const headlineTitle = `A brief human-readable headline.  it SHOULD be made as direct and actionable
+   as possible while remaining short. 160 characters MAY be a useful target limit for headline length.`;
 const areaTitle = 'A text description of the affected area(s).';
 const onSetTitle =
   'The expected time of the beginning of the subject event of the alert message';
@@ -29,12 +29,21 @@ const urgencyTitle =
 const severityTitle =
   'The code denoting the severity of the subject event of the alert message';
 const certaintyTitle =
-  'The code denoting the certainty ofthe subject event of the alert message';
+  'The code denoting the certainty of the subject event of the alert message';
 const typeTitle = 'The code denoting the nature of the alert message';
 const responseTypetitle =
   'The code denoting the type of action recommended for the target audience';
 const alertSourceTitle =
   'The human-readable name of the agency or authority issuing this alert.';
+
+/**
+ * @class
+ * @name AlertForm
+ * @description  form for creating a new alert
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
 class AlertForm extends Component {
   static propTypes = {
     alertSchema: PropTypes.shape({
@@ -84,6 +93,16 @@ class AlertForm extends Component {
     getFeatures();
   }
 
+  /**
+   * @function
+   * @name handleSubmit
+   * @description  handle alert form submission
+   *
+   * @param {Object} e event object
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleSubmit = e => {
     e.preventDefault();
 
@@ -151,6 +170,16 @@ class AlertForm extends Component {
     });
   };
 
+  // eslint-disable-next-line jsdoc/require-returns
+  /**
+   * @function
+   * @name renderSelectOptions
+   * @description  display select options
+   * @param {Array} options select options
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   renderSelectOptions = options =>
     options.map(option => (
       <Option key={option} value={option}>
@@ -158,6 +187,16 @@ class AlertForm extends Component {
       </Option>
     ));
 
+  // eslint-disable-next-line jsdoc/require-returns
+  /**
+   * @function
+   * @name renderAreaOptions
+   * @description  display area options
+   * @param {Array} options area options
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   renderAreaOptions = options =>
     options.map(({ name, _id: id }) => (
       <Option key={id} value={name}>
