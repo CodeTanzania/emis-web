@@ -2,7 +2,7 @@ import {
   paginateStakeholders,
   refreshStakeholders,
 } from '@codetanzania/emis-api-states';
-import { Button, Checkbox, Col, Pagination, Row } from 'antd';
+import { Button, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { notifyError, notifySuccess } from '../../../../util';
@@ -35,12 +35,6 @@ const ContactsActionBar = ({
 }) => (
   <div className="ContactsActionBar">
     <Row>
-      {/* bulk select action */}
-      <Col xl={{ span: 1 }} xxl={{ span: 1 }} className="checkbox">
-        <Checkbox />
-      </Col>
-      {/* end bulk select action */}
-
       {/* refresh contacts action */}
       <Col xl={{ span: 1 }} xxl={{ span: 1 }}>
         <Button
@@ -124,7 +118,7 @@ const ContactsActionBar = ({
       {/* end bulk archive action */}
 
       {/* selected and contacts number summary */}
-      <Col span={6} xl={{ span: 4, offset: 10 }} xxl={{ span: 5, offset: 10 }}>
+      <Col span={6} xl={{ span: 4, offset: 11 }} xxl={{ span: 5, offset: 11 }}>
         {selectedItemCount > 0 && (
           <span
             style={{ color: '#c5c5c5' }}

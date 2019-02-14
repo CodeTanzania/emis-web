@@ -1,10 +1,14 @@
-import { Col, Row } from 'antd';
+import { Col, Row, Checkbox } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
 import './styles.css';
 
 const ListHeader = ({ headerLayout }) => (
   <Row className="ListHeader">
+    <Col xl={{ span: 1 }} xxl={{ span: 1 }}>
+      <Checkbox className="checkbox" />
+    </Col>
+
     {headerLayout.map(item => (
       <Col key={item.header} {...item}>
         <h4 className="title">{item.header}</h4>
