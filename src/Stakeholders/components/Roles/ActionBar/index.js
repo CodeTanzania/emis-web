@@ -1,5 +1,5 @@
-import { refreshRoles, paginateRoles } from '@codetanzania/emis-api-states';
-import { Button, Checkbox, Col, Pagination, Row } from 'antd';
+import { paginateRoles, refreshRoles } from '@codetanzania/emis-api-states';
+import { Button, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { notifyError, notifySuccess } from '../../../../util';
@@ -28,10 +28,6 @@ const RolesActionBar = ({
 }) => (
   <div className="RolesActionBar">
     <Row>
-      <Col span={1} xl={1} className="checkbox">
-        <Checkbox />
-      </Col>
-
       <Col span={1} xl={1}>
         <Button
           shape="circle"

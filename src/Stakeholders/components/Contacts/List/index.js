@@ -12,7 +12,7 @@ import ContactsListItem from '../ListItem';
 
 /* constants */
 const headerLayout = [
-  { span: 4, header: 'Name', offset: 1 },
+  { span: 4, header: 'Name' },
   { span: 5, header: 'Role' },
   { span: 4, header: 'Area' },
   { span: 3, header: 'Mobile Number' },
