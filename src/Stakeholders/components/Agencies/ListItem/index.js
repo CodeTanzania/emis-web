@@ -1,31 +1,33 @@
 import { Avatar, Checkbox, Col, Icon, Row, Modal } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
 import randomColor from 'randomcolor';
+import React, { Component, Fragment } from 'react';
 import './styles.css';
 
+/* constants */
 const { confirm } = Modal;
 
 /**
  * @class
- * @name RoleListItem
- * @description Single role list item component. Render single role details
+ * @name AgencyListItem
+ * @description Single agency list item component. Render single agency details
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class RoleListItem extends Component {
+class AgencyListItem extends Component {
   state = {
     isHovered: false,
   };
 
-  /* props validation */
   static propTypes = {
     abbreviation: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    onEdit: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    mobile: PropTypes.string.isRequired,
     onArchive: PropTypes.func.isRequired,
+    onEdit: PropTypes.func.isRequired,
     isSelected: PropTypes.bool.isRequired,
     onSelectItem: PropTypes.func.isRequired,
     onDeselectItem: PropTypes.func.isRequired,
@@ -34,7 +36,7 @@ class RoleListItem extends Component {
   /**
    * @function
    * @name handleMouseEnter
-   * @description Handle on mouse enter role list item
+   * @description Handle on MouseEnter ListItem event
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -45,8 +47,8 @@ class RoleListItem extends Component {
 
   /**
    * @function
-   * @name handleMouseLeave
-   * @description Handle on mouse leave role list item
+   * @name handleMouseEnter
+   * @description Handle on MouseLeave ListItem event
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -80,7 +82,7 @@ class RoleListItem extends Component {
   /**
    * @function
    * @name showArchiveConfirm
-   * @description show confirm modal before archiving a role
+   * @description show confirm modal before archiving a agency
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -99,11 +101,11 @@ class RoleListItem extends Component {
   };
 
   render() {
-    const { abbreviation, name, description, onEdit } = this.props;
+    const { abbreviation, name, title, email, mobile, onEdit } = this.props;
     const { isHovered } = this.state;
     const { isSelected } = this.props;
-    let sideComponent = null;
     const avatarBackground = randomColor();
+    let sideComponent = null;
 
     if (isSelected) {
       sideComponent = (
@@ -129,27 +131,33 @@ class RoleListItem extends Component {
 
     return (
       <div
-        className="RoleListItem"
+        className="AgencyListItem"
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
         <Row>
           <Col span={1}>{sideComponent}</Col>
-          <Col span={7}>{name}</Col>
-          <Col span={3}>{abbreviation}</Col>
-          <Col span={10}>{description}</Col>
+          <Col span={5}>{name}</Col>
+          <Col span={6}>{title}</Col>
+          <Col span={4}>{mobile}</Col>
+          <Col span={4}>{email}</Col>
           <Col span={3}>
             {isHovered && (
               <Fragment>
                 <Icon
                   type="edit"
-                  title="Update Role"
+                  title="Update Agency"
                   className="actionIcon"
                   onClick={onEdit}
                 />
                 <Icon
+                  type="share-alt"
+                  title="Share Agency"
+                  className="actionIcon"
+                />
+                <Icon
                   type="database"
-                  title="Archive Role"
+                  title="Archive Agency"
                   className="actionIcon"
                   onClick={this.showArchiveConfirm}
                 />
@@ -162,4 +170,4 @@ class RoleListItem extends Component {
   }
 }
 
-export default RoleListItem;
+export default AgencyListItem;
