@@ -11,11 +11,10 @@ import ProceduresListHeader from '../ListHeader';
 import ProceduresListItem from '../ListItem';
 
 /**
- * Render ProceduresList component which have actionBar, procedures header and
- * procedures list components
- *
  * @class
  * @name ProceduresList
+ * @description Render ProceduresList component which have actionBar, procedures header and
+ * procedures list components
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -37,10 +36,11 @@ class ProceduresList extends Component {
   };
 
   /**
-   * Handle select a single procedure action
-   *
    * @function
    * @name handleOnSelectProcedure
+   * @description Handle select a single procedure action
+   *
+   * @param {Object} procedure procedure object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -53,10 +53,9 @@ class ProceduresList extends Component {
   };
 
   /**
-   * Handle selected all procedures actions
-   *
    * @function
    * @name handleSelectAll
+   * @description Handle selected all procedures actions
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -64,10 +63,9 @@ class ProceduresList extends Component {
   handleSelectAll = () => {};
 
   /**
-   * Handle filter procedures by status action
-   *
    * @function
    * @name handleFilterByStatus
+   * @description Handle filter procedures by status action
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -83,10 +81,13 @@ class ProceduresList extends Component {
   };
 
   /**
-   * Handle deselect a single procedure action
-   *
    * @function
    * @name handleOnDeselectProcedure
+   * @description Handle deselect a single procedure action
+   *
+   * @param {Object} procedure procedure object
+   *
+   * @returns {undefined} undefined
    *
    * @version 0.1.0
    * @since 0.1.0

@@ -6,19 +6,9 @@ import { Link, withRouter } from 'react-router-dom';
 import './styles.css';
 
 /**
- * Single activity list item component. Render single activity details
- *
  * @class
  * @name ActivitiesListItem
- *
- * @param {Object} props
- * @param {string} props.code
- * @param {string} props.color
- * @param {string} props.description
- * @param {string} props.id
- * @param {string} props.incidentType
- * @param {string} props.name
- * @param {string} props.phase
+ * @description Single activity list item component. Render single activity details
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -44,14 +34,40 @@ class ActivitiesListItem extends Component {
     onDeselectItem: PropTypes.func.isRequired,
   };
 
+  /**
+   * @function
+   * @name handleMouseEnter
+   * @description Handle mouse enter into a list item event
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleMouseEnter = () => {
     this.setState({ isHovered: true });
   };
 
+  /**
+   * @function
+   * @name handleMouseLeave
+   * @description Handle mouse leave from list item event
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleMouseLeave = () => {
     this.setState({ isHovered: false });
   };
 
+  /**
+   * @function
+   * @name handleToggleSelect
+   * @description Handle toggle list item checkbox
+   *
+   * @param {Object} event checkbox toggle event
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleToggleSelect = event => {
     const { isSelected } = this.state;
     const { onSelectItem, onDeselectItem } = this.props;

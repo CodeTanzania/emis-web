@@ -4,6 +4,15 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { notifyError, notifySuccess } from '../../../../util';
 
+// eslint-disable-next-line jsdoc/require-returns
+/**
+ * @class
+ * @name AlertSourcesActionBar
+ * @description  Render form for creating a new alert source
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
 class AlertSourceForm extends Component {
   static propTypes = {
     alertSource: PropTypes.shape({
@@ -19,6 +28,18 @@ class AlertSourceForm extends Component {
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
   };
 
+  // eslint-disable-next-line jsdoc/require-returns
+  /**
+   * @function
+   * @name handleSubmit
+   * @description  call back function to handle submit action
+   *
+   * @param {Object} e event object
+   *
+   * @returns {undefined} does not return anything
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleSubmit = e => {
     e.preventDefault();
 
@@ -91,18 +112,18 @@ class AlertSourceForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* Alert Source name */}
-        <Form.Item {...formItemLayout} label="Organisation name">
+        <Form.Item {...formItemLayout} label="Organization name">
           {getFieldDecorator('name', {
             initialValue: isEditForm ? alertSource.name : undefined,
             rules: [
               {
                 required: true,
-                message: ' Alert Source organisation name is required',
+                message: ' Alert Source organization name is required',
               },
             ],
-          })(<Input placeholder="e.g Tanzania Meteorogical Agency" />)}
+          })(<Input placeholder="e.g Tanzania Meteorological Agency" />)}
         </Form.Item>
-        {/* end organisation name */}
+        {/* end organization name */}
 
         {/* Alert source website */}
         <Form.Item {...formItemLayout} label="Website">

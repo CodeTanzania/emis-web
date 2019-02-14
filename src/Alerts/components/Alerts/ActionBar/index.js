@@ -5,15 +5,17 @@ import React from 'react';
 import './styles.css';
 import { notifyError, notifySuccess } from '../../../../util';
 
+// eslint-disable-next-line jsdoc/require-returns
 /**
- * Render action bar for actions which are applicable to list content
- *
  * @function
  * @name AlertsActionBar
+ * @description  Render action bar for actions which are applicable
+ * to list content
  *
- * @param {Object} props
- * @param {page} props.page
- * @param {number} props.total
+ * @param {Object} props props object
+ * @param {number} props.page current page
+ * @param {number} props.total total number of alerts
+ * @param {Function} props.onFilter function to filter alerts
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -37,7 +39,8 @@ const AlertsActionBar = ({ page, total, onFilter }) => (
               },
               () => {
                 notifyError(
-                  'An Error occurred while refreshing alerts, please alerts system administrator!'
+                  `An Error occurred while refreshing alerts, please alerts 
+                  system administrator!`
                 );
               }
             )

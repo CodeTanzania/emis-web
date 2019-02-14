@@ -17,10 +17,10 @@ import './styles.css';
 const { Search } = Input;
 
 /**
- * Render Alert Sources module which have search box, actions and source list
- *
  * @class
  * @name AlertSources
+ * @description Render Alert Sources module which have search box
+ * actions and source list
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -65,10 +65,9 @@ class AlertSources extends Component {
   }
 
   /**
-   * Open Alert Sources form
-   *
    * @function
    * @name openForm
+   * @description Open Alert Sources form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -80,10 +79,9 @@ class AlertSources extends Component {
   };
 
   /**
-   * close Alert Sources form
-   *
    * @function
    * @name closeForm
+   * @description close Alert Sources form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -95,10 +93,9 @@ class AlertSources extends Component {
   };
 
   /**
-   * Search Alert Source List based on supplied filter word
-   *
    * @function
    * @name searchAlertSources
+   * @description Search Alert Source List based on supplied filter word
    *
    * @param {Object} event - Event instance
    * @returns {undefined} - Nothing is returned
@@ -111,11 +108,11 @@ class AlertSources extends Component {
   };
 
   /**
-   * Handle on Edit action for list item
-   *
    * @function
    * @name handleEdit
+   * @description Handle on Edit action for list item
    *
+   * @param {Object} alertSource alert source to be edited
    * @version 0.1.0
    * @since 0.1.0
    */
@@ -125,6 +122,14 @@ class AlertSources extends Component {
     openAlertSourceForm();
   };
 
+  /**
+   * @function
+   * @name handleAfterCloseForm
+   * @description handle after form close actions
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleAfterCloseForm = () => {
     this.setState({ isEditForm: false });
   };

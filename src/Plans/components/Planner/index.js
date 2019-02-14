@@ -18,10 +18,9 @@ import './styles.css';
 const { Search } = Input;
 
 /**
- * Render plan list which have search box, actions and plan list
- *
  * @class
  * @name PlansList
+ * @description Render plan list which have search box, actions and plan list
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -54,12 +53,9 @@ class Plans extends Component {
   }
 
   /**
-   * open filters modal by setting it's visible property to false via state
-   *
-   * @function
    * @name openFiltersModal
-   *
-   * @returns {undefined} - Nothing is returned
+   * @description open filters modal by setting it's visible property
+   * to false via state
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -69,12 +65,10 @@ class Plans extends Component {
   };
 
   /**
-   * Close filters modal by setting it's visible property to false via state
-   *
    * @function
    * @name closeFiltersModal
-   *
-   * @returns {undefined} - Nothing is returned
+   * @description Close filters modal by setting it's visible property to false
+   * via state
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -84,12 +78,9 @@ class Plans extends Component {
   };
 
   /**
-   * Open plan form
-   *
    * @function
    * @name openPlanForm
-   *
-   * @returns {undefined} - Nothing is returned
+   * @description Open plan form
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -99,12 +90,9 @@ class Plans extends Component {
   };
 
   /**
-   * close plan form
-   *
    * @function
    * @name openPlanForm
-   *
-   * @returns {undefined} - Nothing is returned
+   * @description close plan form
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -115,13 +103,11 @@ class Plans extends Component {
   };
 
   /**
-   * Search Plans List based on supplied filter word
-   *
    * @function
    * @name searchPlans
+   * @description Search Plans List based on supplied filter word
    *
    * @param {Object} event - Event instance
-   * @returns {undefined} - Nothing is returned
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -131,10 +117,11 @@ class Plans extends Component {
   };
 
   /**
-   * Handle on Edit action for list item
-   *
    * @function
    * @name handleEdit
+   * @description Handle on Edit action for list item
+   *
+   * @param {Object} plan plan object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -146,10 +133,11 @@ class Plans extends Component {
   };
 
   /**
-   * Handle on notify plans
-   *
    * @function
    * @name openNotificationForm
+   * @description Handle on notify plans
+   *
+   * @param {Object[]} plans list of plans objects
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -162,10 +150,9 @@ class Plans extends Component {
   };
 
   /**
-   * Handle on notify plans
-   *
    * @function
    * @name closeNotificationForm
+   * @description Handle on notify plans
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -175,12 +162,9 @@ class Plans extends Component {
   };
 
   /**
-   * Reset isEditForm state to false after closing modal window
-   *
    * @function
    * @name handleAfterCloseForm
-   *
-   * @returns {undefined}
+   * @description Reset isEditForm state to false after closing modal window
    *
    * @version 0.1.0
    * @since 0.1.0

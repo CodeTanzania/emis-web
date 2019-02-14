@@ -6,16 +6,9 @@ import { Link, withRouter } from 'react-router-dom';
 import './styles.css';
 
 /**
- * Single plan list item component. Render single plan details
- *
  * @class
  * @name PlansListItem
- *
- * @param {Object} props
- * @param {string} props.boundary
- * @param {string} props.incidentType
- * @param {string} props.owner
- * @param {string} props.code - Incident Type code
+ * @description Single plan list item component. Render single plan details
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -44,14 +37,40 @@ class PlansListItem extends Component {
     color: undefined,
   };
 
+  /**
+   * @function
+   * @name handleMouseEnter
+   * @description Handle mouse enter list item event
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleMouseEnter = () => {
     this.setState({ isHovered: true });
   };
 
+  /**
+   * @function
+   * @name handleMouseLeave
+   * @description Handle mouse leave list item event
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleMouseLeave = () => {
     this.setState({ isHovered: false });
   };
 
+  /**
+   * @function
+   * @name handleToggleSelect
+   * @description Handle toggle select checkbox for list item
+   *
+   * @param {Object} event Toggle checkbox event object
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleToggleSelect = event => {
     const { isSelected } = this.state;
     const { onSelectItem, onDeselectItem } = this.props;
