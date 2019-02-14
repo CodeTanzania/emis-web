@@ -12,11 +12,10 @@ import PlansListHeader from '../ListHeader';
 import PlansListItem from '../ListItem';
 
 /**
- * Render PlansList component which have actionBar, plans header and
- * plans list components
- *
  * @class
  * @name PlansList
+ * @description Render PlansList component which have actionBar, plans header and
+ * plans list components
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -39,10 +38,11 @@ class PlansList extends Component {
   };
 
   /**
-   * Handle select a single plan action
-   *
    * @function
    * @name handleOnSelectPlan
+   * @description Handle select a single plan action
+   *
+   * @param {Object} plan plan object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -53,10 +53,9 @@ class PlansList extends Component {
   };
 
   /**
-   * Handle selected all plans actions
-   *
    * @function
    * @name handleSelectAll
+   * @description Handle selected all plans actions
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -64,10 +63,9 @@ class PlansList extends Component {
   handleSelectAll = () => {};
 
   /**
-   * Handle filter plans by status action
-   *
    * @function
    * @name handleFilterByStatus
+   * @description Handle filter plans by status action
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -82,6 +80,16 @@ class PlansList extends Component {
     // }
   };
 
+  /**
+   * @function
+   * @name handleToggleLayout
+   * @description Function for switching layout between list and grid plan layout
+   *
+   * @returns {undefined} undefined
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleToggleLayout = () => {
     this.setState(previousState => ({
       isGridLayout: !previousState.isGridLayout,
@@ -93,6 +101,9 @@ class PlansList extends Component {
    *
    * @function
    * @name handleOnDeselectPlan
+   *
+   * @param {Object} plan plan object
+   * @returns {undefined} undefined
    *
    * @version 0.1.0
    * @since 0.1.0
