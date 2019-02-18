@@ -3,6 +3,7 @@ import { List } from 'antd';
 import concat from 'lodash/concat';
 import map from 'lodash/map';
 import remove from 'lodash/remove';
+import uniq from 'lodash/uniq';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import RoleListHeader from '../../../../components/ListHeader';
@@ -40,10 +41,12 @@ class RoleList extends Component {
     total: PropTypes.number.isRequired,
     page: PropTypes.number.isRequired,
     onFilter: PropTypes.func.isRequired,
+    onNotify: PropTypes.func.isRequired,
   };
 
   state = {
     selectedRoles: [],
+    selectedPages: [],
   };
 
   /**
@@ -84,9 +87,67 @@ class RoleList extends Component {
     this.setState({ selectedRoles: selectedList });
   };
 
+  /**
+   * @function
+   * @name handleSelectAll
+   * @description Handle select all contacts actions from current page
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleSelectAll = () => {
+    const { selectedRoles, selectedPages } = this.state;
+    const { roles, page } = this.props;
+    const selectedList = [...selectedRoles, ...roles];
+    const pages = uniq([...selectedPages, page]);
+    this.setState({
+      selectedRoles: selectedList,
+      selectedPages: pages,
+    });
+  };
+
+  /**
+   * @function
+   * @name handleDeselectAll
+   * @description Handle deselect all contacts in a current page
+   *
+   * @returns {undefined} undefined
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleDeselectAll = () => {
+    const { roles, page } = this.props;
+    const { selectedRoles, selectedPages } = this.state;
+    const selectedList = [...selectedRoles];
+    const pages = uniq([...selectedPages]);
+
+    remove(pages, item => item === page);
+
+    roles.forEach(contact => {
+      remove(
+        selectedList,
+        item => item._id === contact._id // eslint-disable-line
+      );
+    });
+
+    this.setState({
+      selectedRoles: selectedList,
+      selectedPages: pages,
+    });
+  };
+
   render() {
-    const { roles, loading, page, total, onEdit, onFilter } = this.props;
-    const { selectedRoles } = this.state;
+    const {
+      roles,
+      loading,
+      page,
+      total,
+      onEdit,
+      onFilter,
+      onNotify,
+    } = this.props;
+    const { selectedRoles, selectedPages } = this.state;
     const selectedRolesCount = this.state.selectedRoles.length;
     return (
       <Fragment>
@@ -96,15 +157,23 @@ class RoleList extends Component {
           page={page}
           onFilter={onFilter}
           selectedItemCount={selectedRolesCount}
+          onNotify={() => {
+            onNotify(selectedRoles);
+          }}
         />
         {/* end list action bar */}
-        <RoleListHeader headerLayout={headerLayout} />
+        <RoleListHeader
+          headerLayout={headerLayout}
+          onSelectAll={this.handleSelectAll}
+          onDeselectAll={this.handleDeselectAll}
+          isBulkSelected={selectedPages.includes(page)}
+        />
         <List
           loading={loading}
           dataSource={roles}
           renderItem={role => (
             <RoleListItem
-              key={role.abbreviation}
+              key={role.name}
               abbreviation={role.abbreviation}
               name={role.name}
               description={role.description}
@@ -123,6 +192,7 @@ class RoleList extends Component {
                 deleteRole(
                   role._id, // eslint-disable-line
                   () => {
+                    console.log(role._id); // eslint-disable-line
                     notifySuccess('Role was archived successfully');
                   },
                   () => {

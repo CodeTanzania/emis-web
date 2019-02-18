@@ -122,7 +122,7 @@ class RoleListItem extends Component {
         />
       ) : (
         <Avatar style={{ backgroundColor: avatarBackground }}>
-          {abbreviation}
+          {name.charAt(0).toUpperCase()}
         </Avatar>
       );
     }
