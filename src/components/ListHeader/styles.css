@@ -7,3 +7,7 @@
 .ListHeader .title {
   font-weight: 600;
 }
+
+.ListHeader .checkbox {
+  padding-left: 8px;
+}

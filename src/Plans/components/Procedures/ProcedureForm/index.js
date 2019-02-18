@@ -16,10 +16,9 @@ import { notifyError, notifySuccess } from '../../../../util';
 const { TextArea } = Input;
 
 /**
- * Render Procedure form for creating and updating procedure procedure details
- *
  * @class
  * @name ProcedureForm
+ * @description Render Procedure form for creating and updating procedure procedure details
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -40,16 +39,17 @@ class ProcedureForm extends Component {
   };
 
   /**
-   * Handle submit form action
-   *
    * @function
    * @name handleSubmit
+   * @description Handle submit form action
+   *
+   * @param {Object} event onSubmit event object
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleSubmit = e => {
-    e.preventDefault();
+  handleSubmit = event => {
+    event.preventDefault();
 
     const {
       form: { validateFieldsAndScroll },

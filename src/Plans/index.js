@@ -41,11 +41,13 @@ const routes = [
 ];
 
 /**
- * Emergency Plans Home page component allow navigation to emergency
- * plans modules
- *
  * @function
  * @name EmergencyPlans
+ * @description Emergency Plans Home page component allow navigation to emergency
+ * plans modules
+ *
+ * @param {Object} props props object
+ * @param {Object} props.match match object inserted by react router
  *
  * @version 0.1.0
  * @since 0.1.0

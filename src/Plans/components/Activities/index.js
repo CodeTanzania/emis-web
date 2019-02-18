@@ -20,10 +20,9 @@ import './styles.css';
 const { Search } = Input;
 
 /**
- * Render activity list which have search box, actions and activity list
- *
  * @class
  * @name ActivitiesList
+ * @description Render activity list which have search box, actions and activity list
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -62,12 +61,9 @@ class Activities extends Component {
   }
 
   /**
-   * Open filters modal by setting it's visible property to false via state
-   *
    * @function
    * @name openFiltersModal
-   *
-   * @returns {undefined} - Nothing is returned
+   * @description Open filters modal by setting it's visible property to false via state
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -77,12 +73,9 @@ class Activities extends Component {
   };
 
   /**
-   * Close filters modal by setting it's visible property to false via state
-   *
    * @function
    * @name closeFiltersModal
-   *
-   * @returns {undefined} - Nothing is returned
+   * @description Close filters modal by setting it's visible property to false via state
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -92,12 +85,9 @@ class Activities extends Component {
   };
 
   /**
-   * Open activity form
-   *
    * @function
    * @name openActivityForm
-   *
-   * @returns {undefined} - Nothing is returned
+   * @description Open activity form
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -107,12 +97,9 @@ class Activities extends Component {
   };
 
   /**
-   * close activity form
-   *
    * @function
    * @name openActivityForm
-   *
-   * @returns {undefined} - Nothing is returned
+   * @description close activity form
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -123,13 +110,11 @@ class Activities extends Component {
   };
 
   /**
-   * Search Activities List based on supplied filter word
-   *
    * @function
    * @name searchActivities
+   * @description Search Activities List based on supplied filter word
    *
    * @param {Object} event - Event instance
-   * @returns {undefined} - Nothing is returned
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -139,11 +124,11 @@ class Activities extends Component {
   };
 
   /**
-   * Handle on Edit action for list item
-   *
    * @function
    * @name handleEdit
+   * @description Handle on Edit action for list item
    *
+   * @param {Object} activity activity object
    * @version 0.1.0
    * @since 0.1.0
    */
@@ -154,10 +139,11 @@ class Activities extends Component {
   };
 
   /**
-   * Handle on notify activities
-   *
    * @function
    * @name openNotificationForm
+   * @description Handle on notify activities
+   *
+   * @param {Object[]} activities activities list
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -170,10 +156,9 @@ class Activities extends Component {
   };
 
   /**
-   * Handle on notify activities
-   *
    * @function
    * @name closeNotificationForm
+   * @description Handle on notify activities
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -183,12 +168,9 @@ class Activities extends Component {
   };
 
   /**
-   * Reset isEditForm state to false when modal is closed
-   *
    * @function
    * @name handleAfterCloseForm
-   *
-   * @returns {undefined}
+   * @description Reset isEditForm state to false when modal is closed
    *
    * @version 0.1.0
    * @since 0.1.0

@@ -20,10 +20,9 @@ import './styles.css';
 const { Search } = Input;
 
 /**
- * Render procedure list which have search box, actions and procedure list
- *
  * @class
  * @name ProceduresList
+ * @description Render procedure list which have search box, actions and procedure list
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -63,12 +62,9 @@ class Procedures extends Component {
   }
 
   /**
-   * open filters modal by setting it's visible property to false via state
-   *
    * @function
    * @name openFiltersModal
-   *
-   * @returns {undefined} - Nothing is returned
+   * @description open filters modal by setting it's visible property to false via state
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -78,12 +74,9 @@ class Procedures extends Component {
   };
 
   /**
-   * Close filters modal by setting it's visible property to false via state
-   *
    * @function
    * @name closeFiltersModal
-   *
-   * @returns {undefined} - Nothing is returned
+   * @description Close filters modal by setting it's visible property to false via state
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -93,12 +86,9 @@ class Procedures extends Component {
   };
 
   /**
-   * Open procedure form
-   *
    * @function
    * @name openProcedureForm
-   *
-   * @returns {undefined} - Nothing is returned
+   * @description Open procedure form
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -108,12 +98,9 @@ class Procedures extends Component {
   };
 
   /**
-   * close procedure form
-   *
    * @function
    * @name openProcedureForm
-   *
-   * @returns {undefined} - Nothing is returned
+   * @description close procedure form
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -124,13 +111,11 @@ class Procedures extends Component {
   };
 
   /**
-   * Search Procedures List based on supplied filter word
-   *
    * @function
    * @name searchProcedures
+   * @description Search Procedures List based on supplied filter word
    *
-   * @param {Object} event - Event instance
-   * @returns {undefined} - Nothing is returned
+   * @param {Object} event  Event instance
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -140,10 +125,11 @@ class Procedures extends Component {
   };
 
   /**
-   * Handle on Edit action for list item
-   *
    * @function
    * @name handleEdit
+   * @description Handle on Edit action for list item
+   *
+   * @param {Object} procedure procedure object to be edited
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -155,10 +141,11 @@ class Procedures extends Component {
   };
 
   /**
-   * Handle on notify procedures
-   *
    * @function
    * @name openNotificationForm
+   * @description Handle on notify procedures
+   *
+   * @param {Object[]} procedures procedure list
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -171,10 +158,9 @@ class Procedures extends Component {
   };
 
   /**
-   * Handle on notify procedures
-   *
    * @function
    * @name closeNotificationForm
+   * @description Handle on notify procedures
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -183,6 +169,14 @@ class Procedures extends Component {
     this.setState({ showNotificationForm: false });
   };
 
+  /**
+   * @function
+   * @name handleAfterCloseForm
+   * @description Perform cleanups after closing procedure form
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleAfterCloseForm = () => {
     this.setState({ isEditForm: false });
   };

@@ -6,13 +6,13 @@ import AlertsListHeader from '../ListHeader';
 import AlertListItem from '../ListItem';
 
 /**
- * This is a comparison function that will result in dates being sorted in DESCENDING order
- *
  * @function
  * @name dateSortDesc
+ * @description This is a comparison function that will result in dates being
+ *  sorted in DESCENDING order
  *
- * @param {Object} date1
- * @param {Object} date2
+ * @param {Object} date1 first date object
+ * @param {Object} date2 second date object
  *
  * @returns {number} result
  *
@@ -26,40 +26,38 @@ const dateSortDesc = (date1, date2) => {
 };
 
 /**
- * Sorts alerts  in ESCENDING ORDER by expiredAt field
- *
  * @function
  * @name sortByExpiredAt
+ * @description Sorts alerts  in ASCENDING ORDER by expiredAt field
  *
- * @param {Array} alerts
+ * @param {Array} alerts alerts to be sorted
  *
- * @returns {Array} sortedAlerts
+ * @returns {Array} sorted Alerts
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-const sortByExpiredAt = arr =>
-  arr.sort(({ expiredAt: ISOdate1 }, { expiredAt: ISOdate2 }) => {
+const sortByExpiredAt = alerts =>
+  alerts.sort(({ expiredAt: ISOdate1 }, { expiredAt: ISOdate2 }) => {
     const date1 = moment(ISOdate1);
     const date2 = moment(ISOdate2);
     return dateSortDesc(date1, date2);
   });
 
 /**
- * Sorts alerts  in ESCENDING ORDER by updatedAt field
- *
  * @function
  * @name sortByUpdatedAt
+ * @description Sorts alerts  in DESCENDING ORDER by updatedAt field
  *
- * @param {Array} alerts
+ * @param {Array} alerts alerts to be filtered
  *
  * @returns {Array} sortedAlerts
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-const sortByUpdatedAt = arr =>
-  arr.sort(({ updatedAt: ISOdate1 }, { updatedAt: ISOdate2 }) => {
+const sortByUpdatedAt = alerts =>
+  alerts.sort(({ updatedAt: ISOdate1 }, { updatedAt: ISOdate2 }) => {
     const date1 = moment(ISOdate1);
     const date2 = moment(ISOdate2);
     return dateSortDesc(date1, date2);

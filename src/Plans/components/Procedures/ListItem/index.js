@@ -5,21 +5,9 @@ import React, { Component, Fragment } from 'react';
 import './styles.css';
 
 /**
- * Single procedure list item component. Render single procedure details
- *
  * @class
  * @name ProceduresListItem
- *
- * @param {Object} props
- * @param {Object} props.activity
- * @param {Object} props.code
- * @param {string} props.color
- * @param {string} props.description
- * @param {string} props.incidentType
- * @param {boolean} props.isSelected
- * @param {string} props.name
- * @param {string} props.owner
- * @param {string} props.phase
+ * @description Single procedure list item component. Render single procedure details
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -45,14 +33,40 @@ class ProceduresListItem extends Component {
     onDeselectItem: PropTypes.func.isRequired,
   };
 
+  /**
+   * @function
+   * @name handleMouseEnter
+   * @description Handle on mouse enter list item event
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleMouseEnter = () => {
     this.setState({ isHovered: true });
   };
 
+  /**
+   * @function
+   * @name handleMouseLeave
+   * @description Handle on mouse leave list item event
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleMouseLeave = () => {
     this.setState({ isHovered: false });
   };
 
+  /**
+   * @function
+   * @name handleToggleSelect
+   * @description Handle toggle select checkbox for a list item
+   *
+   * @param {Object} event Event object
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleToggleSelect = event => {
     const { isSelected } = this.state;
     const { onSelectItem, onDeselectItem } = this.props;

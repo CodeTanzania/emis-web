@@ -1,18 +1,18 @@
-import { List } from 'antd';
 import { deleteRole } from '@codetanzania/emis-api-states';
+import { List } from 'antd';
 import concat from 'lodash/concat';
 import map from 'lodash/map';
 import remove from 'lodash/remove';
 import PropTypes from 'prop-types';
-import React, { Fragment, Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import RoleListHeader from '../../../../components/ListHeader';
 import { notifyError, notifySuccess } from '../../../../util';
 import RolesActionBar from '../ActionBar';
-import RoleListHeader from '../../../../components/ListHeader';
 import RoleListItem from '../ListItem';
 
 /* constants */
 const headerLayout = [
-  { span: 7, header: 'Name', offset: 1 },
+  { span: 7, header: 'Name' },
   { span: 3, header: 'Abbreviation' },
   { span: 10, header: 'Description' },
 ];

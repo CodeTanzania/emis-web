@@ -5,3 +5,8 @@
 .ContactsList .searchBox {
   width: 50%;
 }
+
+.ContactsList .ant-input-clear-icon {
+  padding-right: 10px;
+  color: #bebebe;
+}

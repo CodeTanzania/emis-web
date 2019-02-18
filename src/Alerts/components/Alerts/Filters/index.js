@@ -8,10 +8,15 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 /**
- * Filter modal component for filtering alerts
- *
  * @class
  * @name AlertsFilters
+ * @description Filter modal component for filtering alerts
+ *
+ * @param {Object} props props object
+ * @param {Object} props.alertSchema alert schema object
+ * @param {Object} props.filter alert filter object
+ * @param {Object} props.form antd form
+ * @param {Function} props.onCancel function to cancel alert filters
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -57,10 +62,11 @@ class AlertsFilters extends Component {
   };
 
   /**
-   * Handle filter action
-   *
    * @function
    * @name handleSubmit
+   * @description Handle filter action
+   *
+   * @param {Object} e event object
    *
    * @version 0.1.0
    * @since 0.1.0
