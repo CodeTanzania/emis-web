@@ -21,10 +21,13 @@ const routes = [
 ];
 
 /**
- * Resources component which allow navigation to resource sub modules
- *
  * @function
  * @name Resources
+ * @description Resources component which allow navigation
+ *  to resource sub modules
+ *
+ * @param {Object} props props object
+ * @param {Object} props.match route params
  *
  * @version 0.1.0
  * @since 0.1.0

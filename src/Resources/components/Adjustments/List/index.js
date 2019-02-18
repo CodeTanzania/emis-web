@@ -1,22 +1,24 @@
 import { List } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
-import AjustmentListHeader from '../ListHeader';
+import AdjustmentListHeader from '../ListHeader';
 import AdjustmentsListItem from '../ListItem';
 
 /**
- * Render adjustment list which have search box and actions
+ * @function
+ * @name AdjustmentList
+ * @description Render adjustment list which have search box and actions
  *
- * @class
- * @name AjustmentList
- *
+ * @param {Object} props props object
+ * @param {Array} props.adjustments array of adjustments
+ * @param {boolean} props.loading loading status
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-const AjustmentList = ({ adjustments, loading }) => (
+const AdjustmentList = ({ adjustments, loading }) => (
   <Fragment>
-    <AjustmentListHeader />
+    <AdjustmentListHeader />
     <List
       loading={loading}
       dataSource={adjustments}
@@ -44,7 +46,7 @@ const AjustmentList = ({ adjustments, loading }) => (
   </Fragment>
 );
 
-AjustmentList.propTypes = {
+AdjustmentList.propTypes = {
   loading: PropTypes.bool.isRequired,
   adjustments: PropTypes.arrayOf(
     PropTypes.shape({
@@ -62,4 +64,4 @@ AjustmentList.propTypes = {
   ).isRequired,
 };
 
-export default AjustmentList;
+export default AdjustmentList;

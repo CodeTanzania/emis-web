@@ -28,7 +28,7 @@ class AlertSourcesListItem extends Component {
   };
 
   /**
-   * @class
+   * @function
    * @name handleMouseEnter
    * @description show item actions on hover
    *
@@ -40,7 +40,7 @@ class AlertSourcesListItem extends Component {
   };
 
   /**
-   * @class
+   * @function
    * @name handleMouseLeave
    * @description hide item actions on hover
    *

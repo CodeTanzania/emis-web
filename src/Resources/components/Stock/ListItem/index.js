@@ -4,18 +4,9 @@ import React, { Component, Fragment } from 'react';
 import './styles.css';
 
 /**
- * Single stock list item component. Render single stock details
- *
  * @class
  * @name StockListItem
- *
- * @param {Object} props
- * @param {string} props.itemName
- * @param {string} props.owner
- * @param {string} props.warehouseName
- * @param {string} props.color
- * @param {string} props.uom
- * @param {string} props.quantity
+ * @description Single stock list item component. Render single stock details
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -35,10 +26,26 @@ class StockListItem extends Component {
     owner: PropTypes.shape({ name: PropTypes.string }).isRequired,
   };
 
+  /**
+   * @function
+   * @name handleMouseEnter
+   * @description show item actions on hover
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleMouseEnter = () => {
     this.setState({ isHovered: true });
   };
 
+  /**
+   * @function
+   * @name handleMouseLeave
+   * @description hide item actions on hover
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleMouseLeave = () => {
     this.setState({ isHovered: false });
   };

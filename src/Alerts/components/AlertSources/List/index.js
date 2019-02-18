@@ -12,7 +12,7 @@ import AlertSourcesListItem from '../ListItem';
  * @param {Object} props props object
  * @param {string} props.sources array of alert source objects
  * @param {string} props.loading represents loading status
- * @param {Function} props.onEdit call back action called during editing
+ * @param {Function} props.onEdit call back function called during editing
  *  alert source
  *
  * @version 0.1.0

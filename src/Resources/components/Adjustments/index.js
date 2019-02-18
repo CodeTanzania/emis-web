@@ -11,11 +11,10 @@ import './styles.css';
 const { Search } = Input;
 
 /**
- * Render adjustments module which has search box, actions and list of adjustments
- *
  * @class
  * @name Adjustments
- *
+ * @description Render adjustments module which has search box,
+ *  actions and list of adjustments
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -50,10 +49,10 @@ class Adjustments extends Component {
   }
 
   /**
-   * open filters modal by setting it's visible property to false via state
-   *
    * @function
    * @name openFiltersModal
+   * @description open filters modal by setting it's visible
+   *  property to false via state
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -65,10 +64,10 @@ class Adjustments extends Component {
   };
 
   /**
-   * Close filters modal by setting it's visible property to false via state
-   *
    * @function
    * @name closeFiltersModal
+   * @description Close filters modal by setting it's visible
+   *  property to false via state
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -80,10 +79,9 @@ class Adjustments extends Component {
   };
 
   /**
-   * Search Roles List based on supplied filter word
-   *
    * @function
    * @name searchRoles
+   * @description Search Roles List based on supplied filter word
    *
    * @param {Object} event - Event instance
    * @returns {undefined} - Nothing is returned
