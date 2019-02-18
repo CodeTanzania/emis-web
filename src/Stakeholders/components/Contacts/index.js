@@ -15,11 +15,12 @@ import ContactsList from './List';
 import NotificationForm from './NotificationForm';
 import './styles.css';
 
+/* constants */
 const { Search } = Input;
 
 /**
  * @class
- * @name ContactsList
+ * @name Contacts
  * @description Render contact list which have search box, actions and contact list
  *
  * @version 0.1.0
@@ -58,7 +59,8 @@ class Contacts extends Component {
   /**
    * @function
    * @name openFiltersModal
-   * @description open filters modal by setting it's visible property to false via state
+   * @description open filters modal by setting it's visible property
+   * to false via state
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -70,7 +72,8 @@ class Contacts extends Component {
   /**
    * @function
    * @name closeFiltersModal
-   * @description Close filters modal by setting it's visible property to false via state
+   * @description Close filters modal by setting it's visible property
+   * to false via state
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -184,7 +187,6 @@ class Contacts extends Component {
    * @since 0.1.0
    */
   openNotificationForm = contacts => {
-    console.log(contacts);
     this.setState({
       selectedContacts: contacts,
       showNotificationForm: true,
