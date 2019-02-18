@@ -5,16 +5,16 @@ import { Link } from 'react-router-dom';
 import './styles.css';
 
 /**
- * Navigation menu item that have icon(image) and name for the module to
- * navigate to
- *
  * @function
  * @name NavigationMenuItem
+ * @description Navigation menu item that have icon(image) and name for the module to
+ * navigate to
  *
- * @param {Object} props
- * @param {string} props.name - name/description/label for nav item
- * @param {string} props.icon - path to svg image used as nav icon
- * @param {string} props.path - path to navigate to when clicked
+ * @param {Object} props props object
+ * @param {string} props.name  name/description/label for nav item
+ * @param {string} props.icon  path to svg image used as nav icon
+ * @param {string} props.path  path to navigate to when clicked
+ * @param {boolean} props.disabled flag to mark it navigation menu is disabled
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -35,10 +35,13 @@ const NavigationMenuItem = ({ name, icon, path, disabled }) => (
 );
 
 /**
- * Navigation Menu which renders provided routes
- *
  * @function
  * @name Home
+ * @description Navigation Menu which renders provided routes
+ *
+ * @param {Object} props props object
+ * @param {Object[]} props.routes list of all navigation routes
+ * @param {Object} props.match match object from react router
  *
  * @version 0.1.0
  * @since 0.1.0

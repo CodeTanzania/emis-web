@@ -8,15 +8,16 @@ import React from 'react';
 import { notifyError, notifySuccess } from '../../../../util';
 import './styles.css';
 
+// eslint-disable-next-line jsdoc/require-returns
 /**
- * Render action bar for actions which are applicable to list content
- *
  * @function
  * @name ActivitiesActionBar
+ * @description Render action bar for actions which are applicable to list content
  *
- * @param {Object} props
- * @param {page} props.page
- * @param {number} props.total
+ * @param {Object} props prop object
+ * @param {number} props.page current results page number
+ * @param {number} props.total total number of activities from the API
+ * @param {Function} props.onNotify callback for notify action
  *
  * @version 0.1.0
  * @since 0.1.0

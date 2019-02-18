@@ -1,4 +1,7 @@
-import { paginatePlans, refreshPlans } from '@codetanzania/emis-api-states';
+import {
+  paginateStakeholders,
+  refreshStakeholders,
+} from '@codetanzania/emis-api-states';
 import { Button, Checkbox, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -8,30 +11,27 @@ import './styles.css';
 // eslint-disable-next-line jsdoc/require-returns
 /**
  * @function
- * @name PlansActionBar
+ * @name AgenciesActionBar
  * @description Render action bar for actions which are applicable to list content
  *
  * @param {Object} props props object
- * @param {number} props.page current page number
- * @param {number} props.total total number of plans from the API
- * @param {number} props.selectedItemCount total nunmber of selected plans
- * @param {boolean} props.isGridLayout flag to indicate if the view is grid or list
- * @param {Function} props.onNotify callback for notify action
- * @param {Function} props.onToggleLayout callback for toggling grid and list
- * layout
+ * @param {number} props.page current page
+ * @param {number} props.total total number of agencies
+ * @param {number} props.selectedItemCount total Number of selected items
+ * @param {Function} props.onNotify on notify action callback
+ * @param {Function} props.onFilter on filter action callback
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-const PlansActionBar = ({
+const AgenciesActionBar = ({
   page,
   total,
   selectedItemCount,
-  isGridLayout,
+  onFilter,
   onNotify,
-  onToggleLayout,
 }) => (
-  <div className="PlansActionBar">
+  <div className="AgenciesActionBar">
     <Row>
       {/* bulk select action */}
       <Col xl={{ span: 1 }} xxl={{ span: 1 }} className="checkbox">
@@ -39,20 +39,20 @@ const PlansActionBar = ({
       </Col>
       {/* end bulk select action */}
 
-      {/* refresh plans action */}
+      {/* refresh agencies action */}
       <Col xl={{ span: 1 }} xxl={{ span: 1 }}>
         <Button
           shape="circle"
           icon="reload"
-          title="Refresh plans"
+          title="Refresh agencies"
           onClick={() =>
-            refreshPlans(
+            refreshStakeholders(
               () => {
-                notifySuccess('Plans refreshed successfully');
+                notifySuccess('Agencies refreshed successfully');
               },
               () => {
                 notifyError(
-                  'An Error occurred while refreshing plans, please plan system administrator!'
+                  'An Error occurred while refreshing agencies, please contact system administrator!'
                 );
               }
             )
@@ -61,16 +61,16 @@ const PlansActionBar = ({
           size="large"
         />
       </Col>
-      {/* end refresh plans action */}
+      {/* end refresh agencies action */}
 
       {/* notify action */}
       <Col xl={{ span: 1 }} xxl={{ span: 1 }}>
         <Button
           type="circle"
-          icon="sound"
-          title={`Disseminate plan to${
+          icon="mail"
+          title={`Send Notification to${
             selectedItemCount > 0 ? ' selected' : ''
-          } activity`}
+          } agencies`}
           className="actionButton"
           size="large"
           onClick={onNotify}
@@ -84,7 +84,7 @@ const PlansActionBar = ({
           <Button
             type="circle"
             icon="cloud-download"
-            title="Export selected plans"
+            title="Export selected agencies"
             className="actionButton"
             size="large"
           />
@@ -98,7 +98,7 @@ const PlansActionBar = ({
           <Button
             type="circle"
             icon="share-alt"
-            title="Share selected plans"
+            title="Share selected agencies"
             className="actionButton"
             size="large"
           />
@@ -107,64 +107,51 @@ const PlansActionBar = ({
       {/* end bulk share action */}
 
       {/* bulk archive action */}
-      <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}>
-        {selectedItemCount > 0 && (
-          <Button
-            type="circle"
-            icon="hdd"
-            title="Archive selected plans"
-            className="actionButton"
-            size="large"
-          />
-        )}
-      </Col>
+      {/* <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}> */}
+      {/*   {selectedItemCount > 0 && ( */}
+      {/*     <Button */}
+      {/*       type="circle" */}
+      {/*       icon="hdd" */}
+      {/*       title="Archive selected agencies" */}
+      {/*       className="actionButton" */}
+      {/*       size="large" */}
+      {/*     /> */}
+      {/*   )} */}
+      {/* </Col> */}
       {/* end bulk archive action */}
 
-      {/* selected and plans number summary */}
-      <Col span={5} xl={{ span: 4, offset: 8 }} xxl={{ span: 5, offset: 8 }}>
+      {/* selected and agencies number summary */}
+      <Col span={6} xl={{ span: 4, offset: 10 }} xxl={{ span: 5, offset: 10 }}>
         {selectedItemCount > 0 && (
           <span
             style={{ color: '#c5c5c5' }}
           >{`${selectedItemCount} out of `}</span>
         )}
-        <span style={{ color: '#c5c5c5' }}>{`${total} plans`}</span>
+        <span style={{ color: '#c5c5c5' }}>{`${total} agencies`}</span>
       </Col>
-      {/* end selected and plans number summary */}
+      {/* end selected and agencies number summary */}
 
       {/* filter action */}
       <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}>
-        {/* <Button
+        <Button
           type="circle"
           icon="filter"
-          title="Filter plans"
+          title="Filter agencies"
           className="actionButton"
           size="large"
           onClick={onFilter}
-        /> */}
-      </Col>
-      {/* end filter action */}
-
-      {/* switch list layout action */}
-      <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}>
-        <Button
-          type="circle"
-          icon={isGridLayout ? 'bars' : 'appstore'}
-          title="Switch plans layout to grid"
-          className="actionButton"
-          size="large"
-          onClick={onToggleLayout}
         />
       </Col>
-      {/* end switch list layout action */}
+      {/* end filter action */}
 
       {/* pagination */}
       <Col span={1} xl={{ span: 4 }} xxl={{ span: 3 }}>
         <Pagination
           simple
-          defaultCurrent={page}
           current={page}
+          defaultCurrent={page}
           total={total}
-          onChange={nextPage => paginatePlans(nextPage)}
+          onChange={nextPage => paginateStakeholders(nextPage)}
           className="pagination"
         />
       </Col>
@@ -174,13 +161,12 @@ const PlansActionBar = ({
 );
 
 /* props validation */
-PlansActionBar.propTypes = {
+AgenciesActionBar.propTypes = {
   page: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
-  isGridLayout: PropTypes.bool.isRequired,
   selectedItemCount: PropTypes.number.isRequired,
+  onFilter: PropTypes.func.isRequired,
   onNotify: PropTypes.func.isRequired,
-  onToggleLayout: PropTypes.func.isRequired,
 };
 
-export default PlansActionBar;
+export default AgenciesActionBar;

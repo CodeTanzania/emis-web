@@ -11,11 +11,10 @@ import ActivitiesListHeader from '../ListHeader';
 import ActivitiesListItem from '../ListItem';
 
 /**
- * Render ActivitiesList component which have actionBar, activities header and
- * activities list components
- *
  * @class
  * @name ActivitiesList
+ * @description Render ActivitiesList component which have actionBar, activities header and
+ * activities list components
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -37,10 +36,11 @@ class ActivitiesList extends Component {
   };
 
   /**
-   * Handle select a single activity action
-   *
    * @function
    * @name handleOnSelectActivity
+   * @description Handle select a single activity action
+   *
+   * @param {Object} activity activity object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -53,10 +53,9 @@ class ActivitiesList extends Component {
   };
 
   /**
-   * Handle selected all activities actions
-   *
    * @function
    * @name handleSelectAll
+   * @description Handle selected all activities actions
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -64,10 +63,9 @@ class ActivitiesList extends Component {
   handleSelectAll = () => {};
 
   /**
-   * Handle filter activities by status action
-   *
    * @function
    * @name handleFilterByStatus
+   * @description Handle filter activities by status action
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -83,10 +81,12 @@ class ActivitiesList extends Component {
   };
 
   /**
-   * Handle deselect a single activity action
-   *
    * @function
    * @name handleOnDeselectActivity
+   * @description Handle deselect a single activity action
+   *
+   * @param {Object} activity activity object
+   * @returns {undefined} undefined
    *
    * @version 0.1.0
    * @since 0.1.0

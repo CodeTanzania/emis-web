@@ -1,4 +1,4 @@
-import { getProcedures } from '@codetanzania/emis-api-client';
+import { getStakeholders } from '@codetanzania/emis-api-client';
 import { Button, Form, Input } from 'antd';
 import map from 'lodash/map';
 import PropTypes from 'prop-types';
@@ -10,14 +10,14 @@ const { TextArea } = Input;
 /**
  * @class
  * @name NotificationForm
- * @description Notification form for procedures
+ * @description Render Agencies notification form component
  *
  * @version 0.1.0
  * @since 0.1.0
  */
 class NotificationForm extends Component {
   static propTypes = {
-    selectedProcedures: PropTypes.arrayOf(
+    selectedAgencies: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string,
         title: PropTypes.string,
@@ -33,9 +33,9 @@ class NotificationForm extends Component {
   /**
    * @function
    * @name handleSubmit
-   * @description Handle Notify action
+   * @description Callback to handle form on submit event
    *
-   * @param {Object} event OnSubmit event object
+   * @param {Object} event onSubmit event
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -68,7 +68,7 @@ class NotificationForm extends Component {
     const {
       onCancel,
       form: { getFieldDecorator },
-      selectedProcedures,
+      selectedAgencies,
     } = this.props;
 
     const formItemLayout = {
@@ -101,15 +101,15 @@ class NotificationForm extends Component {
                 message: 'Please provide at least one recipient',
               },
             ],
-            initialValue: map(selectedProcedures, procedure => procedure._id), // eslint-disable-line
+            initialValue: map(selectedAgencies, contact => contact._id), // eslint-disable-line
           })(
             <SearchableSelectInput
               placeholder="Enter notification recipients"
-              onSearch={getProcedures}
+              onSearch={getStakeholders}
               optionLabel="name"
               optionValue="_id"
               mode="multiple"
-              initialValue={selectedProcedures}
+              initialValue={selectedAgencies}
             />
           )}
         </Form.Item>
@@ -118,7 +118,7 @@ class NotificationForm extends Component {
         {/* notification subject */}
         <Form.Item {...formItemLayout} label="Subject">
           {getFieldDecorator('subject', {
-            rules: [{ required: true, message: 'Procedure time is required' }],
+            rules: [{ required: true, message: 'Agency subject is required' }],
           })(<Input placeholder="Applicable for Email notification only" />)}
         </Form.Item>
         {/* notification subject */}

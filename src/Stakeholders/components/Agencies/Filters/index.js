@@ -1,7 +1,7 @@
 import {
-  clearProcedureFilters,
+  clearStakeholderFilters,
   Connect,
-  filterProcedures,
+  filterStakeholders,
 } from '@codetanzania/emis-api-states';
 import { Button, Checkbox, Col, Form, Row } from 'antd';
 import PropTypes from 'prop-types';
@@ -9,13 +9,13 @@ import React, { Component } from 'react';
 
 /**
  * @class
- * @name ProceduresFilters
- * @description Filter modal component for filtering procedures
+ * @name AgenciesFilters
+ * @description Filter modal component for filtering agencies
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class ProceduresFilters extends Component {
+class AgenciesFilters extends Component {
   static propTypes = {
     filter: PropTypes.objectOf(
       PropTypes.shape({
@@ -52,7 +52,7 @@ class ProceduresFilters extends Component {
 
     validateFields((error, values) => {
       if (!error) {
-        filterProcedures(values);
+        filterStakeholders(values);
         onCancel();
       }
     });
@@ -68,7 +68,7 @@ class ProceduresFilters extends Component {
    */
   handleClearFilter = () => {
     const { onCancel } = this.props;
-    clearProcedureFilters();
+    clearStakeholderFilters();
     onCancel();
   };
 
@@ -101,9 +101,9 @@ class ProceduresFilters extends Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit}>
-        {/* start procedure type filters */}
-        <Form.Item {...formItemLayout} label="By Procedure type">
+      <Form onSubmit={this.handleSubmit} autoComplete="off">
+        {/* start agency type filters */}
+        <Form.Item {...formItemLayout} label="By Agency type">
           {getFieldDecorator('type', {
             initialValue: filter ? filter.type : [],
           })(
@@ -118,7 +118,7 @@ class ProceduresFilters extends Component {
             </Checkbox.Group>
           )}
         </Form.Item>
-        {/* end procedure type filters */}
+        {/* end agency type filters */}
 
         {/* start emergency phase filters */}
         <Form.Item {...formItemLayout} label="By Emergency Phases">
@@ -154,8 +154,8 @@ class ProceduresFilters extends Component {
   }
 }
 
-export default Connect(Form.create()(ProceduresFilters), {
-  types: 'procedures.schema.properties.type.enum',
-  phases: 'procedures.schema.properties.phases.enum',
-  filter: 'procedures.filter',
+export default Connect(Form.create()(AgenciesFilters), {
+  types: 'stakeholders.schema.properties.type.enum',
+  phases: 'stakeholders.schema.properties.phases.enum',
+  filter: 'stakeholders.filter',
 });

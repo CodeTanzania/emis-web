@@ -5,10 +5,12 @@ import { Link, withRouter } from 'react-router-dom';
 import './styles.css';
 
 /**
- * Plan Options
+ * @function
+ * @name PlanOptions
+ * @description Plan Options
  *
- * @param {Object} props
- * @param {Function} props.onEditPlan
+ * @param {Object} props props object
+ * @param {Function} props.onEditPlan callback for edit action
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -39,24 +41,10 @@ const PlanOptions = ({ onEditPlan }) => (
 );
 
 /**
- * Plan card component
- *
- * A card component renders in plan list
- *
  * @class
  * @name PlansGridListItem
- *
- * @param {Object} props
- * @param {string} props.id
- * @param {string} props.incidentType
- * @param {string} props.jurisdiction
- * @param {string} props.description
- * @param {string} props.nature
- * @param {string} props.family
- * @param {number} props.activityCount
- * @param {string} props.color
- * @param {Date} updatedAt
- * @param {function} onClickPlan
+ * @description Plan card component
+ * A card component renders in plan list
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -90,12 +78,11 @@ class PlansGridListItem extends Component {
   };
 
   /**
-   * Handle popover visibility change
-   *
    * @function
    * @name handlePopoverVisibilityChange
+   * @description Handle popover visibility change
    *
-   * @param {boolean} isVisible
+   * @param {boolean} isVisible flag for showing popover component
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -105,10 +92,9 @@ class PlansGridListItem extends Component {
   };
 
   /**
-   * Handle hide popover component
-   *
    * @function
    * @name handleHidePopover
+   * @description Handle hide popover component
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -118,10 +104,9 @@ class PlansGridListItem extends Component {
   };
 
   /**
-   * Handle edit plan action
-   *
    * @function
    * @name handleEditPlan
+   * @description Handle edit plan action
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -133,11 +118,9 @@ class PlansGridListItem extends Component {
   };
 
   /**
-   * Handle disseminate plan action
-   *
    * @function
    * @name handleDisseminatePlan
-   *
+   * @description Handle disseminate plan action
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -147,10 +130,9 @@ class PlansGridListItem extends Component {
   };
 
   /**
-   * Handle activate plan action
-   *
    * @function
    * @name handleActivatePlan
+   * @description Handle activate plan action
    *
    * @version 0.1.0
    * @since 0.1.0

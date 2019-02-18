@@ -19,10 +19,9 @@ import { notifyError, notifySuccess } from '../../../../util';
 const { TextArea } = Input;
 
 /**
- * Render Activity form for creating and updating activity activity details
- *
  * @class
  * @name ActivityForm
+ * @description Render Activity form for creating and updating activity activity details
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -44,16 +43,17 @@ class ActivityForm extends Component {
   };
 
   /**
-   * Handle submit form action
-   *
    * @function
    * @name handleSubmit
+   * @description Handle submit form action
+   *
+   * @param {Object} event onSubmit event object
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleSubmit = e => {
-    e.preventDefault();
+  handleSubmit = event => {
+    event.preventDefault();
 
     const {
       form: { validateFieldsAndScroll },

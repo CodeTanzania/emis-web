@@ -17,17 +17,17 @@ const { TextArea } = Input;
 
 /**
  * @class
- * @name ContactForm
- * @description Render Contact form for creating and updating stakeholder
- * contact details
+ * @name AgencyForm
+ * @description Render Agency form for creating and updating stakeholder
+ * agency details
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class ContactForm extends Component {
+class AgencyForm extends Component {
   static propTypes = {
     isEditForm: PropTypes.bool.isRequired,
-    contact: PropTypes.shape({
+    agency: PropTypes.shape({
       name: PropTypes.string,
       title: PropTypes.string,
       abbreviation: PropTypes.string,
@@ -50,27 +50,27 @@ class ContactForm extends Component {
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleSubmit = event => {
+  handleventSubmit = event => {
     event.preventDefault();
 
     const {
       form: { validateFieldsAndScroll },
-      contact,
+      agency,
       isEditForm,
     } = this.props;
 
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedContact = Object.assign({}, contact, values);
+          const updatedAgency = Object.assign({}, agency, values);
           putStakeholder(
-            updatedContact,
+            updatedAgency,
             () => {
-              notifySuccess('Contact was updated successfully');
+              notifySuccess('Agency was updated successfully');
             },
             () => {
               notifyError(
-                'Something occurred while updating contact, please try again!'
+                'Something occurred while updating agency, please try again!'
               );
             }
           );
@@ -78,11 +78,11 @@ class ContactForm extends Component {
           postStakeholder(
             values,
             () => {
-              notifySuccess('Contact was created successfully');
+              notifySuccess('Agency was created successfully');
             },
             () => {
               notifyError(
-                'Something occurred while saving contact, please try again!'
+                'Something occurred while saving agency, please try again!'
               );
             }
           );
@@ -94,7 +94,7 @@ class ContactForm extends Component {
   render() {
     const {
       isEditForm,
-      contact,
+      agency,
       posting,
       onCancel,
       form: { getFieldDecorator },
@@ -122,39 +122,39 @@ class ContactForm extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
-        {/* contact name, phone number and email section */}
+        {/* agency name, phone number and email section */}
         <Row type="flex" justify="space-between">
           <Col span={10}>
-            {/* contact name */}
+            {/* agency name */}
             <Form.Item {...formItemLayout} label="Full Name">
               {getFieldDecorator('name', {
-                initialValue: isEditForm ? contact.name : undefined,
+                initialValue: isEditForm ? agency.name : undefined,
                 rules: [
-                  { required: true, message: 'Contact full name is required' },
+                  { required: true, message: 'Agency full name is required' },
                 ],
               })(<Input />)}
             </Form.Item>
-            {/* end contact name */}
+            {/* end agency name */}
           </Col>
           <Col span={13}>
             <Row type="flex" justify="space-between">
               <Col span={11}>
-                {/* contact mobile number */}
+                {/* agency mobile number */}
                 <Form.Item {...formItemLayout} label="Phone Number">
                   {getFieldDecorator('mobile', {
-                    initialValue: isEditForm ? contact.mobile : undefined,
+                    initialValue: isEditForm ? agency.mobile : undefined,
                     rules: [
                       { required: true, message: 'Phone number is required' },
                     ],
                   })(<Input />)}
                 </Form.Item>
-                {/* end contact mobile number */}
+                {/* end agency mobile number */}
               </Col>
               <Col span={12}>
-                {/* contact email */}
+                {/* agency email */}
                 <Form.Item {...formItemLayout} label="Email">
                   {getFieldDecorator('email', {
-                    initialValue: isEditForm ? contact.email : undefined,
+                    initialValue: isEditForm ? agency.email : undefined,
                     rules: [
                       {
                         type: 'email',
@@ -167,48 +167,48 @@ class ContactForm extends Component {
                     ],
                   })(<Input />)}
                 </Form.Item>
-                {/* end contact email */}
+                {/* end agency email */}
               </Col>
             </Row>
           </Col>
         </Row>
-        {/* end contact name, phone number and email section */}
+        {/* end agency name, phone number and email section */}
 
-        {/* contact organization, group and area section */}
+        {/* agency organization, group and area section */}
         <Row type="flex" justify="space-between">
           <Col span={10}>
-            {/* contact organization */}
+            {/* agency organization */}
             <Form.Item {...formItemLayout} label="Organization/Agency">
               {getFieldDecorator('organization', {
-                initialValue: isEditForm ? contact.title : undefined,
+                initialValue: isEditForm ? agency.title : undefined,
               })(<Input />)}
             </Form.Item>
-            {/* end contact organization */}
+            {/* end agency organization */}
           </Col>
           <Col span={13}>
             <Row type="flex" justify="space-between">
               <Col span={11}>
-                {/* contact group */}
+                {/* agency group */}
                 <Form.Item {...formItemLayout} label="Group">
                   {getFieldDecorator('type', {
-                    initialValue: isEditForm ? contact.type : undefined,
+                    initialValue: isEditForm ? agency.type : undefined,
                     rules: [
-                      { required: true, message: 'Contact group is required' },
+                      { required: true, message: 'Agency group is required' },
                     ],
                   })(<SelectInput options={types} />)}
                 </Form.Item>
-                {/* end contact group */}
+                {/* end agency group */}
               </Col>
               <Col span={12}>
-                {/* contact location */}
+                {/* agency location */}
                 <Form.Item {...formItemLayout} label="Area">
                   {getFieldDecorator('location', {
                     initialValue:
-                      isEditForm && contact.location
-                        ? contact.location._id // eslint-disable-line
+                      isEditForm && agency.location
+                        ? agency.location._id // eslint-disable-line
                         : undefined,
                     rules: [
-                      { required: true, message: 'Contact area is required' },
+                      { required: true, message: 'Agency area is required' },
                     ],
                   })(
                     <SearchableSelectInput
@@ -218,91 +218,89 @@ class ContactForm extends Component {
                       }
                       optionValue="_id"
                       initialValue={
-                        isEditForm && contact.location
-                          ? contact.location
+                        isEditForm && agency.location
+                          ? agency.location
                           : undefined
                       }
                     />
                   )}
                 </Form.Item>
-                {/* end contact location */}
+                {/* end agency location */}
               </Col>
             </Row>
           </Col>
         </Row>
-        {/* end contact organization, group and area section */}
+        {/* end agency organization, group and area section */}
 
-        {/* contact role, landline and fax section */}
+        {/* agency role, landline and fax section */}
         <Row type="flex" justify="space-between">
           <Col span={10}>
-            {/* contact role */}
+            {/* agency role */}
             <Form.Item {...formItemLayout} label="Role">
               {getFieldDecorator('role', {
                 initialValue:
-                  isEditForm && contact.role ? contact.role._id : undefined, // eslint-disable-line
-                rules: [
-                  { required: true, message: 'Contact time is required' },
-                ],
+                  isEditForm && agency.role ? agency.role._id : undefined, // eslint-disable-line
+                rules: [{ required: true, message: 'Agency role is required' }],
               })(
                 <SearchableSelectInput
                   onSearch={getRoles}
                   optionLabel="name"
                   optionValue="_id"
                   initialValue={
-                    isEditForm && contact.role ? contact.role : undefined
+                    isEditForm && agency.role ? agency.role : undefined
                   }
                 />
               )}
             </Form.Item>
-            {/* end contact role */}
+            {/* end agency role */}
           </Col>
           <Col span={13}>
             <Row type="flex" justify="space-between">
               <Col span={11}>
-                {/* contact landline number */}
+                {/* agency landline number */}
                 <Form.Item {...formItemLayout} label="Landline/Other Number">
                   {getFieldDecorator('landline', {
-                    initialValue: isEditForm ? contact.landline : undefined,
+                    initialValue: isEditForm ? agency.landline : undefined,
                   })(<Input />)}
                 </Form.Item>
-                {/* end contact landline number */}
+                {/* end agency landline number */}
               </Col>
               <Col span={12}>
-                {/* contact fax */}
+                {/* agency fax */}
                 <Form.Item {...formItemLayout} label="Fax">
                   {getFieldDecorator('fax', {
-                    initialValue: isEditForm ? contact.fax : undefined,
+                    initialValue: isEditForm ? agency.fax : undefined,
                   })(<Input />)}
                 </Form.Item>
-                {/* end contact fax */}
+                {/* end agency fax */}
               </Col>
             </Row>
           </Col>
         </Row>
-        {/* end contact role, landline and fax section */}
+        {/* end agency role, landline and fax section */}
 
-        {/* contact Physical Address, Postal Address section */}
+        {/* agency Physical Address, Postal Address section */}
         <Row type="flex" justify="space-between">
           <Col span={10}>
-            {/* contact physical Address */}
+            {/* agency physical Address */}
             <Form.Item {...formItemLayout} label="Physical Address">
               {getFieldDecorator('physicalAddress', {
-                initialValue: isEditForm ? contact.physicalAddress : undefined,
+                initialValue: isEditForm ? agency.physicalAddress : undefined,
               })(<TextArea autosize={{ minRows: 1, maxRows: 10 }} />)}
             </Form.Item>
-            {/* end contact physical Address */}
+            {/* end agency physical Address */}
           </Col>
           <Col span={13}>
-            {/* contact postal address */}
+            {/* agency postal address */}
             <Form.Item {...formItemLayout} label="Postal Address">
               {getFieldDecorator('postalAddress', {
-                initialValue: isEditForm ? contact.postalAddress : undefined,
+                initialValue: isEditForm ? agency.postalAddress : undefined,
               })(<TextArea autosize={{ minRows: 1, maxRows: 10 }} />)}
             </Form.Item>
-            {/* end contact postal address */}
+            {/* end agency postal address */}
           </Col>
         </Row>
-        {/* end contact physical Address, Postal Address section */}
+        {/* end agency physical Address, Postal Address section */}
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
@@ -322,6 +320,6 @@ class ContactForm extends Component {
   }
 }
 
-export default Connect(Form.create()(ContactForm), {
+export default Connect(Form.create()(AgencyForm), {
   types: 'stakeholders.schema.properties.type.enum',
 });
