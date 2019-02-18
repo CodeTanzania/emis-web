@@ -96,6 +96,7 @@ const RolesActionBar = ({
         <Pagination
           simple
           defaultCurrent={page}
+          current={page}
           total={total}
           onChange={nextPage => paginateRoles(nextPage)}
           className="pagination"
