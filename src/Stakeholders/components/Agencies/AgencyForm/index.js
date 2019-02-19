@@ -174,16 +174,17 @@ class AgencyForm extends Component {
         </Row>
         {/* end agency name, phone number and email section */}
 
-        {/* agency organization, group and area section */}
+        {/* agency abbreviation, group and area section */}
         <Row type="flex" justify="space-between">
           <Col span={10}>
             {/* agency organization */}
-            <Form.Item {...formItemLayout} label="Organization/Agency">
-              {getFieldDecorator('organization', {
-                initialValue: isEditForm ? agency.title : undefined,
+            <Form.Item {...formItemLayout} label="Abbreviation">
+              {getFieldDecorator('abbreviation', {
+                rules: [{ required: true }],
+                initialValue: isEditForm ? agency.abbreviation : undefined,
               })(<Input />)}
             </Form.Item>
-            {/* end agency organization */}
+            {/* end agency abbreviation */}
           </Col>
           <Col span={13}>
             <Row type="flex" justify="space-between">
@@ -236,11 +237,13 @@ class AgencyForm extends Component {
         <Row type="flex" justify="space-between">
           <Col span={10}>
             {/* agency role */}
-            <Form.Item {...formItemLayout} label="Role">
-              {getFieldDecorator('role', {
+            <Form.Item {...formItemLayout} label="Website">
+              {getFieldDecorator('website', {
                 initialValue:
-                  isEditForm && agency.role ? agency.role._id : undefined, // eslint-disable-line
-                rules: [{ required: true, message: 'Agency role is required' }],
+                  isEditForm && agency.role ? agency.website : undefined, // eslint-disable-line
+                rules: [
+                  { required: true, message: 'Agency website is required' },
+                ],
               })(
                 <SearchableSelectInput
                   onSearch={getRoles}
@@ -294,6 +297,7 @@ class AgencyForm extends Component {
             {/* agency postal address */}
             <Form.Item {...formItemLayout} label="Postal Address">
               {getFieldDecorator('postalAddress', {
+                rules: [{ required: true }],
                 initialValue: isEditForm ? agency.postalAddress : undefined,
               })(<TextArea autosize={{ minRows: 1, maxRows: 10 }} />)}
             </Form.Item>

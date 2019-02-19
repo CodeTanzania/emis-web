@@ -1,7 +1,7 @@
 import {
   closeStakeholderForm,
   Connect,
-  getStakeholders,
+  filterStakeholders,
   openStakeholderForm,
   searchStakeholders,
   selectStakeholder,
@@ -51,7 +51,7 @@ class Agencies extends Component {
   };
 
   componentDidMount() {
-    getStakeholders();
+    filterStakeholders({ type: 'Agency' });
   }
 
   /**

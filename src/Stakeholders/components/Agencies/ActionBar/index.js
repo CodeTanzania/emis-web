@@ -2,7 +2,7 @@ import {
   paginateStakeholders,
   refreshStakeholders,
 } from '@codetanzania/emis-api-states';
-import { Button, Checkbox, Col, Pagination, Row } from 'antd';
+import { Button, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { notifyError, notifySuccess } from '../../../../util';
@@ -24,21 +24,9 @@ import './styles.css';
  * @version 0.1.0
  * @since 0.1.0
  */
-const AgenciesActionBar = ({
-  page,
-  total,
-  selectedItemCount,
-  onFilter,
-  onNotify,
-}) => (
+const AgenciesActionBar = ({ page, total, selectedItemCount, onNotify }) => (
   <div className="AgenciesActionBar">
     <Row>
-      {/* bulk select action */}
-      <Col xl={{ span: 1 }} xxl={{ span: 1 }} className="checkbox">
-        <Checkbox />
-      </Col>
-      {/* end bulk select action */}
-
       {/* refresh agencies action */}
       <Col xl={{ span: 1 }} xxl={{ span: 1 }}>
         <Button
@@ -121,7 +109,7 @@ const AgenciesActionBar = ({
       {/* end bulk archive action */}
 
       {/* selected and agencies number summary */}
-      <Col span={6} xl={{ span: 4, offset: 10 }} xxl={{ span: 5, offset: 10 }}>
+      <Col span={6} xl={{ span: 4, offset: 11 }} xxl={{ span: 5, offset: 11 }}>
         {selectedItemCount > 0 && (
           <span
             style={{ color: '#c5c5c5' }}
@@ -133,14 +121,14 @@ const AgenciesActionBar = ({
 
       {/* filter action */}
       <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}>
-        <Button
+        {/* <Button
           type="circle"
           icon="filter"
           title="Filter agencies"
           className="actionButton"
           size="large"
           onClick={onFilter}
-        />
+        /> */}
       </Col>
       {/* end filter action */}
 
@@ -165,7 +153,6 @@ AgenciesActionBar.propTypes = {
   page: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
   selectedItemCount: PropTypes.number.isRequired,
-  onFilter: PropTypes.func.isRequired,
   onNotify: PropTypes.func.isRequired,
 };
 
