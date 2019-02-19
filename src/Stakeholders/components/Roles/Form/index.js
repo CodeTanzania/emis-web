@@ -1,5 +1,5 @@
 import { postRole, putRole } from '@codetanzania/emis-api-states';
-import { Button, Form, Input, Row, Col } from 'antd';
+import { Button, Col, Form, Input, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { notifyError, notifySuccess } from '../../../../util';

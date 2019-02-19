@@ -1,8 +1,8 @@
-import { getFeatures, getRoles } from '@codetanzania/emis-api-client';
+import { httpActions } from '@codetanzania/emis-api-client';
 import {
   Connect,
-  postStakeholder,
-  putStakeholder,
+  postFocalPerson,
+  putFocalPerson,
 } from '@codetanzania/emis-api-states';
 import { Button, Col, Form, Input, Row } from 'antd';
 import upperFirst from 'lodash/upperFirst';
@@ -13,6 +13,7 @@ import SelectInput from '../../../../components/SelectInput';
 import { notifyError, notifySuccess } from '../../../../util';
 
 /* constants */
+const { getAgencies, getFeatures, getRoles } = httpActions;
 const { TextArea } = Input;
 
 /**
@@ -35,7 +36,7 @@ class ContactForm extends Component {
       email: PropTypes.string,
     }).isRequired,
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
-    types: PropTypes.arrayOf(PropTypes.string).isRequired,
+    groups: PropTypes.arrayOf(PropTypes.string).isRequired,
     onCancel: PropTypes.func.isRequired,
     posting: PropTypes.bool.isRequired,
   };
@@ -63,7 +64,7 @@ class ContactForm extends Component {
       if (!error) {
         if (isEditForm) {
           const updatedContact = Object.assign({}, contact, values);
-          putStakeholder(
+          putFocalPerson(
             updatedContact,
             () => {
               notifySuccess('Contact was updated successfully');
@@ -75,7 +76,7 @@ class ContactForm extends Component {
             }
           );
         } else {
-          postStakeholder(
+          postFocalPerson(
             values,
             () => {
               notifySuccess('Contact was created successfully');
@@ -98,7 +99,7 @@ class ContactForm extends Component {
       posting,
       onCancel,
       form: { getFieldDecorator },
-      types,
+      groups,
     } = this.props;
 
     const formItemLayout = {
@@ -179,23 +180,34 @@ class ContactForm extends Component {
           <Col span={10}>
             {/* contact organization */}
             <Form.Item {...formItemLayout} label="Organization/Agency">
-              {getFieldDecorator('organization', {
-                initialValue: isEditForm ? contact.title : undefined,
-              })(<Input />)}
+              {getFieldDecorator('party', {
+                initialValue:
+                  isEditForm && contact.party ? contact.party._id : undefined, // eslint-disable-line
+              })(
+                <SearchableSelectInput
+                  onSearch={getAgencies}
+                  optionLabel="name"
+                  optionValue="_id"
+                  initialValue={
+                    isEditForm && contact.party ? contact.party : undefined
+                  }
+                />
+              )}
             </Form.Item>
             {/* end contact organization */}
           </Col>
+
           <Col span={13}>
             <Row type="flex" justify="space-between">
               <Col span={11}>
                 {/* contact group */}
                 <Form.Item {...formItemLayout} label="Group">
-                  {getFieldDecorator('type', {
-                    initialValue: isEditForm ? contact.type : undefined,
+                  {getFieldDecorator('group', {
+                    initialValue: isEditForm ? contact.group : undefined,
                     rules: [
                       { required: true, message: 'Contact group is required' },
                     ],
-                  })(<SelectInput options={types} />)}
+                  })(<SelectInput options={groups} />)}
                 </Form.Item>
                 {/* end contact group */}
               </Col>
@@ -323,5 +335,5 @@ class ContactForm extends Component {
 }
 
 export default Connect(Form.create()(ContactForm), {
-  types: 'stakeholders.schema.properties.type.enum',
+  groups: 'focalPeople.schema.properties.group.enum',
 });

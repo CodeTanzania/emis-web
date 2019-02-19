@@ -1,4 +1,4 @@
-import { deleteStakeholder } from '@codetanzania/emis-api-states';
+import { deleteFocalPerson } from '@codetanzania/emis-api-states';
 import { List } from 'antd';
 import concat from 'lodash/concat';
 import map from 'lodash/map';
@@ -123,11 +123,11 @@ class ContactsList extends Component {
    */
   handleFilterByStatus = () => {
     // if (status === 'All') {
-    //   filterStakeholders({});
+    //   filter({});
     // } else if (status === 'Active') {
-    //   filterStakeholders({});
+    //   filter({});
     // } else if (status === 'Archived') {
-    //   filterStakeholders({});
+    //   filter({});
     // }
   };
 
@@ -221,7 +221,7 @@ class ContactsList extends Component {
               }}
               onEdit={() => onEdit(contact)}
               onArchive={() =>
-                deleteStakeholder(
+                deleteFocalPerson(
                   contact._id, // eslint-disable-line
                   () => {
                     notifySuccess('Contact was archived successfully');

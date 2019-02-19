@@ -1,4 +1,4 @@
-import { deleteStakeholder } from '@codetanzania/emis-api-states';
+import { deleteFocalPerson } from '@codetanzania/emis-api-states';
 import { List } from 'antd';
 import concat from 'lodash/concat';
 import map from 'lodash/map';
@@ -165,7 +165,7 @@ class AgencyList extends Component {
               }}
               onEdit={() => onEdit(agency)}
               onArchive={() =>
-                deleteStakeholder(
+                deleteFocalPerson(
                   agency._id, // eslint-disable-line
                   () => {
                     notifySuccess('Agency was archived successfully');

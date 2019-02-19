@@ -1,18 +1,20 @@
-import {
+import { httpActions } from '@codetanzania/emis-api-client';
+import { postProcedure, putProcedure } from '@codetanzania/emis-api-states';
+import { Button, Form, Input } from 'antd';
+import map from 'lodash/map';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import SearchableSelectInput from '../../../../components/SearchableSelectInput';
+import { notifyError, notifySuccess } from '../../../../util';
+
+/* constants */
+const {
   getActivities,
   getItems,
   getPlans,
   getQuestionnaires,
   getRoles,
-} from '@codetanzania/emis-api-client';
-import { postProcedure, putProcedure } from '@codetanzania/emis-api-states';
-import { Button, Form, Input } from 'antd';
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import map from 'lodash/map';
-import SearchableSelectInput from '../../../../components/SearchableSelectInput';
-import { notifyError, notifySuccess } from '../../../../util';
-
+} = httpActions;
 const { TextArea } = Input;
 
 /**

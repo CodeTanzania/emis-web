@@ -1,12 +1,14 @@
-import { postAlert, putAlert, Connect } from '@codetanzania/emis-api-states';
-import { getFeatures, getAlertSources } from '@codetanzania/emis-api-client';
-import { Button, Form, Input, Select, DatePicker, Row, Col } from 'antd';
-import PropTypes from 'prop-types';
+import { httpActions } from '@codetanzania/emis-api-client';
+import { Connect, postAlert, putAlert } from '@codetanzania/emis-api-states';
+import { Button, Col, DatePicker, Form, Input, Row, Select } from 'antd';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import SearchableSelectInput from '../../../../components/SearchableSelectInput';
 import { notifyError, notifySuccess } from '../../../../util';
 
+/* constants */
+const { getAlertSources, getFeatures } = httpActions;
 const { Option } = Select;
 const { TextArea } = Input;
 const eventTitle =
