@@ -205,6 +205,9 @@ class AgencyList extends Component {
               title={agency.role ? agency.role.name : 'N/A'}
               email={agency.email}
               mobile={agency.mobile}
+              onShare={() => {
+                onBulkShare(selectedAgencies);
+              }}
               isSelected={
                 // eslint-disable-next-line
                 map(selectedAgencies, item => item._id).includes(agency._id)
