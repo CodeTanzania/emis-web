@@ -24,7 +24,13 @@ import './styles.css';
  * @version 0.1.0
  * @since 0.1.0
  */
-const AgenciesActionBar = ({ page, total, selectedItemCount, onNotify }) => (
+const AgenciesActionBar = ({
+  page,
+  total,
+  selectedItemCount,
+  onNotify,
+  onShare,
+}) => (
   <div className="AgenciesActionBar">
     <Row>
       {/* refresh agencies action */}
@@ -89,6 +95,7 @@ const AgenciesActionBar = ({ page, total, selectedItemCount, onNotify }) => (
             title="Share selected agencies"
             className="actionButton"
             size="large"
+            onClick={onShare}
           />
         )}
       </Col>
@@ -154,6 +161,7 @@ AgenciesActionBar.propTypes = {
   total: PropTypes.number.isRequired,
   selectedItemCount: PropTypes.number.isRequired,
   onNotify: PropTypes.func.isRequired,
+  onShare: PropTypes.func.isRequired,
 };
 
 export default AgenciesActionBar;
