@@ -14,10 +14,25 @@ import './styles.css';
  * @version 0.1.0
  * @since 0.1.0
  */
-const ListHeader = ({ headerLayout }) => (
+const ListHeader = ({
+  headerLayout,
+  onSelectAll,
+  onDeselectAll,
+  isBulkSelected,
+}) => (
   <Row className="ListHeader">
     <Col xl={{ span: 1 }} xxl={{ span: 1 }}>
-      <Checkbox className="checkbox" />
+      <Checkbox
+        className="checkbox"
+        checked={isBulkSelected}
+        onChange={event => {
+          if (event.target.checked) {
+            onSelectAll();
+          } else {
+            onDeselectAll();
+          }
+        }}
+      />
     </Col>
 
     {headerLayout.map(item => (
@@ -36,6 +51,13 @@ ListHeader.propTypes = {
       header: PropTypes.string.isRequired,
     })
   ).isRequired,
+  onSelectAll: PropTypes.func.isRequired,
+  onDeselectAll: PropTypes.func.isRequired,
+  isBulkSelected: PropTypes.bool,
+};
+
+ListHeader.defaultProps = {
+  isBulkSelected: false,
 };
 
 export default ListHeader;

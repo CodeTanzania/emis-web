@@ -1,9 +1,4 @@
-import {
-  getItems,
-  getPlans,
-  getQuestionnaires,
-  getRoles,
-} from '@codetanzania/emis-api-client';
+import { httpActions } from '@codetanzania/emis-api-client';
 import {
   Connect,
   postActivity,
@@ -16,6 +11,8 @@ import React, { Component } from 'react';
 import SearchableSelectInput from '../../../../components/SearchableSelectInput';
 import { notifyError, notifySuccess } from '../../../../util';
 
+/* constants */
+const { getItems, getPlans, getQuestionnaires, getRoles } = httpActions;
 const { TextArea } = Input;
 
 /**

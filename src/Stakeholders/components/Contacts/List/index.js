@@ -1,8 +1,9 @@
-import { deleteStakeholder } from '@codetanzania/emis-api-states';
+import { deleteFocalPerson } from '@codetanzania/emis-api-states';
 import { List } from 'antd';
 import concat from 'lodash/concat';
 import map from 'lodash/map';
 import remove from 'lodash/remove';
+import uniq from 'lodash/uniq';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import ListHeader from '../../../../components/ListHeader';
@@ -22,8 +23,8 @@ const headerLayout = [
 /**
  * @class
  * @name ContactsList
- * @description Render ContactsList component which have actionBar, contacts header and
- * contacts list components
+ * @description Render ContactsList component which have actionBar, contacts
+ * header and contacts list components
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -44,6 +45,7 @@ class ContactsList extends Component {
 
   state = {
     selectedContacts: [],
+    selectedPages: [],
   };
 
   /**
@@ -64,12 +66,52 @@ class ContactsList extends Component {
   /**
    * @function
    * @name handleSelectAll
-   * @description Handle selected all contacts actions
+   * @description Handle select all contacts actions from current page
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleSelectAll = () => {};
+  handleSelectAll = () => {
+    const { selectedContacts, selectedPages } = this.state;
+    const { contacts, page } = this.props;
+    const selectedList = [...selectedContacts, ...contacts];
+    const pages = uniq([...selectedPages, page]);
+    this.setState({
+      selectedContacts: selectedList,
+      selectedPages: pages,
+    });
+  };
+
+  /**
+   * @function
+   * @name handleDeselectAll
+   * @description Handle deselect all contacts in a current page
+   *
+   * @returns {undefined} undefined
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleDeselectAll = () => {
+    const { contacts, page } = this.props;
+    const { selectedContacts, selectedPages } = this.state;
+    const selectedList = [...selectedContacts];
+    const pages = uniq([...selectedPages]);
+
+    remove(pages, item => item === page);
+
+    contacts.forEach(contact => {
+      remove(
+        selectedList,
+        item => item._id === contact._id // eslint-disable-line
+      );
+    });
+
+    this.setState({
+      selectedContacts: selectedList,
+      selectedPages: pages,
+    });
+  };
 
   /**
    * @function
@@ -81,11 +123,11 @@ class ContactsList extends Component {
    */
   handleFilterByStatus = () => {
     // if (status === 'All') {
-    //   filterStakeholders({});
+    //   filter({});
     // } else if (status === 'Active') {
-    //   filterStakeholders({});
+    //   filter({});
     // } else if (status === 'Archived') {
-    //   filterStakeholders({});
+    //   filter({});
     // }
   };
 
@@ -124,7 +166,7 @@ class ContactsList extends Component {
       onShare,
       onBulkShare,
     } = this.props;
-    const { selectedContacts } = this.state;
+    const { selectedContacts, selectedPages } = this.state;
     const selectedContactsCount = this.state.selectedContacts.length;
 
     return (
@@ -146,7 +188,12 @@ class ContactsList extends Component {
         {/* end action bar */}
 
         {/* contact list header */}
-        <ListHeader headerLayout={headerLayout} />
+        <ListHeader
+          headerLayout={headerLayout}
+          onSelectAll={this.handleSelectAll}
+          onDeselectAll={this.handleDeselectAll}
+          isBulkSelected={selectedPages.includes(page)}
+        />
         {/* end contact list header */}
 
         {/* contacts list */}
@@ -174,7 +221,7 @@ class ContactsList extends Component {
               }}
               onEdit={() => onEdit(contact)}
               onArchive={() =>
-                deleteStakeholder(
+                deleteFocalPerson(
                   contact._id, // eslint-disable-line
                   () => {
                     notifySuccess('Contact was archived successfully');

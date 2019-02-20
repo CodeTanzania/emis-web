@@ -1,6 +1,6 @@
 import {
-  paginateStakeholders,
-  refreshStakeholders,
+  paginateFocalPeople,
+  refreshFocalPeople,
 } from '@codetanzania/emis-api-states';
 import { Button, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
@@ -42,7 +42,7 @@ const ContactsActionBar = ({
           icon="reload"
           title="Refresh contacts"
           onClick={() =>
-            refreshStakeholders(
+            refreshFocalPeople(
               () => {
                 notifySuccess('Contacts refreshed successfully');
               },
@@ -148,7 +148,7 @@ const ContactsActionBar = ({
           current={page}
           defaultCurrent={page}
           total={total}
-          onChange={nextPage => paginateStakeholders(nextPage)}
+          onChange={nextPage => paginateFocalPeople(nextPage)}
           className="pagination"
         />
       </Col>

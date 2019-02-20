@@ -1,10 +1,10 @@
 import {
-  closeStakeholderForm,
+  closeFocalPersonForm,
   Connect,
-  getStakeholders,
-  openStakeholderForm,
-  selectStakeholder,
-  searchStakeholders,
+  getFocalPeople,
+  openFocalPersonForm,
+  searchFocalPeople,
+  selectFocalPerson,
 } from '@codetanzania/emis-api-states';
 import { Button, Col, Input, Modal, Row } from 'antd';
 import PropTypes from 'prop-types';
@@ -15,11 +15,12 @@ import ContactsList from './List';
 import NotificationForm from './NotificationForm';
 import './styles.css';
 
+/* constants */
 const { Search } = Input;
 
 /**
  * @class
- * @name ContactsList
+ * @name Contacts
  * @description Render contact list which have search box, actions and contact list
  *
  * @version 0.1.0
@@ -52,13 +53,14 @@ class Contacts extends Component {
   };
 
   componentDidMount() {
-    getStakeholders();
+    getFocalPeople();
   }
 
   /**
    * @function
    * @name openFiltersModal
-   * @description open filters modal by setting it's visible property to false via state
+   * @description open filters modal by setting it's visible property
+   * to false via state
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -70,7 +72,8 @@ class Contacts extends Component {
   /**
    * @function
    * @name closeFiltersModal
-   * @description Close filters modal by setting it's visible property to false via state
+   * @description Close filters modal by setting it's visible property
+   * to false via state
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -88,7 +91,7 @@ class Contacts extends Component {
    * @since 0.1.0
    */
   openContactForm = () => {
-    openStakeholderForm();
+    openFocalPersonForm();
   };
 
   /**
@@ -100,7 +103,7 @@ class Contacts extends Component {
    * @since 0.1.0
    */
   closeContactForm = () => {
-    closeStakeholderForm();
+    closeFocalPersonForm();
     this.setState({ isEditForm: false });
   };
 
@@ -115,7 +118,7 @@ class Contacts extends Component {
    * @since 0.1.0
    */
   searchContacts = event => {
-    searchStakeholders(event.target.value);
+    searchFocalPeople(event.target.value);
   };
 
   /**
@@ -129,9 +132,9 @@ class Contacts extends Component {
    * @since 0.1.0
    */
   handleEdit = contact => {
-    selectStakeholder(contact);
+    selectFocalPerson(contact);
     this.setState({ isEditForm: true });
-    openStakeholderForm();
+    openFocalPersonForm();
   };
 
   /**
@@ -184,7 +187,6 @@ class Contacts extends Component {
    * @since 0.1.0
    */
   openNotificationForm = contacts => {
-    console.log(contacts);
     this.setState({
       selectedContacts: contacts,
       showNotificationForm: true,
@@ -310,6 +312,7 @@ class Contacts extends Component {
           footer={null}
           destroyOnClose
           maskClosable={false}
+          width="50%"
         >
           <ContactFilters onCancel={this.closeFiltersModal} />
         </Modal>
@@ -359,12 +362,12 @@ class Contacts extends Component {
 }
 
 export default Connect(Contacts, {
-  contacts: 'stakeholders.list',
-  contact: 'stakeholders.selected',
-  loading: 'stakeholders.loading',
-  posting: 'stakeholders.posting',
-  page: 'stakeholders.page',
-  showForm: 'stakeholders.showForm',
-  total: 'stakeholders.total',
-  searchQuery: 'stakeholders.q',
+  contacts: 'focalPeople.list',
+  contact: 'focalPeople.selected',
+  loading: 'focalPeople.loading',
+  posting: 'focalPeople.posting',
+  page: 'focalPeople.page',
+  showForm: 'focalPeople.showForm',
+  total: 'focalPeople.total',
+  searchQuery: 'focalPeople.q',
 });

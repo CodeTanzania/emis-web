@@ -1,4 +1,4 @@
-import { getStakeholders } from '@codetanzania/emis-api-client';
+import { get } from '@codetanzania/emis-api-client';
 import { Button, Form, Input } from 'antd';
 import map from 'lodash/map';
 import PropTypes from 'prop-types';
@@ -111,7 +111,7 @@ class NotificationForm extends Component {
           })(
             <SearchableSelectInput
               placeholder="Enter notification recipients"
-              onSearch={getStakeholders}
+              onSearch={get}
               optionLabel="name"
               optionValue="_id"
               mode="multiple"

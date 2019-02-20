@@ -6,12 +6,20 @@ import React, { Component } from 'react';
 import SearchableSelectInput from '../../../../components/SearchableSelectInput';
 
 /* constants */
-const { getPlans } = httpActions;
+const { getStakeholders } = httpActions;
 const { TextArea } = Input;
 
+/**
+ * @class
+ * @name NotificationForm
+ * @description Render Contacts notification form component
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
 class NotificationForm extends Component {
   static propTypes = {
-    selectedPlans: PropTypes.arrayOf(
+    recipients: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string,
         title: PropTypes.string,
@@ -21,11 +29,26 @@ class NotificationForm extends Component {
       })
     ).isRequired,
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+    body: PropTypes.string,
     onCancel: PropTypes.func.isRequired,
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
+  static defaultProps = {
+    body: undefined,
+  };
+
+  /**
+   * @function
+   * @name handleSubmit
+   * @description Callback to handle form on submit event
+   *
+   * @param {Object} event onSubmit event
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleSubmit = event => {
+    event.preventDefault();
 
     const {
       form: { validateFieldsAndScroll },
@@ -52,7 +75,8 @@ class NotificationForm extends Component {
     const {
       onCancel,
       form: { getFieldDecorator },
-      selectedPlans,
+      recipients,
+      body,
     } = this.props;
 
     const formItemLayout = {
@@ -85,15 +109,15 @@ class NotificationForm extends Component {
                 message: 'Please provide at least one recipient',
               },
             ],
-            initialValue: map(selectedPlans, plan => plan._id), // eslint-disable-line
+            initialValue: map(recipients, contact => contact._id), // eslint-disable-line
           })(
             <SearchableSelectInput
               placeholder="Enter notification recipients"
-              onSearch={getPlans}
+              onSearch={getStakeholders}
               optionLabel="name"
               optionValue="_id"
               mode="multiple"
-              initialValue={selectedPlans}
+              initialValue={recipients}
             />
           )}
         </Form.Item>
@@ -101,9 +125,9 @@ class NotificationForm extends Component {
 
         {/* notification subject */}
         <Form.Item {...formItemLayout} label="Subject">
-          {getFieldDecorator('subject', {
-            rules: [{ required: true, message: 'Plan time is required' }],
-          })(<Input placeholder="Applicable for Email notification only" />)}
+          {getFieldDecorator('subject', {})(
+            <Input placeholder="Applicable for Email notification only" />
+          )}
         </Form.Item>
         {/* notification subject */}
 
@@ -116,6 +140,7 @@ class NotificationForm extends Component {
                 message: 'Please provide notification message',
               },
             ],
+            initialValue: body,
           })(
             <TextArea
               autosize={{ minRows: 6, maxRows: 10 }}

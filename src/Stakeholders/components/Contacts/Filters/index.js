@@ -1,7 +1,7 @@
 import {
-  clearStakeholderFilters,
+  clearFocalPersonFilters,
   Connect,
-  filterStakeholders,
+  filterFocalPeople,
 } from '@codetanzania/emis-api-states';
 import { Button, Checkbox, Col, Form, Row } from 'antd';
 import PropTypes from 'prop-types';
@@ -50,7 +50,7 @@ class ContactsFilters extends Component {
 
     validateFields((error, values) => {
       if (!error) {
-        filterStakeholders(values);
+        filterFocalPeople(values);
         onCancel();
       }
     });
@@ -66,7 +66,7 @@ class ContactsFilters extends Component {
    */
   handleClearFilter = () => {
     const { onCancel } = this.props;
-    clearStakeholderFilters();
+    clearFocalPersonFilters();
     onCancel();
   };
 
@@ -107,7 +107,7 @@ class ContactsFilters extends Component {
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
                 {groups.map(group => (
-                  <Col span={6} style={{ margin: '10px 0' }} key={group}>
+                  <Col span={8} style={{ margin: '10px 0' }} key={group}>
                     <Checkbox value={group}>{group}</Checkbox>
                   </Col>
                 ))}
@@ -134,6 +134,6 @@ class ContactsFilters extends Component {
 }
 
 export default Connect(Form.create()(ContactsFilters), {
-  groups: 'stakeholders.schema.properties.type.enum',
-  filter: 'stakeholders.filter',
+  groups: 'focalPeople.schema.properties.group.enum',
+  filter: 'focalPeople.filter',
 });

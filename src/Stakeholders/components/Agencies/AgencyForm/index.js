@@ -1,9 +1,5 @@
-import { getFeatures, getRoles } from '@codetanzania/emis-api-client';
-import {
-  Connect,
-  postStakeholder,
-  putStakeholder,
-} from '@codetanzania/emis-api-states';
+import { httpActions } from '@codetanzania/emis-api-client';
+import { Connect, postAgency, putAgency } from '@codetanzania/emis-api-states';
 import { Button, Col, Form, Input, Row } from 'antd';
 import upperFirst from 'lodash/upperFirst';
 import PropTypes from 'prop-types';
@@ -13,6 +9,7 @@ import SelectInput from '../../../../components/SelectInput';
 import { notifyError, notifySuccess } from '../../../../util';
 
 /* constants */
+const { getFeatures } = httpActions;
 const { TextArea } = Input;
 
 /**
@@ -50,7 +47,7 @@ class AgencyForm extends Component {
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleventSubmit = event => {
+  handleSubmit = event => {
     event.preventDefault();
 
     const {
@@ -63,7 +60,7 @@ class AgencyForm extends Component {
       if (!error) {
         if (isEditForm) {
           const updatedAgency = Object.assign({}, agency, values);
-          putStakeholder(
+          putAgency(
             updatedAgency,
             () => {
               notifySuccess('Agency was updated successfully');
@@ -75,7 +72,7 @@ class AgencyForm extends Component {
             }
           );
         } else {
-          postStakeholder(
+          postAgency(
             values,
             () => {
               notifySuccess('Agency was created successfully');
@@ -244,16 +241,7 @@ class AgencyForm extends Component {
                 rules: [
                   { required: true, message: 'Agency website is required' },
                 ],
-              })(
-                <SearchableSelectInput
-                  onSearch={getRoles}
-                  optionLabel="name"
-                  optionValue="_id"
-                  initialValue={
-                    isEditForm && agency.role ? agency.role : undefined
-                  }
-                />
-              )}
+              })(<Input />)}
             </Form.Item>
             {/* end agency role */}
           </Col>
@@ -325,5 +313,5 @@ class AgencyForm extends Component {
 }
 
 export default Connect(Form.create()(AgencyForm), {
-  types: 'stakeholders.schema.properties.type.enum',
+  types: 'agencies.schema.properties.type.enum',
 });

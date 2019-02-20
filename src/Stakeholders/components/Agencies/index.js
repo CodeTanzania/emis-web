@@ -1,10 +1,10 @@
 import {
-  closeStakeholderForm,
+  closeAgencyForm,
   Connect,
-  filterStakeholders,
-  openStakeholderForm,
-  searchStakeholders,
-  selectStakeholder,
+  getAgencies,
+  openAgencyForm,
+  searchAgencies,
+  selectAgency,
 } from '@codetanzania/emis-api-states';
 import { Button, Col, Input, Modal, Row } from 'antd';
 import PropTypes from 'prop-types';
@@ -15,6 +15,7 @@ import AgencyList from './List';
 import NotificationForm from './NotificationForm';
 import './styles.css';
 
+/* constants */
 const { Search } = Input;
 
 /**
@@ -51,7 +52,7 @@ class Agencies extends Component {
   };
 
   componentDidMount() {
-    filterStakeholders({ type: 'Agency' });
+    getAgencies();
   }
 
   /**
@@ -87,7 +88,7 @@ class Agencies extends Component {
    * @since 0.1.0
    */
   openAgencyForm = () => {
-    openStakeholderForm();
+    openAgencyForm();
   };
 
   /**
@@ -99,7 +100,7 @@ class Agencies extends Component {
    * @since 0.1.0
    */
   closeAgencyForm = () => {
-    closeStakeholderForm();
+    closeAgencyForm();
     this.setState({ isEditForm: false });
   };
 
@@ -114,7 +115,7 @@ class Agencies extends Component {
    * @since 0.1.0
    */
   searchAgencies = event => {
-    searchStakeholders(event.target.value);
+    searchAgencies(event.target.value);
   };
 
   /**
@@ -128,9 +129,9 @@ class Agencies extends Component {
    * @since 0.1.0
    */
   handleEdit = agency => {
-    selectStakeholder(agency);
+    selectAgency(agency);
     this.setState({ isEditForm: true });
-    openStakeholderForm();
+    openAgencyForm();
   };
 
   /**
@@ -251,6 +252,7 @@ class Agencies extends Component {
           title="Filter Agencies"
           visible={showFilters}
           onCancel={this.closeFiltersModal}
+          width="50%"
           footer={null}
           destroyOnClose
           maskClosable={false}
@@ -301,12 +303,12 @@ class Agencies extends Component {
 }
 
 export default Connect(Agencies, {
-  agencies: 'stakeholders.list',
-  agency: 'stakeholders.selected',
-  loading: 'stakeholders.loading',
-  posting: 'stakeholders.posting',
-  page: 'stakeholders.page',
-  showForm: 'stakeholders.showForm',
-  total: 'stakeholders.total',
-  searchQuery: 'stakeholders.q',
+  agencies: 'agencies.list',
+  agency: 'agencies.selected',
+  loading: 'agencies.loading',
+  posting: 'agencies.posting',
+  page: 'agencies.page',
+  showForm: 'agencies.showForm',
+  total: 'agencies.total',
+  searchQuery: 'agencies.q',
 });
