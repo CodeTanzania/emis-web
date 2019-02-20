@@ -38,6 +38,7 @@ class AgencyList extends Component {
     onEdit: PropTypes.func.isRequired,
     onFilter: PropTypes.func.isRequired,
     onNotify: PropTypes.func.isRequired,
+    onBulkShare: PropTypes.func.isRequired,
   };
 
   state = {
@@ -160,6 +161,7 @@ class AgencyList extends Component {
       onEdit,
       onFilter,
       onNotify,
+      onBulkShare,
     } = this.props;
     const { selectedAgencies, selectedPages } = this.state;
     const selectedAgenciesCount = this.state.selectedAgencies.length;
@@ -171,6 +173,9 @@ class AgencyList extends Component {
           total={total}
           page={page}
           onFilter={onFilter}
+          onShare={() => {
+            onBulkShare(selectedAgencies);
+          }}
           onNotify={() => {
             onNotify(selectedAgencies);
           }}
