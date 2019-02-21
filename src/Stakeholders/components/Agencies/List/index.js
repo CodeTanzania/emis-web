@@ -13,7 +13,7 @@ import AgencyListItem from '../ListItem';
 
 /* constants */
 const headerLayout = [
-  { span: 5, header: 'Name', offset: 0 },
+  { span: 5, header: 'Name' },
   { span: 6, header: 'Role' },
   { span: 4, header: 'Mobile Number' },
   { span: 4, header: 'Email Address' },
