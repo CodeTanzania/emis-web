@@ -9,6 +9,14 @@ const headerLayout = [
   { span: 5, header: 'Warehouse' },
 ];
 
+/**
+ * @function
+ * @name StockListHeader
+ * @description display stock list metadata
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
 const StockListHeader = () => (
   <Row className="StockListHeader">
     {headerLayout.map(item => (

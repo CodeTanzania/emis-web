@@ -18,11 +18,9 @@ import './styles.css';
 const { Search } = Input;
 
 /**
- * Render item list which have search box and actions
- *
  * @class
  * @name Items
- *
+ * @description Render item list which have search box and actions
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -59,10 +57,10 @@ class Items extends Component {
   }
 
   /**
-   * open filters modal by setting it's visible property to false via state
-   *
    * @function
    * @name openFiltersModal
+   * @description open filters modal by setting it's visible property
+   * to false via state
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -74,10 +72,10 @@ class Items extends Component {
   };
 
   /**
-   * Close filters modal by setting it's visible property to false via state
-   *
    * @function
    * @name closeFiltersModal
+   * @description Close filters modal by setting it's visible property
+   * to false via state
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -89,10 +87,9 @@ class Items extends Component {
   };
 
   /**
-   * Open item form
-   *
    * @function
    * @name openForm
+   * @description Open item form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -104,10 +101,9 @@ class Items extends Component {
   };
 
   /**
-   * close item form
-   *
-   * @function closeForm
-   * @name
+   * @function
+   * @name closeForm
+   * @description close item form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -120,10 +116,11 @@ class Items extends Component {
   };
 
   /**
-   * Handle on Edit action for list item
-   *
    * @function
    * @name handleEdit
+   * @description Handle on Edit action for list item
+   *
+   * @param {Object} item item to be edited
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -134,6 +131,14 @@ class Items extends Component {
     openItemForm();
   };
 
+  /**
+   * @function
+   * @name handleAfterCloseForm
+   * @description Handle after close actions
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleAfterCloseForm = () => {
     this.setState({ isEditForm: false });
   };

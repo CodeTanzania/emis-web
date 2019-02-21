@@ -17,10 +17,10 @@ import './styles.css';
 const { Search } = Input;
 
 /**
- * Render stock module which have search box, actions and stock list
- *
  * @class
  * @name Stocks
+ * @description Render stock module which have search box,
+ * actions and stock list
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -61,10 +61,9 @@ class Stocks extends Component {
   }
 
   /**
-   * Open Stock form
-   *
    * @function
    * @name openStockForm
+   * @description  Open Stock form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -76,10 +75,9 @@ class Stocks extends Component {
   };
 
   /**
-   * close Stock form
-   *
    * @function
    * @name openStockForm
+   * @description close Stock form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -92,10 +90,9 @@ class Stocks extends Component {
   };
 
   /**
-   * Search Stocks List based on supplied filter word
-   *
    * @function
    * @name searchStocks
+   * @description Search Stocks List based on supplied filter word
    *
    * @param {Object} event - Event instance
    * @returns {undefined} - Nothing is returned
@@ -108,16 +105,17 @@ class Stocks extends Component {
   };
 
   /**
-   * Handle on Edit action for list item
-   *
    * @function
    * @name handleEdit
+   * @description Handle on Edit action for list item
+   *
+   * @param {Object} stock stock to be deleted
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleEdit = Stock => {
-    selectStock(Stock);
+  handleEdit = stock => {
+    selectStock(stock);
     this.setState({ isEditForm: true });
     openStockForm();
   };

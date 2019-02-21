@@ -1,14 +1,24 @@
-import { httpActions } from '@codetanzania/emis-api-client';
 import { postStock, putStock } from '@codetanzania/emis-api-states';
+import {
+  getStakeholders,
+  getWarehouses,
+  getItems,
+} from '@codetanzania/emis-api-client';
 import { Button, Form, Input } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import SearchableSelectInput from '../../../../components/SearchableSelectInput';
 import { notifyError, notifySuccess } from '../../../../util';
 
-/* constants */
-const { getStakeholders, getWarehouses, getItems } = httpActions;
-
+// eslint-disable-next-line jsdoc/require-returns
+/**
+ * @class
+ * @name StockForm
+ * @description  Render form for creating a new stock
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
 class StockForm extends Component {
   static propTypes = {
     isEditForm: PropTypes.bool.isRequired,
@@ -23,6 +33,17 @@ class StockForm extends Component {
     posting: PropTypes.bool.isRequired,
   };
 
+  /**
+   * @function
+   * @name handleSubmit
+   * @description  call back function to handle submit action
+   *
+   * @param {Object} e event object
+   *
+   * @returns {undefined} does not return anything
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleSubmit = e => {
     e.preventDefault();
 
