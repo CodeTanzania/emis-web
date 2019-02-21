@@ -133,9 +133,7 @@ const Toolbar = ({
             <span
               style={{ color: '#959595', fontSize: 15, fontWeight: 600 }}
             >{`${total} ${
-              selectedItemsCount > 1
-                ? pluralize(itemName)
-                : singularize(itemName)
+              total > 1 ? pluralize(itemName) : singularize(itemName)
             }`}</span>
           </Col>
           {/* end selected and  number summary */}
