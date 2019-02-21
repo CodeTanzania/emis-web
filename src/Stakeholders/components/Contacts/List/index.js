@@ -1,3 +1,4 @@
+import { httpActions } from '@codetanzania/emis-api-client';
 import {
   deleteFocalPerson,
   paginateFocalPeople,
@@ -24,6 +25,7 @@ const headerLayout = [
   { span: 3, header: 'Mobile Number' },
   { span: 3, header: 'Email Address' },
 ];
+const { getFocalPeopleExportUrl } = httpActions;
 
 /**
  * @class
@@ -182,13 +184,16 @@ class ContactsList extends Component {
           page={page}
           total={total}
           selectedItemsCount={selectedContactsCount}
-          onRefresh={refreshFocalPeople}
+          exportUrl={getFocalPeopleExportUrl({
+            filter: { _id: map(selectedContacts, '_id') },
+          })}
           onFilter={onFilter}
           onNotify={() => onNotify(selectedContacts)}
-          onShare={() => onBulkShare(selectedContacts)}
           onPaginate={nextPage => {
             paginateFocalPeople(nextPage);
           }}
+          onRefresh={refreshFocalPeople}
+          onShare={() => onBulkShare(selectedContacts)}
         />
         {/* end toolbar */}
 

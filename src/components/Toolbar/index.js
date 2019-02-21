@@ -1,5 +1,5 @@
 import { Button, Col, Pagination, Row } from 'antd';
-import { singularize, pluralize } from 'inflection';
+import { pluralize, singularize } from 'inflection';
 import PropTypes from 'prop-types';
 import React from 'react';
 import './styles.css';
@@ -27,8 +27,8 @@ const Toolbar = ({
   page,
   total,
   selectedItemsCount,
+  exportUrl,
   onArchive,
-  onExport,
   onFilter,
   onNotify,
   onPaginate,
@@ -42,7 +42,7 @@ const Toolbar = ({
         <Row>
           {/* refresh  action */}
           {onRefresh && (
-            <Col span={1} xl={{ span: 2 }} xxl={{ span: 2 }}>
+            <Col span={2} xl={{ span: 2 }} xxl={{ span: 2 }}>
               <Button
                 shape="circle"
                 icon="reload"
@@ -57,7 +57,7 @@ const Toolbar = ({
 
           {/* notify action */}
           {onNotify && (
-            <Col span={1} xl={{ span: 2 }} xxl={{ span: 2 }}>
+            <Col span={2} xl={{ span: 2 }} xxl={{ span: 2 }}>
               <Button
                 type="circle"
                 icon="mail"
@@ -73,23 +73,24 @@ const Toolbar = ({
           {/* end notify action  */}
 
           {/* export action */}
-          {selectedItemsCount > 0 && onExport && (
-            <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}>
-              <Button
-                type="circle"
-                icon="cloud-download"
-                title="Export selected "
-                className="actionButton"
-                size="large"
-                onClick={onExport}
-              />
+          {exportUrl && (
+            <Col span={2} xl={{ span: 2 }} xxl={{ span: 2 }}>
+              <a href={exportUrl} download>
+                <Button
+                  type="circle"
+                  icon="cloud-download"
+                  title="Export selected "
+                  className="actionButton"
+                  size="large"
+                />
+              </a>
             </Col>
           )}
           {/* end export action */}
 
           {/* bulk share action */}
           {selectedItemsCount > 0 && onShare && (
-            <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}>
+            <Col span={2} xl={{ span: 2 }} xxl={{ span: 2 }}>
               <Button
                 type="circle"
                 icon="share-alt"
@@ -179,9 +180,9 @@ Toolbar.propTypes = {
   itemName: PropTypes.string.isRequired,
   page: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
+  exportUrl: PropTypes.string,
   selectedItemsCount: PropTypes.number.isRequired,
   onArchive: PropTypes.func,
-  onExport: PropTypes.func,
   onFilter: PropTypes.func.isRequired,
   onNotify: PropTypes.func,
   onPaginate: PropTypes.func.isRequired,
@@ -190,7 +191,7 @@ Toolbar.propTypes = {
 };
 
 Toolbar.defaultProps = {
-  onExport: null,
+  exportUrl: undefined,
   onShare: null,
   onNotify: null,
   onArchive: null,
