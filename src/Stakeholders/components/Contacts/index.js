@@ -1,10 +1,10 @@
 import {
-  closeStakeholderForm,
+  closeFocalPersonForm,
   Connect,
-  getStakeholders,
-  openStakeholderForm,
-  searchStakeholders,
-  selectStakeholder,
+  getFocalPeople,
+  openFocalPersonForm,
+  searchFocalPeople,
+  selectFocalPerson,
 } from '@codetanzania/emis-api-states';
 import { Button, Col, Input, Modal, Row } from 'antd';
 import PropTypes from 'prop-types';
@@ -15,13 +15,13 @@ import ContactsList from './List';
 import NotificationForm from './NotificationForm';
 import './styles.css';
 
+/* constants */
 const { Search } = Input;
 
 /**
- * Render contact list which have search box, actions and contact list
- *
  * @class
- * @name ContactsList
+ * @name Contacts
+ * @description Render contact list which have search box, actions and contact list
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -32,6 +32,7 @@ class Contacts extends Component {
     isEditForm: false,
     showNotificationForm: false,
     selectedContacts: [],
+    notificationBody: undefined,
   };
 
   static propTypes = {
@@ -42,24 +43,24 @@ class Contacts extends Component {
     contact: PropTypes.shape({ name: PropTypes.string }),
     page: PropTypes.number.isRequired,
     showForm: PropTypes.bool.isRequired,
+    searchQuery: PropTypes.string,
     total: PropTypes.number.isRequired,
   };
 
   static defaultProps = {
     contact: null,
+    searchQuery: undefined,
   };
 
   componentDidMount() {
-    getStakeholders();
+    getFocalPeople();
   }
 
   /**
-   * open filters modal by setting it's visible property to false via state
-   *
    * @function
    * @name openFiltersModal
-   *
-   * @returns {undefined} - Nothing is returned
+   * @description open filters modal by setting it's visible property
+   * to false via state
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -69,12 +70,10 @@ class Contacts extends Component {
   };
 
   /**
-   * Close filters modal by setting it's visible property to false via state
-   *
    * @function
    * @name closeFiltersModal
-   *
-   * @returns {undefined} - Nothing is returned
+   * @description Close filters modal by setting it's visible property
+   * to false via state
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -84,72 +83,105 @@ class Contacts extends Component {
   };
 
   /**
-   * Open contact form
-   *
    * @function
    * @name openContactForm
-   *
-   * @returns {undefined} - Nothing is returned
+   * @description Open contact form
    *
    * @version 0.1.0
    * @since 0.1.0
    */
   openContactForm = () => {
-    openStakeholderForm();
+    openFocalPersonForm();
   };
 
   /**
-   * close contact form
-   *
    * @function
    * @name openContactForm
-   *
-   * @returns {undefined} - Nothing is returned
+   * @description close contact form
    *
    * @version 0.1.0
    * @since 0.1.0
    */
   closeContactForm = () => {
-    closeStakeholderForm();
+    closeFocalPersonForm();
     this.setState({ isEditForm: false });
   };
 
   /**
-   * Search Contacts List based on supplied filter word
-   *
    * @function
    * @name searchContacts
+   * @description Search Contacts List based on supplied filter word
    *
    * @param {Object} event - Event instance
-   * @returns {undefined} - Nothing is returned
    *
    * @version 0.1.0
    * @since 0.1.0
    */
   searchContacts = event => {
-    searchStakeholders(event.target.value);
+    searchFocalPeople(event.target.value);
   };
 
   /**
-   * Handle on Edit action for list item
-   *
    * @function
    * @name handleEdit
+   * @description Handle on Edit action for list item
+   *
+   * @param {Object} contact contact to be edited
    *
    * @version 0.1.0
    * @since 0.1.0
    */
   handleEdit = contact => {
-    selectStakeholder(contact);
+    selectFocalPerson(contact);
     this.setState({ isEditForm: true });
-    openStakeholderForm();
+    openFocalPersonForm();
   };
 
   /**
-   * Handle on notify contacts
+   * @function
+   * @name handleShare
+   * @description Handle share single contact action
    *
+   * @param {Object} contact contact to be shared
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleShare = contact => {
+    const message = `${contact.name}\nMobile: ${contact.mobile}\nEmail: ${
+      contact.email
+    }`;
+
+    this.setState({ notificationBody: message, showNotificationForm: true });
+  };
+
+  /**
+   * @function
+   * @name handleBulkShare
+   * @description Handle share multiple contacts
+   *
+   * @param {Object[]} contacts contacts list to be shared
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleBulkShare = contacts => {
+    const contactList = contacts.map(
+      contact =>
+        `${contact.name}\nMobile: ${contact.mobile}\nEmail: ${contact.email}`
+    );
+
+    const message = contactList.join('\n\n\n');
+
+    this.setState({ notificationBody: message, showNotificationForm: true });
+  };
+
+  /**
    * @function
    * @name openNotificationForm
+   * @description Handle on notify contacts
+   *
+   * @param {Object[]} contacts List of contacts selected to be notified
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -162,10 +194,9 @@ class Contacts extends Component {
   };
 
   /**
-   * Handle on notify contacts
-   *
    * @function
    * @name closeNotificationForm
+   * @description Handle on notify contacts
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -174,8 +205,28 @@ class Contacts extends Component {
     this.setState({ showNotificationForm: false });
   };
 
+  /**
+   * @function
+   * @name handleAfterCloseForm
+   * @description Perform post close form cleanups
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleAfterCloseForm = () => {
     this.setState({ isEditForm: false });
+  };
+
+  /**
+   * @function
+   * @name handleAfterCloseNotificationForm
+   * @description Perform post close notification form cleanups
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleAfterCloseNotificationForm = () => {
+    this.setState({ notificationBody: undefined });
   };
 
   render() {
@@ -186,6 +237,7 @@ class Contacts extends Component {
       posting,
       page,
       showForm,
+      searchQuery,
       total,
     } = this.props;
     const {
@@ -193,6 +245,7 @@ class Contacts extends Component {
       isEditForm,
       showNotificationForm,
       selectedContacts,
+      notificationBody,
     } = this.state;
     return (
       <div className="ContactsList">
@@ -201,8 +254,10 @@ class Contacts extends Component {
             {/* search input component */}
             <Search
               size="large"
-              placeholder="Search for contacts here ..."
+              placeholder="Search for focal persons here ..."
               onChange={this.searchContacts}
+              allowClear
+              value={searchQuery}
             />
             {/* end search input component */}
           </Col>
@@ -226,10 +281,10 @@ class Contacts extends Component {
               type="primary"
               icon="plus"
               size="large"
-              title="Add New Contact"
+              title="Add New Focal Person"
               onClick={this.openContactForm}
             >
-              New Contact
+              New Focal Person
             </Button>
           </Col>
           {/* end primary actions */}
@@ -244,17 +299,20 @@ class Contacts extends Component {
           onEdit={this.handleEdit}
           onFilter={this.openFiltersModal}
           onNotify={this.openNotificationForm}
+          onShare={this.handleShare}
+          onBulkShare={this.handleBulkShare}
         />
         {/* end list */}
 
         {/* filter modal */}
         <Modal
-          title="Filter Contacts"
+          title="Filter Focal Persons"
           visible={showFilters}
           onCancel={this.closeFiltersModal}
           footer={null}
           destroyOnClose
           maskClosable={false}
+          width="50%"
         >
           <ContactFilters onCancel={this.closeFiltersModal} />
         </Modal>
@@ -262,24 +320,26 @@ class Contacts extends Component {
 
         {/* Notification Modal modal */}
         <Modal
-          title="Notify Contacts"
+          title="Notify Focal Persons"
           visible={showNotificationForm}
           onCancel={this.closeNotificationForm}
           footer={null}
           destroyOnClose
           maskClosable={false}
           width="40%"
+          afterClose={this.handleAfterCloseNotificationForm}
         >
           <NotificationForm
             onCancel={this.closeNotificationForm}
-            selectedContacts={selectedContacts}
+            recipients={selectedContacts}
+            body={notificationBody}
           />
         </Modal>
         {/* end Notification modal */}
 
         {/* create/edit form modal */}
         <Modal
-          title={isEditForm ? 'Edit Contact' : 'Add New Contact'}
+          title={isEditForm ? 'Edit Focal Person' : 'Add New Focal Person'}
           visible={showForm}
           width="50%"
           footer={null}
@@ -302,11 +362,12 @@ class Contacts extends Component {
 }
 
 export default Connect(Contacts, {
-  contacts: 'stakeholders.list',
-  contact: 'stakeholders.selected',
-  loading: 'stakeholders.loading',
-  posting: 'stakeholders.posting',
-  page: 'stakeholders.page',
-  showForm: 'stakeholders.showForm',
-  total: 'stakeholders.total',
+  contacts: 'focalPeople.list',
+  contact: 'focalPeople.selected',
+  loading: 'focalPeople.loading',
+  posting: 'focalPeople.posting',
+  page: 'focalPeople.page',
+  showForm: 'focalPeople.showForm',
+  total: 'focalPeople.total',
+  searchQuery: 'focalPeople.q',
 });

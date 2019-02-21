@@ -1,8 +1,4 @@
-import {
-  getFeatures,
-  getIncidentTypes,
-  getStakeholders,
-} from '@codetanzania/emis-api-client';
+import { httpActions } from '@codetanzania/emis-api-client';
 import { postPlan, putPlan } from '@codetanzania/emis-api-states';
 import { Button, Form } from 'antd';
 import upperFirst from 'lodash/upperFirst';
@@ -11,11 +7,13 @@ import React, { Component } from 'react';
 import SearchableSelectInput from '../../../../components/SearchableSelectInput';
 import { notifyError, notifySuccess } from '../../../../util';
 
+/* constants */
+const { getFeatures, getIncidentTypes, getFocalPeople } = httpActions;
+
 /**
- * Render Plan form for creating and updating plan plan details
- *
  * @class
  * @name PlanForm
+ * @description Render Plan form for creating and updating plan plan details
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -36,16 +34,17 @@ class PlanForm extends Component {
   };
 
   /**
-   * Handle submit form action
-   *
    * @function
    * @name handleSubmit
+   * @description Handle submit form action
+   *
+   * @param {Object} event onSubmit event object
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleSubmit = e => {
-    e.preventDefault();
+  handleSubmit = event => {
+    event.preventDefault();
 
     const {
       form: { validateFieldsAndScroll },
@@ -150,7 +149,7 @@ class PlanForm extends Component {
           })(
             <SearchableSelectInput
               placeholder="Select Plan Owner ..."
-              onSearch={getStakeholders}
+              onSearch={getFocalPeople}
               optionLabel="name"
               optionValue="_id"
               initialValue={isEditForm ? plan.owner : undefined}

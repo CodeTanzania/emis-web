@@ -1,14 +1,16 @@
-import { Avatar, Checkbox, Col, Icon, Row } from 'antd';
+import { Avatar, Checkbox, Col, Icon, Row, Modal } from 'antd';
 import PropTypes from 'prop-types';
 import randomColor from 'randomcolor';
 import React, { Component, Fragment } from 'react';
 import './styles.css';
 
+/* constants */
+const { confirm } = Modal;
+
 /**
  * @class
  * @name ContactsListItem
  * @description Single contact list item component. Render single contact details
- *
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -20,8 +22,9 @@ class ContactsListItem extends Component {
 
   static propTypes = {
     abbreviation: PropTypes.string.isRequired,
+    location: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
+    role: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     mobile: PropTypes.string.isRequired,
     onArchive: PropTypes.func.isRequired,
@@ -29,6 +32,7 @@ class ContactsListItem extends Component {
     isSelected: PropTypes.bool.isRequired,
     onSelectItem: PropTypes.func.isRequired,
     onDeselectItem: PropTypes.func.isRequired,
+    onShare: PropTypes.func.isRequired,
   };
 
   /**
@@ -77,15 +81,37 @@ class ContactsListItem extends Component {
     }
   };
 
+  /**
+   * @function
+   * @name showArchiveConfirm
+   * @description show confirm modal before archiving a contact
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  showArchiveConfirm = () => {
+    const { name, onArchive } = this.props;
+    confirm({
+      title: `Are you sure you want to archive ${name} ?`,
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        onArchive();
+      },
+    });
+  };
+
   render() {
     const {
       abbreviation,
       name,
-      title,
+      role,
+      location,
       email,
       mobile,
       onEdit,
-      onArchive,
+      onShare,
     } = this.props;
     const { isHovered } = this.state;
     const { isSelected } = this.props;
@@ -122,10 +148,11 @@ class ContactsListItem extends Component {
       >
         <Row>
           <Col span={1}>{sideComponent}</Col>
-          <Col span={5}>{name}</Col>
-          <Col span={6}>{title}</Col>
-          <Col span={4}>{mobile}</Col>
-          <Col span={4}>{email}</Col>
+          <Col span={4}>{name}</Col>
+          <Col span={5}>{role}</Col>
+          <Col span={4}>{location}</Col>
+          <Col span={3}>{mobile}</Col>
+          <Col span={3}>{email}</Col>
           <Col span={3}>
             {isHovered && (
               <Fragment>
@@ -139,12 +166,13 @@ class ContactsListItem extends Component {
                   type="share-alt"
                   title="Share Contact"
                   className="actionIcon"
+                  onClick={onShare}
                 />
                 <Icon
                   type="database"
                   title="Archive Contact"
                   className="actionIcon"
-                  onClick={onArchive}
+                  onClick={this.showArchiveConfirm}
                 />
               </Fragment>
             )}

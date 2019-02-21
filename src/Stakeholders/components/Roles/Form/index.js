@@ -1,5 +1,5 @@
 import { postRole, putRole } from '@codetanzania/emis-api-states';
-import { Button, Form, Input, Row, Col } from 'antd';
+import { Button, Col, Form, Input, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { notifyError, notifySuccess } from '../../../../util';
@@ -8,12 +8,9 @@ import { notifyError, notifySuccess } from '../../../../util';
 const { TextArea } = Input;
 
 /**
- * Render React Form
- *
  * @class
  * @name RoleForm
- *
- * @returns {ReactElement}
+ * @description Render React Form
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -35,8 +32,18 @@ class RoleForm extends Component {
     role: null,
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
+  /**
+   * @function
+   * @name handleSubmit
+   * @description Handle form submit action
+   *
+   * @param {Object} event onSubmit event
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleSubmit = event => {
+    event.preventDefault();
 
     const {
       form: { validateFieldsAndScroll },
@@ -114,16 +121,17 @@ class RoleForm extends Component {
               {getFieldDecorator('name', {
                 initialValue: isEditForm ? role.name : undefined,
                 rules: [{ required: true, message: 'Role  name is required' }],
-              })(<Input placeholder="e.g Adminstrator" />)}
+              })(<Input />)}
             </Form.Item>
             {/* end role name */}
           </Col>
+
           <Col span={6}>
             {/* role abbreviation */}
             <Form.Item {...formItemLayout} label="Abbreviation">
               {getFieldDecorator('abbreviation', {
                 initialValue: isEditForm ? role.abbreviation : undefined,
-              })(<Input placeholder="e.g RC,  RAS" />)}
+              })(<Input />)}
             </Form.Item>
             {/* end role abbreviation */}
           </Col>
@@ -134,12 +142,7 @@ class RoleForm extends Component {
         <Form.Item {...formItemLayout} label="Description">
           {getFieldDecorator('description', {
             initialValue: isEditForm ? role.description : undefined,
-          })(
-            <TextArea
-              autosize={{ minRows: 1, maxRows: 10 }}
-              placeholder="e.g Energy and Water Utilities Regulatory Authority"
-            />
-          )}
+          })(<TextArea autosize={{ minRows: 1, maxRows: 10 }} />)}
         </Form.Item>
         {/* end role description */}
 

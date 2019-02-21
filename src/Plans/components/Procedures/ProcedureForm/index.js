@@ -1,25 +1,26 @@
-import {
+import { httpActions } from '@codetanzania/emis-api-client';
+import { postProcedure, putProcedure } from '@codetanzania/emis-api-states';
+import { Button, Form, Input } from 'antd';
+import map from 'lodash/map';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import SearchableSelectInput from '../../../../components/SearchableSelectInput';
+import { notifyError, notifySuccess } from '../../../../util';
+
+/* constants */
+const {
   getActivities,
   getItems,
   getPlans,
   getQuestionnaires,
   getRoles,
-} from '@codetanzania/emis-api-client';
-import { postProcedure, putProcedure } from '@codetanzania/emis-api-states';
-import { Button, Form, Input } from 'antd';
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import map from 'lodash/map';
-import SearchableSelectInput from '../../../../components/SearchableSelectInput';
-import { notifyError, notifySuccess } from '../../../../util';
-
+} = httpActions;
 const { TextArea } = Input;
 
 /**
- * Render Procedure form for creating and updating procedure procedure details
- *
  * @class
  * @name ProcedureForm
+ * @description Render Procedure form for creating and updating procedure procedure details
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -40,16 +41,17 @@ class ProcedureForm extends Component {
   };
 
   /**
-   * Handle submit form action
-   *
    * @function
    * @name handleSubmit
+   * @description Handle submit form action
+   *
+   * @param {Object} event onSubmit event object
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleSubmit = e => {
-    e.preventDefault();
+  handleSubmit = event => {
+    event.preventDefault();
 
     const {
       form: { validateFieldsAndScroll },

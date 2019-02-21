@@ -1,12 +1,22 @@
-import { getProcedures } from '@codetanzania/emis-api-client';
+import { httpActions } from '@codetanzania/emis-api-client';
 import { Button, Form, Input } from 'antd';
 import map from 'lodash/map';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import SearchableSelectInput from '../../../../components/SearchableSelectInput';
 
+/* constants */
+const { getProcedures } = httpActions;
 const { TextArea } = Input;
 
+/**
+ * @class
+ * @name NotificationForm
+ * @description Notification form for procedures
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
 class NotificationForm extends Component {
   static propTypes = {
     selectedProcedures: PropTypes.arrayOf(
@@ -22,8 +32,18 @@ class NotificationForm extends Component {
     onCancel: PropTypes.func.isRequired,
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
+  /**
+   * @function
+   * @name handleSubmit
+   * @description Handle Notify action
+   *
+   * @param {Object} event OnSubmit event object
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleSubmit = event => {
+    event.preventDefault();
 
     const {
       form: { validateFieldsAndScroll },

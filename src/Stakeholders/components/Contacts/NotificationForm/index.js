@@ -1,4 +1,4 @@
-import { getStakeholders } from '@codetanzania/emis-api-client';
+import { get } from '@codetanzania/emis-api-client';
 import { Button, Form, Input } from 'antd';
 import map from 'lodash/map';
 import PropTypes from 'prop-types';
@@ -17,7 +17,7 @@ const { TextArea } = Input;
  */
 class NotificationForm extends Component {
   static propTypes = {
-    selectedContacts: PropTypes.arrayOf(
+    recipients: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string,
         title: PropTypes.string,
@@ -27,7 +27,12 @@ class NotificationForm extends Component {
       })
     ).isRequired,
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+    body: PropTypes.string,
     onCancel: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    body: undefined,
   };
 
   /**
@@ -36,7 +41,6 @@ class NotificationForm extends Component {
    * @description Callback to handle form on submit event
    *
    * @param {Object} event onSubmit event
-   * @returns {undefined} undefined
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -69,7 +73,8 @@ class NotificationForm extends Component {
     const {
       onCancel,
       form: { getFieldDecorator },
-      selectedContacts,
+      recipients,
+      body,
     } = this.props;
 
     const formItemLayout = {
@@ -102,15 +107,15 @@ class NotificationForm extends Component {
                 message: 'Please provide at least one recipient',
               },
             ],
-            initialValue: map(selectedContacts, contact => contact._id), // eslint-disable-line
+            initialValue: map(recipients, contact => contact._id), // eslint-disable-line
           })(
             <SearchableSelectInput
               placeholder="Enter notification recipients"
-              onSearch={getStakeholders}
+              onSearch={get}
               optionLabel="name"
               optionValue="_id"
               mode="multiple"
-              initialValue={selectedContacts}
+              initialValue={recipients}
             />
           )}
         </Form.Item>
@@ -118,9 +123,9 @@ class NotificationForm extends Component {
 
         {/* notification subject */}
         <Form.Item {...formItemLayout} label="Subject">
-          {getFieldDecorator('subject', {
-            rules: [{ required: true, message: 'Contact time is required' }],
-          })(<Input placeholder="Applicable for Email notification only" />)}
+          {getFieldDecorator('subject', {})(
+            <Input placeholder="Applicable for Email notification only" />
+          )}
         </Form.Item>
         {/* notification subject */}
 
@@ -133,6 +138,7 @@ class NotificationForm extends Component {
                 message: 'Please provide notification message',
               },
             ],
+            initialValue: body,
           })(
             <TextArea
               autosize={{ minRows: 6, maxRows: 10 }}

@@ -33,10 +33,11 @@ const routes = [
 ];
 
 /**
- * Alerts component which shows to navigation Nav
- *
  * @function
  * @name Alerts
+ * @description Alerts component which shows to navigation Nav
+ *
+ * @param {Object} match object with routes information
  *
  * @version 0.1.0
  * @since 0.1.0

@@ -3,12 +3,14 @@ import React from 'react';
 import contactsIcon from '../assets/icons/stakeholders/contacts.svg';
 import notificationsIcon from '../assets/icons/stakeholders/notifications-disabled.svg';
 import rolesIcon from '../assets/icons/stakeholders/roles.svg';
+import agenciesIcon from '../assets/icons/stakeholders/agency.svg';
 import NavigationMenu from '../components/NavigationMenu';
 
 const routes = [
-  { name: 'Contacts', path: '/contacts', icon: contactsIcon },
+  { name: 'Focal Persons', path: '/contacts', icon: contactsIcon },
+  { name: 'Agencies', path: '/agencies', icon: agenciesIcon },
   {
-    name: 'Roles & Responsibilities',
+    name: 'Roles',
     path: '/roles',
     icon: rolesIcon,
   },
@@ -21,10 +23,12 @@ const routes = [
 ];
 
 /**
- * Stakeholders component which shows to navigation Nav
- *
  * @function
  * @name Stakeholders
+ * @description Stakeholders component which shows to navigation Nav
+ *
+ * @param {Object} props props object
+ * @param {Object} props.match match router object
  *
  * @version 0.1.0
  * @since 0.1.0

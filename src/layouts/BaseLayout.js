@@ -48,6 +48,7 @@ import ResourcesWarehousesLayout from '../Resources/layouts/Warehouses';
 import StakeholdersContactsLayout from '../Stakeholders/layouts/Contacts';
 import StakeholdersRolesLayout from '../Stakeholders/layouts/Roles';
 import StakeholdersNotificationsLayout from '../Stakeholders/layouts/Notifications';
+import StakeholdersAgenciesLayout from '../Stakeholders/layouts/Agencies';
 import AdministrativeBoundariesLayout from '../GeographicalFeatures/layouts/AdministrativeBoundaries';
 import GeographicalFeaturesWarehousesLayout from '../GeographicalFeatures/layouts/Warehouses';
 import GeographicalFeaturesFacilitiesLayout from '../GeographicalFeatures/layouts/Facilities';
@@ -200,14 +201,21 @@ const breadcrumbNameMap = {
     title: 'List of available warehouses',
   },
   /* Stakeholders Routes */
-  '/stakeholders/contacts': { name: 'Contacts', title: 'List of all contacts' },
+  '/stakeholders/contacts': {
+    name: 'Focal Persons',
+    title: 'List of all focal persons',
+  },
+  '/stakeholders/agencies': {
+    name: 'Agencies',
+    title: 'List of all agencies',
+  },
   '/stakeholders/notifications': {
     name: 'Notifications',
     title: 'Notify stakeholders',
   },
   '/stakeholders/roles': {
     name: 'Roles',
-    title: 'Roles and responsibilities of Stakeholders',
+    title: 'Roles of Stakeholders',
   },
   '/stakeholders': { name: 'Stakeholders', title: 'Stakeholders module' },
 };
@@ -227,10 +235,9 @@ const userMenu = (
 );
 
 /**
- * Render base layout for EMIS dashboard
- *
  * @function
  * @name BaseLayout
+ * @description Render base layout for EMIS dashboard
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -499,6 +506,11 @@ const BaseLayout = withRouter(props => {
             exact
             path="/stakeholders/contacts"
             component={StakeholdersContactsLayout}
+          />
+          <Route
+            exact
+            path="/stakeholders/agencies"
+            component={StakeholdersAgenciesLayout}
           />
           <Route
             exact

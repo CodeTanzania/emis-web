@@ -1,25 +1,26 @@
+import { httpActions } from '@codetanzania/emis-api-client';
 import {
   Connect,
-  postStakeholder,
-  putStakeholder,
+  postFocalPerson,
+  putFocalPerson,
 } from '@codetanzania/emis-api-states';
-import { getFeatures, getRoles } from '@codetanzania/emis-api-client';
-import { Button, Form, Input, Row, Col } from 'antd';
+import { Button, Col, Form, Input, Row } from 'antd';
 import upperFirst from 'lodash/upperFirst';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { notifyError, notifySuccess } from '../../../../util';
 import SearchableSelectInput from '../../../../components/SearchableSelectInput';
 import SelectInput from '../../../../components/SelectInput';
+import { notifyError, notifySuccess } from '../../../../util';
 
 /* constants */
+const { getAgencies, getFeatures, getRoles } = httpActions;
 const { TextArea } = Input;
 
 /**
- * Render Contact form for creating and updating stakeholder contact details
- *
  * @class
  * @name ContactForm
+ * @description Render Contact form for creating and updating stakeholder
+ * contact details
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -35,22 +36,23 @@ class ContactForm extends Component {
       email: PropTypes.string,
     }).isRequired,
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
-    types: PropTypes.arrayOf(PropTypes.string).isRequired,
+    groups: PropTypes.arrayOf(PropTypes.string).isRequired,
     onCancel: PropTypes.func.isRequired,
     posting: PropTypes.bool.isRequired,
   };
 
   /**
-   * Handle submit form action
-   *
    * @function
    * @name handleSubmit
+   * @description Handle submit form action
+   *
+   * @param {Object} event onSubmit event object
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleSubmit = e => {
-    e.preventDefault();
+  handleSubmit = event => {
+    event.preventDefault();
 
     const {
       form: { validateFieldsAndScroll },
@@ -62,7 +64,7 @@ class ContactForm extends Component {
       if (!error) {
         if (isEditForm) {
           const updatedContact = Object.assign({}, contact, values);
-          putStakeholder(
+          putFocalPerson(
             updatedContact,
             () => {
               notifySuccess('Contact was updated successfully');
@@ -74,7 +76,7 @@ class ContactForm extends Component {
             }
           );
         } else {
-          postStakeholder(
+          postFocalPerson(
             values,
             () => {
               notifySuccess('Contact was created successfully');
@@ -97,7 +99,7 @@ class ContactForm extends Component {
       posting,
       onCancel,
       form: { getFieldDecorator },
-      types,
+      groups,
     } = this.props;
 
     const formItemLayout = {
@@ -131,7 +133,7 @@ class ContactForm extends Component {
                 rules: [
                   { required: true, message: 'Contact full name is required' },
                 ],
-              })(<Input placeholder="e.g John Doe" />)}
+              })(<Input />)}
             </Form.Item>
             {/* end contact name */}
           </Col>
@@ -145,7 +147,7 @@ class ContactForm extends Component {
                     rules: [
                       { required: true, message: 'Phone number is required' },
                     ],
-                  })(<Input placeholder="e.g 255799999999" />)}
+                  })(<Input />)}
                 </Form.Item>
                 {/* end contact mobile number */}
               </Col>
@@ -159,8 +161,12 @@ class ContactForm extends Component {
                         type: 'email',
                         message: 'The input is not valid E-mail!',
                       },
+                      {
+                        required: true,
+                        message: 'E-mail address is required',
+                      },
                     ],
-                  })(<Input placeholder="e.g example@mail.com" />)}
+                  })(<Input />)}
                 </Form.Item>
                 {/* end contact email */}
               </Col>
@@ -174,28 +180,34 @@ class ContactForm extends Component {
           <Col span={10}>
             {/* contact organization */}
             <Form.Item {...formItemLayout} label="Organization/Agency">
-              {getFieldDecorator('organization', {
-                initialValue: isEditForm ? contact.title : undefined,
-              })(<Input placeholder="e.g Tanzania Fire and Rescue Force" />)}
+              {getFieldDecorator('party', {
+                initialValue:
+                  isEditForm && contact.party ? contact.party._id : undefined, // eslint-disable-line
+              })(
+                <SearchableSelectInput
+                  onSearch={getAgencies}
+                  optionLabel="name"
+                  optionValue="_id"
+                  initialValue={
+                    isEditForm && contact.party ? contact.party : undefined
+                  }
+                />
+              )}
             </Form.Item>
             {/* end contact organization */}
           </Col>
+
           <Col span={13}>
             <Row type="flex" justify="space-between">
               <Col span={11}>
                 {/* contact group */}
                 <Form.Item {...formItemLayout} label="Group">
-                  {getFieldDecorator('type', {
-                    initialValue: isEditForm ? contact.type : undefined,
+                  {getFieldDecorator('group', {
+                    initialValue: isEditForm ? contact.group : undefined,
                     rules: [
                       { required: true, message: 'Contact group is required' },
                     ],
-                  })(
-                    <SelectInput
-                      options={types}
-                      placeholder="e.g Hospitals, Police"
-                    />
-                  )}
+                  })(<SelectInput options={groups} />)}
                 </Form.Item>
                 {/* end contact group */}
               </Col>
@@ -217,7 +229,6 @@ class ContactForm extends Component {
                         `${feature.name} (${upperFirst(feature.type)})`
                       }
                       optionValue="_id"
-                      placeholder="e.g Ilala, Ubungo"
                       initialValue={
                         isEditForm && contact.location
                           ? contact.location
@@ -249,7 +260,6 @@ class ContactForm extends Component {
                   onSearch={getRoles}
                   optionLabel="name"
                   optionValue="_id"
-                  placeholder="e.g Regional Commissioner"
                   initialValue={
                     isEditForm && contact.role ? contact.role : undefined
                   }
@@ -265,7 +275,7 @@ class ContactForm extends Component {
                 <Form.Item {...formItemLayout} label="Landline/Other Number">
                   {getFieldDecorator('landline', {
                     initialValue: isEditForm ? contact.landline : undefined,
-                  })(<Input placeholder="e.g 0229322112" />)}
+                  })(<Input />)}
                 </Form.Item>
                 {/* end contact landline number */}
               </Col>
@@ -274,7 +284,7 @@ class ContactForm extends Component {
                 <Form.Item {...formItemLayout} label="Fax">
                   {getFieldDecorator('fax', {
                     initialValue: isEditForm ? contact.fax : undefined,
-                  })(<Input placeholder="e.g 0222819343" />)}
+                  })(<Input />)}
                 </Form.Item>
                 {/* end contact fax */}
               </Col>
@@ -290,12 +300,7 @@ class ContactForm extends Component {
             <Form.Item {...formItemLayout} label="Physical Address">
               {getFieldDecorator('physicalAddress', {
                 initialValue: isEditForm ? contact.physicalAddress : undefined,
-              })(
-                <TextArea
-                  autosize={{ minRows: 1, maxRows: 10 }}
-                  placeholder="e.g Sinza A"
-                />
-              )}
+              })(<TextArea autosize={{ minRows: 1, maxRows: 10 }} />)}
             </Form.Item>
             {/* end contact physical Address */}
           </Col>
@@ -304,12 +309,7 @@ class ContactForm extends Component {
             <Form.Item {...formItemLayout} label="Postal Address">
               {getFieldDecorator('postalAddress', {
                 initialValue: isEditForm ? contact.postalAddress : undefined,
-              })(
-                <TextArea
-                  autosize={{ minRows: 1, maxRows: 10 }}
-                  placeholder="e.g P.O. Box XXX, Dar es Salaam"
-                />
-              )}
+              })(<TextArea autosize={{ minRows: 1, maxRows: 10 }} />)}
             </Form.Item>
             {/* end contact postal address */}
           </Col>
@@ -335,5 +335,5 @@ class ContactForm extends Component {
 }
 
 export default Connect(Form.create()(ContactForm), {
-  types: 'stakeholders.schema.properties.type.enum',
+  groups: 'focalPeople.schema.properties.group.enum',
 });

@@ -1,22 +1,26 @@
 import {
-  paginateStakeholders,
-  refreshStakeholders,
+  paginateFocalPeople,
+  refreshFocalPeople,
 } from '@codetanzania/emis-api-states';
-import { Button, Checkbox, Col, Pagination, Row } from 'antd';
+import { Button, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { notifyError, notifySuccess } from '../../../../util';
 import './styles.css';
 
+// eslint-disable-next-line jsdoc/require-returns
 /**
- * Render action bar for actions which are applicable to list content
- *
  * @function
  * @name ContactsActionBar
+ * @description Render action bar for actions which are applicable to list content
  *
- * @param {Object} props
- * @param {page} props.page
- * @param {number} props.total
+ * @param {Object} props props object
+ * @param {number} props.page current page
+ * @param {number} props.total total number of contacts
+ * @param {number} props.selectedItemCount total Number of selected items
+ * @param {Function} props.onNotify on notify action callback
+ * @param {Function} props.onFilter on filter action callback
+ * @param {Function} props.onShare on share action callback
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -27,15 +31,10 @@ const ContactsActionBar = ({
   selectedItemCount,
   onFilter,
   onNotify,
+  onShare,
 }) => (
   <div className="ContactsActionBar">
     <Row>
-      {/* bulk select action */}
-      <Col xl={{ span: 1 }} xxl={{ span: 1 }} className="checkbox">
-        <Checkbox />
-      </Col>
-      {/* end bulk select action */}
-
       {/* refresh contacts action */}
       <Col xl={{ span: 1 }} xxl={{ span: 1 }}>
         <Button
@@ -43,7 +42,7 @@ const ContactsActionBar = ({
           icon="reload"
           title="Refresh contacts"
           onClick={() =>
-            refreshStakeholders(
+            refreshFocalPeople(
               () => {
                 notifySuccess('Contacts refreshed successfully');
               },
@@ -98,27 +97,28 @@ const ContactsActionBar = ({
             title="Share selected contacts"
             className="actionButton"
             size="large"
+            onClick={onShare}
           />
         )}
       </Col>
       {/* end bulk share action */}
 
       {/* bulk archive action */}
-      <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}>
-        {selectedItemCount > 0 && (
-          <Button
-            type="circle"
-            icon="hdd"
-            title="Archive selected contacts"
-            className="actionButton"
-            size="large"
-          />
-        )}
-      </Col>
+      {/* <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}> */}
+      {/*   {selectedItemCount > 0 && ( */}
+      {/*     <Button */}
+      {/*       type="circle" */}
+      {/*       icon="hdd" */}
+      {/*       title="Archive selected contacts" */}
+      {/*       className="actionButton" */}
+      {/*       size="large" */}
+      {/*     /> */}
+      {/*   )} */}
+      {/* </Col> */}
       {/* end bulk archive action */}
 
       {/* selected and contacts number summary */}
-      <Col span={6} xl={{ span: 4, offset: 9 }} xxl={{ span: 5, offset: 9 }}>
+      <Col span={6} xl={{ span: 4, offset: 11 }} xxl={{ span: 5, offset: 11 }}>
         {selectedItemCount > 0 && (
           <span
             style={{ color: '#c5c5c5' }}
@@ -148,7 +148,7 @@ const ContactsActionBar = ({
           current={page}
           defaultCurrent={page}
           total={total}
-          onChange={nextPage => paginateStakeholders(nextPage)}
+          onChange={nextPage => paginateFocalPeople(nextPage)}
           className="pagination"
         />
       </Col>
@@ -164,6 +164,7 @@ ContactsActionBar.propTypes = {
   selectedItemCount: PropTypes.number.isRequired,
   onFilter: PropTypes.func.isRequired,
   onNotify: PropTypes.func.isRequired,
+  onShare: PropTypes.func.isRequired,
 };
 
 export default ContactsActionBar;

@@ -3,13 +3,21 @@ import React from 'react';
 import './styles.css';
 
 const headerLayout = [
-  { span: 5, header: 'Organisation', offset: 1 },
+  { span: 5, header: 'Organization', offset: 1 },
   { span: 3, header: 'Email' },
   { span: 3, header: 'Phone' },
   { span: 4, header: 'Website' },
   { span: 5, header: 'Feed Url' },
 ];
 
+/**
+ * @function
+ * @name AlertSourcesListHeader
+ * @description display alert source list metadata
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
 const AlertSourcesListHeader = () => (
   <Row className="AlertSourcesListHeader">
     {headerLayout.map(item => (

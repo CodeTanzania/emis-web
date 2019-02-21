@@ -6,20 +6,9 @@ import React, { Component, Fragment } from 'react';
 import './styles.css';
 
 /**
- * Single alert list item component. Render single alert details
- *
  * @class
  * @name AlertsListItem
- *
- * @param {Object} props
- * @param {string} props.abbreviation
- * @param {string} props.source
- * @param {string} props.event
- * @param {string} props.headline
- * @param {string} props.description
- * @param {string} props.color
- * @param {string} props.expectedAt
- * @param {string} props.expiredAt
+ * @description Single alert list item component. Render single alert details
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -57,14 +46,14 @@ class AlertsListItem extends Component {
     this.setState({ isHovered: false });
   };
 
+  // eslint-disable-next-line jsdoc/require-returns-check
   /**
-   * Transforms ISO date to human readable date
-   *
    * @function
    * @name toHumanReadableDate
+   * @description Transforms ISO date to human readable date
    *
-   * @param {string} isoFormatDate
-   * @returns humanReadableDate
+   * @param {string} isoFormatDate iso format date string
+   * @returns {string} humanReadableDate
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -74,8 +63,32 @@ class AlertsListItem extends Component {
       .utc()
       .format('ddd, MMM DD YYYY hA');
 
+  // eslint-disable-next-line jsdoc/require-returns-check
+  /**
+   * @function
+   * @name formatTime
+   * @description formats date to ddd, MMM DD YYYY hA format
+   *
+   * @param {Object} date date object
+   * @returns {string} formatted date
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   formatTime = date => moment(date).format('ddd, MMM DD YYYY hA');
 
+  // eslint-disable-next-line jsdoc/require-returns-check
+  /**
+   * @function
+   * @name timeAgo
+   * @description creates relative date
+   *
+   * @param {Object} date date object
+   * @returns {string} relative time
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   timeAgo = date => moment(date).fromNow();
 
   render() {

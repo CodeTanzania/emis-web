@@ -1,9 +1,4 @@
-import {
-  getItems,
-  getPlans,
-  getQuestionnaires,
-  getRoles,
-} from '@codetanzania/emis-api-client';
+import { httpActions } from '@codetanzania/emis-api-client';
 import {
   Connect,
   postActivity,
@@ -16,13 +11,14 @@ import React, { Component } from 'react';
 import SearchableSelectInput from '../../../../components/SearchableSelectInput';
 import { notifyError, notifySuccess } from '../../../../util';
 
+/* constants */
+const { getItems, getPlans, getQuestionnaires, getRoles } = httpActions;
 const { TextArea } = Input;
 
 /**
- * Render Activity form for creating and updating activity activity details
- *
  * @class
  * @name ActivityForm
+ * @description Render Activity form for creating and updating activity activity details
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -44,16 +40,17 @@ class ActivityForm extends Component {
   };
 
   /**
-   * Handle submit form action
-   *
    * @function
    * @name handleSubmit
+   * @description Handle submit form action
+   *
+   * @param {Object} event onSubmit event object
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleSubmit = e => {
-    e.preventDefault();
+  handleSubmit = event => {
+    event.preventDefault();
 
     const {
       form: { validateFieldsAndScroll },
