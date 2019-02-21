@@ -53,7 +53,7 @@ const RolesActionBar = ({
       </Col>
 
       {/* notify action */}
-      <Col xl={{ span: 1 }} xxl={{ span: 1 }}>
+      <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}>
         {selectedItemCount > 0 && (
           <Button
             type="circle"
@@ -92,7 +92,20 @@ const RolesActionBar = ({
       </Col>
       {/* end selected and role number summary */}
 
-      <Col span={3} xl={4} xxl={3}>
+      {/* filter action */}
+      <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}>
+        {/* <Button
+          type="circle"
+          icon="filter"
+          title="Filter contacts"
+          className="actionButton"
+          size="large"
+          onClick={onFilter}
+        /> */}
+      </Col>
+      {/* end filter action */}
+
+      <Col span={2} xl={4} xxl={3}>
         <Pagination
           simple
           defaultCurrent={page}
