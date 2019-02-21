@@ -714,10 +714,10 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@codetanzania/emis-api-client@^0.8.2":
-  version "0.8.2"
-  resolved "https://registry.yarnpkg.com/@codetanzania/emis-api-client/-/emis-api-client-0.8.2.tgz#501836bd08f6186712add95279874ca01a17d3bc"
-  integrity sha512-hfAqR3RzDKf4x40li3HwOVEfTqZZh0c1aZ4rd+747xycfu1n7ZTXTOnjcgacPqsHDkGObx+rDMqK0vVMAGCiFQ==
+"@codetanzania/emis-api-client@^0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@codetanzania/emis-api-client/-/emis-api-client-0.9.0.tgz#1dcada60e7e121241abcf153469ec81838ead4d9"
+  integrity sha512-vITmSxO4e5zaKNsYAtRWZF+kqhAJ6veENfbNm6c/6dFxo8ac6Jm98xKI495HI+W4meeASF8rbFohSV7rHvAegQ==
 
 "@codetanzania/emis-api-states@^0.9.0":
   version "0.9.0"
@@ -1329,10 +1329,10 @@ ant-design-palettes@^1.1.3:
   dependencies:
     tinycolor2 "^1.4.1"
 
-antd@^3.13.4:
-  version "3.13.4"
-  resolved "https://registry.yarnpkg.com/antd/-/antd-3.13.4.tgz#8d9afb182a4c9e2d7d0e43bed8661513159e56b2"
-  integrity sha512-tdnL+XKneuCoigOrQhHxUt2IediQUt4lQVePLMGUmGyPRCwK7ozirAHSsDG2ciK8L9TIG0cxMIn5SuQsDGTH7w==
+antd@^3.13.5:
+  version "3.13.5"
+  resolved "https://registry.yarnpkg.com/antd/-/antd-3.13.5.tgz#26b757ccb35c263c86fb3f4cee74ce4c8dbf4008"
+  integrity sha512-B4tLDoFnI0GaYXOmCMLr7q4dE4msFRzVEkqTAKD2HYXOBLWCTwGUZsp6s1dCI8sdpwnvaabnsO4NtZSWD9i9JA==
   dependencies:
     "@ant-design/icons" "~1.1.16"
     "@ant-design/icons-react" "~1.1.2"

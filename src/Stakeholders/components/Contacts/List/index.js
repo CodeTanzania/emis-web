@@ -1,4 +1,9 @@
-import { deleteFocalPerson } from '@codetanzania/emis-api-states';
+import { httpActions } from '@codetanzania/emis-api-client';
+import {
+  deleteFocalPerson,
+  paginateFocalPeople,
+  refreshFocalPeople,
+} from '@codetanzania/emis-api-states';
 import { List } from 'antd';
 import concat from 'lodash/concat';
 import map from 'lodash/map';
@@ -7,8 +12,9 @@ import uniq from 'lodash/uniq';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import ListHeader from '../../../../components/ListHeader';
+import Toolbar from '../../../../components/Toolbar';
 import { notifyError, notifySuccess } from '../../../../util';
-import ContactsActionBar from '../ActionBar';
+// import ContactsActionBar from '../ActionBar';
 import ContactsListItem from '../ListItem';
 
 /* constants */
@@ -19,6 +25,7 @@ const headerLayout = [
   { span: 3, header: 'Mobile Number' },
   { span: 3, header: 'Email Address' },
 ];
+const { getFocalPeopleExportUrl } = httpActions;
 
 /**
  * @class
@@ -171,21 +178,24 @@ class ContactsList extends Component {
 
     return (
       <Fragment>
-        {/* list action bar */}
-        <ContactsActionBar
-          total={total}
+        {/* toolbar */}
+        <Toolbar
+          itemName="focal person"
           page={page}
+          total={total}
+          selectedItemsCount={selectedContactsCount}
+          exportUrl={getFocalPeopleExportUrl({
+            filter: { _id: map(selectedContacts, '_id') },
+          })}
           onFilter={onFilter}
-          onNotify={() => {
-            onNotify(selectedContacts);
+          onNotify={() => onNotify(selectedContacts)}
+          onPaginate={nextPage => {
+            paginateFocalPeople(nextPage);
           }}
-          selectedItemCount={selectedContactsCount}
-          onFilterByStatus={this.handleFilterByStatus}
-          onShare={() => {
-            onBulkShare(selectedContacts);
-          }}
+          onRefresh={refreshFocalPeople}
+          onShare={() => onBulkShare(selectedContacts)}
         />
-        {/* end action bar */}
+        {/* end toolbar */}
 
         {/* contact list header */}
         <ListHeader
