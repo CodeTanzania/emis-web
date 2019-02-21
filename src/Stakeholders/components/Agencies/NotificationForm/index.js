@@ -1,4 +1,4 @@
-import { get } from '@codetanzania/emis-api-client';
+import { httpActions } from '@codetanzania/emis-api-client';
 import { Button, Form, Input } from 'antd';
 import map from 'lodash/map';
 import PropTypes from 'prop-types';
@@ -7,6 +7,7 @@ import SearchableSelectInput from '../../../../components/SearchableSelectInput'
 
 /* constants */
 const { TextArea } = Input;
+const { getFocalPeople } = httpActions;
 
 /**
  * @class
@@ -112,7 +113,7 @@ class NotificationForm extends Component {
           })(
             <SearchableSelectInput
               placeholder="Enter notification recipients"
-              onSearch={get}
+              onSearch={getFocalPeople}
               optionLabel="name"
               optionValue="_id"
               mode="multiple"

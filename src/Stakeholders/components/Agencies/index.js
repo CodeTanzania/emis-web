@@ -287,7 +287,7 @@ class Agencies extends Component {
 
         {/* Notification Modal modal */}
         <Modal
-          title="Notify Agencies"
+          title="Share Agencies"
           visible={showNotificationForm}
           onCancel={this.closeNotificationForm}
           footer={null}
