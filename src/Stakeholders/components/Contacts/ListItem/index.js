@@ -22,6 +22,8 @@ class ContactsListItem extends Component {
 
   static propTypes = {
     abbreviation: PropTypes.string.isRequired,
+    agency: PropTypes.string.isRequired,
+    agencyAbbreviation: PropTypes.string.isRequired,
     location: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     role: PropTypes.string.isRequired,
@@ -105,6 +107,8 @@ class ContactsListItem extends Component {
   render() {
     const {
       abbreviation,
+      agency,
+      agencyAbbreviation,
       name,
       role,
       location,
@@ -148,10 +152,13 @@ class ContactsListItem extends Component {
       >
         <Row>
           <Col span={1}>{sideComponent}</Col>
-          <Col span={4}>{name}</Col>
+          <Col span={3}>{name}</Col>
+          <Col span={2} title={agency}>
+            {agencyAbbreviation}
+          </Col>
           <Col span={5}>{role}</Col>
           <Col span={4}>{location}</Col>
-          <Col span={3}>{mobile}</Col>
+          <Col span={2}>{mobile}</Col>
           <Col span={3}>{email}</Col>
           <Col span={3}>
             {isHovered && (
