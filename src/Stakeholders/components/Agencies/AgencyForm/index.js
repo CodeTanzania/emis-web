@@ -123,7 +123,7 @@ class AgencyForm extends Component {
         <Row type="flex" justify="space-between">
           <Col span={10}>
             {/* agency name */}
-            <Form.Item {...formItemLayout} label="Full Name">
+            <Form.Item {...formItemLayout} label="Name">
               {getFieldDecorator('name', {
                 initialValue: isEditForm ? agency.name : undefined,
                 rules: [
