@@ -1,4 +1,9 @@
-import { deleteFocalPerson } from '@codetanzania/emis-api-states';
+import {
+  deleteAgency,
+  paginateAgencies,
+  refreshAgencies,
+} from '@codetanzania/emis-api-states';
+import { httpActions } from '@codetanzania/emis-api-client';
 import { List } from 'antd';
 import concat from 'lodash/concat';
 import map from 'lodash/map';
@@ -8,7 +13,7 @@ import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import ListHeader from '../../../../components/ListHeader';
 import { notifyError, notifySuccess } from '../../../../util';
-import AgencyActionBar from '../ActionBar';
+import Toolbar from '../../../../components/Toolbar';
 import AgencyListItem from '../ListItem';
 
 /* constants */
@@ -18,6 +23,8 @@ const headerLayout = [
   { span: 4, header: 'Mobile Number' },
   { span: 4, header: 'Email Address' },
 ];
+
+const { getAgenciesExportUrl } = httpActions;
 
 /**
  * @class
@@ -36,7 +43,6 @@ class AgencyList extends Component {
     page: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
     onEdit: PropTypes.func.isRequired,
-    onFilter: PropTypes.func.isRequired,
     onNotify: PropTypes.func.isRequired,
     onBulkShare: PropTypes.func.isRequired,
   };
@@ -159,7 +165,6 @@ class AgencyList extends Component {
       page,
       total,
       onEdit,
-      onFilter,
       onNotify,
       onBulkShare,
     } = this.props;
@@ -168,21 +173,23 @@ class AgencyList extends Component {
 
     return (
       <Fragment>
-        {/* list action bar */}
-        <AgencyActionBar
-          total={total}
+        {/* toolbar */}
+        <Toolbar
+          itemName="Agency"
           page={page}
-          onFilter={onFilter}
-          onShare={() => {
-            onBulkShare(selectedAgencies);
+          total={total}
+          selectedItemsCount={selectedAgenciesCount}
+          exportUrl={getAgenciesExportUrl({
+            filter: { _id: map(selectedAgencies, '_id') },
+          })}
+          onNotify={() => onNotify(selectedAgencies)}
+          onPaginate={nextPage => {
+            paginateAgencies(nextPage);
           }}
-          onNotify={() => {
-            onNotify(selectedAgencies);
-          }}
-          selectedItemCount={selectedAgenciesCount}
-          onFilterByStatus={this.handleFilterByStatus}
+          onRefresh={refreshAgencies}
+          onShare={() => onBulkShare(selectedAgencies)}
         />
-        {/* end action bar */}
+        {/* end toolbar */}
 
         {/* agency list header */}
         <ListHeader
@@ -220,7 +227,7 @@ class AgencyList extends Component {
               }}
               onEdit={() => onEdit(agency)}
               onArchive={() =>
-                deleteFocalPerson(
+                deleteAgency(
                   agency._id, // eslint-disable-line
                   () => {
                     notifySuccess('Agency was archived successfully');
