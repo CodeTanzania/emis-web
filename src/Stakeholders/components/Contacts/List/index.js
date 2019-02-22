@@ -1,4 +1,9 @@
-import { deleteStakeholder } from '@codetanzania/emis-api-states';
+import { httpActions } from '@codetanzania/emis-api-client';
+import {
+  deleteFocalPerson,
+  paginateFocalPeople,
+  refreshFocalPeople,
+} from '@codetanzania/emis-api-states';
 import { List } from 'antd';
 import concat from 'lodash/concat';
 import map from 'lodash/map';
@@ -7,18 +12,21 @@ import uniq from 'lodash/uniq';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import ListHeader from '../../../../components/ListHeader';
+import Toolbar from '../../../../components/Toolbar';
 import { notifyError, notifySuccess } from '../../../../util';
-import ContactsActionBar from '../ActionBar';
+// import ContactsActionBar from '../ActionBar';
 import ContactsListItem from '../ListItem';
 
 /* constants */
 const headerLayout = [
-  { span: 4, header: 'Name' },
+  { span: 3, header: 'Name' },
+  { span: 2, header: 'Agency' },
   { span: 5, header: 'Role' },
   { span: 4, header: 'Area' },
-  { span: 3, header: 'Mobile Number' },
+  { span: 2, header: 'Mobile Number' },
   { span: 3, header: 'Email Address' },
 ];
+const { getFocalPeopleExportUrl } = httpActions;
 
 /**
  * @class
@@ -123,11 +131,11 @@ class ContactsList extends Component {
    */
   handleFilterByStatus = () => {
     // if (status === 'All') {
-    //   filterStakeholders({});
+    //   filter({});
     // } else if (status === 'Active') {
-    //   filterStakeholders({});
+    //   filter({});
     // } else if (status === 'Archived') {
-    //   filterStakeholders({});
+    //   filter({});
     // }
   };
 
@@ -171,21 +179,24 @@ class ContactsList extends Component {
 
     return (
       <Fragment>
-        {/* list action bar */}
-        <ContactsActionBar
-          total={total}
+        {/* toolbar */}
+        <Toolbar
+          itemName="focal person"
           page={page}
+          total={total}
+          selectedItemsCount={selectedContactsCount}
+          exportUrl={getFocalPeopleExportUrl({
+            filter: { _id: map(selectedContacts, '_id') },
+          })}
           onFilter={onFilter}
-          onNotify={() => {
-            onNotify(selectedContacts);
+          onNotify={() => onNotify(selectedContacts)}
+          onPaginate={nextPage => {
+            paginateFocalPeople(nextPage);
           }}
-          selectedItemCount={selectedContactsCount}
-          onFilterByStatus={this.handleFilterByStatus}
-          onShare={() => {
-            onBulkShare(selectedContacts);
-          }}
+          onRefresh={refreshFocalPeople}
+          onShare={() => onBulkShare(selectedContacts)}
         />
-        {/* end action bar */}
+        {/* end toolbar */}
 
         {/* contact list header */}
         <ListHeader
@@ -206,6 +217,10 @@ class ContactsList extends Component {
               abbreviation={contact.abbreviation}
               location={contact.location.name}
               name={contact.name}
+              agency={contact.party ? contact.party.name : 'N/A'}
+              agencyAbbreviation={
+                contact.party ? contact.party.abbreviation : 'N/A'
+              }
               role={contact.role ? contact.role.name : 'N/A'}
               email={contact.email}
               mobile={contact.mobile}
@@ -221,7 +236,7 @@ class ContactsList extends Component {
               }}
               onEdit={() => onEdit(contact)}
               onArchive={() =>
-                deleteStakeholder(
+                deleteFocalPerson(
                   contact._id, // eslint-disable-line
                   () => {
                     notifySuccess('Contact was archived successfully');

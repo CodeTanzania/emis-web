@@ -6,62 +6,63 @@ import {
   Icon,
   Layout,
   Menu,
-  Row,
   Popover,
+  Row,
 } from 'antd';
 import React from 'react';
 import { Link, Route, Switch, withRouter } from 'react-router-dom';
 import Alerts from '../Alerts';
-import Assessments from '../Assessments';
-import EmergencyPlans from '../Plans';
-import Stakeholders from '../Stakeholders';
-import GeographicalFeatures from '../GeographicalFeatures';
-import Incidents from '../Incidents';
-import Resources from '../Resources';
-import AlertsLayout from '../Alerts/layouts/Alerts';
 import AlertsActionsLayout from '../Alerts/layouts/Actions';
+import AlertsLayout from '../Alerts/layouts/Alerts';
 import AlertsFeedbackLayout from '../Alerts/layouts/Feedback';
 import AlertsFeedsLayout from '../Alerts/layouts/Feeds';
 import AlertsServiceRequestsLayout from '../Alerts/layouts/ServiceRequests';
 import AlertsSourcesLayout from '../Alerts/layouts/Sources';
+import Assessments from '../Assessments';
+import AssessmentsIndicatorsLayout from '../Assessments/layouts/Indicators';
 import AssessmentsQuestionnairesLayout from '../Assessments/layouts/Questionnaires';
 import AssessmentsQuestionsLayout from '../Assessments/layouts/Questions';
-import AssessmentsIndicatorsLayout from '../Assessments/layouts/Indicators';
 import AssessmentsResponsesLayout from '../Assessments/layouts/Responses';
-import EmergencyPlanPlannerLayout from '../Plans/layouts/Planner';
+import GeographicalFeatures from '../GeographicalFeatures';
+import AdministrativeBoundariesLayout from '../GeographicalFeatures/layouts/AdministrativeBoundaries';
+import DistrictsLayout from '../GeographicalFeatures/layouts/Districts';
+import EvacuationCentersLayout from '../GeographicalFeatures/layouts/EvacuationCenters';
+import GeographicalFeaturesFacilitiesLayout from '../GeographicalFeatures/layouts/Facilities';
+import GeographicalFeaturesInfrastructureLayout from '../GeographicalFeatures/layouts/Infrastructure';
+import RegionsLayout from '../GeographicalFeatures/layouts/Regions';
+import SubWardsLayout from '../GeographicalFeatures/layouts/SubWards';
+import WardsLayout from '../GeographicalFeatures/layouts/Wards';
+import GeographicalFeaturesWarehousesLayout from '../GeographicalFeatures/layouts/Warehouses';
+import Home from '../Home';
+import Incidents from '../Incidents';
+import IncidentsActionsLayout from '../Incidents/layouts/Actions';
+import IncidentsAssessmentsLayout from '../Incidents/layouts/Assessments';
+import IncidentsCommandCenterLayout from '../Incidents/layouts/CommandCenter';
+import IncidentsFeedsLayout from '../Incidents/layouts/Feeds';
+import IncidentsIncidentTypesLayout from '../Incidents/layouts/IncidentTypes';
+import IncidentsLossDatabaseLayout from '../Incidents/layouts/LossDatabase';
+import EmergencyPlans from '../Plans';
 import EmergencyPlanActivationsLayout from '../Plans/layouts/Activations';
 import EmergencyPlanActivitiesLayout from '../Plans/layouts/Activities';
 import EmergencyPlanDisseminationsLayout from '../Plans/layouts/Disseminations';
 import EmergencyPlanDrillsLayout from '../Plans/layouts/Drills';
+import EmergencyPlanPlannerLayout from '../Plans/layouts/Planner';
 import EmergencyPlanProceduresLayout from '../Plans/layouts/Procedures';
-import IncidentsCommandCenterLayout from '../Incidents/layouts/CommandCenter';
-import IncidentsAssessmentsLayout from '../Incidents/layouts/Assessments';
-import IncidentsActionsLayout from '../Incidents/layouts/Actions';
-import IncidentsFeedsLayout from '../Incidents/layouts/Feeds';
-import IncidentsLossDatabaseLayout from '../Incidents/layouts/LossDatabase';
-import IncidentsIncidentTypesLayout from '../Incidents/layouts/IncidentTypes';
-import ResourcesItemsLayout from '../Resources/layouts/Items';
+import Resources from '../Resources';
 import ResourcesAdjustmentsLayout from '../Resources/layouts/Adjustments';
-import ResourcesUtilizationLayout from '../Resources/layouts/Utilization';
+import ResourcesItemsLayout from '../Resources/layouts/Items';
 import ResourcesStockLayout from '../Resources/layouts/Stock';
+import ResourcesUtilizationLayout from '../Resources/layouts/Utilization';
 import ResourcesWarehousesLayout from '../Resources/layouts/Warehouses';
-import StakeholdersContactsLayout from '../Stakeholders/layouts/Contacts';
-import StakeholdersRolesLayout from '../Stakeholders/layouts/Roles';
-import StakeholdersNotificationsLayout from '../Stakeholders/layouts/Notifications';
+import Stakeholders from '../Stakeholders';
 import StakeholdersAgenciesLayout from '../Stakeholders/layouts/Agencies';
-import AdministrativeBoundariesLayout from '../GeographicalFeatures/layouts/AdministrativeBoundaries';
-import GeographicalFeaturesWarehousesLayout from '../GeographicalFeatures/layouts/Warehouses';
-import GeographicalFeaturesFacilitiesLayout from '../GeographicalFeatures/layouts/Facilities';
-import GeographicalFeaturesInfrastructureLayout from '../GeographicalFeatures/layouts/Infrastructure';
+import StakeholdersContactsLayout from '../Stakeholders/layouts/Contacts';
+import StakeholdersNotificationsLayout from '../Stakeholders/layouts/Notifications';
+import StakeholdersRolesLayout from '../Stakeholders/layouts/Roles';
 import HeaderNavMenu from './components/HeaderNavMenu';
-import EvacuationCentersLayout from '../GeographicalFeatures/layouts/EvacuationCenters';
-import DistrictsLayout from '../GeographicalFeatures/layouts/Districts';
-import SubWardsLayout from '../GeographicalFeatures/layouts/SubWards';
-import WardsLayout from '../GeographicalFeatures/layouts/Wards';
-import RegionsLayout from '../GeographicalFeatures/layouts/Regions';
-import Home from '../Home';
 import './styles.css';
 
+/* constants */
 const { Header, Content } = Layout;
 const breadcrumbNameMap = {
   '/': { name: 'Home', title: 'EMIS' },

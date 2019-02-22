@@ -1,10 +1,12 @@
-import { getPlans } from '@codetanzania/emis-api-client';
+import { httpActions } from '@codetanzania/emis-api-client';
 import { Button, Form, Input } from 'antd';
 import map from 'lodash/map';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import SearchableSelectInput from '../../../../components/SearchableSelectInput';
 
+/* constants */
+const { getPlans } = httpActions;
 const { TextArea } = Input;
 
 class NotificationForm extends Component {

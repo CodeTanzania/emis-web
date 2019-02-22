@@ -1,10 +1,10 @@
 import {
-  closeStakeholderForm,
+  closeFocalPersonForm,
   Connect,
-  getStakeholders,
-  openStakeholderForm,
-  selectStakeholder,
-  searchStakeholders,
+  getFocalPeople,
+  openFocalPersonForm,
+  searchFocalPeople,
+  selectFocalPerson,
 } from '@codetanzania/emis-api-states';
 import { Button, Col, Input, Modal, Row } from 'antd';
 import PropTypes from 'prop-types';
@@ -53,7 +53,7 @@ class Contacts extends Component {
   };
 
   componentDidMount() {
-    getStakeholders();
+    getFocalPeople();
   }
 
   /**
@@ -91,7 +91,7 @@ class Contacts extends Component {
    * @since 0.1.0
    */
   openContactForm = () => {
-    openStakeholderForm();
+    openFocalPersonForm();
   };
 
   /**
@@ -103,7 +103,7 @@ class Contacts extends Component {
    * @since 0.1.0
    */
   closeContactForm = () => {
-    closeStakeholderForm();
+    closeFocalPersonForm();
     this.setState({ isEditForm: false });
   };
 
@@ -118,7 +118,7 @@ class Contacts extends Component {
    * @since 0.1.0
    */
   searchContacts = event => {
-    searchStakeholders(event.target.value);
+    searchFocalPeople(event.target.value);
   };
 
   /**
@@ -132,9 +132,9 @@ class Contacts extends Component {
    * @since 0.1.0
    */
   handleEdit = contact => {
-    selectStakeholder(contact);
+    selectFocalPerson(contact);
     this.setState({ isEditForm: true });
-    openStakeholderForm();
+    openFocalPersonForm();
   };
 
   /**
@@ -312,6 +312,7 @@ class Contacts extends Component {
           footer={null}
           destroyOnClose
           maskClosable={false}
+          width="50%"
         >
           <ContactFilters onCancel={this.closeFiltersModal} />
         </Modal>
@@ -361,12 +362,12 @@ class Contacts extends Component {
 }
 
 export default Connect(Contacts, {
-  contacts: 'stakeholders.list',
-  contact: 'stakeholders.selected',
-  loading: 'stakeholders.loading',
-  posting: 'stakeholders.posting',
-  page: 'stakeholders.page',
-  showForm: 'stakeholders.showForm',
-  total: 'stakeholders.total',
-  searchQuery: 'stakeholders.q',
+  contacts: 'focalPeople.list',
+  contact: 'focalPeople.selected',
+  loading: 'focalPeople.loading',
+  posting: 'focalPeople.posting',
+  page: 'focalPeople.page',
+  showForm: 'focalPeople.showForm',
+  total: 'focalPeople.total',
+  searchQuery: 'focalPeople.q',
 });

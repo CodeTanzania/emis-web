@@ -1,6 +1,6 @@
 import {
-  paginateStakeholders,
-  refreshStakeholders,
+  paginateAgencies,
+  refreshAgencies,
 } from '@codetanzania/emis-api-states';
 import { Button, Checkbox, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
@@ -46,7 +46,7 @@ const AgenciesActionBar = ({
           icon="reload"
           title="Refresh agencies"
           onClick={() =>
-            refreshStakeholders(
+            refreshAgencies(
               () => {
                 notifySuccess('Agencies refreshed successfully');
               },
@@ -151,7 +151,7 @@ const AgenciesActionBar = ({
           current={page}
           defaultCurrent={page}
           total={total}
-          onChange={nextPage => paginateStakeholders(nextPage)}
+          onChange={nextPage => paginateAgencies(nextPage)}
           className="pagination"
         />
       </Col>

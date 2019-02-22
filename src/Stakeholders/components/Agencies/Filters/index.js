@@ -1,7 +1,7 @@
 import {
-  clearStakeholderFilters,
+  clearAgencyFilters,
   Connect,
-  filterStakeholders,
+  filterAgencies,
 } from '@codetanzania/emis-api-states';
 import { Button, Checkbox, Col, Form, Row } from 'antd';
 import PropTypes from 'prop-types';
@@ -19,14 +19,13 @@ class AgenciesFilters extends Component {
   static propTypes = {
     filter: PropTypes.objectOf(
       PropTypes.shape({
-        types: PropTypes.arrayOf(PropTypes.string),
+        groups: PropTypes.arrayOf(PropTypes.string),
         phases: PropTypes.arrayOf(PropTypes.string),
       })
     ),
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
     onCancel: PropTypes.func.isRequired,
-    types: PropTypes.arrayOf(PropTypes.string).isRequired,
-    phases: PropTypes.arrayOf(PropTypes.string).isRequired,
+    groups: PropTypes.arrayOf(PropTypes.string).isRequired,
   };
 
   static defaultProps = {
@@ -52,7 +51,7 @@ class AgenciesFilters extends Component {
 
     validateFields((error, values) => {
       if (!error) {
-        filterStakeholders(values);
+        filterAgencies(values);
         onCancel();
       }
     });
@@ -68,7 +67,7 @@ class AgenciesFilters extends Component {
    */
   handleClearFilter = () => {
     const { onCancel } = this.props;
-    clearStakeholderFilters();
+    clearAgencyFilters();
     onCancel();
   };
 
@@ -76,8 +75,7 @@ class AgenciesFilters extends Component {
     const {
       form: { getFieldDecorator },
       onCancel,
-      types,
-      phases,
+      groups,
       filter,
     } = this.props;
 
@@ -103,14 +101,14 @@ class AgenciesFilters extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* start agency type filters */}
-        <Form.Item {...formItemLayout} label="By Agency type">
-          {getFieldDecorator('type', {
+        <Form.Item {...formItemLayout} label="By Agency Group">
+          {getFieldDecorator('group', {
             initialValue: filter ? filter.type : [],
           })(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
-                {types.map(type => (
-                  <Col span={6} style={{ margin: '10px 0' }} key={type}>
+                {groups.map(type => (
+                  <Col span={8} style={{ margin: '10px 0' }} key={type}>
                     <Checkbox value={type}>{type}</Checkbox>
                   </Col>
                 ))}
@@ -119,24 +117,6 @@ class AgenciesFilters extends Component {
           )}
         </Form.Item>
         {/* end agency type filters */}
-
-        {/* start emergency phase filters */}
-        <Form.Item {...formItemLayout} label="By Emergency Phases">
-          {getFieldDecorator('phases', {
-            initialValue: filter ? filter.phases : [],
-          })(
-            <Checkbox.Group style={{ width: '100%' }}>
-              <Row>
-                {phases.map(phase => (
-                  <Col span={6} style={{ margin: '10px 0' }} key={phase}>
-                    <Checkbox value={phase}>{phase}</Checkbox>
-                  </Col>
-                ))}
-              </Row>
-            </Checkbox.Group>
-          )}
-        </Form.Item>
-        {/* end emergency phase filters */}
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
@@ -155,7 +135,6 @@ class AgenciesFilters extends Component {
 }
 
 export default Connect(Form.create()(AgenciesFilters), {
-  types: 'stakeholders.schema.properties.type.enum',
-  phases: 'stakeholders.schema.properties.phases.enum',
-  filter: 'stakeholders.filter',
+  groups: 'agencies.schema.properties.group.enum',
+  filter: 'agencies.filter',
 });

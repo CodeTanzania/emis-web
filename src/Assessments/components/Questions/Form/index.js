@@ -1,15 +1,17 @@
+import { httpActions } from '@codetanzania/emis-api-client';
 import {
+  Connect,
   postQuestion,
   putQuestion,
-  Connect,
 } from '@codetanzania/emis-api-states';
-import { getIndicators } from '@codetanzania/emis-api-client';
 import { Button, Form, Input, Select } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import SearchableSelectInput from '../../../../components/SearchableSelectInput';
 import { notifyError, notifySuccess } from '../../../../util';
 
+/* constants */
+const { getIndicators } = httpActions;
 const { Option } = Select;
 
 /**

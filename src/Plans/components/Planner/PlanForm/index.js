@@ -1,8 +1,4 @@
-import {
-  getFeatures,
-  getIncidentTypes,
-  getStakeholders,
-} from '@codetanzania/emis-api-client';
+import { httpActions } from '@codetanzania/emis-api-client';
 import { postPlan, putPlan } from '@codetanzania/emis-api-states';
 import { Button, Form } from 'antd';
 import upperFirst from 'lodash/upperFirst';
@@ -10,6 +6,9 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import SearchableSelectInput from '../../../../components/SearchableSelectInput';
 import { notifyError, notifySuccess } from '../../../../util';
+
+/* constants */
+const { getFeatures, getIncidentTypes, getFocalPeople } = httpActions;
 
 /**
  * @class
@@ -150,7 +149,7 @@ class PlanForm extends Component {
           })(
             <SearchableSelectInput
               placeholder="Select Plan Owner ..."
-              onSearch={getStakeholders}
+              onSearch={getFocalPeople}
               optionLabel="name"
               optionValue="_id"
               initialValue={isEditForm ? plan.owner : undefined}
