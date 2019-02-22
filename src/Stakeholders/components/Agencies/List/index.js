@@ -44,7 +44,7 @@ class AgencyList extends Component {
     total: PropTypes.number.isRequired,
     onEdit: PropTypes.func.isRequired,
     onNotify: PropTypes.func.isRequired,
-    onBulkShare: PropTypes.func.isRequired,
+    onShare: PropTypes.func.isRequired,
   };
 
   state = {
@@ -166,7 +166,7 @@ class AgencyList extends Component {
       total,
       onEdit,
       onNotify,
-      onBulkShare,
+      onShare,
     } = this.props;
     const { selectedAgencies, selectedPages } = this.state;
     const selectedAgenciesCount = this.state.selectedAgencies.length;
@@ -187,7 +187,7 @@ class AgencyList extends Component {
             paginateAgencies(nextPage);
           }}
           onRefresh={refreshAgencies}
-          onShare={() => onBulkShare(selectedAgencies)}
+          onShare={() => onShare(selectedAgencies)}
         />
         {/* end toolbar */}
 
@@ -213,7 +213,7 @@ class AgencyList extends Component {
               email={agency.email}
               mobile={agency.mobile}
               onShare={() => {
-                onBulkShare(selectedAgencies);
+                onShare(agency);
               }}
               isSelected={
                 // eslint-disable-next-line

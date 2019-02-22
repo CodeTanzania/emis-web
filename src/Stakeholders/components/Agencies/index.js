@@ -154,6 +154,24 @@ class Agencies extends Component {
 
   /**
    * @function
+   * @name handleShare
+   * @description Handle share single agency action
+   *
+   * @param {Object} agency  to be shared
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleShare = agency => {
+    const message = `${agency.name}\nMobile: ${agency.mobile}\nEmail: ${
+      agency.email
+    }`;
+
+    this.setState({ notificationBody: message, showNotificationForm: true });
+  };
+
+  /**
+   * @function
    * @name handleBulkShare
    * @description Handle share multiple agencies
    *
@@ -267,6 +285,7 @@ class Agencies extends Component {
           onEdit={this.handleEdit}
           onFilter={this.openFiltersModal}
           onNotify={this.openNotificationForm}
+          onShare={this.handleShare}
           onBulkShare={this.handleBulkShare}
         />
         {/* end list */}
