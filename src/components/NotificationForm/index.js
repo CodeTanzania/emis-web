@@ -3,23 +3,23 @@ import { Button, Form, Input } from 'antd';
 import map from 'lodash/map';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import SearchableSelectInput from '../../../../components/SearchableSelectInput';
+import SearchableSelectInput from '../SearchableSelectInput';
 
 /* constants */
-const { TextArea } = Input;
 const { getFocalPeople } = httpActions;
+const { TextArea } = Input;
 
 /**
  * @class
  * @name NotificationForm
- * @description Render Agencies notification form component
+ * @description Render notification form component
  *
  * @version 0.1.0
  * @since 0.1.0
  */
 class NotificationForm extends Component {
   static propTypes = {
-    selectedAgencies: PropTypes.arrayOf(
+    recipients: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string,
         title: PropTypes.string,
@@ -28,9 +28,10 @@ class NotificationForm extends Component {
         email: PropTypes.string,
       })
     ).isRequired,
-    body: PropTypes.string,
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+    body: PropTypes.string,
     onCancel: PropTypes.func.isRequired,
+    onNotify: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -75,7 +76,7 @@ class NotificationForm extends Component {
     const {
       onCancel,
       form: { getFieldDecorator },
-      selectedAgencies,
+      recipients,
       body,
     } = this.props;
 
@@ -109,7 +110,7 @@ class NotificationForm extends Component {
                 message: 'Please provide at least one recipient',
               },
             ],
-            initialValue: map(selectedAgencies, contact => contact._id), // eslint-disable-line
+            initialValue: map(recipients, contact => contact._id), // eslint-disable-line
           })(
             <SearchableSelectInput
               placeholder="Enter notification recipients"
@@ -117,7 +118,7 @@ class NotificationForm extends Component {
               optionLabel="name"
               optionValue="_id"
               mode="multiple"
-              initialValue={selectedAgencies}
+              initialValue={recipients}
             />
           )}
         </Form.Item>
@@ -125,9 +126,9 @@ class NotificationForm extends Component {
 
         {/* notification subject */}
         <Form.Item {...formItemLayout} label="Subject">
-          {getFieldDecorator('subject', {
-            rules: [{ required: true, message: 'Agency subject is required' }],
-          })(<Input placeholder="Applicable for Email notification only" />)}
+          {getFieldDecorator('subject', {})(
+            <Input placeholder="Applicable for Email notification only" />
+          )}
         </Form.Item>
         {/* notification subject */}
 
