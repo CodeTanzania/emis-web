@@ -1,4 +1,9 @@
-import { deleteRole } from '@codetanzania/emis-api-states';
+import { httpActions } from '@codetanzania/emis-api-client';
+import {
+  deleteRole,
+  paginateRoles,
+  refreshRoles,
+} from '@codetanzania/emis-api-states';
 import { List } from 'antd';
 import concat from 'lodash/concat';
 import map from 'lodash/map';
@@ -7,8 +12,8 @@ import uniq from 'lodash/uniq';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import RoleListHeader from '../../../../components/ListHeader';
+import Toolbar from '../../../../components/Toolbar';
 import { notifyError, notifySuccess } from '../../../../util';
-import RolesActionBar from '../ActionBar';
 import RoleListItem from '../ListItem';
 
 /* constants */
@@ -17,6 +22,8 @@ const headerLayout = [
   { span: 3, header: 'Abbreviation' },
   { span: 10, header: 'Description' },
 ];
+
+const { getRolesExportUrl } = httpActions;
 
 // eslint-disable-next-line jsdoc/require-returns
 /**
@@ -40,7 +47,6 @@ class RoleList extends Component {
     ).isRequired,
     total: PropTypes.number.isRequired,
     page: PropTypes.number.isRequired,
-    onFilter: PropTypes.func.isRequired,
     onNotify: PropTypes.func.isRequired,
   };
 
@@ -138,30 +144,28 @@ class RoleList extends Component {
   };
 
   render() {
-    const {
-      roles,
-      loading,
-      page,
-      total,
-      onEdit,
-      onFilter,
-      onNotify,
-    } = this.props;
+    const { roles, loading, page, total, onEdit, onNotify } = this.props;
     const { selectedRoles, selectedPages } = this.state;
     const selectedRolesCount = this.state.selectedRoles.length;
     return (
       <Fragment>
-        {/* list action bar */}
-        <RolesActionBar
-          total={total}
+        {/* toolbar */}
+        <Toolbar
+          itemName="Role"
           page={page}
-          onFilter={onFilter}
-          selectedItemCount={selectedRolesCount}
-          onNotify={() => {
-            onNotify(selectedRoles);
+          total={total}
+          selectedItemsCount={selectedRolesCount}
+          exportUrl={getRolesExportUrl({
+            filter: { _id: map(selectedRoles, '_id') },
+          })}
+          onNotify={() => onNotify(selectedRoles)}
+          onPaginate={nextPage => {
+            paginateRoles(nextPage);
           }}
+          onRefresh={refreshRoles}
         />
-        {/* end list action bar */}
+        {/* end toolbar */}
+
         <RoleListHeader
           headerLayout={headerLayout}
           onSelectAll={this.handleSelectAll}
