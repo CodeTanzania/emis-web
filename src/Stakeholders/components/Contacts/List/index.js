@@ -193,7 +193,18 @@ class ContactsList extends Component {
           onPaginate={nextPage => {
             paginateFocalPeople(nextPage);
           }}
-          onRefresh={refreshFocalPeople}
+          onRefresh={() =>
+            refreshFocalPeople(
+              () => {
+                notifySuccess('Focal People refreshed successfully');
+              },
+              () => {
+                notifyError(
+                  'An Error occurred while refreshing Focal People please contact system administrator'
+                );
+              }
+            )
+          }
           onShare={() => onBulkShare(selectedContacts)}
         />
         {/* end toolbar */}
