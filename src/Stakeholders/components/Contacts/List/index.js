@@ -19,10 +19,11 @@ import ContactsListItem from '../ListItem';
 
 /* constants */
 const headerLayout = [
-  { span: 4, header: 'Name' },
+  { span: 3, header: 'Name' },
+  { span: 2, header: 'Agency' },
   { span: 5, header: 'Role' },
   { span: 4, header: 'Area' },
-  { span: 3, header: 'Mobile Number' },
+  { span: 2, header: 'Mobile Number' },
   { span: 3, header: 'Email Address' },
 ];
 const { getFocalPeopleExportUrl } = httpActions;
@@ -216,6 +217,10 @@ class ContactsList extends Component {
               abbreviation={contact.abbreviation}
               location={contact.location.name}
               name={contact.name}
+              agency={contact.party ? contact.party.name : 'N/A'}
+              agencyAbbreviation={
+                contact.party ? contact.party.abbreviation : 'N/A'
+              }
               role={contact.role ? contact.role.name : 'N/A'}
               email={contact.email}
               mobile={contact.mobile}
