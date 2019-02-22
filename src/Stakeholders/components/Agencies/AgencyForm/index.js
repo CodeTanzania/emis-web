@@ -9,7 +9,7 @@ import SelectInput from '../../../../components/SelectInput';
 import { notifyError, notifySuccess } from '../../../../util';
 
 /* constants */
-const { getFeatures, getRoles } = httpActions;
+const { getFeatures } = httpActions;
 const { TextArea } = Input;
 
 /**
@@ -123,7 +123,7 @@ class AgencyForm extends Component {
         <Row type="flex" justify="space-between">
           <Col span={10}>
             {/* agency name */}
-            <Form.Item {...formItemLayout} label="Full Name">
+            <Form.Item {...formItemLayout} label="Name">
               {getFieldDecorator('name', {
                 initialValue: isEditForm ? agency.name : undefined,
                 rules: [
@@ -171,16 +171,17 @@ class AgencyForm extends Component {
         </Row>
         {/* end agency name, phone number and email section */}
 
-        {/* agency organization, group and area section */}
+        {/* agency abbreviation, group and area section */}
         <Row type="flex" justify="space-between">
           <Col span={10}>
             {/* agency organization */}
-            <Form.Item {...formItemLayout} label="Organization/Agency">
-              {getFieldDecorator('organization', {
-                initialValue: isEditForm ? agency.title : undefined,
+            <Form.Item {...formItemLayout} label="Abbreviation">
+              {getFieldDecorator('abbreviation', {
+                rules: [{ required: true }],
+                initialValue: isEditForm ? agency.abbreviation : undefined,
               })(<Input />)}
             </Form.Item>
-            {/* end agency organization */}
+            {/* end agency abbreviation */}
           </Col>
           <Col span={13}>
             <Row type="flex" justify="space-between">
@@ -233,21 +234,14 @@ class AgencyForm extends Component {
         <Row type="flex" justify="space-between">
           <Col span={10}>
             {/* agency role */}
-            <Form.Item {...formItemLayout} label="Role">
-              {getFieldDecorator('role', {
+            <Form.Item {...formItemLayout} label="Website">
+              {getFieldDecorator('website', {
                 initialValue:
-                  isEditForm && agency.role ? agency.role._id : undefined, // eslint-disable-line
-                rules: [{ required: true, message: 'Agency role is required' }],
-              })(
-                <SearchableSelectInput
-                  onSearch={getRoles}
-                  optionLabel="name"
-                  optionValue="_id"
-                  initialValue={
-                    isEditForm && agency.role ? agency.role : undefined
-                  }
-                />
-              )}
+                  isEditForm && agency.role ? agency.website : undefined, // eslint-disable-line
+                rules: [
+                  { required: true, message: 'Agency website is required' },
+                ],
+              })(<Input />)}
             </Form.Item>
             {/* end agency role */}
           </Col>
@@ -291,6 +285,7 @@ class AgencyForm extends Component {
             {/* agency postal address */}
             <Form.Item {...formItemLayout} label="Postal Address">
               {getFieldDecorator('postalAddress', {
+                rules: [{ required: true }],
                 initialValue: isEditForm ? agency.postalAddress : undefined,
               })(<TextArea autosize={{ minRows: 1, maxRows: 10 }} />)}
             </Form.Item>
