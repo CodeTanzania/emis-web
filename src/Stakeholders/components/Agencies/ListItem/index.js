@@ -31,6 +31,7 @@ class AgencyListItem extends Component {
     isSelected: PropTypes.bool.isRequired,
     onSelectItem: PropTypes.func.isRequired,
     onDeselectItem: PropTypes.func.isRequired,
+    onShare: PropTypes.func.isRequired,
   };
 
   /**
@@ -101,7 +102,15 @@ class AgencyListItem extends Component {
   };
 
   render() {
-    const { abbreviation, name, title, email, mobile, onEdit } = this.props;
+    const {
+      abbreviation,
+      name,
+      title,
+      email,
+      mobile,
+      onEdit,
+      onShare,
+    } = this.props;
     const { isHovered } = this.state;
     const { isSelected } = this.props;
     const avatarBackground = randomColor();
@@ -154,6 +163,7 @@ class AgencyListItem extends Component {
                   type="share-alt"
                   title="Share Agency"
                   className="actionIcon"
+                  onClick={onShare}
                 />
                 <Icon
                   type="database"

@@ -6,8 +6,8 @@ import React, { Component } from 'react';
 import SearchableSelectInput from '../../../../components/SearchableSelectInput';
 
 /* constants */
-const { getStakeholders } = httpActions;
 const { TextArea } = Input;
+const { getFocalPeople } = httpActions;
 
 /**
  * @class
@@ -28,8 +28,13 @@ class NotificationForm extends Component {
         email: PropTypes.string,
       })
     ).isRequired,
+    body: PropTypes.string,
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
     onCancel: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    body: undefined,
   };
 
   /**
@@ -71,6 +76,7 @@ class NotificationForm extends Component {
       onCancel,
       form: { getFieldDecorator },
       selectedAgencies,
+      body,
     } = this.props;
 
     const formItemLayout = {
@@ -107,7 +113,7 @@ class NotificationForm extends Component {
           })(
             <SearchableSelectInput
               placeholder="Enter notification recipients"
-              onSearch={getStakeholders}
+              onSearch={getFocalPeople}
               optionLabel="name"
               optionValue="_id"
               mode="multiple"
@@ -134,6 +140,7 @@ class NotificationForm extends Component {
                 message: 'Please provide notification message',
               },
             ],
+            initialValue: body,
           })(
             <TextArea
               autosize={{ minRows: 6, maxRows: 10 }}

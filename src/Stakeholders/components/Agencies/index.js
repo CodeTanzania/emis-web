@@ -32,6 +32,7 @@ class Agencies extends Component {
     isEditForm: false,
     showNotificationForm: false,
     selectedAgencies: [],
+    notificationBody: undefined,
   };
 
   static propTypes = {
@@ -153,6 +154,45 @@ class Agencies extends Component {
 
   /**
    * @function
+   * @name handleShare
+   * @description Handle share single agency action
+   *
+   * @param {Object} agency  to be shared
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleShare = agency => {
+    const message = `${agency.name}\nMobile: ${agency.mobile}\nEmail: ${
+      agency.email
+    }`;
+
+    this.setState({ notificationBody: message, showNotificationForm: true });
+  };
+
+  /**
+   * @function
+   * @name handleBulkShare
+   * @description Handle share multiple agencies
+   *
+   * @param {Object[]} agencies agencies list to be shared
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleBulkShare = agencies => {
+    const agencyList = agencies.map(
+      agency =>
+        `${agency.name}\nMobile: ${agency.mobile}\nEmail: ${agency.email}`
+    );
+
+    const message = agencyList.join('\n\n\n');
+
+    this.setState({ notificationBody: message, showNotificationForm: true });
+  };
+
+  /**
+   * @function
    * @name closeNotificationForm
    * @description Handle on notify agencies
    *
@@ -191,6 +231,7 @@ class Agencies extends Component {
       isEditForm,
       showNotificationForm,
       selectedAgencies,
+      notificationBody,
     } = this.state;
     return (
       <div className="Agencies">
@@ -244,6 +285,8 @@ class Agencies extends Component {
           onEdit={this.handleEdit}
           onFilter={this.openFiltersModal}
           onNotify={this.openNotificationForm}
+          onShare={this.handleShare}
+          onBulkShare={this.handleBulkShare}
         />
         {/* end list */}
 
@@ -263,7 +306,7 @@ class Agencies extends Component {
 
         {/* Notification Modal modal */}
         <Modal
-          title="Notify Agencies"
+          title="Share Agencies"
           visible={showNotificationForm}
           onCancel={this.closeNotificationForm}
           footer={null}
@@ -274,6 +317,7 @@ class Agencies extends Component {
           <NotificationForm
             onCancel={this.closeNotificationForm}
             selectedAgencies={selectedAgencies}
+            body={notificationBody}
           />
         </Modal>
         {/* end Notification modal */}
