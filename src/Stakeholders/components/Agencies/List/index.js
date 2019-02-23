@@ -46,6 +46,7 @@ class AgencyList extends Component {
     onNotify: PropTypes.func.isRequired,
     onBulkShare: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
+    onFilter: PropTypes.func.isRequired,
   };
 
   state = {
@@ -167,6 +168,7 @@ class AgencyList extends Component {
       total,
       onEdit,
       onNotify,
+      onFilter,
       onShare,
       onBulkShare,
     } = this.props;
@@ -185,6 +187,7 @@ class AgencyList extends Component {
             filter: { _id: map(selectedAgencies, '_id') },
           })}
           onNotify={() => onNotify(selectedAgencies)}
+          onFilter={onFilter}
           onPaginate={nextPage => {
             paginateAgencies(nextPage);
           }}
