@@ -163,7 +163,7 @@ const Toolbar = ({
                 defaultCurrent={page}
                 total={total}
                 className="pagination"
-                onClick={onPaginate}
+                onChange={onPaginate}
               />
             </Col>
           )}
