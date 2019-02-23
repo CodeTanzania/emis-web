@@ -124,7 +124,7 @@ class AgencyListItem extends Component {
         />
       ) : (
         <Avatar style={{ backgroundColor: avatarBackground }}>
-          {abbreviation}
+          {name.toUpperCase().charAt(0)}
         </Avatar>
       );
     }
