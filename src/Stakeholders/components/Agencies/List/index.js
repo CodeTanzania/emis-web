@@ -19,7 +19,7 @@ import AgencyListItem from '../ListItem';
 /* constants */
 const headerLayout = [
   { span: 5, header: 'Name' },
-  { span: 6, header: 'Role' },
+  { span: 6, header: 'Abbreviation' },
   { span: 4, header: 'Mobile Number' },
   { span: 4, header: 'Email Address' },
 ];
