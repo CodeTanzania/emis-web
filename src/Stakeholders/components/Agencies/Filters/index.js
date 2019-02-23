@@ -100,23 +100,23 @@ class AgenciesFilters extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
-        {/* start agency type filters */}
+        {/* start agency group filters */}
         <Form.Item {...formItemLayout} label="By Agency Group">
           {getFieldDecorator('group', {
-            initialValue: filter ? filter.type : [],
+            initialValue: filter ? filter.group : [],
           })(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
-                {groups.map(type => (
-                  <Col span={8} style={{ margin: '10px 0' }} key={type}>
-                    <Checkbox value={type}>{type}</Checkbox>
+                {groups.map(group => (
+                  <Col span={8} style={{ margin: '10px 0' }} key={group}>
+                    <Checkbox value={group}>{group}</Checkbox>
                   </Col>
                 ))}
               </Row>
             </Checkbox.Group>
           )}
         </Form.Item>
-        {/* end agency type filters */}
+        {/* end agency group filters */}
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
