@@ -44,6 +44,7 @@ class AgencyList extends Component {
     total: PropTypes.number.isRequired,
     onEdit: PropTypes.func.isRequired,
     onNotify: PropTypes.func.isRequired,
+    onBulkShare: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
   };
 
@@ -167,6 +168,7 @@ class AgencyList extends Component {
       onEdit,
       onNotify,
       onShare,
+      onBulkShare,
     } = this.props;
     const { selectedAgencies, selectedPages } = this.state;
     const selectedAgenciesCount = this.state.selectedAgencies.length;
@@ -187,7 +189,7 @@ class AgencyList extends Component {
             paginateAgencies(nextPage);
           }}
           onRefresh={refreshAgencies}
-          onShare={() => onShare(selectedAgencies)}
+          onShare={() => onBulkShare(selectedAgencies)}
         />
         {/* end toolbar */}
 
