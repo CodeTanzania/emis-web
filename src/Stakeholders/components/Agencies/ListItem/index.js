@@ -23,7 +23,7 @@ class AgencyListItem extends Component {
   static propTypes = {
     abbreviation: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
+    area: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     mobile: PropTypes.string.isRequired,
     onArchive: PropTypes.func.isRequired,
@@ -105,9 +105,9 @@ class AgencyListItem extends Component {
     const {
       abbreviation,
       name,
-      title,
       email,
       mobile,
+      area,
       onEdit,
       onShare,
     } = this.props;
@@ -133,7 +133,7 @@ class AgencyListItem extends Component {
         />
       ) : (
         <Avatar style={{ backgroundColor: avatarBackground }}>
-          {abbreviation}
+          {name.toUpperCase().charAt(0)}
         </Avatar>
       );
     }
@@ -147,7 +147,8 @@ class AgencyListItem extends Component {
         <Row>
           <Col span={1}>{sideComponent}</Col>
           <Col span={5}>{name}</Col>
-          <Col span={6}>{title}</Col>
+          <Col span={3}>{abbreviation}</Col>
+          <Col span={3}>{area}</Col>
           <Col span={4}>{mobile}</Col>
           <Col span={4}>{email}</Col>
           <Col span={3}>

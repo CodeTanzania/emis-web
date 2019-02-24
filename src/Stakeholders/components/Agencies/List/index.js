@@ -19,7 +19,8 @@ import AgencyListItem from '../ListItem';
 /* constants */
 const headerLayout = [
   { span: 5, header: 'Name' },
-  { span: 6, header: 'Role' },
+  { span: 3, header: 'Abbreviation' },
+  { span: 3, header: 'Area' },
   { span: 4, header: 'Mobile Number' },
   { span: 4, header: 'Email Address' },
 ];
@@ -44,7 +45,9 @@ class AgencyList extends Component {
     total: PropTypes.number.isRequired,
     onEdit: PropTypes.func.isRequired,
     onNotify: PropTypes.func.isRequired,
+    onBulkShare: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
+    onFilter: PropTypes.func.isRequired,
   };
 
   state = {
@@ -166,7 +169,9 @@ class AgencyList extends Component {
       total,
       onEdit,
       onNotify,
+      onFilter,
       onShare,
+      onBulkShare,
     } = this.props;
     const { selectedAgencies, selectedPages } = this.state;
     const selectedAgenciesCount = this.state.selectedAgencies.length;
@@ -183,11 +188,12 @@ class AgencyList extends Component {
             filter: { _id: map(selectedAgencies, '_id') },
           })}
           onNotify={() => onNotify(selectedAgencies)}
+          onFilter={onFilter}
           onPaginate={nextPage => {
             paginateAgencies(nextPage);
           }}
           onRefresh={refreshAgencies}
-          onShare={() => onShare(selectedAgencies)}
+          onShare={() => onBulkShare(selectedAgencies)}
         />
         {/* end toolbar */}
 
@@ -204,43 +210,49 @@ class AgencyList extends Component {
         <List
           loading={loading}
           dataSource={agencies}
-          renderItem={agency => (
-            <AgencyListItem
-              key={agency._id} // eslint-disable-line
-              abbreviation={agency.abbreviation}
-              name={agency.name}
-              title={agency.role ? agency.role.name : 'N/A'}
-              email={agency.email}
-              mobile={agency.mobile}
-              onShare={() => {
-                onShare(agency);
-              }}
-              isSelected={
-                // eslint-disable-next-line
-                map(selectedAgencies, item => item._id).includes(agency._id)
-              }
-              onSelectItem={() => {
-                this.handleOnSelectAgency(agency);
-              }}
-              onDeselectItem={() => {
-                this.handleOnDeselectAgency(agency);
-              }}
-              onEdit={() => onEdit(agency)}
-              onArchive={() =>
-                deleteAgency(
-                  agency._id, // eslint-disable-line
-                  () => {
-                    notifySuccess('Agency was archived successfully');
-                  },
-                  () => {
-                    notifyError(
-                      'An Error occurred while archiving Agency please agency system administrator'
-                    );
-                  }
-                )
-              }
-            />
-          )}
+          renderItem={agency => {
+            const {
+              location: { name: area },
+            } = agency;
+            return (
+              <AgencyListItem
+                key={agency._id} // eslint-disable-line
+                abbreviation={agency.abbreviation}
+                name={agency.name}
+                title={agency.role ? agency.role.name : 'N/A'}
+                email={agency.email}
+                area={area}
+                mobile={agency.mobile}
+                onShare={() => {
+                  onShare(agency);
+                }}
+                isSelected={
+                  // eslint-disable-next-line
+                  map(selectedAgencies, item => item._id).includes(agency._id)
+                }
+                onSelectItem={() => {
+                  this.handleOnSelectAgency(agency);
+                }}
+                onDeselectItem={() => {
+                  this.handleOnDeselectAgency(agency);
+                }}
+                onEdit={() => onEdit(agency)}
+                onArchive={() =>
+                  deleteAgency(
+                    agency._id, // eslint-disable-line
+                    () => {
+                      notifySuccess('Agency was archived successfully');
+                    },
+                    () => {
+                      notifyError(
+                        'An Error occurred while archiving Agency please agency system administrator'
+                      );
+                    }
+                  )
+                }
+              />
+            );
+          }}
         />
         {/* end agencies list */}
       </Fragment>

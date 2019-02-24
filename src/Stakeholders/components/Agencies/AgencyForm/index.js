@@ -32,7 +32,7 @@ class AgencyForm extends Component {
       email: PropTypes.string,
     }).isRequired,
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
-    types: PropTypes.arrayOf(PropTypes.string).isRequired,
+    groups: PropTypes.arrayOf(PropTypes.string).isRequired,
     onCancel: PropTypes.func.isRequired,
     posting: PropTypes.bool.isRequired,
   };
@@ -95,7 +95,7 @@ class AgencyForm extends Component {
       posting,
       onCancel,
       form: { getFieldDecorator },
-      types,
+      groups,
     } = this.props;
 
     const formItemLayout = {
@@ -188,12 +188,12 @@ class AgencyForm extends Component {
               <Col span={11}>
                 {/* agency group */}
                 <Form.Item {...formItemLayout} label="Group">
-                  {getFieldDecorator('type', {
-                    initialValue: isEditForm ? agency.type : undefined,
+                  {getFieldDecorator('group', {
+                    initialValue: isEditForm ? agency.group : undefined,
                     rules: [
                       { required: true, message: 'Agency group is required' },
                     ],
-                  })(<SelectInput options={types} />)}
+                  })(<SelectInput options={groups} />)}
                 </Form.Item>
                 {/* end agency group */}
               </Col>
@@ -237,7 +237,7 @@ class AgencyForm extends Component {
             <Form.Item {...formItemLayout} label="Website">
               {getFieldDecorator('website', {
                 initialValue:
-                  isEditForm && agency.role ? agency.website : undefined, // eslint-disable-line
+                  isEditForm && agency.website ? agency.website : undefined, // eslint-disable-line
                 rules: [
                   { required: true, message: 'Agency website is required' },
                 ],
@@ -313,5 +313,5 @@ class AgencyForm extends Component {
 }
 
 export default Connect(Form.create()(AgencyForm), {
-  types: 'agencies.schema.properties.type.enum',
+  groups: 'agencies.schema.properties.group.enum',
 });
