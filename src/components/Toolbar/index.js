@@ -183,7 +183,7 @@ Toolbar.propTypes = {
   exportUrl: PropTypes.string,
   selectedItemsCount: PropTypes.number.isRequired,
   onArchive: PropTypes.func,
-  onFilter: PropTypes.func.isRequired,
+  onFilter: PropTypes.func,
   onNotify: PropTypes.func,
   onPaginate: PropTypes.func.isRequired,
   onRefresh: PropTypes.func.isRequired,
@@ -192,6 +192,7 @@ Toolbar.propTypes = {
 
 Toolbar.defaultProps = {
   exportUrl: undefined,
+  onFilter: null,
   onShare: null,
   onNotify: null,
   onArchive: null,
