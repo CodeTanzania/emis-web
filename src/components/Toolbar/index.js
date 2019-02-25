@@ -155,7 +155,7 @@ const Toolbar = ({
           {/* end filter action */}
 
           {/* pagination */}
-          {onPaginate && (
+          {onPaginate && total > 0 && (
             <Col span={4} xl={{ span: 4 }} xxl={{ span: 5 }}>
               <Pagination
                 simple
