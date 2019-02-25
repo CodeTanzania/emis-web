@@ -9,12 +9,12 @@ import concat from 'lodash/concat';
 import map from 'lodash/map';
 import remove from 'lodash/remove';
 import uniq from 'lodash/uniq';
+import uniqBy from 'lodash/uniqBy';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import ListHeader from '../../../../components/ListHeader';
 import Toolbar from '../../../../components/Toolbar';
 import { notifyError, notifySuccess } from '../../../../util';
-// import ContactsActionBar from '../ActionBar';
 import ContactsListItem from '../ListItem';
 
 /* constants */
@@ -82,7 +82,7 @@ class ContactsList extends Component {
   handleSelectAll = () => {
     const { selectedContacts, selectedPages } = this.state;
     const { contacts, page } = this.props;
-    const selectedList = [...selectedContacts, ...contacts];
+    const selectedList = uniqBy([...selectedContacts, ...contacts], '_id');
     const pages = uniq([...selectedPages, page]);
     this.setState({
       selectedContacts: selectedList,
@@ -103,7 +103,7 @@ class ContactsList extends Component {
   handleDeselectAll = () => {
     const { contacts, page } = this.props;
     const { selectedContacts, selectedPages } = this.state;
-    const selectedList = [...selectedContacts];
+    const selectedList = uniqBy([...selectedContacts], '_id');
     const pages = uniq([...selectedPages]);
 
     remove(pages, item => item === page);
