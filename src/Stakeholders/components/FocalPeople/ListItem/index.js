@@ -1,4 +1,4 @@
-import { Avatar, Checkbox, Col, Icon, Row, Modal } from 'antd';
+import { Avatar, Checkbox, Col, Icon, Modal, Row } from 'antd';
 import PropTypes from 'prop-types';
 import randomColor from 'randomcolor';
 import React, { Component, Fragment } from 'react';
@@ -9,13 +9,13 @@ const { confirm } = Modal;
 
 /**
  * @class
- * @name ContactsListItem
- * @description Single contact list item component. Render single contact details
+ * @name FocalPeopleListItem
+ * @description Single focal person list item component. Render single focal person details
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class ContactsListItem extends Component {
+class FocalPeopleListItem extends Component {
   state = {
     isHovered: false,
   };
@@ -86,7 +86,7 @@ class ContactsListItem extends Component {
   /**
    * @function
    * @name showArchiveConfirm
-   * @description show confirm modal before archiving a contact
+   * @description show confirm modal before archiving a focal person
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -146,7 +146,7 @@ class ContactsListItem extends Component {
 
     return (
       <div
-        className="ContactsListItem"
+        className="FocalPeopleListItem"
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
@@ -190,4 +190,4 @@ class ContactsListItem extends Component {
   }
 }
 
-export default ContactsListItem;
+export default FocalPeopleListItem;

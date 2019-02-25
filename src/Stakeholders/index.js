@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import agenciesIcon from '../assets/icons/stakeholders/agency.svg';
 import contactsIcon from '../assets/icons/stakeholders/contacts.svg';
 import notificationsIcon from '../assets/icons/stakeholders/notifications-disabled.svg';
 import rolesIcon from '../assets/icons/stakeholders/roles.svg';
-import agenciesIcon from '../assets/icons/stakeholders/agency.svg';
 import NavigationMenu from '../components/NavigationMenu';
 
 const routes = [
-  { name: 'Focal Persons', path: '/contacts', icon: contactsIcon },
+  { name: 'Focal People', path: '/focalpeople', icon: contactsIcon },
   { name: 'Agencies', path: '/agencies', icon: agenciesIcon },
   {
     name: 'Roles',

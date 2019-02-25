@@ -56,7 +56,7 @@ import ResourcesUtilizationLayout from '../Resources/layouts/Utilization';
 import ResourcesWarehousesLayout from '../Resources/layouts/Warehouses';
 import Stakeholders from '../Stakeholders';
 import StakeholdersAgenciesLayout from '../Stakeholders/layouts/Agencies';
-import StakeholdersContactsLayout from '../Stakeholders/layouts/Contacts';
+import StakeholdersFocalPeopleLayout from '../Stakeholders/layouts/FocalPeople';
 import StakeholdersNotificationsLayout from '../Stakeholders/layouts/Notifications';
 import StakeholdersRolesLayout from '../Stakeholders/layouts/Roles';
 import HeaderNavMenu from './components/HeaderNavMenu';
@@ -202,8 +202,8 @@ const breadcrumbNameMap = {
     title: 'List of available warehouses',
   },
   /* Stakeholders Routes */
-  '/stakeholders/contacts': {
-    name: 'Focal Persons',
+  '/stakeholders/focalpeople': {
+    name: 'Focal People',
     title: 'List of all focal persons',
   },
   '/stakeholders/agencies': {
@@ -505,8 +505,8 @@ const BaseLayout = withRouter(props => {
           />
           <Route
             exact
-            path="/stakeholders/contacts"
-            component={StakeholdersContactsLayout}
+            path="/stakeholders/focalpeople"
+            component={StakeholdersFocalPeopleLayout}
           />
           <Route
             exact

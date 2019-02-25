@@ -9,13 +9,13 @@ import React, { Component } from 'react';
 
 /**
  * @class
- * @name ContactsFilters
+ * @name FocalPeopleFilters
  * @description Filter modal component for filtering contacts
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class ContactsFilters extends Component {
+class FocalPeopleFilters extends Component {
   static propTypes = {
     filter: PropTypes.objectOf(
       PropTypes.shape({
@@ -133,7 +133,7 @@ class ContactsFilters extends Component {
   }
 }
 
-export default Connect(Form.create()(ContactsFilters), {
+export default Connect(Form.create()(FocalPeopleFilters), {
   groups: 'focalPeople.schema.properties.group.enum',
   filter: 'focalPeople.filter',
 });

@@ -15,7 +15,7 @@ import React, { Component, Fragment } from 'react';
 import ListHeader from '../../../../components/ListHeader';
 import Toolbar from '../../../../components/Toolbar';
 import { notifyError, notifySuccess } from '../../../../util';
-import ContactsListItem from '../ListItem';
+import FocalPersonsListItem from '../ListItem';
 
 /* constants */
 const headerLayout = [
@@ -30,17 +30,17 @@ const { getFocalPeopleExportUrl } = httpActions;
 
 /**
  * @class
- * @name ContactsList
- * @description Render ContactsList component which have actionBar, contacts
- * header and contacts list components
+ * @name FocalPersonsList
+ * @description Render FocalPersonsList component which have actionBar, focal People
+ * header and focal People list components
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class ContactsList extends Component {
+class FocalPersonsList extends Component {
   static propTypes = {
     loading: PropTypes.bool.isRequired,
-    contacts: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+    focalPeople: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
       .isRequired,
     page: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
@@ -52,40 +52,45 @@ class ContactsList extends Component {
   };
 
   state = {
-    selectedContacts: [],
+    selectedFocalPeople: [],
     selectedPages: [],
   };
 
   /**
    * @function
-   * @name handleOnSelectContact
-   * @description Handle select a single contact action
+   * @name handleOnSelectFocalPerson
+   * @description Handle select a single focalPerson action
    *
-   * @param {Object} contact selected contact object
+   * @param {Object} focalPerson selected focalPerson object
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleOnSelectContact = contact => {
-    const { selectedContacts } = this.state;
-    this.setState({ selectedContacts: concat([], selectedContacts, contact) });
+  handleOnSelectFocalPerson = focalPerson => {
+    const { selectedFocalPeople } = this.state;
+    this.setState({
+      selectedFocalPeople: concat([], selectedFocalPeople, focalPerson),
+    });
   };
 
   /**
    * @function
    * @name handleSelectAll
-   * @description Handle select all contacts actions from current page
+   * @description Handle select all focalPeople actions from current page
    *
    * @version 0.1.0
    * @since 0.1.0
    */
   handleSelectAll = () => {
-    const { selectedContacts, selectedPages } = this.state;
-    const { contacts, page } = this.props;
-    const selectedList = uniqBy([...selectedContacts, ...contacts], '_id');
+    const { selectedFocalPeople, selectedPages } = this.state;
+    const { focalPeople, page } = this.props;
+    const selectedList = uniqBy(
+      [...selectedFocalPeople, ...focalPeople],
+      '_id'
+    );
     const pages = uniq([...selectedPages, page]);
     this.setState({
-      selectedContacts: selectedList,
+      selectedFocalPeople: selectedList,
       selectedPages: pages,
     });
   };
@@ -93,7 +98,7 @@ class ContactsList extends Component {
   /**
    * @function
    * @name handleDeselectAll
-   * @description Handle deselect all contacts in a current page
+   * @description Handle deselect all focalPeople in a current page
    *
    * @returns {undefined} undefined
    *
@@ -101,22 +106,22 @@ class ContactsList extends Component {
    * @since 0.1.0
    */
   handleDeselectAll = () => {
-    const { contacts, page } = this.props;
-    const { selectedContacts, selectedPages } = this.state;
-    const selectedList = uniqBy([...selectedContacts], '_id');
+    const { focalPeople, page } = this.props;
+    const { selectedFocalPeople, selectedPages } = this.state;
+    const selectedList = uniqBy([...selectedFocalPeople], '_id');
     const pages = uniq([...selectedPages]);
 
     remove(pages, item => item === page);
 
-    contacts.forEach(contact => {
+    focalPeople.forEach(focalPerson => {
       remove(
         selectedList,
-        item => item._id === contact._id // eslint-disable-line
+        item => item._id === focalPerson._id // eslint-disable-line
       );
     });
 
     this.setState({
-      selectedContacts: selectedList,
+      selectedFocalPeople: selectedList,
       selectedPages: pages,
     });
   };
@@ -124,7 +129,7 @@ class ContactsList extends Component {
   /**
    * @function
    * @name handleFilterByStatus
-   * @description Handle filter contacts by status action
+   * @description Handle filter focalPeople by status action
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -141,30 +146,30 @@ class ContactsList extends Component {
 
   /**
    * @function
-   * @name handleOnDeselectContact
-   * @description Handle deselect a single contact action
+   * @name handleOnDeselectFocalPerson
+   * @description Handle deselect a single focalPerson action
    *
-   * @param {Object} contact contact to be removed from selected contacts
+   * @param {Object} focalPerson focalPerson to be removed from selected focalPeople
    * @returns {undefined} undefined
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleOnDeselectContact = contact => {
-    const { selectedContacts } = this.state;
-    const selectedList = [...selectedContacts];
+  handleOnDeselectFocalPerson = focalPerson => {
+    const { selectedFocalPeople } = this.state;
+    const selectedList = [...selectedFocalPeople];
 
     remove(
       selectedList,
-      item => item._id === contact._id // eslint-disable-line
+      item => item._id === focalPerson._id // eslint-disable-line
     );
 
-    this.setState({ selectedContacts: selectedList });
+    this.setState({ selectedFocalPeople: selectedList });
   };
 
   render() {
     const {
-      contacts,
+      focalPeople,
       loading,
       page,
       total,
@@ -174,8 +179,8 @@ class ContactsList extends Component {
       onShare,
       onBulkShare,
     } = this.props;
-    const { selectedContacts, selectedPages } = this.state;
-    const selectedContactsCount = this.state.selectedContacts.length;
+    const { selectedFocalPeople, selectedPages } = this.state;
+    const selectedFocalPeopleCount = this.state.selectedFocalPeople.length;
 
     return (
       <Fragment>
@@ -184,12 +189,12 @@ class ContactsList extends Component {
           itemName="focal person"
           page={page}
           total={total}
-          selectedItemsCount={selectedContactsCount}
+          selectedItemsCount={selectedFocalPeopleCount}
           exportUrl={getFocalPeopleExportUrl({
-            filter: { _id: map(selectedContacts, '_id') },
+            filter: { _id: map(selectedFocalPeople, '_id') },
           })}
           onFilter={onFilter}
-          onNotify={() => onNotify(selectedContacts)}
+          onNotify={() => onNotify(selectedFocalPeople)}
           onPaginate={nextPage => {
             paginateFocalPeople(nextPage);
           }}
@@ -200,75 +205,77 @@ class ContactsList extends Component {
               },
               () => {
                 notifyError(
-                  'An Error occurred while refreshing Focal People please contact system administrator'
+                  'An Error occurred while refreshing Focal People please focalPerson system administrator'
                 );
               }
             )
           }
-          onShare={() => onBulkShare(selectedContacts)}
+          onShare={() => onBulkShare(selectedFocalPeople)}
         />
         {/* end toolbar */}
 
-        {/* contact list header */}
+        {/* focalPerson list header */}
         <ListHeader
           headerLayout={headerLayout}
           onSelectAll={this.handleSelectAll}
           onDeselectAll={this.handleDeselectAll}
           isBulkSelected={selectedPages.includes(page)}
         />
-        {/* end contact list header */}
+        {/* end focalPerson list header */}
 
-        {/* contacts list */}
+        {/* focalPeople list */}
         <List
           loading={loading}
-          dataSource={contacts}
-          renderItem={contact => (
-            <ContactsListItem
-              key={contact._id} // eslint-disable-line
-              abbreviation={contact.abbreviation}
-              location={contact.location.name}
-              name={contact.name}
-              agency={contact.party ? contact.party.name : 'N/A'}
+          dataSource={focalPeople}
+          renderItem={focalPerson => (
+            <FocalPersonsListItem
+              key={focalPerson._id} // eslint-disable-line
+              abbreviation={focalPerson.abbreviation}
+              location={focalPerson.location.name}
+              name={focalPerson.name}
+              agency={focalPerson.party ? focalPerson.party.name : 'N/A'}
               agencyAbbreviation={
-                contact.party ? contact.party.abbreviation : 'N/A'
+                focalPerson.party ? focalPerson.party.abbreviation : 'N/A'
               }
-              role={contact.role ? contact.role.name : 'N/A'}
-              email={contact.email}
-              mobile={contact.mobile}
+              role={focalPerson.role ? focalPerson.role.name : 'N/A'}
+              email={focalPerson.email}
+              mobile={focalPerson.mobile}
               isSelected={
                 // eslint-disable-next-line
-                map(selectedContacts, item => item._id).includes(contact._id)
+                map(selectedFocalPeople, item => item._id).includes(
+                  focalPerson._id // eslint-disable-line
+                )
               }
               onSelectItem={() => {
-                this.handleOnSelectContact(contact);
+                this.handleOnSelectFocalPerson(focalPerson);
               }}
               onDeselectItem={() => {
-                this.handleOnDeselectContact(contact);
+                this.handleOnDeselectFocalPerson(focalPerson);
               }}
-              onEdit={() => onEdit(contact)}
+              onEdit={() => onEdit(focalPerson)}
               onArchive={() =>
                 deleteFocalPerson(
-                  contact._id, // eslint-disable-line
+                  focalPerson._id, // eslint-disable-line
                   () => {
-                    notifySuccess('Contact was archived successfully');
+                    notifySuccess('Focal Person was archived successfully');
                   },
                   () => {
                     notifyError(
-                      'An Error occurred while archiving Contact please contact system administrator'
+                      'An Error occurred while archiving Focal Person please focalPerson system administrator'
                     );
                   }
                 )
               }
               onShare={() => {
-                onShare(contact);
+                onShare(focalPerson);
               }}
             />
           )}
         />
-        {/* end contacts list */}
+        {/* end focalPeople list */}
       </Fragment>
     );
   }
 }
 
-export default ContactsList;
+export default FocalPersonsList;
