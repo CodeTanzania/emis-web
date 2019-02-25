@@ -151,7 +151,7 @@ class AgencyList extends Component {
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleOnDeselectFocalPerson = agency => {
+  handleOnDeselectAgency = agency => {
     const { selectedAgencies } = this.state;
     const selectedList = [...selectedAgencies];
 
