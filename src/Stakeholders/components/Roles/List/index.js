@@ -19,9 +19,17 @@ import RoleListItem from '../ListItem';
 
 /* constants */
 const headerLayout = [
-  { span: 7, header: 'Name' },
-  { span: 3, header: 'Abbreviation' },
-  { span: 10, header: 'Description' },
+  {
+    span: 7,
+    header: 'Name',
+    title: 'Roles name associated with focal people',
+  },
+  { span: 3, header: 'Abbreviation', title: 'A shortened form of roles' },
+  {
+    span: 10,
+    header: 'Description',
+    title: 'Detail explanation of roles',
+  },
 ];
 
 const { getRolesExportUrl } = httpActions;
@@ -168,7 +176,18 @@ class RoleList extends Component {
           onPaginate={nextPage => {
             paginateRoles(nextPage);
           }}
-          onRefresh={refreshRoles}
+          onRefresh={() =>
+            refreshRoles(
+              () => {
+                notifySuccess('Role refreshed successfully');
+              },
+              () => {
+                notifyError(
+                  'An Error occurred while refreshing role please contact system administrator'
+                );
+              }
+            )
+          }
         />
         {/* end toolbar */}
 

@@ -135,21 +135,27 @@ class RoleListItem extends Component {
       >
         <Row>
           <Col span={1}>{sideComponent}</Col>
-          <Col span={7}>{name}</Col>
-          <Col span={3}>{abbreviation}</Col>
-          <Col span={10}>{description}</Col>
+          <Col span={7} title="Role of focal people">
+            {name}
+          </Col>
+          <Col span={3} title="role abbreviation ">
+            {abbreviation}
+          </Col>
+          <Col span={10} title="An additional information attached to a role">
+            {description}
+          </Col>
           <Col span={3}>
             {isHovered && (
               <Fragment>
                 <Icon
                   type="edit"
-                  title="Update Role"
+                  title="Click to update Role"
                   className="actionIcon"
                   onClick={onEdit}
                 />
                 <Icon
                   type="database"
-                  title="Archive Role"
+                  title="Click to archive Role"
                   className="actionIcon"
                   onClick={this.showArchiveConfirm}
                 />
