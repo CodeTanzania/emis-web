@@ -6,16 +6,18 @@ import {
   searchFocalPeople,
   selectFocalPerson,
 } from '@codetanzania/emis-api-states';
+import { httpActions } from '@codetanzania/emis-api-client';
 import { Button, Col, Input, Modal, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import ContactForm from './ContactForm';
 import ContactFilters from './Filters';
 import ContactsList from './List';
-import NotificationForm from './NotificationForm';
+import NotificationForm from '../../../components/NotificationForm';
 import './styles.css';
 
 /* constants */
+const { getFocalPeople: getFocalPeopleFromAPI } = httpActions;
 const { Search } = Input;
 
 /**
@@ -330,9 +332,11 @@ class Contacts extends Component {
           afterClose={this.handleAfterCloseNotificationForm}
         >
           <NotificationForm
-            onCancel={this.closeNotificationForm}
             recipients={selectedContacts}
+            onSearchRecipients={getFocalPeopleFromAPI}
             body={notificationBody}
+            onCancel={this.closeNotificationForm}
+            onNotify={() => {}}
           />
         </Modal>
         {/* end Notification modal */}
