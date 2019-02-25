@@ -9,6 +9,7 @@ import concat from 'lodash/concat';
 import map from 'lodash/map';
 import remove from 'lodash/remove';
 import uniq from 'lodash/uniq';
+import intersectionBy from 'lodash/intersectionBy';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import RoleListHeader from '../../../../components/ListHeader';
@@ -146,7 +147,12 @@ class RoleList extends Component {
   render() {
     const { roles, loading, page, total, onEdit, onNotify } = this.props;
     const { selectedRoles, selectedPages } = this.state;
-    const selectedRolesCount = this.state.selectedRoles.length;
+    const selectedRolesCount = intersectionBy(
+      this.state.selectedRoles,
+      roles,
+      '_id'
+    ).length;
+
     return (
       <Fragment>
         {/* toolbar */}
@@ -214,4 +220,5 @@ class RoleList extends Component {
     );
   }
 }
+
 export default RoleList;

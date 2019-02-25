@@ -9,6 +9,7 @@ import concat from 'lodash/concat';
 import map from 'lodash/map';
 import uniq from 'lodash/uniq';
 import remove from 'lodash/remove';
+import intersectionBy from 'lodash/intersectionBy';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import ListHeader from '../../../../components/ListHeader';
@@ -174,7 +175,11 @@ class AgencyList extends Component {
       onBulkShare,
     } = this.props;
     const { selectedAgencies, selectedPages } = this.state;
-    const selectedAgenciesCount = this.state.selectedAgencies.length;
+    const selectedAgenciesCount = intersectionBy(
+      this.state.selectedAgencies,
+      agencies,
+      '_id'
+    ).length;
 
     return (
       <Fragment>

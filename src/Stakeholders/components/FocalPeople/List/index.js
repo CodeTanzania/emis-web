@@ -10,6 +10,7 @@ import map from 'lodash/map';
 import remove from 'lodash/remove';
 import uniq from 'lodash/uniq';
 import uniqBy from 'lodash/uniqBy';
+import intersectionBy from 'lodash/intersectionBy';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import ListHeader from '../../../../components/ListHeader';
@@ -180,7 +181,11 @@ class FocalPersonsList extends Component {
       onBulkShare,
     } = this.props;
     const { selectedFocalPeople, selectedPages } = this.state;
-    const selectedFocalPeopleCount = this.state.selectedFocalPeople.length;
+    const selectedFocalPeopleCount = intersectionBy(
+      this.state.selectedFocalPeople,
+      focalPeople,
+      '_id'
+    ).length;
 
     return (
       <Fragment>
