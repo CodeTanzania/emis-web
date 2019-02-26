@@ -179,11 +179,11 @@ class RoleList extends Component {
           onRefresh={() =>
             refreshRoles(
               () => {
-                notifySuccess('Role refreshed successfully');
+                notifySuccess('Roles refreshed successfully');
               },
               () => {
                 notifyError(
-                  'An Error occurred while refreshing role please contact system administrator'
+                  'An Error occurred while refreshing roles please contact system administrator'
                 );
               }
             )
