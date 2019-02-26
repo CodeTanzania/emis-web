@@ -8,6 +8,7 @@ import { List } from 'antd';
 import concat from 'lodash/concat';
 import map from 'lodash/map';
 import uniq from 'lodash/uniq';
+import uniqBy from 'lodash/uniqBy';
 import remove from 'lodash/remove';
 import intersectionBy from 'lodash/intersectionBy';
 import PropTypes from 'prop-types';
@@ -100,7 +101,7 @@ class AgencyList extends Component {
   handleSelectAll = () => {
     const { selectedAgencies, selectedPages } = this.state;
     const { agencies, page } = this.props;
-    const selectedList = [...selectedAgencies, ...agencies];
+    const selectedList = uniqBy([...selectedAgencies, ...agencies], '_id');
     const pages = uniq([...selectedPages, page]);
     this.setState({
       selectedAgencies: selectedList,
@@ -121,7 +122,7 @@ class AgencyList extends Component {
   handleDeselectAll = () => {
     const { agencies, page } = this.props;
     const { selectedAgencies, selectedPages } = this.state;
-    const selectedList = [...selectedAgencies];
+    const selectedList = uniqBy([...selectedAgencies], '_id');
     const pages = uniq([...selectedPages]);
 
     remove(pages, item => item === page);
