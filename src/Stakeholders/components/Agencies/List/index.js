@@ -1,22 +1,33 @@
-import { deleteFocalPerson } from '@codetanzania/emis-api-states';
+import {
+  deleteAgency,
+  paginateAgencies,
+  refreshAgencies,
+} from '@codetanzania/emis-api-states';
+import { httpActions } from '@codetanzania/emis-api-client';
 import { List } from 'antd';
 import concat from 'lodash/concat';
 import map from 'lodash/map';
+import uniq from 'lodash/uniq';
+import uniqBy from 'lodash/uniqBy';
 import remove from 'lodash/remove';
+import intersectionBy from 'lodash/intersectionBy';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import ListHeader from '../../../../components/ListHeader';
 import { notifyError, notifySuccess } from '../../../../util';
-import AgencyActionBar from '../ActionBar';
+import Toolbar from '../../../../components/Toolbar';
 import AgencyListItem from '../ListItem';
 
 /* constants */
 const headerLayout = [
-  { span: 5, header: 'Name', offset: 1 },
-  { span: 6, header: 'Role' },
+  { span: 5, header: 'Name' },
+  { span: 3, header: 'Abbreviation' },
+  { span: 3, header: 'Area' },
   { span: 4, header: 'Mobile Number' },
   { span: 4, header: 'Email Address' },
 ];
+
+const { getAgenciesExportUrl } = httpActions;
 
 /**
  * @class
@@ -35,12 +46,15 @@ class AgencyList extends Component {
     page: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
     onEdit: PropTypes.func.isRequired,
-    onFilter: PropTypes.func.isRequired,
     onNotify: PropTypes.func.isRequired,
+    onBulkShare: PropTypes.func.isRequired,
+    onShare: PropTypes.func.isRequired,
+    onFilter: PropTypes.func.isRequired,
   };
 
   state = {
-    selectedAgency: [],
+    selectedAgencies: [],
+    selectedPages: [],
   };
 
   /**
@@ -54,19 +68,9 @@ class AgencyList extends Component {
    * @since 0.1.0
    */
   handleOnSelectAgency = agency => {
-    const { selectedAgency } = this.state;
-    this.setState({ selectedAgency: concat([], selectedAgency, agency) });
+    const { selectedAgencies } = this.state;
+    this.setState({ selectedAgencies: concat([], selectedAgencies, agency) });
   };
-
-  /**
-   * @function
-   * @name handleSelectAll
-   * @description Handle selected all agencies actions
-   *
-   * @version 0.1.0
-   * @since 0.1.0
-   */
-  handleSelectAll = () => {};
 
   /**
    * @function
@@ -88,6 +92,56 @@ class AgencyList extends Component {
 
   /**
    * @function
+   * @name handleSelectAll
+   * @description Handle select all agencies actions from current page
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleSelectAll = () => {
+    const { selectedAgencies, selectedPages } = this.state;
+    const { agencies, page } = this.props;
+    const selectedList = uniqBy([...selectedAgencies, ...agencies], '_id');
+    const pages = uniq([...selectedPages, page]);
+    this.setState({
+      selectedAgencies: selectedList,
+      selectedPages: pages,
+    });
+  };
+
+  /**
+   * @function
+   * @name handleDeselectAll
+   * @description Handle deselect all agencies in a current page
+   *
+   * @returns {undefined} undefined
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleDeselectAll = () => {
+    const { agencies, page } = this.props;
+    const { selectedAgencies, selectedPages } = this.state;
+    const selectedList = uniqBy([...selectedAgencies], '_id');
+    const pages = uniq([...selectedPages]);
+
+    remove(pages, item => item === page);
+
+    agencies.forEach(agency => {
+      remove(
+        selectedList,
+        item => item._id === agency._id // eslint-disable-line
+      );
+    });
+
+    this.setState({
+      selectedAgencies: selectedList,
+      selectedPages: pages,
+    });
+  };
+
+  /**
+   * @function
    * @name handleOnDeselectAgency
    * @description Handle deselect a single agency action
    *
@@ -98,15 +152,15 @@ class AgencyList extends Component {
    * @since 0.1.0
    */
   handleOnDeselectAgency = agency => {
-    const { selectedAgency } = this.state;
-    const selectedList = [...selectedAgency];
+    const { selectedAgencies } = this.state;
+    const selectedList = [...selectedAgencies];
 
     remove(
       selectedList,
       item => item._id === agency._id // eslint-disable-line
     );
 
-    this.setState({ selectedAgency: selectedList });
+    this.setState({ selectedAgencies: selectedList });
   };
 
   render() {
@@ -116,69 +170,95 @@ class AgencyList extends Component {
       page,
       total,
       onEdit,
-      onFilter,
       onNotify,
+      onFilter,
+      onShare,
+      onBulkShare,
     } = this.props;
-    const { selectedAgency } = this.state;
-    const selectedAgencyCount = this.state.selectedAgency.length;
+    const { selectedAgencies, selectedPages } = this.state;
+    const selectedAgenciesCount = intersectionBy(
+      this.state.selectedAgencies,
+      agencies,
+      '_id'
+    ).length;
 
     return (
       <Fragment>
-        {/* list action bar */}
-        <AgencyActionBar
-          total={total}
+        {/* toolbar */}
+        <Toolbar
+          itemName="Agency"
           page={page}
+          total={total}
+          selectedItemsCount={selectedAgenciesCount}
+          exportUrl={getAgenciesExportUrl({
+            filter: { _id: map(selectedAgencies, '_id') },
+          })}
+          onNotify={() => onNotify(selectedAgencies)}
           onFilter={onFilter}
-          onNotify={() => {
-            onNotify(selectedAgency);
+          onPaginate={nextPage => {
+            paginateAgencies(nextPage);
           }}
-          selectedItemCount={selectedAgencyCount}
-          onFilterByStatus={this.handleFilterByStatus}
+          onRefresh={refreshAgencies}
+          onShare={() => onBulkShare(selectedAgencies)}
         />
-        {/* end action bar */}
+        {/* end toolbar */}
 
         {/* agency list header */}
-        <ListHeader headerLayout={headerLayout} />
+        <ListHeader
+          headerLayout={headerLayout}
+          onSelectAll={this.handleSelectAll}
+          onDeselectAll={this.handleDeselectAll}
+          isBulkSelected={selectedPages.includes(page)}
+        />
         {/* end agency list header */}
 
         {/* agencies list */}
         <List
           loading={loading}
           dataSource={agencies}
-          renderItem={agency => (
-            <AgencyListItem
-              key={agency._id} // eslint-disable-line
-              abbreviation={agency.abbreviation}
-              name={agency.name}
-              title={agency.role ? agency.role.name : 'N/A'}
-              email={agency.email}
-              mobile={agency.mobile}
-              isSelected={
-                // eslint-disable-next-line
-                map(selectedAgency, item => item._id).includes(agency._id)
-              }
-              onSelectItem={() => {
-                this.handleOnSelectAgency(agency);
-              }}
-              onDeselectItem={() => {
-                this.handleOnDeselectAgency(agency);
-              }}
-              onEdit={() => onEdit(agency)}
-              onArchive={() =>
-                deleteFocalPerson(
-                  agency._id, // eslint-disable-line
-                  () => {
-                    notifySuccess('Agency was archived successfully');
-                  },
-                  () => {
-                    notifyError(
-                      'An Error occurred while archiving Agency please contact system administrator'
-                    );
-                  }
-                )
-              }
-            />
-          )}
+          renderItem={agency => {
+            const {
+              location: { name: area },
+            } = agency;
+            return (
+              <AgencyListItem
+                key={agency._id} // eslint-disable-line
+                abbreviation={agency.abbreviation}
+                name={agency.name}
+                title={agency.role ? agency.role.name : 'N/A'}
+                email={agency.email}
+                area={area}
+                mobile={agency.mobile}
+                onShare={() => {
+                  onShare(agency);
+                }}
+                isSelected={
+                  // eslint-disable-next-line
+                  map(selectedAgencies, item => item._id).includes(agency._id)
+                }
+                onSelectItem={() => {
+                  this.handleOnSelectAgency(agency);
+                }}
+                onDeselectItem={() => {
+                  this.handleOnDeselectAgency(agency);
+                }}
+                onEdit={() => onEdit(agency)}
+                onArchive={() =>
+                  deleteAgency(
+                    agency._id, // eslint-disable-line
+                    () => {
+                      notifySuccess('Agency was archived successfully');
+                    },
+                    () => {
+                      notifyError(
+                        'An Error occurred while archiving Agency please agency system administrator'
+                      );
+                    }
+                  )
+                }
+              />
+            );
+          }}
         />
         {/* end agencies list */}
       </Fragment>

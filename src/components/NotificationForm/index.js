@@ -1,16 +1,16 @@
-import { get } from '@codetanzania/emis-api-client';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, Icon, Tooltip } from 'antd';
 import map from 'lodash/map';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import SearchableSelectInput from '../../../../components/SearchableSelectInput';
+import SearchableSelectInput from '../SearchableSelectInput';
 
+/* constants */
 const { TextArea } = Input;
 
 /**
  * @class
  * @name NotificationForm
- * @description Render Contacts notification form component
+ * @description Render notification form component
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -29,6 +29,8 @@ class NotificationForm extends Component {
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
     body: PropTypes.string,
     onCancel: PropTypes.func.isRequired,
+    onNotify: PropTypes.func.isRequired,
+    onSearchRecipients: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -71,10 +73,11 @@ class NotificationForm extends Component {
 
   render() {
     const {
-      onCancel,
       form: { getFieldDecorator },
       recipients,
       body,
+      onCancel,
+      onSearchRecipients,
     } = this.props;
 
     const formItemLayout = {
@@ -110,8 +113,7 @@ class NotificationForm extends Component {
             initialValue: map(recipients, contact => contact._id), // eslint-disable-line
           })(
             <SearchableSelectInput
-              placeholder="Enter notification recipients"
-              onSearch={get}
+              onSearch={onSearchRecipients}
               optionLabel="name"
               optionValue="_id"
               mode="multiple"
@@ -122,10 +124,18 @@ class NotificationForm extends Component {
         {/* end notification recipients */}
 
         {/* notification subject */}
-        <Form.Item {...formItemLayout} label="Subject">
-          {getFieldDecorator('subject', {})(
-            <Input placeholder="Applicable for Email notification only" />
-          )}
+        <Form.Item
+          {...formItemLayout}
+          label={
+            <span>
+              Subject&nbsp;
+              <Tooltip title="Applicable for Email notification only">
+                <Icon type="question-circle-o" />
+              </Tooltip>
+            </span>
+          }
+        >
+          {getFieldDecorator('subject', {})(<Input />)}
         </Form.Item>
         {/* notification subject */}
 
@@ -139,12 +149,7 @@ class NotificationForm extends Component {
               },
             ],
             initialValue: body,
-          })(
-            <TextArea
-              autosize={{ minRows: 6, maxRows: 10 }}
-              placeholder="Write notification message here ..."
-            />
-          )}
+          })(<TextArea autosize={{ minRows: 6, maxRows: 10 }} />)}
         </Form.Item>
         {/* end notification body */}
 

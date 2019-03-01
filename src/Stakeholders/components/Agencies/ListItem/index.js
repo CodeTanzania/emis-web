@@ -23,7 +23,7 @@ class AgencyListItem extends Component {
   static propTypes = {
     abbreviation: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
+    area: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     mobile: PropTypes.string.isRequired,
     onArchive: PropTypes.func.isRequired,
@@ -31,6 +31,7 @@ class AgencyListItem extends Component {
     isSelected: PropTypes.bool.isRequired,
     onSelectItem: PropTypes.func.isRequired,
     onDeselectItem: PropTypes.func.isRequired,
+    onShare: PropTypes.func.isRequired,
   };
 
   /**
@@ -101,7 +102,15 @@ class AgencyListItem extends Component {
   };
 
   render() {
-    const { abbreviation, name, title, email, mobile, onEdit } = this.props;
+    const {
+      abbreviation,
+      name,
+      email,
+      mobile,
+      area,
+      onEdit,
+      onShare,
+    } = this.props;
     const { isHovered } = this.state;
     const { isSelected } = this.props;
     const avatarBackground = randomColor();
@@ -124,7 +133,7 @@ class AgencyListItem extends Component {
         />
       ) : (
         <Avatar style={{ backgroundColor: avatarBackground }}>
-          {abbreviation}
+          {name.toUpperCase().charAt(0)}
         </Avatar>
       );
     }
@@ -138,7 +147,8 @@ class AgencyListItem extends Component {
         <Row>
           <Col span={1}>{sideComponent}</Col>
           <Col span={5}>{name}</Col>
-          <Col span={6}>{title}</Col>
+          <Col span={3}>{abbreviation}</Col>
+          <Col span={3}>{area}</Col>
           <Col span={4}>{mobile}</Col>
           <Col span={4}>{email}</Col>
           <Col span={3}>
@@ -154,6 +164,7 @@ class AgencyListItem extends Component {
                   type="share-alt"
                   title="Share Agency"
                   className="actionIcon"
+                  onClick={onShare}
                 />
                 <Icon
                   type="database"

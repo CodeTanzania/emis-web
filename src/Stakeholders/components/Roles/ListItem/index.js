@@ -135,9 +135,15 @@ class RoleListItem extends Component {
       >
         <Row>
           <Col span={1}>{sideComponent}</Col>
-          <Col span={7}>{name}</Col>
-          <Col span={3}>{abbreviation}</Col>
-          <Col span={10}>{description}</Col>
+          <Col span={7} title="Role name">
+            {name}
+          </Col>
+          <Col span={3} title="role abbreviation ">
+            {abbreviation}
+          </Col>
+          <Col span={10} title="Role summary">
+            {description}
+          </Col>
           <Col span={3}>
             {isHovered && (
               <Fragment>

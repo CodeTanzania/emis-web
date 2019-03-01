@@ -1,0 +1,12 @@
+.FocalPeopleList {
+  padding: 40px;
+}
+
+.FocalPeopleList .searchBox {
+  width: 50%;
+}
+
+.FocalPeopleList .ant-input-clear-icon {
+  padding-right: 10px;
+  color: #bebebe;
+}
