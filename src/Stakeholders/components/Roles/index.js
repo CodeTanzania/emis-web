@@ -201,7 +201,7 @@ class Roles extends Component {
               placeholder="Search for roles here ..."
               onChange={this.searchRoles}
               allowClear
-              title="Click to search roles"
+              title="Search roles"
             />
             {/* end search input component */}
           </Col>
@@ -211,7 +211,7 @@ class Roles extends Component {
               type="primary"
               icon="plus"
               size="large"
-              title="Click to add new role"
+              title="Add new role"
               onClick={this.openForm}
             >
               New Role

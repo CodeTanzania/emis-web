@@ -28,7 +28,7 @@ const headerLayout = [
   {
     span: 10,
     header: 'Description',
-    title: 'Detail explanation of roles',
+    title: 'Explanation of roles',
   },
 ];
 

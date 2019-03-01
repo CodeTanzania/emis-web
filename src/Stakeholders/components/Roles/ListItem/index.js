@@ -135,13 +135,13 @@ class RoleListItem extends Component {
       >
         <Row>
           <Col span={1}>{sideComponent}</Col>
-          <Col span={7} title="Role of focal people">
+          <Col span={7} title="Role name">
             {name}
           </Col>
           <Col span={3} title="role abbreviation ">
             {abbreviation}
           </Col>
-          <Col span={10} title="An additional information attached to a role">
+          <Col span={10} title="Role summary">
             {description}
           </Col>
           <Col span={3}>
@@ -149,13 +149,13 @@ class RoleListItem extends Component {
               <Fragment>
                 <Icon
                   type="edit"
-                  title="Click to update Role"
+                  title="Update Role"
                   className="actionIcon"
                   onClick={onEdit}
                 />
                 <Icon
                   type="database"
-                  title="Click to archive Role"
+                  title="Archive Role"
                   className="actionIcon"
                   onClick={this.showArchiveConfirm}
                 />
