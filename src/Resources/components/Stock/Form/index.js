@@ -1,14 +1,13 @@
 import { postStock, putStock } from '@codetanzania/emis-api-states';
-import {
-  getStakeholders,
-  getWarehouses,
-  getItems,
-} from '@codetanzania/emis-api-client';
+import { httpActions } from '@codetanzania/emis-api-client';
 import { Button, Form, Input } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import SearchableSelectInput from '../../../../components/SearchableSelectInput';
 import { notifyError, notifySuccess } from '../../../../util';
+
+/* constants */
+const { getStakeholders, getWarehouses, getItems } = httpActions;
 
 // eslint-disable-next-line jsdoc/require-returns
 /**
