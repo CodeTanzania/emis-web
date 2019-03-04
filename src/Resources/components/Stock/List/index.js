@@ -4,6 +4,20 @@ import React, { Fragment } from 'react';
 import StocksListHeader from '../ListHeader';
 import StockListItem from '../ListItem';
 
+/**
+ * @function
+ * @name StockList
+ * @description Render stock list which has search box and actions
+ *
+ * @param {Object} props props object
+ * @param {string} props.stocks array of stocks objects
+ * @param {boolean} props.loading represents loading status
+ * @param {Function} props.onEdit call back function  called
+ * during editing a stock
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
 const StockList = ({ stocks, loading, onEdit }) => (
   <Fragment>
     <StocksListHeader />

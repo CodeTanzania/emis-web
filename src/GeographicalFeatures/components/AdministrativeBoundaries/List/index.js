@@ -5,11 +5,16 @@ import AdminstrativeBoundaryListHeader from '../ListHeader';
 import AdminstrativeBoundaryListItem from '../ListItem';
 
 /**
- * Render AdminstrativeBoundary list which have search box and actions
  *
- * @class
+ * @function
  * @name AdminstrativeBoundaryList
+ * @description Render AdminstrativeBoundary list which have search box and
+ * actions
  *
+ * @param {Object} props props object
+ * @param {boolean} props.loading preload list of adminstrativeBoundaries
+ * @param {Array} props.adminstrativeBoundaries array list of
+ *  adminstrativeBoundaries
  *
  * @version 0.1.0
  * @since 0.1.0

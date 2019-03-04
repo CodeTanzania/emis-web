@@ -18,10 +18,10 @@ import './styles.css';
 const { Search } = Input;
 
 /**
- * Render warehouses module which has search box, actions and list of warehouses
- *
  * @class
  * @name Warehouses
+ * @description Render warehouses module which has search box,
+ *  actions and list of warehouses
  *
  *
  * @version 0.1.0
@@ -60,10 +60,10 @@ class Warehouses extends Component {
   }
 
   /**
-   * open filters modal by setting it's visible property to false via state
-   *
    * @function
    * @name openFiltersModal
+   * @description open filters modal by setting it's visible
+   * property to false via state
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -75,10 +75,10 @@ class Warehouses extends Component {
   };
 
   /**
-   * Close filters modal by setting it's visible property to false via state
-   *
    * @function
    * @name closeFiltersModal
+   * @description Close filters modal by setting it's visible
+   * property to false via state
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -90,10 +90,9 @@ class Warehouses extends Component {
   };
 
   /**
-   * Open warehouse form
-   *
    * @function
    * @name openForm
+   * @description Open warehouse form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -105,10 +104,9 @@ class Warehouses extends Component {
   };
 
   /**
-   * close warehouse form
-   *
    * @function
    * @name closeForm
+   * @description close warehouse form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -121,13 +119,12 @@ class Warehouses extends Component {
   };
 
   /**
-   * Search Warehouses List based on supplied filter word
-   *
    * @function
    * @name searchWarehouses
+   * @description Search Warehouses List based on supplied filter word
    *
-   * @param {Object} event - Event instance
-   * @returns {undefined} - Nothing is returned
+   * @param {Object} event  Event instance
+   * @returns {undefined}  Nothing is returned
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -137,10 +134,11 @@ class Warehouses extends Component {
   };
 
   /**
-   * Handle on Edit action for list item
-   *
    * @function
    * @name handleEdit
+   * @description Handle on Edit action for list item
+   *
+   * @param {Object} warehouse warehouse to be deleted
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -151,6 +149,14 @@ class Warehouses extends Component {
     openWarehouseForm();
   };
 
+  /**
+   * @function
+   * @name handleAfterCloseForm
+   * @description Handle on actions after closing form
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleAfterCloseForm = () => {
     this.setState({ isEditForm: false });
   };

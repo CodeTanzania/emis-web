@@ -11,6 +11,14 @@ const headerLayout = [
   { span: 4, header: 'Warehouse' },
 ];
 
+/**
+ * @function
+ * @name AdjustmentListHeader
+ * @description Render adjustment list metadata
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
 const AdjustmentListHeader = () => (
   <Row className="AdjustmentListHeader">
     {headerLayout.map(item => (

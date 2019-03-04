@@ -4,6 +4,20 @@ import React, { Fragment } from 'react';
 import IndicatorsListHeader from '../ListHeader';
 import IndicatorListItem from '../ListItem';
 
+// eslint-disable-next-line jsdoc/require-returns
+/**
+ * @function
+ * @name IndicatorsList
+ * @description render list of indicators
+ *
+ * @param {Object} props props object
+ * @param {boolean} props.loading preload list of indictors
+ * @param {Array} props.indicators array list of indictors
+ * @param {Function} props.onEdit function for editing single indictor
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
 const IndicatorsList = ({ indicators, loading, onEdit }) => (
   <Fragment>
     <IndicatorsListHeader />

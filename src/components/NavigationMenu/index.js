@@ -35,6 +35,7 @@ const NavigationMenuItem = ({ name, icon, path, disabled }) => (
 );
 
 /**
+ *
  * @function
  * @name Home
  * @description Navigation Menu which renders provided routes

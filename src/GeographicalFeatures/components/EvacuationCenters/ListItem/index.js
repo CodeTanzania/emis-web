@@ -4,15 +4,11 @@ import React, { Component, Fragment } from 'react';
 import './styles.css';
 
 /**
- * Single Evacuation Center list item component.
- * Render single Evacuation Center details
  *
  * @class
  * @name EvacuationCenterListItem
- *
- * @param {Object} props
- * @param {string} props.name
- * @param {string} props.type
+ * @description Single Evacuation Center list item component.
+ * Render single Evacuation Center details
  *
  * @version 0.1.0
  * @since 0.1.0

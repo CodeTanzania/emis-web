@@ -6,11 +6,12 @@ import {
 import { Button, Checkbox, Col, Form, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+
 /**
- * Filter modal component for filtering incident types
  *
  * @class
  * @name IncidentTypesFilters
+ * @description Filter modal component for filtering incident types
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -34,10 +35,12 @@ class IncidentTypesFilters extends Component {
   };
 
   /**
-   * Handle filter action
    *
    * @function
    * @name handleSubmit
+   * @description Handle filter action
+   *
+   * @param {Object} e event object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -58,10 +61,10 @@ class IncidentTypesFilters extends Component {
   };
 
   /**
-   * Action handle when clear
    *
    * @function
    * @name handleClearFilter
+   * @description Action handle when clear
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -119,6 +122,7 @@ class IncidentTypesFilters extends Component {
           )}
         </Form.Item>
         {/* end families filters */}
+
         {/* start natures filters */}
         <Form.Item {...formItemLayout} label="By Nature ">
           {getFieldDecorator('nature', {
@@ -136,6 +140,7 @@ class IncidentTypesFilters extends Component {
           )}
         </Form.Item>
         {/* end nature filters */}
+
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
           <Button onClick={onCancel}>Cancel</Button>

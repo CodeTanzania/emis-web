@@ -23,6 +23,15 @@ class WarehouseForm extends Component {
     posting: PropTypes.bool.isRequired,
   };
 
+  /**
+   * @function
+   * @name handleSubmit
+   * @description Handle create/edit action
+   *
+   * @param {Object} e event object
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleSubmit = e => {
     e.preventDefault();
 

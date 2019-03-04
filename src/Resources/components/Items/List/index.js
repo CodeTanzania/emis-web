@@ -4,17 +4,18 @@ import React, { Fragment } from 'react';
 import ItemsListItem from '../ListItem';
 import ItemsListHeader from '../ListHeader';
 
+// eslint-disable-next-line jsdoc/require-returns
 /**
- * list item component.
- * Render item details
- *
  * @function
  * @name ItemsList
+ * @description list item component.
+ * Render item details
  *
- * @param {Object} props
- * @param {string} props.items
- * @param {string} props.loading
- * @param {string} props.onEdit
+ * @param {Object} props props object
+ * @param {Array} props.items array of items
+ * @param {string} props.loading loading status
+ * @param {Function} props.onEdit call back function
+ *  when edit is performed
  *
  * @version 0.1.0
  * @since 0.1.0

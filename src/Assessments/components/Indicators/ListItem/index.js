@@ -4,17 +4,10 @@ import React, { Component, Fragment } from 'react';
 import './styles.css';
 
 /**
- * Single  indicator list item component.
- * Render single indicator details
- *
  * @class
  * @name IndicatorListItem
- *
- * @param {Object} props
- * @param {string} props.subject
- * @param {string} props.topic
- * @param {string} props.description
- * @param {string} props.color
+ * @description single  indicator list item component.Render single indicator
+ * details
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -68,7 +61,7 @@ class IndicatorListItem extends Component {
               <Fragment>
                 <Icon
                   type="edit"
-                  title="Update ndicator"
+                  title="Update indicator"
                   className="actionIcon"
                   onClick={onEdit}
                 />

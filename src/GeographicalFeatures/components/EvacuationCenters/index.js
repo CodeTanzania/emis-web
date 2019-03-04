@@ -18,11 +18,11 @@ import './styles.css';
 const { Search } = Input;
 
 /**
- * Render features module which has search box, actions and list of features
  *
  * @class
  * @name EvacuationCenters
- *
+ * @description Render features module which has search box,
+ * actions and list of features
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -60,11 +60,11 @@ class EvacuationCenters extends Component {
   }
 
   /**
-   * open filters modal by setting it's visible property to false via state
    *
    * @function
    * @name openFiltersModal
-   *
+   * @description open filters modal by setting it's visible property to
+   * false via state
    * @returns {undefined} - Nothing is returned
    *
    * @version 0.1.0
@@ -75,10 +75,11 @@ class EvacuationCenters extends Component {
   };
 
   /**
-   * Close filters modal by setting it's visible property to false via state
    *
    * @function
    * @name closeFiltersModal
+   * @description Close filters modal by setting it's visible property to
+   * false via state
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -90,10 +91,10 @@ class EvacuationCenters extends Component {
   };
 
   /**
-   * Open Evacuation Center form
    *
    * @function
    * @name openForm
+   * @description Open Evacuation Center form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -105,10 +106,10 @@ class EvacuationCenters extends Component {
   };
 
   /**
-   * close Evacuation Center form
    *
    * @function
    * @name closeForm
+   * @description close Evacuation Center form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -121,10 +122,10 @@ class EvacuationCenters extends Component {
   };
 
   /**
-   * Search Evacuation Centers List based on supplied filter word
    *
    * @function
    * @name searchFeatures
+   * @description Search Evacuation Centers List based on supplied filter word
    *
    * @param {Object} event - Event instance
    * @returns {undefined} - Nothing is returned
@@ -137,10 +138,12 @@ class EvacuationCenters extends Component {
   };
 
   /**
-   * Handle on Edit action for list item
    *
    * @function
    * @name handleEdit
+   * @description Handle on Edit action for list item
+   *
+   * @param {Object} evacuationCenter evacuation center object
    *
    * @version 0.1.0
    * @since 0.1.0

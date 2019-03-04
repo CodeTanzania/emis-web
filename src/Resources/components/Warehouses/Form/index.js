@@ -88,6 +88,15 @@ const slevels = [
   'other',
 ];
 
+// eslint-disable-next-line jsdoc/require-returns
+/**
+ * @class
+ * @name WarehouseForm
+ * @description  Render form for creating a new warehouse
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
 class WarehouseForm extends Component {
   static propTypes = {
     isEditForm: PropTypes.bool.isRequired,
@@ -103,6 +112,17 @@ class WarehouseForm extends Component {
     posting: PropTypes.bool.isRequired,
   };
 
+  /**
+   * @function
+   * @name handleSubmit
+   * @description  call back function to handle submit action
+   *
+   * @param {Object} e event object
+   *
+   * @returns {undefined} does not return anything
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleSubmit = e => {
     e.preventDefault();
 
@@ -148,6 +168,17 @@ class WarehouseForm extends Component {
     });
   };
 
+  // eslint-disable-next-line jsdoc/require-returns
+  /**
+   * @function
+   * @name renderSelectOptions
+   * @description  renders select options
+   *
+   * @param {Array} options array of select options
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   renderSelectOptions = options =>
     options.map(option => (
       <Option key={option} value={option}>

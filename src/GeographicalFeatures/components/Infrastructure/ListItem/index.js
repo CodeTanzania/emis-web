@@ -4,15 +4,11 @@ import React, { Component, Fragment } from 'react';
 import './styles.css';
 
 /**
- * Single Critical Infrastructure list item component.
- * Render single Critical Infrastructure details
  *
  * @class
  * @name CriticalInfrastructureListItem
- *
- * @param {Object} props
- * @param {string} props.name
- * @param {string} props.type
+ * @description Single Critical Infrastructure list item component.
+ * Render single Critical Infrastructure details
  *
  * @version 0.1.0
  * @since 0.1.0

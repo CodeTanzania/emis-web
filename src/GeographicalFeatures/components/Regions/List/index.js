@@ -4,6 +4,21 @@ import React, { Fragment } from 'react';
 import RegionsListItem from '../ListItem';
 import RegionsListHeader from '../LIstHeader';
 
+// eslint-disable-next-line jsdoc/require-returns
+/**
+ *
+ * @function
+ * @name RegionsList
+ * @description Render Region list
+ *
+ * @param {Object} props props object
+ * @param {boolean} props.loading preload list of region
+ * @param {Array} props.regions array list of region
+ * @param {Function} props.onEdit function for editing region
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
 const RegionsList = ({ regions, loading, onEdit }) => (
   <Fragment>
     <RegionsListHeader />

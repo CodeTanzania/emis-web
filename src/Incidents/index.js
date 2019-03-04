@@ -25,10 +25,12 @@ const routes = [
   },
 ];
 /**
- * Home component which shows to navigation Nav
  *
  * @function
  * @name Incidents
+ * @description Home component which shows to navigation Nav
+ *
+ * @param {Object} props props object
  *
  * @version 0.1.0
  * @since 0.1.0

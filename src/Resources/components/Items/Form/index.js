@@ -8,6 +8,15 @@ import './styles.css';
 const { Option } = Select;
 const { TextArea } = Input;
 
+// eslint-disable-next-line jsdoc/require-returns
+/**
+ * @class
+ * @name AlertSourcesActionBar
+ * @description  Render form for creating a new alert source
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
 class ItemForm extends Component {
   static propTypes = {
     isEditForm: PropTypes.bool.isRequired,
@@ -30,6 +39,18 @@ class ItemForm extends Component {
     item: null,
   };
 
+  // eslint-disable-next-line jsdoc/require-returns
+  /**
+   * @function
+   * @name onChangeColor
+   * @description  call back function to handle color change
+   *
+   * @param {Object} colors colors object
+   * @param {Object} colors.color current color
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   onChangeColor = ({ color }) => {
     const {
       form: { setFieldsValue },
@@ -37,6 +58,17 @@ class ItemForm extends Component {
     setFieldsValue({ color });
   };
 
+  // eslint-disable-next-line jsdoc/require-returns
+  /**
+   * @function
+   * @name handleSubmit
+   * @description  call back function to handle submit action
+   *
+   * @param {Object} e event object
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleSubmit = e => {
     e.preventDefault();
 

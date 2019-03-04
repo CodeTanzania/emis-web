@@ -4,6 +4,21 @@ import React, { Fragment } from 'react';
 import DistrictsListItem from '../ListItem';
 import DistrictsListHeader from '../ListHeader';
 
+// eslint-disable-next-line jsdoc/require-returns
+/**
+ *
+ * @function
+ * @name DistrictsList
+ * @description Render Districts list
+ *
+ * @param {Object} props props object
+ * @param {boolean} props.loading preload list of district
+ * @param {Array} props.districts array list of district
+ * @param {Function} props.onEdit function for editing district
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
 const DistrictsList = ({ districts, loading, onEdit }) => (
   <Fragment>
     <DistrictsListHeader />

@@ -9,25 +9,25 @@ import {
 import { Input, Modal, Col, Row, Button } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import CriticalInfrastructerList from './List';
-import CriticalInfrastructerForm from './Form';
-import CriticalInfrastructerFilters from './Filters';
-import CriticalInfrastructersActionBar from './ActionBar';
+import CriticalInfrastructureList from './List';
+import CriticalInfrastructureForm from './Form';
+import CriticalInfrastructuresFilters from './Filters';
+import CriticalInfrastructuresActionBar from './ActionBar';
 import './styles.css';
 
 const { Search } = Input;
 
 /**
- * Render Critical Infrastructure module which has search box, actions and list of Critical Infrastructures
  *
  * @class
- * @name CriticalInfrastructers
- *
+ * @name CriticalInfrastructures
+ * @description Render Critical Infrastructure module which has search box,
+ *  actions and list of Critical Infrastructures
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class CriticalInfrastructers extends Component {
+class CriticalInfrastructures extends Component {
   state = {
     showFilters: false,
     isEditForm: false,
@@ -60,10 +60,11 @@ class CriticalInfrastructers extends Component {
   }
 
   /**
-   * open filters modal by setting it's visible property to false via state
    *
    * @function
    * @name openFiltersModal
+   * @description open filters modal by setting it's visible property
+   * to false via state
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -75,10 +76,11 @@ class CriticalInfrastructers extends Component {
   };
 
   /**
-   * Close filters modal by setting it's visible property to false via state
    *
    * @function
    * @name closeFiltersModal
+   * @description Close filters modal by setting it's visible property
+   *  to false via state
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -90,10 +92,10 @@ class CriticalInfrastructers extends Component {
   };
 
   /**
-   * Open Critical Infrastructure form
    *
    * @function
    * @name openForm
+   * @description Open Critical Infrastructure form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -105,10 +107,10 @@ class CriticalInfrastructers extends Component {
   };
 
   /**
-   * close Critical Infrastructure form
    *
    * @function
    * @name closeForm
+   * @description close Critical Infrastructure form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -121,10 +123,11 @@ class CriticalInfrastructers extends Component {
   };
 
   /**
-   * Search Critical Infrastructures List based on supplied filter word
    *
    * @function
    * @name searchFeatures
+   * @description Search Critical Infrastructures List based on
+   * supplied filter word
    *
    * @param {Object} event - Event instance
    * @returns {undefined} - Nothing is returned
@@ -137,10 +140,12 @@ class CriticalInfrastructers extends Component {
   };
 
   /**
-   * Handle on Edit action for list item
    *
    * @function
    * @name handleEdit
+   * @description Handle on Edit action for list item
+   *
+   * @param {Object} criticalInfrastructure critical Infrastructure object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -167,7 +172,7 @@ class CriticalInfrastructers extends Component {
     } = this.props;
     const { showFilters, isEditForm } = this.state;
     return (
-      <div className="CriticalInfrastructerList">
+      <div className="CriticalInfrastructureList">
         <Row>
           <Col span={12}>
             {/* search input component */}
@@ -193,14 +198,14 @@ class CriticalInfrastructers extends Component {
           {/* end primary actions */}
         </Row>
         {/* list action bar */}
-        <CriticalInfrastructersActionBar
+        <CriticalInfrastructuresActionBar
           total={total}
           page={page}
           onFilter={this.openFiltersModal}
         />
         {/* end list action bar */}
         {/* list starts */}
-        <CriticalInfrastructerList
+        <CriticalInfrastructureList
           criticalInfrastructures={criticalInfrastructures}
           loading={loading}
           onEdit={this.handleEdit}
@@ -217,7 +222,7 @@ class CriticalInfrastructers extends Component {
           footer={null}
           width={800}
         >
-          <CriticalInfrastructerFilters onCancel={this.closeFiltersModal} />
+          <CriticalInfrastructuresFilters onCancel={this.closeFiltersModal} />
         </Modal>
         {/* end filter modal */}
 
@@ -235,7 +240,7 @@ class CriticalInfrastructers extends Component {
           maskClosable={false}
           afterClose={this.handleAfterCloseForm}
         >
-          <CriticalInfrastructerForm
+          <CriticalInfrastructureForm
             posting={posting}
             isEditForm={isEditForm}
             criticalInfrastructure={criticalInfrastructure}
@@ -248,7 +253,7 @@ class CriticalInfrastructers extends Component {
   }
 }
 
-export default Connect(CriticalInfrastructers, {
+export default Connect(CriticalInfrastructures, {
   criticalInfrastructures: 'features.list',
   criticalInfrastructure: 'features.selected',
   posting: 'features.posting',

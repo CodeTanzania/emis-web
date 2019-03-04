@@ -18,10 +18,11 @@ import './styles.css';
 const { Search } = Input;
 
 /**
- * Render question list which have search box, actions and question list
  *
  * @class
  * @name Questions
+ * @description Render question list which have search box, actions and
+ * question list
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -52,10 +53,11 @@ class Questions extends Component {
   }
 
   /**
-   * open filters modal by setting it's visible property to false via state
    *
    * @function
    * @name openFiltersModal
+   * @description open filters modal by setting it's visible property to
+   * false via state
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -67,10 +69,11 @@ class Questions extends Component {
   };
 
   /**
-   * Close filters modal by setting it's visible property to false via state
    *
    * @function
    * @name closeFiltersModal
+   * @description Close filters modal by setting it's visible property to
+   * false via state
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -82,10 +85,10 @@ class Questions extends Component {
   };
 
   /**
-   * Open question form
    *
    * @function
    * @name openForm
+   * @description Open question form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -97,10 +100,10 @@ class Questions extends Component {
   };
 
   /**
-   * close question form
    *
    * @function closeForm
    * @name
+   * @description close question form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -113,11 +116,12 @@ class Questions extends Component {
   };
 
   /**
-   * Handle on Edit action for list item
    *
    * @function
    * @name handleEdit
+   * @description Handle on Edit action for list item
    *
+   * @param {Object} question question object
    * @version 0.1.0
    * @since 0.1.0
    */

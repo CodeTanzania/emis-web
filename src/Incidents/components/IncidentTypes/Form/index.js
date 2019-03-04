@@ -13,6 +13,15 @@ import './styles.css';
 
 const { Option } = Select;
 
+/**
+ * @class
+ * @name IncidentTypeForm
+ * @description Render incident type form for creating/editing incident types
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
+
 class IncidentTypeForm extends Component {
   static propTypes = {
     isEditForm: PropTypes.bool.isRequired,
@@ -35,6 +44,15 @@ class IncidentTypeForm extends Component {
     incidenttype: null,
   };
 
+  /**
+   * @function
+   * @name onChangeColor
+   * @description Handle changing of color
+   *
+   * @param {string} color event object
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   onChangeColor = ({ color }) => {
     const {
       form: { setFieldsValue },
@@ -42,6 +60,15 @@ class IncidentTypeForm extends Component {
     setFieldsValue({ color });
   };
 
+  /**
+   * @function
+   * @name handleSubmit
+   * @description Handle create/edit action
+   *
+   * @param {Object} e event object
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleSubmit = e => {
     e.preventDefault();
 
@@ -62,7 +89,8 @@ class IncidentTypeForm extends Component {
             },
             () => {
               notifyError(
-                'Something occurred while updating Incident Type, please try again!'
+                `Something occurred while updating Incident Type,
+                 please try again!`
               );
             }
           );

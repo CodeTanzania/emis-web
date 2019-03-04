@@ -7,6 +7,14 @@ const headerLayout = [
   { span: 6, header: 'Type', offset: 4 },
 ];
 
+/**
+ * @function
+ * @name EvacuationCenterListHeader
+ * @description Render list headers
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
 const EvacuationCenterListHeader = () => (
   <Row className="EvacuationCenterListHeader">
     {headerLayout.map(item => (
