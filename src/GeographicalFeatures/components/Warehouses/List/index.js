@@ -4,12 +4,14 @@ import React, { Fragment } from 'react';
 import WarehouseListHeader from '../ListHeader';
 import WarehouseListItem from '../ListItem';
 
+// eslint-disable-next-line jsdoc/require-returns
 /**
- * Render warehouse list which have search box and actions
  *
- * @class
+ * @function
  * @name WarehouseList
+ * @description Render warehouse list which have search box and actions
  *
+ * @param {Object} props props object
  *
  * @version 0.1.0
  * @since 0.1.0

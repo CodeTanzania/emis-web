@@ -88,10 +88,9 @@ const levels = [
 ];
 
 /**
- * Filter modal component for filtering warehouses
- *
  * @class
  * @name WarehousesFilters
+ * @description Filter modal component for filtering warehouses
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -113,10 +112,11 @@ class WarehousesFilters extends Component {
   };
 
   /**
-   * Handle filter action
-   *
    * @function
    * @name handleSubmit
+   * @description Handle filter action
+   *
+   * @param {Object} e event object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -137,10 +137,9 @@ class WarehousesFilters extends Component {
   };
 
   /**
-   * Action handle when clear
-   *
    * @function
    * @name handleClearFilter
+   * @description Action handle when clear
    *
    * @version 0.1.0
    * @since 0.1.0

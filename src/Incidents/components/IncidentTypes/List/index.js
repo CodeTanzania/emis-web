@@ -4,17 +4,17 @@ import React, { Fragment } from 'react';
 import IncidentTypesListHeader from '../ListHeader';
 import IncidentTypesListItem from '../ListItem';
 
+// eslint-disable-next-line jsdoc/require-returns
 /**
- * Incident Types list item component. Render Incident Type list
  *
  * @function
  * @name IncidentTypesList
+ * @description Incident Types list item component. Render Incident Type list
  *
- * @param {Object} props
- * @param {string} props.onEdit
- * @param {string} props.loading
- * @param {string} props.incidenttypes
-
+ * @param {Object} props props object
+ * @param {boolean} props.loading preload list of incident types
+ * @param {Array} props.incidenttype array list of incident types
+ * @param {Function} props.onEdit function for editing single incident types
  * @version 0.1.0
  * @since 0.1.0
  */

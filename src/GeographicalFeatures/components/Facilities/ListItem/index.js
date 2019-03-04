@@ -4,15 +4,11 @@ import React, { Component, Fragment } from 'react';
 import './styles.css';
 
 /**
- * Single Facility list item component.
- * Render single Facility details
  *
  * @class
  * @name FacilityListItem
- *
- * @param {Object} props
- * @param {string} props.name
- * @param {string} props.type
+ * @description  Single Facility list item component.
+ * Render single Facility details
  *
  * @version 0.1.0
  * @since 0.1.0

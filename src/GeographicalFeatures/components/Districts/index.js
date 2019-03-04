@@ -18,10 +18,11 @@ import './styles.css';
 const { Search } = Input;
 
 /**
- * Render districts list which have search box, actions and districts list
  *
  * @class
  * @name Districts
+ * @description Render districts list which have search box,
+ *  actions and districts list
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -52,10 +53,11 @@ class Districts extends Component {
   }
 
   /**
-   * open filters modal by setting it's visible property to false via state
    *
    * @function
    * @name openFiltersModal
+   * @description open filters modal by setting it's visible property to
+   *  false via state
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -67,10 +69,11 @@ class Districts extends Component {
   };
 
   /**
-   * Close filters modal by setting it's visible property to false via state
    *
    * @function
    * @name closeFiltersModal
+   * @description Close filters modal by setting it's visible property to
+   * false via state
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -82,10 +85,10 @@ class Districts extends Component {
   };
 
   /**
-   * Search Districts List based on supplied filter word
    *
    * @function
    * @name searchDistrict
+   * @description Search Districts List based on supplied filter word
    *
    * @param {Object} event - Event instance
    * @returns {undefined} - Nothing is returned
@@ -98,10 +101,10 @@ class Districts extends Component {
   };
 
   /**
-   * Open district form
    *
    * @function
    * @name openContactForm
+   * @description Open district form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -113,10 +116,10 @@ class Districts extends Component {
   };
 
   /**
-   * close district form
    *
    * @function
    * @name closeForm
+   * @description close district form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -129,10 +132,12 @@ class Districts extends Component {
   };
 
   /**
-   * Handle on Edit action for list item
    *
    * @function
    * @name handleEdit
+   * @description Handle on Edit action for list item
+   *
+   * @param {Object} district object passed to the function
    *
    * @version 0.1.0
    * @since 0.1.0

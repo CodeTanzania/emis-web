@@ -9,10 +9,10 @@ import React, { Component } from 'react';
 const { Option } = Select;
 
 /**
- * Searchable select input
  *
  * @class
  * @name SearchableSelectInput
+ * @description Searchable select input
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -76,10 +76,12 @@ export default class SearchableSelectInput extends Component {
   }
 
   /**
-   * Function called when searching in select box
    *
    * @function
    * @name handleSearch
+   * @description Function called when searching in select box
+   *
+   * @param {string} value value passed to the when function called
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -92,10 +94,12 @@ export default class SearchableSelectInput extends Component {
   };
 
   /**
-   * Function called when value of select box changes
    *
    * @function
    * @name handleChange
+   * @description Function called when value of select box changes
+   *
+   * @param {string} value value passed to the when function called
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -109,10 +113,12 @@ export default class SearchableSelectInput extends Component {
   };
 
   /**
-   * Function called when the select box is opened
    *
    * @function
    * @name handleOnDropdownVisibleChange
+   * @description Function called when the select box is opened
+   *
+   * @param {string} open open select box
    *
    * @version 0.1.0
    * @since 0.1.0

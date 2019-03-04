@@ -15,10 +15,10 @@ const { getIndicators } = httpActions;
 const { Option } = Select;
 
 /**
- * Question form component for creating/editing questios
  *
  * @class
  * @name QuestionsForm
+ * @description Question form component for creating/editing questions
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -47,6 +47,15 @@ class QuestionForm extends Component {
     question: null,
   };
 
+  /**
+   * @function
+   * @name handleSubmit
+   * @description Handle create/edit action
+   *
+   * @param {Object} e event object
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleSubmit = e => {
     e.preventDefault();
 

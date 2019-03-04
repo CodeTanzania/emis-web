@@ -9,20 +9,20 @@ import {
 import { Input, Modal, Col, Row, Button } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import CriticalInfrastructerList from './List';
-import CriticalInfrastructerForm from './Form';
-import CriticalInfrastructerFilters from './Filters';
+import FacilityList from './List';
+import FacilityForm from './Form';
+import FacilitiesFilters from './Filters';
 import FacilitiesActionBar from './ActionBar';
 import './styles.css';
 
 const { Search } = Input;
 
 /**
- * Render Facility module which has search box, actions and list of Facilitys
  *
  * @class
  * @name Facilities
- *
+ * @description Render Facility module which has search box,
+ * actions and list of Facilities
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -60,10 +60,11 @@ class Facilities extends Component {
   }
 
   /**
-   * open filters modal by setting it's visible property to false via state
    *
    * @function
    * @name openFiltersModal
+   * @description open filters modal by setting it's visible property
+   *  to false via state
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -75,10 +76,11 @@ class Facilities extends Component {
   };
 
   /**
-   * Close filters modal by setting it's visible property to false via state
    *
    * @function
    * @name closeFiltersModal
+   * @description Close filters modal by setting it's visible
+   * property to false via state
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -90,10 +92,10 @@ class Facilities extends Component {
   };
 
   /**
-   * Open Facility form
    *
    * @function
    * @name openForm
+   * @description Open Facility form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -105,10 +107,10 @@ class Facilities extends Component {
   };
 
   /**
-   * close Facility form
    *
    * @function
    * @name closeForm
+   * @description close Facility form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -121,10 +123,10 @@ class Facilities extends Component {
   };
 
   /**
-   * Search Facilitys List based on supplied filter word
    *
    * @function
    * @name searchFeatures
+   * @description Search Facility List based on supplied filter word
    *
    * @param {Object} event - Event instance
    * @returns {undefined} - Nothing is returned
@@ -137,10 +139,12 @@ class Facilities extends Component {
   };
 
   /**
-   * Handle on Edit action for list item
    *
    * @function
    * @name handleEdit
+   * @description Handle on Edit action for list item
+   *
+   * @param {Object} facility facility object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -178,6 +182,7 @@ class Facilities extends Component {
             />
             {/* end search input component */}
           </Col>
+
           {/* primary actions */}
           <Col span={3} offset={9}>
             <Button
@@ -200,7 +205,7 @@ class Facilities extends Component {
         />
         {/* end list action bar */}
         {/* list starts */}
-        <CriticalInfrastructerList
+        <FacilityList
           facilities={facilities}
           loading={loading}
           onEdit={this.handleEdit}
@@ -209,7 +214,7 @@ class Facilities extends Component {
 
         {/* filter modal */}
         <Modal
-          title="Filter Facilitys"
+          title="Filter Facilities"
           visible={showFilters}
           onCancel={this.closeFiltersModal}
           destroyOnClose
@@ -217,7 +222,7 @@ class Facilities extends Component {
           footer={null}
           width={800}
         >
-          <CriticalInfrastructerFilters onCancel={this.closeFiltersModal} />
+          <FacilitiesFilters onCancel={this.closeFiltersModal} />
         </Modal>
         {/* end filter modal */}
 
@@ -231,7 +236,7 @@ class Facilities extends Component {
           maskClosable={false}
           afterClose={this.handleAfterCloseForm}
         >
-          <CriticalInfrastructerForm
+          <FacilityForm
             posting={posting}
             isEditForm={isEditForm}
             facility={facility}

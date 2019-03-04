@@ -4,17 +4,11 @@ import React, { Component, Fragment } from 'react';
 import './styles.css';
 
 /**
- * Single question list item component. Render single question details
  *
  * @class
  * @name QuestionsListItem
- *
- * @param {Object} props
- * @param {string} props.label
- * @param {string} props.phase
- * @param {string} props.color
- * @param {string} props.assess
- * @param {string} props.stage
+ * @description Single question list item component.Render single question
+ * details
  *
  * @version 0.1.0
  * @since 0.1.0

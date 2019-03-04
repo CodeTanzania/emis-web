@@ -4,15 +4,11 @@ import React, { Component, Fragment } from 'react';
 import './styles.css';
 
 /**
- * Single warehouse list item component.
- * Render single warehouse details
  *
  * @class
  * @name WarehouseListItem
- *
- * @param {Object} props
- * @param {string} props.name
- * @param {string} props.level
+ * @description Single warehouse list item component.
+ * Render single warehouse details
  *
  * @version 0.1.0
  * @since 0.1.0

@@ -18,11 +18,11 @@ import './styles.css';
 const { Search } = Input;
 
 /**
- * Render features module which has search box, actions and list of features
  *
  * @class
  * @name Warehouses
- *
+ * @description Render features module which has search box, actions and
+ *  list of features
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -60,10 +60,11 @@ class Warehouses extends Component {
   }
 
   /**
-   * open filters modal by setting it's visible property to false via state
    *
    * @function
    * @name openFiltersModal
+   * @description open filters modal by setting it's visible property to
+   * false via state
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -75,10 +76,11 @@ class Warehouses extends Component {
   };
 
   /**
-   * Close filters modal by setting it's visible property to false via state
    *
    * @function
    * @name closeFiltersModal
+   * @description Close filters modal by setting it's visible property to
+   * false via state
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -90,10 +92,10 @@ class Warehouses extends Component {
   };
 
   /**
-   * Open warehouse form
    *
    * @function
    * @name openForm
+   * @description Open warehouse form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -105,10 +107,10 @@ class Warehouses extends Component {
   };
 
   /**
-   * close warehouse form
    *
    * @function
    * @name closeForm
+   * @description close warehouse form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -121,10 +123,10 @@ class Warehouses extends Component {
   };
 
   /**
-   * Search Warehouses List based on supplied filter word
    *
    * @function
    * @name searchFeatures
+   * @description Search Warehouses List based on supplied filter word
    *
    * @param {Object} event - Event instance
    * @returns {undefined} - Nothing is returned
@@ -137,10 +139,12 @@ class Warehouses extends Component {
   };
 
   /**
-   * Handle on Edit action for list item
    *
    * @function
    * @name handleEdit
+   * @description Handle on Edit action for list item
+   *
+   * @param {Object} warehouse warehouse object passed in the function
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -178,6 +182,7 @@ class Warehouses extends Component {
             />
             {/* end search input component */}
           </Col>
+
           {/* primary actions */}
           <Col span={3} offset={9}>
             <Button
@@ -192,6 +197,7 @@ class Warehouses extends Component {
           </Col>
           {/* end primary actions */}
         </Row>
+
         {/* list action bar */}
         <WarehousesActionBar
           total={total}
@@ -199,6 +205,7 @@ class Warehouses extends Component {
           onFilter={this.openFiltersModal}
         />
         {/* end list action bar */}
+
         {/* list starts */}
         <WarehouseList
           warehouses={warehouses}

@@ -4,20 +4,12 @@ import React, { Component, Fragment } from 'react';
 import './styles.css';
 
 /**
- * Single incidenttype list item component. Render single incidenttype details
  *
  * @class
  * @name IncidentTypesListItem
+ * @description Single incidenttype list item component. Render single
+ * incident type details
  *
- * @param {Object} props
- * @param {string} props.color
- * @param {string} props.name
- * @param {string} props.nature
- * @param {string} props.cap
- * @param {string} props.family
- * @param {string} props.cope
- * @param {string} props.onEdit
-
  * @version 0.1.0
  * @since 0.1.0
  */

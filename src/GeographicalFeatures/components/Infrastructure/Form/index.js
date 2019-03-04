@@ -10,15 +10,6 @@ import { notifyError, notifySuccess } from '../../../../util';
 
 const { Option } = Select;
 
-/**
- * Critical Infrastructure form component for creating new critical infrastructures
- *
- * @class
- * @name CriticalInfrastructureForm
- *
- * @version 0.1.0
- * @since 0.1.0
- */
 class CriticalInfrastructureForm extends Component {
   static propTypes = {
     isEditForm: PropTypes.bool.isRequired,
@@ -32,6 +23,17 @@ class CriticalInfrastructureForm extends Component {
     posting: PropTypes.bool.isRequired,
   };
 
+  /**
+   * Handle submit form action
+   *
+   * @function
+   * @name handleSubmit
+   *
+   * @param {Object} e event object
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleSubmit = e => {
     e.preventDefault();
 
@@ -61,7 +63,8 @@ class CriticalInfrastructureForm extends Component {
             },
             () => {
               notifyError(
-                'Something occurred while updating Critical Infrastructure, please try again!'
+                `Something occurred while updating Critical Infrastructure, 
+                please try again!`
               );
             }
           );
@@ -73,7 +76,8 @@ class CriticalInfrastructureForm extends Component {
             },
             () => {
               notifyError(
-                'Something occurred while saving Critical Infrastructure, please try again!'
+                `Something occurred while saving Critical Infrastructure,
+                 please try again!`
               );
             }
           );

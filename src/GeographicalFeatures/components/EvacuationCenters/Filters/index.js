@@ -8,10 +8,10 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 /**
- * Filter modal component for filtering evacuation centers
  *
  * @class
  * @name EvacuationCentersFilters
+ * @description Filter modal component for filtering evacuation centers
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -33,11 +33,12 @@ class EvacuationCentersFilters extends Component {
   };
 
   /**
-   * Handle filter action
    *
    * @function
    * @name handleSubmit
+   * @description Handle filter action
    *
+   * @param {Object} e event object
    * @version 0.1.0
    * @since 0.1.0
    */
@@ -57,10 +58,10 @@ class EvacuationCentersFilters extends Component {
   };
 
   /**
-   * Action handle when clear
    *
    * @function
    * @name handleClearFilter
+   * @description Action handle when clear
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -100,7 +101,7 @@ class EvacuationCentersFilters extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
-        {/* start evacution centers nature filters */}
+        {/* start evacuation centers nature filters */}
         <Form.Item {...formItemLayout} label="By Nature">
           {getFieldDecorator('nature', {
             initialValue: filter ? filter.nature : [],

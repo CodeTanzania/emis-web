@@ -4,12 +4,17 @@ import React, { Fragment } from 'react';
 import CriticalInfrastructureListHeader from '../ListHeader';
 import CriticalInfrastructureListItem from '../ListItem';
 
+// eslint-disable-next-line jsdoc/require-returns
 /**
- * Render Critical infrastructure list which have search box and actions
  *
- * @class
+ * @function
  * @name CriticalInfrastructureList
+ * @description Render Critical Infrastructure list
  *
+ * @param {Object} props props object
+ * @param {boolean} props.loading preload list of Critical Infrastructure
+ * @param {Array} props.districts array list of Critical Infrastructure
+ * @param {Function} props.onEdit function for editing Critical Infrastructure
  *
  * @version 0.1.0
  * @since 0.1.0

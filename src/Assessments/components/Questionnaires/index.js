@@ -18,10 +18,11 @@ import './styles.css';
 const { Search } = Input;
 
 /**
- * Render questionnaire list which have search box, actions and questionnaire list
  *
  * @class
  * @name Questionnaires
+ * @description Render questionnaire list which have search box, actions and
+ *  questionnaire list
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -53,10 +54,11 @@ class Questionnaires extends Component {
   }
 
   /**
-   * open filters modal by setting it's visible property to false via state
    *
    * @function
    * @name openFiltersModal
+   * @description open filters modal by setting it's visible property to
+   * false via state
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -68,10 +70,11 @@ class Questionnaires extends Component {
   };
 
   /**
-   * Close filters modal by setting it's visible property to false via state
    *
    * @function
    * @name closeFiltersModal
+   * @description Close filters modal by setting it's visible property to
+   *  false via state
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -83,10 +86,10 @@ class Questionnaires extends Component {
   };
 
   /**
-   * Open questionnaire form
    *
    * @function
    * @name openForm
+   * @description Open questionnaire form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -98,10 +101,10 @@ class Questionnaires extends Component {
   };
 
   /**
-   * close questionnaire form
    *
-   * @function closeForm
-   * @name
+   * @function
+   * @name closeForm
+   * @description close questionnaire form
    *
    * @returns {undefined} - Nothing is returned
    *
@@ -114,11 +117,11 @@ class Questionnaires extends Component {
   };
 
   /**
-   * Handle on Edit action for list item
-   *
    * @function
    * @name handleEdit
+   * @description Handle on Edit action for list item
    *
+   * @param {Object} questionnaire questionnaire object
    * @version 0.1.0
    * @since 0.1.0
    */
@@ -157,6 +160,7 @@ class Questionnaires extends Component {
             />
             {/* end search input component */}
           </Col>
+
           {/* primary actions */}
           <Col span={3} offset={9}>
             <Button
@@ -179,6 +183,7 @@ class Questionnaires extends Component {
           onFilter={this.openFiltersModal}
         />
         {/* end list header */}
+
         {/* list starts */}
         <QuestionnairesList
           questionnaires={questionnaires}

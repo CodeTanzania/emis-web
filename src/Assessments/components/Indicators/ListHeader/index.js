@@ -8,6 +8,14 @@ const headerLayout = [
   { span: 8, header: 'Description' },
 ];
 
+/**
+ * @function
+ * @name IndicatorsListHeader
+ * @description Render list headers
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
 const IndicatorsListHeader = () => (
   <Row className="IndicatorsListHeader">
     {headerLayout.map(item => (

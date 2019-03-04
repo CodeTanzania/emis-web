@@ -7,6 +7,14 @@ const headerLayout = [
   { span: 6, header: 'Level', offset: 4 },
 ];
 
+/**
+ * @function
+ * @name WarehouseListHeader
+ * @description display warehouse list metadata
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
 const WarehouseListHeader = () => (
   <Row className="WarehouseListHeader">
     {headerLayout.map(item => (

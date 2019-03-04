@@ -10,15 +10,6 @@ import { notifyError, notifySuccess } from '../../../../util';
 
 const { Option } = Select;
 
-/**
- * Evacuation Center form component for creating new evacuation centers
- *
- * @class
- * @name EvacuationCenterForm
- *
- * @version 0.1.0
- * @since 0.1.0
- */
 class EvacuationCenterForm extends Component {
   static propTypes = {
     isEditForm: PropTypes.bool.isRequired,
@@ -32,6 +23,16 @@ class EvacuationCenterForm extends Component {
     posting: PropTypes.bool.isRequired,
   };
 
+  /**
+   *
+   * @function
+   * @name handleSubmit
+   * @description Handle filter action
+   *
+   * @param {Object} e event object
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleSubmit = e => {
     e.preventDefault();
 
