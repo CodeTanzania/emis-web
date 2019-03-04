@@ -1,7 +1,8 @@
-import { Avatar, Checkbox, Col, Icon, Row, Modal } from 'antd';
+import { Avatar, Checkbox, Col, Row, Modal } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import randomColor from 'randomcolor';
+import ListItemActions from '../../../../components/ListItemActions';
 import './styles.css';
 
 const { confirm } = Modal;
@@ -141,25 +142,23 @@ class RoleListItem extends Component {
           <Col span={3} title="role abbreviation ">
             {abbreviation}
           </Col>
-          <Col span={10} title="Role summary">
+          <Col span={11} title="Role summary">
             {description}
           </Col>
-          <Col span={3}>
+          <Col span={2}>
             {isHovered && (
-              <Fragment>
-                <Icon
-                  type="edit"
-                  title="Update Role"
-                  className="actionIcon"
-                  onClick={onEdit}
-                />
-                <Icon
-                  type="database"
-                  title="Archive Role"
-                  className="actionIcon"
-                  onClick={this.showArchiveConfirm}
-                />
-              </Fragment>
+              <ListItemActions
+                edit={{
+                  name: 'Edit Role',
+                  title: 'Update Role Details',
+                  onClick: onEdit,
+                }}
+                archive={{
+                  name: 'Archive Role',
+                  title: 'Remove Role from the list of active Roles',
+                  onClick: this.showArchiveConfirm,
+                }}
+              />
             )}
           </Col>
         </Row>

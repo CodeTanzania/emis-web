@@ -1,7 +1,8 @@
-import { Avatar, Checkbox, Col, Icon, Row, Modal } from 'antd';
+import { Avatar, Checkbox, Col, Row, Modal } from 'antd';
 import PropTypes from 'prop-types';
 import randomColor from 'randomcolor';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
+import ListItemActions from '../../../../components/ListItemActions';
 import './styles.css';
 
 /* constants */
@@ -150,29 +151,26 @@ class AgencyListItem extends Component {
           <Col span={3}>{abbreviation}</Col>
           <Col span={3}>{area}</Col>
           <Col span={4}>{mobile}</Col>
-          <Col span={4}>{email}</Col>
-          <Col span={3}>
+          <Col span={5}>{email}</Col>
+          <Col span={2}>
             {isHovered && (
-              <Fragment>
-                <Icon
-                  type="edit"
-                  title="Update Agency"
-                  className="actionIcon"
-                  onClick={onEdit}
-                />
-                <Icon
-                  type="share-alt"
-                  title="Share Agency"
-                  className="actionIcon"
-                  onClick={onShare}
-                />
-                <Icon
-                  type="database"
-                  title="Archive Agency"
-                  className="actionIcon"
-                  onClick={this.showArchiveConfirm}
-                />
-              </Fragment>
+              <ListItemActions
+                edit={{
+                  name: 'Edit Agency',
+                  title: 'Update Agency details',
+                  onClick: onEdit,
+                }}
+                share={{
+                  name: 'Share Agency',
+                  title: 'Share Agency',
+                  onClick: onShare,
+                }}
+                archive={{
+                  name: 'Archive Agency',
+                  title: 'Remove Agency from the list of Active Agencies',
+                  onClick: this.showArchiveConfirm,
+                }}
+              />
             )}
           </Col>
         </Row>

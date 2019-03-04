@@ -16,25 +16,29 @@ import './styles.css';
  * @version 0.1.0
  * @since 0.1.0
  */
-const ListItemActions = ({ onEdit, onShare, onArchive }) => (
+const ListItemActions = ({ edit, share, archive }) => (
   <Dropdown
     overlay={
       <Menu>
-        {onEdit && (
-          <Menu.Item key="edit" onClick={onEdit} title="edit item">
-            <Icon type="edit" /> Edit
+        {edit && (
+          <Menu.Item key="edit" onClick={edit.onClick} title={edit.title}>
+            <Icon type="edit" /> {edit.name}
           </Menu.Item>
         )}
 
-        {onShare && (
-          <Menu.Item key="share" onClick={onShare} title="share item">
-            <Icon type="share-alt" /> Share
+        {share && (
+          <Menu.Item key="share" onClick={share.onClick} title={share.title}>
+            <Icon type="share-alt" /> {share.name}
           </Menu.Item>
         )}
 
-        {onArchive && (
-          <Menu.Item key="archive" onClick={onArchive} title="archive item">
-            <Icon type="delete" /> Archive
+        {archive && (
+          <Menu.Item
+            key="archive"
+            onClick={archive.onClick}
+            title={archive.title}
+          >
+            <Icon type="delete" /> {archive.name}
           </Menu.Item>
         )}
       </Menu>
@@ -53,15 +57,27 @@ const ListItemActions = ({ onEdit, onShare, onArchive }) => (
 
 /* props validation */
 ListItemActions.propTypes = {
-  onEdit: PropTypes.func,
-  onShare: PropTypes.func,
-  onArchive: PropTypes.func,
+  edit: PropTypes.shape({
+    name: PropTypes.string,
+    title: PropTypes.string,
+    onClick: PropTypes.func,
+  }),
+  share: PropTypes.shape({
+    name: PropTypes.string,
+    title: PropTypes.string,
+    onClick: PropTypes.func,
+  }),
+  archive: PropTypes.shape({
+    name: PropTypes.string,
+    title: PropTypes.string,
+    onClick: PropTypes.func,
+  }),
 };
 
 ListItemActions.defaultProps = {
-  onEdit: null,
-  onShare: null,
-  onArchive: null,
+  edit: null,
+  share: null,
+  archive: null,
 };
 
 export default ListItemActions;
