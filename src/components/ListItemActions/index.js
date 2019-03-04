@@ -39,6 +39,7 @@ const ListItemActions = ({ onEdit, onShare, onArchive }) => (
         )}
       </Menu>
     }
+    trigger={['click']}
   >
     <Button
       shape="circle"
