@@ -45,7 +45,7 @@ class IndicatorForm extends Component {
    * @name onChangeColor
    * @description Handle changing of color
    *
-   * @param {string} color event object
+   * @param {Object} color event object
    * @version 0.1.0
    * @since 0.1.0
    */
