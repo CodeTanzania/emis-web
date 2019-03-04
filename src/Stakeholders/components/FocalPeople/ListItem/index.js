@@ -1,7 +1,8 @@
-import { Avatar, Checkbox, Col, Icon, Modal, Row } from 'antd';
+import { Avatar, Checkbox, Col, Modal, Row } from 'antd';
 import PropTypes from 'prop-types';
 import randomColor from 'randomcolor';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
+import ListItemActions from '../../../../components/ListItemActions';
 import './styles.css';
 
 /* constants */
@@ -10,7 +11,8 @@ const { confirm } = Modal;
 /**
  * @class
  * @name FocalPeopleListItem
- * @description Single focal person list item component. Render single focal person details
+ * @description Single focal person list item component.
+ * Render single focal person details
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -157,31 +159,16 @@ class FocalPeopleListItem extends Component {
             {agencyAbbreviation}
           </Col>
           <Col span={5}>{role}</Col>
-          <Col span={4}>{location}</Col>
+          <Col span={5}>{location}</Col>
           <Col span={2}>{mobile}</Col>
-          <Col span={3}>{email}</Col>
-          <Col span={3}>
+          <Col span={4}>{email}</Col>
+          <Col span={1}>
             {isHovered && (
-              <Fragment>
-                <Icon
-                  type="edit"
-                  title="Update Contact"
-                  className="actionIcon"
-                  onClick={onEdit}
-                />
-                <Icon
-                  type="share-alt"
-                  title="Share Contact"
-                  className="actionIcon"
-                  onClick={onShare}
-                />
-                <Icon
-                  type="database"
-                  title="Archive Contact"
-                  className="actionIcon"
-                  onClick={this.showArchiveConfirm}
-                />
-              </Fragment>
+              <ListItemActions
+                onEdit={onEdit}
+                onShare={onShare}
+                onArchive={this.showArchiveConfirm}
+              />
             )}
           </Col>
         </Row>

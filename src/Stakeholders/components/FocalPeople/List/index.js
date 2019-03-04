@@ -23,9 +23,9 @@ const headerLayout = [
   { span: 3, header: 'Name' },
   { span: 2, header: 'Agency' },
   { span: 5, header: 'Role' },
-  { span: 4, header: 'Area' },
+  { span: 5, header: 'Area' },
   { span: 2, header: 'Mobile Number' },
-  { span: 3, header: 'Email Address' },
+  { span: 4, header: 'Email Address' },
 ];
 const { getFocalPeopleExportUrl } = httpActions;
 
@@ -236,7 +236,10 @@ class FocalPersonsList extends Component {
             <FocalPersonsListItem
               key={focalPerson._id} // eslint-disable-line
               abbreviation={focalPerson.abbreviation}
-              location={focalPerson.location.name}
+              location={`${focalPerson.location.name}, ${focalPerson.location
+                .place.district ||
+                focalPerson.location.place.region ||
+                focalPerson.location.place.country}`}
               name={focalPerson.name}
               agency={focalPerson.party ? focalPerson.party.name : 'N/A'}
               agencyAbbreviation={
