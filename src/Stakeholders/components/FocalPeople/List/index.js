@@ -7,6 +7,7 @@ import {
 import { List } from 'antd';
 import concat from 'lodash/concat';
 import map from 'lodash/map';
+import compact from 'lodash/compact';
 import remove from 'lodash/remove';
 import uniq from 'lodash/uniq';
 import uniqBy from 'lodash/uniqBy';
@@ -236,10 +237,12 @@ class FocalPersonsList extends Component {
             <FocalPersonsListItem
               key={focalPerson._id} // eslint-disable-line
               abbreviation={focalPerson.abbreviation}
-              location={`${focalPerson.location.name}, ${focalPerson.location
-                .place.district ||
-                focalPerson.location.place.region ||
-                focalPerson.location.place.country}`}
+              location={compact([
+                focalPerson.location.name,
+                focalPerson.location.place.district,
+                focalPerson.location.place.region,
+                focalPerson.location.place.country,
+              ]).join(', ')}
               name={focalPerson.name}
               agency={focalPerson.party ? focalPerson.party.name : 'N/A'}
               agencyAbbreviation={
