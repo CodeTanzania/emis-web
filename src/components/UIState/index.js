@@ -1,4 +1,5 @@
-import { Button, Icon } from 'antd';
+import { Icon } from 'antd';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import React from 'react';
 import './styles.css';
@@ -17,11 +18,13 @@ import './styles.css';
  * @version 0.1.0
  * @since 0.1.0
  */
-const UIState = ({ icon, description, buttonLabel, onClick }) => (
+const UIState = ({ icon, description }) => (
   <div className="UIState">
     <Icon type={icon} className="Icon" />
     <p className="description">{description}</p>
-    <Button onClick={onClick}>{buttonLabel}</Button>
+    <Link to="/" title="Click here to return to home page">
+      Return to Home Page
+    </Link>
   </div>
 );
 
@@ -29,8 +32,6 @@ const UIState = ({ icon, description, buttonLabel, onClick }) => (
 UIState.propTypes = {
   icon: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  buttonLabel: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
 };
 
 export default UIState;

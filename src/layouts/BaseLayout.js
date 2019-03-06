@@ -60,6 +60,7 @@ import StakeholdersFocalPeopleLayout from '../Stakeholders/layouts/FocalPeople';
 import StakeholdersNotificationsLayout from '../Stakeholders/layouts/Notifications';
 import StakeholdersRolesLayout from '../Stakeholders/layouts/Roles';
 import HeaderNavMenu from './components/HeaderNavMenu';
+import PageNotFound from '../components/UIState/PageNotFound';
 import './styles.css';
 
 /* constants */
@@ -518,6 +519,7 @@ const BaseLayout = withRouter(props => {
             path="/stakeholders/roles"
             component={StakeholdersRolesLayout}
           />
+          <Route component={PageNotFound} />
         </Switch>
       </Content>
     </Layout>
