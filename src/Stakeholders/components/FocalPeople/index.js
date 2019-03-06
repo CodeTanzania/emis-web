@@ -7,10 +7,11 @@ import {
   searchFocalPeople,
   selectFocalPerson,
 } from '@codetanzania/emis-api-states';
-import { Button, Col, Input, Modal, Row } from 'antd';
+import { Modal } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import NotificationForm from '../../../components/NotificationForm';
+import Topbar from '../../../components/Topbar';
 import FocalPersonFilters from './Filters';
 import FocalPersonForm from './Form';
 import FocalPeopleList from './List';
@@ -18,7 +19,6 @@ import './styles.css';
 
 /* constants */
 const { getFocalPeople: getFocalPeopleFromAPI } = httpActions;
-const { Search } = Input;
 
 /**
  * @class
@@ -252,117 +252,98 @@ class FocalPeople extends Component {
       notificationBody,
     } = this.state;
     return (
-      <div className="FocalPeopleList">
-        <Row>
-          <Col span={12}>
-            {/* search input component */}
-            <Search
-              size="large"
-              placeholder="Search for focal persons here ..."
-              onChange={this.searchFocalPeople}
-              allowClear
-              value={searchQuery}
-            />
-            {/* end search input component */}
-          </Col>
-
-          {/* <Col span={3} offset={1}>
-            <Select
-              defaultValue="Active"
-              style={{ width: 120 }}
-              size="large"
-              type="primary"
-            >
-              <Option value="All">All</Option>
-              <Option value="Active">Active</Option>
-              <Option value="Archived">Archived</Option>
-            </Select>
-          </Col> */}
-
-          {/* primary actions */}
-          <Col span={2} offset={9}>
-            <Button
-              type="primary"
-              icon="plus"
-              size="large"
-              title="Add New Focal Person"
-              onClick={this.openFocalPersonForm}
-            >
-              New Focal Person
-            </Button>
-          </Col>
-          {/* end primary actions */}
-        </Row>
-
-        {/* list starts */}
-        <FocalPeopleList
-          total={total}
-          page={page}
-          focalPeople={focalPeople}
-          loading={loading}
-          onEdit={this.handleEdit}
-          onFilter={this.openFiltersModal}
-          onNotify={this.openNotificationForm}
-          onShare={this.handleShare}
-          onBulkShare={this.handleBulkShare}
+      <Fragment>
+        {/* Topbar */}
+        <Topbar
+          search={{
+            size: 'large',
+            placeholder: 'Search for focal persons here ...',
+            onChange: this.searchFocalPeople,
+            value: searchQuery,
+          }}
+          actions={[
+            {
+              label: 'New Focal Person',
+              icon: 'plus',
+              size: 'large',
+              title: 'Add New Focal Person',
+              onClick: this.openFocalPersonForm,
+            },
+          ]}
         />
-        {/* end list */}
+        {/* end Topbar */}
 
-        {/* filter modal */}
-        <Modal
-          title="Filter Focal Persons"
-          visible={showFilters}
-          onCancel={this.closeFiltersModal}
-          footer={null}
-          destroyOnClose
-          maskClosable={false}
-          width="50%"
-        >
-          <FocalPersonFilters onCancel={this.closeFiltersModal} />
-        </Modal>
-        {/* end filter modal */}
+        <div className="FocalPeopleList">
+          {/* list starts */}
+          <FocalPeopleList
+            total={total}
+            page={page}
+            focalPeople={focalPeople}
+            loading={loading}
+            onEdit={this.handleEdit}
+            onFilter={this.openFiltersModal}
+            onNotify={this.openNotificationForm}
+            onShare={this.handleShare}
+            onBulkShare={this.handleBulkShare}
+          />
+          {/* end list */}
 
-        {/* Notification Modal modal */}
-        <Modal
-          title="Notify Focal Persons"
-          visible={showNotificationForm}
-          onCancel={this.closeNotificationForm}
-          footer={null}
-          destroyOnClose
-          maskClosable={false}
-          width="40%"
-          afterClose={this.handleAfterCloseNotificationForm}
-        >
-          <NotificationForm
-            recipients={selectedFocalPeople}
-            onSearchRecipients={getFocalPeopleFromAPI}
-            body={notificationBody}
+          {/* filter modal */}
+          <Modal
+            title="Filter Focal Persons"
+            visible={showFilters}
+            onCancel={this.closeFiltersModal}
+            footer={null}
+            destroyOnClose
+            maskClosable={false}
+            width="50%"
+          >
+            <FocalPersonFilters onCancel={this.closeFiltersModal} />
+          </Modal>
+          {/* end filter modal */}
+
+          {/* Notification Modal modal */}
+          <Modal
+            title="Notify Focal Persons"
+            visible={showNotificationForm}
             onCancel={this.closeNotificationForm}
-            onNotify={() => {}}
-          />
-        </Modal>
-        {/* end Notification modal */}
+            footer={null}
+            destroyOnClose
+            maskClosable={false}
+            width="40%"
+            afterClose={this.handleAfterCloseNotificationForm}
+          >
+            <NotificationForm
+              recipients={selectedFocalPeople}
+              onSearchRecipients={getFocalPeopleFromAPI}
+              body={notificationBody}
+              onCancel={this.closeNotificationForm}
+              onNotify={() => {}}
+            />
+          </Modal>
+          {/* end Notification modal */}
 
-        {/* create/edit form modal */}
-        <Modal
-          title={isEditForm ? 'Edit Focal Person' : 'Add New Focal Person'}
-          visible={showForm}
-          width="50%"
-          footer={null}
-          onCancel={this.closeFocalPersonForm}
-          destroyOnClose
-          maskClosable={false}
-          afterClose={this.handleAfterCloseForm}
-        >
-          <FocalPersonForm
-            posting={posting}
-            isEditForm={isEditForm}
-            focalPerson={focalPerson}
+          {/* create/edit form modal */}
+          <Modal
+            title={isEditForm ? 'Edit Focal Person' : 'Add New Focal Person'}
+            visible={showForm}
+            width="50%"
+            footer={null}
             onCancel={this.closeFocalPersonForm}
-          />
-        </Modal>
-        {/* end create/edit form modal */}
-      </div>
+            destroyOnClose
+            maskClosable={false}
+            afterClose={this.handleAfterCloseForm}
+          >
+            <FocalPersonForm
+              posting={posting}
+              isEditForm={isEditForm}
+              focalPerson={focalPerson}
+              onCancel={this.closeFocalPersonForm}
+            />
+          </Modal>
+          {/* end create/edit form modal */}
+        </div>
+      </Fragment>
     );
   }
 }

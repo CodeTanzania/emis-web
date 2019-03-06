@@ -1,0 +1,8 @@
+.Topbar {
+  padding: 40px 40px 0;
+}
+
+.Topbar .ant-input-clear-icon {
+  padding-right: 10px;
+  color: #bebebe;
+}
