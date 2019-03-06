@@ -1,9 +1,9 @@
 import React from 'react';
-import UIState from '../../components/UIState';
+import EmptyState from '../../components/EmptyState';
 
 const EmergencyPlansDrillsLayout = () => (
   <div style={{ marginTop: '20%' }}>
-    <UIState
+    <EmptyState
       icon="exclamation-circle"
       description="No Drills yet,but when they are available will appear here"
       buttonLabel="New Plan"

@@ -1,9 +1,9 @@
 import React from 'react';
-import UIState from '../../components/UIState';
+import EmptyState from '../../components/EmptyState';
 
 const IncidentsFeedsLayout = () => (
   <div style={{ marginTop: '20%' }}>
-    <UIState
+    <EmptyState
       icon="exclamation-circle"
       description="No Incidents Feeds yet,but when they are available will appear here"
       buttonLabel="New Incident"

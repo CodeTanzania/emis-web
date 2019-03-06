@@ -1,0 +1,12 @@
+.EmptyState {
+  text-align: center;
+}
+
+.EmptyState .Icon {
+  font-size: 40px;
+}
+
+.EmptyState .description {
+  margin-top: 15px;
+  font-size: 16px;
+}

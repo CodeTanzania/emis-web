@@ -1,9 +1,9 @@
 import React from 'react';
-import UIState from '../../components/UIState';
+import EmptyState from '../../components/EmptyState';
 
 const StakeholdersNotificationsLayout = () => (
   <div style={{ marginTop: '20%' }}>
-    <UIState
+    <EmptyState
       icon="exclamation-circle"
       description="No Alerts Actions yet,but when they are available will appear here"
       buttonLabel="New Alert"
