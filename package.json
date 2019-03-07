@@ -11,7 +11,8 @@
     "commit": "git-cz",
     "commit:all": "git add -A && git-cz",
     "lint": "eslint --fix --ext .jsx,.js src/",
-    "changelog": "changelog"
+    "changelog": "changelog",
+    "heroku-postbuild": "echo Skip build on Heroku"
   },
   "keywords": [
     "codetanzania",
@@ -80,7 +81,12 @@
     "url": "https://github.com/CodeTanzania/emis-web/issues"
   },
   "homepage": ".",
-  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"],
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
   "engines": {
     "node": ">=8.11.1",
     "npm": ">=5.6.0"
@@ -91,15 +97,20 @@
     }
   },
   "commitlint": {
-    "extends": ["@commitlint/config-conventional"]
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   },
   "lint-staged": {
-    "*.js": ["npm run lint"]
+    "*.js": [
+      "npm run lint"
+    ]
   },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
-  }
+  },
+  "heroku-run-build-script": true
 }
