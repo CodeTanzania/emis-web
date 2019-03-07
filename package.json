@@ -1,7 +1,7 @@
 {
   "name": "emis-web",
   "version": "0.0.0",
-  "description": "WIP",
+  "description": "A collaboration platform that facilitates communication, planning and actions for disaster management.",
   "main": "index.js",
   "scripts": {
     "start": "react-app-rewired start",
