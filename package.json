@@ -79,7 +79,7 @@
   "bugs": {
     "url": "https://github.com/CodeTanzania/emis-web/issues"
   },
-  "homepage": "https://github.com/CodeTanzania/emis-web#readme",
+  "homepage": ".",
   "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"],
   "engines": {
     "node": ">=8.11.1",
