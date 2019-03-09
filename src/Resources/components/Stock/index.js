@@ -6,15 +6,14 @@ import {
   searchStocks,
   selectStock,
 } from '@codetanzania/emis-api-states';
-import { Button, Col, Input, Modal, Row } from 'antd';
+import { Modal } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import Topbar from '../../../components/Topbar';
 import StocksActionBar from './ActionBar';
 import StockForm from './Form';
 import StockList from './List';
 import './styles.css';
-
-const { Search } = Input;
 
 /**
  * @class
@@ -132,58 +131,57 @@ class Stocks extends Component {
     } = this.props;
     const { isEditForm } = this.state;
     return (
-      <div className="Stocks">
-        <Row>
-          <Col span={12}>
-            {/* search input component */}
-            <Search
-              size="large"
-              placeholder="Search for stocks here ..."
-              onChange={this.searchStocks}
-            />
-            {/* end search input component */}
-          </Col>
-          {/* primary actions */}
-          <Col span={3} offset={9}>
-            <Button
-              type="primary"
-              icon="plus"
-              size="large"
-              title="Add New Stock"
-              onClick={this.openStockForm}
-            >
-              New Stock
-            </Button>
-          </Col>
-          {/* end primary actions */}
-        </Row>
+      <Fragment>
+        {/* Topbar */}
+        <Topbar
+          search={{
+            size: 'large',
+            placeholder: 'Search for stocks here...',
+            onChange: this.searchStocks,
+          }}
+          actions={[
+            {
+              label: 'Add New Stock',
+              icon: 'Plus',
+              size: 'large',
+              title: 'Add New Stock',
+              onClick: this.openStockForm,
+            },
+          ]}
+        />
+        {/* Topbar */}
+        <div className="Stocks">
+          {/* list header */}
+          <StocksActionBar total={total} page={page} />
+          {/* end list header */}
 
-        {/* list header */}
-        <StocksActionBar total={total} page={page} />
-        {/* end list header */}
-
-        {/* list starts */}
-        <StockList stocks={stocks} loading={loading} onEdit={this.handleEdit} />
-        {/* end list */}
-
-        {/* create/edit form modal */}
-        <Modal
-          title={isEditForm ? 'Edit Stock' : 'Add New Stock'}
-          visible={showForm}
-          footer={null}
-          onCancel={this.closeStockForm}
-          destroyOnClose
-          maskClosable={false}
-        >
-          <StockForm
-            posting={posting}
-            isEditForm={isEditForm}
-            stock={stock}
-            onCancel={this.closeStockForm}
+          {/* list starts */}
+          <StockList
+            stocks={stocks}
+            loading={loading}
+            onEdit={this.handleEdit}
           />
-        </Modal>
-        {/* end create/edit form modal */}
-      </div>
+          {/* end list */}
+
+          {/* create/edit form modal */}
+          <Modal
+            title={isEditForm ? 'Edit Stock' : 'Add New Stock'}
+            visible={showForm}
+            footer={null}
+            onCancel={this.closeStockForm}
+            destroyOnClose
+            maskClosable={false}
+          >
+            <StockForm
+              posting={posting}
+              isEditForm={isEditForm}
+              stock={stock}
+              onCancel={this.closeStockForm}
+            />
+          </Modal>
+          {/* end create/edit form modal */}
+        </div>
+      </Fragment>
     );
   }
 }
