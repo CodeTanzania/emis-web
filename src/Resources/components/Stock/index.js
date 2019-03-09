@@ -10,7 +10,6 @@ import { Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import Topbar from '../../../components/Topbar';
-import StocksActionBar from './ActionBar';
 import StockForm from './Form';
 import StockList from './List';
 import './styles.css';
@@ -151,14 +150,12 @@ class Stocks extends Component {
         />
         {/* Topbar */}
         <div className="Stocks">
-          {/* list header */}
-          <StocksActionBar total={total} page={page} />
-          {/* end list header */}
-
           {/* list starts */}
           <StockList
             stocks={stocks}
             loading={loading}
+            total={total}
+            page={page}
             onEdit={this.handleEdit}
           />
           {/* end list */}
