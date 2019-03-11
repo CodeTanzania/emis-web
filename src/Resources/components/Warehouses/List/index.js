@@ -9,6 +9,8 @@ import PropTypes from 'prop-types';
 import concat from 'lodash/concat';
 import intersectionBy from 'lodash/intersectionBy';
 import map from 'lodash/map';
+import uniq from 'lodash/uniq';
+import uniqBy from 'lodash/uniqBy';
 import remove from 'lodash/remove';
 import React, { Fragment } from 'react';
 import ListHeader from '../../../../components/ListHeader';
@@ -43,7 +45,7 @@ class WarehouseList extends React.Component {
     page: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
     onEdit: PropTypes.func.isRequired,
-    onFilter: PropTypes.func.isRequired, 
+    onFilter: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
     warehouses: PropTypes.arrayOf(
       PropTypes.shape({
@@ -55,7 +57,7 @@ class WarehouseList extends React.Component {
 
   state = {
     selectedWarehouse: [],
-    // selectedPages: [],
+    selectedPages: [],
   };
 
   /**
@@ -98,11 +100,61 @@ class WarehouseList extends React.Component {
     this.setState({ selectedWarehouse: selectedList });
   };
 
+  /**
+   * @function
+   * @name handleSelectAll
+   * @description Handle select all warehouses actions from current page
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleSelectAll = () => {
+    const { selectedWarehouse, selectedPages } = this.state;
+    const { warehouses, page } = this.props;
+    const selectedList = uniqBy([...selectedWarehouse, ...warehouses], '_id');
+    const pages = uniq([...selectedPages, page]);
+    this.setState({
+      selectedWarehouse: selectedList,
+      selectedPages: pages,
+    });
+  };
+
+  /**
+   * @function
+   * @name handleDeselectAll
+   * @description Handle deselect all warehouses in a current page
+   *
+   * @returns {undefined} undefined
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleDeselectAll = () => {
+    const { warehouses, page } = this.props;
+    const { selectedWarehouse, selectedPages } = this.state;
+    const selectedList = uniqBy([...selectedWarehouse], '_id');
+    const pages = uniq([...selectedPages]);
+
+    remove(pages, item => item === page);
+
+    warehouses.forEach(warehouse => {
+      remove(
+        selectedList,
+        item => item._id === warehouse._id // eslint-disable-line
+      );
+    });
+
+    this.setState({
+      selectedWarehouse: selectedList,
+      selectedPages: pages,
+    });
+  };
+
   render() {
     const { warehouses, loading, onEdit, total, page, onFilter } = this.props;
-    const { selectedWarehouse } = this.state;
+    const { selectedWarehouse, selectedPages } = this.state;
     const selectedWarehouseCount = intersectionBy(
-      this.state.selectedFocalPeople,
+      this.state.selectedWarehouse,
       warehouses,
       '_id'
     ).length;
@@ -136,7 +188,12 @@ class WarehouseList extends React.Component {
         />
         {/* end toolbar */}
         {/* Warehouse list header */}
-        <ListHeader headerLayout={headerLayout} />
+        <ListHeader
+          headerLayout={headerLayout}
+          onSelectAll={this.handleSelectAll}
+          onDeselectAll={this.handleDeselectAll}
+          isBulkSelected={selectedPages.includes(page)}
+        />
         {/* end Warehouse list header */}{' '}
         <List
           loading={loading}
