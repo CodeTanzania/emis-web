@@ -149,6 +149,7 @@ class Stocks extends Component {
           ]}
         />
         {/* Topbar */}
+
         <div className="Stocks">
           {/* list starts */}
           <StockList

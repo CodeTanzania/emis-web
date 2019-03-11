@@ -7,7 +7,7 @@ import SearchableSelectInput from '../../../../components/SearchableSelectInput'
 import { notifyError, notifySuccess } from '../../../../util';
 
 /* constants */
-const { getStakeholders, getWarehouses, getItems } = httpActions;
+const { getAgencies, getWarehouses, getItems } = httpActions;
 
 // eslint-disable-next-line jsdoc/require-returns
 /**
@@ -75,7 +75,7 @@ class StockForm extends Component {
             },
             () => {
               notifyError(
-                'Something occurred while saving stock, please try again!'
+                'An Error occured while saving stock, please try again!'
               );
             }
           );
@@ -115,17 +115,15 @@ class StockForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* stock stakeholder */}
-        <Form.Item {...formItemLayout} label="Stakeholder">
+        <Form.Item {...formItemLayout} label="Agency">
           {getFieldDecorator('owner', {
             initialValue:
               isEditForm && stock.owner ? stock.owner._id : undefined, // eslint-disable-line
-            rules: [
-              { required: true, message: 'Stock stakeholder is required' },
-            ],
+            rules: [{ required: true, message: 'Stock Owner is required' }],
           })(
             <SearchableSelectInput
               placeholder="Please select stakeholder"
-              onSearch={getStakeholders}
+              onSearch={getAgencies}
               optionLabel="name"
               optionValue="_id"
               initialValue={isEditForm && stock.owner ? stock.owner : undefined}
