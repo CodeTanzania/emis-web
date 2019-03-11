@@ -2,6 +2,7 @@ import {
   refreshAdjustments,
   paginateAdjustments,
 } from '@codetanzania/emis-api-states';
+import { httpActions } from '@codetanzania/emis-api-client';
 import { List } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Fragment, Component } from 'react';
@@ -25,6 +26,7 @@ const headerLayout = [
   { span: 4, header: 'Reason' },
   { span: 4, header: 'Warehouse' },
 ];
+const { getAdjustmentsExportUrl } = httpActions;
 
 /**
  * @class
@@ -158,11 +160,15 @@ class AdjustmentsList extends Component {
 
     return (
       <Fragment>
+        {/* toolbar */}
         <Toolbar
           itemName="adjustment"
           page={page}
           total={total}
           selectedItemsCount={selectedAdjustmentsCount}
+          exportUrl={getAdjustmentsExportUrl({
+            filter: { _id: map(selectedAdjustments, '_id') },
+          })}
           onPaginate={nextPage => {
             paginateAdjustments(nextPage);
           }}
@@ -179,14 +185,17 @@ class AdjustmentsList extends Component {
             )
           }
         />
-
+        {/* end toolbar */}
+        {/* list header */}
         <ListHeader
           headerLayout={headerLayout}
           onSelectAll={this.handleSelectAll}
           onDeselectAll={this.handleDeselectAll}
           isBulkSelected={selectedPages.includes(page)}
         />
+        {/* list header */}
 
+        {/* adjustments list */}
         <List
           loading={loading}
           dataSource={adjustments}
@@ -212,6 +221,7 @@ class AdjustmentsList extends Component {
             />
           )}
         />
+        {/* end adjustments list */}
       </Fragment>
     );
   }
