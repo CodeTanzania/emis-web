@@ -5,13 +5,13 @@ import {
   refreshFocalPeople,
 } from '@codetanzania/emis-api-states';
 import { List } from 'antd';
-import concat from 'lodash/concat';
-import map from 'lodash/map';
 import compact from 'lodash/compact';
+import concat from 'lodash/concat';
+import intersectionBy from 'lodash/intersectionBy';
+import map from 'lodash/map';
 import remove from 'lodash/remove';
 import uniq from 'lodash/uniq';
 import uniqBy from 'lodash/uniqBy';
-import intersectionBy from 'lodash/intersectionBy';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import ListHeader from '../../../../components/ListHeader';

@@ -1,6 +1,7 @@
-import { Avatar, Checkbox, Col, Icon, Row } from 'antd';
+import { Avatar, Checkbox, Col, Row } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
+import ListItemActions from '../../../../components/ListItemActions';
 import './styles.css';
 
 /**
@@ -24,6 +25,9 @@ class StockListItem extends Component {
     quantity: PropTypes.number.isRequired,
     uom: PropTypes.string.isRequired,
     owner: PropTypes.shape({ name: PropTypes.string }).isRequired,
+    isSelected: PropTypes.bool.isRequired,
+    onSelectItem: PropTypes.func.isRequired,
+    onDeselectItem: PropTypes.func.isRequired,
   };
 
   /**
@@ -50,6 +54,28 @@ class StockListItem extends Component {
     this.setState({ isHovered: false });
   };
 
+  /**
+   * @function
+   * @name handleToggleSelect
+   * @description Handle Toggling List Item checkbox
+   *
+   * @param {Object} event Event object
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleToggleSelect = event => {
+    const { isSelected } = this.state;
+    const { onSelectItem, onDeselectItem } = this.props;
+
+    this.setState({ isSelected: !isSelected });
+    if (event.target.checked) {
+      onSelectItem();
+    } else {
+      onDeselectItem();
+    }
+  };
+
   render() {
     const {
       itemName,
@@ -59,8 +85,32 @@ class StockListItem extends Component {
       owner,
       onEdit,
       uom,
+      isSelected,
     } = this.props;
     const { isHovered } = this.state;
+    let sideComponent = null;
+
+    if (isSelected) {
+      sideComponent = (
+        <Checkbox
+          className="Checkbox"
+          onChange={this.handleToggleSelect}
+          checked={isSelected}
+        />
+      );
+    } else {
+      sideComponent = isHovered ? (
+        <Checkbox
+          className="Checkbox"
+          onChange={this.handleToggleSelect}
+          checked={isSelected}
+        />
+      ) : (
+        <Avatar style={{ backgroundColor: color }}>
+          {itemName.toUpperCase().charAt(0)}
+        </Avatar>
+      );
+    }
     return (
       <div
         className="StockListItem"
@@ -68,39 +118,20 @@ class StockListItem extends Component {
         onMouseLeave={this.handleMouseLeave}
       >
         <Row>
-          <Col span={1}>
-            {isHovered ? (
-              <Checkbox className="Checkbox" />
-            ) : (
-              <Avatar style={{ backgroundColor: color }}>
-                {itemName.toUpperCase().charAt(0)}
-              </Avatar>
-            )}
-          </Col>
+          <Col span={1}>{sideComponent} </Col>
           <Col span={5}>{owner}</Col>
           <Col span={5}>{itemName}</Col>
           <Col span={5}>{`${quantity} ${uom}`}</Col>
           <Col span={5}>{warehouseName}</Col>
           <Col span={3}>
             {isHovered && (
-              <Fragment>
-                <Icon
-                  type="edit"
-                  title="Update Stock"
-                  className="actionIcon"
-                  onClick={onEdit}
-                />
-                <Icon
-                  type="share-alt"
-                  title="Share Stock"
-                  className="actionIcon"
-                />
-                <Icon
-                  type="database"
-                  title="Archive Stock"
-                  className="actionIcon"
-                />
-              </Fragment>
+              <ListItemActions
+                edit={{
+                  name: 'Edit Stock',
+                  title: 'Update stock details',
+                  onClick: onEdit,
+                }}
+              />
             )}
           </Col>
         </Row>

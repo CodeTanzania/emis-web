@@ -6,15 +6,13 @@ import {
   searchStocks,
   selectStock,
 } from '@codetanzania/emis-api-states';
-import { Button, Col, Input, Modal, Row } from 'antd';
+import { Modal } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import StocksActionBar from './ActionBar';
+import React, { Component, Fragment } from 'react';
+import Topbar from '../../../components/Topbar';
 import StockForm from './Form';
 import StockList from './List';
 import './styles.css';
-
-const { Search } = Input;
 
 /**
  * @class
@@ -65,8 +63,6 @@ class Stocks extends Component {
    * @name openStockForm
    * @description  Open Stock form
    *
-   * @returns {undefined} - Nothing is returned
-   *
    * @version 0.1.0
    * @since 0.1.0
    */
@@ -78,8 +74,6 @@ class Stocks extends Component {
    * @function
    * @name openStockForm
    * @description close Stock form
-   *
-   * @returns {undefined} - Nothing is returned
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -94,8 +88,7 @@ class Stocks extends Component {
    * @name searchStocks
    * @description Search Stocks List based on supplied filter word
    *
-   * @param {Object} event - Event instance
-   * @returns {undefined} - Nothing is returned
+   * @param {Object} event Event instance
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -120,6 +113,18 @@ class Stocks extends Component {
     openStockForm();
   };
 
+  /**
+   * @function
+   * @name handleAfterCloseForm
+   * @description Perform post close form cleanups
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleAfterCloseForm = () => {
+    this.setState({ isEditForm: false });
+  };
+
   render() {
     const {
       stocks,
@@ -132,58 +137,57 @@ class Stocks extends Component {
     } = this.props;
     const { isEditForm } = this.state;
     return (
-      <div className="Stocks">
-        <Row>
-          <Col span={12}>
-            {/* search input component */}
-            <Search
-              size="large"
-              placeholder="Search for stocks here ..."
-              onChange={this.searchStocks}
-            />
-            {/* end search input component */}
-          </Col>
-          {/* primary actions */}
-          <Col span={3} offset={9}>
-            <Button
-              type="primary"
-              icon="plus"
-              size="large"
-              title="Add New Stock"
-              onClick={this.openStockForm}
-            >
-              New Stock
-            </Button>
-          </Col>
-          {/* end primary actions */}
-        </Row>
+      <Fragment>
+        {/* Topbar */}
+        <Topbar
+          search={{
+            size: 'large',
+            placeholder: 'Search for stocks here...',
+            onChange: this.searchStocks,
+          }}
+          actions={[
+            {
+              label: 'Add New Stock',
+              icon: 'Plus',
+              size: 'large',
+              title: 'Add New Stock',
+              onClick: this.openStockForm,
+            },
+          ]}
+        />
+        {/* Topbar */}
 
-        {/* list header */}
-        <StocksActionBar total={total} page={page} />
-        {/* end list header */}
-
-        {/* list starts */}
-        <StockList stocks={stocks} loading={loading} onEdit={this.handleEdit} />
-        {/* end list */}
-
-        {/* create/edit form modal */}
-        <Modal
-          title={isEditForm ? 'Edit Stock' : 'Add New Stock'}
-          visible={showForm}
-          footer={null}
-          onCancel={this.closeStockForm}
-          destroyOnClose
-          maskClosable={false}
-        >
-          <StockForm
-            posting={posting}
-            isEditForm={isEditForm}
-            stock={stock}
-            onCancel={this.closeStockForm}
+        <div className="Stocks">
+          {/* list starts */}
+          <StockList
+            stocks={stocks}
+            loading={loading}
+            total={total}
+            page={page}
+            onEdit={this.handleEdit}
           />
-        </Modal>
-        {/* end create/edit form modal */}
-      </div>
+          {/* end list */}
+
+          {/* create/edit form modal */}
+          <Modal
+            title={isEditForm ? 'Edit Stock' : 'Add New Stock'}
+            visible={showForm}
+            footer={null}
+            destroyOnClose
+            maskClosable={false}
+            onCancel={this.closeStockForm}
+            afterClose={this.handleAfterCloseForm}
+          >
+            <StockForm
+              posting={posting}
+              isEditForm={isEditForm}
+              stock={stock}
+              onCancel={this.closeStockForm}
+            />
+          </Modal>
+          {/* end create/edit form modal */}
+        </div>
+      </Fragment>
     );
   }
 }
