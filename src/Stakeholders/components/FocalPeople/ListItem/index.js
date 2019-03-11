@@ -165,15 +165,6 @@ class FocalPeopleListItem extends Component {
           <Col span={1}>
             {isHovered && (
               <ListItemActions
-                onEdit={onEdit}
-                editActionName="Edit Focal Person"
-                editActionTitle="Edit Focal Person"
-                onShare={onShare}
-                shareActionName="Share Focal Person"
-                shareActionTitle="Share Focal Person"
-                onArchive={this.showArchiveConfirm}
-                archiveActionName="Archive Focal Person"
-                archiveActionTitle="Archive Focal Person"
                 edit={{
                   name: 'Edit Focal Person',
                   title: 'Update Focal Person Details',
