@@ -1,6 +1,7 @@
-import { Avatar, Checkbox, Col, Icon, Row } from 'antd';
+import { Avatar, Checkbox, Col, Row } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
+import ListItemActions from '../../../../components/ListItemActions';
 import './styles.css';
 
 /**
@@ -124,24 +125,13 @@ class StockListItem extends Component {
           <Col span={5}>{warehouseName}</Col>
           <Col span={3}>
             {isHovered && (
-              <Fragment>
-                <Icon
-                  type="edit"
-                  title="Update Stock"
-                  className="actionIcon"
-                  onClick={onEdit}
-                />
-                <Icon
-                  type="share-alt"
-                  title="Share Stock"
-                  className="actionIcon"
-                />
-                <Icon
-                  type="database"
-                  title="Archive Stock"
-                  className="actionIcon"
-                />
-              </Fragment>
+              <ListItemActions
+                edit={{
+                  name: 'Edit Stock',
+                  title: 'Update stock details',
+                  onClick: onEdit,
+                }}
+              />
             )}
           </Col>
         </Row>
