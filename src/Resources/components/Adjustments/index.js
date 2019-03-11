@@ -1,14 +1,15 @@
-import { Connect, getAdjustments } from '@codetanzania/emis-api-states';
-import { Input, Col, Row, Modal } from 'antd';
+import {
+  Connect,
+  getAdjustments,
+  searchAdjustments,
+} from '@codetanzania/emis-api-states';
+import { Modal } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import AdjustmentsActionBar from './ActionBar';
+import React, { Component, Fragment } from 'react';
+import Topbar from '../../../components/Topbar';
 import AdjustmentList from './List';
 import AdjustmentFilters from './Filters';
-
 import './styles.css';
-
-const { Search } = Input;
 
 /**
  * @class
@@ -20,10 +21,6 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class Adjustments extends Component {
-  state = {
-    showFilters: false,
-  };
-
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     adjustments: PropTypes.arrayOf(
@@ -42,6 +39,15 @@ class Adjustments extends Component {
     ).isRequired,
     total: PropTypes.number.isRequired,
     page: PropTypes.number.isRequired,
+    searchQuery: PropTypes.string,
+  };
+
+  static defaultProps = {
+    searchQuery: undefined,
+  };
+
+  state = {
+    showFilters: false,
   };
 
   componentWillMount() {
@@ -54,7 +60,7 @@ class Adjustments extends Component {
    * @description open filters modal by setting it's visible
    *  property to false via state
    *
-   * @returns {undefined} - Nothing is returned
+   * @returns {undefined} undefined
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -69,7 +75,7 @@ class Adjustments extends Component {
    * @description Close filters modal by setting it's visible
    *  property to false via state
    *
-   * @returns {undefined} - Nothing is returned
+   * @returns {undefined} undefined
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -90,50 +96,46 @@ class Adjustments extends Component {
    * @since 0.1.0
    */
   searchAdjustments = event => {
-    getAdjustments({ q: event.target.value });
+    searchAdjustments(event.target.value);
   };
 
   render() {
-    const { adjustments, loading, total, page } = this.props;
+    const { adjustments, loading, total, page, searchQuery } = this.props;
     const { showFilters } = this.state;
     return (
-      <div className="AdjustmentList">
-        <Row>
-          <Col span={12}>
-            {/* search input component */}
-            <Search
-              size="large"
-              placeholder="Search for adjustments here ..."
-              onChange={this.searchAdjustments}
-            />
-            {/* end search input component */}
-          </Col>
-          {/* primary actions */}
-          <Col span={3} offset={9} />
-          {/* end primary actions */}
-        </Row>
-        {/* list action bar */}
-        <AdjustmentsActionBar
-          total={total}
-          page={page}
-          onFilter={this.openFiltersModal}
+      <Fragment>
+        {/* Topbar */}
+        <Topbar
+          search={{
+            size: 'large',
+            placeholder: 'Search for adjustments here ...',
+            onChange: this.searchAdjustments,
+            value: searchQuery,
+          }}
         />
-        {/* end list action bar */}
-        {/* list starts */}
-        <AdjustmentList adjustments={adjustments} loading={loading} />
-        {/* end list */}
-        <Modal
-          title="Filter Adjustments"
-          visible={showFilters}
-          width={650}
-          maskClosable={false}
-          destroyOnClose
-          onCancel={this.closeFiltersModal}
-          footer={null}
-        >
-          <AdjustmentFilters onCancel={this.closeFiltersModal} />
-        </Modal>
-      </div>
+        {/* end Topbar */}
+        <div className="AdjustmentList">
+          {/* list starts */}
+          <AdjustmentList
+            adjustments={adjustments}
+            loading={loading}
+            total={total}
+            page={page}
+          />
+          {/* end list */}
+          <Modal
+            title="Filter Adjustments"
+            visible={showFilters}
+            width={650}
+            maskClosable={false}
+            destroyOnClose
+            onCancel={this.closeFiltersModal}
+            footer={null}
+          >
+            <AdjustmentFilters onCancel={this.closeFiltersModal} />
+          </Modal>
+        </div>
+      </Fragment>
     );
   }
 }
@@ -142,5 +144,7 @@ export default Connect(Adjustments, {
   adjustments: 'adjustments.list',
   loading: 'adjustments.loading',
   page: 'adjustments.page',
+  showForm: 'adjustments.showForm',
   total: 'adjustments.total',
+  searchQuery: 'adjustments.q',
 });
