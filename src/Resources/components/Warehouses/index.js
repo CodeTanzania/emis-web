@@ -13,7 +13,6 @@ import Topbar from '../../../components/Topbar';
 import WarehouseList from './List';
 import WarehouseForm from './Form';
 import WarehouseFilters from './Filters';
-import WarehousesActionBar from './ActionBar';
 import './styles.css';
 
 /**
@@ -54,7 +53,6 @@ class Warehouses extends Component {
   static defaultProps = {
     warehouse: null,
     searchQuery: undefined,
-
   };
 
   componentWillMount() {
@@ -198,17 +196,13 @@ class Warehouses extends Component {
         {/* end Topbar */}
 
         <div className="WarehouseList">
-          <WarehousesActionBar
-            total={total}
-            page={page}
-            onFilter={this.openFiltersModal}
-          />
-          {/* end list action bar */}
           {/* list starts */}
           <WarehouseList
             warehouses={warehouses}
             loading={loading}
             onEdit={this.handleEdit}
+            total={total}
+            page={page}
           />
           {/* end list */}
 
