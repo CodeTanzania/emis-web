@@ -6,6 +6,11 @@ import { List } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Fragment, Component } from 'react';
 import intersectionBy from 'lodash/intersectionBy';
+import concat from 'lodash/concat';
+import map from 'lodash/map';
+import remove from 'lodash/remove';
+import uniq from 'lodash/uniq';
+import uniqBy from 'lodash/uniqBy';
 import AdjustmentsListItem from '../ListItem';
 import ListHeader from '../../../../components/ListHeader';
 import Toolbar from '../../../../components/Toolbar';
@@ -22,13 +27,9 @@ const headerLayout = [
 ];
 
 /**
- * @function
- * @name AdjustmentList
+ * @class
+ * @name AdjustmentsList
  * @description Render adjustment list which have search box and actions
- *
- * @param {Object} props props object
- * @param {Array} props.adjustments array of adjustments
- * @param {boolean} props.loading loading status
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -54,11 +55,101 @@ class AdjustmentsList extends Component {
     page: PropTypes.number.isRequired,
   };
 
-  state = { selectedAdjustments: [] };
+  state = { selectedAdjustments: [], selectedPages: [] };
+
+  /**
+   * @function
+   * @name handleSelectAdjustment
+   * @description Handle select single adjustment checkbox
+   *
+   * @param {Object} adjustment selected adjustment object
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleSelectAdjustment = adjustment => {
+    const { selectedAdjustments } = this.state;
+    this.setState({
+      selectedAdjustments: concat([], selectedAdjustments, adjustment),
+    });
+  };
+
+  /**
+   * @function
+   * @name handleSelectAll
+   * @description Handle select all adjustment action in current page
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleSelectAll = () => {
+    const { selectedAdjustments, selectedPages } = this.state;
+    const { adjustments, page } = this.props;
+    const selectedList = uniqBy(
+      [...selectedAdjustments, ...adjustments],
+      '_id'
+    );
+    const pages = uniq([...selectedPages, page]);
+    this.setState({
+      selectedAdjustments: selectedList,
+      selectedPages: pages,
+    });
+  };
+
+  /**
+   * @function
+   * @name handleDeselectAdjustment
+   * @description Handle deselect a single adjustment checkbox
+   *
+   * @param {Object} adjustment adjustment objected to be removed from
+   * list of selected adjustments
+   * @returns {undefined} undefined
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleDeselectAdjustment = adjustment => {
+    const { selectedAdjustments } = this.state;
+    const selectedList = [...selectedAdjustments];
+
+    remove(selectedList, item => item._id === adjustment._id); // eslint-disable-line
+
+    this.setState({
+      selectedAdjustments: selectedList,
+    });
+  };
+
+  /**
+   * @function
+   * @name handleDeselectAll
+   * @description Handle deselect all adjustments in a current page
+   *
+   * @returns {undefined} undefined
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleDeselectAll = () => {
+    const { adjustments, page } = this.props;
+    const { selectedAdjustments, selectedPages } = this.state;
+    const selectedList = [...selectedAdjustments];
+    const pages = [...selectedPages];
+
+    remove(pages, item => item === page);
+
+    adjustments.forEach(adjustment => {
+      remove(selectedList, item => item._id === adjustment._id); // eslint-disable-line
+    });
+
+    this.setState({
+      selectedAdjustments: selectedList,
+      selectedPages: pages,
+    });
+  };
 
   render() {
     const { adjustments, loading, total, page } = this.props;
-    const { selectedAdjustments } = this.state;
+    const { selectedAdjustments, selectedPages } = this.state;
     const selectedAdjustmentsCount = intersectionBy(
       selectedAdjustments,
       adjustments,
@@ -88,28 +179,36 @@ class AdjustmentsList extends Component {
             )
           }
         />
-        <ListHeader headerLayout={headerLayout} />
+
+        <ListHeader
+          headerLayout={headerLayout}
+          onSelectAll={this.handleSelectAll}
+          onDeselectAll={this.handleDeselectAll}
+          isBulkSelected={selectedPages.includes(page)}
+        />
+
         <List
           loading={loading}
           dataSource={adjustments}
-          renderItem={({
-            _id: id,
-            type,
-            quantity,
-            cost,
-            reason,
-            item: { name: itemName, color },
-            store: { name: warehouseName },
-          }) => (
+          renderItem={adjustment => (
             <AdjustmentsListItem
-              key={id}
-              itemName={itemName}
-              warehouseName={warehouseName}
-              type={type}
-              quantity={quantity}
-              cost={cost}
-              reason={reason}
-              color={color}
+              key={adjustment.id}
+              itemName={adjustment.item.name}
+              warehouseName={adjustment.store.name}
+              type={adjustment.type}
+              quantity={adjustment.quantity}
+              cost={adjustment.cost}
+              reason={adjustment.reason}
+              color={adjustment.item.color}
+              isSelected={
+                map(selectedAdjustments, '_id').includes(adjustment._id) //eslint-disable-line
+              }
+              onSelectItem={() => {
+                this.handleSelectAdjustment(adjustment);
+              }}
+              onDeselectItem={() => {
+                this.handleDeselectAdjustment(adjustment);
+              }}
             />
           )}
         />
