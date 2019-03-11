@@ -1,3 +1,4 @@
+import { httpActions } from '@codetanzania/emis-api-client';
 import { paginateStocks, refreshStocks } from '@codetanzania/emis-api-states';
 import { List } from 'antd';
 import PropTypes from 'prop-types';
@@ -20,6 +21,7 @@ const headerLayout = [
   { span: 5, header: 'Quantity (Unit)' },
   { span: 5, header: 'Warehouse' },
 ];
+const { getStocksExportUrl } = httpActions;
 
 /**
  * @class
@@ -145,6 +147,9 @@ class StockList extends Component {
         <Toolbar
           itemName="stock"
           selectedItemsCount={selectedStocksCount}
+          exportUrl={getStocksExportUrl({
+            filter: { _id: map(selectedStocks, '_id') },
+          })}
           page={page}
           total={total}
           onPaginate={nextPage => paginateStocks(nextPage)}
