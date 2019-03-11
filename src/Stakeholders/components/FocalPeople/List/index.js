@@ -211,7 +211,7 @@ class FocalPersonsList extends Component {
               },
               () => {
                 notifyError(
-                  'An Error occurred while refreshing Focal People please focalPerson system administrator'
+                  'An Error occurred while refreshing Focal People please contact system administrator'
                 );
               }
             )
@@ -272,7 +272,7 @@ class FocalPersonsList extends Component {
                   },
                   () => {
                     notifyError(
-                      'An Error occurred while archiving Focal Person please focalPerson system administrator'
+                      'An Error occurred while archiving Focal Person please contact system administrator'
                     );
                   }
                 )
