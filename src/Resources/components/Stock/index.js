@@ -63,8 +63,6 @@ class Stocks extends Component {
    * @name openStockForm
    * @description  Open Stock form
    *
-   * @returns {undefined} - Nothing is returned
-   *
    * @version 0.1.0
    * @since 0.1.0
    */
@@ -76,8 +74,6 @@ class Stocks extends Component {
    * @function
    * @name openStockForm
    * @description close Stock form
-   *
-   * @returns {undefined} - Nothing is returned
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -92,8 +88,7 @@ class Stocks extends Component {
    * @name searchStocks
    * @description Search Stocks List based on supplied filter word
    *
-   * @param {Object} event - Event instance
-   * @returns {undefined} - Nothing is returned
+   * @param {Object} event Event instance
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -116,6 +111,18 @@ class Stocks extends Component {
     selectStock(stock);
     this.setState({ isEditForm: true });
     openStockForm();
+  };
+
+  /**
+   * @function
+   * @name handleAfterCloseForm
+   * @description Perform post close form cleanups
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleAfterCloseForm = () => {
+    this.setState({ isEditForm: false });
   };
 
   render() {
@@ -166,9 +173,10 @@ class Stocks extends Component {
             title={isEditForm ? 'Edit Stock' : 'Add New Stock'}
             visible={showForm}
             footer={null}
-            onCancel={this.closeStockForm}
             destroyOnClose
             maskClosable={false}
+            onCancel={this.closeStockForm}
+            afterClose={this.handleAfterCloseForm}
           >
             <StockForm
               posting={posting}

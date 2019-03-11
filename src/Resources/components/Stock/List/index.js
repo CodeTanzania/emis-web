@@ -1,6 +1,11 @@
 import { paginateStocks, refreshStocks } from '@codetanzania/emis-api-states';
 import { List } from 'antd';
 import PropTypes from 'prop-types';
+import concat from 'lodash/concat';
+import uniq from 'lodash/uniq';
+import uniqBy from 'lodash/uniqBy';
+import remove from 'lodash/remove';
+import map from 'lodash/map';
 import intersectionBy from 'lodash/intersectionBy';
 import React, { Fragment, Component } from 'react';
 import StockListItem from '../ListItem';
@@ -10,7 +15,7 @@ import ListHeader from '../../../../components/ListHeader';
 
 /* constants */
 const headerLayout = [
-  { span: 5, header: 'Stakeholder' },
+  { span: 5, header: 'Owner' },
   { span: 5, header: 'Item' },
   { span: 5, header: 'Quantity (Unit)' },
   { span: 5, header: 'Warehouse' },
@@ -20,12 +25,6 @@ const headerLayout = [
  * @class
  * @name StockList
  * @description Render stock list which has search box and actions
- *
- * @param {Object} props props object
- * @param {string} props.stocks array of stocks objects
- * @param {boolean} props.loading represents loading status
- * @param {Function} props.onEdit call back function  called
- * during editing a stock
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -51,6 +50,89 @@ class StockList extends Component {
     selectedPages: [],
   };
 
+  /**
+   * @function
+   * @name handleSelectStock
+   * @description Handle selection of a single stock checkbox
+   *
+   * @param {Object} stock selected stock object
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleSelectStock = stock => {
+    const { selectedStocks } = this.state;
+    this.setState({
+      selectedStocks: concat([], selectedStocks, stock),
+    });
+  };
+
+  /**
+   * @function
+   * @name handleSelectAll
+   * @description Handle select all stocks action for current displayed page
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleSelectAll = () => {
+    const { selectedStocks, selectedPages } = this.state;
+    const { stocks, page } = this.props;
+    const selectedList = uniqBy([...selectedStocks, ...stocks], '_id');
+    const pages = uniq([...selectedPages, page]);
+    this.setState({
+      selectedStocks: selectedList,
+      selectedPages: pages,
+    });
+  };
+
+  /**
+   * @function
+   * @name handleDeselectStock
+   * @description Handle deselect as single stock checkbox action
+   *
+   * @param {Object} stock deselected stock object
+   * @returns {undefined} undefined
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleDeselectStock = stock => {
+    const { selectedStocks } = this.state;
+    const selectedList = [...selectedStocks];
+    remove(selectedList, item => item._id === stock._id); // eslint-disable-line
+
+    this.setState({ selectedStocks: selectedList });
+  };
+
+  /**
+   * @function
+   * @name handleDeselectAll
+   * @description Handle deselected bulk action for stocks displayed in a list
+   *
+   * @returns {undefined} undefined
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleDeselectAll = () => {
+    const { stocks, page } = this.props;
+    const { selectedStocks, selectedPages } = this.state;
+    const selectedList = [...selectedStocks];
+    const pages = [...selectedPages];
+
+    remove(pages, item => item === page);
+
+    stocks.forEach(stock => {
+      remove(selectedList, item => item._id === stock._id); // eslint-disable-line
+    });
+
+    this.setState({
+      selectedStocks: selectedList,
+      selectedPages: pages,
+    });
+  };
+
   render() {
     const { stocks, loading, page, total, onEdit } = this.props;
     const { selectedStocks, selectedPages } = this.state;
@@ -73,7 +155,7 @@ class StockList extends Component {
               },
               () => {
                 notifyError(
-                  'An Error occurred while refreshing Stocks contact System administrator'
+                  'An Error occurred while refreshing Stocks, please contact System administrator'
                 );
               }
             )
@@ -84,6 +166,8 @@ class StockList extends Component {
         {/* stocks list header */}
         <ListHeader
           headerLayout={headerLayout}
+          onSelectAll={this.handleSelectAll}
+          onDeselectAll={this.handleDeselectAll}
           isBulkSelected={selectedPages.includes(page)}
         />
         {/* end stocks list header */}
@@ -104,6 +188,13 @@ class StockList extends Component {
                 color={item.color}
                 uom={item.uom}
                 quantity={stock.quantity}
+                isSelected={map(selectedStocks, '_id').includes(stock._id)} // eslint-disable-line
+                onSelectItem={() => {
+                  this.handleSelectStock(stock);
+                }}
+                onDeselectItem={() => {
+                  this.handleDeselectStock(stock);
+                }}
                 onEdit={() => onEdit(stock)}
               />
             );
