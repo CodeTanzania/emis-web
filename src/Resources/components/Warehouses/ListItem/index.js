@@ -1,8 +1,11 @@
-import { Icon, Avatar, Col, Row, Checkbox } from 'antd';
+import { Avatar, Col, Row, Checkbox, Modal } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import randomColor from 'randomcolor';
+import ListItemActions from '../../../../components/ListItemActions';
 import './styles.css';
+
+const { confirm } = Modal;
 
 /**
  * @class
@@ -22,6 +25,7 @@ class WarehouseListItem extends Component {
     isSelected: PropTypes.bool.isRequired,
     onSelectItem: PropTypes.func.isRequired,
     onDeselectItem: PropTypes.func.isRequired,
+    onArchive: PropTypes.func.isRequired,
   };
 
   state = {
@@ -56,6 +60,27 @@ class WarehouseListItem extends Component {
     } else {
       onDeselectItem();
     }
+  };
+
+  /**
+   * @function
+   * @name showArchiveConfirm
+   * @description show confirm modal before archiving a warehouse
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  showArchiveConfirm = () => {
+    const { name, onArchive } = this.props;
+    confirm({
+      title: `Are you sure you want to archive ${name} ?`,
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        onArchive();
+      },
+    });
   };
 
   render() {
@@ -98,19 +123,18 @@ class WarehouseListItem extends Component {
           <Col span={10}>{level}</Col>
           <Col span={3}>
             {isHovered && (
-              <Fragment>
-                <Icon
-                  type="edit"
-                  title="Update warehouse"
-                  className="actionIcon"
-                  onClick={onEdit}
-                />
-                <Icon
-                  type="database"
-                  title="Archive warehouse"
-                  className="actionIcon"
-                />
-              </Fragment>
+              <ListItemActions
+                edit={{
+                  name: 'Edit Warehouse',
+                  title: 'Update Warehouse Details',
+                  onClick: onEdit,
+                }}
+                archive={{
+                  name: 'Archive Warehouse',
+                  title: 'Remove warehouse from the list of active Warehouses',
+                  onClick: this.showArchiveConfirm,
+                }}
+              />
             )}
           </Col>
         </Row>

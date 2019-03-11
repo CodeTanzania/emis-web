@@ -2,7 +2,7 @@ import { httpActions } from '@codetanzania/emis-api-client';
 import {
   refreshWarehouses,
   paginateWarehouses,
-  // deleteWarehouse,
+  deleteWarehouse,
 } from '@codetanzania/emis-api-states';
 import { List } from 'antd';
 import PropTypes from 'prop-types';
@@ -214,6 +214,20 @@ class WarehouseList extends React.Component {
               onDeselectItem={() => {
                 this.handleOnDeselectWarehouse(warehouse);
               }}
+              onArchive={() =>
+                deleteWarehouse(
+                  warehouse._id, // eslint-disable-line
+                  () => {
+                    notifySuccess('Warehouse was archived successfully');
+                  },
+                  () => {
+                    notifyError(
+                      `An Error occurred while archiving Warehouse please contact
+                   system administrator`
+                    );
+                  }
+                )
+              }
             />
           )}
         />
