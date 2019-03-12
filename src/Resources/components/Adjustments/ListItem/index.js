@@ -1,6 +1,7 @@
-import { Icon, Avatar, Col, Row, Checkbox } from 'antd';
+import { Avatar, Col, Row, Checkbox } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
+import moment from 'moment';
 import './styles.css';
 
 /**
@@ -25,6 +26,7 @@ class AdjustmentListItem extends Component {
     isSelected: PropTypes.bool.isRequired,
     onSelectItem: PropTypes.func.isRequired,
     onDeselectItem: PropTypes.func.isRequired,
+    creationDate: PropTypes.string.isRequired,
   };
 
   state = {
@@ -87,6 +89,7 @@ class AdjustmentListItem extends Component {
       cost,
       reason,
       color,
+      creationDate,
       isSelected,
     } = this.props;
     const { isHovered } = this.state;
@@ -127,18 +130,8 @@ class AdjustmentListItem extends Component {
           <Col span={2}>{quantity}</Col>
           <Col span={3}>{cost}</Col>
           <Col span={4}>{reason}</Col>
-          <Col span={4}>{warehouseName}</Col>
-          <Col span={3}>
-            {isHovered && (
-              <Fragment>
-                <Icon
-                  type="database"
-                  title="Archive adjustment"
-                  className="actionIcon"
-                />
-              </Fragment>
-            )}
-          </Col>
+          <Col span={3}>{warehouseName}</Col>
+          <Col span={4}>{moment(creationDate).format('DD-MM-YYYY HH:mm')}</Col>
         </Row>
       </div>
     );

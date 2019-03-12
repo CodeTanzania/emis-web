@@ -24,7 +24,8 @@ const headerLayout = [
   { span: 2, header: 'Quantity' },
   { span: 3, header: 'Cost' },
   { span: 4, header: 'Reason' },
-  { span: 4, header: 'Warehouse' },
+  { span: 3, header: 'Warehouse' },
+  { span: 4, header: 'Adjustment Date' },
 ];
 const { getAdjustmentsExportUrl } = httpActions;
 
@@ -209,6 +210,7 @@ class AdjustmentsList extends Component {
               cost={adjustment.cost}
               reason={adjustment.reason}
               color={adjustment.item.color}
+              creationDate={adjustment.updatedAt}
               isSelected={
                 map(selectedAdjustments, '_id').includes(adjustment._id) //eslint-disable-line
               }
