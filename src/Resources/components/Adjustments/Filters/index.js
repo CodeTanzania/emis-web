@@ -3,7 +3,7 @@ import {
   Connect,
   filterAdjustments,
 } from '@codetanzania/emis-api-states';
-import { Button, Checkbox, Col, Form, Row } from 'antd';
+import { Button, Checkbox, DatePicker, Col, Form, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
@@ -101,23 +101,50 @@ class AdjustmentsFilters extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
-        {/* start adjustment actions filters */}
-        <Form.Item {...formItemLayout} label="By Types">
-          {getFieldDecorator('type', {
-            initialValue: filter ? filter.type : [],
-          })(
-            <Checkbox.Group style={{ width: '100%' }}>
-              <Row>
-                {types.map(type => (
-                  <Col span={6} style={{ margin: '10px 0' }} key={type}>
-                    <Checkbox value={type}>{type}</Checkbox>
-                  </Col>
-                ))}
-              </Row>
-            </Checkbox.Group>
-          )}
-        </Form.Item>
-        {/* end adjustment actions filters */}
+        <Row>
+          <Col span={12}>
+            {/* adjustment date range start date filter */}
+            <Form.Item label="Adjustments From">
+              {getFieldDecorator('updatedAt.from', {
+                initialValue:
+                  filter && filter.updatedAt ? filter.updatedAt.from : null,
+                rules: [
+                  {
+                    type: 'object',
+                  },
+                ],
+              })(
+                <DatePicker
+                  format="DD-MM-YYYY"
+                  placeholder="Select Start Date"
+                  style={{ width: '80%' }}
+                />
+              )}
+            </Form.Item>
+            {/* end adjustment date range start date filter */}
+          </Col>
+          <Col span={12}>
+            {/* adjustment date range end date filter */}
+            <Form.Item label="Adjustments To">
+              {getFieldDecorator('updatedAt.to', {
+                initialValue:
+                  filter && filter.updatedAt ? filter.updatedAt.to : null,
+                rules: [
+                  {
+                    type: 'object',
+                  },
+                ],
+              })(
+                <DatePicker
+                  format="DD-MM-YYYY"
+                  placeholder="Select End Date"
+                  style={{ width: '80%' }}
+                />
+              )}
+            </Form.Item>
+            {/* end adjustment date range end date filter */}
+          </Col>
+        </Row>
 
         {/* start adjustment reasons filters */}
         <Form.Item {...formItemLayout} label="By  Reasons">
@@ -136,6 +163,24 @@ class AdjustmentsFilters extends Component {
           )}
         </Form.Item>
         {/* end adjustment reason filters */}
+
+        {/* start adjustment type filters */}
+        <Form.Item {...formItemLayout} label="By Types">
+          {getFieldDecorator('type', {
+            initialValue: filter ? filter.type : [],
+          })(
+            <Checkbox.Group style={{ width: '100%' }}>
+              <Row>
+                {types.map(type => (
+                  <Col span={6} style={{ margin: '10px 0' }} key={type}>
+                    <Checkbox value={type}>{type}</Checkbox>
+                  </Col>
+                ))}
+              </Row>
+            </Checkbox.Group>
+          )}
+        </Form.Item>
+        {/* end adjustment type filters */}
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
