@@ -24,7 +24,8 @@ const headerLayout = [
   { span: 2, header: 'Quantity' },
   { span: 3, header: 'Cost' },
   { span: 4, header: 'Reason' },
-  { span: 4, header: 'Warehouse' },
+  { span: 3, header: 'Warehouse' },
+  { span: 4, header: 'Adjustment Date' },
 ];
 const { getAdjustmentsExportUrl } = httpActions;
 
@@ -55,6 +56,7 @@ class AdjustmentsList extends Component {
     ).isRequired,
     total: PropTypes.number.isRequired,
     page: PropTypes.number.isRequired,
+    onFilter: PropTypes.func.isRequired,
   };
 
   state = { selectedAdjustments: [], selectedPages: [] };
@@ -150,7 +152,7 @@ class AdjustmentsList extends Component {
   };
 
   render() {
-    const { adjustments, loading, total, page } = this.props;
+    const { adjustments, loading, total, page, onFilter } = this.props;
     const { selectedAdjustments, selectedPages } = this.state;
     const selectedAdjustmentsCount = intersectionBy(
       selectedAdjustments,
@@ -172,6 +174,7 @@ class AdjustmentsList extends Component {
           onPaginate={nextPage => {
             paginateAdjustments(nextPage);
           }}
+          onFilter={onFilter}
           onRefresh={() =>
             refreshAdjustments(
               () => {
@@ -209,6 +212,7 @@ class AdjustmentsList extends Component {
               cost={adjustment.cost}
               reason={adjustment.reason}
               color={adjustment.item.color}
+              creationDate={adjustment.updatedAt}
               isSelected={
                 map(selectedAdjustments, '_id').includes(adjustment._id) //eslint-disable-line
               }
