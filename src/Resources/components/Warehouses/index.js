@@ -201,6 +201,7 @@ class Warehouses extends Component {
             warehouses={warehouses}
             loading={loading}
             onEdit={this.handleEdit}
+            onFilter={this.openFiltersModal}
             total={total}
             page={page}
           />
@@ -211,9 +212,10 @@ class Warehouses extends Component {
             title="Filter Warehouses"
             visible={showFilters}
             onCancel={this.closeFiltersModal}
-            maskClosable={false}
+            width="50%"
             footer={null}
-            width={800}
+            destroyOnClose
+            maskClosable={false}
           >
             <WarehouseFilters onCancel={this.closeFiltersModal} />
           </Modal>
