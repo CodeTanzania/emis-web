@@ -121,8 +121,11 @@ class Adjustments extends Component {
             loading={loading}
             total={total}
             page={page}
+            onFilter={this.openFiltersModal}
           />
           {/* end list */}
+
+          {/* adjustments filters */}
           <Modal
             title="Filter Adjustments"
             visible={showFilters}
@@ -134,6 +137,7 @@ class Adjustments extends Component {
           >
             <AdjustmentFilters onCancel={this.closeFiltersModal} />
           </Modal>
+          {/* end adjustments filters */}
         </div>
       </Fragment>
     );
