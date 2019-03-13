@@ -20,7 +20,9 @@ class WarehouseListItem extends Component {
   /* props validation */
   static propTypes = {
     name: PropTypes.string.isRequired,
-    level: PropTypes.string.isRequired,
+    family: PropTypes.string.isRequired,
+    nature: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
     onEdit: PropTypes.func.isRequired,
     isSelected: PropTypes.bool.isRequired,
     onSelectItem: PropTypes.func.isRequired,
@@ -84,7 +86,7 @@ class WarehouseListItem extends Component {
   };
 
   render() {
-    const { name, level, onEdit } = this.props;
+    const { name, family, nature, type, onEdit } = this.props;
     const { isHovered } = this.state;
     const { isSelected } = this.props;
     let sideComponent = null;
@@ -119,8 +121,10 @@ class WarehouseListItem extends Component {
       >
         <Row>
           <Col span={1}>{sideComponent}</Col>
-          <Col span={9}>{name}</Col>
-          <Col span={10}>{level}</Col>
+          <Col span={5}>{name}</Col>
+          <Col span={6}>{nature}</Col>
+          <Col span={4}>{family}</Col>
+          <Col span={4}>{type}</Col>
           <Col span={3}>
             {isHovered && (
               <ListItemActions

@@ -21,8 +21,10 @@ import { notifyError, notifySuccess } from '../../../../util';
 const { getWarehousesExportUrl } = httpActions;
 
 const headerLayout = [
-  { span: 5, header: 'Name', offset: 1 },
-  { span: 6, header: 'Level', offset: 4 },
+  { span: 5, header: 'Name' },
+  { span: 6, header: 'Nature' },
+  { span: 4, header: 'Family' },
+  { span: 4, header: 'Type' },
 ];
 
 // eslint-disable-next-line jsdoc/require-returns
@@ -202,7 +204,9 @@ class WarehouseList extends React.Component {
             <WarehouseListItem
               key={warehouse.name}
               name={warehouse.name}
-              level={warehouse.level}
+              nature={warehouse.nature}
+              family={warehouse.family}
+              type={warehouse.type}
               onEdit={() => onEdit(warehouse)}
               isSelected={
                 // eslint-disable-next-line
