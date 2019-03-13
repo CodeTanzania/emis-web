@@ -16,7 +16,7 @@ import './styles.css';
  * @version 0.1.0
  * @since 0.1.0
  */
-const ListItemActions = ({ edit, share, archive }) => (
+const ListItemActions = ({ edit, share, archive, transfer, adjust }) => (
   <Dropdown
     overlay={
       <Menu>
@@ -39,6 +39,26 @@ const ListItemActions = ({ edit, share, archive }) => (
             title={archive.title}
           >
             <Icon type="delete" /> {archive.name}
+          </Menu.Item>
+        )}
+
+        {transfer && (
+          <Menu.Item
+            key="transfer"
+            onClick={transfer.onClick}
+            title={transfer.title}
+          >
+            <Icon type="swap" /> {transfer.name}
+          </Menu.Item>
+        )}
+
+        {adjust && (
+          <Menu.Item
+            key="transfer"
+            onClick={adjust.onClick}
+            title={adjust.title}
+          >
+            <Icon type="diff" /> {adjust.name}
           </Menu.Item>
         )}
       </Menu>
@@ -72,12 +92,24 @@ ListItemActions.propTypes = {
     title: PropTypes.string,
     onClick: PropTypes.func,
   }),
+  transfer: PropTypes.shape({
+    name: PropTypes.string,
+    title: PropTypes.string,
+    onClick: PropTypes.func,
+  }),
+  adjust: PropTypes.shape({
+    name: PropTypes.string,
+    title: PropTypes.string,
+    onClick: PropTypes.func,
+  }),
 };
 
 ListItemActions.defaultProps = {
   edit: null,
   share: null,
   archive: null,
+  transfer: null,
+  adjust: null,
 };
 
 export default ListItemActions;
