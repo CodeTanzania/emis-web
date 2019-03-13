@@ -18,6 +18,11 @@ const routes = [
     disabled: true,
   },
   { name: 'Warehouses', path: '/warehouses', icon: warehousesIcon },
+  {
+    name: 'Item Unit Of Measure',
+    path: '/unitofmeasure',
+    icon: warehousesIcon,
+  },
 ];
 
 /**
