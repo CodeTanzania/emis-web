@@ -1,8 +1,4 @@
-import {
-  Connect,
-  getItems,
-  searchItems,
-} from '@codetanzania/emis-api-states';
+import { Connect, getItems, searchItems } from '@codetanzania/emis-api-states';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import Topbar from '../../../components/Topbar';

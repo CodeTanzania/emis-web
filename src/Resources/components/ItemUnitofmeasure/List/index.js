@@ -1,3 +1,4 @@
+import { httpActions } from '@codetanzania/emis-api-client';
 import { paginateItems, refreshItems } from '@codetanzania/emis-api-states';
 import { List } from 'antd';
 import concat from 'lodash/concat';
@@ -20,6 +21,8 @@ const headerLayout = [
   { span: 5, header: 'Maximum' },
   { span: 4, header: 'Minimum' },
 ];
+
+const { getItemsExportUrl } = httpActions;
 
 /**
  * @class
@@ -160,6 +163,9 @@ class UnitOfMeasureList extends Component {
           onPaginate={nextPage => {
             paginateItems(nextPage);
           }}
+          exportUrl={getItemsExportUrl({
+            filter: { _id: map(selectedUnitOfMeasure, '_id') },
+          })}
           onRefresh={() =>
             refreshItems(
               () => {
