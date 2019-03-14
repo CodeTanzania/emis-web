@@ -1,5 +1,9 @@
 import { httpActions } from '@codetanzania/emis-api-client';
-import { paginateItems, refreshItems } from '@codetanzania/emis-api-states';
+import {
+  paginateItems,
+  refreshItems,
+  deleteItem,
+} from '@codetanzania/emis-api-states';
 import { List } from 'antd';
 import concat from 'lodash/concat';
 import map from 'lodash/map';
@@ -38,14 +42,11 @@ class UnitOfMeasureList extends Component {
     unitofmeasures: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string,
-        type: PropTypes.string,
-        minStockAllowed: PropTypes.string,
-        maxStockAllowed: PropTypes.string,
-        color: PropTypes.string,
       })
     ).isRequired,
     total: PropTypes.number.isRequired,
     page: PropTypes.number.isRequired,
+    onEdit: PropTypes.func.isRequired,
   };
 
   state = {
@@ -144,7 +145,7 @@ class UnitOfMeasureList extends Component {
   };
 
   render() {
-    const { unitofmeasures, loading, total, page } = this.props;
+    const { unitofmeasures, loading, total, page, onEdit } = this.props;
     const { selectedUnitOfMeasure, selectedPages } = this.state;
     const selectedItemUnitsCount = intersectionBy(
       this.state.selectedUnitOfMeasure,
@@ -211,6 +212,23 @@ class UnitOfMeasureList extends Component {
               onDeselectItem={() => {
                 this.handleDeselectItemUnitOfMeasure(unitofmeasure);
               }}
+              onEdit={() => onEdit(unitofmeasure)}
+              onArchive={() =>
+                deleteItem(
+                  unitofmeasure._id, // eslint-disable-line
+                  () => {
+                    notifySuccess(
+                      'Item unit of measure was archived successfully'
+                    );
+                  },
+                  () => {
+                    notifyError(
+                      `An Error occurred while archiving item unit of measure please contact
+                   system administrator`
+                    );
+                  }
+                )
+              }
             />
           )}
         />

@@ -1,8 +1,10 @@
-import { Avatar, Col, Row, Checkbox } from 'antd';
+import { Avatar, Col, Row, Checkbox, Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import ListItemActions from '../../../../components/ListItemActions';
 import './styles.css';
+
+const { confirm } = Modal;
 
 /**
  * @class
@@ -24,6 +26,8 @@ class ItemUnitOfMeasureListItem extends Component {
     isSelected: PropTypes.bool.isRequired,
     onSelectItem: PropTypes.func.isRequired,
     onDeselectItem: PropTypes.func.isRequired,
+    onEdit: PropTypes.func.isRequired,
+    onArchive: PropTypes.func.isRequired,
   };
 
   state = {
@@ -77,6 +81,27 @@ class ItemUnitOfMeasureListItem extends Component {
     }
   };
 
+  /**
+   * @function
+   * @name showArchiveConfirm
+   * @description show confirm modal before archiving a item unit of measure
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  showArchiveConfirm = () => {
+    const { name, onArchive } = this.props;
+    confirm({
+      title: `Are you sure you want to archive ${name} ?`,
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        onArchive();
+      },
+    });
+  };
+
   render() {
     const {
       name,
@@ -85,6 +110,7 @@ class ItemUnitOfMeasureListItem extends Component {
       maxStockAllowed,
       minStockAllowed,
       isSelected,
+      onEdit,
     } = this.props;
     const { isHovered } = this.state;
     let sideComponent = null;
@@ -129,11 +155,13 @@ class ItemUnitOfMeasureListItem extends Component {
                 edit={{
                   name: 'Edit Item unit of measure',
                   title: 'Update Item unit of measure Details',
+                  onClick: onEdit,
                 }}
                 archive={{
                   name: 'Archive Item unit of measure',
                   title:
                     'Remove Role from the list of active Item unit of measure',
+                  onClick: this.showArchiveConfirm,
                 }}
               />
             )}

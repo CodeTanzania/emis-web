@@ -1,8 +1,17 @@
-import { Connect, getItems, searchItems } from '@codetanzania/emis-api-states';
+import {
+  Connect,
+  getItems,
+  searchItems,
+  openItemForm,
+  closeItemForm,
+  selectItem,
+} from '@codetanzania/emis-api-states';
+import { Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import Topbar from '../../../components/Topbar';
 import UnitOfMeasureList from './List';
+import ItemUnitOfMeasureForm from './Form';
 import './styles.css';
 
 /**
@@ -17,66 +26,84 @@ import './styles.css';
 class ItemUnitOfMeasure extends Component {
   static propTypes = {
     loading: PropTypes.bool.isRequired,
+    posting: PropTypes.bool.isRequired,
     unitofmeasures: PropTypes.arrayOf(
-      PropTypes.shape({
-        _id: PropTypes.string,
-        item: PropTypes.shape({
-          name: PropTypes.string,
-          color: PropTypes.color,
-        }),
-        type: PropTypes.string,
-        quantity: PropTypes.number,
-        cost: PropTypes.number,
-        reason: PropTypes.string,
-        store: PropTypes.shape({ name: PropTypes.string }),
-      })
+      PropTypes.shape({ name: PropTypes.string })
     ).isRequired,
+    unitofmeasure: PropTypes.shape({ name: PropTypes.string }),
     total: PropTypes.number.isRequired,
     page: PropTypes.number.isRequired,
     searchQuery: PropTypes.string,
+    showForm: PropTypes.bool.isRequired,
   };
 
   static defaultProps = {
     searchQuery: undefined,
+    unitofmeasure: null,
   };
 
-  // state = {
-  //   showFilters: false,
-  // };
+  state = {
+    isEditForm: false,
+  };
 
   componentDidMount() {
     getItems();
   }
 
-  // /**
-  //  * @function
-  //  * @name openFiltersModal
-  //  * @description open filters modal by setting it's visible
-  //  *  property to false via state
-  //  *
-  //  * @returns {undefined} undefined
-  //  *
-  //  * @version 0.1.0
-  //  * @since 0.1.0
-  //  */
-  // openFiltersModal = () => {
-  //   this.setState({ showFilters: true });
-  // };
+  /**
+   * @function
+   * @name openForm
+   * @description Open role form
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openForm = () => {
+    openItemForm();
+  };
 
-  // /**
-  //  * @function
-  //  * @name closeFiltersModal
-  //  * @description Close filters modal by setting it's visible
-  //  *  property to false via state
-  //  *
-  //  * @returns {undefined} undefined
-  //  *
-  //  * @version 0.1.0
-  //  * @since 0.1.0
-  //  */
-  // closeFiltersModal = () => {
-  //   this.setState({ showFilters: false });
-  // };
+  /**
+   * @function
+   * @name openForm
+   * @description close role form
+   *
+   * @returns {undefined} - Nothing is returned
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeForm = () => {
+    closeItemForm();
+    this.setState({ isEditForm: false });
+  };
+
+  /**
+   * @function
+   * @name handleEdit
+   * @description Handle on Edit action for list item
+   *
+   * @param {Object} value - item to be edited
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleEdit = value => {
+    selectItem(value);
+    this.setState({ isEditForm: true });
+    openItemForm();
+  };
+
+  /**
+   * @function
+   * @name handleAfterCloseForm
+   * @description Performs after close form cleanups
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleAfterCloseForm = () => {
+    this.setState({ isEditForm: false });
+  };
 
   /**
    * @function
@@ -94,7 +121,17 @@ class ItemUnitOfMeasure extends Component {
   };
 
   render() {
-    const { unitofmeasures, loading, total, page, searchQuery } = this.props;
+    const {
+      unitofmeasures,
+      loading,
+      showForm,
+      posting,
+      page,
+      total,
+      unitofmeasure,
+      searchQuery,
+    } = this.props;
+    const { isEditForm } = this.state;
     return (
       <Fragment>
         {/* Topbar */}
@@ -105,6 +142,15 @@ class ItemUnitOfMeasure extends Component {
             onChange: this.searchItemUnitOfMeasure,
             value: searchQuery,
           }}
+          actions={[
+            {
+              label: 'New Unit Of Measure',
+              icon: 'plus',
+              size: 'large',
+              title: 'Add New Item Unit Of Measure',
+              onClick: this.openForm,
+            },
+          ]}
         />
         {/* end Topbar */}
         <div className="UnitOfMeasureList">
@@ -114,8 +160,32 @@ class ItemUnitOfMeasure extends Component {
             loading={loading}
             total={total}
             page={page}
+            onEdit={this.handleEdit}
           />
           {/* end list */}
+
+          {/* create/edit form modal */}
+          <Modal
+            title={
+              isEditForm
+                ? 'Edit Item Unit Of Measure'
+                : 'Add New Item Unit Of Measure'
+            }
+            visible={showForm}
+            footer={null}
+            onCancel={this.closeForm}
+            destroyOnClose
+            maskClosable={false}
+            afterClose={this.handleAfterCloseForm}
+          >
+            <ItemUnitOfMeasureForm
+              posting={posting}
+              isEditForm={isEditForm}
+              unitofmeasure={unitofmeasure}
+              onCancel={this.closeForm}
+            />
+          </Modal>
+          {/* end create/edit form modal */}
         </div>
       </Fragment>
     );
@@ -124,6 +194,7 @@ class ItemUnitOfMeasure extends Component {
 
 export default Connect(ItemUnitOfMeasure, {
   unitofmeasures: 'items.list',
+  unitofmeasure: 'items.selected',
   loading: 'items.loading',
   page: 'items.page',
   showForm: 'items.showForm',
