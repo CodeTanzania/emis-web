@@ -22,6 +22,8 @@ class ItemUnitOfMeasureListItem extends Component {
     maxStockAllowed: PropTypes.number.isRequired,
     minStockAllowed: PropTypes.number.isRequired,
     isSelected: PropTypes.bool.isRequired,
+    onSelectItem: PropTypes.func.isRequired,
+    onDeselectItem: PropTypes.func.isRequired,
   };
 
   state = {
@@ -52,6 +54,29 @@ class ItemUnitOfMeasureListItem extends Component {
     this.setState({ isHovered: false });
   };
 
+  /**
+   * @function
+   * @name handleToggleSelect
+   * @description Handle toggling list item checkbox
+   *
+   * @param {Object} event Event object
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleToggleSelect = event => {
+    const { isSelected } = this.state;
+    const { onSelectItem, onDeselectItem } = this.props;
+
+    this.setState({ isSelected: !isSelected });
+
+    if (event.target.checked) {
+      onSelectItem();
+    } else {
+      onDeselectItem();
+    }
+  };
+
   render() {
     const {
       name,
@@ -65,13 +90,23 @@ class ItemUnitOfMeasureListItem extends Component {
     let sideComponent = null;
 
     if (isSelected) {
-      sideComponent = <Checkbox className="Checkbox" />;
+      sideComponent = (
+        <Checkbox
+          className="Checkbox"
+          onChange={this.handleToggleSelect}
+          checked={isSelected}
+        />
+      );
     } else {
       sideComponent = isHovered ? (
-        <Checkbox className="Checkbox" />
+        <Checkbox
+          className="Checkbox"
+          onChange={this.handleToggleSelect}
+          checked={isSelected}
+        />
       ) : (
         <Avatar style={{ backgroundColor: color }}>
-          {name.toUpperCase().charAt(0)}
+          {name.charAt(0).toUpperCase()}
         </Avatar>
       );
     }
