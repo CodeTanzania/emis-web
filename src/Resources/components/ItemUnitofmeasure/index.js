@@ -1,7 +1,7 @@
 import {
   Connect,
-  searchAdjustments,
   getItems,
+  searchItems,
 } from '@codetanzania/emis-api-states';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
@@ -85,7 +85,7 @@ class ItemUnitOfMeasure extends Component {
   /**
    * @function
    * @name searchRoles
-   * @description Search Roles List based on supplied filter word
+   * @description Search item unit of measure List based on supplied filter word
    *
    * @param {Object} event - Event instance
    * @returns {undefined} - Nothing is returned
@@ -93,8 +93,8 @@ class ItemUnitOfMeasure extends Component {
    * @version 0.1.0
    * @since 0.1.0
    */
-  searchAdjustments = event => {
-    searchAdjustments(event.target.value);
+  searchItemUnitOfMeasure = event => {
+    searchItems(event.target.value);
   };
 
   render() {
@@ -106,7 +106,7 @@ class ItemUnitOfMeasure extends Component {
           search={{
             size: 'large',
             placeholder: 'Search for Item unit of measure here ...',
-            onChange: this.searchAdjustments,
+            onChange: this.searchItemUnitOfMeasure,
             value: searchQuery,
           }}
         />
