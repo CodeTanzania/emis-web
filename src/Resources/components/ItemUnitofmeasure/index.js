@@ -1,7 +1,7 @@
 import {
   Connect,
-  getAdjustments,
   searchAdjustments,
+  getItems,
 } from '@codetanzania/emis-api-states';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
@@ -49,7 +49,7 @@ class ItemUnitOfMeasure extends Component {
   // };
 
   componentDidMount() {
-    getAdjustments();
+    getItems();
   }
 
   // /**
@@ -127,10 +127,10 @@ class ItemUnitOfMeasure extends Component {
 }
 
 export default Connect(ItemUnitOfMeasure, {
-  unitofmeasures: 'adjustments.list',
-  loading: 'adjustments.loading',
-  page: 'adjustments.page',
-  showForm: 'adjustments.showForm',
-  total: 'adjustments.total',
-  searchQuery: 'adjustments.q',
+  unitofmeasures: 'items.list',
+  loading: 'items.loading',
+  page: 'items.page',
+  showForm: 'items.showForm',
+  total: 'items.total',
+  searchQuery: 'items.q',
 });

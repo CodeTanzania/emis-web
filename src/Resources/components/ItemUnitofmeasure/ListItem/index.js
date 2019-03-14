@@ -16,11 +16,12 @@ import './styles.css';
 class ItemUnitOfMeasureListItem extends Component {
   /* props validation */
   static propTypes = {
-    itemName: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    quantity: PropTypes.string.isRequired,
-    cost: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
+    maxStockAllowed: PropTypes.number.isRequired,
+    minStockAllowed: PropTypes.number.isRequired,
+    isSelected: PropTypes.bool.isRequired,
   };
 
   state = {
@@ -52,18 +53,25 @@ class ItemUnitOfMeasureListItem extends Component {
   };
 
   render() {
-    const { itemName, type, quantity, cost, color } = this.props;
+    const {
+      name,
+      type,
+      color,
+      maxStockAllowed,
+      minStockAllowed,
+      isSelected,
+    } = this.props;
     const { isHovered } = this.state;
     let sideComponent = null;
 
-    if (itemName) {
+    if (isSelected) {
       sideComponent = <Checkbox className="Checkbox" />;
     } else {
       sideComponent = isHovered ? (
         <Checkbox className="Checkbox" />
       ) : (
         <Avatar style={{ backgroundColor: color }}>
-          {itemName.toUpperCase().charAt(0)}
+          {name.toUpperCase().charAt(0)}
         </Avatar>
       );
     }
@@ -76,10 +84,10 @@ class ItemUnitOfMeasureListItem extends Component {
       >
         <Row>
           <Col span={1}>{sideComponent} </Col>
-          <Col span={6}>{itemName}</Col>
+          <Col span={6}>{name}</Col>
           <Col span={5}>{type}</Col>
-          <Col span={5}>{quantity}</Col>
-          <Col span={4}>{cost}</Col>
+          <Col span={5}>{maxStockAllowed}</Col>
+          <Col span={4}>{minStockAllowed}</Col>
           <Col span={3}>
             {isHovered && (
               <ListItemActions
