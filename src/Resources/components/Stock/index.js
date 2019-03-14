@@ -148,7 +148,7 @@ class Stocks extends Component {
           actions={[
             {
               label: 'Add New Stock',
-              icon: 'Plus',
+              icon: 'plus',
               size: 'large',
               title: 'Add New Stock',
               onClick: this.openStockForm,
