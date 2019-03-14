@@ -40,8 +40,16 @@ const { getItemsExportUrl } = httpActions;
 class ItemsList extends Component {
   static propTypes = {
     loading: PropTypes.bool.isRequired,
-    items: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-      .isRequired,
+    items: PropTypes.arrayOf(
+      PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
+        maxStockAllowed: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        minStockAllowed: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+      })
+    ).isRequired,
     page: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
     onEdit: PropTypes.func.isRequired,

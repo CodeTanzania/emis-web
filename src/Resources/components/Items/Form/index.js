@@ -1,18 +1,18 @@
-import { putItem, Connect, postItem } from '@codetanzania/emis-api-states';
-import { Button, Form, Input, Select, Row, Col } from 'antd';
+import { Connect, postItem, putItem } from '@codetanzania/emis-api-states';
+import { Button, Col, Form, Input, Row, Select } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { notifyError, notifySuccess } from '../../../../util';
-import './styles.css';
 
-const { Option } = Select;
+/* constants */
 const { TextArea } = Input;
+const { Option } = Select;
 
-// eslint-disable-next-line jsdoc/require-returns
 /**
  * @class
- * @name AlertSourcesActionBar
- * @description  Render form for creating a new alert source
+ * @name ItemForm
+ * @description Render Item form for creating and updating
+ * item details
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -21,56 +21,32 @@ class ItemForm extends Component {
   static propTypes = {
     isEditForm: PropTypes.bool.isRequired,
     item: PropTypes.shape({
-      name: PropTypes.string,
-      uom: PropTypes.string,
-      type: PropTypes.string,
-      maxStockAllowed: PropTypes.string,
-      minStockAllowed: PropTypes.string,
-      code: PropTypes.string,
-    }),
+      _id: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      maxStockAllowed: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      minStockAllowed: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+    }).isRequired,
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    posting: PropTypes.bool.isRequired,
     types: PropTypes.arrayOf(PropTypes.string).isRequired,
     uoms: PropTypes.arrayOf(PropTypes.string).isRequired,
+    onCancel: PropTypes.func.isRequired,
+    posting: PropTypes.bool.isRequired,
   };
 
-  static defaultProps = {
-    item: null,
-  };
-
-  // eslint-disable-next-line jsdoc/require-returns
-  /**
-   * @function
-   * @name onChangeColor
-   * @description  call back function to handle color change
-   *
-   * @param {Object} colors colors object
-   * @param {Object} colors.color current color
-   *
-   * @version 0.1.0
-   * @since 0.1.0
-   */
-  onChangeColor = ({ color }) => {
-    const {
-      form: { setFieldsValue },
-    } = this.props;
-    setFieldsValue({ color });
-  };
-
-  // eslint-disable-next-line jsdoc/require-returns
   /**
    * @function
    * @name handleSubmit
-   * @description  call back function to handle submit action
+   * @description Handle submit form action
    *
-   * @param {Object} e event object
+   * @param {Object} event onSubmit event object
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleSubmit = e => {
-    e.preventDefault();
+  handleSubmit = event => {
+    event.preventDefault();
 
     const {
       form: { validateFieldsAndScroll },
@@ -89,7 +65,7 @@ class ItemForm extends Component {
             },
             () => {
               notifyError(
-                'Something occurred while updating Item, please try again!'
+                'Something occurred while updating item, please try again!'
               );
             }
           );
@@ -101,7 +77,7 @@ class ItemForm extends Component {
             },
             () => {
               notifyError(
-                'Something occurred while saving Item, please try again!'
+                'Something occurred while saving item, please try again!'
               );
             }
           );
