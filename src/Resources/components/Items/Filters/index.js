@@ -1,7 +1,7 @@
 import {
-  clearItemFilters,
+  clearFocalPersonFilters,
   Connect,
-  filterItems,
+  filterFocalPeople,
 } from '@codetanzania/emis-api-states';
 import { Button, Checkbox, Col, Form, Row } from 'antd';
 import PropTypes from 'prop-types';
@@ -9,24 +9,22 @@ import React, { Component } from 'react';
 
 /**
  * @class
- * @name ItemsFilters
- * @description Filter modal component for filtering items
+ * @name FocalPeopleFilters
+ * @description Filter modal component for filtering contacts
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class ItemsFilters extends Component {
+class FocalPeopleFilters extends Component {
   static propTypes = {
     filter: PropTypes.objectOf(
       PropTypes.shape({
-        types: PropTypes.arrayOf(PropTypes.string),
-        uoms: PropTypes.arrayOf(PropTypes.string),
+        groups: PropTypes.arrayOf(PropTypes.string),
       })
     ),
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
     onCancel: PropTypes.func.isRequired,
-    types: PropTypes.arrayOf(PropTypes.string).isRequired,
-    uoms: PropTypes.arrayOf(PropTypes.string).isRequired,
+    groups: PropTypes.arrayOf(PropTypes.string).isRequired,
   };
 
   static defaultProps = {
@@ -38,13 +36,13 @@ class ItemsFilters extends Component {
    * @name handleSubmit
    * @description Handle filter action
    *
-   * @param {Object} e event object
+   * @param {Object} event onSubmit event object
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleSubmit = e => {
-    e.preventDefault();
+  handleSubmit = event => {
+    event.preventDefault();
     const {
       form: { validateFields },
       onCancel,
@@ -52,7 +50,7 @@ class ItemsFilters extends Component {
 
     validateFields((error, values) => {
       if (!error) {
-        filterItems(values);
+        filterFocalPeople(values);
         onCancel();
       }
     });
@@ -68,7 +66,7 @@ class ItemsFilters extends Component {
    */
   handleClearFilter = () => {
     const { onCancel } = this.props;
-    clearItemFilters();
+    clearFocalPersonFilters();
     onCancel();
   };
 
@@ -76,8 +74,7 @@ class ItemsFilters extends Component {
     const {
       form: { getFieldDecorator },
       onCancel,
-      types,
-      uoms,
+      groups,
       filter,
     } = this.props;
 
@@ -102,41 +99,23 @@ class ItemsFilters extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
-        {/* start type filters */}
-        <Form.Item {...formItemLayout} label="By Types">
-          {getFieldDecorator('type', {
-            initialValue: filter ? filter.type : [],
+        {/* start contact group filters */}
+        <Form.Item {...formItemLayout} label="By Person Group">
+          {getFieldDecorator('group', {
+            initialValue: filter ? filter.group : [],
           })(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
-                {types.map(type => (
-                  <Col span={6} style={{ margin: '10px 0' }} key={type}>
-                    <Checkbox value={type}>{type}</Checkbox>
+                {groups.map(group => (
+                  <Col span={8} style={{ margin: '10px 0' }} key={group}>
+                    <Checkbox value={group}>{group}</Checkbox>
                   </Col>
                 ))}
               </Row>
             </Checkbox.Group>
           )}
         </Form.Item>
-        {/* end type filters */}
-
-        {/* start unit of measure filters */}
-        <Form.Item {...formItemLayout} label="By Unit of Measurement">
-          {getFieldDecorator('uom', {
-            initialValue: filter ? filter.uom : [],
-          })(
-            <Checkbox.Group style={{ width: '100%' }}>
-              <Row>
-                {uoms.map(uom => (
-                  <Col span={6} style={{ margin: '10px 0' }} key={uom}>
-                    <Checkbox value={uom}>{uom}</Checkbox>
-                  </Col>
-                ))}
-              </Row>
-            </Checkbox.Group>
-          )}
-        </Form.Item>
-        {/* end uom filters */}
+        {/* end contact group filters */}
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
@@ -144,7 +123,7 @@ class ItemsFilters extends Component {
           <Button style={{ marginLeft: 8 }} onClick={this.handleClearFilter}>
             Clear
           </Button>
-          <Button type="primary" htmlType="submit" style={{ marginLeft: 8 }}>
+          <Button style={{ marginLeft: 8 }} type="primary" htmlType="submit">
             Filter
           </Button>
         </Form.Item>
@@ -153,8 +132,8 @@ class ItemsFilters extends Component {
     );
   }
 }
-export default Connect(Form.create()(ItemsFilters), {
-  types: 'items.schema.properties.type.enum',
-  uoms: 'items.schema.properties.uom.enum',
-  filter: 'items.filter',
+
+export default Connect(Form.create()(FocalPeopleFilters), {
+  groups: 'focalPeople.schema.properties.group.enum',
+  filter: 'focalPeople.filter',
 });
