@@ -20,6 +20,7 @@ class StockListItem extends Component {
   static propTypes = {
     itemName: PropTypes.string.isRequired,
     onEdit: PropTypes.func.isRequired,
+    onAdjust: PropTypes.func.isRequired,
     warehouseName: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
     quantity: PropTypes.number.isRequired,
@@ -83,9 +84,10 @@ class StockListItem extends Component {
       color,
       quantity,
       owner,
-      onEdit,
       uom,
       isSelected,
+      onEdit,
+      onAdjust,
     } = this.props;
     const { isHovered } = this.state;
     let sideComponent = null;
@@ -130,6 +132,15 @@ class StockListItem extends Component {
                   name: 'Edit Stock',
                   title: 'Update stock details',
                   onClick: onEdit,
+                }}
+                transfer={{
+                  name: 'Transfer Stock',
+                  title: 'Move stock to another warehouse',
+                }}
+                adjust={{
+                  name: 'Adjust Stock',
+                  title: 'Adjust stock quantity',
+                  onClick: onAdjust,
                 }}
               />
             )}

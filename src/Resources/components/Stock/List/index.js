@@ -45,6 +45,7 @@ class StockList extends Component {
     page: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
     onEdit: PropTypes.func.isRequired,
+    onAdjust: PropTypes.func.isRequired,
   };
 
   state = {
@@ -136,7 +137,7 @@ class StockList extends Component {
   };
 
   render() {
-    const { stocks, loading, page, total, onEdit } = this.props;
+    const { stocks, loading, page, total, onEdit, onAdjust } = this.props;
     const { selectedStocks, selectedPages } = this.state;
     const selectedStocksCount = intersectionBy(selectedStocks, stocks, '_id')
       .length;
@@ -201,6 +202,7 @@ class StockList extends Component {
                   this.handleDeselectStock(stock);
                 }}
                 onEdit={() => onEdit(stock)}
+                onAdjust={() => onAdjust(stock)}
               />
             );
           }}
