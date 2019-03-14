@@ -50,7 +50,7 @@ class Adjustments extends Component {
     showFilters: false,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     getAdjustments();
   }
 
