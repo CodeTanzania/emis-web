@@ -1,6 +1,7 @@
 import { Avatar, Col, Row, Checkbox, Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import truncate from 'lodash/truncate';
 import ListItemActions from '../../../../components/ListItemActions';
 import './styles.css';
 
@@ -145,7 +146,13 @@ class ItemUnitListItem extends Component {
           <Col span={1}>{sideComponent} </Col>
           <Col span={6}>{name}</Col>
           <Col span={6}>{abbreviation}</Col>
-          <Col span={6}>{description}</Col>
+          <Col span={6} title={description}>
+            {description
+              ? truncate(description, {
+                  length: 70,
+                })
+              : 'N/A'}
+          </Col>
           <Col span={4}>
             {isHovered && (
               <ListItemActions

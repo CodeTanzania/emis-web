@@ -1,8 +1,8 @@
 import { httpActions } from '@codetanzania/emis-api-client';
 import {
-  paginateItems,
-  refreshItems,
-  deleteItem,
+  refreshItemUnits,
+  paginateItemUnits,
+  deleteItemUnit,
 } from '@codetanzania/emis-api-states';
 import { List } from 'antd';
 import concat from 'lodash/concat';
@@ -25,7 +25,7 @@ const headerLayout = [
   { span: 6, header: 'Description' },
 ];
 
-const { getItemsExportUrl } = httpActions;
+const { getItemUnitsExportUrl } = httpActions;
 
 /**
  * @class
@@ -153,24 +153,24 @@ class ItemUnitList extends Component {
       <Fragment>
         {/* toolbar */}
         <Toolbar
-          itemName="item unit of measure"
+          itemName="item unit"
           page={page}
           total={total}
           selectedItemsCount={selectedItemUnitsCount}
           onPaginate={nextPage => {
-            paginateItems(nextPage);
+            paginateItemUnits(nextPage);
           }}
-          exportUrl={getItemsExportUrl({
+          exportUrl={getItemUnitsExportUrl({
             filter: { _id: map(selectedItemUnit, '_id') },
           })}
           onRefresh={() =>
-            refreshItems(
+            refreshItemUnits(
               () => {
-                notifySuccess('Item unit of measure refreshed successfully');
+                notifySuccess('Item units refreshed successfully');
               },
               () => {
                 notifyError(
-                  'An Error occurred while refreshing Item unit of measure please contact system administrator'
+                  'An Error occurred while refreshing Item units please contact system administrator'
                 );
               }
             )
@@ -196,7 +196,7 @@ class ItemUnitList extends Component {
               key={itemUnit.id}
               name={itemUnit.value}
               abbreviation={itemUnit.abbreviation}
-              description={itemUnit.description ? itemUnit.description : 'N/A'}
+              description={itemUnit.description}
               color={itemUnit.color}
               isSelected={
                 map(selectedItemUnit, '_id').includes(itemUnit._id) //eslint-disable-line
@@ -209,16 +209,14 @@ class ItemUnitList extends Component {
               }}
               onEdit={() => onEdit(itemUnit)}
               onArchive={() =>
-                deleteItem(
+                deleteItemUnit(
                   itemUnit._id, // eslint-disable-line
                   () => {
-                    notifySuccess(
-                      'Item unit of measure was archived successfully'
-                    );
+                    notifySuccess('Item unit was archived successfully');
                   },
                   () => {
                     notifyError(
-                      `An Error occurred while archiving item unit of measure please contact
+                      `An Error occurred while archiving item unit please contact
                    system administrator`
                     );
                   }
