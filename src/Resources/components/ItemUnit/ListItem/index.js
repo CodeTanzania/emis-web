@@ -19,10 +19,9 @@ class ItemUnitListItem extends Component {
   /* props validation */
   static propTypes = {
     name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
-    maxStockAllowed: PropTypes.number.isRequired,
-    minStockAllowed: PropTypes.number.isRequired,
+    abbreviation: PropTypes.number.isRequired,
     isSelected: PropTypes.bool.isRequired,
     onSelectItem: PropTypes.func.isRequired,
     onDeselectItem: PropTypes.func.isRequired,
@@ -105,10 +104,9 @@ class ItemUnitListItem extends Component {
   render() {
     const {
       name,
-      type,
+      description,
       color,
-      maxStockAllowed,
-      minStockAllowed,
+      abbreviation,
       isSelected,
       onEdit,
     } = this.props;
@@ -146,21 +144,20 @@ class ItemUnitListItem extends Component {
         <Row>
           <Col span={1}>{sideComponent} </Col>
           <Col span={6}>{name}</Col>
-          <Col span={5}>{type}</Col>
-          <Col span={5}>{maxStockAllowed}</Col>
-          <Col span={4}>{minStockAllowed}</Col>
-          <Col span={3}>
+          <Col span={6}>{abbreviation}</Col>
+          <Col span={6}>{description}</Col>
+          <Col span={4}>
             {isHovered && (
               <ListItemActions
                 edit={{
-                  name: 'Edit Item unit of measure',
+                  name: 'Edit Item unit',
                   title: 'Update Item unit of measure Details',
                   onClick: onEdit,
                 }}
                 archive={{
-                  name: 'Archive Item unit of measure',
+                  name: 'Archive Item unit',
                   title:
-                    'Remove Role from the list of active Item unit of measure',
+                    'Remove Item unit from the list of active Item unit of measure',
                   onClick: this.showArchiveConfirm,
                 }}
               />

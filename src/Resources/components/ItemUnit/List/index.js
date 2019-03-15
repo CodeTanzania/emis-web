@@ -21,9 +21,8 @@ import { notifyError, notifySuccess } from '../../../../util';
 /* constants */
 const headerLayout = [
   { span: 6, header: 'Name' },
-  { span: 5, header: 'Type' },
-  { span: 5, header: 'Maximum' },
-  { span: 4, header: 'Minimum' },
+  { span: 6, header: 'Abbreviation' },
+  { span: 6, header: 'Description' },
 ];
 
 const { getItemsExportUrl } = httpActions;
@@ -39,7 +38,7 @@ const { getItemsExportUrl } = httpActions;
 class ItemUnitList extends Component {
   static propTypes = {
     loading: PropTypes.bool.isRequired,
-    unitofmeasures: PropTypes.arrayOf(
+    itemUnits: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string,
       })
@@ -50,7 +49,7 @@ class ItemUnitList extends Component {
   };
 
   state = {
-    selectedUnitOfMeasure: [],
+    selectedItemUnit: [],
     selectedPages: [],
   };
 
@@ -59,15 +58,15 @@ class ItemUnitList extends Component {
    * @name handleSelectItemUnit
    * @description Handle select single  item unit of measure checkbox
    *
-   * @param {Object} unitofmeasure selected  item unit of measure object
+   * @param {Object} itemUnit selected  item unit of measure object
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleSelectItemUnit = unitofmeasure => {
-    const { selectedUnitOfMeasure } = this.state;
+  handleSelectItemUnit = itemUnit => {
+    const { selectedItemUnit } = this.state;
     this.setState({
-      selectedUnitOfMeasure: concat([], selectedUnitOfMeasure, unitofmeasure),
+      selectedItemUnit: concat([], selectedItemUnit, itemUnit),
     });
   };
 
@@ -80,15 +79,12 @@ class ItemUnitList extends Component {
    * @since 0.1.0
    */
   handleSelectAll = () => {
-    const { selectedUnitOfMeasure, selectedPages } = this.state;
-    const { unitofmeasures, page } = this.props;
-    const selectedList = uniqBy(
-      [...selectedUnitOfMeasure, ...unitofmeasures],
-      '_id'
-    );
+    const { selectedItemUnit, selectedPages } = this.state;
+    const { itemUnits, page } = this.props;
+    const selectedList = uniqBy([...selectedItemUnit, ...itemUnits], '_id');
     const pages = uniq([...selectedPages, page]);
     this.setState({
-      selectedUnitOfMeasure: selectedList,
+      selectedItemUnit: selectedList,
       selectedPages: pages,
     });
   };
@@ -98,21 +94,21 @@ class ItemUnitList extends Component {
    * @name handleDeselectItemUnit
    * @description Handle deselect a single  item unit of measure checkbox
    *
-   * @param {Object} unitofmeasure  item unit of measure objected to be removed from
+   * @param {Object} itemUnit  item unit of measure objected to be removed from
    * list of selected adjustments
    * @returns {undefined} undefined
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleDeselectItemUnit = unitofmeasure => {
-    const { selectedUnitOfMeasure } = this.state;
-    const selectedList = [...selectedUnitOfMeasure];
+  handleDeselectItemUnit = itemUnit => {
+    const { selectedItemUnit } = this.state;
+    const selectedList = [...selectedItemUnit];
 
-    remove(selectedList, item => item._id === unitofmeasure._id); // eslint-disable-line
+    remove(selectedList, item => item._id === itemUnit._id); // eslint-disable-line
 
     this.setState({
-      selectedUnitOfMeasure: selectedList,
+      selectedItemUnit: selectedList,
     });
   };
 
@@ -127,29 +123,29 @@ class ItemUnitList extends Component {
    * @since 0.1.0
    */
   handleDeselectAll = () => {
-    const { unitofmeasures, page } = this.props;
-    const { selectedUnitOfMeasure, selectedPages } = this.state;
-    const selectedList = [...selectedUnitOfMeasure];
+    const { itemUnits, page } = this.props;
+    const { selectedItemUnit, selectedPages } = this.state;
+    const selectedList = [...selectedItemUnit];
     const pages = [...selectedPages];
 
     remove(pages, item => item === page);
 
-    unitofmeasures.forEach(unitofmeasure => {
-      remove(selectedList, item => item._id === unitofmeasure._id); // eslint-disable-line
+    itemUnits.forEach(itemUnit => {
+      remove(selectedList, item => item._id === itemUnit._id); // eslint-disable-line
     });
 
     this.setState({
-      selectedUnitOfMeasure: selectedList,
+      selectedItemUnit: selectedList,
       selectedPages: pages,
     });
   };
 
   render() {
-    const { unitofmeasures, loading, total, page, onEdit } = this.props;
-    const { selectedUnitOfMeasure, selectedPages } = this.state;
+    const { itemUnits, loading, total, page, onEdit } = this.props;
+    const { selectedItemUnit, selectedPages } = this.state;
     const selectedItemUnitsCount = intersectionBy(
-      this.state.selectedUnitOfMeasure,
-      unitofmeasures,
+      this.state.selectedItemUnit,
+      itemUnits,
       '_id'
     ).length;
 
@@ -165,7 +161,7 @@ class ItemUnitList extends Component {
             paginateItems(nextPage);
           }}
           exportUrl={getItemsExportUrl({
-            filter: { _id: map(selectedUnitOfMeasure, '_id') },
+            filter: { _id: map(selectedItemUnit, '_id') },
           })}
           onRefresh={() =>
             refreshItems(
@@ -194,28 +190,27 @@ class ItemUnitList extends Component {
         {/* Item Unit Of Measure list */}
         <List
           loading={loading}
-          dataSource={unitofmeasures}
-          renderItem={unitofmeasure => (
+          dataSource={itemUnits}
+          renderItem={itemUnit => (
             <ItemUnitListItem
-              key={unitofmeasure.id}
-              name={unitofmeasure.name}
-              type={unitofmeasure.type}
-              maxStockAllowed={unitofmeasure.maxStockAllowed}
-              minStockAllowed={unitofmeasure.minStockAllowed}
-              color={unitofmeasure.color}
+              key={itemUnit.id}
+              name={itemUnit.value}
+              abbreviation={itemUnit.abbreviation}
+              description={itemUnit.description ? itemUnit.description : 'N/A'}
+              color={itemUnit.color}
               isSelected={
-                map(selectedUnitOfMeasure, '_id').includes(unitofmeasure._id) //eslint-disable-line
+                map(selectedItemUnit, '_id').includes(itemUnit._id) //eslint-disable-line
               }
               onSelectItem={() => {
-                this.handleSelectItemUnit(unitofmeasure);
+                this.handleSelectItemUnit(itemUnit);
               }}
               onDeselectItem={() => {
-                this.handleDeselectItemUnit(unitofmeasure);
+                this.handleDeselectItemUnit(itemUnit);
               }}
-              onEdit={() => onEdit(unitofmeasure)}
+              onEdit={() => onEdit(itemUnit)}
               onArchive={() =>
                 deleteItem(
-                  unitofmeasure._id, // eslint-disable-line
+                  itemUnit._id, // eslint-disable-line
                   () => {
                     notifySuccess(
                       'Item unit of measure was archived successfully'

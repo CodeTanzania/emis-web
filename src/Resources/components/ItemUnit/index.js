@@ -1,17 +1,17 @@
 import {
   Connect,
-  getItems,
   searchItems,
   openItemForm,
   closeItemForm,
   selectItem,
+  getItemUnits,
 } from '@codetanzania/emis-api-states';
 import { Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import Topbar from '../../../components/Topbar';
 import ItemUnitList from './List';
-import ItemUnitOfMeasureForm from './Form';
+import ItemUnitForm from './Form';
 import './styles.css';
 
 /**
@@ -27,10 +27,9 @@ class ItemUnit extends Component {
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     posting: PropTypes.bool.isRequired,
-    unitofmeasures: PropTypes.arrayOf(
-      PropTypes.shape({ name: PropTypes.string })
-    ).isRequired,
-    unitofmeasure: PropTypes.shape({ name: PropTypes.string }),
+    itemUnits: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+      .isRequired,
+    itemUnit: PropTypes.shape({ name: PropTypes.string }),
     total: PropTypes.number.isRequired,
     page: PropTypes.number.isRequired,
     searchQuery: PropTypes.string,
@@ -39,7 +38,7 @@ class ItemUnit extends Component {
 
   static defaultProps = {
     searchQuery: undefined,
-    unitofmeasure: null,
+    itemUnit: null,
   };
 
   state = {
@@ -47,7 +46,7 @@ class ItemUnit extends Component {
   };
 
   componentDidMount() {
-    getItems();
+    getItemUnits();
   }
 
   /**
@@ -122,13 +121,13 @@ class ItemUnit extends Component {
 
   render() {
     const {
-      unitofmeasures,
+      itemUnits,
       loading,
       showForm,
       posting,
       page,
       total,
-      unitofmeasure,
+      itemUnit,
       searchQuery,
     } = this.props;
     const { isEditForm } = this.state;
@@ -138,16 +137,16 @@ class ItemUnit extends Component {
         <Topbar
           search={{
             size: 'large',
-            placeholder: 'Search for Item unit of measure here ...',
+            placeholder: 'Search for Item unit here ...',
             onChange: this.searchItemUnit,
             value: searchQuery,
           }}
           actions={[
             {
-              label: 'New Unit Of Measure',
+              label: 'New Item Unit',
               icon: 'plus',
               size: 'large',
-              title: 'Add New Item Unit Of Measure',
+              title: 'Add New Item Unit',
               onClick: this.openForm,
             },
           ]}
@@ -156,7 +155,7 @@ class ItemUnit extends Component {
         <div className="ItemUnitList">
           {/* list starts */}
           <ItemUnitList
-            unitofmeasures={unitofmeasures}
+            itemUnits={itemUnits}
             loading={loading}
             total={total}
             page={page}
@@ -178,10 +177,10 @@ class ItemUnit extends Component {
             maskClosable={false}
             afterClose={this.handleAfterCloseForm}
           >
-            <ItemUnitOfMeasureForm
+            <ItemUnitForm
               posting={posting}
               isEditForm={isEditForm}
-              unitofmeasure={unitofmeasure}
+              itemUnit={itemUnit}
               onCancel={this.closeForm}
             />
           </Modal>
@@ -193,11 +192,11 @@ class ItemUnit extends Component {
 }
 
 export default Connect(ItemUnit, {
-  unitofmeasures: 'items.list',
-  unitofmeasure: 'items.selected',
-  loading: 'items.loading',
-  page: 'items.page',
-  showForm: 'items.showForm',
-  total: 'items.total',
-  searchQuery: 'items.q',
+  itemUnits: 'itemUnits.list',
+  itemUnit: 'itemUnits.selected',
+  loading: 'itemUnits.loading',
+  page: 'itemUnits.page',
+  showForm: 'itemUnits.showForm',
+  total: 'itemUnits.total',
+  searchQuery: 'itemUnits.q',
 });

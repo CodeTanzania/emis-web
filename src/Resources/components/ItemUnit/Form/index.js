@@ -17,10 +17,10 @@ const { TextArea } = Input;
  * @version 0.1.0
  * @since 0.1.0
  */
-class ItemUnitOfMeasureForm extends Component {
+class ItemUnitForm extends Component {
   static propTypes = {
     isEditForm: PropTypes.bool.isRequired,
-    unitofmeasure: PropTypes.shape({
+    itemUnit: PropTypes.shape({
       name: PropTypes.string,
       type: PropTypes.string,
       maxStockAllowed: PropTypes.string,
@@ -33,7 +33,7 @@ class ItemUnitOfMeasureForm extends Component {
   };
 
   static defaultProps = {
-    unitofmeasure: null,
+    itemUnit: null,
   };
 
   // eslint-disable-next-line jsdoc/require-returns
@@ -71,14 +71,14 @@ class ItemUnitOfMeasureForm extends Component {
 
     const {
       form: { validateFieldsAndScroll },
-      unitofmeasure,
+      itemUnit,
       isEditForm,
     } = this.props;
 
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedItem = Object.assign({}, unitofmeasure, values);
+          const updatedItem = Object.assign({}, itemUnit, values);
           putItem(
             updatedItem,
             () => {
@@ -110,7 +110,7 @@ class ItemUnitOfMeasureForm extends Component {
   render() {
     const {
       isEditForm,
-      unitofmeasure,
+      itemUnit,
       posting,
       onCancel,
       types,
@@ -141,8 +141,8 @@ class ItemUnitOfMeasureForm extends Component {
         {/* name */}
         <Form.Item {...formItemLayout} label="Name">
           {getFieldDecorator('name', {
-            initialValue: isEditForm ? unitofmeasure.name : undefined,
-            rules: [{ required: true, message: 'Item name is required' }],
+            initialValue: isEditForm ? itemUnit.name : undefined,
+            rules: [{ required: true, message: 'Item unit name is required' }],
           })(<Input placeholder="e.g Water" />)}
         </Form.Item>
         {/* end name */}
@@ -150,7 +150,7 @@ class ItemUnitOfMeasureForm extends Component {
         {/* Type */}
         <Form.Item {...formItemLayout} label="Type">
           {getFieldDecorator('type', {
-            initialValue: isEditForm ? unitofmeasure.type : undefined,
+            initialValue: isEditForm ? itemUnit.type : undefined,
             rules: [{ required: true, message: 'Type is required' }],
           })(
             <Select placeholder="e.g Consumable">
@@ -167,7 +167,7 @@ class ItemUnitOfMeasureForm extends Component {
         {/* description */}
         <Form.Item {...formItemLayout} label="Item Summary">
           {getFieldDecorator('description', {
-            initialValue: isEditForm ? unitofmeasure.description : undefined,
+            initialValue: isEditForm ? itemUnit.description : undefined,
             rules: [{ message: 'Add summaries' }],
           })(
             <TextArea placeholder="e.g Addition information of item unit of measure" />
@@ -180,9 +180,7 @@ class ItemUnitOfMeasureForm extends Component {
           <Col span={10}>
             <Form.Item {...formItemLayout} label="Minimum Stock">
               {getFieldDecorator('minStockAllowed', {
-                initialValue: isEditForm
-                  ? unitofmeasure.minStockAllowed
-                  : undefined,
+                initialValue: isEditForm ? itemUnit.minStockAllowed : undefined,
                 rules: [{ message: 'Minimum stock is required' }],
               })(<Input placeholder="e.g 23" type="number" />)}
             </Form.Item>
@@ -190,9 +188,7 @@ class ItemUnitOfMeasureForm extends Component {
           <Col span={10} offset={1}>
             <Form.Item {...formItemLayout} label="Maximum Stock">
               {getFieldDecorator('maxStockAllowed', {
-                initialValue: isEditForm
-                  ? unitofmeasure.maxStockAllowed
-                  : undefined,
+                initialValue: isEditForm ? itemUnit.maxStockAllowed : undefined,
                 rules: [{ message: 'Maximum stock is required' }],
               })(<Input placeholder="e.g 123" type="number" />)}
             </Form.Item>
@@ -218,6 +214,6 @@ class ItemUnitOfMeasureForm extends Component {
   }
 }
 
-export default Connect(Form.create()(ItemUnitOfMeasureForm), {
+export default Connect(Form.create()(ItemUnitForm), {
   types: 'items.schema.properties.type.enum',
 });
