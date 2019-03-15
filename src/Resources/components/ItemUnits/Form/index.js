@@ -1,11 +1,10 @@
-import { putItem, Connect, postItem } from '@codetanzania/emis-api-states';
-import { Button, Form, Input, Select, Row, Col } from 'antd';
+import { putItemUnit, postItemUnit } from '@codetanzania/emis-api-states';
+import { Button, Form, Input } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { notifyError, notifySuccess } from '../../../../util';
 import './styles.css';
 
-const { Option } = Select;
 const { TextArea } = Input;
 
 // eslint-disable-next-line jsdoc/require-returns
@@ -79,22 +78,22 @@ class ItemUnitForm extends Component {
       if (!error) {
         if (isEditForm) {
           const updatedItem = Object.assign({}, itemUnit, values);
-          putItem(
+          putItemUnit(
             updatedItem,
             () => {
-              notifySuccess('Item unit of measure was updated successfully');
+              notifySuccess('Item unit was updated successfully');
             },
             () => {
               notifyError(
-                'Something occurred while updating Item unit of measure, please try again!'
+                'Something occurred while updating Item unit, please try again!'
               );
             }
           );
         } else {
-          postItem(
+          postItemUnit(
             values,
             () => {
-              notifySuccess('Item unit of measure was created successfully');
+              notifySuccess('Item unit was created successfully');
             },
             () => {
               notifyError(
@@ -113,7 +112,6 @@ class ItemUnitForm extends Component {
       itemUnit,
       posting,
       onCancel,
-      types,
       form: { getFieldDecorator },
     } = this.props;
 
@@ -140,32 +138,24 @@ class ItemUnitForm extends Component {
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* name */}
         <Form.Item {...formItemLayout} label="Name">
-          {getFieldDecorator('name', {
-            initialValue: isEditForm ? itemUnit.name : undefined,
+          {getFieldDecorator('value', {
+            initialValue: isEditForm ? itemUnit.value : undefined,
             rules: [{ required: true, message: 'Item unit name is required' }],
-          })(<Input placeholder="e.g Water" />)}
+          })(<Input placeholder="e.g piece" />)}
         </Form.Item>
         {/* end name */}
 
-        {/* Type */}
-        <Form.Item {...formItemLayout} label="Type">
-          {getFieldDecorator('type', {
-            initialValue: isEditForm ? itemUnit.type : undefined,
-            rules: [{ required: true, message: 'Type is required' }],
-          })(
-            <Select placeholder="e.g Consumable">
-              {types.map(type => (
-                <Option key={type} value={type}>
-                  {type}
-                </Option>
-              ))}
-            </Select>
-          )}
+        {/* abbreviation */}
+        <Form.Item {...formItemLayout} label="Abbreviation">
+          {getFieldDecorator('abbreviation', {
+            initialValue: isEditForm ? itemUnit.abbreviation : undefined,
+            rules: [{ required: true, message: 'Abbreviation is required' }],
+          })(<Input placeholder="e.g P" />)}
         </Form.Item>
-        {/* end type */}
+        {/* end abbreviation */}
 
         {/* description */}
-        <Form.Item {...formItemLayout} label="Item Summary">
+        <Form.Item {...formItemLayout} label="Item Unit Summary">
           {getFieldDecorator('description', {
             initialValue: isEditForm ? itemUnit.description : undefined,
             rules: [{ message: 'Add summaries' }],
@@ -174,27 +164,6 @@ class ItemUnitForm extends Component {
           )}
         </Form.Item>
         {/* end description */}
-
-        {/*  minStockAllowed, maxStockAllowed */}
-        <Row>
-          <Col span={10}>
-            <Form.Item {...formItemLayout} label="Minimum Stock">
-              {getFieldDecorator('minStockAllowed', {
-                initialValue: isEditForm ? itemUnit.minStockAllowed : undefined,
-                rules: [{ message: 'Minimum stock is required' }],
-              })(<Input placeholder="e.g 23" type="number" />)}
-            </Form.Item>
-          </Col>
-          <Col span={10} offset={1}>
-            <Form.Item {...formItemLayout} label="Maximum Stock">
-              {getFieldDecorator('maxStockAllowed', {
-                initialValue: isEditForm ? itemUnit.maxStockAllowed : undefined,
-                rules: [{ message: 'Maximum stock is required' }],
-              })(<Input placeholder="e.g 123" type="number" />)}
-            </Form.Item>
-          </Col>
-        </Row>
-        {/* end minStockAllowed & maxStockAllowed */}
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
@@ -214,6 +183,4 @@ class ItemUnitForm extends Component {
   }
 }
 
-export default Connect(Form.create()(ItemUnitForm), {
-  types: 'items.schema.properties.type.enum',
-});
+export default Form.create()(ItemUnitForm);

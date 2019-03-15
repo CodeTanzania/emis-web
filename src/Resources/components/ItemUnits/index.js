@@ -1,8 +1,8 @@
 import {
   Connect,
-  openItemForm,
-  closeItemForm,
-  selectItem,
+  openItemUnitForm,
+  closeItemUnitForm,
+  selectItemUnit,
   getItemUnits,
   searchItemUnits,
 } from '@codetanzania/emis-api-states';
@@ -58,7 +58,7 @@ class ItemUnit extends Component {
    * @since 0.1.0
    */
   openForm = () => {
-    openItemForm();
+    openItemUnitForm();
   };
 
   /**
@@ -72,7 +72,7 @@ class ItemUnit extends Component {
    * @since 0.1.0
    */
   closeForm = () => {
-    closeItemForm();
+    closeItemUnitForm();
     this.setState({ isEditForm: false });
   };
 
@@ -87,9 +87,9 @@ class ItemUnit extends Component {
    * @since 0.1.0
    */
   handleEdit = value => {
-    selectItem(value);
+    selectItemUnit(value);
     this.setState({ isEditForm: true });
-    openItemForm();
+    openItemUnitForm();
   };
 
   /**

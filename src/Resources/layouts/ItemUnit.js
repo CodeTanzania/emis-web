@@ -1,6 +1,6 @@
 import React from 'react';
 // import UIState from '../../components/UIState';
-import ItemUnit from '../components/ItemUnit';
+import ItemUnit from '../components/ItemUnits';
 
 /**
  * @function
