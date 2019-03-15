@@ -1,26 +1,29 @@
+import { httpActions } from '@codetanzania/emis-api-client';
 import {
+  closeItemForm,
   Connect,
   getItems,
-  closeItemForm,
   openItemForm,
-  selectItem,
   searchItems,
+  selectItem,
 } from '@codetanzania/emis-api-states';
-import { Input, Col, Row, Button, Modal } from 'antd';
+import { Modal } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import ItemsActionBar from './ActionBar';
-import ItemsList from './List';
-import ItemsFilters from './Filters';
+import React, { Component, Fragment } from 'react';
+import NotificationForm from '../../../components/NotificationForm';
+import Topbar from '../../../components/Topbar';
+import ItemFilters from './Filters';
 import ItemForm from './Form';
+import ItemsList from './List';
 import './styles.css';
 
-const { Search } = Input;
+/* constants */
+const { getItems: getItemsFromAPI } = httpActions;
 
 /**
  * @class
  * @name Items
- * @description Render item list which have search box and actions
+ * @description Render item list which have search box, actions and a list
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -29,27 +32,34 @@ class Items extends Component {
   state = {
     showFilters: false,
     isEditForm: false,
+    showNotificationForm: false,
+    selectedItems: [],
+    notificationBody: undefined,
   };
 
   static propTypes = {
     loading: PropTypes.bool.isRequired,
+    posting: PropTypes.bool.isRequired,
     items: PropTypes.arrayOf(
       PropTypes.shape({
-        name: PropTypes.string,
-        type: PropTypes.string,
-        description: PropTypes.string,
-        color: PropTypes.string,
+        _id: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
+        maxStockAllowed: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        minStockAllowed: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
       })
     ).isRequired,
     item: PropTypes.shape({ name: PropTypes.string }),
-    posting: PropTypes.bool.isRequired,
-    showForm: PropTypes.bool.isRequired,
-    total: PropTypes.number.isRequired,
     page: PropTypes.number.isRequired,
+    showForm: PropTypes.bool.isRequired,
+    searchQuery: PropTypes.string,
+    total: PropTypes.number.isRequired,
   };
 
   static defaultProps = {
     item: null,
+    searchQuery: undefined,
   };
 
   componentDidMount() {
@@ -61,8 +71,6 @@ class Items extends Component {
    * @name openFiltersModal
    * @description open filters modal by setting it's visible property
    * to false via state
-   *
-   * @returns {undefined} - Nothing is returned
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -77,8 +85,6 @@ class Items extends Component {
    * @description Close filters modal by setting it's visible property
    * to false via state
    *
-   * @returns {undefined} - Nothing is returned
-   *
    * @version 0.1.0
    * @since 0.1.0
    */
@@ -88,31 +94,41 @@ class Items extends Component {
 
   /**
    * @function
-   * @name openForm
+   * @name openItemForm
    * @description Open item form
-   *
-   * @returns {undefined} - Nothing is returned
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  openForm = () => {
+  openItemForm = () => {
     openItemForm();
   };
 
   /**
    * @function
-   * @name closeForm
+   * @name openItemForm
    * @description close item form
-   *
-   * @returns {undefined} - Nothing is returned
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  closeForm = () => {
+  closeItemForm = () => {
     closeItemForm();
     this.setState({ isEditForm: false });
+  };
+
+  /**
+   * @function
+   * @name searchItems
+   * @description Search Items List based on supplied filter word
+   *
+   * @param {Object} event - Event instance
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  searchItems = event => {
+    searchItems(event.target.value);
   };
 
   /**
@@ -133,8 +149,75 @@ class Items extends Component {
 
   /**
    * @function
+   * @name handleShare
+   * @description Handle share single item action
+   *
+   * @param {Object} item item to be shared
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleShare = item => {
+    const message = `${item.name}\nMobile: ${item.mobile}\nEmail: ${
+      item.email
+    }`;
+
+    this.setState({ notificationBody: message, showNotificationForm: true });
+  };
+
+  /**
+   * @function
+   * @name handleBulkShare
+   * @description Handle share multiple focal People
+   *
+   * @param {Object[]} items focal People list to be shared
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleBulkShare = items => {
+    const itemList = items.map(
+      item => `${item.name}\nMobile: ${item.mobile}\nEmail: ${item.email}`
+    );
+
+    const message = itemList.join('\n\n\n');
+
+    this.setState({ notificationBody: message, showNotificationForm: true });
+  };
+
+  /**
+   * @function
+   * @name openNotificationForm
+   * @description Handle on notify items
+   *
+   * @param {Object[]} items List of items selected to be notified
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openNotificationForm = items => {
+    this.setState({
+      selectedItems: items,
+      showNotificationForm: true,
+    });
+  };
+
+  /**
+   * @function
+   * @name closeNotificationForm
+   * @description Handle on notify items
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeNotificationForm = () => {
+    this.setState({ showNotificationForm: false });
+  };
+
+  /**
+   * @function
    * @name handleAfterCloseForm
-   * @description Handle after close actions
+   * @description Perform post close form cleanups
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -143,89 +226,140 @@ class Items extends Component {
     this.setState({ isEditForm: false });
   };
 
+  /**
+   * @function
+   * @name handleAfterCloseNotificationForm
+   * @description Perform post close notification form cleanups
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleAfterCloseNotificationForm = () => {
+    this.setState({ notificationBody: undefined });
+  };
+
   render() {
-    const { items, loading, total, page, showForm, posting, item } = this.props;
-    const { showFilters, isEditForm } = this.state;
+    const {
+      items,
+      item,
+      loading,
+      posting,
+      page,
+      showForm,
+      searchQuery,
+      total,
+    } = this.props;
+    const {
+      showFilters,
+      isEditForm,
+      showNotificationForm,
+      selectedItems,
+      notificationBody,
+    } = this.state;
     return (
-      <div className="Items">
-        <Row>
-          <Col span={12}>
-            {/* search input component */}
-            <Search
-              size="large"
-              placeholder="Search for items here ..."
-              onChange={({ target: { value } }) => searchItems({ q: value })}
-            />
-            {/* end search input component */}
-          </Col>
-
-          {/* primary actions */}
-          <Col span={3} offset={9}>
-            <Button
-              type="primary"
-              icon="plus"
-              size="large"
-              title="Add New Item"
-              onClick={this.openForm}
-            >
-              New Item
-            </Button>
-          </Col>
-          {/* end primary actions */}
-        </Row>
-
-        {/* list action bar */}
-        <ItemsActionBar
-          total={total}
-          page={page}
-          onFilter={this.openFiltersModal}
+      <Fragment>
+        {/* Topbar */}
+        <Topbar
+          search={{
+            size: 'large',
+            placeholder: 'Search for items here ...',
+            onChange: this.searchItems,
+            value: searchQuery,
+          }}
+          actions={[
+            {
+              label: 'New Item',
+              icon: 'plus',
+              size: 'large',
+              title: 'Add New Item',
+              onClick: this.openItemForm,
+            },
+          ]}
         />
-        {/* end list action bar */}
+        {/* end Topbar */}
 
-        {/* list starts */}
-        <ItemsList items={items} loading={loading} onEdit={this.handleEdit} />
-        {/* end list */}
-
-        <Modal
-          title="Filter Items"
-          visible={showFilters}
-          onCancel={this.closeFiltersModal}
-          footer={null}
-          destroyOnClose
-          maskClosable={false}
-        >
-          <ItemsFilters onCancel={this.closeFiltersModal} />
-        </Modal>
-
-        {/* create/edit form modal */}
-        <Modal
-          title={isEditForm ? 'Edit Item' : 'Add New Item'}
-          visible={showForm}
-          footer={null}
-          onCancel={this.closeForm}
-          destroyOnClose
-          maskClosable={false}
-          afterClose={this.handleAfterCloseForm}
-        >
-          <ItemForm
-            posting={posting}
-            isEditForm={isEditForm}
-            item={item}
-            onCancel={this.closeForm}
+        <div className="ItemsList">
+          {/* list starts */}
+          <ItemsList
+            total={total}
+            page={page}
+            items={items}
+            loading={loading}
+            onEdit={this.handleEdit}
+            onFilter={this.openFiltersModal}
+            onNotify={this.openNotificationForm}
+            onShare={this.handleShare}
+            onBulkShare={this.handleBulkShare}
           />
-        </Modal>
-        {/* end create/edit form modal */}
-      </div>
+          {/* end list */}
+
+          {/* filter modal */}
+          <Modal
+            title="Filter Items"
+            visible={showFilters}
+            onCancel={this.closeFiltersModal}
+            footer={null}
+            destroyOnClose
+            maskClosable={false}
+            width="50%"
+          >
+            <ItemFilters onCancel={this.closeFiltersModal} />
+          </Modal>
+          {/* end filter modal */}
+
+          {/* Notification Modal modal */}
+          <Modal
+            title="Notify Items"
+            visible={showNotificationForm}
+            onCancel={this.closeNotificationForm}
+            footer={null}
+            destroyOnClose
+            maskClosable={false}
+            width="40%"
+            afterClose={this.handleAfterCloseNotificationForm}
+          >
+            <NotificationForm
+              recipients={selectedItems}
+              onSearchRecipients={getItemsFromAPI}
+              body={notificationBody}
+              onCancel={this.closeNotificationForm}
+              onNotify={() => {}}
+            />
+          </Modal>
+          {/* end Notification modal */}
+
+          {/* create/edit form modal */}
+          <Modal
+            title={isEditForm ? 'Edit Item' : 'Add New Item'}
+            visible={showForm}
+            width="50%"
+            footer={null}
+            onCancel={this.closeItemForm}
+            destroyOnClose
+            maskClosable={false}
+            afterClose={this.handleAfterCloseForm}
+          >
+            <ItemForm
+              posting={posting}
+              isEditForm={isEditForm}
+              item={item}
+              onCancel={this.closeItemForm}
+            />
+          </Modal>
+          {/* end create/edit form modal */}
+        </div>
+      </Fragment>
     );
   }
 }
 
 export default Connect(Items, {
   items: 'items.list',
-  loading: 'items.loading',
   item: 'items.selected',
-  page: 'items.page',
-  total: 'items.total',
+  loading: 'items.loading',
   posting: 'items.posting',
+  page: 'items.page',
   showForm: 'items.showForm',
+  total: 'items.total',
+  searchQuery: 'items.q',
 });
