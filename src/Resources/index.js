@@ -10,6 +10,7 @@ import NavigationMenu from '../components/NavigationMenu';
 const routes = [
   { name: 'Adjustments', path: '/adjustments', icon: adjustmentsIcon },
   { name: 'Items', path: '/items', icon: itemsIcon },
+  { name: 'Item Categories', path: '/item-categories', icon: itemsIcon },
   { name: 'Stock', path: '/stock', icon: stockIcon },
   {
     name: 'Utilization/Consumptions',
