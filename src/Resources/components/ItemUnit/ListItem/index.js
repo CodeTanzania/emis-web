@@ -8,14 +8,14 @@ const { confirm } = Modal;
 
 /**
  * @class
- * @name ItemUnitOfMeasureListItem
+ * @name ItemUnitListItem
  * @description Single item unit of measure list item component.
  * Render single item unit of measure list item details
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class ItemUnitOfMeasureListItem extends Component {
+class ItemUnitListItem extends Component {
   /* props validation */
   static propTypes = {
     name: PropTypes.string.isRequired,
@@ -139,7 +139,7 @@ class ItemUnitOfMeasureListItem extends Component {
 
     return (
       <div
-        className="ItemUnitOfMeasureListItem"
+        className="ItemUnitListItem"
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
@@ -172,4 +172,4 @@ class ItemUnitOfMeasureListItem extends Component {
   }
 }
 
-export default ItemUnitOfMeasureListItem;
+export default ItemUnitListItem;

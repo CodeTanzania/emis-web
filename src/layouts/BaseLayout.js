@@ -61,7 +61,8 @@ import StakeholdersNotificationsLayout from '../Stakeholders/layouts/Notificatio
 import StakeholdersRolesLayout from '../Stakeholders/layouts/Roles';
 import HeaderNavMenu from './components/HeaderNavMenu';
 import PageNotFound from '../components/UIState/PageNotFound';
-import ItemUnitOfMeasure from '../Resources/components/ItemUnitofmeasure';
+import ResourcesItemUnitLayout from '../Resources/layouts/ItemUnit';
+
 import './styles.css';
 
 /* constants */
@@ -203,8 +204,8 @@ const breadcrumbNameMap = {
     name: 'Utilizations',
     title: 'Resource utilizations',
   },
-  '/resources/unitofmeasure': {
-    name: 'Item Unit Of Measure',
+  '/resources/itemunit': {
+    name: 'Item Unit',
     title: 'List of available Item unit of measure',
   },
   /* Stakeholders Routes */
@@ -495,8 +496,8 @@ const BaseLayout = withRouter(props => {
           />
           <Route
             exact
-            path="/resources/unitofmeasure"
-            component={ItemUnitOfMeasure}
+            path="/resources/itemunit"
+            component={ResourcesItemUnitLayout}
           />
           <Route
             exact

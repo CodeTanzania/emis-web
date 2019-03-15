@@ -13,7 +13,7 @@ import uniqBy from 'lodash/uniqBy';
 import intersectionBy from 'lodash/intersectionBy';
 import PropTypes from 'prop-types';
 import React, { Fragment, Component } from 'react';
-import ItemUnitOfMeasureListItem from '../ListItem';
+import ItemUnitListItem from '../ListItem';
 import ListHeader from '../../../../components/ListHeader';
 import Toolbar from '../../../../components/Toolbar';
 import { notifyError, notifySuccess } from '../../../../util';
@@ -30,13 +30,13 @@ const { getItemsExportUrl } = httpActions;
 
 /**
  * @class
- * @name UnitOfMeasureList
+ * @name ItemUnitList
  * @description Render item unit of measure list which have search box and actions
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class UnitOfMeasureList extends Component {
+class ItemUnitList extends Component {
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     unitofmeasures: PropTypes.arrayOf(
@@ -56,7 +56,7 @@ class UnitOfMeasureList extends Component {
 
   /**
    * @function
-   * @name handleSelectItemUnitOfMeasure
+   * @name handleSelectItemUnit
    * @description Handle select single  item unit of measure checkbox
    *
    * @param {Object} unitofmeasure selected  item unit of measure object
@@ -64,7 +64,7 @@ class UnitOfMeasureList extends Component {
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleSelectItemUnitOfMeasure = unitofmeasure => {
+  handleSelectItemUnit = unitofmeasure => {
     const { selectedUnitOfMeasure } = this.state;
     this.setState({
       selectedUnitOfMeasure: concat([], selectedUnitOfMeasure, unitofmeasure),
@@ -95,7 +95,7 @@ class UnitOfMeasureList extends Component {
 
   /**
    * @function
-   * @name handleDeselectItemUnitOfMeasure
+   * @name handleDeselectItemUnit
    * @description Handle deselect a single  item unit of measure checkbox
    *
    * @param {Object} unitofmeasure  item unit of measure objected to be removed from
@@ -105,7 +105,7 @@ class UnitOfMeasureList extends Component {
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleDeselectItemUnitOfMeasure = unitofmeasure => {
+  handleDeselectItemUnit = unitofmeasure => {
     const { selectedUnitOfMeasure } = this.state;
     const selectedList = [...selectedUnitOfMeasure];
 
@@ -196,7 +196,7 @@ class UnitOfMeasureList extends Component {
           loading={loading}
           dataSource={unitofmeasures}
           renderItem={unitofmeasure => (
-            <ItemUnitOfMeasureListItem
+            <ItemUnitListItem
               key={unitofmeasure.id}
               name={unitofmeasure.name}
               type={unitofmeasure.type}
@@ -207,10 +207,10 @@ class UnitOfMeasureList extends Component {
                 map(selectedUnitOfMeasure, '_id').includes(unitofmeasure._id) //eslint-disable-line
               }
               onSelectItem={() => {
-                this.handleSelectItemUnitOfMeasure(unitofmeasure);
+                this.handleSelectItemUnit(unitofmeasure);
               }}
               onDeselectItem={() => {
-                this.handleDeselectItemUnitOfMeasure(unitofmeasure);
+                this.handleDeselectItemUnit(unitofmeasure);
               }}
               onEdit={() => onEdit(unitofmeasure)}
               onArchive={() =>
@@ -238,4 +238,4 @@ class UnitOfMeasureList extends Component {
   }
 }
 
-export default UnitOfMeasureList;
+export default ItemUnitList;

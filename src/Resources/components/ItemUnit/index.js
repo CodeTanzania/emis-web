@@ -10,20 +10,20 @@ import { Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import Topbar from '../../../components/Topbar';
-import UnitOfMeasureList from './List';
+import ItemUnitList from './List';
 import ItemUnitOfMeasureForm from './Form';
 import './styles.css';
 
 /**
  * @class
- * @name ItemUnitOfMeasure
+ * @name ItemUnit
  * @description Render Item unit of measure module which has search box,
  *  actions and list of Item unit of measures
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class ItemUnitOfMeasure extends Component {
+class ItemUnit extends Component {
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     posting: PropTypes.bool.isRequired,
@@ -116,7 +116,7 @@ class ItemUnitOfMeasure extends Component {
    * @version 0.1.0
    * @since 0.1.0
    */
-  searchItemUnitOfMeasure = event => {
+  searchItemUnit = event => {
     searchItems(event.target.value);
   };
 
@@ -139,7 +139,7 @@ class ItemUnitOfMeasure extends Component {
           search={{
             size: 'large',
             placeholder: 'Search for Item unit of measure here ...',
-            onChange: this.searchItemUnitOfMeasure,
+            onChange: this.searchItemUnit,
             value: searchQuery,
           }}
           actions={[
@@ -153,9 +153,9 @@ class ItemUnitOfMeasure extends Component {
           ]}
         />
         {/* end Topbar */}
-        <div className="UnitOfMeasureList">
+        <div className="ItemUnitList">
           {/* list starts */}
-          <UnitOfMeasureList
+          <ItemUnitList
             unitofmeasures={unitofmeasures}
             loading={loading}
             total={total}
@@ -192,7 +192,7 @@ class ItemUnitOfMeasure extends Component {
   }
 }
 
-export default Connect(ItemUnitOfMeasure, {
+export default Connect(ItemUnit, {
   unitofmeasures: 'items.list',
   unitofmeasure: 'items.selected',
   loading: 'items.loading',
