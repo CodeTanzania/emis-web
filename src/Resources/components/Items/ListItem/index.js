@@ -1,37 +1,46 @@
-import { Icon, Avatar, Col, Row, Checkbox } from 'antd';
+import { Avatar, Checkbox, Col, Modal, Row } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import randomColor from 'randomcolor';
+import React, { Component } from 'react';
+import ListItemActions from '../../../../components/ListItemActions';
 import './styles.css';
+
+/* constants */
+const { confirm } = Modal;
 
 /**
  * @class
- * @name ItemsListItem
- * @description Single  list item component.
+ * @name ListItem
+ * @description Single list item component.
  * Render single item details
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class ItemsListItem extends Component {
-  /* props validation */
-  static propTypes = {
-    name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    color: PropTypes.string.isRequired,
-    maxStockAllowed: PropTypes.number.isRequired,
-    minStockAllowed: PropTypes.number.isRequired,
-    onEdit: PropTypes.func.isRequired,
-  };
-
+class ListItem extends Component {
   state = {
     isHovered: false,
+  };
+
+  static propTypes = {
+    abbreviation: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    maxStockAllowed: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    minStockAllowed: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    onArchive: PropTypes.func.isRequired,
+    onEdit: PropTypes.func.isRequired,
+    isSelected: PropTypes.bool.isRequired,
+    onSelectItem: PropTypes.func.isRequired,
+    onDeselectItem: PropTypes.func.isRequired,
+    onShare: PropTypes.func.isRequired,
   };
 
   /**
    * @function
    * @name handleMouseEnter
-   * @description show item actions on hover
+   * @description Handle on MouseEnter ListItem event
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -42,8 +51,8 @@ class ItemsListItem extends Component {
 
   /**
    * @function
-   * @name handleMouseLeave
-   * @description hide item actions on hover
+   * @name handleMouseEnter
+   * @description Handle on MouseLeave ListItem event
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -52,53 +61,119 @@ class ItemsListItem extends Component {
     this.setState({ isHovered: false });
   };
 
+  /**
+   * @function
+   * @name handleToggleSelect
+   * @description Handle Toggling List Item checkbox
+   *
+   * @param {Object} event - Event object
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleToggleSelect = event => {
+    const { isSelected } = this.state;
+    const { onSelectItem, onDeselectItem } = this.props;
+
+    this.setState({ isSelected: !isSelected });
+    if (event.target.checked) {
+      onSelectItem();
+    } else {
+      onDeselectItem();
+    }
+  };
+
+  /**
+   * @function
+   * @name showArchiveConfirm
+   * @description show confirm modal before archiving a item
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  showArchiveConfirm = () => {
+    const { name, onArchive } = this.props;
+    confirm({
+      title: `Are you sure you want to archive ${name} ?`,
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        onArchive();
+      },
+    });
+  };
+
   render() {
     const {
-      name,
+      abbreviation,
       type,
-      description,
-      color,
-      maxStockAllowed,
+      name,
       minStockAllowed,
+      maxStockAllowed,
+      description,
       onEdit,
+      onShare,
     } = this.props;
     const { isHovered } = this.state;
+    const { isSelected } = this.props;
+    const avatarBackground = randomColor();
+    let sideComponent = null;
+
+    if (isSelected) {
+      sideComponent = (
+        <Checkbox
+          className="Checkbox"
+          onChange={this.handleToggleSelect}
+          checked={isSelected}
+        />
+      );
+    } else {
+      sideComponent = isHovered ? (
+        <Checkbox
+          className="Checkbox"
+          onChange={this.handleToggleSelect}
+          checked={isSelected}
+        />
+      ) : (
+        <Avatar style={{ backgroundColor: avatarBackground }}>
+          {abbreviation}
+        </Avatar>
+      );
+    }
+
     return (
       <div
-        className="ItemsListItem"
+        className="ListItem"
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
         <Row>
-          <Col span={1}>
-            {isHovered ? (
-              <Checkbox className="Checkbox" />
-            ) : (
-              <Avatar style={{ backgroundColor: color }}>
-                {name.slice(0, 1)}
-              </Avatar>
-            )}
-          </Col>
+          <Col span={1}>{sideComponent}</Col>
           <Col span={6}>{name}</Col>
           <Col span={3}>{type}</Col>
           <Col span={2}>{maxStockAllowed}</Col>
           <Col span={2}>{minStockAllowed}</Col>
           <Col span={7}>{description}</Col>
-          <Col span={3}>
+          <Col span={1}>
             {isHovered && (
-              <Fragment>
-                <Icon
-                  type="edit"
-                  title="Update item"
-                  className="actionIcon"
-                  onClick={onEdit}
-                />
-                <Icon
-                  type="database"
-                  title="Archive item"
-                  className="actionIcon"
-                />
-              </Fragment>
+              <ListItemActions
+                edit={{
+                  name: 'Edit Item',
+                  title: 'Update Item Details',
+                  onClick: onEdit,
+                }}
+                share={{
+                  name: 'Share Item',
+                  title: 'Share Item details with others',
+                  onClick: onShare,
+                }}
+                archive={{
+                  name: 'Archive Item',
+                  title: 'Remove Item from list of active items',
+                  onClick: this.showArchiveConfirm,
+                }}
+              />
             )}
           </Col>
         </Row>
@@ -107,4 +182,4 @@ class ItemsListItem extends Component {
   }
 }
 
-export default ItemsListItem;
+export default ListItem;
