@@ -1,10 +1,10 @@
 import {
   Connect,
-  searchItems,
   openItemForm,
   closeItemForm,
   selectItem,
   getItemUnits,
+  searchItemUnits,
 } from '@codetanzania/emis-api-states';
 import { Modal } from 'antd';
 import PropTypes from 'prop-types';
@@ -116,7 +116,7 @@ class ItemUnit extends Component {
    * @since 0.1.0
    */
   searchItemUnit = event => {
-    searchItems(event.target.value);
+    searchItemUnits(event.target.value);
   };
 
   render() {
