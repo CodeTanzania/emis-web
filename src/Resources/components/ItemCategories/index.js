@@ -1,56 +1,58 @@
 import { httpActions } from '@codetanzania/emis-api-client';
 import {
-  closeItemForm,
+  closeItemCategoryForm,
   Connect,
-  getItems,
-  openItemForm,
-  searchItems,
-  selectItem,
+  getItemCategories,
+  openItemCategoryForm,
+  searchItemCategories,
+  selectItemCategory,
 } from '@codetanzania/emis-api-states';
 import { Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import NotificationForm from '../../../components/NotificationForm';
 import Topbar from '../../../components/Topbar';
-import ItemFilters from './Filters';
 import ItemForm from './Form';
-import ItemsList from './List';
+import ItemCategoriesList from './List';
 import './styles.css';
 
 /* constants */
-const { getItems: getItemsFromAPI } = httpActions;
+const { getItemCategories: getItemCategoriesFromAPI } = httpActions;
 
 /**
  * @class
- * @name Items
- * @description Render item list which have search box, actions and a list
+ * @name ItemCategories
+ * @description Render itemCategory list which have search box, actions and a list
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class Items extends Component {
+class ItemCategories extends Component {
   state = {
     showFilters: false,
     isEditForm: false,
     showNotificationForm: false,
-    selectedItems: [],
+    selectedItemCategories: [],
     notificationBody: undefined,
   };
 
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     posting: PropTypes.bool.isRequired,
-    items: PropTypes.arrayOf(
+    itemCategories: PropTypes.arrayOf(
       PropTypes.shape({
         _id: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        maxStockAllowed: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
-        minStockAllowed: PropTypes.string.isRequired,
+        color: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired,
       })
     ).isRequired,
-    item: PropTypes.shape({ name: PropTypes.string }),
+    itemCategory: PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      color: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+    }),
     page: PropTypes.number.isRequired,
     showForm: PropTypes.bool.isRequired,
     searchQuery: PropTypes.string,
@@ -58,12 +60,12 @@ class Items extends Component {
   };
 
   static defaultProps = {
-    item: null,
+    itemCategory: null,
     searchQuery: undefined,
   };
 
   componentDidMount() {
-    getItems();
+    getItemCategories();
   }
 
   /**
@@ -94,73 +96,73 @@ class Items extends Component {
 
   /**
    * @function
-   * @name openItemForm
-   * @description Open item form
+   * @name openItemCategoryForm
+   * @description Open itemCategory form
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  openItemForm = () => {
-    openItemForm();
+  openItemCategoryForm = () => {
+    openItemCategoryForm();
   };
 
   /**
    * @function
-   * @name openItemForm
-   * @description close item form
+   * @name openItemCategoryForm
+   * @description close itemCategory form
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  closeItemForm = () => {
-    closeItemForm();
+  closeItemCategoryForm = () => {
+    closeItemCategoryForm();
     this.setState({ isEditForm: false });
   };
 
   /**
    * @function
-   * @name searchItems
-   * @description Search Items List based on supplied filter word
+   * @name searchItemCategories
+   * @description Search ItemCategories List based on supplied filter word
    *
    * @param {Object} event - Event instance
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  searchItems = event => {
-    searchItems(event.target.value);
+  searchItemCategories = event => {
+    searchItemCategories(event.target.value);
   };
 
   /**
    * @function
    * @name handleEdit
-   * @description Handle on Edit action for list item
+   * @description Handle on Edit action for itemCategory list
    *
-   * @param {Object} item item to be edited
+   * @param {Object} itemCategory itemCategory to be edited
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleEdit = item => {
-    selectItem(item);
+  handleEdit = itemCategory => {
+    selectItemCategory(itemCategory);
     this.setState({ isEditForm: true });
-    openItemForm();
+    openItemCategoryForm();
   };
 
   /**
    * @function
    * @name handleShare
-   * @description Handle share single item action
+   * @description Handle share single itemCategory action
    *
-   * @param {Object} item item to be shared
+   * @param {Object} itemCategory itemCategory to be shared
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleShare = item => {
-    const message = `${item.name}\nMobile: ${item.mobile}\nEmail: ${
-      item.email
-    }`;
+  handleShare = itemCategory => {
+    const message = `${itemCategory.name}\nMobile: ${
+      itemCategory.mobile
+    }\nEmail: ${itemCategory.email}`;
 
     this.setState({ notificationBody: message, showNotificationForm: true });
   };
@@ -168,16 +170,19 @@ class Items extends Component {
   /**
    * @function
    * @name handleBulkShare
-   * @description Handle share multiple focal People
+   * @description Handle share multiple itemCategories
    *
-   * @param {Object[]} items focal People list to be shared
+   * @param {Object[]} itemCategories itemCategories list to be shared
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleBulkShare = items => {
-    const itemList = items.map(
-      item => `${item.name}\nMobile: ${item.mobile}\nEmail: ${item.email}`
+  handleBulkShare = itemCategories => {
+    const itemList = itemCategories.map(
+      itemCategory =>
+        `${itemCategory.name}\nMobile: ${itemCategory.mobile}\nEmail: ${
+          itemCategory.email
+        }`
     );
 
     const message = itemList.join('\n\n\n');
@@ -188,16 +193,16 @@ class Items extends Component {
   /**
    * @function
    * @name openNotificationForm
-   * @description Handle on notify items
+   * @description Handle on notify itemCategories
    *
-   * @param {Object[]} items List of items selected to be notified
+   * @param {Object[]} itemCategories List of itemCategories selected to be notified
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  openNotificationForm = items => {
+  openNotificationForm = itemCategories => {
     this.setState({
-      selectedItems: items,
+      selectedItemCategories: itemCategories,
       showNotificationForm: true,
     });
   };
@@ -205,7 +210,7 @@ class Items extends Component {
   /**
    * @function
    * @name closeNotificationForm
-   * @description Handle on notify items
+   * @description Handle on notify itemCategories
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -240,8 +245,8 @@ class Items extends Component {
 
   render() {
     const {
-      items,
-      item,
+      itemCategories,
+      itemCategory,
       loading,
       posting,
       page,
@@ -253,7 +258,7 @@ class Items extends Component {
       showFilters,
       isEditForm,
       showNotificationForm,
-      selectedItems,
+      selectedItemCategories,
       notificationBody,
     } = this.state;
     return (
@@ -262,31 +267,30 @@ class Items extends Component {
         <Topbar
           search={{
             size: 'large',
-            placeholder: 'Search for items here ...',
-            onChange: this.searchItems,
+            placeholder: 'Search for Item Categories here ...',
+            onChange: this.searchItemCategories,
             value: searchQuery,
           }}
           actions={[
             {
-              label: 'New Item',
+              label: 'New Item Category',
               icon: 'plus',
               size: 'large',
-              title: 'Add New Item',
-              onClick: this.openItemForm,
+              title: 'Add New Item Category',
+              onClick: this.openItemCategoryForm,
             },
           ]}
         />
         {/* end Topbar */}
 
-        <div className="ItemsList">
+        <div className="ItemCategories">
           {/* list starts */}
-          <ItemsList
+          <ItemCategoriesList
             total={total}
             page={page}
-            items={items}
+            itemCategories={itemCategories}
             loading={loading}
             onEdit={this.handleEdit}
-            onFilter={this.openFiltersModal}
             onNotify={this.openNotificationForm}
             onShare={this.handleShare}
             onBulkShare={this.handleBulkShare}
@@ -295,21 +299,19 @@ class Items extends Component {
 
           {/* filter modal */}
           <Modal
-            title="Filter Items"
+            title="Filter Item Categories"
             visible={showFilters}
             onCancel={this.closeFiltersModal}
             footer={null}
             destroyOnClose
             maskClosable={false}
             width="50%"
-          >
-            <ItemFilters onCancel={this.closeFiltersModal} />
-          </Modal>
+          />
           {/* end filter modal */}
 
           {/* Notification Modal modal */}
           <Modal
-            title="Notify Items"
+            title="Notify Item Categories"
             visible={showNotificationForm}
             onCancel={this.closeNotificationForm}
             footer={null}
@@ -319,8 +321,8 @@ class Items extends Component {
             afterClose={this.handleAfterCloseNotificationForm}
           >
             <NotificationForm
-              recipients={selectedItems}
-              onSearchRecipients={getItemsFromAPI}
+              recipients={selectedItemCategories}
+              onSearchRecipients={getItemCategoriesFromAPI}
               body={notificationBody}
               onCancel={this.closeNotificationForm}
               onNotify={() => {}}
@@ -330,11 +332,11 @@ class Items extends Component {
 
           {/* create/edit form modal */}
           <Modal
-            title={isEditForm ? 'Edit Item' : 'Add New Item'}
+            title={isEditForm ? 'Edit Item Category' : 'Add New Item Category'}
             visible={showForm}
             width="50%"
             footer={null}
-            onCancel={this.closeItemForm}
+            onCancel={this.closeItemCategoryForm}
             destroyOnClose
             maskClosable={false}
             afterClose={this.handleAfterCloseForm}
@@ -342,8 +344,8 @@ class Items extends Component {
             <ItemForm
               posting={posting}
               isEditForm={isEditForm}
-              item={item}
-              onCancel={this.closeItemForm}
+              itemCategory={itemCategory}
+              onCancel={this.closeItemCategoryForm}
             />
           </Modal>
           {/* end create/edit form modal */}
@@ -353,13 +355,13 @@ class Items extends Component {
   }
 }
 
-export default Connect(Items, {
-  items: 'items.list',
-  item: 'items.selected',
-  loading: 'items.loading',
-  posting: 'items.posting',
-  page: 'items.page',
-  showForm: 'items.showForm',
-  total: 'items.total',
-  searchQuery: 'items.q',
+export default Connect(ItemCategories, {
+  itemCategories: 'itemCategories.list',
+  itemCategory: 'itemCategories.selected',
+  loading: 'itemCategories.loading',
+  posting: 'itemCategories.posting',
+  page: 'itemCategories.page',
+  showForm: 'itemCategories.showForm',
+  total: 'itemCategories.total',
+  searchQuery: 'itemCategories.q',
 });

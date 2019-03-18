@@ -7,35 +7,46 @@ import plannerIcon from '../assets/icons/emergencyplans/planner.svg';
 import proceduresIcon from '../assets/icons/emergencyplans/procedures.svg';
 import activitiesIcon from '../assets/icons/emergencyplans/activities.svg';
 import NavigationMenu from '../components/NavigationMenu';
+import modules from '../modules.json';
 
 const routes = [
-  { name: 'Emergency Planner', path: '/planner', icon: plannerIcon },
+  {
+    name: 'Emergency Planner',
+    path: '/planner',
+    icon: plannerIcon,
+    description: modules.emergencyPlansPlanner,
+  },
   {
     name: 'Emergency Plans Activities',
     path: '/activities',
     icon: activitiesIcon,
+    description: modules.emergencyPlansActivities,
   },
   {
     name: 'Emergency Plans Procedures',
     path: '/procedures',
     icon: proceduresIcon,
+    description: modules.emergencyPlansProcedures,
   },
   {
     name: 'Disseminations',
     path: '/disseminations',
     icon: disseminationIcon,
+    description: modules.emergencyPlansDisseminations,
     disabled: true,
   },
   {
     name: 'Activations',
     path: '/activations',
     icon: activationIcon,
+    description: modules.emergencyPlansActivations,
     disabled: true,
   },
   {
     name: 'Drills & Exercises',
     path: '/drills',
     icon: drillsAndExercisesIcon,
+    description: modules.emergencyPlansDrillsExercises,
     disabled: true,
   },
 ];

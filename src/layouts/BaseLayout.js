@@ -51,6 +51,7 @@ import EmergencyPlanProceduresLayout from '../Plans/layouts/Procedures';
 import Resources from '../Resources';
 import ResourcesAdjustmentsLayout from '../Resources/layouts/Adjustments';
 import ResourcesItemsLayout from '../Resources/layouts/Items';
+import ResourcesItemCategoriesLayout from '../Resources/layouts/ItemCategories';
 import ResourcesStockLayout from '../Resources/layouts/Stock';
 import ResourcesUtilizationLayout from '../Resources/layouts/Utilization';
 import ResourcesWarehousesLayout from '../Resources/layouts/Warehouses';
@@ -192,8 +193,12 @@ const breadcrumbNameMap = {
     title: 'List of adjusted resources',
   },
   '/resources/items': { name: 'Items', title: 'List of available items' },
+  '/resources/items-categories': {
+    name: 'Item Categories',
+    title: 'List of available item categories',
+  },
   '/resources': { name: 'Resources', title: 'Resource module' },
-  '/resources/stock': { name: 'Stock', title: 'List of available stock' },
+  '/resources/stocks': { name: 'Stocks', title: 'List of available stocks' },
   '/resources/utilization': {
     name: 'Utilizations',
     title: 'Resource utilizations',
@@ -480,13 +485,18 @@ const BaseLayout = withRouter(props => {
           />
           <Route
             exact
-            path="/resources/stock"
+            path="/resources/stocks"
             component={ResourcesStockLayout}
           />
           <Route
             exact
             path="/resources/items"
             component={ResourcesItemsLayout}
+          />
+          <Route
+            exact
+            path="/resources/item-categories"
+            component={ResourcesItemCategoriesLayout}
           />
           <Route
             exact

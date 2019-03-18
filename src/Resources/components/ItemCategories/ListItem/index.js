@@ -1,43 +1,60 @@
-import { Avatar, Col, Row, Checkbox, Modal } from 'antd';
+import { Avatar, Checkbox, Col, Modal, Row } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
 import randomColor from 'randomcolor';
+import truncate from 'lodash/truncate';
+import React, { Component } from 'react';
 import ListItemActions from '../../../../components/ListItemActions';
 import './styles.css';
 
+/* constants */
 const { confirm } = Modal;
 
 /**
  * @class
- * @name WarehouseListItem
- * @description Single warehouse list item component.
- * Render single warehouse details
+ * @name ListItem
+ * @description Single list item component.
+ * Render single item details
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class WarehouseListItem extends Component {
-  /* props validation */
-  static propTypes = {
-    name: PropTypes.string.isRequired,
-    family: PropTypes.string.isRequired,
-    nature: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    isSelected: PropTypes.bool.isRequired,
-    onSelectItem: PropTypes.func.isRequired,
-    onDeselectItem: PropTypes.func.isRequired,
-    onArchive: PropTypes.func.isRequired,
-  };
-
+class ListItem extends Component {
   state = {
     isHovered: false,
   };
 
+  static propTypes = {
+    abbreviation: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired,
+    onArchive: PropTypes.func.isRequired,
+    onEdit: PropTypes.func.isRequired,
+    isSelected: PropTypes.bool.isRequired,
+    onSelectItem: PropTypes.func.isRequired,
+    onDeselectItem: PropTypes.func.isRequired,
+  };
+
+  /**
+   * @function
+   * @name handleMouseEnter
+   * @description Handle on MouseEnter ListItem event
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleMouseEnter = () => {
     this.setState({ isHovered: true });
   };
 
+  /**
+   * @function
+   * @name handleMouseEnter
+   * @description Handle on MouseLeave ListItem event
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleMouseLeave = () => {
     this.setState({ isHovered: false });
   };
@@ -45,7 +62,7 @@ class WarehouseListItem extends Component {
   /**
    * @function
    * @name handleToggleSelect
-   * @description Handle Toggling List Item checkbox
+   * @description Handle Toggling List ItemCategory checkbox
    *
    * @param {Object} event - Event object
    *
@@ -67,7 +84,7 @@ class WarehouseListItem extends Component {
   /**
    * @function
    * @name showArchiveConfirm
-   * @description show confirm modal before archiving a warehouse
+   * @description show confirm modal before archiving a item
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -86,11 +103,12 @@ class WarehouseListItem extends Component {
   };
 
   render() {
-    const { name, family, nature, type, onEdit } = this.props;
+    const { abbreviation, description, name, onEdit, color } = this.props;
     const { isHovered } = this.state;
     const { isSelected } = this.props;
+    const avatarBackground = color || randomColor();
     let sideComponent = null;
-    const avatarBackground = randomColor();
+
     if (isSelected) {
       sideComponent = (
         <Checkbox
@@ -108,34 +126,34 @@ class WarehouseListItem extends Component {
         />
       ) : (
         <Avatar style={{ backgroundColor: avatarBackground }}>
-          {name.charAt(0).toUpperCase()}
+          {abbreviation}
         </Avatar>
       );
     }
 
     return (
       <div
-        className="WarehouseListItem"
+        className="ListItem"
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
         <Row>
           <Col span={1}>{sideComponent}</Col>
-          <Col span={5}>{name}</Col>
-          <Col span={6}>{nature}</Col>
-          <Col span={4}>{family}</Col>
-          <Col span={4}>{type}</Col>
-          <Col span={3}>
+          <Col span={6}>{name}</Col>
+          <Col span={14} title={description}>
+            {truncate(description, { length: 160 })}
+          </Col>
+          <Col span={1}>
             {isHovered && (
               <ListItemActions
                 edit={{
-                  name: 'Edit Warehouse',
-                  title: 'Update Warehouse Details',
+                  name: 'Edit Item category',
+                  title: 'Update Item category Details',
                   onClick: onEdit,
                 }}
                 archive={{
-                  name: 'Archive Warehouse',
-                  title: 'Remove warehouse from the list of active Warehouses',
+                  name: 'Archive Item category',
+                  title: 'Remove Item category from list of active items',
                   onClick: this.showArchiveConfirm,
                 }}
               />
@@ -147,4 +165,4 @@ class WarehouseListItem extends Component {
   }
 }
 
-export default WarehouseListItem;
+export default ListItem;

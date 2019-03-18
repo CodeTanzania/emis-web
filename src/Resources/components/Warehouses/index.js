@@ -6,16 +6,14 @@ import {
   closeWarehouseForm,
   searchWarehouses,
 } from '@codetanzania/emis-api-states';
-import { Input, Modal, Col, Row, Button } from 'antd';
+import { Modal } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import Topbar from '../../../components/Topbar';
 import WarehouseList from './List';
 import WarehouseForm from './Form';
 import WarehouseFilters from './Filters';
-import WarehousesActionBar from './ActionBar';
 import './styles.css';
-
-const { Search } = Input;
 
 /**
  * @class
@@ -49,10 +47,12 @@ class Warehouses extends Component {
     }),
     total: PropTypes.number.isRequired,
     page: PropTypes.number.isRequired,
+    searchQuery: PropTypes.string,
   };
 
   static defaultProps = {
     warehouse: null,
+    searchQuery: undefined,
   };
 
   componentWillMount() {
@@ -129,8 +129,8 @@ class Warehouses extends Component {
    * @version 0.1.0
    * @since 0.1.0
    */
-  search = event => {
-    searchWarehouses({ q: event.target.value });
+  searchWarehouse = event => {
+    searchWarehouses(event.target.value);
   };
 
   /**
@@ -170,81 +170,77 @@ class Warehouses extends Component {
       posting,
       showForm,
       warehouse,
+      searchQuery,
     } = this.props;
     const { showFilters, isEditForm } = this.state;
     return (
-      <div className="WarehouseList">
-        <Row>
-          <Col span={12}>
-            {/* search input component */}
-            <Search
-              size="large"
-              placeholder="Search for warehouses here ..."
-              onChange={this.search}
-            />
-            {/* end search input component */}
-          </Col>
-          {/* primary actions */}
-          <Col span={3} offset={9}>
-            <Button
-              type="primary"
-              icon="plus"
-              size="large"
-              title="Add New Warehouse"
-              onClick={this.openForm}
-            >
-              New Warehouse
-            </Button>
-          </Col>
-          {/* end primary actions */}
-        </Row>
-        {/* list action bar */}
-        <WarehousesActionBar
-          total={total}
-          page={page}
-          onFilter={this.openFiltersModal}
+      <Fragment>
+        {/* Topbar */}
+        <Topbar
+          search={{
+            size: 'large',
+            placeholder: 'Search for warehouses here ...',
+            onChange: this.searchWarehouse,
+            value: searchQuery,
+          }}
+          actions={[
+            {
+              label: 'New Warehouse',
+              icon: 'plus',
+              size: 'large',
+              title: 'Add New Warehouse',
+              onClick: this.openForm,
+            },
+          ]}
         />
-        {/* end list action bar */}
-        {/* list starts */}
-        <WarehouseList
-          warehouses={warehouses}
-          loading={loading}
-          onEdit={this.handleEdit}
-        />
-        {/* end list */}
+        {/* end Topbar */}
 
-        {/* filter modal */}
-        <Modal
-          title="Filter Warehouses"
-          visible={showFilters}
-          onCancel={this.closeFiltersModal}
-          maskClosable={false}
-          footer={null}
-          width={800}
-        >
-          <WarehouseFilters onCancel={this.closeFiltersModal} />
-        </Modal>
-        {/* end filter modal */}
-
-        {/* create/edit form modal */}
-        <Modal
-          title={isEditForm ? 'Edit Warehouse' : 'Add New Warehouse'}
-          visible={showForm}
-          footer={null}
-          onCancel={this.closeForm}
-          destroyOnClose
-          maskClosable={false}
-          afterClose={this.handleAfterCloseForm}
-        >
-          <WarehouseForm
-            posting={posting}
-            isEditForm={isEditForm}
-            warehouse={warehouse}
-            onCancel={this.closeForm}
+        <div className="WarehouseList">
+          {/* list starts */}
+          <WarehouseList
+            warehouses={warehouses}
+            loading={loading}
+            onEdit={this.handleEdit}
+            onFilter={this.openFiltersModal}
+            total={total}
+            page={page}
           />
-        </Modal>
-        {/* end create/edit form modal */}
-      </div>
+          {/* end list */}
+
+          {/* filter modal */}
+          <Modal
+            title="Filter Warehouses"
+            visible={showFilters}
+            onCancel={this.closeFiltersModal}
+            width="50%"
+            footer={null}
+            destroyOnClose
+            maskClosable={false}
+          >
+            <WarehouseFilters onCancel={this.closeFiltersModal} />
+          </Modal>
+          {/* end filter modal */}
+
+          {/* create/edit form modal */}
+          <Modal
+            title={isEditForm ? 'Edit Warehouse' : 'Add New Warehouse'}
+            visible={showForm}
+            footer={null}
+            onCancel={this.closeForm}
+            destroyOnClose
+            maskClosable={false}
+            afterClose={this.handleAfterCloseForm}
+          >
+            <WarehouseForm
+              posting={posting}
+              isEditForm={isEditForm}
+              warehouse={warehouse}
+              onCancel={this.closeForm}
+            />
+          </Modal>
+          {/* end create/edit form modal */}
+        </div>
+      </Fragment>
     );
   }
 }
@@ -257,4 +253,5 @@ export default Connect(Warehouses, {
   loading: 'warehouses.loading',
   page: 'warehouses.page',
   total: 'warehouses.total',
+  searchQuery: 'warehouses.q',
 });
