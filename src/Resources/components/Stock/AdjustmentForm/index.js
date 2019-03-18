@@ -68,7 +68,7 @@ class AdjustmentForm extends Component {
           },
           () => {
             notifyError(
-              'Something occurred while adjusting stock quantity, please contact your system administrator'
+              'An error occurred while adjusting stock quantity, please contact your system administrator'
             );
           }
         );
