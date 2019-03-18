@@ -7,21 +7,44 @@ import lossDatabaseIcon from '../assets/icons/incidents/lossdatabase.svg';
 import feedIcon from '../assets/icons/incidents/feed.svg';
 import actionsIcon from '../assets/icons/incidents/actions.svg';
 import NavigationMenu from '../components/NavigationMenu';
+import modules from '../modules.json';
 
 const routes = [
   {
     name: 'Incident Command Center',
     path: '/commandcenter',
     icon: commandCenterIcon,
+    description: modules.incidentsCommandCenter,
   },
-  { name: 'Incidents Actions', path: '/actions', icon: actionsIcon },
-  { name: 'Assessments', path: '/assessments', icon: assessmentIcon },
-  { name: 'Incidents Feeds', path: '/feeds', icon: feedIcon },
-  { name: 'Incident Types', path: '/incidenttypes', icon: incidentTypeIcon },
+  {
+    name: 'Incidents Actions',
+    path: '/actions',
+    icon: actionsIcon,
+    description: modules.incidentsActions,
+  },
+  {
+    name: 'Assessments',
+    path: '/assessments',
+    icon: assessmentIcon,
+    description: modules.incidentsAssessments,
+  },
+  {
+    name: 'Incidents Feeds',
+    path: '/feeds',
+    icon: feedIcon,
+    description: modules.incidentsFeeds,
+  },
+  {
+    name: 'Incident Types',
+    path: '/incidenttypes',
+    icon: incidentTypeIcon,
+    description: modules.incidentsTypes,
+  },
   {
     name: 'Loss Database/History',
     path: '/lossdatabase',
     icon: lossDatabaseIcon,
+    description: modules.incidentsLossDatabase,
   },
 ];
 /**
