@@ -6,18 +6,40 @@ import stockIcon from '../assets/icons/resources/stock.svg';
 import utilizationIcon from '../assets/icons/resources/utilization-disabled.svg';
 import warehousesIcon from '../assets/icons/resources/warehouse.svg';
 import NavigationMenu from '../components/NavigationMenu';
+import modules from '../modules.json';
 
 const routes = [
-  { name: 'Adjustments', path: '/adjustments', icon: adjustmentsIcon },
-  { name: 'Items', path: '/items', icon: itemsIcon },
-  { name: 'Stock', path: '/stock', icon: stockIcon },
+  {
+    name: 'Adjustments',
+    path: '/adjustments',
+    icon: adjustmentsIcon,
+    description: modules.resourcesAdjustments,
+  },
+  {
+    name: 'Items',
+    path: '/items',
+    icon: itemsIcon,
+    description: modules.resourcesItems,
+  },
+  {
+    name: 'Stocks',
+    path: '/stocks',
+    icon: stockIcon,
+    description: modules.resourcesStocks,
+  },
   {
     name: 'Utilization/Consumptions',
     path: '/utilization',
     icon: utilizationIcon,
+    description: modules.resourcesConsumption,
     disabled: true,
   },
-  { name: 'Warehouses', path: '/warehouses', icon: warehousesIcon },
+  {
+    name: 'Warehouses',
+    path: '/warehouses',
+    icon: warehousesIcon,
+    description: modules.resourcesWarehouses,
+  },
 ];
 
 /**
