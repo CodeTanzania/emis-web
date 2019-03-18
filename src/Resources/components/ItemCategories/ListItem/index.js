@@ -27,6 +27,7 @@ class ListItem extends Component {
     abbreviation: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired,
     onArchive: PropTypes.func.isRequired,
     onEdit: PropTypes.func.isRequired,
     isSelected: PropTypes.bool.isRequired,
@@ -102,10 +103,10 @@ class ListItem extends Component {
   };
 
   render() {
-    const { abbreviation, description, name, onEdit } = this.props;
+    const { abbreviation, description, name, onEdit, color } = this.props;
     const { isHovered } = this.state;
     const { isSelected } = this.props;
-    const avatarBackground = randomColor();
+    const avatarBackground = color || randomColor();
     let sideComponent = null;
 
     if (isSelected) {

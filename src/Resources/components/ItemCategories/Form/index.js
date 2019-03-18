@@ -77,10 +77,7 @@ class ItemCategoryForm extends Component {
 
       if (!error) {
         if (isEditForm) {
-          const updateItemCategory = Object.assign({}, itemCategory, {
-            ...values,
-            key: 'category',
-          });
+          const updateItemCategory = Object.assign({}, itemCategory, values);
           putItemCategory(
             updateItemCategory,
             () => {
