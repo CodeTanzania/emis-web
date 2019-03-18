@@ -73,8 +73,6 @@ class ItemCategoryForm extends Component {
     } = this.props;
 
     validateFieldsAndScroll((error, values) => {
-      // const values = { ...data, key: 'category' };
-
       if (!error) {
         if (isEditForm) {
           const updateItemCategory = Object.assign({}, itemCategory, values);
