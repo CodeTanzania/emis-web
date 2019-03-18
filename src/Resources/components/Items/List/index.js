@@ -112,10 +112,10 @@ class ItemsList extends Component {
 
     remove(pages, item => item === page);
 
-    items.forEach(emisItem => {
+    items.forEach(resourceItem => {
       remove(
         selectedList,
-        item => item._id === emisItem._id // eslint-disable-line
+        item => item._id === resourceItem._id // eslint-disable-line
       );
     });
 
@@ -148,19 +148,19 @@ class ItemsList extends Component {
    * @name handleOnDeselectItem
    * @description Handle deselect a single item action
    *
-   * @param {Object} emisItem item to be removed from selected items
+   * @param {Object} resourceItem item to be removed from selected items
    * @returns {undefined} undefined
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleOnDeselectItem = emisItem => {
+  handleOnDeselectItem = resourceItem => {
     const { selectedItems } = this.state;
     const selectedList = [...selectedItems];
 
     remove(
       selectedList,
-      item => item._id === emisItem._id // eslint-disable-line
+      item => item._id === resourceItem._id // eslint-disable-line
     );
 
     this.setState({ selectedItems: selectedList });
