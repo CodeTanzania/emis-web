@@ -50,9 +50,7 @@ class ItemsList extends Component {
     total: PropTypes.number.isRequired,
     onEdit: PropTypes.func.isRequired,
     onFilter: PropTypes.func.isRequired,
-    onNotify: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
-    onBulkShare: PropTypes.func.isRequired,
   };
 
   state = {
@@ -176,9 +174,7 @@ class ItemsList extends Component {
       total,
       onEdit,
       onFilter,
-      onNotify,
       onShare,
-      onBulkShare,
     } = this.props;
     const { selectedItems, selectedPages } = this.state;
     const selectedItemsCount = intersectionBy(
@@ -199,7 +195,6 @@ class ItemsList extends Component {
             filter: { _id: map(selectedItems, '_id') },
           })}
           onFilter={onFilter}
-          onNotify={() => onNotify(selectedItems)}
           onPaginate={nextPage => {
             paginateItems(nextPage);
           }}
@@ -215,7 +210,6 @@ class ItemsList extends Component {
               }
             )
           }
-          onShare={() => onBulkShare(selectedItems)}
         />
         {/* end toolbar */}
 

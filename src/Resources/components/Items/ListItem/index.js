@@ -33,7 +33,6 @@ class ListItem extends Component {
     isSelected: PropTypes.bool.isRequired,
     onSelectItem: PropTypes.func.isRequired,
     onDeselectItem: PropTypes.func.isRequired,
-    onShare: PropTypes.func.isRequired,
   };
 
   /**
@@ -104,14 +103,7 @@ class ListItem extends Component {
   };
 
   render() {
-    const {
-      abbreviation,
-      type,
-      name,
-      description,
-      onEdit,
-      onShare,
-    } = this.props;
+    const { abbreviation, type, name, description, onEdit } = this.props;
     const { isHovered } = this.state;
     const { isSelected } = this.props;
     const avatarBackground = randomColor();
@@ -159,11 +151,6 @@ class ListItem extends Component {
                   name: 'Edit Item',
                   title: 'Update Item Details',
                   onClick: onEdit,
-                }}
-                share={{
-                  name: 'Share Item',
-                  title: 'Share Item details with others',
-                  onClick: onShare,
                 }}
                 archive={{
                   name: 'Archive Item',
