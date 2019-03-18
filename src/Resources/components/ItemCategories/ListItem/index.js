@@ -1,6 +1,7 @@
 import { Avatar, Checkbox, Col, Modal, Row } from 'antd';
 import PropTypes from 'prop-types';
 import randomColor from 'randomcolor';
+import truncate from 'lodash/truncate';
 import React, { Component } from 'react';
 import ListItemActions from '../../../../components/ListItemActions';
 import './styles.css';
@@ -31,7 +32,6 @@ class ListItem extends Component {
     isSelected: PropTypes.bool.isRequired,
     onSelectItem: PropTypes.func.isRequired,
     onDeselectItem: PropTypes.func.isRequired,
-    onShare: PropTypes.func.isRequired,
   };
 
   /**
@@ -102,7 +102,7 @@ class ListItem extends Component {
   };
 
   render() {
-    const { abbreviation, description, name, onEdit, onShare } = this.props;
+    const { abbreviation, description, name, onEdit } = this.props;
     const { isHovered } = this.state;
     const { isSelected } = this.props;
     const avatarBackground = randomColor();
@@ -139,23 +139,20 @@ class ListItem extends Component {
         <Row>
           <Col span={1}>{sideComponent}</Col>
           <Col span={6}>{name}</Col>
-          <Col span={14}>{description}</Col>
+          <Col span={14} title={description}>
+            {truncate(description, { length: 160 })}
+          </Col>
           <Col span={1}>
             {isHovered && (
               <ListItemActions
                 edit={{
-                  name: 'Edit ItemCategory',
-                  title: 'Update ItemCategory Details',
+                  name: 'Edit Item category',
+                  title: 'Update Item category Details',
                   onClick: onEdit,
                 }}
-                share={{
-                  name: 'Share ItemCategory',
-                  title: 'Share ItemCategory details with others',
-                  onClick: onShare,
-                }}
                 archive={{
-                  name: 'Archive ItemCategory',
-                  title: 'Remove ItemCategory from list of active items',
+                  name: 'Archive Item category',
+                  title: 'Remove Item category from list of active items',
                   onClick: this.showArchiveConfirm,
                 }}
               />

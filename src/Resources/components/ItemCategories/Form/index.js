@@ -72,11 +72,9 @@ class ItemCategoryForm extends Component {
       isEditForm,
     } = this.props;
 
-    validateFieldsAndScroll((error, values) => {
-      console.log({
-        ...values,
-        key: 'category',
-      });
+    validateFieldsAndScroll((error, data) => {
+      const values = { ...data, key: 'category' };
+
       if (!error) {
         if (isEditForm) {
           const updateItemCategory = Object.assign({}, itemCategory, {
@@ -86,7 +84,7 @@ class ItemCategoryForm extends Component {
           putItemCategory(
             updateItemCategory,
             () => {
-              notifySuccess('Item Category was updated successfully');
+              notifySuccess('Item category was updated successfully');
             },
             () => {
               notifyError(
@@ -99,11 +97,11 @@ class ItemCategoryForm extends Component {
           postItemCategory(
             values,
             () => {
-              notifySuccess('Item Category was created successfully');
+              notifySuccess('Item category was created successfully');
             },
             () => {
               notifyError(
-                'Something occurred while saving Item Category, please try again!'
+                'Something occurred while saving Item category, please try again!'
               );
             }
           );
@@ -154,7 +152,7 @@ class ItemCategoryForm extends Component {
         {/* Item Categories abbreviation */}
         <Form.Item {...formItemLayout} label="Abbreviation">
           {getFieldDecorator('abbreviation', {
-            initialValue: isEditForm ? itemCategory.value : undefined,
+            initialValue: isEditForm ? itemCategory.abbreviation : undefined,
             rules: [{ required: true, message: 'Abbreviation is required' }],
           })(<Input />)}
         </Form.Item>
@@ -163,7 +161,7 @@ class ItemCategoryForm extends Component {
         {/* Item Categories value */}
         <Form.Item {...formItemLayout} label="Description ">
           {getFieldDecorator('description', {
-            initialValue: isEditForm ? itemCategory.value : undefined,
+            initialValue: isEditForm ? itemCategory.description : undefined,
             rules: [{ required: true, message: 'Description is required' }],
           })(<Input />)}
         </Form.Item>

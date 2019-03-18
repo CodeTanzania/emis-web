@@ -49,10 +49,7 @@ class ItemCategoriesList extends Component {
     page: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
     onEdit: PropTypes.func.isRequired,
-    onFilter: PropTypes.func.isRequired,
-    onNotify: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
-    onBulkShare: PropTypes.func.isRequired,
   };
 
   state = {
@@ -178,10 +175,7 @@ class ItemCategoriesList extends Component {
       page,
       total,
       onEdit,
-      onFilter,
-      onNotify,
       onShare,
-      onBulkShare,
     } = this.props;
     const { selectedItemCategories, selectedPages } = this.state;
     const selectedItemsCount = intersectionBy(
@@ -194,31 +188,28 @@ class ItemCategoriesList extends Component {
       <Fragment>
         {/* toolbar */}
         <Toolbar
-          itemName="itemCategory"
+          itemName="item category"
           page={page}
           total={total}
           selectedItemsCount={selectedItemsCount}
           exportUrl={getItemCategoriesExportUrl({
             filter: { _id: map(selectedItemCategories, '_id') },
           })}
-          onFilter={onFilter}
-          onNotify={() => onNotify(selectedItemCategories)}
           onPaginate={nextPage => {
             paginateItemCategories(nextPage);
           }}
           onRefresh={() =>
             refreshItemCategories(
               () => {
-                notifySuccess('ItemCategories refreshed successfully');
+                notifySuccess('Item categories refreshed successfully');
               },
               () => {
                 notifyError(
-                  'An Error occurred while refreshing ItemCategories please contact system administrator'
+                  'An Error occurred while refreshing Item categories please contact system administrator'
                 );
               }
             )
           }
-          onShare={() => onBulkShare(selectedItemCategories)}
         />
         {/* end toolbar */}
 
@@ -264,11 +255,11 @@ class ItemCategoriesList extends Component {
                 deleteItemCategory(
                   itemCategory._id, // eslint-disable-line
                   () => {
-                    notifySuccess('Item was archived successfully');
+                    notifySuccess('Item category was archived successfully');
                   },
                   () => {
                     notifyError(
-                      'An Error occurred while archiving Item please contact system administrator'
+                      'An Error occurred while archiving Item category please contact system administrator'
                     );
                   }
                 )
