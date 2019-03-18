@@ -7,86 +7,6 @@ import { Button, Checkbox, Col, Form, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-const categories = [
-  'Aerialway',
-  'Aeroway',
-  'Amenity',
-  'Barrier',
-  'Boundary',
-  'Building',
-  'Craft',
-  'Emergency',
-  'Geological',
-  'Highway',
-  'Historic',
-  'Landuse',
-  'Leisure',
-  'Man made',
-  'Military',
-  'Natural',
-  'Office',
-  'Other',
-  'Place',
-  'Power',
-  'Public',
-  'Railway',
-  'Route',
-  'Shop',
-  'Sport',
-  'Telecom',
-  'Tourism',
-  'Transport',
-  'Waterway',
-];
-
-const types = [
-  'Access Control',
-  'Accommodation',
-  'Administrative',
-  'Arts',
-  'Assembly Point',
-  'Civic',
-  'Commercial',
-  'Culture',
-  'Education',
-  'Entertainment',
-  'Facilities',
-  'Financial',
-  'Firefighters',
-  'Healthcare',
-  'Landform',
-  'Lifecycle',
-  'Lifeguards',
-  'Linear Barriers',
-  'Link Roads',
-  'Medical Rescue',
-  'Other',
-  'Paths',
-  'Religious',
-  'Roads',
-  'Stations',
-  'Stops',
-  'Sustenance',
-  'Tracks',
-  'Transportation',
-  'Vegetation',
-  'Warehouse',
-  'Water',
-  'Watercourses',
-  'Waterways',
-];
-
-const levels = [
-  'zone',
-  'region',
-  'district',
-  'division',
-  'ward',
-  'village',
-  'shina',
-  'other',
-];
-
 /**
  * @class
  * @name WarehousesFilters
@@ -105,6 +25,9 @@ class WarehousesFilters extends Component {
     ),
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
     onCancel: PropTypes.func.isRequired,
+    natures: PropTypes.arrayOf(PropTypes.string).isRequired,
+    families: PropTypes.arrayOf(PropTypes.string).isRequired,
+    types: PropTypes.arrayOf(PropTypes.string).isRequired,
   };
 
   static defaultProps = {
@@ -155,6 +78,9 @@ class WarehousesFilters extends Component {
       form: { getFieldDecorator },
       onCancel,
       filter,
+      families,
+      types,
+      natures,
     } = this.props;
 
     const formItemLayout = {
@@ -178,23 +104,41 @@ class WarehousesFilters extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
-        {/* start warehouses category filters */}
-        <Form.Item {...formItemLayout} label="By Category">
-          {getFieldDecorator('category', {
-            initialValue: filter ? filter.category : [],
+        {/* start warehouses nature filters */}
+        <Form.Item {...formItemLayout} label="By Nature">
+          {getFieldDecorator('nature', {
+            initialValue: filter ? filter.nature : [],
           })(
             <Checkbox.Group style={{ width: '100%' }}>
               <Row>
-                {categories.map(category => (
-                  <Col span={6} style={{ margin: '10px 0' }} key={category}>
-                    <Checkbox value={category}>{category}</Checkbox>
+                {natures.map(nature => (
+                  <Col span={6} style={{ margin: '10px 0' }} key={nature}>
+                    <Checkbox value={nature}>{nature}</Checkbox>
                   </Col>
                 ))}
               </Row>
             </Checkbox.Group>
           )}
         </Form.Item>
-        {/* end warehouse category filters */}
+        {/* end warehouse nature filters */}
+
+        {/* start warehouses family filters */}
+        <Form.Item {...formItemLayout} label="By Family">
+          {getFieldDecorator('family', {
+            initialValue: filter ? filter.family : [],
+          })(
+            <Checkbox.Group style={{ width: '100%' }}>
+              <Row>
+                {families.map(family => (
+                  <Col span={6} style={{ margin: '10px 0' }} key={family}>
+                    <Checkbox value={family}>{family}</Checkbox>
+                  </Col>
+                ))}
+              </Row>
+            </Checkbox.Group>
+          )}
+        </Form.Item>
+        {/* end warehouse family filters */}
 
         {/* start warehouses type filters */}
         <Form.Item {...formItemLayout} label="By Types">
@@ -214,24 +158,6 @@ class WarehousesFilters extends Component {
         </Form.Item>
         {/* end warehouse type filters */}
 
-        {/* start warehouses level filters */}
-        <Form.Item {...formItemLayout} label="By Levels">
-          {getFieldDecorator('level', {
-            initialValue: filter ? filter.level : [],
-          })(
-            <Checkbox.Group style={{ width: '100%' }}>
-              <Row>
-                {levels.map(level => (
-                  <Col span={6} style={{ margin: '10px 0' }} key={level}>
-                    <Checkbox value={level}>{level}</Checkbox>
-                  </Col>
-                ))}
-              </Row>
-            </Checkbox.Group>
-          )}
-        </Form.Item>
-        {/* end warehouse level filters */}
-
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
           <Button onClick={onCancel}>Cancel</Button>
@@ -250,5 +176,8 @@ class WarehousesFilters extends Component {
 export default Form.create()(
   Connect(WarehousesFilters, {
     filter: 'warehouses.filter',
+    natures: 'warehouses.schema.properties.nature.enum',
+    families: 'warehouses.schema.properties.family.enum',
+    types: 'warehouses.schema.properties.type.enum',
   })
 );
