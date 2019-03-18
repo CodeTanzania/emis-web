@@ -10,84 +10,6 @@ import { notifyError, notifySuccess } from '../../../../util';
 
 const { Option } = Select;
 
-const scategories = [
-  'Aerialway',
-  'Aeroway',
-  'Amenity',
-  'Barrier',
-  'Boundary',
-  'Building',
-  'Craft',
-  'Emergency',
-  'Geological',
-  'Highway',
-  'Historic',
-  'Landuse',
-  'Leisure',
-  'Man made',
-  'Military',
-  'Natural',
-  'Office',
-  'Other',
-  'Place',
-  'Power',
-  'Public',
-  'Railway',
-  'Route',
-  'Shop',
-  'Sport',
-  'Telecom',
-  'Tourism',
-  'Transport',
-  'Waterway',
-];
-const stypes = [
-  'Access Control',
-  'Accommodation',
-  'Administrative',
-  'Arts',
-  'Assembly Point',
-  'Civic',
-  'Commercial',
-  'Culture',
-  'Education',
-  'Entertainment',
-  'Facilities',
-  'Financial',
-  'Firefighters',
-  'Healthcare',
-  'Landform',
-  'Lifecycle',
-  'Lifeguards',
-  'Linear Barriers',
-  'Link Roads',
-  'Medical Rescue',
-  'Other',
-  'Paths',
-  'Religious',
-  'Roads',
-  'Stations',
-  'Stops',
-  'Sustenance',
-  'Tracks',
-  'Transportation',
-  'Vegetation',
-  'Warehouse',
-  'Water',
-  'Watercourses',
-  'Waterways',
-];
-const slevels = [
-  'zone',
-  'region',
-  'district',
-  'division',
-  'ward',
-  'village',
-  'shina',
-  'other',
-];
-
 // eslint-disable-next-line jsdoc/require-returns
 /**
  * @class
@@ -100,8 +22,8 @@ const slevels = [
 class WarehouseForm extends Component {
   static propTypes = {
     isEditForm: PropTypes.bool.isRequired,
-    levels: PropTypes.arrayOf(PropTypes.string).isRequired,
-    categories: PropTypes.arrayOf(PropTypes.string).isRequired,
+    families: PropTypes.arrayOf(PropTypes.string).isRequired,
+    natures: PropTypes.arrayOf(PropTypes.string).isRequired,
     types: PropTypes.arrayOf(PropTypes.string).isRequired,
     warehouse: PropTypes.shape({
       name: PropTypes.string,
@@ -135,11 +57,7 @@ class WarehouseForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedWarehouse = Object.assign({}, warehouse, {
-            ...values,
-            continent: 'Africa',
-            country: 'Tanzania',
-          });
+          const updatedWarehouse = Object.assign({}, warehouse, values);
           putWarehouse(
             updatedWarehouse,
             () => {
@@ -193,6 +111,9 @@ class WarehouseForm extends Component {
       posting,
       onCancel,
       form: { getFieldDecorator },
+      natures,
+      families,
+      types,
     } = this.props;
 
     const formItemLayout = {
@@ -225,36 +146,36 @@ class WarehouseForm extends Component {
         </Form.Item>
         {/* end warehouse name */}
 
-        {/* warehouse level */}
-        <Form.Item {...formItemLayout} label="Level">
-          {getFieldDecorator('level', {
-            initialValue: isEditForm ? warehouse.level : undefined,
-            rules: [{ required: true, message: 'Warehouse level is required' }],
-          })(<Select showSearch>{this.renderSelectOptions(slevels)}</Select>)}
+        {/* warehouse nature */}
+        <Form.Item {...formItemLayout} label="Nature">
+          {getFieldDecorator('nature', {
+            initialValue: isEditForm ? warehouse.nature : undefined,
+            rules: [
+              { required: true, message: 'Warehouse nature is required' },
+            ],
+          })(<Select showSearch>{this.renderSelectOptions(natures)}</Select>)}
         </Form.Item>
-        {/* end warehouse level */}
+        {/* end warehouse nature */}
+
+        {/* warehouse family */}
+        <Form.Item {...formItemLayout} label="Family">
+          {getFieldDecorator('family', {
+            initialValue: isEditForm ? warehouse.family : undefined,
+            rules: [
+              { required: true, message: 'Warehouse family is required' },
+            ],
+          })(<Select showSearch>{this.renderSelectOptions(families)}</Select>)}
+        </Form.Item>
+        {/* end warehouse family */}
 
         {/* warehouse type */}
         <Form.Item {...formItemLayout} label="Type">
           {getFieldDecorator('type', {
             initialValue: isEditForm ? warehouse.type : undefined,
             rules: [{ required: true, message: 'Warehouse Type is required' }],
-          })(<Select showSearch>{this.renderSelectOptions(stypes)}</Select>)}
+          })(<Select showSearch>{this.renderSelectOptions(types)}</Select>)}
         </Form.Item>
         {/* end warehouse type */}
-
-        {/* warehouse category */}
-        <Form.Item {...formItemLayout} label="Category">
-          {getFieldDecorator('category', {
-            initialValue: isEditForm ? warehouse.category : undefined,
-            rules: [
-              { required: true, message: 'Warehouse Category is required' },
-            ],
-          })(
-            <Select showSearch>{this.renderSelectOptions(scategories)}</Select>
-          )}
-        </Form.Item>
-        {/* end warehouse category */}
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
@@ -276,8 +197,8 @@ class WarehouseForm extends Component {
 
 export default Form.create()(
   Connect(WarehouseForm, {
-    levels: 'warehouses.schema.properties.level.enum',
-    categories: 'warehouses.schema.properties.category.enum',
+    natures: 'warehouses.schema.properties.nature.enum',
+    families: 'warehouses.schema.properties.family.enum',
     types: 'warehouses.schema.properties.type.enum',
   })
 );
