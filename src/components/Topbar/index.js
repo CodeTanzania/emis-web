@@ -54,7 +54,13 @@ Topbar.propTypes = {
     onChange: PropTypes.func.isRequired,
     value: PropTypes.string,
   }).isRequired,
-  actions: PropTypes.arrayOf(PropTypes.node),
+  actions: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      title: PropTypes.string,
+      onClick: PropTypes.func,
+    })
+  ),
 };
 
 Topbar.defaultProps = {
