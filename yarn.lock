@@ -722,15 +722,15 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@codetanzania/emis-api-client@^0.9.0":
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/@codetanzania/emis-api-client/-/emis-api-client-0.9.0.tgz#1dcada60e7e121241abcf153469ec81838ead4d9"
-  integrity sha512-vITmSxO4e5zaKNsYAtRWZF+kqhAJ6veENfbNm6c/6dFxo8ac6Jm98xKI495HI+W4meeASF8rbFohSV7rHvAegQ==
+"@codetanzania/emis-api-client@^0.11.0":
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/@codetanzania/emis-api-client/-/emis-api-client-0.11.0.tgz#a5ed75ca05bcde48ad185879dae7056fe3a1863f"
+  integrity sha512-gg0HO1lERpbXDKiZup5yh8ySg05lCIOBhcg/bRIaOlfJ/HFlr+y+eJvfIFLqEKTDsMM8X7PCI1CSMdVtX9e05Q==
 
-"@codetanzania/emis-api-states@^0.9.1":
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/@codetanzania/emis-api-states/-/emis-api-states-0.9.1.tgz#39dda1fb816206bd89e1ce01b799939c764d18cd"
-  integrity sha512-iNzL7ZYbz4AXIzuhfTzcIXAuOXBeJwxipvrZ6fMqWTxKffkyOkLUiCOiPE/2ki4wEDMG7HnThge3pj2neAE6cw==
+"@codetanzania/emis-api-states@^0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@codetanzania/emis-api-states/-/emis-api-states-0.10.0.tgz#be8ef64a533236906a78fa0a02f3387cb15c6125"
+  integrity sha512-MYSlD1440UgNApABCMbPMpOWNrdclDOpv4ewiuxS/JDV8sQgozaKsS2uC/Bi4hIl6pAa2FguF1/0T9gEUI2/3w==
 
 "@commitlint/cli@^7.5.2":
   version "7.5.2"
@@ -3612,15 +3612,15 @@ eslint-plugin-import@^2.16.0:
     read-pkg-up "^2.0.0"
     resolve "^1.9.0"
 
-eslint-plugin-jest@^22.3.0:
-  version "22.3.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-22.3.0.tgz#a10f10dedfc92def774ec9bb5bfbd2fb8e1c96d2"
-  integrity sha512-P1mYVRNlOEoO5T9yTqOfucjOYf1ktmJ26NjwjH8sxpCFQa6IhBGr5TpKl3hcAAT29hOsRJVuMWmTsHoUVo9FoA==
+eslint-plugin-jest@^22.3.2:
+  version "22.3.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-22.3.2.tgz#702ac04b06223c9241d92b986165318db474ca81"
+  integrity sha512-K1i3qORvcX2VuGLI4N+slreGpeObAWkT5gi1ya8olZ6YXwnxzBrMlif3uEUHgXwPIStpO26vAlRX0SgFy8SkZA==
 
-eslint-plugin-jsdoc@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-4.1.1.tgz#54f33bdc878b21fd43f4d82c92970bb9b062f18d"
-  integrity sha512-ZsMmZbhnJBJDwTY+iNUDW5qV9pmXMC+6LPtthPExIJHQyv+rNHU87xjfeCbVciecJ/oHb8HK1ho4eOQbHZfvag==
+eslint-plugin-jsdoc@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-4.4.0.tgz#ecdf72e0f226293ccf7083a13340547ee81c43ba"
+  integrity sha512-q+4IV5wU9wCoCL3zRBOR1/E4qWzMTEZ6Y7H2eYOq9HQI5ouqowN8VTWFC9yR7x6Apmn4aQQEFrm2EsX78msTOw==
   dependencies:
     comment-parser "^0.5.4"
     jsdoctypeparser "^2.0.0-alpha-8"

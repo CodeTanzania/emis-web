@@ -5,17 +5,34 @@ import questionnairesIcon from '../assets/icons/assessment/questionnaires.svg';
 import questionsIcon from '../assets/icons/assessment/questions.svg';
 import responsesIcon from '../assets/icons/assessment/responses-disabled.svg';
 import NavigationMenu from '../components/NavigationMenu';
+import modules from '../modules.json';
 
 const routes = [
   {
     name: 'Observations / Response',
     path: '/responses',
     icon: responsesIcon,
+    description: modules.assessmentsObservations,
     disabled: true,
   },
-  { name: 'Questionnaires', path: '/questionnaires', icon: questionnairesIcon },
-  { name: 'Questions', path: '/questions', icon: questionsIcon },
-  { name: 'Indicators', path: '/indicators', icon: indicatorIcon },
+  {
+    name: 'Questionnaires',
+    path: '/questionnaires',
+    icon: questionnairesIcon,
+    description: modules.assessmentsQuestionnaires,
+  },
+  {
+    name: 'Questions',
+    path: '/questions',
+    icon: questionsIcon,
+    description: modules.assessmentsQuestions,
+  },
+  {
+    name: 'Indicators',
+    path: '/indicators',
+    icon: indicatorIcon,
+    description: modules.assessmentsIndicators,
+  },
 ];
 
 // eslint-disable-next-line jsdoc/require-returns

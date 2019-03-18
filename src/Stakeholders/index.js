@@ -5,19 +5,32 @@ import contactsIcon from '../assets/icons/stakeholders/contacts.svg';
 import notificationsIcon from '../assets/icons/stakeholders/notifications-disabled.svg';
 import rolesIcon from '../assets/icons/stakeholders/roles.svg';
 import NavigationMenu from '../components/NavigationMenu';
+import modules from '../modules.json';
 
 const routes = [
-  { name: 'Focal People', path: '/focalpeople', icon: contactsIcon },
-  { name: 'Agencies', path: '/agencies', icon: agenciesIcon },
+  {
+    name: 'Focal People',
+    path: '/focalpeople',
+    icon: contactsIcon,
+    description: modules.stakeholdersFocalPeople,
+  },
+  {
+    name: 'Agencies',
+    path: '/agencies',
+    icon: agenciesIcon,
+    description: modules.stakeholdersAgencies,
+  },
   {
     name: 'Roles',
     path: '/roles',
     icon: rolesIcon,
+    description: modules.stakeholdersRoles,
   },
   {
     name: 'Notifications',
     path: '/notifications',
     icon: notificationsIcon,
+    description: modules.stakeholdersNotifications,
     disabled: true,
   },
 ];
