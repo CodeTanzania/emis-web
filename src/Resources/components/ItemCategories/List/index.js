@@ -129,24 +129,6 @@ class ItemCategoriesList extends Component {
 
   /**
    * @function
-   * @name handleFilterByStatus
-   * @description Handle filter itemCategories by status action
-   *
-   * @version 0.1.0
-   * @since 0.1.0
-   */
-  handleFilterByStatus = () => {
-    // if (status === 'All') {
-    //   filter({});
-    // } else if (status === 'Active') {
-    //   filter({});
-    // } else if (status === 'Archived') {
-    //   filter({});
-    // }
-  };
-
-  /**
-   * @function
    * @name handleOnDeselectItem
    * @description Handle deselect a single itemCategory action
    *
