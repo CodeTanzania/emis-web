@@ -204,9 +204,9 @@ const breadcrumbNameMap = {
     name: 'Utilizations',
     title: 'Resource utilizations',
   },
-  '/resources/itemunit': {
+  '/resources/unitsofmeasure': {
     name: 'Item Unit',
-    title: 'List of available Item unit of measure',
+    title: 'List of available units of measure for items',
   },
   /* Stakeholders Routes */
   '/stakeholders/focalpeople': {
@@ -496,7 +496,7 @@ const BaseLayout = withRouter(props => {
           />
           <Route
             exact
-            path="/resources/itemunit"
+            path="/resources/unitsofmeasure"
             component={ResourcesItemUnitLayout}
           />
           <Route

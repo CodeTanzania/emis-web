@@ -20,7 +20,7 @@ const routes = [
   { name: 'Warehouses', path: '/warehouses', icon: warehousesIcon },
   {
     name: 'Item Unit Of Measure',
-    path: '/itemunit',
+    path: '/unitsofmeasure',
     icon: warehousesIcon,
   },
 ];
