@@ -1,6 +1,7 @@
 import { Avatar, Checkbox, Col, Modal, Row } from 'antd';
 import PropTypes from 'prop-types';
 import randomColor from 'randomcolor';
+import truncate from 'lodash/truncate';
 import React, { Component } from 'react';
 import ListItemActions from '../../../../components/ListItemActions';
 import './styles.css';
@@ -25,16 +26,13 @@ class ListItem extends Component {
   static propTypes = {
     abbreviation: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    maxStockAllowed: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    minStockAllowed: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     onArchive: PropTypes.func.isRequired,
     onEdit: PropTypes.func.isRequired,
     isSelected: PropTypes.bool.isRequired,
     onSelectItem: PropTypes.func.isRequired,
     onDeselectItem: PropTypes.func.isRequired,
-    onShare: PropTypes.func.isRequired,
   };
 
   /**
@@ -105,16 +103,7 @@ class ListItem extends Component {
   };
 
   render() {
-    const {
-      abbreviation,
-      type,
-      name,
-      minStockAllowed,
-      maxStockAllowed,
-      description,
-      onEdit,
-      onShare,
-    } = this.props;
+    const { abbreviation, type, name, description, onEdit } = this.props;
     const { isHovered } = this.state;
     const { isSelected } = this.props;
     const avatarBackground = randomColor();
@@ -151,10 +140,10 @@ class ListItem extends Component {
         <Row>
           <Col span={1}>{sideComponent}</Col>
           <Col span={6}>{name}</Col>
-          <Col span={3}>{type}</Col>
-          <Col span={2}>{maxStockAllowed}</Col>
-          <Col span={2}>{minStockAllowed}</Col>
-          <Col span={7}>{description}</Col>
+          <Col span={4}>{type}</Col>
+          <Col span={10} title={description}>
+            {truncate(description, { length: 140 })}
+          </Col>
           <Col span={1}>
             {isHovered && (
               <ListItemActions
@@ -162,11 +151,6 @@ class ListItem extends Component {
                   name: 'Edit Item',
                   title: 'Update Item Details',
                   onClick: onEdit,
-                }}
-                share={{
-                  name: 'Share Item',
-                  title: 'Share Item details with others',
-                  onClick: onShare,
                 }}
                 archive={{
                   name: 'Archive Item',
