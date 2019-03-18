@@ -26,6 +26,7 @@ const routes = [
     name: 'Item Categories',
     path: '/item-categories',
     icon: itemCategoriesIcon,
+    description: modules.resourcesItemCategories,
   },
   {
     name: 'Stocks',
