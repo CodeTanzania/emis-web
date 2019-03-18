@@ -21,10 +21,8 @@ import ListItem from '../ListItem';
 /* constants */
 const headerLayout = [
   { span: 6, header: 'Name' },
-  { span: 3, header: 'Type' },
-  { span: 2, header: 'Maximum' },
-  { span: 2, header: 'Minimum' },
-  { span: 7, header: 'Description' },
+  { span: 4, header: 'Type' },
+  { span: 10, header: 'Description' },
 ];
 const { getItemsExportUrl } = httpActions;
 
@@ -44,9 +42,7 @@ class ItemsList extends Component {
       PropTypes.shape({
         _id: PropTypes.string.isRequired,
         type: PropTypes.string.isRequired,
-        maxStockAllowed: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
-        minStockAllowed: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired,
       })
     ).isRequired,
@@ -54,9 +50,7 @@ class ItemsList extends Component {
     total: PropTypes.number.isRequired,
     onEdit: PropTypes.func.isRequired,
     onFilter: PropTypes.func.isRequired,
-    onNotify: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
-    onBulkShare: PropTypes.func.isRequired,
   };
 
   state = {
@@ -118,10 +112,10 @@ class ItemsList extends Component {
 
     remove(pages, item => item === page);
 
-    items.forEach(emisItem => {
+    items.forEach(resourceItem => {
       remove(
         selectedList,
-        item => item._id === emisItem._id // eslint-disable-line
+        item => item._id === resourceItem._id // eslint-disable-line
       );
     });
 
@@ -154,19 +148,19 @@ class ItemsList extends Component {
    * @name handleOnDeselectItem
    * @description Handle deselect a single item action
    *
-   * @param {Object} item item to be removed from selected items
+   * @param {Object} resourceItem item to be removed from selected items
    * @returns {undefined} undefined
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleOnDeselectItem = emisItem => {
+  handleOnDeselectItem = resourceItem => {
     const { selectedItems } = this.state;
     const selectedList = [...selectedItems];
 
     remove(
       selectedList,
-      item => item._id === emisItem._id // eslint-disable-line
+      item => item._id === resourceItem._id // eslint-disable-line
     );
 
     this.setState({ selectedItems: selectedList });
@@ -180,9 +174,7 @@ class ItemsList extends Component {
       total,
       onEdit,
       onFilter,
-      onNotify,
       onShare,
-      onBulkShare,
     } = this.props;
     const { selectedItems, selectedPages } = this.state;
     const selectedItemsCount = intersectionBy(
@@ -203,7 +195,6 @@ class ItemsList extends Component {
             filter: { _id: map(selectedItems, '_id') },
           })}
           onFilter={onFilter}
-          onNotify={() => onNotify(selectedItems)}
           onPaginate={nextPage => {
             paginateItems(nextPage);
           }}
@@ -219,7 +210,6 @@ class ItemsList extends Component {
               }
             )
           }
-          onShare={() => onBulkShare(selectedItems)}
         />
         {/* end toolbar */}
 
@@ -240,12 +230,6 @@ class ItemsList extends Component {
             <ListItem
               key={item._id} // eslint-disable-line
               abbreviation={item.name.charAt(0).toUpperCase()}
-              minStockAllowed={
-                item.minStockAllowed ? item.minStockAllowed : 'N/A'
-              }
-              maxStockAllowed={
-                item.maxStockAllowed ? item.maxStockAllowed : 'N/A'
-              }
               name={item.name}
               type={item.type ? item.type : 'N/A'}
               description={item.description ? item.description : 'N/A'}
