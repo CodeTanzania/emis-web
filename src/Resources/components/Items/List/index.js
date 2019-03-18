@@ -21,10 +21,8 @@ import ListItem from '../ListItem';
 /* constants */
 const headerLayout = [
   { span: 6, header: 'Name' },
-  { span: 3, header: 'Type' },
-  { span: 2, header: 'Maximum' },
-  { span: 2, header: 'Minimum' },
-  { span: 7, header: 'Description' },
+  { span: 4, header: 'Type' },
+  { span: 10, header: 'Description' },
 ];
 const { getItemsExportUrl } = httpActions;
 
@@ -44,9 +42,7 @@ class ItemsList extends Component {
       PropTypes.shape({
         _id: PropTypes.string.isRequired,
         type: PropTypes.string.isRequired,
-        maxStockAllowed: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
-        minStockAllowed: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired,
       })
     ).isRequired,
@@ -154,7 +150,7 @@ class ItemsList extends Component {
    * @name handleOnDeselectItem
    * @description Handle deselect a single item action
    *
-   * @param {Object} item item to be removed from selected items
+   * @param {Object} emisItem item to be removed from selected items
    * @returns {undefined} undefined
    *
    * @version 0.1.0
@@ -240,12 +236,6 @@ class ItemsList extends Component {
             <ListItem
               key={item._id} // eslint-disable-line
               abbreviation={item.name.charAt(0).toUpperCase()}
-              minStockAllowed={
-                item.minStockAllowed ? item.minStockAllowed : 'N/A'
-              }
-              maxStockAllowed={
-                item.maxStockAllowed ? item.maxStockAllowed : 'N/A'
-              }
               name={item.name}
               type={item.type ? item.type : 'N/A'}
               description={item.description ? item.description : 'N/A'}
