@@ -10,8 +10,20 @@ import assessmentIcon from '../assets/icons/assessments.svg';
 import NavigationMenu from '../components/NavigationMenu';
 
 const routes = [
-  { name: 'Alerts', path: '/alerts', icon: alertIcon },
-  { name: 'Assessment', path: '/assessments', icon: assessmentIcon },
+  {
+    name: 'Alerts',
+    path: '/alerts',
+    icon: alertIcon,
+    description:
+      'Includes up to date database of ingested emergency/disaster alerts from multiple sources in near real-time, disseminate them to disaster management stakeholders',
+  },
+  {
+    name: 'Assessment',
+    path: '/assessments',
+    icon: assessmentIcon,
+    description:
+      'Includes up to date database of ingested emergency/disaster alerts from multiple sources in near real-time, disseminate them to disaster management',
+  },
   { name: 'Emergency Plans', path: '/plans', icon: planIcon },
   {
     name: 'Geographical Features',
