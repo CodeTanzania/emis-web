@@ -237,11 +237,11 @@ class ItemCategoriesList extends Component {
                 deleteItemCategory(
                   itemCategory._id, // eslint-disable-line
                   () => {
-                    notifySuccess('Item category was archived successfully');
+                    notifySuccess('item category was archived successfully');
                   },
                   () => {
                     notifyError(
-                      'An Error occurred while archiving Item category please contact system administrator'
+                      'An Error occurred while archiving item category please contact system administrator'
                     );
                   }
                 )
