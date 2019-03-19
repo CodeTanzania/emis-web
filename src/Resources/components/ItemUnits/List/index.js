@@ -216,7 +216,7 @@ class ItemUnitList extends Component {
                   },
                   () => {
                     notifyError(
-                      `An Error occurred while archiving unit of measure please contact
+                      `An error occurred while archiving unit of measure please contact
                    system administrator`
                     );
                   }
