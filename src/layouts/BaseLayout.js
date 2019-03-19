@@ -193,7 +193,7 @@ const breadcrumbNameMap = {
     title: 'List of adjusted resources',
   },
   '/resources/items': { name: 'Items', title: 'List of available items' },
-  '/resources/items-categories': {
+  '/resources/item-categories': {
     name: 'Item Categories',
     title: 'List of available item categories',
   },
