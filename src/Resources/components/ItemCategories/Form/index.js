@@ -5,10 +5,14 @@ import {
 import { Button, Form, Input, Col, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import randomColor from 'randomcolor';
 import ColorPicker from 'rc-color-picker';
 import { notifyError, notifySuccess } from '../../../../util';
 import 'rc-color-picker/assets/index.css';
 import './styles.css';
+
+/* constants */
+const { TextArea } = Input;
 
 /**
  * @class
@@ -47,7 +51,7 @@ class ItemCategoryForm extends Component {
    * @version 0.1.0
    * @since 0.1.0
    */
-  onChangeColor = ({ color }) => {
+  onChangeColor = color => {
     const {
       form: { setFieldsValue },
     } = this.props;
@@ -72,7 +76,9 @@ class ItemCategoryForm extends Component {
       isEditForm,
     } = this.props;
 
-    validateFieldsAndScroll((error, values) => {
+    validateFieldsAndScroll((error, data) => {
+      const color = data.color ? data.color.color : null; // color comes as object we need to get color string
+      const values = { ...data, color };
       if (!error) {
         if (isEditForm) {
           const updateItemCategory = Object.assign({}, itemCategory, values);
@@ -114,6 +120,8 @@ class ItemCategoryForm extends Component {
       form: { getFieldDecorator },
     } = this.props;
 
+    const defaultColor = itemCategory ? itemCategory.color : randomColor();
+
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -144,37 +152,43 @@ class ItemCategoryForm extends Component {
         </Form.Item>
         {/* end Item Categories value */}
 
-        {/* Item Categories abbreviation */}
-        <Form.Item {...formItemLayout} label="Abbreviation">
-          {getFieldDecorator('abbreviation', {
-            initialValue: isEditForm ? itemCategory.abbreviation : undefined,
-            rules: [{ required: true, message: 'Abbreviation is required' }],
-          })(<Input />)}
-        </Form.Item>
-        {/* end Item Categories abbreviation */}
+        <Row>
+          {/* Item Categories abbreviation */}
+          <Col span={21}>
+            <Form.Item {...formItemLayout} label="Code">
+              {getFieldDecorator('abbreviation', {
+                initialValue: isEditForm
+                  ? itemCategory.abbreviation
+                  : undefined,
+                rules: [{ required: true, message: 'Code is required' }],
+              })(<Input />)}
+            </Form.Item>
+          </Col>
+          {/* end Item Categories abbreviation */}
+
+          {/* Item Categories color */}
+          <Col span={2} offset={1}>
+            <Form.Item {...formItemLayout} label="Color">
+              {getFieldDecorator('color')(
+                <ColorPicker
+                  animation="slide-up"
+                  defaultColor={defaultColor}
+                  onChange={this.onChangeColor}
+                />
+              )}
+            </Form.Item>
+          </Col>
+          {/* end Item Categories color */}
+        </Row>
 
         {/* Item Categories value */}
         <Form.Item {...formItemLayout} label="Description ">
           {getFieldDecorator('description', {
             initialValue: isEditForm ? itemCategory.description : undefined,
-            rules: [{ required: true, message: 'Description is required' }],
-          })(<Input />)}
+            rules: [{ message: 'Description is required' }],
+          })(<TextArea autosize={{ minRows: 1, maxRows: 10 }} />)}
         </Form.Item>
         {/* end Item Categories value */}
-
-        <Row>
-          <Col span={19}>
-            <Form.Item {...formItemLayout} label="Color Code">
-              {getFieldDecorator('color', {
-                initialValue: isEditForm ? itemCategory.color : undefined,
-              })(<Input title="Click button to select color" />)}
-            </Form.Item>
-          </Col>
-          <Col span={4} offset={1} className="ItemCategoryFormColor">
-            <ColorPicker animation="slide-up" onChange={this.onChangeColor} />
-          </Col>
-        </Row>
-        {/* end Item Categories color code */}
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
