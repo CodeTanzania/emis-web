@@ -157,14 +157,14 @@ class ItemUnitListItem extends Component {
             {isHovered && (
               <ListItemActions
                 edit={{
-                  name: 'Edit Unit of measure',
-                  title: 'Update Unit of measure Details',
+                  name: 'Edit unit of measure',
+                  title: 'Update unit of measure Details',
                   onClick: onEdit,
                 }}
                 archive={{
-                  name: 'Archive Unit of measure',
+                  name: 'Archive unit of measure',
                   title:
-                    'Remove Unit of measure from the list of active Item unit of measure',
+                    'Remove unit of measure from the list of active item unit of measure',
                   onClick: this.showArchiveConfirm,
                 }}
               />

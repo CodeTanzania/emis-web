@@ -153,7 +153,7 @@ class ItemUnitList extends Component {
       <Fragment>
         {/* toolbar */}
         <Toolbar
-          itemName="item unit"
+          itemName="unit of measure"
           page={page}
           total={total}
           selectedItemsCount={selectedItemUnitsCount}
@@ -166,11 +166,11 @@ class ItemUnitList extends Component {
           onRefresh={() =>
             refreshItemUnits(
               () => {
-                notifySuccess('Item units refreshed successfully');
+                notifySuccess('Unit of measure refreshed successfully');
               },
               () => {
                 notifyError(
-                  'An Error occurred while refreshing Item units please contact system administrator'
+                  'An Error occurred while refreshing unit of measure please contact system administrator'
                 );
               }
             )
@@ -216,7 +216,7 @@ class ItemUnitList extends Component {
                   },
                   () => {
                     notifyError(
-                      `An Error occurred while archiving Unit of measure please contact
+                      `An Error occurred while archiving unit of measure please contact
                    system administrator`
                     );
                   }
