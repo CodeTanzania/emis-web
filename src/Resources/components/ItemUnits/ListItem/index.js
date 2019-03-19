@@ -149,7 +149,7 @@ class ItemUnitListItem extends Component {
           <Col span={6} title={description}>
             {description
               ? truncate(description, {
-                  length: 70,
+                  length: 60,
                 })
               : 'N/A'}
           </Col>
@@ -157,14 +157,14 @@ class ItemUnitListItem extends Component {
             {isHovered && (
               <ListItemActions
                 edit={{
-                  name: 'Edit Item unit',
-                  title: 'Update Item unit of measure Details',
+                  name: 'Edit Unit of measure',
+                  title: 'Update Unit of measure Details',
                   onClick: onEdit,
                 }}
                 archive={{
-                  name: 'Archive Item unit',
+                  name: 'Archive Unit of measure',
                   title:
-                    'Remove Item unit from the list of active Item unit of measure',
+                    'Remove Unit of measure from the list of active Item unit of measure',
                   onClick: this.showArchiveConfirm,
                 }}
               />

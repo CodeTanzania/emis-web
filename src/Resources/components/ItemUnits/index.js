@@ -137,16 +137,16 @@ class ItemUnit extends Component {
         <Topbar
           search={{
             size: 'large',
-            placeholder: 'Search for Item unit here ...',
+            placeholder: 'Search for  Unit of measure here ...',
             onChange: this.searchItemUnit,
             value: searchQuery,
           }}
           actions={[
             {
-              label: 'New Item Unit',
+              label: 'New Unit Of Measure',
               icon: 'plus',
               size: 'large',
-              title: 'Add New Item Unit',
+              title: 'Add new unit of measure',
               onClick: this.openForm,
             },
           ]}
@@ -166,9 +166,7 @@ class ItemUnit extends Component {
           {/* create/edit form modal */}
           <Modal
             title={
-              isEditForm
-                ? 'Edit Item Unit Of Measure'
-                : 'Add New Item Unit Of Measure'
+              isEditForm ? 'Edit Unit Of Measure' : 'Add New Unit Of Measure'
             }
             visible={showForm}
             footer={null}

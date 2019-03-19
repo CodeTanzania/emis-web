@@ -212,11 +212,11 @@ class ItemUnitList extends Component {
                 deleteItemUnit(
                   itemUnit._id, // eslint-disable-line
                   () => {
-                    notifySuccess('Item unit was archived successfully');
+                    notifySuccess('Unit of measure was archived successfully');
                   },
                   () => {
                     notifyError(
-                      `An Error occurred while archiving item unit please contact
+                      `An Error occurred while archiving Unit of measure please contact
                    system administrator`
                     );
                   }

@@ -1,5 +1,5 @@
 import { putItemUnit, postItemUnit } from '@codetanzania/emis-api-states';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, Col, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { notifyError, notifySuccess } from '../../../../util';
@@ -10,7 +10,7 @@ const { TextArea } = Input;
 // eslint-disable-next-line jsdoc/require-returns
 /**
  * @class
- * @name ItemUnitOfMeasureForm
+ * @name ItemUnitForm
  * @description  Render form for creating a new Item Unit Of Measure
  *
  * @version 0.1.0
@@ -81,11 +81,11 @@ class ItemUnitForm extends Component {
           putItemUnit(
             updatedItem,
             () => {
-              notifySuccess('Item unit was updated successfully');
+              notifySuccess('Unit of measure was updated successfully');
             },
             () => {
               notifyError(
-                'Something occurred while updating Item unit, please try again!'
+                'Something occurred while updating Unit of measure, please try again!'
               );
             }
           );
@@ -93,11 +93,11 @@ class ItemUnitForm extends Component {
           postItemUnit(
             values,
             () => {
-              notifySuccess('Item unit was created successfully');
+              notifySuccess('Unit of measure was created successfully');
             },
             () => {
               notifyError(
-                'Something occurred while saving Item unit of measure, please try again!'
+                'Something occurred while saving Unit of measure of measure, please try again!'
               );
             }
           );
@@ -136,32 +136,42 @@ class ItemUnitForm extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
-        {/* name */}
-        <Form.Item {...formItemLayout} label="Name">
-          {getFieldDecorator('value', {
-            initialValue: isEditForm ? itemUnit.value : undefined,
-            rules: [{ required: true, message: 'Item unit name is required' }],
-          })(<Input placeholder="e.g piece" />)}
-        </Form.Item>
-        {/* end name */}
-
-        {/* abbreviation */}
-        <Form.Item {...formItemLayout} label="Abbreviation">
-          {getFieldDecorator('abbreviation', {
-            initialValue: isEditForm ? itemUnit.abbreviation : undefined,
-            rules: [{ required: true, message: 'Abbreviation is required' }],
-          })(<Input placeholder="e.g P" />)}
-        </Form.Item>
-        {/* end abbreviation */}
+        <Row type="flex" justify="space-between">
+          <Col span={16}>
+            {/* name */}
+            <Form.Item {...formItemLayout} label="Name">
+              {getFieldDecorator('value', {
+                initialValue: isEditForm ? itemUnit.value : undefined,
+                rules: [
+                  {
+                    required: true,
+                    message: 'Unit of measure name is required',
+                  },
+                ],
+              })(<Input />)}
+            </Form.Item>
+            {/* end name */}
+          </Col>
+          <Col span={7}>
+            {/* abbreviation */}
+            <Form.Item {...formItemLayout} label="Abbreviation">
+              {getFieldDecorator('abbreviation', {
+                initialValue: isEditForm ? itemUnit.abbreviation : undefined,
+                rules: [
+                  { required: true, message: 'Abbreviation is required' },
+                ],
+              })(<Input />)}
+            </Form.Item>
+            {/* end abbreviation */}
+          </Col>
+        </Row>
 
         {/* description */}
-        <Form.Item {...formItemLayout} label="Item Unit Summary">
+        <Form.Item {...formItemLayout} label="Description">
           {getFieldDecorator('description', {
             initialValue: isEditForm ? itemUnit.description : undefined,
             rules: [{ message: 'Add summaries' }],
-          })(
-            <TextArea placeholder="e.g Addition information of item unit of measure" />
-          )}
+          })(<TextArea />)}
         </Form.Item>
         {/* end description */}
 
