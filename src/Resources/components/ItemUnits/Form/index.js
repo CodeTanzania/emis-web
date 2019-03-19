@@ -97,7 +97,7 @@ class ItemUnitForm extends Component {
             },
             () => {
               notifyError(
-                'Something occurred while saving unit of measure of measure, please try again!'
+                'An error occurred while saving unit of measure of measure, please try again!'
               );
             }
           );
