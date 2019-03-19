@@ -6,6 +6,7 @@ import itemCategoriesIcon from '../assets/icons/resources/itemcategory.svg';
 import stockIcon from '../assets/icons/resources/stock.svg';
 import utilizationIcon from '../assets/icons/resources/utilization-disabled.svg';
 import warehousesIcon from '../assets/icons/resources/warehouse.svg';
+import itemUnitsIcon from '../assets/icons/resources/itemunit.svg';
 import NavigationMenu from '../components/NavigationMenu';
 import modules from '../modules.json';
 
@@ -41,11 +42,11 @@ const routes = [
     description: modules.resourcesConsumption,
     disabled: true,
   },
+  { name: 'Warehouses', path: '/warehouses', icon: warehousesIcon },
   {
-    name: 'Warehouses',
-    path: '/warehouses',
-    icon: warehousesIcon,
-    description: modules.resourcesWarehouses,
+    name: 'Item Unit Of Measure',
+    path: '/unitsofmeasure',
+    icon: itemUnitsIcon,
   },
 ];
 
