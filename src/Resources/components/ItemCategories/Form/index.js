@@ -154,7 +154,7 @@ class ItemCategoryForm extends Component {
 
         <Row>
           {/* Item Categories abbreviation */}
-          <Col span={21}>
+          <Col span={19}>
             <Form.Item {...formItemLayout} label="Code">
               {getFieldDecorator('abbreviation', {
                 initialValue: isEditForm
@@ -167,7 +167,7 @@ class ItemCategoryForm extends Component {
           {/* end Item Categories abbreviation */}
 
           {/* Item Categories color */}
-          <Col span={2} offset={1}>
+          <Col span={4} offset={1}>
             <Form.Item {...formItemLayout} label="Color">
               {getFieldDecorator('color')(
                 <ColorPicker
