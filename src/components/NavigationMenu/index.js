@@ -1,4 +1,4 @@
-import { Col, Row } from 'antd';
+import { Col, Row, Popover } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -19,18 +19,50 @@ import './styles.css';
  * @version 0.1.0
  * @since 0.1.0
  */
-const NavigationMenuItem = ({ name, icon, path, disabled }) => (
+const NavigationMenuItem = ({ name, icon, path, disabled, description }) => (
   <Link to={path}>
-    <div className="NavigationMenuItem">
-      <img
-        src={icon}
-        alt={`${name} icon not available`}
-        width={130}
-        height={130}
-        className="image"
-      />
-      <span className={`text ${disabled ? 'text-disabled' : ''}`}>{name}</span>
-    </div>
+    {description ? (
+      <Popover
+        content={
+          <p
+            style={{
+              width: '200px',
+              textAlign: 'justify',
+              textJustify: 'auto',
+            }}
+          >
+            {description}
+          </p>
+        }
+        placement="bottom"
+      >
+        <div className="NavigationMenuItem">
+          <img
+            src={icon}
+            alt={`${name} icon not available`}
+            width={130}
+            height={130}
+            className="image"
+          />
+          <span className={`text ${disabled ? 'text-disabled' : ''}`}>
+            {name}
+          </span>
+        </div>
+      </Popover>
+    ) : (
+      <div className="NavigationMenuItem">
+        <img
+          src={icon}
+          alt={`${name} icon not available`}
+          width={130}
+          height={130}
+          className="image"
+        />
+        <span className={`text ${disabled ? 'text-disabled' : ''}`}>
+          {name}
+        </span>
+      </div>
+    )}
   </Link>
 );
 
@@ -69,6 +101,7 @@ const NavigationMenu = ({ routes, match }) => {
               icon={route.icon}
               path={route.disabled ? '#' : url + route.path}
               disabled={route.disabled}
+              description={route.description}
             />
           </Col>
         ))}
@@ -82,8 +115,10 @@ NavigationMenuItem.propTypes = {
   name: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
 };
+
 NavigationMenu.propTypes = {
   routes: PropTypes.arrayOf(
     PropTypes.shape({
