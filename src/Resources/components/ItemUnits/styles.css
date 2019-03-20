@@ -1,8 +1,3 @@
 .ItemUnitList {
-    padding: 40px;
-  }
-  
-  .ItemUnitList .searchBox {
-    width: 50%;
-  }
-  
+  padding: 0 40px;
+}

@@ -23,6 +23,7 @@ import AssessmentsIndicatorsLayout from '../Assessments/layouts/Indicators';
 import AssessmentsQuestionnairesLayout from '../Assessments/layouts/Questionnaires';
 import AssessmentsQuestionsLayout from '../Assessments/layouts/Questions';
 import AssessmentsResponsesLayout from '../Assessments/layouts/Responses';
+import PageNotFound from '../components/UIState/PageNotFound';
 import GeographicalFeatures from '../GeographicalFeatures';
 import AdministrativeBoundariesLayout from '../GeographicalFeatures/layouts/AdministrativeBoundaries';
 import DistrictsLayout from '../GeographicalFeatures/layouts/Districts';
@@ -50,8 +51,9 @@ import EmergencyPlanPlannerLayout from '../Plans/layouts/Planner';
 import EmergencyPlanProceduresLayout from '../Plans/layouts/Procedures';
 import Resources from '../Resources';
 import ResourcesAdjustmentsLayout from '../Resources/layouts/Adjustments';
-import ResourcesItemsLayout from '../Resources/layouts/Items';
 import ResourcesItemCategoriesLayout from '../Resources/layouts/ItemCategories';
+import ResourcesItemsLayout from '../Resources/layouts/Items';
+import ResourcesItemUnitLayout from '../Resources/layouts/ItemUnit';
 import ResourcesStockLayout from '../Resources/layouts/Stock';
 import ResourcesUtilizationLayout from '../Resources/layouts/Utilization';
 import ResourcesWarehousesLayout from '../Resources/layouts/Warehouses';
@@ -61,9 +63,6 @@ import StakeholdersFocalPeopleLayout from '../Stakeholders/layouts/FocalPeople';
 import StakeholdersNotificationsLayout from '../Stakeholders/layouts/Notifications';
 import StakeholdersRolesLayout from '../Stakeholders/layouts/Roles';
 import HeaderNavMenu from './components/HeaderNavMenu';
-import PageNotFound from '../components/UIState/PageNotFound';
-import ResourcesItemUnitLayout from '../Resources/layouts/ItemUnit';
-
 import './styles.css';
 
 /* constants */
@@ -190,28 +189,28 @@ const breadcrumbNameMap = {
     title: 'Standard Operating Procedures(SOP)',
   },
   /* Resources Routes */
+  '/resources': { name: 'Resources', title: 'Resource module' },
   '/resources/adjustments': {
     name: 'Adjustments',
     title: 'List of adjusted resources',
   },
   '/resources/items': { name: 'Items', title: 'List of available items' },
-  '/resources/warehouses': {
-    name: 'Warehouses',
-    title: 'List of available warehouses',
-  },
-  '/resources/items-categories': {
+  '/resources/itemcategories': {
     name: 'Item Categories',
     title: 'List of available item categories',
   },
-  '/resources': { name: 'Resources', title: 'Resource module' },
+  '/resources/unitsofmeasure': {
+    name: 'Item Unit',
+    title: 'List of available units of measure for items',
+  },
   '/resources/stocks': { name: 'Stocks', title: 'List of available stocks' },
   '/resources/utilization': {
     name: 'Utilizations',
     title: 'Resource utilizations',
   },
-  '/resources/unitsofmeasure': {
-    name: 'Item Unit',
-    title: 'List of available units of measure for items',
+  '/resources/warehouses': {
+    name: 'Warehouses',
+    title: 'List of available warehouses',
   },
   /* Stakeholders Routes */
   '/stakeholders/focalpeople': {
@@ -486,18 +485,13 @@ const BaseLayout = withRouter(props => {
           <Route exact path="/resources" component={Resources} />
           <Route
             exact
-            path="/resources/warehouses"
-            component={ResourcesWarehousesLayout}
-          />
-          <Route
-            exact
-            path="/resources/stocks"
-            component={ResourcesStockLayout}
-          />
-          <Route
-            exact
             path="/resources/items"
             component={ResourcesItemsLayout}
+          />
+          <Route
+            exact
+            path="/resources/itemcategories"
+            component={ResourcesItemCategoriesLayout}
           />
           <Route
             exact
@@ -506,8 +500,13 @@ const BaseLayout = withRouter(props => {
           />
           <Route
             exact
-            path="/resources/item-categories"
-            component={ResourcesItemCategoriesLayout}
+            path="/resources/warehouses"
+            component={ResourcesWarehousesLayout}
+          />
+          <Route
+            exact
+            path="/resources/stocks"
+            component={ResourcesStockLayout}
           />
           <Route
             exact
