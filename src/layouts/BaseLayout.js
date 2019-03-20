@@ -193,7 +193,7 @@ const breadcrumbNameMap = {
     title: 'List of adjusted resources',
   },
   '/resources/items': { name: 'Items', title: 'List of available items' },
-  '/resources/item-categories': {
+  '/resources/itemcategories': {
     name: 'Item Categories',
     title: 'List of available item categories',
   },
@@ -495,7 +495,7 @@ const BaseLayout = withRouter(props => {
           />
           <Route
             exact
-            path="/resources/item-categories"
+            path="/resources/itemcategories"
             component={ResourcesItemCategoriesLayout}
           />
           <Route
