@@ -185,7 +185,6 @@ class ItemCategoryForm extends Component {
         <Form.Item {...formItemLayout} label="Description ">
           {getFieldDecorator('description', {
             initialValue: isEditForm ? itemCategory.description : undefined,
-            rules: [{ message: 'Description is required' }],
           })(<TextArea autosize={{ minRows: 1, maxRows: 10 }} />)}
         </Form.Item>
         {/* end Item Categories value */}
