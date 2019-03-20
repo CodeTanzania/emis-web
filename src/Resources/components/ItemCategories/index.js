@@ -334,7 +334,6 @@ class ItemCategories extends Component {
           <Modal
             title={isEditForm ? 'Edit Item Category' : 'Add New Item Category'}
             visible={showForm}
-            width="50%"
             footer={null}
             onCancel={this.closeItemCategoryForm}
             destroyOnClose

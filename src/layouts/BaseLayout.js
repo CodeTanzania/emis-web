@@ -62,8 +62,6 @@ import StakeholdersNotificationsLayout from '../Stakeholders/layouts/Notificatio
 import StakeholdersRolesLayout from '../Stakeholders/layouts/Roles';
 import HeaderNavMenu from './components/HeaderNavMenu';
 import PageNotFound from '../components/UIState/PageNotFound';
-import ResourcesItemUnitLayout from '../Resources/layouts/ItemUnit';
-
 import './styles.css';
 
 /* constants */
@@ -195,11 +193,7 @@ const breadcrumbNameMap = {
     title: 'List of adjusted resources',
   },
   '/resources/items': { name: 'Items', title: 'List of available items' },
-  '/resources/warehouses': {
-    name: 'Warehouses',
-    title: 'List of available warehouses',
-  },
-  '/resources/items-categories': {
+  '/resources/itemcategories': {
     name: 'Item Categories',
     title: 'List of available item categories',
   },
@@ -209,9 +203,9 @@ const breadcrumbNameMap = {
     name: 'Utilizations',
     title: 'Resource utilizations',
   },
-  '/resources/unitsofmeasure': {
-    name: 'Item Unit',
-    title: 'List of available units of measure for items',
+  '/resources/warehouses': {
+    name: 'Warehouses',
+    title: 'List of available warehouses',
   },
   /* Stakeholders Routes */
   '/stakeholders/focalpeople': {
@@ -501,12 +495,7 @@ const BaseLayout = withRouter(props => {
           />
           <Route
             exact
-            path="/resources/unitsofmeasure"
-            component={ResourcesItemUnitLayout}
-          />
-          <Route
-            exact
-            path="/resources/item-categories"
+            path="/resources/itemcategories"
             component={ResourcesItemCategoriesLayout}
           />
           <Route
