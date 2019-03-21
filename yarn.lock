@@ -722,10 +722,10 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@codetanzania/emis-api-client@^0.11.0":
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/@codetanzania/emis-api-client/-/emis-api-client-0.11.0.tgz#a5ed75ca05bcde48ad185879dae7056fe3a1863f"
-  integrity sha512-gg0HO1lERpbXDKiZup5yh8ySg05lCIOBhcg/bRIaOlfJ/HFlr+y+eJvfIFLqEKTDsMM8X7PCI1CSMdVtX9e05Q==
+"@codetanzania/emis-api-client@^0.12.0":
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/@codetanzania/emis-api-client/-/emis-api-client-0.12.0.tgz#d6964028529e6634508fe18c20d3fb16308fc3cb"
+  integrity sha512-zkSKHpYByveRMOBfYGTOgrOzCNqKa4lowpOyElen6X4snR/zYA+XIVz7DpuYOcrHOjMrBlgDWhI21s8gszPeTg==
 
 "@codetanzania/emis-api-states@^0.10.2":
   version "0.10.2"
