@@ -94,7 +94,8 @@
     "extends": ["@commitlint/config-conventional"]
   },
   "lint-staged": {
-    "*.js": ["eslint --fix","git add"]
+    "*.js": ["eslint --fix", "git add"],
+    ".{css,scss}": ["prettier --write", "git add"]
   },
   "husky": {
     "hooks": {
