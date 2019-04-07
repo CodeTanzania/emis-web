@@ -94,7 +94,7 @@
     "extends": ["@commitlint/config-conventional"]
   },
   "lint-staged": {
-    "*.js": ["npm run lint"]
+    "*.js": ["eslint --fix","git add"]
   },
   "husky": {
     "hooks": {
