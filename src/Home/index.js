@@ -1,12 +1,12 @@
 import React from 'react';
 import alertIcon from '../assets/icons/alerts.svg';
+import assessmentIcon from '../assets/icons/assessments.svg';
+import dashboardIcon from '../assets/icons/dashboards-disabled.svg';
+import planIcon from '../assets/icons/emergencyplans.svg';
 import geographicalFeaturesIcon from '../assets/icons/geographicalfeatures.svg';
 import incidentIcon from '../assets/icons/incidents-disabled.svg';
-import dashboardIcon from '../assets/icons/dashboards-disabled.svg';
-import stakeholderIcon from '../assets/icons/stakeholders.svg';
 import resourceIcon from '../assets/icons/resources.svg';
-import planIcon from '../assets/icons/emergencyplans.svg';
-import assessmentIcon from '../assets/icons/assessments.svg';
+import stakeholderIcon from '../assets/icons/stakeholders.svg';
 import NavigationMenu from '../components/NavigationMenu';
 import modules from '../modules.json';
 
@@ -59,10 +59,9 @@ const routes = [
 ];
 
 /**
- * Home component which shows to navigation Nav
- *
  * @function
  * @name Home
+ * @description Home component which shows to base navigation menu
  *
  * @version 0.1.0
  * @since 0.1.0

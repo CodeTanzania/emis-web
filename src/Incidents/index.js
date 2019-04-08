@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import commandCenterIcon from '../assets/icons/incidents/incidentcommandcenter.svg';
+import actionsIcon from '../assets/icons/incidents/actions.svg';
 import assessmentIcon from '../assets/icons/incidents/assessments.svg';
+import feedIcon from '../assets/icons/incidents/feed.svg';
+import commandCenterIcon from '../assets/icons/incidents/incidentcommandcenter.svg';
 import incidentTypeIcon from '../assets/icons/incidents/incidenttype.svg';
 import lossDatabaseIcon from '../assets/icons/incidents/lossdatabase.svg';
-import feedIcon from '../assets/icons/incidents/feed.svg';
-import actionsIcon from '../assets/icons/incidents/actions.svg';
 import NavigationMenu from '../components/NavigationMenu';
 import modules from '../modules.json';
 
@@ -47,13 +47,14 @@ const routes = [
     description: modules.incidentsLossDatabase,
   },
 ];
+
 /**
- *
  * @function
  * @name Incidents
  * @description Home component which shows to navigation Nav
  *
  * @param {Object} props props object
+ * @param {Object} props.match match object from react router
  *
  * @version 0.1.0
  * @since 0.1.0
