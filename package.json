@@ -25,8 +25,8 @@
   ],
   "dependencies": {
     "@codetanzania/emis-api-client": "^0.13.2",
-    "@codetanzania/emis-api-states": "^0.10.2",
-    "antd": "^3.16.1",
+    "@codetanzania/emis-api-states": "^0.10.3",
+    "antd": "^3.16.2",
     "axios": "^0.18.0",
     "customize-cra": "^0.2.12",
     "inflection": "^1.12.0",
