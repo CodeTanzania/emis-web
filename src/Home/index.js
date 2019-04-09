@@ -10,6 +10,7 @@ import stakeholderIcon from '../assets/icons/stakeholders.svg';
 import NavigationMenu from '../components/NavigationMenu';
 import modules from '../modules.json';
 
+/* constants */
 const routes = [
   {
     name: 'Alerts',

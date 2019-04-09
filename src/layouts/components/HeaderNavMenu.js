@@ -1,17 +1,18 @@
 import { Col, Row } from 'antd';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import alertIcon from '../../assets/icons/alerts.svg';
+import assessmentIcon from '../../assets/icons/assessments.svg';
 import dashboardIcon from '../../assets/icons/dashboards-disabled.svg';
+import planIcon from '../../assets/icons/emergencyplans.svg';
 import geographicalFeaturesIcon from '../../assets/icons/geographicalfeatures.svg';
 import incidentIcon from '../../assets/icons/incidents-disabled.svg';
-import stakeholderIcon from '../../assets/icons/stakeholders.svg';
 import resourceIcon from '../../assets/icons/resources.svg';
-import planIcon from '../../assets/icons/emergencyplans.svg';
-import assessmentIcon from '../../assets/icons/assessments.svg';
+import stakeholderIcon from '../../assets/icons/stakeholders.svg';
 import './styles.css';
 
+/* constants */
 const routes = [
   { name: 'Alerts', path: '/alerts', icon: alertIcon },
   { name: 'Assessments', path: '/assessments', icon: assessmentIcon },

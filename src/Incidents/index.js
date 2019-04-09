@@ -51,7 +51,7 @@ const routes = [
 /**
  * @function
  * @name Incidents
- * @description Home component which shows to navigation Nav
+ * @description Home component which shows to navigation menu
  *
  * @param {Object} props props object
  * @param {Object} props.match match object from react router
