@@ -10,6 +10,7 @@ import itemUnitsIcon from '../assets/icons/resources/itemunit.svg';
 import NavigationMenu from '../components/NavigationMenu';
 import modules from '../modules.json';
 
+/* constants */
 const routes = [
   {
     name: 'Adjustments',
@@ -53,8 +54,8 @@ const routes = [
 /**
  * @function
  * @name Resources
- * @description Resources component which allow navigation
- *  to resource sub modules
+ * @description Resources component which allow navigation to resource
+ * sub modules
  *
  * @param {Object} props props object
  * @param {Object} props.match route params

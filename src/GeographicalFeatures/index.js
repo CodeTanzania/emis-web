@@ -11,6 +11,7 @@ import wardIcon from '../assets/icons/ward.svg';
 import NavigationMenu from '../components/NavigationMenu';
 import modules from '../modules.json';
 
+/* constants */
 const routes = [
   {
     name: 'Regions',
@@ -63,12 +64,12 @@ const routes = [
 ];
 
 /**
- *
  * @function
  * @name GeographicalFeatures
- * @description Home component which shows to navigation Nav
+ * @description Home component which shows to navigation menu
  *
  * @param {Object} props props object
+ * @param {Object} props.match match object from url router
  *
  * @version 0.1.0
  * @since 0.1.0

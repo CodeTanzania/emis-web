@@ -8,15 +8,20 @@ import './styles.css';
 /**
  * @function
  * @name Toolbar
- * @description Render action bar for actions which are applicable to list content
+ * @description Render action bar for actions which are applicable to list
+ * content
  *
  * @param {Object} props props object
  * @param {string} props.itemName names for items/ modules used by toolbar
  * @param {number} props.page current page
  * @param {number} props.total total number of results from the API
  * @param {number} props.selectedItemsCount total Number of selected items
- * @param {Function} props.onNotify on notify action callback
+ * @param {string} props.exportUrl export url
+ * @param {Function} props.onArchive on archive action callback
  * @param {Function} props.onFilter on filter action callback
+ * @param {Function} props.onNotify on notify action callback
+ * @param {Function} props.onPaginate on paginate action callback
+ * @param {Function} props.onRefresh on refresh action callback
  * @param {Function} props.onShare on share action callback
  *
  * @version 0.1.0

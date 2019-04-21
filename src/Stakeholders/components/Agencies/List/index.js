@@ -26,7 +26,6 @@ const headerLayout = [
   { span: 4, header: 'Mobile Number' },
   { span: 4, header: 'Email Address' },
 ];
-
 const { getAgenciesExportUrl } = httpActions;
 
 /**
@@ -114,7 +113,7 @@ class AgencyList extends Component {
    * @name handleDeselectAll
    * @description Handle deselect all agencies in a current page
    *
-   * @returns {undefined} undefined
+   * @returns {undefined}
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -146,7 +145,7 @@ class AgencyList extends Component {
    * @description Handle deselect a single agency action
    *
    * @param {Object} agency agency to be removed from selected agencies
-   * @returns {undefined} undefined
+   * @returns {undefined}
    *
    * @version 0.1.0
    * @since 0.1.0

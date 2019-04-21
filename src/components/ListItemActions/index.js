@@ -9,9 +9,11 @@ import './styles.css';
  * @description Render Dropdown component with has actions for list items
  *
  * @param {Object} props props object
- * @param {Function} props.onEdit on edit action callback
- * @param {Function} props.onShare on share action callback
- * @param {Function} props.onArchive on archive action callback
+ * @param {Object} props.edit on edit action callback
+ * @param {Object} props.share on share action callback
+ * @param {Object} props.archive on archive action callback
+ * @param {Object} props.transfer on transfer action callback
+ * @param {Object} props.adjust on adjust action callback
  *
  * @version 0.1.0
  * @since 0.1.0

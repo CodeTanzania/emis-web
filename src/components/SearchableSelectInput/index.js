@@ -62,7 +62,6 @@ export default class SearchableSelectInput extends Component {
         loading: false,
       };
     } else if (!isEmpty(initialValue)) {
-      // console.log(props.initialValue[optionValue]);
       this.state = {
         data: [initialValue],
         loading: false,
@@ -146,10 +145,10 @@ export default class SearchableSelectInput extends Component {
    * @function
    * @name getOptionProp
    *
-   * @param {string|Function} prop - The property name or value return from
-   *                                   a provided function
-   * @param {Object} option - A single data item for select options
-   * @returns {string} - Value of the extracted property
+   * @param {string|Function} prop The property name or value return from
+   * a provided function
+   * @param {Object} option A single data item for select options
+   * @returns {string} Value of the extracted property
    *
    * @version 0.1.0
    * @since 0.1.0
