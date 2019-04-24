@@ -1,7 +1,6 @@
 import React from 'react';
-// import UIState from '../../components/UIState';
-import AdminstrativeBoundaries from '../components/AdministrativeBoundaries';
+import AdministrativeBoundaries from '../components/AdministrativeBoundaries';
 
-const AdministrativeBoundariesLayout = () => <AdminstrativeBoundaries />;
+const AdministrativeBoundariesLayout = () => <AdministrativeBoundaries />;
 
 export default AdministrativeBoundariesLayout;
