@@ -3043,9 +3043,10 @@ currently-unhandled@^0.4.1:
   dependencies:
     array-find-index "^1.0.1"
 
-curriable@^1.0.0:
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/curriable/-/curriable-1.2.4.tgz#0bbdd0fea2679f195c8f83a33e1a5904ce2b5978"
+curriable@^1.2.4:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/curriable/-/curriable-1.2.5.tgz#fb6ff7ad8740927ea09db15d395d9d26ca9d2726"
+  integrity sha512-hQwrkCn8DNiCw5CG8OS0td2wfpCDtxo1dmrVYxCDWUBHQPkpAvN9RqBVbmC64oSQaBqPQD2SOCXcTWH1zXe2mA==
 
 customize-cra@^0.2.12:
   version "0.2.12"
@@ -5001,9 +5002,10 @@ immer@1.10.0:
   resolved "https://registry.yarnpkg.com/immer/-/immer-1.10.0.tgz#bad67605ba9c810275d91e1c2a47d4582e98286d"
   integrity sha512-O3sR1/opvCDGLEVcvrGTMtLac8GJ5IwZC4puPrLuRj3l7ICKvkmA0vGuU9OW8mV9WIBRnaxp5GJh9IEAaNOoYg==
 
-immer@^1.10.5:
-  version "1.12.0"
-  resolved "https://registry.yarnpkg.com/immer/-/immer-1.12.0.tgz#36063119eb65fa3f0e81ce000eb22f4eede9762e"
+immer@^2.1.5:
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-2.1.5.tgz#0389947455c5a2c7a47f1e6f415c9d1a62a1ebed"
+  integrity sha512-xyjQyTBYIeiz6jd02Hg12jV+9QISwF1crLcwTlzHpWH4e0ryNWj1kacpTwimK3bJV5NKKXw458G2vpqoB/inFA==
 
 immutable@^3.7.4:
   version "3.8.2"
@@ -8986,9 +8988,10 @@ redent@^2.0.0:
     indent-string "^3.0.0"
     strip-indent "^2.0.0"
 
-redux-devtools-extension@^2.13.7:
-  version "2.13.7"
-  resolved "https://registry.yarnpkg.com/redux-devtools-extension/-/redux-devtools-extension-2.13.7.tgz#14bd7a1a7c8bee7f397beb1116fd16fc9633b752"
+redux-devtools-extension@^2.13.8:
+  version "2.13.8"
+  resolved "https://registry.yarnpkg.com/redux-devtools-extension/-/redux-devtools-extension-2.13.8.tgz#37b982688626e5e4993ff87220c9bbb7cd2d96e1"
+  integrity sha512-8qlpooP2QqPtZHQZRhx3x3OP5skEV1py/zUdMY28WNAocbafxdG2tRD1MWE7sp8obGMNYuLWanhhQ7EQvT1FBg==
 
 redux-immutable-state-invariant@^2.1.0:
   version "2.1.0"
@@ -8997,17 +9000,17 @@ redux-immutable-state-invariant@^2.1.0:
     invariant "^2.1.0"
     json-stringify-safe "^5.0.1"
 
-redux-starter-kit@^0.4.3:
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/redux-starter-kit/-/redux-starter-kit-0.4.3.tgz#66a583cde1f1995ae59782d87cc462260ca85fa8"
-  integrity sha512-T3HXtwEGyFLCy63QlZEM95rDzTQ5BKbBhhTINNVFD1yWgHBKtgN3tXw4/sX9+Ve1Y8mAtXbAhep/E7I0YVvZPg==
+redux-starter-kit@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/redux-starter-kit/-/redux-starter-kit-0.5.0.tgz#c3f4ac0e3a2337ed2f378a6af18caee78f3d1559"
+  integrity sha512-Df2mE2yokpkzTdWKzZwY3GKJ0vOXRAoBXTT1IYfgKzVpVj+rTgpKOrGgktQGVNhWTqp5luCNTFLk83YokQtWPw==
   dependencies:
-    immer "^1.10.5"
+    immer "^2.1.5"
     redux "^4.0.0"
-    redux-devtools-extension "^2.13.7"
+    redux-devtools-extension "^2.13.8"
     redux-immutable-state-invariant "^2.1.0"
     redux-thunk "^2.2.0"
-    selectorator "^4.0.1"
+    selectorator "^4.0.3"
 
 redux-thunk@^2.2.0, redux-thunk@^2.3.0:
   version "2.3.0"
@@ -9421,14 +9424,15 @@ select-hose@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"
 
-selectorator@^4.0.1:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/selectorator/-/selectorator-4.0.2.tgz#928ef813290166564ecbcb2f2bd08cc1419c752b"
+selectorator@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/selectorator/-/selectorator-4.0.3.tgz#d33b11027da7e6838de277cd6eb1134125aa788b"
+  integrity sha512-A8+paRhzTab4Qm/38RAVnCgEZFbpn5xIWLyTCDqvyU3Obhmo94RS6UK1H00bVH7+U609sOhqbFJha09POsWURA==
   dependencies:
     fast-equals "^1.2.1"
     identitate "^1.0.0"
     reselect "^4.0.0"
-    unchanged "^1.0.7"
+    unchanged "^2.0.1"
 
 selfsigned@^1.9.1:
   version "1.10.4"
@@ -10317,11 +10321,12 @@ uglify-js@3.4.x, uglify-js@^3.1.4:
     commander "~2.17.1"
     source-map "~0.6.1"
 
-unchanged@^1.0.7:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/unchanged/-/unchanged-1.5.2.tgz#5328ae9cebe2644b8115734a96169d5d9c711d62"
+unchanged@^2.0.1:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/unchanged/-/unchanged-2.1.0.tgz#16308dde5bec15925032d91651f5c3843b957de6"
+  integrity sha512-CYVU0Mz35N821Pjxf+iG6JMPx/Yb6wStUq8uuhR52/+AU3vMiueOTrJ6u1vBKYSke7a75FAi2/jCdQkXcHaNGQ==
   dependencies:
-    curriable "^1.0.0"
+    curriable "^1.2.4"
     pathington "^1.1.5"
 
 unicode-canonical-property-names-ecmascript@^1.0.4:
