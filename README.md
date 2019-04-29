@@ -1,60 +1,68 @@
 # emis-web
 
 [![Build Status](https://travis-ci.org/CodeTanzania/emis-web.svg?branch=develop)](https://travis-ci.org/CodeTanzania/emis-web)
+[![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com/)
 
 <img src="docs/images/logo.svg" 
 alt="EMIS Logo" width="100" height="auto" />
 
-
 ## About EMIS
-A collaboration platform that facilitates communication, planning and actions for disaster management. 
+
+A collaboration platform that facilitates communication, planning and actions for disaster management.
 
 It incorporates data that can be shared and analyzed in order generate insights for local authorities and communities to better manage disasters and increase resilience to disaster risk. The data is organized in core components.
 
-![EMIS Homepage](docs/images/home.png "EMIS Homepage")
+![EMIS Homepage](docs/images/home.png 'EMIS Homepage')
 
 ## EMIS Components
 
-####  Stakeholders
+#### Stakeholders
+
 EMIS Stakeholders contains an up to date database of all stakeholders responsible for emergency/disaster management within a specific region.
 
 See source code [repository](https://github.com/CodeTanzania/emis-stakeholder).
 
 #### Resources
+
 EMIS Resources depends heavily on EMIS Stakeholders as it acts as a resource management tool for resources owned by stakeholders.
 
 See source code [repository](https://github.com/CodeTanzania/emis-resource).
 
 #### Alerts
+
 This component consists of an up to date database of ingested emergency / disaster alerts from multiple sources in near real time and disseminating them to disaster management stakeholders.
 
 See source code [repository](https://github.com/CodeTanzania/emis-alert).
 
 #### Emergency Plans
+
 EMIS Plans provides a way to create, store and disseminate emergency/disaster management plans with detailed activities and Standard Operating Procedures (SOPs) to be performed by each stakeholder in all phases of disaster management.
 
 See source code [repository](https://github.com/CodeTanzania/emis-plan).
 
 #### Incident Management
+
 Provides means to record and report the occurrence of a disaster incident and activating planned activities to respond and recover. It allows for storing of results of continuous assessments performed on affected areas, people and critical infrastructure.
 
 See source code [repository](https://github.com/CodeTanzania/emis-incident).
 
 #### Assessment Toolkit
-Provides a set of integrated tools  that provides a way to determine what happened, where it happened, who was affected, what was the impact and what type of assistance is required for an immediate response for both affected population and infrastructures.
+
+Provides a set of integrated tools that provides a way to determine what happened, where it happened, who was affected, what was the impact and what type of assistance is required for an immediate response for both affected population and infrastructures.
 
 See source code [repository](https://github.com/CodeTanzania/emis-assessment).
 
 #### Dashboards
+
 EMIS dashboards consists of visualization and analysis tools for all the data that is available on all EMIS components.
 
 See source code [repository]().
 
 #### Geographical Features
+
 Provides an up to date geographical database of all features of interest that can be used to study and control the expected and the actual extent of impact that may be caused in case of an emergency/disaster.
 
 See source code [repository](https://github.com/CodeTanzania/emis-feature).
-
 
 ## Contribute
 
@@ -87,12 +95,11 @@ yarn start
 and view it on http://localhost:3000
 
 ## Documentation
+
 - [Project website]()
 - [A collection of references for EMIS]()
 - [Http client for EMIS API](https://github.com/CodeTanzania/emis-api-client)
 - [Redux state manager for EMIS](https://github.com/CodeTanzania/emis-api-states)
-
-
 
 ## License
 
