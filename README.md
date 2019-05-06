@@ -1,6 +1,7 @@
 # emis-web
 
 [![Build Status](https://travis-ci.org/CodeTanzania/emis-web.svg?branch=develop)](https://travis-ci.org/CodeTanzania/emis-web)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com/)
 
 <img src="docs/images/logo.svg" 
