@@ -1,11 +1,11 @@
 import React from 'react';
 import alertIcon from '../assets/icons/alerts.svg';
-import assessmentIcon from '../assets/icons/assessments.svg';
+import assessmentIcon from '../assets/icons/assessments-disabled.svg';
 import dashboardIcon from '../assets/icons/dashboards-disabled.svg';
-import planIcon from '../assets/icons/emergencyplans.svg';
-import geographicalFeaturesIcon from '../assets/icons/geographicalfeatures.svg';
+import planIcon from '../assets/icons/emergencyplans-disabled.svg';
+import geographicalFeaturesIcon from '../assets/icons/geographicalfeatures-disabled.svg';
 import incidentIcon from '../assets/icons/incidents-disabled.svg';
-import resourceIcon from '../assets/icons/resources.svg';
+import resourceIcon from '../assets/icons/resources-disabled.svg';
 import stakeholderIcon from '../assets/icons/stakeholders.svg';
 import NavigationMenu from '../components/NavigationMenu';
 import modules from '../modules.json';
@@ -23,13 +23,15 @@ const routes = [
     path: '/assessments',
     icon: assessmentIcon,
     description: modules.assessments,
+    disabled: true,
   },
-  { name: 'Emergency Plans', path: '/plans', icon: planIcon },
+  { name: 'Emergency Plans', path: '/plans', icon: planIcon, disabled: true },
   {
     name: 'Geographical Features',
     path: '/geographicalfeatures',
     icon: geographicalFeaturesIcon,
     description: modules.geographicalfeatures,
+    disabled: true,
   },
   {
     name: 'Incidents',
@@ -43,6 +45,7 @@ const routes = [
     path: '/resources',
     icon: resourceIcon,
     description: modules.resources,
+    disabled: true,
   },
   {
     name: 'Stakeholders',
@@ -63,6 +66,8 @@ const routes = [
  * @function
  * @name Home
  * @description Home component which shows to base navigation menu
+ *
+ * @returns {object} Navigation Menu
  *
  * @version 0.1.0
  * @since 0.1.0
