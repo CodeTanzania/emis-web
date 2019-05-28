@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
  *
  * @returns {object} React Element
  */
-const SecureRoute = ({ Component, ...rest }) => {
+const SecureRoute = ({ component: Component, ...rest }) => {
   const isAuthenticated = true;
 
   return (
@@ -33,7 +33,7 @@ const SecureRoute = ({ Component, ...rest }) => {
 
 /* props validation */
 SecureRoute.propTypes = {
-  Component: PropTypes.node.isRequired,
+  component: PropTypes.node.isRequired,
 };
 
 export default SecureRoute;
