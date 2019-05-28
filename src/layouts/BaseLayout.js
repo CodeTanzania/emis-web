@@ -10,7 +10,8 @@ import {
   Row,
 } from 'antd';
 import React from 'react';
-import { Link, Switch, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Link, Switch } from 'react-router-dom';
 import Alerts from '../Alerts';
 import AlertsActionsLayout from '../Alerts/layouts/Actions';
 import AlertsLayout from '../Alerts/layouts/Alerts';
@@ -252,11 +253,17 @@ const userMenu = (
  * @name BaseLayout
  * @description Render base layout for EMIS dashboard
  *
+ * @param {object} props Properties inject by router
+ *
+ * @returns {object} BaseLayout component
  * @version 0.1.0
  * @since 0.1.0
  */
-const BaseLayout = withRouter(props => {
-  const { location } = props;
+const BaseLayout = props => {
+  const {
+    location,
+    match: { url: baseUrl },
+  } = props;
 
   const pathSnippets = location.pathname.split('/').filter(i => i);
   const lastPath = pathSnippets[pathSnippets.length - 1];
@@ -328,219 +335,219 @@ const BaseLayout = withRouter(props => {
       </Header>
       <Content className="BaseLayoutContent">
         <Switch>
-          <SecureRoute exact path="/" component={Home} />
-          <SecureRoute exact path="/alerts" component={Alerts} />
-          <SecureRoute path="/alerts/alerts" component={AlertsLayout} />
-          <SecureRoute path="/alerts/actions" component={AlertsActionsLayout} />
-          <SecureRoute path="/alerts/feeds" component={AlertsFeedsLayout} />
+          <SecureRoute exact path={`${baseUrl}`} component={Home} />
+          <SecureRoute exact path={`${baseUrl}alerts`} component={Alerts} />
           <SecureRoute
-            path="/alerts/feedback"
+            path={`${baseUrl}alerts/alerts`}
+            component={AlertsLayout}
+          />
+          <SecureRoute
+            path={`${baseUrl}alerts/actions`}
+            component={AlertsActionsLayout}
+          />
+          <SecureRoute
+            path={`${baseUrl}alerts/feeds`}
+            component={AlertsFeedsLayout}
+          />
+          <SecureRoute
+            path={`${baseUrl}alerts/feedback`}
             component={AlertsFeedbackLayout}
           />
-          <SecureRoute path="/alerts/sources" component={AlertsSourcesLayout} />
           <SecureRoute
-            path="/alerts/servicerequests"
+            path={`${baseUrl}alerts/sources`}
+            component={AlertsSourcesLayout}
+          />
+          <SecureRoute
+            path={`${baseUrl}alerts/servicerequests`}
             component={AlertsServiceRequestsLayout}
           />
-          <SecureRoute exact path="/assessments" component={Assessments} />
           <SecureRoute
-            path="/assessments/indicators"
+            exact
+            path={`${baseUrl}assessments`}
+            component={Assessments}
+          />
+          <SecureRoute
+            path={`${baseUrl}assessments/indicators`}
             component={AssessmentsIndicatorsLayout}
           />
           <SecureRoute
-            path="/assessments/questionnaires"
+            path={`${baseUrl}assessments/questionnaires`}
             component={AssessmentsQuestionnairesLayout}
           />
           <SecureRoute
-            path="/assessments/questions"
+            path={`${baseUrl}assessments/questions`}
             component={AssessmentsQuestionsLayout}
           />
           <SecureRoute
-            path="/assessments/responses"
+            path={`${baseUrl}assessments/responses`}
             component={AssessmentsResponsesLayout}
           />
           <SecureRoute
             exact
-            path="/geographicalfeatures"
+            path={`${baseUrl}geographicalfeatures`}
             component={GeographicalFeatures}
           />
           <SecureRoute
-            exact
-            path="/geographicalfeatures/administrativeboundaries"
+            path={`${baseUrl}geographicalfeatures/administrativeboundaries`}
             component={AdministrativeBoundariesLayout}
           />
           <SecureRoute
-            exact
-            path="/geographicalfeatures/districts"
+            path={`${baseUrl}geographicalfeatures/districts`}
             component={DistrictsLayout}
           />
           <SecureRoute
-            exact
-            path="/geographicalfeatures/evacuationcenters"
+            path={`${baseUrl}geographicalfeatures/evacuationcenters`}
             component={EvacuationCentersLayout}
           />
           <SecureRoute
-            exact
-            path="/geographicalfeatures/facilities"
+            path={`${baseUrl}geographicalfeatures/facilities`}
             component={GeographicalFeaturesFacilitiesLayout}
           />
           <SecureRoute
-            exact
-            path="/geographicalfeatures/infrastructure"
+            path={`${baseUrl}geographicalfeatures/infrastructure`}
             component={GeographicalFeaturesInfrastructureLayout}
           />
           <SecureRoute
-            exact
-            path="/geographicalfeatures/regions"
+            path={`${baseUrl}geographicalfeatures/regions`}
             component={RegionsLayout}
           />
           <SecureRoute
-            exact
-            path="/geographicalfeatures/subwards"
+            path={`${baseUrl}geographicalfeatures/subwards`}
             component={SubWardsLayout}
           />
           <SecureRoute
-            exact
-            path="/geographicalfeatures/warehouses"
+            path={`${baseUrl}geographicalfeatures/warehouses`}
             component={GeographicalFeaturesWarehousesLayout}
           />
           <SecureRoute
-            exact
-            path="/geographicalfeatures/wards"
+            path={`${baseUrl}geographicalfeatures/wards`}
             component={WardsLayout}
           />
-          <SecureRoute exact path="/incidents" component={Incidents} />
           <SecureRoute
             exact
-            path="/incidents/commandcenter"
+            path={`${baseUrl}incidents`}
+            component={Incidents}
+          />
+
+          <SecureRoute
+            path={`${baseUrl}incidents/commandcenter`}
             component={IncidentsCommandCenterLayout}
           />
           <SecureRoute
-            exact
-            path="/incidents/assessments"
+            path={`${baseUrl}incidents/assessments`}
             component={IncidentsAssessmentsLayout}
           />
           <SecureRoute
-            exact
-            path="/incidents/actions"
+            path={`${baseUrl}incidents/actions`}
             component={IncidentsActionsLayout}
           />
           <SecureRoute
-            exact
-            path="/incidents/feeds"
+            path={`${baseUrl}incidents/feeds`}
             component={IncidentsFeedsLayout}
           />
           <SecureRoute
-            exact
-            path="/incidents/lossdatabase"
+            path={`${baseUrl}incidents/lossdatabase`}
             component={IncidentsLossDatabaseLayout}
           />
           <SecureRoute
-            exact
-            path="/incidents/incidenttypes"
+            path={`${baseUrl}incidents/incidenttypes`}
             component={IncidentsIncidentTypesLayout}
           />
-          <SecureRoute exact path="/plans" component={EmergencyPlans} />
           <SecureRoute
             exact
-            path="/plans/planner"
+            path={`${baseUrl}plans`}
+            component={EmergencyPlans}
+          />
+          <SecureRoute
+            path={`${baseUrl}plans/planner`}
             component={EmergencyPlanPlannerLayout}
           />
           <SecureRoute
-            exact
-            path="/plans/planner/:planId/:activityId"
+            path={`${baseUrl}plans/planner/:planId/:activityId`}
             component={EmergencyPlanProceduresLayout}
           />
           <SecureRoute
-            exact
-            path="/plans/activations"
+            path={`${baseUrl}plans/activations`}
             component={EmergencyPlanActivationsLayout}
           />
           <SecureRoute
-            exact
-            path="/plans/activities"
+            path={`${baseUrl}plans/activities`}
             component={EmergencyPlanActivitiesLayout}
           />
           <SecureRoute
-            exact
-            path="/plans/activities/:activityId"
+            path={`${baseUrl}plans/activities/:activityId`}
             component={EmergencyPlanProceduresLayout}
           />
           <SecureRoute
-            exact
-            path="/plans/planner/:planId"
+            path={`${baseUrl}plans/planner/:planId`}
             component={EmergencyPlanActivitiesLayout}
           />
           <SecureRoute
-            exact
-            path="/plans/disseminations"
+            path={`${baseUrl}plans/disseminations`}
             component={EmergencyPlanDisseminationsLayout}
           />
           <SecureRoute
-            exact
-            path="/plans/drills"
+            path={`${baseUrl}plans/drills`}
             component={EmergencyPlanDrillsLayout}
           />
           <SecureRoute
-            exact
-            path="/plans/procedures"
+            path={`${baseUrl}plans/procedures`}
             component={EmergencyPlanProceduresLayout}
           />
-          <SecureRoute exact path="/resources" component={Resources} />
           <SecureRoute
             exact
-            path="/resources/items"
+            path={`${baseUrl}resources`}
+            component={Resources}
+          />
+          <SecureRoute
+            exact
+            path={`${baseUrl}resources/items`}
             component={ResourcesItemsLayout}
           />
           <SecureRoute
             exact
-            path="/resources/itemcategories"
+            path={`${baseUrl}resources/itemcategories`}
             component={ResourcesItemCategoriesLayout}
           />
           <SecureRoute
-            exact
-            path="/resources/unitsofmeasure"
+            path={`${baseUrl}resources/unitsofmeasure`}
             component={ResourcesItemUnitLayout}
           />
           <SecureRoute
-            exact
-            path="/resources/warehouses"
+            path={`${baseUrl}resources/warehouses`}
             component={ResourcesWarehousesLayout}
           />
           <SecureRoute
-            exact
-            path="/resources/stocks"
+            path={`${baseUrl}resources/stocks`}
             component={ResourcesStockLayout}
           />
           <SecureRoute
-            exact
-            path="/resources/utilization"
+            path={`${baseUrl}resources/utilization`}
             component={ResourcesUtilizationLayout}
           />
           <SecureRoute
-            exact
-            path="/resources/adjustments"
+            path={`${baseUrl}resources/adjustments`}
             component={ResourcesAdjustmentsLayout}
           />
-          <SecureRoute exact path="/stakeholders" component={Stakeholders} />
           <SecureRoute
             exact
-            path="/stakeholders/notifications"
+            path={`${baseUrl}stakeholders`}
+            component={Stakeholders}
+          />
+          <SecureRoute
+            path={`${baseUrl}stakeholders/notifications`}
             component={StakeholdersNotificationsLayout}
           />
           <SecureRoute
-            exact
-            path="/stakeholders/focalpeople"
+            path={`${baseUrl}stakeholders/focalpeople`}
             component={StakeholdersFocalPeopleLayout}
           />
           <SecureRoute
-            exact
-            path="/stakeholders/agencies"
+            path={`${baseUrl}stakeholders/agencies`}
             component={StakeholdersAgenciesLayout}
           />
           <SecureRoute
-            exact
-            path="/stakeholders/roles"
+            path={`${baseUrl}stakeholders/roles`}
             component={StakeholdersRolesLayout}
           />
           <SecureRoute component={PageNotFound} />
@@ -548,6 +555,12 @@ const BaseLayout = withRouter(props => {
       </Content>
     </Layout>
   );
-});
+};
+
+BaseLayout.propTypes = {
+  location: PropTypes.string.isRequired,
+  match: PropTypes.shape({ url: PropTypes.string, path: PropTypes.string })
+    .isRequired,
+};
 
 export default BaseLayout;
