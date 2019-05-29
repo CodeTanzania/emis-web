@@ -70,168 +70,171 @@ import './styles.css';
 /* constants */
 const { Header, Content } = Layout;
 const breadcrumbNameMap = {
-  '/': { name: 'Home', title: 'EMIS' },
+  '/app': { name: 'Home', title: 'EMIS' },
   /* Alerts Routes */
-  '/alerts': { name: 'Alerts', title: 'Alerts module' },
-  '/alerts/actions': {
+  '/app/alerts': { name: 'Alerts', title: 'Alerts module' },
+  '/app/alerts/actions': {
     name: 'Actions Taken',
     title: 'List of all performed actions',
   },
-  '/alerts/feedback': {
+  '/app/alerts/feedback': {
     name: 'Surveys & Feedback',
     title: 'Alerts surveys and feedback',
   },
-  '/alerts/feeds': { name: 'Feeds', title: 'Alerts feeds' },
-  '/alerts/alerts': { name: 'Issued Alerts', title: 'List of all alerts' },
-  '/alerts/servicerequests': {
+  '/app/alerts/feeds': { name: 'Feeds', title: 'Alerts feeds' },
+  '/app/alerts/alerts': { name: 'Issued Alerts', title: 'List of all alerts' },
+  '/app/alerts/servicerequests': {
     name: 'Service Requests',
     title: 'Alerts service requests',
   },
-  '/alerts/sources': {
+  '/app/alerts/sources': {
     name: 'Alerts Sources',
     title: 'Data sources for alerts',
   },
   /* Assessments Routes */
-  '/assessments': { name: 'Assessments', title: 'Assessments module' },
-  '/assessments/indicators': {
+  '/app/assessments': { name: 'Assessments', title: 'Assessments module' },
+  '/app/assessments/indicators': {
     name: 'Indicators',
     title: 'Indicators for monitoring assessments',
   },
-  '/assessments/questionnaires': {
+  '/app/assessments/questionnaires': {
     name: 'Questionnaires',
     title: 'List of questionnaires',
   },
-  '/assessments/questions': {
+  '/app/assessments/questions': {
     name: 'Questions',
     title: 'List of questions',
   },
-  '/assessments/responses': {
+  '/app/assessments/responses': {
     name: 'Responses & Observations',
     title: 'Responses and observations',
   },
   /* Geographical Features Routes */
-  '/geographicalfeatures/administrativeboundaries': {
+  '/app/geographicalfeatures/administrativeboundaries': {
     name: 'Administrative Boundaries',
     title: 'List of administrative boundaries',
   },
-  '/geographicalfeatures/districts': {
+  '/app/geographicalfeatures/districts': {
     name: 'Districts',
     title: 'List of Districts',
   },
-  '/geographicalfeatures/evacuationcenters': {
+  '/app/geographicalfeatures/evacuationcenters': {
     name: 'Evacuation Centers',
     title: 'List of evacuation centers',
   },
-  '/geographicalfeatures/facilities': {
+  '/app/geographicalfeatures/facilities': {
     name: 'Facilities',
     title: 'Facilities available',
   },
-  '/geographicalfeatures': {
+  '/app/geographicalfeatures': {
     name: 'Geographical Features',
     title: 'Geographical features module',
   },
-  '/geographicalfeatures/infrastructure': {
+  '/app/geographicalfeatures/infrastructure': {
     name: 'Critical Infrastructure',
     title: 'List of critical infrastructures ',
   },
-  '/geographicalfeatures/regions': {
+  '/app/geographicalfeatures/regions': {
     name: 'Regions',
     title: 'List of Regions',
   },
-  '/geographicalfeatures/subwards': {
+  '/app/geographicalfeatures/subwards': {
     name: 'Subwards',
     title: 'List of subwards',
   },
-  '/geographicalfeatures/warehouses': {
+  '/app/geographicalfeatures/warehouses': {
     name: 'Warehouses',
     title: 'List of available warehouses',
   },
-  '/geographicalfeatures/wards': {
+  '/app/geographicalfeatures/wards': {
     name: 'Wards',
     title: 'List of all wards',
   },
   /* Incidents Routes */
-  '/incidents/actions': {
+  '/app/incidents/actions': {
     name: 'Actions',
     title: 'Incident actions performed',
   },
-  '/incidents/assessments': {
+  '/app/incidents/assessments': {
     name: 'Assessments',
     title: 'Assessment of an incident',
   },
-  '/incidents/commandcenter': {
+  '/app/incidents/commandcenter': {
     name: 'Command Center',
     title: 'Incidents command center',
   },
-  '/incidents/feeds': { name: 'Feeds', title: 'Incident feeds' },
-  '/incidents': { name: 'Incidents', title: 'Incidents module' },
-  '/incidents/incidenttypes': {
+  '/app/incidents/feeds': { name: 'Feeds', title: 'Incident feeds' },
+  '/app/incidents': { name: 'Incidents', title: 'Incidents module' },
+  '/app/incidents/incidenttypes': {
     name: 'Incidents Types',
     title: 'List of Incidents Types',
   },
-  '/incidents/lossdatabase': {
+  '/app/incidents/lossdatabase': {
     name: 'Loss Database',
     title: 'List of previous incidents',
   },
   /* Plans Routes */
-  '/plans/activations': { name: 'Activations', title: 'Plans activation' },
-  '/plans/activities': { name: 'Activities', title: 'Plans Activities' },
-  '/plans/disseminations': {
+  '/app/plans/activations': { name: 'Activations', title: 'Plans activation' },
+  '/app/plans/activities': { name: 'Activities', title: 'Plans Activities' },
+  '/app/plans/disseminations': {
     name: 'Disseminations',
     title: 'Dissemination of plans',
   },
-  '/plans/drills': {
+  '/app/plans/drills': {
     name: 'Drills & Exercises',
     title: 'List of drills and exercises',
   },
-  '/plans': { name: 'Emergency Plans', title: 'Emergency plans module' },
-  '/plans/planner': { name: 'Planner', title: 'Planner' },
-  '/plans/procedures': {
+  '/app/plans': { name: 'Emergency Plans', title: 'Emergency plans module' },
+  '/app/plans/planner': { name: 'Planner', title: 'Planner' },
+  '/app/plans/procedures': {
     name: 'Standard Operating Procedures',
     title: 'Standard Operating Procedures(SOP)',
   },
   /* Resources Routes */
-  '/resources': { name: 'Resources', title: 'Resource module' },
-  '/resources/adjustments': {
+  '/app/resources': { name: 'Resources', title: 'Resource module' },
+  '/app/resources/adjustments': {
     name: 'Adjustments',
     title: 'List of adjusted resources',
   },
-  '/resources/items': { name: 'Items', title: 'List of available items' },
-  '/resources/itemcategories': {
+  '/app/resources/items': { name: 'Items', title: 'List of available items' },
+  '/app/resources/itemcategories': {
     name: 'Item Categories',
     title: 'List of available item categories',
   },
-  '/resources/unitsofmeasure': {
+  '/app/resources/unitsofmeasure': {
     name: 'Item Unit',
     title: 'List of available units of measure for items',
   },
-  '/resources/stocks': { name: 'Stocks', title: 'List of available stocks' },
-  '/resources/utilization': {
+  '/app/resources/stocks': {
+    name: 'Stocks',
+    title: 'List of available stocks',
+  },
+  '/app/resources/utilization': {
     name: 'Utilizations',
     title: 'Resource utilizations',
   },
-  '/resources/warehouses': {
+  '/app/resources/warehouses': {
     name: 'Warehouses',
     title: 'List of available warehouses',
   },
   /* Stakeholders Routes */
-  '/stakeholders/focalpeople': {
+  '/app/stakeholders/focalpeople': {
     name: 'Focal People',
     title: 'List of all focal persons',
   },
-  '/stakeholders/agencies': {
+  '/app/stakeholders/agencies': {
     name: 'Agencies',
     title: 'List of all agencies',
   },
-  '/stakeholders/notifications': {
+  '/app/stakeholders/notifications': {
     name: 'Notifications',
     title: 'Notify stakeholders',
   },
-  '/stakeholders/roles': {
+  '/app/stakeholders/roles': {
     name: 'Roles',
     title: 'Roles of Stakeholders',
   },
-  '/stakeholders': { name: 'Stakeholders', title: 'Stakeholders module' },
+  '/app/stakeholders': { name: 'Stakeholders', title: 'Stakeholders module' },
 };
 
 // profile menu
@@ -289,11 +292,8 @@ const BaseLayout = props => {
     );
   });
 
-  const breadcrumbItems = [
-    <Breadcrumb.Item key="home">
-      <Link to="/">Home</Link>
-    </Breadcrumb.Item>,
-  ].concat(extraBreadcrumbItems);
+  // TODO clean this up
+  const breadcrumbItems = [].concat(extraBreadcrumbItems);
 
   return (
     <Layout className="BaseLayout">
@@ -335,219 +335,219 @@ const BaseLayout = props => {
       </Header>
       <Content className="BaseLayoutContent">
         <Switch>
-          <SecureRoute exact path={`${baseUrl}`} component={Home} />
-          <SecureRoute exact path={`${baseUrl}alerts`} component={Alerts} />
+          <SecureRoute exact path={`${baseUrl}/`} component={Home} />
+          <SecureRoute exact path={`${baseUrl}/alerts`} component={Alerts} />
           <SecureRoute
-            path={`${baseUrl}alerts/alerts`}
+            path={`${baseUrl}/alerts/alerts`}
             component={AlertsLayout}
           />
           <SecureRoute
-            path={`${baseUrl}alerts/actions`}
+            path={`${baseUrl}/alerts/actions`}
             component={AlertsActionsLayout}
           />
           <SecureRoute
-            path={`${baseUrl}alerts/feeds`}
+            path={`${baseUrl}/alerts/feeds`}
             component={AlertsFeedsLayout}
           />
           <SecureRoute
-            path={`${baseUrl}alerts/feedback`}
+            path={`${baseUrl}/alerts/feedback`}
             component={AlertsFeedbackLayout}
           />
           <SecureRoute
-            path={`${baseUrl}alerts/sources`}
+            path={`${baseUrl}/alerts/sources`}
             component={AlertsSourcesLayout}
           />
           <SecureRoute
-            path={`${baseUrl}alerts/servicerequests`}
+            path={`${baseUrl}/alerts/servicerequests`}
             component={AlertsServiceRequestsLayout}
           />
           <SecureRoute
             exact
-            path={`${baseUrl}assessments`}
+            path={`${baseUrl}/assessments`}
             component={Assessments}
           />
           <SecureRoute
-            path={`${baseUrl}assessments/indicators`}
+            path={`${baseUrl}/assessments/indicators`}
             component={AssessmentsIndicatorsLayout}
           />
           <SecureRoute
-            path={`${baseUrl}assessments/questionnaires`}
+            path={`${baseUrl}/assessments/questionnaires`}
             component={AssessmentsQuestionnairesLayout}
           />
           <SecureRoute
-            path={`${baseUrl}assessments/questions`}
+            path={`${baseUrl}/assessments/questions`}
             component={AssessmentsQuestionsLayout}
           />
           <SecureRoute
-            path={`${baseUrl}assessments/responses`}
+            path={`${baseUrl}/assessments/responses`}
             component={AssessmentsResponsesLayout}
           />
           <SecureRoute
             exact
-            path={`${baseUrl}geographicalfeatures`}
+            path={`${baseUrl}/geographicalfeatures`}
             component={GeographicalFeatures}
           />
           <SecureRoute
-            path={`${baseUrl}geographicalfeatures/administrativeboundaries`}
+            path={`${baseUrl}/geographicalfeatures/administrativeboundaries`}
             component={AdministrativeBoundariesLayout}
           />
           <SecureRoute
-            path={`${baseUrl}geographicalfeatures/districts`}
+            path={`${baseUrl}/geographicalfeatures/districts`}
             component={DistrictsLayout}
           />
           <SecureRoute
-            path={`${baseUrl}geographicalfeatures/evacuationcenters`}
+            path={`${baseUrl}/geographicalfeatures/evacuationcenters`}
             component={EvacuationCentersLayout}
           />
           <SecureRoute
-            path={`${baseUrl}geographicalfeatures/facilities`}
+            path={`${baseUrl}/geographicalfeatures/facilities`}
             component={GeographicalFeaturesFacilitiesLayout}
           />
           <SecureRoute
-            path={`${baseUrl}geographicalfeatures/infrastructure`}
+            path={`${baseUrl}/geographicalfeatures/infrastructure`}
             component={GeographicalFeaturesInfrastructureLayout}
           />
           <SecureRoute
-            path={`${baseUrl}geographicalfeatures/regions`}
+            path={`${baseUrl}/geographicalfeatures/regions`}
             component={RegionsLayout}
           />
           <SecureRoute
-            path={`${baseUrl}geographicalfeatures/subwards`}
+            path={`${baseUrl}/geographicalfeatures/subwards`}
             component={SubWardsLayout}
           />
           <SecureRoute
-            path={`${baseUrl}geographicalfeatures/warehouses`}
+            path={`${baseUrl}/geographicalfeatures/warehouses`}
             component={GeographicalFeaturesWarehousesLayout}
           />
           <SecureRoute
-            path={`${baseUrl}geographicalfeatures/wards`}
+            path={`${baseUrl}/geographicalfeatures/wards`}
             component={WardsLayout}
           />
           <SecureRoute
             exact
-            path={`${baseUrl}incidents`}
+            path={`${baseUrl}/incidents`}
             component={Incidents}
           />
 
           <SecureRoute
-            path={`${baseUrl}incidents/commandcenter`}
+            path={`${baseUrl}/incidents/commandcenter`}
             component={IncidentsCommandCenterLayout}
           />
           <SecureRoute
-            path={`${baseUrl}incidents/assessments`}
+            path={`${baseUrl}/incidents/assessments`}
             component={IncidentsAssessmentsLayout}
           />
           <SecureRoute
-            path={`${baseUrl}incidents/actions`}
+            path={`${baseUrl}/incidents/actions`}
             component={IncidentsActionsLayout}
           />
           <SecureRoute
-            path={`${baseUrl}incidents/feeds`}
+            path={`${baseUrl}/incidents/feeds`}
             component={IncidentsFeedsLayout}
           />
           <SecureRoute
-            path={`${baseUrl}incidents/lossdatabase`}
+            path={`${baseUrl}/incidents/lossdatabase`}
             component={IncidentsLossDatabaseLayout}
           />
           <SecureRoute
-            path={`${baseUrl}incidents/incidenttypes`}
+            path={`${baseUrl}/incidents/incidenttypes`}
             component={IncidentsIncidentTypesLayout}
           />
           <SecureRoute
             exact
-            path={`${baseUrl}plans`}
+            path={`${baseUrl}/plans`}
             component={EmergencyPlans}
           />
           <SecureRoute
-            path={`${baseUrl}plans/planner`}
+            path={`${baseUrl}/plans/planner`}
             component={EmergencyPlanPlannerLayout}
           />
           <SecureRoute
-            path={`${baseUrl}plans/planner/:planId/:activityId`}
+            path={`${baseUrl}/plans/planner/:planId/:activityId`}
             component={EmergencyPlanProceduresLayout}
           />
           <SecureRoute
-            path={`${baseUrl}plans/activations`}
+            path={`${baseUrl}/plans/activations`}
             component={EmergencyPlanActivationsLayout}
           />
           <SecureRoute
-            path={`${baseUrl}plans/activities`}
+            path={`${baseUrl}/plans/activities`}
             component={EmergencyPlanActivitiesLayout}
           />
           <SecureRoute
-            path={`${baseUrl}plans/activities/:activityId`}
+            path={`${baseUrl}/plans/activities/:activityId`}
             component={EmergencyPlanProceduresLayout}
           />
           <SecureRoute
-            path={`${baseUrl}plans/planner/:planId`}
+            path={`${baseUrl}/plans/planner/:planId`}
             component={EmergencyPlanActivitiesLayout}
           />
           <SecureRoute
-            path={`${baseUrl}plans/disseminations`}
+            path={`${baseUrl}/plans/disseminations`}
             component={EmergencyPlanDisseminationsLayout}
           />
           <SecureRoute
-            path={`${baseUrl}plans/drills`}
+            path={`${baseUrl}/plans/drills`}
             component={EmergencyPlanDrillsLayout}
           />
           <SecureRoute
-            path={`${baseUrl}plans/procedures`}
+            path={`${baseUrl}/plans/procedures`}
             component={EmergencyPlanProceduresLayout}
           />
           <SecureRoute
             exact
-            path={`${baseUrl}resources`}
+            path={`${baseUrl}/resources`}
             component={Resources}
           />
           <SecureRoute
             exact
-            path={`${baseUrl}resources/items`}
+            path={`${baseUrl}/resources/items`}
             component={ResourcesItemsLayout}
           />
           <SecureRoute
             exact
-            path={`${baseUrl}resources/itemcategories`}
+            path={`${baseUrl}/resources/itemcategories`}
             component={ResourcesItemCategoriesLayout}
           />
           <SecureRoute
-            path={`${baseUrl}resources/unitsofmeasure`}
+            path={`${baseUrl}/resources/unitsofmeasure`}
             component={ResourcesItemUnitLayout}
           />
           <SecureRoute
-            path={`${baseUrl}resources/warehouses`}
+            path={`${baseUrl}/resources/warehouses`}
             component={ResourcesWarehousesLayout}
           />
           <SecureRoute
-            path={`${baseUrl}resources/stocks`}
+            path={`${baseUrl}/resources/stocks`}
             component={ResourcesStockLayout}
           />
           <SecureRoute
-            path={`${baseUrl}resources/utilization`}
+            path={`${baseUrl}/resources/utilization`}
             component={ResourcesUtilizationLayout}
           />
           <SecureRoute
-            path={`${baseUrl}resources/adjustments`}
+            path={`${baseUrl}/resources/adjustments`}
             component={ResourcesAdjustmentsLayout}
           />
           <SecureRoute
             exact
-            path={`${baseUrl}stakeholders`}
+            path={`${baseUrl}/stakeholders`}
             component={Stakeholders}
           />
           <SecureRoute
-            path={`${baseUrl}stakeholders/notifications`}
+            path={`${baseUrl}/stakeholders/notifications`}
             component={StakeholdersNotificationsLayout}
           />
           <SecureRoute
-            path={`${baseUrl}stakeholders/focalpeople`}
+            path={`${baseUrl}/stakeholders/focalpeople`}
             component={StakeholdersFocalPeopleLayout}
           />
           <SecureRoute
-            path={`${baseUrl}stakeholders/agencies`}
+            path={`${baseUrl}/stakeholders/agencies`}
             component={StakeholdersAgenciesLayout}
           />
           <SecureRoute
-            path={`${baseUrl}stakeholders/roles`}
+            path={`${baseUrl}/stakeholders/roles`}
             component={StakeholdersRolesLayout}
           />
           <SecureRoute component={PageNotFound} />
