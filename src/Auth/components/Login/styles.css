@@ -2,6 +2,8 @@
 .Login {
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 80vh;
 }
 .login-form {
   max-width: 300px;
