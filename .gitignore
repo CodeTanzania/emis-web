@@ -8,6 +8,7 @@
 # editors
 /.vscode
 /.nvimrc
+/.idea
 
 # testing
 /coverage
