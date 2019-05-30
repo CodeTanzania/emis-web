@@ -81,11 +81,13 @@ Clone the project
 git clone https://github.com/CodeTanzania/emis-web.git
 ```
 
+
 Install all required dependencies
 
 ```sh
 yarn install
 ```
+Create .env file based on .env.example
 
 ### Run it in development mode
 
