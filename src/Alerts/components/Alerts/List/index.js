@@ -234,7 +234,7 @@ class AlertList extends Component {
           exportUrl={getAlertsExportUrl({
             filter: { _id: map('_id') },
           })}
-          onNotify={() => onNotify()}
+          onNotify={() => onNotify(selectedAlert)}
           onPaginate={nextPage => {
             paginateAlerts(nextPage);
           }}

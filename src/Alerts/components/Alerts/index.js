@@ -1,3 +1,4 @@
+import { httpActions } from '@codetanzania/emis-api-client';
 import {
   closeAlertForm,
   Connect,
@@ -15,6 +16,8 @@ import AlertsFilters from './Filters';
 import AlertForm from './Form';
 import AlertList from './List';
 import './styles.css';
+
+const { getFocalPeople } = httpActions;
 
 /**
  * @class
@@ -289,7 +292,7 @@ class Alerts extends Component {
 
           {/* Notification Modal modal */}
           <Modal
-            title="Notify Focal Persons"
+            title="Share Alerts"
             visible={showNotificationForm}
             onCancel={this.closeNotificationForm}
             footer={null}
@@ -300,7 +303,7 @@ class Alerts extends Component {
           >
             <NotificationForm
               recipients={selectedAlert}
-              onSearchRecipients={getAlerts}
+              onSearchRecipients={getFocalPeople}
               body={notificationBody}
               onCancel={this.closeNotificationForm}
               onNotify={() => {}}
