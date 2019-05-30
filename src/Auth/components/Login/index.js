@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Icon, Input, Button } from 'antd';
+import logo from '../../../assets/icons/emislogo-blue.png';
 import './styles.css';
 
 /**
@@ -33,7 +34,8 @@ class Login extends React.Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <div className="Login">
-        <Form onSubmit={this.handleSubmit} className="login-form">
+        <img alt="EMIS" src={logo} height={60} width={60} />
+        <Form onSubmit={this.handleSubmit}>
           <Form.Item>
             {getFieldDecorator('username', {
               rules: [
@@ -64,13 +66,6 @@ class Login extends React.Component {
             )}
           </Form.Item>
           <Form.Item>
-            {getFieldDecorator('remember', {
-              valuePropName: 'checked',
-              initialValue: true,
-            })(<Checkbox>Remember me</Checkbox>)}
-            <a className="login-form-forgot" href>
-              Forgot password
-            </a>
             <Button
               type="primary"
               htmlType="submit"
@@ -78,7 +73,7 @@ class Login extends React.Component {
             >
               Log in
             </Button>
-            Or <a href>register now!</a>
+            <div className="version-text">version: 1.0.0</div>
           </Form.Item>
         </Form>
       </div>

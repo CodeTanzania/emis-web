@@ -1,16 +1,25 @@
 
 .Login {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 80vh;
 }
-.login-form {
-  max-width: 300px;
+
+.Login img {
+  margin: 10px;
 }
-.login-form-forgot {
+
+.version-text {
+  padding: 10px;
   float: right;
 }
 .login-form-button {
   width: 100%;
+}
+
+/* override antd css*/
+.ant-form {
+  width: 16%;
 }
