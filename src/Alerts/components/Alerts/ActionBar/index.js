@@ -1,10 +1,13 @@
 import { refreshAlerts, paginateAlerts } from '@codetanzania/emis-api-states';
+import { httpActions } from '@codetanzania/emis-api-client';
 import { Button, Checkbox, Col, Pagination, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
 import './styles.css';
 import { notifyError, notifySuccess } from '../../../../util';
 
+/* constants */
+const { getAlertsExportUrl } = httpActions;
 // eslint-disable-next-line jsdoc/require-returns
 /**
  * @function
@@ -12,7 +15,7 @@ import { notifyError, notifySuccess } from '../../../../util';
  * @description  Render action bar for actions which are applicable
  * to list content
  *
- * @param {Object} props props object
+ * @param {object} props props object
  * @param {number} props.page current page
  * @param {number} props.total total number of alerts
  * @param {Function} props.onFilter function to filter alerts
@@ -61,13 +64,15 @@ const AlertsActionBar = ({ page, total, onFilter }) => (
       </Col>
 
       <Col span={1} xl={1}>
-        <Button
-          type="circle"
-          icon="cloud-download"
-          title="Export selected Alerts"
-          className="actionButton"
-          size="large"
-        />
+        <a href={getAlertsExportUrl()} download>
+          <Button
+            type="circle"
+            icon="cloud-download"
+            title="Export selected Alerts"
+            className="actionButton"
+            size="large"
+          />
+        </a>
       </Col>
 
       <Col
