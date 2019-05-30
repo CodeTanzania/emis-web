@@ -1,7 +1,4 @@
 .Alerts {
-  padding: 40px;
+  padding: 0 40px;
 }
 
-.Alerts .searchBox {
-  width: 50%;
-}

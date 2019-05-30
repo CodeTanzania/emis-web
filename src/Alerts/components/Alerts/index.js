@@ -28,6 +28,8 @@ class Alerts extends Component {
   state = {
     showFilters: false,
     isEditForm: false,
+    // showNotificationForm: false,
+    // notificationBody: undefined,
   };
 
   static propTypes = {
@@ -165,8 +167,56 @@ class Alerts extends Component {
     openAlertForm();
   };
 
+  /**
+   * @function
+   * @name openNotificationForm
+   * @description Handle on notify focalPeople
+   *
+   * @param {Array<object>} alert List of focalPeople selected to be notified
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openNotificationForm = () => {
+    // this.setState({
+    //   showNotificationForm: true,
+    // });
+  };
+
+  /**
+   * @function
+   * @name closeNotificationForm
+   * @description Handle on notify alert
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeNotificationForm = () => {
+    // this.setState({ showNotificationForm: false });
+  };
+
+  /**
+   * @function
+   * @name handleAfterCloseForm
+   * @description Perform post close form cleanups
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleAfterCloseForm = () => {
     this.setState({ isEditForm: false });
+  };
+
+  /**
+   * @function
+   * @name handleAfterCloseNotificationForm
+   * @description Perform post close notification form cleanups
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleAfterCloseNotificationForm = () => {
+    // this.setState({ notificationBody: undefined });
   };
 
   render() {
@@ -201,6 +251,7 @@ class Alerts extends Component {
           ]}
         />
         {/* end Topbar */}
+
         <div className="Alerts">
           <AlertList
             total={total}
@@ -208,6 +259,8 @@ class Alerts extends Component {
             page={page}
             loading={loading}
             onEdit={this.handleEdit}
+            onFilter={this.openFiltersModal}
+            onNotify={this.openNotificationForm}
           />
           {/* end list */}
 
