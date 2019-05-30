@@ -6,16 +6,14 @@ import {
   searchAlerts,
   selectAlert,
 } from '@codetanzania/emis-api-states';
-import { Button, Col, Input, Modal, Row } from 'antd';
+import { Modal } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import AlertsActionBar from './ActionBar';
+import React, { Component, Fragment } from 'react';
+import Topbar from '../../../components/Topbar';
 import AlertsFilters from './Filters';
 import AlertForm from './Form';
 import AlertList from './List';
 import './styles.css';
-
-const { Search } = Input;
 
 /**
  * @class
@@ -62,13 +60,15 @@ class Alerts extends Component {
     page: PropTypes.number.isRequired,
     showForm: PropTypes.bool.isRequired,
     total: PropTypes.number.isRequired,
+    searchQuery: PropTypes.string,
   };
 
   static defaultProps = {
     alert: null,
+    searchQuery: undefined,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     getAlerts();
   }
 
@@ -139,7 +139,7 @@ class Alerts extends Component {
    * @function
    * @name searchAlerts
    *
-   * @param {Object} event - Event instance
+   * @param {object} event - Event instance
    * @returns {undefined} - Nothing is returned
    *
    * @version 0.1.0
@@ -154,7 +154,7 @@ class Alerts extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} alert alert to be edited
+   * @param {object} alert alert to be edited
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -176,81 +176,75 @@ class Alerts extends Component {
       loading,
       posting,
       page,
+      searchQuery,
       showForm,
       total,
     } = this.props;
     const { showFilters, isEditForm } = this.state;
     return (
-      <div className="Alerts">
-        <Row>
-          <Col span={12}>
-            {/* search input component */}
-            <Search
-              size="large"
-              placeholder="Search for alerts here ..."
-              onChange={this.searchAlerts}
-            />
-            {/* end search input component */}
-          </Col>
-          {/* primary actions */}
-          <Col span={3} offset={9}>
-            <Button
-              type="primary"
-              icon="plus"
-              size="large"
-              title="Add New Alert"
-              onClick={this.openForm}
-            >
-              New Alert
-            </Button>
-          </Col>
-          {/* end primary actions */}
-        </Row>
-
-        {/* list header */}
-        <AlertsActionBar
-          total={total}
-          page={page}
-          onFilter={this.openFiltersModal}
+      <Fragment>
+        <Topbar
+          search={{
+            size: 'large',
+            placeholder: 'Search for alert here ...',
+            onChange: this.searchAlerts,
+            value: searchQuery,
+          }}
+          actions={[
+            {
+              label: 'New Alert',
+              icon: 'plus',
+              size: 'large',
+              title: 'Add New Alert',
+              onClick: this.openForm,
+            },
+          ]}
         />
-        {/* end list header */}
-        {/* list starts */}
-        <AlertList alerts={alerts} loading={loading} onEdit={this.handleEdit} />
-        {/* end list */}
-
-        {/* filter modal */}
-        <Modal
-          title="Filter Alerts"
-          visible={showFilters}
-          onCancel={this.closeFiltersModal}
-          destroyOnClose
-          maskClosable={false}
-          width={800}
-          footer={null}
-        >
-          <AlertsFilters onCancel={this.closeFiltersModal} />
-        </Modal>
-        {/* end filter modal */}
-
-        {/* create/edit form modal */}
-        <Modal
-          title={isEditForm ? 'Edit Alert' : 'Add New Alert'}
-          visible={showForm}
-          footer={null}
-          maskClosable={false}
-          onCancel={this.closeForm}
-          width="60%"
-          destroyOnClose
-        >
-          <AlertForm
-            posting={posting}
-            onCancel={this.closeForm}
-            isEditForm={isEditForm}
-            alert={alert}
+        {/* end Topbar */}
+        <div className="Alerts">
+          <AlertList
+            total={total}
+            alerts={alerts}
+            page={page}
+            loading={loading}
+            onEdit={this.handleEdit}
           />
-        </Modal>
-        {/* end create/edit form modal */}
-      </div>
+          {/* end list */}
+
+          {/* filter modal */}
+          <Modal
+            title="Filter Alerts"
+            visible={showFilters}
+            onCancel={this.closeFiltersModal}
+            destroyOnClose
+            maskClosable={false}
+            width={800}
+            footer={null}
+          >
+            <AlertsFilters onCancel={this.closeFiltersModal} />
+          </Modal>
+          {/* end filter modal */}
+
+          {/* create/edit form modal */}
+          <Modal
+            title={isEditForm ? 'Edit Alert' : 'Add New Alert'}
+            visible={showForm}
+            footer={null}
+            maskClosable={false}
+            onCancel={this.closeForm}
+            width="60%"
+            destroyOnClose
+          >
+            <AlertForm
+              posting={posting}
+              onCancel={this.closeForm}
+              isEditForm={isEditForm}
+              alert={alert}
+            />
+          </Modal>
+          {/* end create/edit form modal */}
+        </div>
+      </Fragment>
     );
   }
 }
@@ -263,4 +257,5 @@ export default Connect(Alerts, {
   page: 'alerts.page',
   total: 'alerts.total',
   showForm: 'alerts.showForm',
+  searchQuery: 'alerts.q',
 });
