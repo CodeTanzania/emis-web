@@ -77,6 +77,19 @@ class ChangePassword extends React.Component {
         onSubmit={this.handleSubmit}
         className="ChangePassword"
       >
+        <Form.Item label="Old Password" hasFeedback>
+          {getFieldDecorator('password', {
+            rules: [
+              {
+                required: true,
+                message: 'Please input your old password!',
+              },
+              {
+                validator: this.validateToNextPassword,
+              },
+            ],
+          })(<Input.Password />)}
+        </Form.Item>
         <Form.Item label="New Password" hasFeedback>
           {getFieldDecorator('password', {
             rules: [
