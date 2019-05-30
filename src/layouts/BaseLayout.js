@@ -1,17 +1,8 @@
-import {
-  Breadcrumb,
-  Button,
-  Col,
-  Dropdown,
-  Icon,
-  Layout,
-  Menu,
-  Popover,
-  Row,
-} from 'antd';
+import { Breadcrumb, Button, Col, Layout, Popover, Row } from 'antd';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, Switch } from 'react-router-dom';
+import UserMenu from './components/UserMenu';
 import Alerts from '../Alerts';
 import AlertsActionsLayout from '../Alerts/layouts/Actions';
 import AlertsLayout from '../Alerts/layouts/Alerts';
@@ -237,20 +228,6 @@ const breadcrumbNameMap = {
   '/app/stakeholders': { name: 'Stakeholders', title: 'Stakeholders module' },
 };
 
-// profile menu
-const userMenu = (
-  <Menu>
-    <Menu.Item key="1">
-      <Icon type="profile" />
-      Profile
-    </Menu.Item>
-    <Menu.Item key="2">
-      <Icon type="logout" />
-      Logout
-    </Menu.Item>
-  </Menu>
-);
-
 /**
  * @function
  * @name BaseLayout
@@ -322,12 +299,7 @@ const BaseLayout = props => {
                 </Col>
               )}
               <Col span={12}>
-                <Dropdown overlay={userMenu}>
-                  <Button
-                    style={{ marginLeft: 8, borderRadius: '50%' }}
-                    icon="user"
-                  />
-                </Dropdown>
+                <UserMenu />
               </Col>
             </Row>
           </Col>
