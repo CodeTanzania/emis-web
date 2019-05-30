@@ -53,6 +53,7 @@ class AlertList extends Component {
     total: PropTypes.number.isRequired,
     onFilter: PropTypes.func.isRequired,
     onNotify: PropTypes.func.isRequired,
+    onShare: PropTypes.func.isRequired,
   };
 
   state = {
@@ -213,6 +214,7 @@ class AlertList extends Component {
       alerts,
       loading,
       onEdit,
+      onShare,
       page,
       total,
       onFilter,
@@ -325,6 +327,9 @@ class AlertList extends Component {
                     }
                   )
                 }
+                onShare={() => {
+                  onShare(alert);
+                }}
               />
             );
           }}

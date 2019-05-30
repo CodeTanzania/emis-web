@@ -225,6 +225,24 @@ class Alerts extends Component {
     this.setState({ notificationBody: undefined });
   };
 
+  /**
+   * @function
+   * @name handleShare
+   * @description Handle share single alert action
+   *
+   * @param {object} alert alert to be shared
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleShare = alert => {
+    const message = `${alert.event}\nSeverity: ${alert.severity}\nUrgency: ${
+      alert.urgency
+    }\nExpected: ${alert.expectedAt}\nExpire: ${alert.expiredAt}`;
+
+    this.setState({ notificationBody: message, showNotificationForm: true });
+  };
+
   render() {
     const {
       alerts,
@@ -273,6 +291,7 @@ class Alerts extends Component {
             onEdit={this.handleEdit}
             onFilter={this.openFiltersModal}
             onNotify={this.openNotificationForm}
+            onShare={this.handleShare}
           />
           {/* end list */}
 

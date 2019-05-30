@@ -35,6 +35,7 @@ class AlertsListItem extends Component {
     isSelected: PropTypes.bool.isRequired,
     onSelectItem: PropTypes.func.isRequired,
     onDeselectItem: PropTypes.func.isRequired,
+    onShare: PropTypes.func.isRequired,
     onArchive: PropTypes.func.isRequired,
     severity: PropTypes.func.isRequired,
     urgency: PropTypes.func.isRequired,
@@ -164,6 +165,7 @@ class AlertsListItem extends Component {
       color,
       certainty,
       onEdit,
+      onShare,
       event,
       headline,
       description,
@@ -246,6 +248,11 @@ class AlertsListItem extends Component {
                   name: 'Edit Alert',
                   title: 'Update Alert',
                   onClick: onEdit,
+                }}
+                share={{
+                  name: 'Send Alert',
+                  title: 'Send Alert to the focal people',
+                  onClick: onShare,
                 }}
                 archive={{
                   name: 'Archive Alert',
