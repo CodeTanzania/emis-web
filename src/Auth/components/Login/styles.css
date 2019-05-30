@@ -20,6 +20,6 @@
 }
 
 /* override antd css*/
-.ant-form {
-  width: 16%;
+.Login .ant-form {
+  width: 300px;
 }

@@ -8,6 +8,15 @@ class UserMenu extends React.Component {
     confirmLoading: false,
   };
 
+  /* eslint-disable react/sort-comp */
+  showModal = ({ key }) => {
+    // open modal when change password item is clicked
+    if (key === '1')
+      this.setState({
+        visible: true,
+      });
+  };
+
   menu = (
     <Menu onClick={this.showModal}>
       <Menu.Item key="1">
@@ -20,14 +29,6 @@ class UserMenu extends React.Component {
       </Menu.Item>
     </Menu>
   );
-
-  showModal = ({ key }) => {
-    // open modal when change password item is clicked
-    if (key === '1')
-      this.setState({
-        visible: true,
-      });
-  };
 
   handleOk = () => {
     this.setState({
