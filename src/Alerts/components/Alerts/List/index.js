@@ -3,6 +3,7 @@ import { httpActions } from '@codetanzania/emis-api-client';
 import { paginateAlerts, refreshAlerts } from '@codetanzania/emis-api-states';
 import { List } from 'antd';
 import moment from 'moment';
+import intersectionBy from 'lodash/intersectionBy';
 import concat from 'lodash/concat';
 import map from 'lodash/map';
 import remove from 'lodash/remove';
@@ -214,6 +215,11 @@ class AlertList extends Component {
       onNotify,
     } = this.props;
     const { selectedAlert, selectedPages } = this.state;
+    const selectedAlertCount = intersectionBy(
+      this.state.selectedAlert,
+      alerts,
+      '_id'
+    ).length;
 
     const sortedAlerts = this.sortByUpdatedAt(this.sortByExpiredAt(alerts));
     return (
@@ -223,6 +229,7 @@ class AlertList extends Component {
           itemName="Alerts"
           page={page}
           total={total}
+          selectedItemsCount={selectedAlertCount}
           onFilter={onFilter}
           exportUrl={getAlertsExportUrl({
             filter: { _id: map('_id') },
