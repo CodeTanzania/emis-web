@@ -3,7 +3,11 @@ import { httpActions } from '@codetanzania/emis-api-client';
 import { paginateAlerts, refreshAlerts } from '@codetanzania/emis-api-states';
 import { List } from 'antd';
 import moment from 'moment';
+import concat from 'lodash/concat';
 import map from 'lodash/map';
+import remove from 'lodash/remove';
+import uniq from 'lodash/uniq';
+import uniqBy from 'lodash/uniqBy';
 import PropTypes from 'prop-types';
 import React, { Fragment, Component } from 'react';
 import ListHeader from '../../../../components/ListHeader';
@@ -44,6 +48,101 @@ class AlertList extends Component {
     total: PropTypes.number.isRequired,
     onFilter: PropTypes.func.isRequired,
     onNotify: PropTypes.func.isRequired,
+  };
+
+  state = {
+    selectedAlert: [],
+    selectedPages: [],
+  };
+
+  /**
+   * @function
+   * @name handleOnSelectAlert
+   * @description Handle select a single alert action
+   *
+   * @param {object} alert selected alert object
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleOnSelectAlert = alert => {
+    const { selectedAlert } = this.state;
+    this.setState({
+      selectedAlert: concat([], selectedAlert, alert),
+    });
+  };
+
+  /**
+   * @function
+   * @name handleSelectAll
+   * @description Handle select all alerts actions from current page
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleSelectAll = () => {
+    const { selectedAlert, selectedPages } = this.state;
+    const { alerts, page } = this.props;
+    const selectedList = uniqBy([...selectedAlert, ...alerts], '_id');
+    const pages = uniq([...selectedPages, page]);
+    this.setState({
+      selectedAlert: selectedList,
+      selectedPages: pages,
+    });
+  };
+
+  /**
+   * @function
+   * @name handleDeselectAll
+   * @description Handle deselect all alerts in a current page
+   *
+   * @returns {undefined} undefined
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleDeselectAll = () => {
+    const { alerts, page } = this.props;
+    const { selectedAlert, selectedPages } = this.state;
+    const selectedList = uniqBy([...selectedAlert], '_id');
+    const pages = uniq([...selectedPages]);
+
+    remove(pages, item => item === page);
+
+    alerts.forEach(alert => {
+      remove(
+        selectedList,
+        item => item._id === alert._id // eslint-disable-line
+      );
+    });
+
+    this.setState({
+      selectedAlert: selectedList,
+      selectedPages: pages,
+    });
+  };
+
+  /**
+   * @function
+   * @name handleOnDeselectAlert
+   * @description Handle deselect a single focalPerson action
+   *
+   * @param {object} alert focalPerson to be removed from selected focalPeople
+   * @returns {undefined} undefined
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleOnDeselectAlert = alert => {
+    const { selectedAlert } = this.state;
+    const selectedList = [...selectedAlert];
+
+    remove(
+      selectedList,
+      item => item._id === alert._id // eslint-disable-line
+    );
+
+    this.setState({ selectedAlert: selectedList });
   };
 
   /**
@@ -114,6 +213,8 @@ class AlertList extends Component {
       onFilter,
       onNotify,
     } = this.props;
+    const { selectedAlert, selectedPages } = this.state;
+
     const sortedAlerts = this.sortByUpdatedAt(this.sortByExpiredAt(alerts));
     return (
       <Fragment>
@@ -144,9 +245,14 @@ class AlertList extends Component {
           }
         />
         {/* end toolbar */}
-        {/* focalPerson list header */}
-        <ListHeader headerLayout={headerLayout} />
-        {/* end focalPerson list header */}{' '}
+        {/* alert list header */}
+        <ListHeader
+          headerLayout={headerLayout}
+          onSelectAll={this.handleSelectAll}
+          onDeselectAll={this.handleDeselectAll}
+          isBulkSelected={selectedPages.includes(page)}
+        />
+        {/* end alert list header */}{' '}
         <List
           loading={loading}
           dataSource={sortedAlerts}
@@ -182,6 +288,18 @@ class AlertList extends Component {
                 expiredAt={expiredAt}
                 expectedAt={expectedAt}
                 severity={severity}
+                isSelected={
+                  // eslint-disable-next-line
+                  map(selectedAlert, item => item._id).includes(
+                    alert._id // eslint-disable-line
+                  )
+                }
+                onSelectItem={() => {
+                  this.handleOnSelectAlert(alert);
+                }}
+                onDeselectItem={() => {
+                  this.handleOnDeselectAlert(alert);
+                }}
                 onEdit={() => onEdit(alert)}
               />
             );

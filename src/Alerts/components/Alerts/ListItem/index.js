@@ -29,6 +29,9 @@ class AlertsListItem extends Component {
     expiredAt: PropTypes.string.isRequired,
     expectedAt: PropTypes.string.isRequired,
     onEdit: PropTypes.func.isRequired,
+    isSelected: PropTypes.bool.isRequired,
+    onSelectItem: PropTypes.func.isRequired,
+    onDeselectItem: PropTypes.func.isRequired,
     severity: PropTypes.func.isRequired,
     urgency: PropTypes.func.isRequired,
   };
@@ -38,12 +41,50 @@ class AlertsListItem extends Component {
     headline: '',
   };
 
+  /**
+   * @function
+   * @name handleMouseEnter
+   * @description Handle on MouseEnter ListItem event
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleMouseEnter = () => {
     this.setState({ isHovered: true });
   };
 
+  /**
+   * @function
+   * @name handleMouseEnter
+   * @description Handle on MouseLeave ListItem event
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleMouseLeave = () => {
     this.setState({ isHovered: false });
+  };
+
+  /**
+   * @function
+   * @name handleToggleSelect
+   * @description Handle Toggling List Item checkbox
+   *
+   * @param {object} event - Event object
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleToggleSelect = event => {
+    const { isSelected } = this.state;
+    const { onSelectItem, onDeselectItem } = this.props;
+
+    this.setState({ isSelected: !isSelected });
+    if (event.target.checked) {
+      onSelectItem();
+    } else {
+      onDeselectItem();
+    }
   };
 
   // eslint-disable-next-line jsdoc/require-returns-check
@@ -69,7 +110,7 @@ class AlertsListItem extends Component {
    * @name formatTime
    * @description formats date to ddd, MMM DD YYYY hA format
    *
-   * @param {Object} date date object
+   * @param {object} date date object
    * @returns {string} formatted date
    *
    * @version 0.1.0
@@ -83,7 +124,7 @@ class AlertsListItem extends Component {
    * @name timeAgo
    * @description creates relative date
    *
-   * @param {Object} date date object
+   * @param {object} date date object
    * @returns {string} relative time
    *
    * @version 0.1.0
@@ -107,8 +148,32 @@ class AlertsListItem extends Component {
       severity,
     } = this.props;
     const { isHovered } = this.state;
+    const { isSelected } = this.props;
     const eventTitle = description || headline;
     const avatarBackgroundColor = color || randomColor();
+    let sideComponent = null;
+
+    if (isSelected) {
+      sideComponent = (
+        <Checkbox
+          className="Checkbox"
+          onChange={this.handleToggleSelect}
+          checked={isSelected}
+        />
+      );
+    } else {
+      sideComponent = isHovered ? (
+        <Checkbox
+          className="Checkbox"
+          onChange={this.handleToggleSelect}
+          checked={isSelected}
+        />
+      ) : (
+        <Avatar style={{ backgroundColor: avatarBackgroundColor }}>
+          {abbreviation}
+        </Avatar>
+      );
+    }
     return (
       <div
         className="AlertsListItem"
@@ -116,15 +181,7 @@ class AlertsListItem extends Component {
         onMouseLeave={this.handleMouseLeave}
       >
         <Row>
-          <Col span={1}>
-            {isHovered ? (
-              <Checkbox className="Checkbox" />
-            ) : (
-              <Avatar style={{ backgroundColor: avatarBackgroundColor }}>
-                {abbreviation}
-              </Avatar>
-            )}
-          </Col>
+          <Col span={1}>{sideComponent}</Col>
           <Col span={7} title={eventTitle}>
             {event}
           </Col>
