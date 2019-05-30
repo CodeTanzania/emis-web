@@ -1,9 +1,12 @@
-import { Avatar, Checkbox, Col, Icon, Row } from 'antd';
+import { Avatar, Checkbox, Col, Row, Modal } from 'antd';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import randomColor from 'randomcolor';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
+import ListItemActions from '../../../../components/ListItemActions';
 import './styles.css';
+
+const { confirm } = Modal;
 
 /**
  * @class
@@ -32,6 +35,7 @@ class AlertsListItem extends Component {
     isSelected: PropTypes.bool.isRequired,
     onSelectItem: PropTypes.func.isRequired,
     onDeselectItem: PropTypes.func.isRequired,
+    onArchive: PropTypes.func.isRequired,
     severity: PropTypes.func.isRequired,
     urgency: PropTypes.func.isRequired,
   };
@@ -85,6 +89,27 @@ class AlertsListItem extends Component {
     } else {
       onDeselectItem();
     }
+  };
+
+  /**
+   * @function
+   * @name showArchiveConfirm
+   * @description show confirm modal before archiving a alert
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  showArchiveConfirm = () => {
+    const { event, onArchive } = this.props;
+    confirm({
+      title: `Are you sure you want to archive ${event} ?`,
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        onArchive();
+      },
+    });
   };
 
   // eslint-disable-next-line jsdoc/require-returns-check
@@ -194,8 +219,8 @@ class AlertsListItem extends Component {
           <Col title={this.formatTime(expectedAt)} span={2}>
             {this.timeAgo(expiredAt)}
           </Col>
-          <Col span={3}>{source}</Col>
-          <Col span={3}>
+          <Col span={4}>{source}</Col>
+          {/* <Col span={3}>
             {isHovered && (
               <Fragment>
                 <Icon
@@ -212,6 +237,22 @@ class AlertsListItem extends Component {
                   onClick={() => {}}
                 />
               </Fragment>
+            )}
+          </Col> */}
+          <Col span={2}>
+            {isHovered && (
+              <ListItemActions
+                edit={{
+                  name: 'Edit Alert',
+                  title: 'Update Alert',
+                  onClick: onEdit,
+                }}
+                archive={{
+                  name: 'Archive Alert',
+                  title: 'Remove Alert from list of active alerts',
+                  onClick: this.showArchiveConfirm,
+                }}
+              />
             )}
           </Col>
         </Row>

@@ -1,6 +1,10 @@
 import { httpActions } from '@codetanzania/emis-api-client';
 
-import { paginateAlerts, refreshAlerts } from '@codetanzania/emis-api-states';
+import {
+  paginateAlerts,
+  refreshAlerts,
+  deleteAlert,
+} from '@codetanzania/emis-api-states';
 import { List } from 'antd';
 import moment from 'moment';
 import intersectionBy from 'lodash/intersectionBy';
@@ -308,6 +312,19 @@ class AlertList extends Component {
                   this.handleOnDeselectAlert(alert);
                 }}
                 onEdit={() => onEdit(alert)}
+                onArchive={() =>
+                  deleteAlert(
+                    alert._id, // eslint-disable-line
+                    () => {
+                      notifySuccess('Alert was archived successfully');
+                    },
+                    () => {
+                      notifyError(
+                        'An Error occurred while archiving alert please contact system administrator'
+                      );
+                    }
+                  )
+                }
               />
             );
           }}
