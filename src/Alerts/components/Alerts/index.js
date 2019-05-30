@@ -10,6 +10,7 @@ import { Modal } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import Topbar from '../../../components/Topbar';
+import NotificationForm from '../../../components/NotificationForm';
 import AlertsFilters from './Filters';
 import AlertForm from './Form';
 import AlertList from './List';
@@ -28,8 +29,9 @@ class Alerts extends Component {
   state = {
     showFilters: false,
     isEditForm: false,
-    // showNotificationForm: false,
-    // notificationBody: undefined,
+    showNotificationForm: false,
+    notificationBody: undefined,
+    selectedAlert: [],
   };
 
   static propTypes = {
@@ -170,17 +172,18 @@ class Alerts extends Component {
   /**
    * @function
    * @name openNotificationForm
-   * @description Handle on notify focalPeople
+   * @description Handle on notify
    *
    * @param {Array<object>} alert List of focalPeople selected to be notified
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  openNotificationForm = () => {
-    // this.setState({
-    //   showNotificationForm: true,
-    // });
+  openNotificationForm = alerts => {
+    this.setState({
+      selectedAlert: alerts,
+      showNotificationForm: true,
+    });
   };
 
   /**
@@ -192,7 +195,7 @@ class Alerts extends Component {
    * @since 0.1.0
    */
   closeNotificationForm = () => {
-    // this.setState({ showNotificationForm: false });
+    this.setState({ showNotificationForm: false });
   };
 
   /**
@@ -216,7 +219,7 @@ class Alerts extends Component {
    * @since 0.1.0
    */
   handleAfterCloseNotificationForm = () => {
-    // this.setState({ notificationBody: undefined });
+    this.setState({ notificationBody: undefined });
   };
 
   render() {
@@ -230,7 +233,13 @@ class Alerts extends Component {
       showForm,
       total,
     } = this.props;
-    const { showFilters, isEditForm } = this.state;
+    const {
+      showFilters,
+      isEditForm,
+      showNotificationForm,
+      selectedAlert,
+      notificationBody,
+    } = this.state;
     return (
       <Fragment>
         <Topbar
@@ -277,6 +286,27 @@ class Alerts extends Component {
             <AlertsFilters onCancel={this.closeFiltersModal} />
           </Modal>
           {/* end filter modal */}
+
+          {/* Notification Modal modal */}
+          <Modal
+            title="Notify Focal Persons"
+            visible={showNotificationForm}
+            onCancel={this.closeNotificationForm}
+            footer={null}
+            destroyOnClose
+            maskClosable={false}
+            width="40%"
+            afterClose={this.handleAfterCloseNotificationForm}
+          >
+            <NotificationForm
+              recipients={selectedAlert}
+              onSearchRecipients={getAlerts}
+              body={notificationBody}
+              onCancel={this.closeNotificationForm}
+              onNotify={() => {}}
+            />
+          </Modal>
+          {/* end Notification modal */}
 
           {/* create/edit form modal */}
           <Modal
