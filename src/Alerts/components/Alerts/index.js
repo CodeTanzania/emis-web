@@ -177,7 +177,7 @@ class Alerts extends Component {
    * @name openNotificationForm
    * @description Handle on notify
    *
-   * @param {Array<object>} alert List of focalPeople selected to be notified
+   * @param {Array<object>} alerts List of alerts selected to be notified
    *
    * @version 0.1.0
    * @since 0.1.0

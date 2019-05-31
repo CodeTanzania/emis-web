@@ -29,7 +29,7 @@ const headerLayout = [
   { span: 2, header: 'Urgency' },
   { span: 2, header: 'Expected' },
   { span: 2, header: 'Expires' },
-  { span: 3, header: 'Source' },
+  { span: 4, header: 'Source' },
 ];
 
 class AlertList extends Component {
@@ -131,9 +131,9 @@ class AlertList extends Component {
   /**
    * @function
    * @name handleOnDeselectAlert
-   * @description Handle deselect a single focalPerson action
+   * @description Handle deselect a single alert action
    *
-   * @param {object} alert focalPerson to be removed from selected focalPeople
+   * @param {object} alert alert to be removed from selected alerts
    * @returns {undefined} undefined
    *
    * @version 0.1.0

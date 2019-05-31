@@ -222,25 +222,6 @@ class AlertsListItem extends Component {
             {this.timeAgo(expiredAt)}
           </Col>
           <Col span={4}>{source}</Col>
-          {/* <Col span={3}>
-            {isHovered && (
-              <Fragment>
-                <Icon
-                  type="edit"
-                  title="Update Alert"
-                  className="actionIcon"
-                  onClick={onEdit}
-                />
-
-                <Icon
-                  type="mail"
-                  title="Send Alert"
-                  className="actionIcon"
-                  onClick={() => {}}
-                />
-              </Fragment>
-            )}
-          </Col> */}
           <Col span={2}>
             {isHovered && (
               <ListItemActions
