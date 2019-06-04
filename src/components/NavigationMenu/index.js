@@ -81,21 +81,21 @@ const NavigationMenuItem = ({ name, icon, path, disabled, description }) => (
  */
 const NavigationMenu = ({ routes, match }) => {
   let url = '';
-  let colSpan = 12;
+  let colSpan = { span: 12 };
 
   if (match) {
     ({ url } = match);
   }
 
   if (routes.length > 4) {
-    colSpan = 8;
+    colSpan = { xxl: 8, xl: 8, lg: 8, md: 8, sm: 12, xs: 12 };
   }
 
   return (
     <div className="NavigationMenu">
       <Row type="flex" align="middle">
         {routes.map(route => (
-          <Col key={route.path} span={colSpan}>
+          <Col key={route.path} {...colSpan}>
             <NavigationMenuItem
               name={route.name}
               icon={route.icon}

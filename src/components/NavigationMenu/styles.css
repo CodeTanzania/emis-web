@@ -26,3 +26,15 @@
 .NavigationMenu .NavigationMenuItem .text-disabled {
   color: #a0b0b8;
 }
+
+@media screen and (max-width: 768px) {
+  .NavigationMenu {
+    width: 80%;
+  }
+}
+ 
+ @media screen and (max-width: 426px) {
+  .NavigationMenu {
+    width: 100%;
+  }
+}
