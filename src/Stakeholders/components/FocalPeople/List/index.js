@@ -22,11 +22,11 @@ import FocalPersonsListItem from '../ListItem';
 /* constants */
 const headerLayout = [
   { span: 3, header: 'Name' },
+  { span: 2, header: 'Mobile Number' },
+  { span: 4, header: 'Email Address' },
   { span: 2, header: 'Agency' },
   { span: 5, header: 'Role' },
   { span: 5, header: 'Area' },
-  { span: 2, header: 'Mobile Number' },
-  { span: 4, header: 'Email Address' },
 ];
 const { getFocalPeopleExportUrl } = httpActions;
 

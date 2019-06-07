@@ -109,13 +109,13 @@ class FocalPeopleListItem extends Component {
   render() {
     const {
       abbreviation,
+      mobile,
+      email,
       agency,
       agencyAbbreviation,
       name,
       role,
       location,
-      email,
-      mobile,
       onEdit,
       onShare,
     } = this.props;
@@ -155,13 +155,13 @@ class FocalPeopleListItem extends Component {
         <Row>
           <Col span={1}>{sideComponent}</Col>
           <Col span={3}>{name}</Col>
+          <Col span={2}>{mobile}</Col>
+          <Col span={4}>{email}</Col>
           <Col span={2} title={agency}>
             {agencyAbbreviation}
           </Col>
           <Col span={5}>{role}</Col>
           <Col span={5}>{location}</Col>
-          <Col span={2}>{mobile}</Col>
-          <Col span={4}>{email}</Col>
           <Col span={1}>
             {isHovered && (
               <ListItemActions
