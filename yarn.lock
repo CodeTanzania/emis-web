@@ -940,10 +940,10 @@
     lodash ">=4.17.11"
     moment ">=2.24.0"
 
-"@codetanzania/emis-api-states@^0.10.3":
-  version "0.10.3"
-  resolved "https://registry.yarnpkg.com/@codetanzania/emis-api-states/-/emis-api-states-0.10.3.tgz#021ff4d05c64484b9b51864711544242360b2d6d"
-  integrity sha512-QNX9x70w11eClEGPOj7lkAF7M6dRC5MrtrO9llqS9La1uAX2bWzvI5DcEhTUT+SK5X1TobD18/JqivIK8tb2Dw==
+"@codetanzania/emis-api-states@^0.11.0":
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/@codetanzania/emis-api-states/-/emis-api-states-0.11.0.tgz#a5ecf256bd4e57ca8728d94e2d835b8ec05ea2c1"
+  integrity sha512-FQlkXvUKXvRjxk4remqG85QDYcP9yvVkDmyIJiiof+pyZMkOuyMgpnW8BxFtqXnviNE5/d/03hyKiqTEHph5qw==
 
 "@commitlint/cli@8.0.0", "@commitlint/cli@^8.0.0":
   version "8.0.0"
