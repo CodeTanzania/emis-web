@@ -24,7 +24,7 @@
     "risk"
   ],
   "dependencies": {
-    "@codetanzania/emis-api-client": "^0.14.1",
+    "@codetanzania/emis-api-client": "^0.15.1",
     "@codetanzania/emis-api-states": "^0.11.0",
     "antd": "^3.19.2",
     "axios": "^0.19.0",
@@ -80,12 +80,7 @@
     "url": "https://github.com/CodeTanzania/emis-web/issues"
   },
   "homepage": ".",
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
+  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"],
   "engines": {
     "node": ">=8.11.1",
     "npm": ">=5.6.0"
@@ -96,19 +91,11 @@
     }
   },
   "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
+    "extends": ["@commitlint/config-conventional"]
   },
   "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "git add"
-    ],
-    ".{css,scss}": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.js": ["eslint --fix", "git add"],
+    ".{css,scss}": ["prettier --write", "git add"]
   },
   "husky": {
     "hooks": {
