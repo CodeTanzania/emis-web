@@ -935,16 +935,16 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@codetanzania/emis-api-client@^0.14.1":
-  version "0.14.1"
-  resolved "https://registry.yarnpkg.com/@codetanzania/emis-api-client/-/emis-api-client-0.14.1.tgz#e79b159c7ba298a7e140d28afb4180b75b2b9a53"
-  integrity sha512-f3OHmbT1zSfDqvhqTCCGI3xFqZKPfjSmDuMnt8f/ZZ95zAzHudETILRQqfKCq/5kxg2aKLkkB8Mi+63Xm9YoHw==
+"@codetanzania/emis-api-client@^0.15.0":
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/@codetanzania/emis-api-client/-/emis-api-client-0.15.0.tgz#475c295b151ba12f6fff8e6fefef21dfa8343681"
+  integrity sha512-xlStmqnTSa8iEfY2SaIMAm32s9lLcPlivuimEEcfLlvd6em0ZwsTTSh8RLvBECrxfU2qBldsSZhLOWd7dHV4LA==
   dependencies:
-    "@lykmapipo/common" ">=0.16.0"
-    "@lykmapipo/env" ">=0.7.3"
+    "@lykmapipo/common" ">=0.20.0"
+    "@lykmapipo/env" ">=0.8.0"
     axios ">=0.18.0"
     inflection ">=1.12.0"
-    jsonwebtoken "^8.5.1"
+    jsonwebtoken ">=8.5.1"
     lodash ">=4.17.11"
     moment ">=2.24.0"
 
@@ -1274,7 +1274,7 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^12.0.9"
 
-"@lykmapipo/common@>=0.16.0":
+"@lykmapipo/common@>=0.20.0":
   version "0.20.0"
   resolved "https://registry.yarnpkg.com/@lykmapipo/common/-/common-0.20.0.tgz#ef061ce4e77e15d8594de8f5006753b34b0b0fb3"
   integrity sha512-n8PvufGZtGxLYWyitZZiPf6VWjNNLGp14pl8RsYqi10wMSrlk5Ks3ldu9c1SsTxEWVfUICIqXLNokwqssOVwdQ==
@@ -1286,10 +1286,10 @@
     read-pkg ">=5.1.1"
     statuses ">=1.5.0"
 
-"@lykmapipo/env@>=0.7.3":
-  version "0.7.10"
-  resolved "https://registry.yarnpkg.com/@lykmapipo/env/-/env-0.7.10.tgz#bcf7c58748f0c55b0f24cbde9fac34c94d7bb75d"
-  integrity sha512-JmZBXZ/46kzCSVLWvRekEFNi9ezwejuUKq0oasdQ+9Tm/0v8+1xN6LXNSPCopIHcetLHhbcIRNUlUTihMciORg==
+"@lykmapipo/env@>=0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@lykmapipo/env/-/env-0.8.0.tgz#d1fa7abbdad6738147424e2bf607253d0457d4c3"
+  integrity sha512-LPAOz3rxUbK0NlDGjfa/CkIJh8nA/5R6sh+MO7mP/gKbYUsOD8e44NNAQji2OJvZhk2VfnMMmrDHhuKUUU/BAA==
   dependencies:
     dotenv ">=8.0.0"
     lodash ">=4.17.11"
@@ -6766,7 +6766,7 @@ jsonparse@^1.2.0:
   resolved "https://registry.yarnpkg.com/jsonparse/-/jsonparse-1.3.1.tgz#3f4dae4a91fac315f71062f8521cc239f1366280"
   integrity sha1-P02uSpH6wxX3EGL4UhzCOfE2YoA=
 
-jsonwebtoken@^8.5.1:
+jsonwebtoken@>=8.5.1:
   version "8.5.1"
   resolved "https://registry.yarnpkg.com/jsonwebtoken/-/jsonwebtoken-8.5.1.tgz#00e71e0b8df54c2121a1f26137df2280673bcc0d"
   integrity sha512-XjwVfRS6jTMsqYs0EsuJ4LGxXV14zQybNd4L2r0UvbVnSF9Af8x7p5MzbJ90Ioz/9TI41/hTCvznF/loiSzn8w==
