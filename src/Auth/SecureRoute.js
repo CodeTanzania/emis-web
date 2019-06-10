@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { isTokenValid } from '@codetanzania/emis-api-client';
 import PropTypes from 'prop-types';
 
 /**
@@ -13,7 +14,7 @@ import PropTypes from 'prop-types';
  * @returns {object} React Element
  */
 const SecureRoute = ({ component: Component, ...rest }) => {
-  const isAuthenticated = true;
+  const isAuthenticated = isTokenValid();
 
   return (
     <Route

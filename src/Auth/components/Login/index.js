@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Icon, Input, Button } from 'antd';
+import { Connect, signin } from '@codetanzania/emis-api-states';
+import { notifyError, notifySuccess } from '../../../util';
 import logo from '../../../assets/icons/emislogo-blue.png';
 import './styles.css';
 
 /**
- * @function
+ * @class
  * @name Login
  * @description Login component which shows login form
  *
- * @param e event object
  * @version 0.1.0
  * @since 0.1.0
  */
@@ -19,27 +20,57 @@ class Login extends React.Component {
       validateFields: PropTypes.func.isRequired,
       getFieldDecorator: PropTypes.func.isRequired,
     }).isRequired,
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired,
+    loading: PropTypes.bool.isRequired,
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
+  /**
+   * @function
+   * @name handleSubmit
+   * @description Handle submit event for signin function
+   * @param {object} event Submit event
+   * @returns {undefined}
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleSubmit = event => {
+    event.preventDefault();
+    const { history } = this.props;
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        signin(
+          values,
+          () => {
+            history.push('/app');
+            notifySuccess('Welcome to EMIS');
+          },
+          () => {
+            notifyError('Invalid Credentials Please Try Again');
+          }
+        );
       }
     });
   };
 
   render() {
-    const { getFieldDecorator } = this.props.form;
+    const {
+      form: { getFieldDecorator },
+      loading,
+    } = this.props;
     return (
       <div className="Login">
         <img alt="EMIS" src={logo} height={60} width={60} />
         <Form onSubmit={this.handleSubmit}>
           <Form.Item>
-            {getFieldDecorator('username', {
+            {getFieldDecorator('email', {
               rules: [
-                { required: true, message: 'Please input your username!' },
+                {
+                  required: true,
+                  email: true,
+                  message: 'Please input your username!',
+                },
               ],
             })(
               <Input
@@ -70,6 +101,7 @@ class Login extends React.Component {
               type="primary"
               htmlType="submit"
               className="login-form-button"
+              loading={loading}
             >
               Log in
             </Button>
@@ -81,4 +113,6 @@ class Login extends React.Component {
   }
 }
 
-export default Form.create({ name: 'normal_login' })(Login);
+export default Connect(Form.create({ name: 'normal_login' })(Login), {
+  loading: 'app.signing',
+});
