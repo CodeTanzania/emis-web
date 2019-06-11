@@ -21,20 +21,20 @@ const { Search } = Input;
 const Topbar = ({ search, actions }) => (
   <Row className="Topbar">
     {/* search box */}
-    <Col span={12}>
-      <Search {...search} allowClear />
+    <Col span={12} sm={24} xs={24}>
+      <Search {...search} allowClear className="TopbarSearch" />
     </Col>
     {/* end search box */}
 
     {/* primary actions */}
-    <Col span={12}>
+    <Col span={12} sm={24} xs={24}>
       <Row type="flex" justify="end">
         {actions.map(action => {
           const { label, ...props } = action;
 
           return (
-            <Col span={5} xl={7} xxl={5} key={label}>
-              <Button {...props} type="primary">
+            <Col span={12} sm={24} xs={24} key={label}>
+              <Button {...props} type="primary" block>
                 {label}
               </Button>
             </Col>

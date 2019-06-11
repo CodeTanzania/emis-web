@@ -6,3 +6,19 @@
   padding-right: 10px;
   color: #bebebe;
 }
+
+
+@media screen and (max-width: 768px) {
+  .Topbar {
+    padding: 30px;
+  }
+}
+ 
+ @media screen and (max-width: 426px) {
+  .Topbar {
+    padding: 20px;
+  }
+  .TopbarSearch {
+    padding-bottom: 10px;
+  }
+}

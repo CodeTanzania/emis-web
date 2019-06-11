@@ -34,4 +34,8 @@
   .BaseLayoutHeader .Breadcrumb {
     font-size: 14px;
   }
+
+  .ant-dropdown-menu-item {
+    font-size: 12px;
+  }
 }
