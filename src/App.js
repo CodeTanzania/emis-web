@@ -2,7 +2,7 @@ import { initializeApp, StoreProvider } from '@codetanzania/emis-api-states';
 import { Icon, Spin } from 'antd';
 import React from 'react';
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
-import Login from './Auth/components/Login';
+import Signin from './Auth/components/Signin';
 import BaseLayout from './layouts/BaseLayout';
 import SecureRoute from './Auth/SecureRoute';
 
@@ -17,7 +17,7 @@ const App = () => (
     <HashRouter hashType="hashbang">
       <Switch>
         <SecureRoute path="/app" component={BaseLayout} />
-        <Route path="/login" component={Login} />
+        <Route path="/signin" component={Signin} />
         <Redirect to="/app" />
       </Switch>
     </HashRouter>

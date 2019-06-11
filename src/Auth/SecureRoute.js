@@ -24,7 +24,7 @@ const SecureRoute = ({ component: Component, ...rest }) => {
           <Component {...props} />
         ) : (
           <Redirect
-            to={{ pathname: '/login', state: { from: props.location } }} // eslint-disable-line
+            to={{ pathname: '/signin', state: { from: props.location } }} // eslint-disable-line
           />
         )
       }

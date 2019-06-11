@@ -1,5 +1,4 @@
-
-.Login {
+.Signin {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -7,7 +6,7 @@
   height: 80vh;
 }
 
-.Login img {
+.Signin img {
   margin: 10px;
 }
 
@@ -15,11 +14,11 @@
   padding: 10px;
   float: right;
 }
-.login-form-button {
+.signin-form-button {
   width: 100%;
 }
 
 /* override antd css*/
-.Login .ant-form {
+.Signin .ant-form {
   width: 300px;
 }

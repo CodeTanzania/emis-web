@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Icon, Input, Button } from 'antd';
 import { Connect, signin } from '@codetanzania/emis-api-states';
@@ -8,13 +8,13 @@ import './styles.css';
 
 /**
  * @class
- * @name Login
- * @description Login component which shows login form
+ * @name Signin
+ * @description Signin component which shows signin form
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class Login extends React.Component {
+class Signin extends Component {
   static propTypes = {
     form: PropTypes.shape({
       validateFields: PropTypes.func.isRequired,
@@ -60,9 +60,9 @@ class Login extends React.Component {
       loading,
     } = this.props;
     return (
-      <div className="Login">
+      <div className="Signin">
         <img alt="EMIS" src={logo} height={60} width={60} />
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit} autoComplete={false}>
           <Form.Item>
             {getFieldDecorator('email', {
               rules: [
@@ -100,10 +100,10 @@ class Login extends React.Component {
             <Button
               type="primary"
               htmlType="submit"
-              className="login-form-button"
+              className="signin-form-button"
               loading={loading}
             >
-              Log in
+              Sign in
             </Button>
             <div className="version-text">version: 1.0.0</div>
           </Form.Item>
@@ -113,6 +113,6 @@ class Login extends React.Component {
   }
 }
 
-export default Connect(Form.create({ name: 'normal_login' })(Login), {
+export default Connect(Form.create({ name: 'normal_login' })(Signin), {
   loading: 'app.signing',
 });
