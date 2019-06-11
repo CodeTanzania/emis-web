@@ -103,7 +103,7 @@ class Signin extends Component {
               className="signin-form-button"
               loading={loading}
             >
-              Sign in
+              Sign In
             </Button>
             <div className="version-text">version: 1.0.0</div>
           </Form.Item>
