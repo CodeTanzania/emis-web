@@ -880,7 +880,7 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.0", "@babel/runtime@^7.4.2", "@babel/runtime@^7.4.3":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.0", "@babel/runtime@^7.4.2", "@babel/runtime@^7.4.5":
   version "7.4.5"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.4.5.tgz#582bb531f5f9dc67d2fcb682979894f75e253f12"
   integrity sha512-TuI4qpWZP6lGOGIuGWtp9sPluqYICmbk8T/1vpSysqJxRPkudh/ofFWyqdcMsDf2s7KvDL4/YHgKyvcS3g9CJQ==
@@ -928,23 +928,23 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@codetanzania/emis-api-client@^0.15.3":
-  version "0.15.3"
-  resolved "https://registry.yarnpkg.com/@codetanzania/emis-api-client/-/emis-api-client-0.15.3.tgz#be671b7183718bccf2e921829b286ebf2b3033f0"
-  integrity sha512-tMEsiPP5Vnn0DxzAbQqkHIIdQz++dj0i7P6Dn/MZJ/MuWSeSyhQ/OC63lTmF0lCq/yhG/XOnXQDyioMfZkzX2A==
+"@codetanzania/emis-api-client@^0.15.5":
+  version "0.15.5"
+  resolved "https://registry.yarnpkg.com/@codetanzania/emis-api-client/-/emis-api-client-0.15.5.tgz#4a0d508d8ba289bfbda17a692e7f8db911d70823"
+  integrity sha512-KwLYp1BcQuoPG0wV4bBNaNlVkrkuB8ZQU0zJC9fG0Qp2G9MOKx2vjydswsDNk7AnMSMrGNvpsvvASY4A+eomNQ==
   dependencies:
-    "@lykmapipo/common" ">=0.20.1"
-    "@lykmapipo/env" ">=0.8.0"
+    "@lykmapipo/common" ">=0.20.2"
+    "@lykmapipo/env" ">=0.8.1"
     axios ">=0.19.0"
     inflection ">=1.12.0"
     jsonwebtoken ">=8.5.1"
     lodash ">=4.17.11"
     moment ">=2.24.0"
 
-"@codetanzania/emis-api-states@^0.11.1":
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/@codetanzania/emis-api-states/-/emis-api-states-0.11.1.tgz#060e5a4f89f819ab4b69a58a217ed92693647d5a"
-  integrity sha512-tIaI5qkOkWMvMJrVd9v1vc4HuFQ8gPZ3OpLmI9rUbZ0vGjDRAPfV1n6W1OILqjVOIQS3iXB1klosG1oVx1EnFw==
+"@codetanzania/emis-api-states@^0.11.2":
+  version "0.11.2"
+  resolved "https://registry.yarnpkg.com/@codetanzania/emis-api-states/-/emis-api-states-0.11.2.tgz#670f3c04187f972617fc756edaaba5a07e721000"
+  integrity sha512-M4bFMuC77wBBjvWwJw09Nspafaor01yhgcOpOtUqifabtMyz1P/IrMpuqVLf6HZmuBissoOeNQh3riy7DRAhcw==
 
 "@commitlint/cli@8.0.0", "@commitlint/cli@^8.0.0":
   version "8.0.0"
@@ -1267,7 +1267,7 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^12.0.9"
 
-"@lykmapipo/common@>=0.20.1":
+"@lykmapipo/common@>=0.20.2":
   version "0.20.2"
   resolved "https://registry.yarnpkg.com/@lykmapipo/common/-/common-0.20.2.tgz#2d79b54c5b6e25f33db2abc928f7b1a944c0bd74"
   integrity sha512-1v3oWh/JkJNkzEUOVkWgLfMfcUqnIGePJjo+5/l75ZmY0bGm50CWxWC4jbx15h9TIgcIiYsXjRA3mosTvmmiXQ==
@@ -1279,7 +1279,7 @@
     randomcolor ">=0.5.4"
     statuses ">=1.5.0"
 
-"@lykmapipo/env@>=0.8.0":
+"@lykmapipo/env@>=0.8.1":
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/@lykmapipo/env/-/env-0.8.1.tgz#e3eb782ffa2590c83275aec81be29dbc3421a56c"
   integrity sha512-rAjHttVgF772pxERAe75wFXsTgAUMRqOcF92IXbXAcbKPqeDrLxQLYNjfyfltMcNpPSaQibsx1OeavrAz6MhAw==
@@ -1449,9 +1449,9 @@
     "@babel/types" "^7.0.0"
 
 "@types/babel__traverse@*", "@types/babel__traverse@^7.0.6":
-  version "7.0.6"
-  resolved "https://registry.yarnpkg.com/@types/babel__traverse/-/babel__traverse-7.0.6.tgz#328dd1a8fc4cfe3c8458be9477b219ea158fd7b2"
-  integrity sha512-XYVgHF2sQ0YblLRMLNPB3CkFMewzFmlDsH/TneZFHUXDlABQgh88uOxuez7ZcXxayLFrqLwtDH1t+FmlFwNZxw==
+  version "7.0.7"
+  resolved "https://registry.yarnpkg.com/@types/babel__traverse/-/babel__traverse-7.0.7.tgz#2496e9ff56196cc1429c72034e07eab6121b6f3f"
+  integrity sha512-CeBpmX1J8kWLcDEnI3Cl2Eo6RfbGvzUctA+CjZUhOKDFbLfcr7fc4usEqLNWetrlJd7RhAkyYe2czXop4fICpw==
   dependencies:
     "@babel/types" "^7.3.0"
 
@@ -4237,13 +4237,13 @@ eslint-plugin-jest@22.6.4:
   resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-22.6.4.tgz#2895b047dd82f90f43a58a25cf136220a21c9104"
   integrity sha512-36OqnZR/uMCDxXGmTsqU4RwllR0IiB/XF8GW3ODmhsjiITKuI0GpgultWFt193ipN3HARkaIcKowpE6HBvRHNg==
 
-eslint-plugin-jsdoc@7.2.3:
-  version "7.2.3"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-7.2.3.tgz#04d21890cdadf33290f865b27f2f901f1321aa42"
-  integrity sha512-233HUc5ftIlmswaNmck++gkoW2iubcDDbM4KCzTHaawJFODuTNriDmZyKm8+7GgNnnwlkrE0mmD4TCzrdMTnsA==
+eslint-plugin-jsdoc@8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-8.0.1.tgz#8598ef4705da465d60d77c629fb22517e0e3a491"
+  integrity sha512-kzZHxDjTgNSdDpwULMqSBZr6wKaX+vvIrg/D+UppH8rd87bh+sPzs8PEJNjsQ94tx2TSQebc3P2cXcmkIVsyeA==
   dependencies:
     comment-parser "^0.5.4"
-    jsdoctypeparser "3.1.0"
+    jsdoctypeparser "4.0.0"
     lodash "^4.17.11"
 
 eslint-plugin-jsx-a11y@6.2.1:
@@ -6618,10 +6618,10 @@ jsbn@~0.1.0:
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
   integrity sha1-peZUwuWi3rXyAdls77yoDA7y9RM=
 
-jsdoctypeparser@3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/jsdoctypeparser/-/jsdoctypeparser-3.1.0.tgz#2f65f75165c4d9c632bb4fda13ed36b78321a43b"
-  integrity sha512-JNbkKpDFqbYjg+IU3FNo7qjX7Opy7CwjHywT32zgAcz/d4lX6Umn5jOHVETUdnNNgGrMk0nEx1gvP0F4M0hzlQ==
+jsdoctypeparser@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/jsdoctypeparser/-/jsdoctypeparser-4.0.0.tgz#f25e212ff8b0e3e9ed76627554392787cd524128"
+  integrity sha512-Bh6AW8eJ1bVdofhYUuqgFOVo0FE9qII+a+Go+juEnAfaDS5lZAiIqBAFm9gDu80OqBcQ1UI3v/8cP+3D5IGVww==
 
 jsdom@^11.5.1:
   version "11.12.0"
@@ -9458,9 +9458,9 @@ rc-color-picker@^1.2.6:
     tinycolor2 "^1.4.1"
 
 rc-dialog@~7.4.0:
-  version "7.4.0"
-  resolved "https://registry.yarnpkg.com/rc-dialog/-/rc-dialog-7.4.0.tgz#640551235b1f886c7f9a01ce75f87102a70ae1d4"
-  integrity sha512-X2JdDjphlOHPkqXUmmTAhYvcDAgGeM/VFjF5r/AMqjDYIL2xZkvrrOOq7KNxddRAJ0r1V4Ib/MTgCfhhti/aew==
+  version "7.4.1"
+  resolved "https://registry.yarnpkg.com/rc-dialog/-/rc-dialog-7.4.1.tgz#2bb4dee930bbed404b032710fff07732db09ebdd"
+  integrity sha512-vvVVP7AUjxs2AEGL5GUr6BjfVzaiBV5RoiPYchCDqHmf8n7xTrfsACAhZ2Vezj6mtl2446zhxoGvhxNpyCyX7A==
   dependencies:
     babel-runtime "6.x"
     rc-animate "2.x"
@@ -9635,9 +9635,9 @@ rc-select@~9.1.4:
     warning "^4.0.2"
 
 rc-slider@~8.6.11:
-  version "8.6.12"
-  resolved "https://registry.yarnpkg.com/rc-slider/-/rc-slider-8.6.12.tgz#40bb0a6e35f13183f08a3e6aa9a2adbd8dabd39d"
-  integrity sha512-mfYRg7H/smb2MlbqAB+/a34e8PeVqAr7t7hrfSS5+0njuDin4qCwoUHkX1jygGeEwtMAdGJ3buE0wRW988R7Xw==
+  version "8.6.13"
+  resolved "https://registry.yarnpkg.com/rc-slider/-/rc-slider-8.6.13.tgz#88a8150c2dda6709f3f119135de11fba80af765b"
+  integrity sha512-fCUe8pPn8n9pq1ARX44nN2nzJoATtna4x/PdskUrxIvZXN8ja7HuceN/hq6kokZjo3FBD2B1yMZvZh6oi68l6Q==
   dependencies:
     babel-runtime "6.x"
     classnames "^2.2.5"
@@ -9915,12 +9915,12 @@ react-lifecycles-compat@^3.0.2, react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-redux@^7.0.3:
-  version "7.0.3"
-  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-7.0.3.tgz#983c5a6de81cb1e696bd1c090ba826545f9170f1"
-  integrity sha512-vYZA7ftOYlDk3NetitsI7fLjryt/widNl1SLXYvFenIpm7vjb4ryK0EeFrgn62usg5fYkyIAWNUPKnwWPevKLg==
+react-redux@^7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-7.1.0.tgz#72af7cf490a74acdc516ea9c1dd80e25af9ea0b2"
+  integrity sha512-hyu/PoFK3vZgdLTg9ozbt7WF3GgX5+Yn3pZm5/96/o4UueXA+zj08aiSC9Mfj2WtD1bvpIb3C5yvskzZySzzaw==
   dependencies:
-    "@babel/runtime" "^7.4.3"
+    "@babel/runtime" "^7.4.5"
     hoist-non-react-statics "^3.3.0"
     invariant "^2.2.4"
     loose-envify "^1.4.0"
@@ -11566,9 +11566,9 @@ ts-pnp@1.1.2, ts-pnp@^1.0.0:
   integrity sha512-f5Knjh7XCyRIzoC/z1Su1yLLRrPrFCgtUAh/9fCSP6NKbATwpOL1+idQVXQokK9GRFURn/jYPGPfegIctwunoA==
 
 tslib@^1.8.1, tslib@^1.9.0:
-  version "1.9.3"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
-  integrity sha512-4krF8scpejhaOgqzBEcGM7yDIEfi0/8+8zDRZhNZZ2kjmHJ4hv3zCbQWxoJGz1iw5U0Jl0nma13xzHXcncMavQ==
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.10.0.tgz#c3c19f95973fb0a62973fb09d90d961ee43e5c8a"
+  integrity sha512-qOebF53frne81cf0S9B41ByenJ3/IuH8yJKngAX35CmiZySA0khhkovshKK+jGCaMnVomla7gVlIcc3EvKPbTQ==
 
 tsutils@^3.7.0:
   version "3.14.0"
