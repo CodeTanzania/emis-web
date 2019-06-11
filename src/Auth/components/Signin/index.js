@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Icon, Input, Button } from 'antd';
-import { Connect, signin } from '@codetanzania/emis-api-states';
+import { Connect, signin, initializeApp } from '@codetanzania/emis-api-states';
 import { notifyError, notifySuccess } from '../../../util';
 import logo from '../../../assets/icons/emislogo-blue.png';
 import './styles.css';
@@ -44,6 +44,10 @@ class Signin extends Component {
           values,
           () => {
             history.push('/app');
+
+            // populate app store with schemas
+            initializeApp();
+
             notifySuccess('Welcome to EMIS');
           },
           () => {
@@ -62,7 +66,7 @@ class Signin extends Component {
     return (
       <div className="Signin">
         <img alt="EMIS" src={logo} height={60} width={60} />
-        <Form onSubmit={this.handleSubmit} autoComplete={false}>
+        <Form onSubmit={this.handleSubmit} autoComplete="off">
           <Form.Item>
             {getFieldDecorator('email', {
               rules: [

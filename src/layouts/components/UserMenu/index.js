@@ -3,7 +3,7 @@ import { signout } from '@codetanzania/emis-api-states';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import React from 'react';
-import ChangePassword from '../../../Auth/components/ChangePassword';
+import ChangePasswordForm from '../../../Auth/components/ChangePassword';
 
 class UserMenu extends React.Component {
   static propTypes = {
@@ -79,12 +79,13 @@ class UserMenu extends React.Component {
         <Modal
           title="Change Password"
           visible={visible}
-          okText="Update"
-          onOk={this.handleOk}
           confirmLoading={confirmLoading}
           onCancel={this.handleCancel}
+          footer={null}
+          maskClosable={false}
+          destroyOnClose
         >
-          <ChangePassword />
+          <ChangePasswordForm onCancel={this.handleCancel} />
         </Modal>
         <Dropdown overlay={this.menu}>
           <Button style={{ marginLeft: 8, borderRadius: '50%' }} icon="user" />
