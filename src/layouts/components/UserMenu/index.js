@@ -48,7 +48,7 @@ class UserMenu extends React.Component {
       </Menu.Item>
       <Menu.Item key="2" onClick={() => this.signout()}>
         <Icon type="logout" />
-        Logout
+        Sign Out
       </Menu.Item>
     </Menu>
   );
