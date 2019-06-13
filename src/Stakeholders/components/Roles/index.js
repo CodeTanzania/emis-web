@@ -195,27 +195,33 @@ class Roles extends Component {
     return (
       <div className="RoleList">
         <Row>
-          <Col span={12}>
+          <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
             <Search
               size="large"
               placeholder="Search for roles here ..."
               onChange={this.searchRoles}
               allowClear
               title="Search roles"
+              className="RoleSearch"
             />
             {/* end search input component */}
           </Col>
           {/* primary actions */}
-          <Col span={3} offset={9}>
-            <Button
-              type="primary"
-              icon="plus"
-              size="large"
-              title="Add new role"
-              onClick={this.openForm}
-            >
-              New Role
-            </Button>
+          <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
+            <Row type="flex" justify="end">
+              <Col xxl={6} xl={6} lg={6} md={8} sm={24} xs={24}>
+                <Button
+                  block
+                  type="primary"
+                  icon="plus"
+                  size="large"
+                  title="Add new role"
+                  onClick={this.openForm}
+                >
+                  New Role
+                </Button>
+              </Col>
+            </Row>
           </Col>
           {/* end primary actions */}
         </Row>

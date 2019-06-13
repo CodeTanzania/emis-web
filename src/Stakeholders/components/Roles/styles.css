@@ -5,3 +5,18 @@
 .RoleList .searchBox {
   width: 50%;
 }
+
+@media screen and (max-width: 768px) {
+  .RoleList {
+    padding: 30px;
+  }
+}
+ 
+ @media screen and (max-width: 426px) {
+  .RoleList {
+    padding: 20px;
+  }
+  .RoleSearch {
+    padding-bottom: 10px;
+  }
+}
