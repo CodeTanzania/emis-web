@@ -20,13 +20,19 @@ import { notifyError, notifySuccess } from '../../../../util';
 import FocalPersonsListItem from '../ListItem';
 
 /* constants */
+const nameSpan = { xxl: 3, xl: 3, lg: 3, md: 5, sm: 10, xs: 10 };
+const phoneSpan = { xxl: 2, xl: 2, lg: 3, md: 4, sm: 9, xs: 9 };
+const emailSpan = { xxl: 3, xl: 4, lg: 5, md: 7, sm: 0, xs: 0 };
+const agencySpan = { xxl: 5, xl: 4, lg: 3, md: 0, sm: 0, xs: 0 };
+const roleSpan = { xxl: 5, xl: 4, lg: 4, md: 0, sm: 0, xs: 0 };
+const areaSpan = { xxl: 5, xl: 5, lg: 4, md: 5, sm: 0, xs: 0 };
 const headerLayout = [
-  { span: 3, header: 'Name' },
-  { span: 2, header: 'Mobile Number' },
-  { span: 4, header: 'Email Address' },
-  { span: 2, header: 'Agency' },
-  { span: 5, header: 'Role' },
-  { span: 5, header: 'Area' },
+  { ...nameSpan, header: 'Name' },
+  { ...phoneSpan, header: 'Mobile Number' },
+  { ...emailSpan, header: 'Email Address' },
+  { ...agencySpan, header: 'Agency' },
+  { ...roleSpan, header: 'Role' },
+  { ...areaSpan, header: 'Area' },
 ];
 const { getFocalPeopleExportUrl } = httpActions;
 

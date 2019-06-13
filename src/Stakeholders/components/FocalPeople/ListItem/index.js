@@ -107,6 +107,13 @@ class FocalPeopleListItem extends Component {
   };
 
   render() {
+    const sideSpan = { xxl: 1, xl: 1, lg: 1, md: 2, sm: 3, xs: 3 };
+    const nameSpan = { xxl: 3, xl: 3, lg: 3, md: 5, sm: 10, xs: 10 };
+    const phoneSpan = { xxl: 2, xl: 2, lg: 3, md: 4, sm: 9, xs: 9 };
+    const emailSpan = { xxl: 3, xl: 4, lg: 5, md: 7, sm: 0, xs: 0 };
+    const agencySpan = { xxl: 4, xl: 3, lg: 3, md: 0, sm: 0, xs: 0 };
+    const roleSpan = { xxl: 5, xl: 5, lg: 4, md: 0, sm: 0, xs: 0 };
+    const areaSpan = { xxl: 5, xl: 5, lg: 4, md: 5, sm: 0, xs: 0 };
     const {
       abbreviation,
       mobile,
@@ -153,16 +160,16 @@ class FocalPeopleListItem extends Component {
         onMouseLeave={this.handleMouseLeave}
       >
         <Row>
-          <Col span={1}>{sideComponent}</Col>
-          <Col span={3}>{name}</Col>
-          <Col span={2}>{mobile}</Col>
-          <Col span={4}>{email}</Col>
-          <Col span={2} title={agency}>
+          <Col {...sideSpan}>{sideComponent}</Col>
+          <Col {...nameSpan}>{name}</Col>
+          <Col {...phoneSpan}>{mobile}</Col>
+          <Col {...emailSpan}>{email}</Col>
+          <Col {...agencySpan} title={agency}>
             {agencyAbbreviation}
           </Col>
-          <Col span={5}>{role}</Col>
-          <Col span={5}>{location}</Col>
-          <Col span={1}>
+          <Col {...roleSpan}>{role}</Col>
+          <Col {...areaSpan}>{location}</Col>
+          <Col xxl={1} xl={1} lg={1} md={1} sm={2} xs={2}>
             {isHovered && (
               <ListItemActions
                 edit={{
