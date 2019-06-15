@@ -68,7 +68,7 @@ class Signin extends Component {
         <img alt="EMIS" src={logo} height={60} width={60} />
         <Form onSubmit={this.handleSubmit} autoComplete="off">
           <Form.Item>
-            {getFieldDecorator('email', {
+            {getFieldDecorator('username', {
               rules: [
                 {
                   required: true,
