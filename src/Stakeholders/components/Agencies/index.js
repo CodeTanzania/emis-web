@@ -248,7 +248,7 @@ class Agencies extends Component {
     return (
       <div className="Agencies">
         <Row>
-          <Col span={12}>
+          <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
             {/* search input component */}
             <Search
               size="large"
@@ -256,6 +256,7 @@ class Agencies extends Component {
               onChange={this.searchAgencies}
               allowClear
               value={searchQuery}
+              className="searchBox"
             />
             {/* end search input component */}
           </Col>
@@ -274,16 +275,21 @@ class Agencies extends Component {
           </Col> */}
 
           {/* primary actions */}
-          <Col span={2} offset={9}>
-            <Button
-              type="primary"
-              icon="plus"
-              size="large"
-              title="Add New Agency"
-              onClick={this.openAgencyForm}
-            >
-              New Agency
-            </Button>
+          <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
+            <Row type="flex" justify="end">
+              <Col xxl={6} xl={6} lg={6} md={8} sm={24} xs={24}>
+                <Button
+                  type="primary"
+                  icon="plus"
+                  size="large"
+                  title="Add New Agency"
+                  onClick={this.openAgencyForm}
+                  block
+                >
+                  New Agency
+                </Button>
+              </Col>
+            </Row>
           </Col>
           {/* end primary actions */}
         </Row>

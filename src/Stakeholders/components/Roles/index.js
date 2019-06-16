@@ -202,7 +202,7 @@ class Roles extends Component {
               onChange={this.searchRoles}
               allowClear
               title="Search roles"
-              className="RoleSearch"
+              className="SearchBox"
             />
             {/* end search input component */}
           </Col>

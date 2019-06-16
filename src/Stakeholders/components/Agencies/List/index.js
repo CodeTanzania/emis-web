@@ -19,12 +19,18 @@ import Toolbar from '../../../../components/Toolbar';
 import AgencyListItem from '../ListItem';
 
 /* constants */
+const nameSpan = { xxl: 5, xl: 5, lg: 5, md: 7, sm: 12, xs: 12 };
+const abbreviationSpan = { xxl: 3, xl: 3, lg: 3, md: 3, sm: 0, xs: 0 };
+const areaSpan = { xxl: 4, xl: 4, lg: 4, md: 0, sm: 0, xs: 0 };
+const phoneSpan = { xxl: 4, xl: 4, lg: 4, md: 4, sm: 5, xs: 5 };
+const emailSpan = { xxl: 5, xl: 5, lg: 5, md: 6, sm: 0, xs: 0 };
+
 const headerLayout = [
-  { span: 5, header: 'Name' },
-  { span: 3, header: 'Abbreviation' },
-  { span: 3, header: 'Area' },
-  { span: 4, header: 'Mobile Number' },
-  { span: 4, header: 'Email Address' },
+  { ...nameSpan, header: 'Name' },
+  { ...abbreviationSpan, header: 'Abbreviation' },
+  { ...areaSpan, header: 'Area' },
+  { ...phoneSpan, header: 'Mobile Number' },
+  { ...emailSpan, header: 'Email Address' },
 ];
 const { getAgenciesExportUrl } = httpActions;
 
