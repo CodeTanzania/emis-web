@@ -18,7 +18,13 @@ import FocalPeopleList from './List';
 import './styles.css';
 
 /* constants */
-const { getFocalPeople: getFocalPeopleFromAPI } = httpActions;
+const {
+  getFocalPeople: getFocalPeopleFromAPI,
+  getJurisdictions,
+  getPartyGroups,
+  getRoles,
+  getAgencies,
+} = httpActions;
 
 /**
  * @class
@@ -150,7 +156,10 @@ class FocalPeople extends Component {
    * @since 0.1.0
    */
   handleShare = focalPerson => {
-    const message = `${focalPerson.name}\nMobile: ${focalPerson.mobile}\nEmail: ${focalPerson.email}`;
+    const message = `${focalPerson.name}\nMobile: ${
+      // eslint-disable-line
+      focalPerson.mobile
+    }\nEmail: ${focalPerson.email}`;
 
     this.setState({ notificationBody: message, showNotificationForm: true });
   };
@@ -168,7 +177,10 @@ class FocalPeople extends Component {
   handleBulkShare = focalPeople => {
     const focalPersonList = focalPeople.map(
       focalPerson =>
-        `${focalPerson.name}\nMobile: ${focalPerson.mobile}\nEmail: ${focalPerson.email}`
+        `${focalPerson.name}\nMobile: ${focalPerson.mobile}\nEmail: ${
+          // eslint-disable-line
+          focalPerson.email
+        }`
     );
 
     const message = focalPersonList.join('\n\n\n');
@@ -306,12 +318,16 @@ class FocalPeople extends Component {
             footer={null}
             destroyOnClose
             maskClosable={false}
-            width="40%"
+            width="50%"
             afterClose={this.handleAfterCloseNotificationForm}
           >
             <NotificationForm
               recipients={selectedFocalPeople}
               onSearchRecipients={getFocalPeopleFromAPI}
+              onSearchJurisdictions={getJurisdictions}
+              onSearchGroups={getPartyGroups}
+              onSearchAgencies={getAgencies}
+              onSearchRoles={getRoles}
               body={notificationBody}
               onCancel={this.closeNotificationForm}
               onNotify={() => {}}
