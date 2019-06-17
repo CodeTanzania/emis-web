@@ -1,8 +1,17 @@
 import { Button, Dropdown, Icon, Menu, Modal } from 'antd';
+import { signout } from '@codetanzania/emis-api-states';
+import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import React from 'react';
-import ChangePassword from '../../../Auth/components/ChangePassword';
+import ChangePasswordForm from '../../../Auth/components/ChangePassword';
 
 class UserMenu extends React.Component {
+  static propTypes = {
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired,
+  };
+
   state = {
     visible: false,
     confirmLoading: false,
@@ -17,15 +26,29 @@ class UserMenu extends React.Component {
       });
   };
 
+  /**
+   * @function
+   * @name signout
+   * @description signout user from emis system
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  signout = () => {
+    const { history } = this.props;
+    signout();
+    history.push('/signin');
+  };
+
   menu = (
-    <Menu onClick={this.showModal}>
-      <Menu.Item key="1">
+    <Menu>
+      <Menu.Item key="1" onClick={this.showModal}>
         <Icon type="lock" />
         Change Password
       </Menu.Item>
-      <Menu.Item key="2">
+      <Menu.Item key="2" onClick={() => this.signout()}>
         <Icon type="logout" />
-        Logout
+        Sign Out
       </Menu.Item>
     </Menu>
   );
@@ -44,7 +67,6 @@ class UserMenu extends React.Component {
   };
 
   handleCancel = () => {
-    console.log('Clicked cancel button');
     this.setState({
       visible: false,
     });
@@ -57,12 +79,13 @@ class UserMenu extends React.Component {
         <Modal
           title="Change Password"
           visible={visible}
-          okText="Update"
-          onOk={this.handleOk}
           confirmLoading={confirmLoading}
           onCancel={this.handleCancel}
+          footer={null}
+          maskClosable={false}
+          destroyOnClose
         >
-          <ChangePassword />
+          <ChangePasswordForm onCancel={this.handleCancel} />
         </Modal>
         <Dropdown overlay={this.menu}>
           <Button style={{ marginLeft: 8, borderRadius: '50%' }} icon="user" />
@@ -72,4 +95,4 @@ class UserMenu extends React.Component {
   }
 }
 
-export default UserMenu;
+export default withRouter(UserMenu);

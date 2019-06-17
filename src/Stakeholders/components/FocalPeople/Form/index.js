@@ -1,19 +1,14 @@
 import { httpActions } from '@codetanzania/emis-api-client';
-import {
-  Connect,
-  postFocalPerson,
-  putFocalPerson,
-} from '@codetanzania/emis-api-states';
+import { postFocalPerson, putFocalPerson } from '@codetanzania/emis-api-states';
 import { Button, Col, Form, Input, Row } from 'antd';
 import upperFirst from 'lodash/upperFirst';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import SearchableSelectInput from '../../../../components/SearchableSelectInput';
-import SelectInput from '../../../../components/SelectInput';
 import { notifyError, notifySuccess } from '../../../../util';
 
 /* constants */
-const { getAgencies, getFeatures, getRoles } = httpActions;
+const { getAgencies, getFeatures, getRoles, getPartyGroups } = httpActions;
 const { TextArea } = Input;
 
 /**
@@ -46,7 +41,7 @@ class FocalPersonForm extends Component {
    * @name handleSubmit
    * @description Handle submit form action
    *
-   * @param {Object} event onSubmit event object
+   * @param {object} event onSubmit event object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -99,7 +94,6 @@ class FocalPersonForm extends Component {
       posting,
       onCancel,
       form: { getFieldDecorator },
-      groups,
     } = this.props;
 
     const formItemLayout = {
@@ -210,14 +204,28 @@ class FocalPersonForm extends Component {
                 {/* focalPerson group */}
                 <Form.Item {...formItemLayout} label="Group">
                   {getFieldDecorator('group', {
-                    initialValue: isEditForm ? focalPerson.group : undefined,
+                    initialValue:
+                      isEditForm && focalPerson.group
+                        ? focalPerson.group._id // eslint-disable-line
+                        : undefined,
                     rules: [
                       {
                         required: true,
                         message: 'Focal Person group is required',
                       },
                     ],
-                  })(<SelectInput options={groups} />)}
+                  })(
+                    <SearchableSelectInput
+                      onSearch={getPartyGroups}
+                      optionLabel="name"
+                      optionValue="_id"
+                      initialValue={
+                        isEditForm && focalPerson.group
+                          ? focalPerson.group
+                          : undefined
+                      }
+                    />
+                  )}
                 </Form.Item>
                 {/* end focalPerson group */}
               </Col>
@@ -355,6 +363,4 @@ class FocalPersonForm extends Component {
   }
 }
 
-export default Connect(Form.create()(FocalPersonForm), {
-  groups: 'focalPeople.schema.properties.group.enum',
-});
+export default Form.create()(FocalPersonForm);

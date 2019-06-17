@@ -12,7 +12,7 @@ const { TextArea } = Input;
  * @name NotificationForm
  * @description Render notification form component
  *
- * @version 0.1.0
+ * @version 0.2.0
  * @since 0.1.0
  */
 class NotificationForm extends Component {
@@ -31,18 +31,24 @@ class NotificationForm extends Component {
     onCancel: PropTypes.func.isRequired,
     onNotify: PropTypes.func.isRequired,
     onSearchRecipients: PropTypes.func.isRequired,
+    onSearchJurisdictions: PropTypes.func.isRequired,
+    onSearchGroups: PropTypes.func.isRequired,
+    onSearchRoles: PropTypes.func.isRequired,
+    onSearchAgencies: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
     body: undefined,
   };
 
+  state = { moreFilters: false };
+
   /**
    * @function
    * @name handleSubmit
    * @description Callback to handle form on submit event
    *
-   * @param {Object} event onSubmit event
+   * @param {object} event onSubmit event
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -71,15 +77,36 @@ class NotificationForm extends Component {
     });
   };
 
+  /**
+   * @function
+   * @name toogleMoreFilters
+   * @description Toggle areas, groups, agencies, roles filters visibility
+   *
+   * @returns {undefined}
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  toggleMoreFilters = () => {
+    this.setState(prevState => ({
+      moreFilters: !prevState.moreFilters,
+    }));
+  };
+
   render() {
     const {
       form: { getFieldDecorator },
       recipients,
       body,
       onCancel,
+      onSearchAgencies,
       onSearchRecipients,
+      onSearchJurisdictions,
+      onSearchGroups,
+      onSearchRoles,
     } = this.props;
 
+    const { moreFilters } = this.state;
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -101,26 +128,84 @@ class NotificationForm extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
+        {/* notify recipients per jurisdictions */}
+        {onSearchJurisdictions && moreFilters && (
+          <Form.Item {...formItemLayout} label="Areas">
+            {getFieldDecorator('feature')(
+              <SearchableSelectInput
+                onSearch={onSearchJurisdictions}
+                optionLabel="name"
+                optionValue="_id"
+                mode="multiple"
+              />
+            )}
+          </Form.Item>
+        )}
+        {/* end notification jurisdictions */}
+
+        {/* notify recipients per group */}
+        {onSearchGroups && moreFilters && (
+          <Form.Item {...formItemLayout} label="Group(s)">
+            {getFieldDecorator('groups')(
+              <SearchableSelectInput
+                onSearch={onSearchGroups}
+                optionLabel="name"
+                optionValue="_id"
+                mode="multiple"
+              />
+            )}
+          </Form.Item>
+        )}
+        {/* notify recipients per group */}
+
+        {/* notify recipients per role */}
+        {onSearchRoles && moreFilters && (
+          <Form.Item {...formItemLayout} label="Role(s)">
+            {getFieldDecorator('roles')(
+              <SearchableSelectInput
+                onSearch={onSearchRoles}
+                optionLabel="name"
+                optionValue="_id"
+                mode="multiple"
+                initialValue={recipients}
+              />
+            )}
+          </Form.Item>
+        )}
+        {/* notify recipients per role */}
+
+        {/* notify recipients per agency */}
+        {onSearchAgencies && moreFilters && (
+          <Form.Item {...formItemLayout} label="Agencies">
+            {getFieldDecorator('agencies')(
+              <SearchableSelectInput
+                onSearch={onSearchAgencies}
+                optionLabel="name"
+                optionValue="_id"
+                mode="multiple"
+                initialValue={recipients}
+              />
+            )}
+          </Form.Item>
+        )}
+        {/* notify recipients per agency */}
+
         {/* notification recipients */}
-        <Form.Item {...formItemLayout} label="Recipients">
-          {getFieldDecorator('recipients', {
-            rules: [
-              {
-                required: true,
-                message: 'Please provide at least one recipient',
-              },
-            ],
-            initialValue: map(recipients, contact => contact._id), // eslint-disable-line
-          })(
-            <SearchableSelectInput
-              onSearch={onSearchRecipients}
-              optionLabel="name"
-              optionValue="_id"
-              mode="multiple"
-              initialValue={recipients}
-            />
-          )}
-        </Form.Item>
+        {onSearchRecipients && (
+          <Form.Item {...formItemLayout} label="Recipients">
+            {getFieldDecorator('recipients', {
+              initialValue: map(recipients, contact => contact._id), // eslint-disable-line
+            })(
+              <SearchableSelectInput
+                onSearch={onSearchRecipients}
+                optionLabel="name"
+                optionValue="_id"
+                mode="multiple"
+                initialValue={recipients}
+              />
+            )}
+          </Form.Item>
+        )}
         {/* end notification recipients */}
 
         {/* notification subject */}
@@ -135,7 +220,7 @@ class NotificationForm extends Component {
             </span>
           }
         >
-          {getFieldDecorator('subject', {})(<Input />)}
+          {getFieldDecorator('subject')(<Input />)}
         </Form.Item>
         {/* notification subject */}
 
@@ -155,7 +240,12 @@ class NotificationForm extends Component {
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
-          <Button onClick={onCancel}>Cancel</Button>
+          <Button type="link" onClick={this.toggleMoreFilters}>
+            More Options
+          </Button>
+          <Button style={{ marginLeft: 8 }} onClick={onCancel}>
+            Cancel
+          </Button>
           <Button style={{ marginLeft: 8 }} type="primary" htmlType="submit">
             Send
           </Button>

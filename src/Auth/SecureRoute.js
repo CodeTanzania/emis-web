@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { isTokenValid } from '@codetanzania/emis-api-client';
 import PropTypes from 'prop-types';
 
 /**
@@ -13,7 +14,7 @@ import PropTypes from 'prop-types';
  * @returns {object} React Element
  */
 const SecureRoute = ({ component: Component, ...rest }) => {
-  const isAuthenticated = true;
+  const isAuthenticated = isTokenValid();
 
   return (
     <Route
@@ -23,7 +24,7 @@ const SecureRoute = ({ component: Component, ...rest }) => {
           <Component {...props} />
         ) : (
           <Redirect
-            to={{ pathname: '/login', state: { from: props.location } }} // eslint-disable-line
+            to={{ pathname: '/signin', state: { from: props.location } }} // eslint-disable-line
           />
         )
       }
@@ -33,7 +34,11 @@ const SecureRoute = ({ component: Component, ...rest }) => {
 
 /* props validation */
 SecureRoute.propTypes = {
-  component: PropTypes.node.isRequired,
+  component: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.element,
+    PropTypes.node,
+  ]).isRequired,
 };
 
 export default SecureRoute;

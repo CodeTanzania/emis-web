@@ -18,7 +18,13 @@ import FocalPeopleList from './List';
 import './styles.css';
 
 /* constants */
-const { getFocalPeople: getFocalPeopleFromAPI } = httpActions;
+const {
+  getFocalPeople: getFocalPeopleFromAPI,
+  getJurisdictions,
+  getPartyGroups,
+  getRoles,
+  getAgencies,
+} = httpActions;
 
 /**
  * @class
@@ -114,7 +120,7 @@ class FocalPeople extends Component {
    * @name searchFocalPeople
    * @description Search FocalPeople List based on supplied filter word
    *
-   * @param {Object} event - Event instance
+   * @param {object} event - Event instance
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -128,7 +134,7 @@ class FocalPeople extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} focalPerson focalPerson to be edited
+   * @param {object} focalPerson focalPerson to be edited
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -144,13 +150,14 @@ class FocalPeople extends Component {
    * @name handleShare
    * @description Handle share single focalPerson action
    *
-   * @param {Object} focalPerson focalPerson to be shared
+   * @param {object} focalPerson focalPerson to be shared
    *
    * @version 0.1.0
    * @since 0.1.0
    */
   handleShare = focalPerson => {
     const message = `${focalPerson.name}\nMobile: ${
+      // eslint-disable-line
       focalPerson.mobile
     }\nEmail: ${focalPerson.email}`;
 
@@ -162,7 +169,7 @@ class FocalPeople extends Component {
    * @name handleBulkShare
    * @description Handle share multiple focal People
    *
-   * @param {Object[]} focalPeople focal People list to be shared
+   * @param {object[]} focalPeople focal People list to be shared
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -171,6 +178,7 @@ class FocalPeople extends Component {
     const focalPersonList = focalPeople.map(
       focalPerson =>
         `${focalPerson.name}\nMobile: ${focalPerson.mobile}\nEmail: ${
+          // eslint-disable-line
           focalPerson.email
         }`
     );
@@ -185,7 +193,7 @@ class FocalPeople extends Component {
    * @name openNotificationForm
    * @description Handle on notify focalPeople
    *
-   * @param {Object[]} focalPeople List of focalPeople selected to be notified
+   * @param {object[]} focalPeople List of focalPeople selected to be notified
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -310,12 +318,16 @@ class FocalPeople extends Component {
             footer={null}
             destroyOnClose
             maskClosable={false}
-            width="40%"
+            width="50%"
             afterClose={this.handleAfterCloseNotificationForm}
           >
             <NotificationForm
               recipients={selectedFocalPeople}
               onSearchRecipients={getFocalPeopleFromAPI}
+              onSearchJurisdictions={getJurisdictions}
+              onSearchGroups={getPartyGroups}
+              onSearchAgencies={getAgencies}
+              onSearchRoles={getRoles}
               body={notificationBody}
               onCancel={this.closeNotificationForm}
               onNotify={() => {}}
