@@ -1,9 +1,9 @@
-import {
-  deleteAgency,
-  paginateAgencies,
-  refreshAgencies,
-} from '@codetanzania/emis-api-states';
 import { httpActions } from '@codetanzania/emis-api-client';
+import {
+  paginateFocalPeople,
+  refreshFocalPeople,
+  deleteFocalPerson,
+} from '@codetanzania/emis-api-states';
 import { List } from 'antd';
 import concat from 'lodash/concat';
 import map from 'lodash/map';
@@ -18,15 +18,16 @@ import { notifyError, notifySuccess } from '../../../../util';
 import Toolbar from '../../../../components/Toolbar';
 import NotificationListItem from '../ListItem';
 
+const { getFocalPeopleExportUrl } = httpActions;
+
 /* constants */
 const headerLayout = [
-  { span: 5, header: 'Form' },
-  { span: 3, header: 'Title' },
+  { span: 5, header: 'Title' },
+  { span: 3, header: 'Form' },
   { span: 3, header: 'Sender' },
-  { span: 4, header: 'TO' },
+  { span: 4, header: 'To' },
   { span: 4, header: 'Subject' },
 ];
-const { getAgenciesExportUrl } = httpActions;
 
 /**
  * @class
@@ -50,7 +51,7 @@ class NotificationList extends Component {
   };
 
   state = {
-    seletedNotification: [],
+    selectedNotification: [],
     selectedPages: [],
   };
 
@@ -65,9 +66,9 @@ class NotificationList extends Component {
    * @since 0.1.0
    */
   handleOnselectNotification = notification => {
-    const { seletedNotification } = this.state;
+    const { selectedNotification } = this.state;
     this.setState({
-      seletedNotification: concat([], seletedNotification, notification),
+      selectedNotification: concat([], selectedNotification, notification),
     });
   };
 
@@ -80,15 +81,15 @@ class NotificationList extends Component {
    * @since 0.1.0
    */
   handleSelectAll = () => {
-    const { seletedNotification, selectedPages } = this.state;
+    const { selectedNotification, selectedPages } = this.state;
     const { notifications, page } = this.props;
     const selectedList = uniqBy(
-      [...seletedNotification, ...notifications],
+      [...selectedNotification, ...notifications],
       '_id'
     );
     const pages = uniq([...selectedPages, page]);
     this.setState({
-      seletedNotification: selectedList,
+      selectedNotification: selectedList,
       selectedPages: pages,
     });
   };
@@ -105,8 +106,8 @@ class NotificationList extends Component {
    */
   handleDeselectAll = () => {
     const { notifications, page } = this.props;
-    const { seletedNotification, selectedPages } = this.state;
-    const selectedList = uniqBy([...seletedNotification], '_id');
+    const { selectedNotification, selectedPages } = this.state;
+    const selectedList = uniqBy([...selectedNotification], '_id');
     const pages = uniq([...selectedPages]);
 
     remove(pages, item => item === page);
@@ -119,7 +120,7 @@ class NotificationList extends Component {
     });
 
     this.setState({
-      seletedNotification: selectedList,
+      selectedNotification: selectedList,
       selectedPages: pages,
     });
   };
@@ -136,15 +137,15 @@ class NotificationList extends Component {
    * @since 0.1.0
    */
   handleOnDeselectNotification = notification => {
-    const { seletedNotification } = this.state;
-    const selectedList = [...seletedNotification];
+    const { selectedNotification } = this.state;
+    const selectedList = [...selectedNotification];
 
     remove(
       selectedList,
       item => item._id === notification._id // eslint-disable-line
     );
 
-    this.setState({ seletedNotification: selectedList });
+    this.setState({ selectedNotification: selectedList });
   };
 
   render() {
@@ -157,9 +158,9 @@ class NotificationList extends Component {
       onNotify,
       onFilter,
     } = this.props;
-    const { seletedNotification, selectedPages } = this.state;
-    const selectedAgenciesCount = intersectionBy(
-      this.state.seletedNotification,
+    const { selectedNotification, selectedPages } = this.state;
+    const selectedNotificationCount = intersectionBy(
+      this.state.selectedNotification,
       notifications,
       '_id'
     ).length;
@@ -168,19 +169,30 @@ class NotificationList extends Component {
       <Fragment>
         {/* toolbar */}
         <Toolbar
-          itemName="Agency"
+          itemName="Notification"
           page={page}
           total={total}
-          selectedItemsCount={selectedAgenciesCount}
-          exportUrl={getAgenciesExportUrl({
-            filter: { _id: map(seletedNotification, '_id') },
+          selectedItemsCount={selectedNotificationCount}
+          exportUrl={getFocalPeopleExportUrl({
+            filter: { _id: map(selectedNotification, '_id') },
           })}
-          onNotify={() => onNotify(seletedNotification)}
           onFilter={onFilter}
+          onNotify={() => onNotify(selectedNotification)}
           onPaginate={nextPage => {
-            paginateAgencies(nextPage);
+            paginateFocalPeople(nextPage);
           }}
-          onRefresh={refreshAgencies}
+          onRefresh={() =>
+            refreshFocalPeople(
+              () => {
+                notifySuccess('Notification refreshed successfully');
+              },
+              () => {
+                notifyError(
+                  'An Error occurred while refreshing Notification please contact system administrator'
+                );
+              }
+            )
+          }
         />
         {/* end toolbar */}
 
@@ -202,12 +214,11 @@ class NotificationList extends Component {
               <NotificationListItem
                 key={notification._id} // eslint-disable-line
                 name={notification.name}
-                title={notification.role ? notification.role.name : 'N/A'}
                 email={notification.email}
                 mobile={notification.mobile}
                 isSelected={
                   // eslint-disable-next-line
-                  map(seletedNotification, item => item._id).includes(
+                  map(selectedNotification, item => item._id).includes(
                     // eslint-disable-next-line
                     notification._id
                   )
@@ -220,14 +231,14 @@ class NotificationList extends Component {
                 }}
                 onEdit={() => onEdit(notification)}
                 onArchive={() =>
-                  deleteAgency(
+                  deleteFocalPerson(
                     notification._id, // eslint-disable-line
                     () => {
-                      notifySuccess('Agency was archived successfully');
+                      notifySuccess('Notification was archived successfully');
                     },
                     () => {
                       notifyError(
-                        'An Error occurred while archiving Agency please notification system administrator'
+                        'An Error occurred while archiving Notification please notification system administrator'
                       );
                     }
                   )

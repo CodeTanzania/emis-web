@@ -22,9 +22,9 @@ class NotificationListItem extends Component {
 
   /* props validation */
   static propTypes = {
-    abbreviation: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    mobile: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
     onEdit: PropTypes.func.isRequired,
     onArchive: PropTypes.func.isRequired,
     isSelected: PropTypes.bool.isRequired,
@@ -100,7 +100,7 @@ class NotificationListItem extends Component {
   };
 
   render() {
-    const { abbreviation, name, description, onEdit } = this.props;
+    const { email, name, mobile, onEdit } = this.props;
     const { isHovered } = this.state;
     const { isSelected } = this.props;
     let sideComponent = null;
@@ -123,7 +123,7 @@ class NotificationListItem extends Component {
         />
       ) : (
         <Avatar style={{ backgroundColor: avatarBackground }}>
-          {/* {name.charAt(0).toUpperCase()} */}
+          {name.charAt(0).toUpperCase()}
         </Avatar>
       );
     }
@@ -136,14 +136,20 @@ class NotificationListItem extends Component {
       >
         <Row>
           <Col span={1}>{sideComponent}</Col>
-          <Col span={7} title="Notification name">
+          <Col span={5} title="Notification title">
             {name}
           </Col>
-          <Col span={3} title="role abbreviation ">
-            {abbreviation}
+          <Col span={3} title="Notification form ">
+            {mobile}
           </Col>
-          <Col span={11} title="Notification summary">
-            {description}
+          <Col span={3} title="Notification sender">
+            {name}
+          </Col>
+          <Col span={4} title="Destination of notification">
+            {email}
+          </Col>
+          <Col span={4} title="Notification subject">
+            {email}
           </Col>
           <Col span={2}>
             {isHovered && (

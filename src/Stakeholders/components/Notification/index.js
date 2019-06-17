@@ -29,8 +29,9 @@ class Notification extends Component {
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     // posting: PropTypes.bool.isRequired,
-    focalPeople: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-      .isRequired,
+    notifications: PropTypes.arrayOf(
+      PropTypes.shape({ name: PropTypes.string })
+    ).isRequired,
     // focalPeople: PropTypes.shape({ name: PropTypes.string }),
     page: PropTypes.number.isRequired,
     // showForm: PropTypes.bool.isRequired,
@@ -48,7 +49,7 @@ class Notification extends Component {
   }
 
   render() {
-    const { focalPeople, loading, page, searchQuery, total } = this.props;
+    const { notifications, loading, page, searchQuery, total } = this.props;
     return (
       <Fragment>
         {/* Topbar */}
@@ -76,13 +77,11 @@ class Notification extends Component {
           <NotificationList
             total={total}
             page={page}
-            notifications={focalPeople}
+            notifications={notifications}
             loading={loading}
             onEdit={this.handleEdit}
             onFilter={this.openFiltersModal}
             onNotify={this.openNotificationForm}
-            onShare={this.handleShare}
-            onBulkShare={this.handleBulkShare}
           />
           {/* end list */}
         </div>
@@ -93,8 +92,8 @@ class Notification extends Component {
 
 export default Connect(Notification, {
   searchQuery: 'focalPeople.q',
-  // notification: 'focalPeople.list',
-  notifications: 'focalPeople.selected',
+  notifications: 'focalPeople.list',
+  // notification: 'focalPeople.selected',
   loading: 'focalPeople.loading',
   // posting: 'focalPeople.posting',
   page: 'focalPeople.page',
