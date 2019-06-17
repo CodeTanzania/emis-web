@@ -2,8 +2,9 @@ import { Connect, getFocalPeople } from '@codetanzania/emis-api-states';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import Topbar from '../../../components/Topbar';
+import NotificationList from './List';
+
 import './styles.css';
-import NotificationListItem from './ListItem';
 
 /* constants */
 
@@ -72,7 +73,7 @@ class Notification extends Component {
 
         <div className="NotificationList">
           {/* list starts */}
-          <NotificationListItem
+          <NotificationList
             total={total}
             page={page}
             notifications={focalPeople}
