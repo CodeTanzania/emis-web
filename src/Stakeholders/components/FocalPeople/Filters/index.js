@@ -3,9 +3,14 @@ import {
   Connect,
   filterFocalPeople,
 } from '@codetanzania/emis-api-states';
-import { Button, Checkbox, Col, Form, Row } from 'antd';
+import { httpActions } from '@codetanzania/emis-api-client';
+import { Button, Form } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import SearchableSelectInput from '../../../../components/SearchableSelectInput';
+
+/* declarations */
+const { getPartyGroups, getJurisdictions, getRoles, getAgencies } = httpActions;
 
 /**
  * @class
@@ -24,11 +29,16 @@ class FocalPeopleFilters extends Component {
     ),
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
     onCancel: PropTypes.func.isRequired,
-    groups: PropTypes.arrayOf(PropTypes.string).isRequired,
+    cached: PropTypes.shape({
+      groups: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })),
+    }),
+    onCache: PropTypes.func.isRequired,
+    onClearCache: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
     filter: null,
+    cached: null,
   };
 
   /**
@@ -36,7 +46,8 @@ class FocalPeopleFilters extends Component {
    * @name handleSubmit
    * @description Handle filter action
    *
-   * @param {Object} event onSubmit event object
+   * @param {object} event onSubmit event object
+   * @returns {undefined}
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -65,17 +76,34 @@ class FocalPeopleFilters extends Component {
    * @since 0.1.0
    */
   handleClearFilter = () => {
-    const { onCancel } = this.props;
+    const { onCancel, onClearCache } = this.props;
     clearFocalPersonFilters();
+
+    onClearCache();
     onCancel();
+  };
+
+  /**
+   * @function
+   * @name cacheFilters
+   * @description cache lazy loaded value from filters
+   *
+   * @param {object} values Object with key value of what is to be cached
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  cacheFilters = values => {
+    const { onCache } = this.props;
+    onCache(values);
   };
 
   render() {
     const {
       form: { getFieldDecorator },
       onCancel,
-      groups,
       filter,
+      cached,
     } = this.props;
 
     const formItemLayout = {
@@ -100,19 +128,69 @@ class FocalPeopleFilters extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* start contact group filters */}
-        <Form.Item {...formItemLayout} label="By Person Group">
+        <Form.Item {...formItemLayout} label="By Area(s)">
+          {getFieldDecorator('location', {
+            initialValue: filter ? filter.location : [],
+          })(
+            <SearchableSelectInput
+              onSearch={getJurisdictions}
+              optionLabel="name"
+              optionValue="_id"
+              mode="multiple"
+              onCache={locations => this.cacheFilters({ locations })}
+              initialValue={cached && cached.locations ? cached.locations : []}
+            />
+          )}
+        </Form.Item>
+        {/* end contact group filters */}
+
+        {/* start contact group filters */}
+        <Form.Item {...formItemLayout} label="By Group(s)">
           {getFieldDecorator('group', {
             initialValue: filter ? filter.group : [],
           })(
-            <Checkbox.Group style={{ width: '100%' }}>
-              <Row>
-                {groups.map(group => (
-                  <Col span={8} style={{ margin: '10px 0' }} key={group}>
-                    <Checkbox value={group}>{group}</Checkbox>
-                  </Col>
-                ))}
-              </Row>
-            </Checkbox.Group>
+            <SearchableSelectInput
+              onSearch={getPartyGroups}
+              optionLabel="name"
+              optionValue="_id"
+              mode="multiple"
+              onCache={groups => this.cacheFilters({ groups })}
+              initialValue={cached && cached.groups ? cached.groups : []}
+            />
+          )}
+        </Form.Item>
+        {/* end contact group filters */}
+
+        {/* start contact group filters */}
+        <Form.Item {...formItemLayout} label="By Role(s)">
+          {getFieldDecorator('role', {
+            initialValue: filter ? filter.role : [],
+          })(
+            <SearchableSelectInput
+              onSearch={getRoles}
+              optionLabel="name"
+              optionValue="_id"
+              mode="multiple"
+              onCache={roles => this.cacheFilters({ roles })}
+              initialValue={cached && cached.roles ? cached.roles : []}
+            />
+          )}
+        </Form.Item>
+        {/* end contact group filters */}
+
+        {/* start contact group filters */}
+        <Form.Item {...formItemLayout} label="By Agencies">
+          {getFieldDecorator('party', {
+            initialValue: filter ? filter.party : [],
+          })(
+            <SearchableSelectInput
+              onSearch={getAgencies}
+              optionLabel="name"
+              optionValue="_id"
+              mode="multiple"
+              onCache={agencies => this.cacheFilters({ agencies })}
+              initialValue={cached && cached.agencies ? cached.agencies : []}
+            />
           )}
         </Form.Item>
         {/* end contact group filters */}
@@ -134,6 +212,5 @@ class FocalPeopleFilters extends Component {
 }
 
 export default Connect(Form.create()(FocalPeopleFilters), {
-  groups: 'focalPeople.schema.properties.group.enum',
   filter: 'focalPeople.filter',
 });

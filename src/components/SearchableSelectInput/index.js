@@ -2,6 +2,7 @@ import { Select, Spin } from 'antd';
 import isArray from 'lodash/isArray';
 import isEmpty from 'lodash/isEmpty';
 import isFunction from 'lodash/isFunction';
+import filter from 'lodash/filter';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
@@ -43,6 +44,7 @@ export default class SearchableSelectInput extends Component {
       }),
     ]),
     isFilter: PropTypes.bool,
+    onCache: PropTypes.func,
   };
 
   static defaultProps = {
@@ -50,6 +52,7 @@ export default class SearchableSelectInput extends Component {
     value: undefined,
     initialValue: undefined,
     isFilter: false,
+    onCache: null,
   };
 
   constructor(props) {
@@ -104,10 +107,17 @@ export default class SearchableSelectInput extends Component {
    * @since 0.1.0
    */
   handleChange = value => {
-    const { onChange } = this.props;
+    const { onChange, onCache } = this.props;
+    const { data } = this.state;
     this.setState({
       value,
     });
+
+    if (isFunction(onCache)) {
+      const state = filter(data, entry => value.includes(entry._id)); // eslint-disable-line
+      onCache(state);
+    }
+
     onChange(value);
   };
 
@@ -147,7 +157,7 @@ export default class SearchableSelectInput extends Component {
    *
    * @param {string|Function} prop The property name or value return from
    * a provided function
-   * @param {Object} option A single data item for select options
+   * @param {object} option A single data item for select options
    * @returns {string} Value of the extracted property
    *
    * @version 0.1.0
