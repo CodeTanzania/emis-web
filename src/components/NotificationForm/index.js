@@ -79,7 +79,7 @@ class NotificationForm extends Component {
 
   /**
    * @function
-   * @name toogleMoreFilters
+   * @name toggleMoreFilters
    * @description Toggle areas, groups, agencies, roles filters visibility
    *
    * @returns {undefined}

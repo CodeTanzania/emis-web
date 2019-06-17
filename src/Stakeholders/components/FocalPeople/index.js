@@ -41,6 +41,7 @@ class FocalPeople extends Component {
     showNotificationForm: false,
     selectedFocalPeople: [],
     notificationBody: undefined,
+    cached: null,
   };
 
   static propTypes = {
@@ -63,6 +64,34 @@ class FocalPeople extends Component {
   componentDidMount() {
     getFocalPeople();
   }
+
+  /**
+   * @function
+   * @name handleOnCachedValues
+   * @description Cached selected values for filters
+   *
+   * @param {object} cached values to be cached from filter
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleOnCachedValues = cached => {
+    const previousCached = this.state.cached;
+    const values = { ...previousCached, ...cached };
+    this.setState({ cached: values });
+  };
+
+  /**
+   * @function
+   * @name handleClearCachedValues
+   * @description Clear cached values
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleClearCachedValues = () => {
+    this.setState({ cached: null });
+  };
 
   /**
    * @function
@@ -258,6 +287,7 @@ class FocalPeople extends Component {
       showNotificationForm,
       selectedFocalPeople,
       notificationBody,
+      cached,
     } = this.state;
     return (
       <Fragment>
@@ -306,7 +336,12 @@ class FocalPeople extends Component {
             maskClosable={false}
             width="50%"
           >
-            <FocalPersonFilters onCancel={this.closeFiltersModal} />
+            <FocalPersonFilters
+              onCancel={this.closeFiltersModal}
+              cached={cached}
+              onCache={this.handleOnCachedValues}
+              onClearCache={this.handleClearCachedValues}
+            />
           </Modal>
           {/* end filter modal */}
 
