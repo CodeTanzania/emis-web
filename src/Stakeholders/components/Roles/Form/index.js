@@ -37,7 +37,7 @@ class RoleForm extends Component {
    * @name handleSubmit
    * @description Handle form submit action
    *
-   * @param {Object} event onSubmit event
+   * @param {object} event onSubmit event
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -115,7 +115,7 @@ class RoleForm extends Component {
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* role name and abbreviation */}
         <Row type="flex" justify="space-between">
-          <Col span={17}>
+          <Col xxl={17} xl={17} lg={17} md={17} sm={24} xs={24}>
             {/* role name */}
             <Form.Item {...formItemLayout} label=" Name">
               {getFieldDecorator('name', {
@@ -126,7 +126,7 @@ class RoleForm extends Component {
             {/* end role name */}
           </Col>
 
-          <Col span={6}>
+          <Col xxl={6} xl={6} lg={6} md={6} sm={24} xs={24}>
             {/* role abbreviation */}
             <Form.Item {...formItemLayout} label="Abbreviation">
               {getFieldDecorator('abbreviation', {

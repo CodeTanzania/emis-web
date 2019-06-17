@@ -2,6 +2,25 @@
   padding: 40px;
 }
 
-.Agencies .searchBox {
-  width: 50%;
+
+@media screen and (max-width: 768px) {
+  .Agencies {
+    padding: 30px;
+  }
+
+ .Agencies .ant-btn-lg {
+  padding: 0 5px;
+  font-size: 14px;
+ }
 }
+
+@media screen and (max-width: 426px) {
+  .Agencies {
+    padding: 20px;
+  }
+  .searchBox {
+    padding-bottom: 10px;
+  }
+}
+
+

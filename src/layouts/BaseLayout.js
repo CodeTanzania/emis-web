@@ -73,7 +73,10 @@ const breadcrumbNameMap = {
     title: 'Alerts surveys and feedback',
   },
   '/app/alerts/feeds': { name: 'Feeds', title: 'Alerts feeds' },
-  '/app/alerts/alerts': { name: 'Issued Alerts', title: 'List of all alerts' },
+  '/app/alerts/issuedalerts': {
+    name: 'Issued Alerts',
+    title: 'List of all alerts',
+  },
   '/app/alerts/servicerequests': {
     name: 'Service Requests',
     title: 'Alerts service requests',
@@ -233,9 +236,9 @@ const breadcrumbNameMap = {
  * @name BaseLayout
  * @description Render base layout for EMIS dashboard
  *
- * @param {object} props Properties inject by router
+ * @param {Object} props Properties inject by router
  *
- * @returns {object} BaseLayout component
+ * @returns {Object} BaseLayout component
  * @version 0.1.0
  * @since 0.1.0
  */
@@ -277,14 +280,14 @@ const BaseLayout = props => {
       <Header className="BaseLayoutHeader">
         <Row type="flex" align="middle">
           {/* breadcrumb section start */}
-          <Col span={22}>
+          <Col xxl={22} xl={22} lg={22} md={22} sm={20} xs={20}>
             <Breadcrumb className="Breadcrumb" separator=">">
               {breadcrumbItems}
             </Breadcrumb>
           </Col>
           {/* breadcrumb section end */}
 
-          <Col span={2}>
+          <Col xxl={2} xl={2} lg={2} md={2} sm={4} xs={4}>
             <Row type="flex" justify="end">
               {/* control showing module navigation menu */}
               {location.pathname !== '/' && (
@@ -310,7 +313,7 @@ const BaseLayout = props => {
           <SecureRoute exact path={`${baseUrl}/`} component={Home} />
           <SecureRoute exact path={`${baseUrl}/alerts`} component={Alerts} />
           <SecureRoute
-            path={`${baseUrl}/alerts/alerts`}
+            path={`${baseUrl}/alerts/issuedalerts`}
             component={AlertsLayout}
           />
           <SecureRoute

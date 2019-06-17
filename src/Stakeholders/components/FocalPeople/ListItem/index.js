@@ -7,6 +7,13 @@ import './styles.css';
 
 /* constants */
 const { confirm } = Modal;
+const sideSpan = { xxl: 1, xl: 1, lg: 1, md: 2, sm: 3, xs: 3 };
+const nameSpan = { xxl: 3, xl: 3, lg: 3, md: 5, sm: 10, xs: 10 };
+const phoneSpan = { xxl: 2, xl: 2, lg: 3, md: 4, sm: 9, xs: 9 };
+const emailSpan = { xxl: 3, xl: 4, lg: 5, md: 7, sm: 0, xs: 0 };
+const roleSpan = { xxl: 9, xl: 8, lg: 7, md: 0, sm: 0, xs: 0 };
+const areaSpan = { xxl: 5, xl: 5, lg: 4, md: 5, sm: 0, xs: 0 };
+const isHoveredSpan = { xxl: 1, xl: 1, lg: 1, md: 1, sm: 2, xs: 2 };
 
 /**
  * @class
@@ -68,7 +75,7 @@ class FocalPeopleListItem extends Component {
    * @name handleToggleSelect
    * @description Handle Toggling List Item checkbox
    *
-   * @param {Object} event - Event object
+   * @param {object} event - Event object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -109,13 +116,13 @@ class FocalPeopleListItem extends Component {
   render() {
     const {
       abbreviation,
+      mobile,
+      email,
       agency,
       agencyAbbreviation,
       name,
       role,
       location,
-      email,
-      mobile,
       onEdit,
       onShare,
     } = this.props;
@@ -153,16 +160,15 @@ class FocalPeopleListItem extends Component {
         onMouseLeave={this.handleMouseLeave}
       >
         <Row>
-          <Col span={1}>{sideComponent}</Col>
-          <Col span={3}>{name}</Col>
-          <Col span={2} title={agency}>
-            {agencyAbbreviation}
+          <Col {...sideSpan}>{sideComponent}</Col>
+          <Col {...nameSpan}>{name}</Col>
+          <Col {...roleSpan} title={agency}>
+            {role}, {agencyAbbreviation}
           </Col>
-          <Col span={5}>{role}</Col>
-          <Col span={5}>{location}</Col>
-          <Col span={2}>{mobile}</Col>
-          <Col span={4}>{email}</Col>
-          <Col span={1}>
+          <Col {...phoneSpan}>{mobile}</Col>
+          <Col {...emailSpan}>{email}</Col>
+          <Col {...areaSpan}>{location}</Col>
+          <Col {...isHoveredSpan}>
             {isHovered && (
               <ListItemActions
                 edit={{

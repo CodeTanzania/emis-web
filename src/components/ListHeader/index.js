@@ -25,7 +25,7 @@ const ListHeader = ({
   isBulkSelected,
 }) => (
   <Row className="ListHeader">
-    <Col xl={{ span: 1 }} xxl={{ span: 1 }}>
+    <Col xxl={1} xl={1} lg={1} md={2} sm={3} xs={3}>
       <Checkbox
         className="checkbox"
         checked={isBulkSelected}

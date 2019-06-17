@@ -6,6 +6,11 @@ import ListItemActions from '../../../../components/ListItemActions';
 import './styles.css';
 
 const { confirm } = Modal;
+const sideSpan = { xxl: 1, xl: 1, lg: 1, md: 2, sm: 3, xs: 3 };
+const nameSpan = { xxl: 7, xl: 7, lg: 7, md: 7, sm: 16, xs: 16 };
+const abbreviationSpan = { xxl: 3, xl: 3, lg: 3, md: 3, sm: 3, xs: 3 };
+const descriptionSpan = { xxl: 11, xl: 11, lg: 11, md: 10, sm: 0, xs: 0 };
+const isHoveredSpan = { xxl: 2, xl: 2, lg: 2, md: 2, sm: 2, xs: 2 };
 
 /**
  * @class
@@ -135,17 +140,17 @@ class RoleListItem extends Component {
         onMouseLeave={this.handleMouseLeave}
       >
         <Row>
-          <Col span={1}>{sideComponent}</Col>
-          <Col span={7} title="Role name">
+          <Col {...sideSpan}>{sideComponent}</Col>
+          <Col {...nameSpan} title="Role name">
             {name}
           </Col>
-          <Col span={3} title="role abbreviation ">
+          <Col {...abbreviationSpan} title="role abbreviation ">
             {abbreviation}
           </Col>
-          <Col span={11} title="Role summary">
+          <Col {...descriptionSpan} title="Role summary">
             {description}
           </Col>
-          <Col span={2}>
+          <Col {...isHoveredSpan}>
             {isHovered && (
               <ListItemActions
                 edit={{
