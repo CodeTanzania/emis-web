@@ -1,15 +1,14 @@
 import { httpActions } from '@codetanzania/emis-api-client';
-import { Connect, postAgency, putAgency } from '@codetanzania/emis-api-states';
+import { postAgency, putAgency } from '@codetanzania/emis-api-states';
 import { Button, Col, Form, Input, Row } from 'antd';
 import upperFirst from 'lodash/upperFirst';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import SearchableSelectInput from '../../../../components/SearchableSelectInput';
-import SelectInput from '../../../../components/SelectInput';
 import { notifyError, notifySuccess } from '../../../../util';
 
 /* constants */
-const { getFeatures } = httpActions;
+const { getFeatures, getPartyGroups } = httpActions;
 const { TextArea } = Input;
 
 /**
@@ -42,7 +41,7 @@ class AgencyForm extends Component {
    * @name handleSubmit
    * @description Handle submit form action
    *
-   * @param {Object} event onSubmit event object
+   * @param {object} event onSubmit event object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -95,7 +94,6 @@ class AgencyForm extends Component {
       posting,
       onCancel,
       form: { getFieldDecorator },
-      groups,
     } = this.props;
 
     const formItemLayout = {
@@ -183,17 +181,33 @@ class AgencyForm extends Component {
             </Form.Item>
             {/* end agency abbreviation */}
           </Col>
+
           <Col span={13}>
             <Row type="flex" justify="space-between">
               <Col span={11}>
                 {/* agency group */}
                 <Form.Item {...formItemLayout} label="Group">
                   {getFieldDecorator('group', {
-                    initialValue: isEditForm ? agency.group : undefined,
+                    initialValue:
+                      isEditForm && agency.group
+                        ? agency.group._id // eslint-disable-line
+                        : undefined,
                     rules: [
-                      { required: true, message: 'Agency group is required' },
+                      {
+                        required: true,
+                        message: 'Focal Person group is required',
+                      },
                     ],
-                  })(<SelectInput options={groups} />)}
+                  })(
+                    <SearchableSelectInput
+                      onSearch={getPartyGroups}
+                      optionLabel="name"
+                      optionValue="_id"
+                      initialValue={
+                        isEditForm && agency.group ? agency.group : undefined
+                      }
+                    />
+                  )}
                 </Form.Item>
                 {/* end agency group */}
               </Col>
@@ -238,9 +252,6 @@ class AgencyForm extends Component {
               {getFieldDecorator('website', {
                 initialValue:
                   isEditForm && agency.website ? agency.website : undefined, // eslint-disable-line
-                rules: [
-                  { required: true, message: 'Agency website is required' },
-                ],
               })(<Input />)}
             </Form.Item>
             {/* end agency role */}
@@ -285,7 +296,6 @@ class AgencyForm extends Component {
             {/* agency postal address */}
             <Form.Item {...formItemLayout} label="Postal Address">
               {getFieldDecorator('postalAddress', {
-                rules: [{ required: true }],
                 initialValue: isEditForm ? agency.postalAddress : undefined,
               })(<TextArea autosize={{ minRows: 1, maxRows: 10 }} />)}
             </Form.Item>
@@ -312,6 +322,4 @@ class AgencyForm extends Component {
   }
 }
 
-export default Connect(Form.create()(AgencyForm), {
-  groups: 'agencies.schema.properties.group.enum',
-});
+export default Form.create()(AgencyForm);
