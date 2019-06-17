@@ -20,13 +20,18 @@ import { notifyError, notifySuccess } from '../../../../util';
 import FocalPersonsListItem from '../ListItem';
 
 /* constants */
+const nameSpan = { xxl: 3, xl: 3, lg: 3, md: 5, sm: 10, xs: 10 };
+const phoneSpan = { xxl: 2, xl: 2, lg: 3, md: 4, sm: 9, xs: 9 };
+const emailSpan = { xxl: 3, xl: 4, lg: 5, md: 7, sm: 0, xs: 0 };
+const roleSpan = { xxl: 10, xl: 8, lg: 7, md: 0, sm: 0, xs: 0 };
+const areaSpan = { xxl: 5, xl: 5, lg: 4, md: 5, sm: 0, xs: 0 };
+
 const headerLayout = [
-  { span: 3, header: 'Name' },
-  { span: 2, header: 'Agency' },
-  { span: 5, header: 'Role' },
-  { span: 5, header: 'Area' },
-  { span: 2, header: 'Mobile Number' },
-  { span: 4, header: 'Email Address' },
+  { ...nameSpan, header: 'Name' },
+  { ...roleSpan, header: 'Title & Organization' },
+  { ...phoneSpan, header: 'Phone Number' },
+  { ...emailSpan, header: 'Email' },
+  { ...areaSpan, header: 'Area' },
 ];
 const { getFocalPeopleExportUrl } = httpActions;
 
@@ -63,7 +68,7 @@ class FocalPersonsList extends Component {
    * @name handleOnSelectFocalPerson
    * @description Handle select a single focalPerson action
    *
-   * @param {Object} focalPerson selected focalPerson object
+   * @param {object} focalPerson selected focalPerson object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -151,7 +156,7 @@ class FocalPersonsList extends Component {
    * @name handleOnDeselectFocalPerson
    * @description Handle deselect a single focalPerson action
    *
-   * @param {Object} focalPerson focalPerson to be removed from selected focalPeople
+   * @param {object} focalPerson focalPerson to be removed from selected focalPeople
    * @returns {undefined} undefined
    *
    * @version 0.1.0

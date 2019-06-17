@@ -119,9 +119,9 @@ class FocalPersonForm extends Component {
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* focalPerson name, phone number and email section */}
         <Row type="flex" justify="space-between">
-          <Col span={10}>
+          <Col xxl={10} xl={10} lg={10} md={10} sm={24} xs={24}>
             {/* focalPerson name */}
-            <Form.Item {...formItemLayout} label="Full Name">
+            <Form.Item {...formItemLayout} label="Name">
               {getFieldDecorator('name', {
                 initialValue: isEditForm ? focalPerson.name : undefined,
                 rules: [
@@ -134,9 +134,9 @@ class FocalPersonForm extends Component {
             </Form.Item>
             {/* end focalPerson name */}
           </Col>
-          <Col span={13}>
+          <Col xxl={13} xl={13} lg={13} md={13} sm={24} xs={24}>
             <Row type="flex" justify="space-between">
-              <Col span={11}>
+              <Col xxl={11} xl={11} lg={11} md={11} sm={24} xs={24}>
                 {/* focalPerson mobile number */}
                 <Form.Item {...formItemLayout} label="Phone Number">
                   {getFieldDecorator('mobile', {
@@ -148,7 +148,7 @@ class FocalPersonForm extends Component {
                 </Form.Item>
                 {/* end focalPerson mobile number */}
               </Col>
-              <Col span={12}>
+              <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24} span={12}>
                 {/* focalPerson email */}
                 <Form.Item {...formItemLayout} label="Email">
                   {getFieldDecorator('email', {
@@ -174,7 +174,7 @@ class FocalPersonForm extends Component {
 
         {/* focalPerson organization, group and area section */}
         <Row type="flex" justify="space-between">
-          <Col span={10}>
+          <Col xxl={10} xl={10} lg={10} md={10} sm={24} xs={24}>
             {/* focalPerson organization */}
             <Form.Item {...formItemLayout} label="Organization/Agency">
               {getFieldDecorator('party', {
@@ -198,9 +198,9 @@ class FocalPersonForm extends Component {
             {/* end focalPerson organization */}
           </Col>
 
-          <Col span={13}>
+          <Col xxl={13} xl={13} lg={13} md={13} sm={24} xs={24}>
             <Row type="flex" justify="space-between">
-              <Col span={11}>
+              <Col xxl={11} xl={11} lg={11} md={11} sm={24} xs={24}>
                 {/* focalPerson group */}
                 <Form.Item {...formItemLayout} label="Group">
                   {getFieldDecorator('group', {
@@ -229,7 +229,7 @@ class FocalPersonForm extends Component {
                 </Form.Item>
                 {/* end focalPerson group */}
               </Col>
-              <Col span={12}>
+              <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
                 {/* focalPerson location */}
                 <Form.Item {...formItemLayout} label="Area">
                   {getFieldDecorator('location', {
@@ -267,7 +267,7 @@ class FocalPersonForm extends Component {
 
         {/* focalPerson role, landline and fax section */}
         <Row type="flex" justify="space-between">
-          <Col span={10}>
+          <Col xxl={10} xl={10} lg={10} md={10} sm={24} xs={24}>
             {/* focalPerson role */}
             <Form.Item {...formItemLayout} label="Role">
               {getFieldDecorator('role', {
@@ -293,9 +293,9 @@ class FocalPersonForm extends Component {
             </Form.Item>
             {/* end focalPerson role */}
           </Col>
-          <Col span={13}>
+          <Col xxl={13} xl={13} lg={13} md={13} sm={24} xs={24}>
             <Row type="flex" justify="space-between">
-              <Col span={11}>
+              <Col xxl={11} xl={11} lg={11} md={11} sm={24} xs={24}>
                 {/* focalPerson landline number */}
                 <Form.Item {...formItemLayout} label="Landline/Other Number">
                   {getFieldDecorator('landline', {
@@ -304,7 +304,7 @@ class FocalPersonForm extends Component {
                 </Form.Item>
                 {/* end focalPerson landline number */}
               </Col>
-              <Col span={12}>
+              <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
                 {/* focalPerson fax */}
                 <Form.Item {...formItemLayout} label="Fax">
                   {getFieldDecorator('fax', {
@@ -320,7 +320,7 @@ class FocalPersonForm extends Component {
 
         {/* focalPerson Physical Address, Postal Address section */}
         <Row type="flex" justify="space-between">
-          <Col span={10}>
+          <Col xxl={10} xl={10} lg={10} md={10} sm={24} xs={24}>
             {/* focalPerson physical Address */}
             <Form.Item {...formItemLayout} label="Physical Address">
               {getFieldDecorator('physicalAddress', {
@@ -331,7 +331,7 @@ class FocalPersonForm extends Component {
             </Form.Item>
             {/* end focalPerson physical Address */}
           </Col>
-          <Col span={13}>
+          <Col xxl={13} xl={13} lg={13} md={13} sm={24} xs={24}>
             {/* focalPerson postal address */}
             <Form.Item {...formItemLayout} label="Postal Address">
               {getFieldDecorator('postalAddress', {

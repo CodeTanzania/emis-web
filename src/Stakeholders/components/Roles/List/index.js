@@ -18,15 +18,22 @@ import { notifyError, notifySuccess } from '../../../../util';
 import RoleListItem from '../ListItem';
 
 /* constants */
+const nameSpan = { xxl: 7, xl: 7, lg: 7, md: 7, sm: 16, xs: 16 };
+const abbreviationSpan = { xxl: 3, xl: 3, lg: 3, md: 3, sm: 3, xs: 3 };
+const descriptionSpan = { xxl: 11, xl: 11, lg: 11, md: 10, sm: 0, xs: 0 };
 const headerLayout = [
   {
-    span: 7,
+    ...nameSpan,
     header: 'Name',
     title: 'Roles name associated with focal people',
   },
-  { span: 3, header: 'Abbreviation', title: 'A shortened form of roles' },
   {
-    span: 10,
+    ...abbreviationSpan,
+    header: 'Abbreviation',
+    title: 'A shortened form of roles',
+  },
+  {
+    ...descriptionSpan,
     header: 'Description',
     title: 'Explanation of roles',
   },

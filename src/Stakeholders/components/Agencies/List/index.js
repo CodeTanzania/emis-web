@@ -19,12 +19,18 @@ import Toolbar from '../../../../components/Toolbar';
 import AgencyListItem from '../ListItem';
 
 /* constants */
+const nameSpan = { xxl: 5, xl: 5, lg: 5, md: 7, sm: 12, xs: 12 };
+const abbreviationSpan = { xxl: 3, xl: 3, lg: 3, md: 3, sm: 0, xs: 0 };
+const areaSpan = { xxl: 4, xl: 4, lg: 4, md: 0, sm: 0, xs: 0 };
+const phoneSpan = { xxl: 4, xl: 4, lg: 4, md: 4, sm: 5, xs: 5 };
+const emailSpan = { xxl: 5, xl: 5, lg: 5, md: 6, sm: 0, xs: 0 };
+
 const headerLayout = [
-  { span: 5, header: 'Name' },
-  { span: 3, header: 'Abbreviation' },
-  { span: 3, header: 'Area' },
-  { span: 4, header: 'Mobile Number' },
-  { span: 4, header: 'Email Address' },
+  { ...nameSpan, header: 'Name' },
+  { ...abbreviationSpan, header: 'Abbreviation' },
+  { ...areaSpan, header: 'Area' },
+  { ...phoneSpan, header: 'Phone Number' },
+  { ...emailSpan, header: 'Email' },
 ];
 const { getAgenciesExportUrl } = httpActions;
 
@@ -61,7 +67,7 @@ class AgencyList extends Component {
    * @name handleOnSelectAgency
    * @description Handle select a single agency action
    *
-   * @param {Object} agency selected agency object
+   * @param {object} agency selected agency object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -144,7 +150,7 @@ class AgencyList extends Component {
    * @name handleOnDeselectAgency
    * @description Handle deselect a single agency action
    *
-   * @param {Object} agency agency to be removed from selected agencies
+   * @param {object} agency agency to be removed from selected agencies
    * @returns {undefined}
    *
    * @version 0.1.0
