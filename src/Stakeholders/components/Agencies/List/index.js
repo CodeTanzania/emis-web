@@ -29,8 +29,8 @@ const headerLayout = [
   { ...nameSpan, header: 'Name' },
   { ...abbreviationSpan, header: 'Abbreviation' },
   { ...areaSpan, header: 'Area' },
-  { ...phoneSpan, header: 'Mobile Number' },
-  { ...emailSpan, header: 'Email Address' },
+  { ...phoneSpan, header: 'Phone Number' },
+  { ...emailSpan, header: 'Email' },
 ];
 const { getAgenciesExportUrl } = httpActions;
 
@@ -67,7 +67,7 @@ class AgencyList extends Component {
    * @name handleOnSelectAgency
    * @description Handle select a single agency action
    *
-   * @param {Object} agency selected agency object
+   * @param {object} agency selected agency object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -150,7 +150,7 @@ class AgencyList extends Component {
    * @name handleOnDeselectAgency
    * @description Handle deselect a single agency action
    *
-   * @param {Object} agency agency to be removed from selected agencies
+   * @param {object} agency agency to be removed from selected agencies
    * @returns {undefined}
    *
    * @version 0.1.0

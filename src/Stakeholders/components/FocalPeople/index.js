@@ -265,7 +265,7 @@ class FocalPeople extends Component {
         <Topbar
           search={{
             size: 'large',
-            placeholder: 'Search for focal persons here ...',
+            placeholder: 'Search for focal people here ...',
             onChange: this.searchFocalPeople,
             value: searchQuery,
           }}
@@ -298,13 +298,13 @@ class FocalPeople extends Component {
 
           {/* filter modal */}
           <Modal
-            title="Filter Focal Persons"
+            title="Filter Focal People"
             visible={showFilters}
             onCancel={this.closeFiltersModal}
             footer={null}
             destroyOnClose
             maskClosable={false}
-            width="50%"
+            className="FormModal"
           >
             <FocalPersonFilters onCancel={this.closeFiltersModal} />
           </Modal>
@@ -312,13 +312,13 @@ class FocalPeople extends Component {
 
           {/* Notification Modal modal */}
           <Modal
-            title="Notify Focal Persons"
+            title="Notify Focal People"
             visible={showNotificationForm}
             onCancel={this.closeNotificationForm}
             footer={null}
             destroyOnClose
             maskClosable={false}
-            width="50%"
+            className="FormModal"
             afterClose={this.handleAfterCloseNotificationForm}
           >
             <NotificationForm
@@ -339,7 +339,7 @@ class FocalPeople extends Component {
           <Modal
             title={isEditForm ? 'Edit Focal Person' : 'Add New Focal Person'}
             visible={showForm}
-            width="50%"
+            className="FormModal"
             footer={null}
             onCancel={this.closeFocalPersonForm}
             destroyOnClose
