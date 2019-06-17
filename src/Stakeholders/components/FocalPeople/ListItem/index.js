@@ -68,7 +68,7 @@ class FocalPeopleListItem extends Component {
    * @name handleToggleSelect
    * @description Handle Toggling List Item checkbox
    *
-   * @param {Object} event - Event object
+   * @param {object} event - Event object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -111,9 +111,10 @@ class FocalPeopleListItem extends Component {
     const nameSpan = { xxl: 3, xl: 3, lg: 3, md: 5, sm: 10, xs: 10 };
     const phoneSpan = { xxl: 2, xl: 2, lg: 3, md: 4, sm: 9, xs: 9 };
     const emailSpan = { xxl: 3, xl: 4, lg: 5, md: 7, sm: 0, xs: 0 };
-    const agencySpan = { xxl: 4, xl: 3, lg: 3, md: 0, sm: 0, xs: 0 };
-    const roleSpan = { xxl: 5, xl: 5, lg: 4, md: 0, sm: 0, xs: 0 };
+    const roleSpan = { xxl: 9, xl: 8, lg: 7, md: 0, sm: 0, xs: 0 };
     const areaSpan = { xxl: 5, xl: 5, lg: 4, md: 5, sm: 0, xs: 0 };
+    const isHoveredSpan = { xxl: 1, xl: 1, lg: 1, md: 1, sm: 2, xs: 2 };
+
     const {
       abbreviation,
       mobile,
@@ -162,14 +163,13 @@ class FocalPeopleListItem extends Component {
         <Row>
           <Col {...sideSpan}>{sideComponent}</Col>
           <Col {...nameSpan}>{name}</Col>
+          <Col {...roleSpan} title={agency}>
+            {role}, {agencyAbbreviation}
+          </Col>
           <Col {...phoneSpan}>{mobile}</Col>
           <Col {...emailSpan}>{email}</Col>
-          <Col {...agencySpan} title={agency}>
-            {agencyAbbreviation}
-          </Col>
-          <Col {...roleSpan}>{role}</Col>
           <Col {...areaSpan}>{location}</Col>
-          <Col xxl={1} xl={1} lg={1} md={1} sm={2} xs={2}>
+          <Col {...isHoveredSpan}>
             {isHovered && (
               <ListItemActions
                 edit={{
