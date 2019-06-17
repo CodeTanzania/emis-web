@@ -80,7 +80,12 @@
     "url": "https://github.com/CodeTanzania/emis-web/issues"
   },
   "homepage": ".",
-  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"],
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
   "engines": {
     "node": ">=8.11.1",
     "npm": ">=5.6.0"
@@ -91,11 +96,19 @@
     }
   },
   "commitlint": {
-    "extends": ["@commitlint/config-conventional"]
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   },
   "lint-staged": {
-    "*.js": ["eslint --fix", "git add"],
-    ".{css,scss}": ["prettier --write", "git add"]
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    ".{css,scss}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "husky": {
     "hooks": {
