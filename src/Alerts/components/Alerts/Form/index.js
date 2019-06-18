@@ -100,7 +100,7 @@ class AlertForm extends Component {
    * @name handleSubmit
    * @description  handle alert form submission
    *
-   * @param {Object} e event object
+   * @param {object} e event object
    *
    * @version 0.1.0
    * @since 0.1.0

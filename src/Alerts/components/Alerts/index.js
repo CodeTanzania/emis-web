@@ -9,19 +9,18 @@ import {
 import { Button, Col, Input, Modal, Row } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import AlertsActionBar from './ActionBar';
-import AlertsFilters from './Filters';
 import AlertForm from './Form';
+import AlertFilters from './Filters';
 import AlertList from './List';
 import './styles.css';
 
+/* constants */
 const { Search } = Input;
 
 /**
  * @class
  * @name Alerts
- * @description Render alert module which have search box, actions and alert
- * list
+ * @description Render alert list which have search box, actions and alert list
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -35,50 +34,28 @@ class Alerts extends Component {
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     posting: PropTypes.bool.isRequired,
-    alert: PropTypes.shape({
-      event: PropTypes.string,
-      category: PropTypes.string,
-      urgency: PropTypes.string,
-      area: PropTypes.string,
-      severity: PropTypes.string,
-      certainty: PropTypes.string,
-      instruction: PropTypes.string,
-      expiredAt: PropTypes.string,
-      expectedAt: PropTypes.string,
-      _id: PropTypes.string,
-    }),
-    alerts: PropTypes.arrayOf(
-      PropTypes.shape({
-        event: PropTypes.string,
-        headline: PropTypes.string,
-        description: PropTypes.string,
-        source: PropTypes.string,
-        reportedAt: PropTypes.string,
-        expiredAt: PropTypes.string,
-        expectedAt: PropTypes.string,
-        _id: PropTypes.string,
-      })
-    ).isRequired,
+    alerts: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+      .isRequired,
+    alert: PropTypes.shape({ name: PropTypes.string }),
     page: PropTypes.number.isRequired,
     showForm: PropTypes.bool.isRequired,
+    searchQuery: PropTypes.string,
     total: PropTypes.number.isRequired,
   };
 
   static defaultProps = {
     alert: null,
+    searchQuery: undefined,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     getAlerts();
   }
 
   /**
    * @function
    * @name openFiltersModal
-   * @description open filters modal by setting it's visible property
-   * to false via state
-   *
-   * @returns {undefined} - Nothing is returned
+   * @description open filters modal by setting it's visible property to false via state
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -90,10 +67,7 @@ class Alerts extends Component {
   /**
    * @function
    * @name closeFiltersModal
-   * @description Close filters modal by setting it's visible property
-   *  to false via state
-   *
-   * @returns {undefined} - Nothing is returned
+   * @description Close filters modal by setting it's visible property to false via state
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -103,44 +77,36 @@ class Alerts extends Component {
   };
 
   /**
-   * Open alert form
-   *
    * @function
-   * @name openForm
-   *
-   * @returns {undefined} - Nothing is returned
+   * @name openAlertForm
+   * @description Open alert form
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  openForm = () => {
+  openAlertForm = () => {
     openAlertForm();
   };
 
   /**
-   * close alert form
-   *
    * @function
-   * @name openForm
-   *
-   * @returns {undefined} - Nothing is returned
+   * @name openAlertForm
+   * @description close alert form
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  closeForm = () => {
+  closeAlertForm = () => {
     closeAlertForm();
     this.setState({ isEditForm: false });
   };
 
   /**
-   * Search Alerts List based on supplied filter word
-   *
    * @function
    * @name searchAlerts
+   * @description Search Alerts List based on supplied filter word
    *
-   * @param {Object} event - Event instance
-   * @returns {undefined} - Nothing is returned
+   * @param {object} event - Event instance
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -154,7 +120,7 @@ class Alerts extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} alert alert to be edited
+   * @param {object} alert alert to be edited
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -165,6 +131,14 @@ class Alerts extends Component {
     openAlertForm();
   };
 
+  /**
+   * @function
+   * @name handleAfterCloseForm
+   * @description Perform post close form cleanups
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
   handleAfterCloseForm = () => {
     this.setState({ isEditForm: false });
   };
@@ -177,45 +151,58 @@ class Alerts extends Component {
       posting,
       page,
       showForm,
+      searchQuery,
       total,
     } = this.props;
     const { showFilters, isEditForm } = this.state;
     return (
       <div className="Alerts">
         <Row>
-          <Col span={12}>
+          <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
             {/* search input component */}
             <Search
               size="large"
               placeholder="Search for alerts here ..."
               onChange={this.searchAlerts}
+              allowClear
+              value={searchQuery}
+              className="searchBox"
             />
             {/* end search input component */}
           </Col>
+
           {/* primary actions */}
-          <Col span={3} offset={9}>
-            <Button
-              type="primary"
-              icon="plus"
-              size="large"
-              title="Add New Alert"
-              onClick={this.openForm}
-            >
-              New Alert
-            </Button>
+          <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
+            <Row type="flex" justify="end">
+              <Col xxl={6} xl={6} lg={6} md={8} sm={24} xs={24}>
+                <Button
+                  type="primary"
+                  icon="plus"
+                  size="large"
+                  title="Add New Alert"
+                  onClick={this.openAlertForm}
+                  block
+                >
+                  New Alert
+                </Button>
+              </Col>
+            </Row>
           </Col>
           {/* end primary actions */}
         </Row>
 
-        {/* list header */}
-        <AlertsActionBar
+        {/* list starts */}
+        <AlertList
           total={total}
           page={page}
+          alerts={alerts}
+          loading={loading}
+          onEdit={this.handleEdit}
           onFilter={this.openFiltersModal}
+          onNotify={this.openNotificationForm}
+          onShare={this.handleShare}
+          onBulkShare={this.handleBulkShare}
         />
-        {/* end list header */}
-        {/* list starts */}
-        <AlertList alerts={alerts} loading={loading} onEdit={this.handleEdit} />
         {/* end list */}
 
         {/* filter modal */}
@@ -223,30 +210,30 @@ class Alerts extends Component {
           title="Filter Alerts"
           visible={showFilters}
           onCancel={this.closeFiltersModal}
+          width="50%"
+          footer={null}
           destroyOnClose
           maskClosable={false}
-          width={800}
-          footer={null}
         >
-          <AlertsFilters onCancel={this.closeFiltersModal} />
+          <AlertFilters onCancel={this.closeFiltersModal} />
         </Modal>
         {/* end filter modal */}
-
         {/* create/edit form modal */}
         <Modal
           title={isEditForm ? 'Edit Alert' : 'Add New Alert'}
           visible={showForm}
+          width="50%"
           footer={null}
-          maskClosable={false}
-          onCancel={this.closeForm}
-          width="60%"
+          onCancel={this.closeAlertForm}
           destroyOnClose
+          maskClosable={false}
+          afterClose={this.handleAfterCloseForm}
         >
           <AlertForm
             posting={posting}
-            onCancel={this.closeForm}
             isEditForm={isEditForm}
             alert={alert}
+            onCancel={this.closeAlertForm}
           />
         </Modal>
         {/* end create/edit form modal */}
@@ -261,6 +248,7 @@ export default Connect(Alerts, {
   loading: 'alerts.loading',
   posting: 'alerts.posting',
   page: 'alerts.page',
-  total: 'alerts.total',
   showForm: 'alerts.showForm',
+  total: 'alerts.total',
+  searchQuery: 'alerts.q',
 });
