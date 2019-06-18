@@ -63,7 +63,7 @@ class ItemUnitListItem extends Component {
    * @name handleToggleSelect
    * @description Handle toggling list item checkbox
    *
-   * @param {Object} event Event object
+   * @param {object} event Event object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -111,6 +111,7 @@ class ItemUnitListItem extends Component {
       isSelected,
       onEdit,
     } = this.props;
+
     const { isHovered } = this.state;
     let sideComponent = null;
 

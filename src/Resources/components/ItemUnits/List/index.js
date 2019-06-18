@@ -58,7 +58,7 @@ class ItemUnitList extends Component {
    * @name handleSelectItemUnit
    * @description Handle select single  item unit of measure checkbox
    *
-   * @param {Object} itemUnit selected  item unit of measure object
+   * @param {object} itemUnit selected  item unit of measure object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -94,7 +94,7 @@ class ItemUnitList extends Component {
    * @name handleDeselectItemUnit
    * @description Handle deselect a single  item unit of measure checkbox
    *
-   * @param {Object} itemUnit  item unit of measure objected to be removed from
+   * @param {object} itemUnit  item unit of measure objected to be removed from
    * list of selected adjustments
    * @returns {undefined} undefined
    *
@@ -194,7 +194,7 @@ class ItemUnitList extends Component {
           renderItem={itemUnit => (
             <ItemUnitListItem
               key={itemUnit.id}
-              name={itemUnit.value}
+              name={itemUnit.name}
               abbreviation={itemUnit.abbreviation}
               description={itemUnit.description}
               color={itemUnit.color}
