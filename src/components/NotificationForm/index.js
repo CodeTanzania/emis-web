@@ -162,7 +162,7 @@ class NotificationForm extends Component {
             {getFieldDecorator('features')(
               <SearchableSelectInput
                 onSearch={onSearchJurisdictions}
-                optionLabel="name"
+                optionLabel={feature => `${feature.name} (${feature.type})`}
                 optionValue="_id"
                 mode="multiple"
               />
