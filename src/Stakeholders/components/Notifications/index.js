@@ -1,55 +1,103 @@
-import { Connect, getFocalPeople } from '@codetanzania/emis-api-states';
+import { Connect, getCampaigns } from '@codetanzania/emis-api-states';
+import { httpActions } from '@codetanzania/emis-api-client';
 import PropTypes from 'prop-types';
+import { Modal } from 'antd';
 import React, { Component, Fragment } from 'react';
 import Topbar from '../../../components/Topbar';
-import NotificationList from './List';
+import CampaignList from './List';
 
 import './styles.css';
+import NotificationForm from '../../../components/NotificationForm';
 
 /* constants */
+const {
+  getFocalPeople: getFocalPeopleFromAPI,
+  getJurisdictions,
+  getPartyGroups,
+  getRoles,
+  getAgencies,
+} = httpActions;
 
 /**
  * @class
- * @name Notification
- * @description Render focalPeople list which have search box, actions and focalPeople list
+ * @name Campaign
+ * @description Render campaign list which have search box, actions and campaign list
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class Notification extends Component {
-  // state = {
-  //   showFilters: false,
-  //   isEditForm: false,
-  //   showNotificationForm: false,
-  //   selectedFocalPeople: [],
-  //   notificationBody: undefined,
-  //   cached: null,
-  // };
+class Campaign extends Component {
+  state = {
+    showNotificationForm: false,
+    selectedFocalPeople: [],
+    notificationBody: undefined,
+  };
 
   static propTypes = {
     loading: PropTypes.bool.isRequired,
-    // posting: PropTypes.bool.isRequired,
-    notifications: PropTypes.arrayOf(
-      PropTypes.shape({ name: PropTypes.string })
-    ).isRequired,
-    // focalPeople: PropTypes.shape({ name: PropTypes.string }),
+    campaigns: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+      .isRequired,
     page: PropTypes.number.isRequired,
-    // showForm: PropTypes.bool.isRequired,
     searchQuery: PropTypes.string,
     total: PropTypes.number.isRequired,
   };
 
   static defaultProps = {
-    // focalPeople: null,
     searchQuery: undefined,
   };
 
   componentDidMount() {
-    getFocalPeople();
+    getCampaigns();
   }
 
+  /**
+   * @function
+   * @name openNotificationForm
+   * @description Handle on notify focalPeople
+   *
+   * @param {object[]} focalPeople List of focalPeople selected to be notified
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  openNotificationForm = (focalPeople = []) => {
+    this.setState({
+      selectedFocalPeople: focalPeople,
+      showNotificationForm: true,
+    });
+  };
+
+  /**
+   * @function
+   * @name closeNotificationForm
+   * @description Handle on notify focalPeople
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  closeNotificationForm = () => {
+    this.setState({ showNotificationForm: false });
+  };
+
+  /**
+   * @function
+   * @name handleAfterCloseNotificationForm
+   * @description Perform post close notification form cleanups
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleAfterCloseNotificationForm = () => {
+    this.setState({ notificationBody: undefined });
+  };
+
   render() {
-    const { notifications, loading, page, searchQuery, total } = this.props;
+    const { campaigns, loading, page, searchQuery, total } = this.props;
+    const {
+      showNotificationForm,
+      selectedFocalPeople,
+      notificationBody,
+    } = this.state;
     return (
       <Fragment>
         {/* Topbar */}
@@ -57,7 +105,7 @@ class Notification extends Component {
           search={{
             size: 'large',
             placeholder: 'Search for notifications here ...',
-            onChange: this.searchFocalPeople,
+            onChange: this.searchCampaigns,
             value: searchQuery,
           }}
           actions={[
@@ -65,8 +113,8 @@ class Notification extends Component {
               label: 'New Notification',
               icon: 'plus',
               size: 'large',
-              title: 'Add Notification',
-              onClick: this.openFocalPersonForm,
+              title: 'Create Notification',
+              onClick: () => this.openNotificationForm(),
             },
           ]}
         />
@@ -74,29 +122,53 @@ class Notification extends Component {
 
         <div className="NotificationList">
           {/* list starts */}
-          <NotificationList
+          <CampaignList
             total={total}
             page={page}
-            notifications={notifications}
+            campaigns={campaigns}
             loading={loading}
             onEdit={this.handleEdit}
             onFilter={this.openFiltersModal}
-            onNotify={this.openNotificationForm}
+            onNotify={this.openCampaignForm}
           />
           {/* end list */}
+
+          {/* Notification Modal modal */}
+          <Modal
+            title="Notify Focal People"
+            visible={showNotificationForm}
+            onCancel={this.closeNotificationForm}
+            footer={null}
+            destroyOnClose
+            maskClosable={false}
+            className="FormModal"
+            afterClose={this.handleAfterCloseNotificationForm}
+          >
+            <NotificationForm
+              recipients={selectedFocalPeople}
+              onSearchRecipients={getFocalPeopleFromAPI}
+              onSearchJurisdictions={getJurisdictions}
+              onSearchGroups={getPartyGroups}
+              onSearchAgencies={getAgencies}
+              onSearchRoles={getRoles}
+              body={notificationBody}
+              onCancel={this.closeNotificationForm}
+            />
+          </Modal>
+          {/* end Notification modal */}
         </div>
       </Fragment>
     );
   }
 }
 
-export default Connect(Notification, {
-  searchQuery: 'focalPeople.q',
-  notifications: 'focalPeople.list',
-  // notification: 'focalPeople.selected',
-  loading: 'focalPeople.loading',
-  // posting: 'focalPeople.posting',
-  page: 'focalPeople.page',
-  showForm: 'focalPeople.showForm',
-  total: 'focalPeople.total',
+export default Connect(Campaign, {
+  searchQuery: 'campaigns.q',
+  campaigns: 'campaigns.list',
+  // notification: 'campaign.selected',
+  loading: 'campaigns.loading',
+  // posting: 'campaign.posting',
+  page: 'campaigns.page',
+  showForm: 'campaigns.showForm',
+  total: 'campaigns.total',
 });
