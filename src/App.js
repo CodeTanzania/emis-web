@@ -10,8 +10,19 @@ import SecureRoute from './Auth/SecureRoute';
 /* configure global spin indicator */
 Spin.setDefaultIndicator(<Icon type="loading" style={{ fontSize: 24 }} spin />);
 
+/**
+ * @function
+ * @name App
+ * @description Entry component for EMIS web application
+ *
+ * @returns {object} React Node
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
 const App = () => {
   if (isTokenValid) {
+    // on refresh browser tab reinitialize application(redux-store) again
     initializeApp();
   }
 

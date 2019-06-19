@@ -33,7 +33,7 @@ const Topbar = ({ search, actions }) => (
           const { label, ...props } = action;
 
           return (
-            <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24} key={label}>
+            <Col xxl={4} xl={7} lg={10} md={12} sm={24} xs={24} key={label}>
               <Button {...props} type="primary" block>
                 {label}
               </Button>

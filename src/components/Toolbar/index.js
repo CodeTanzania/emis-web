@@ -43,7 +43,7 @@ const Toolbar = ({
   <div className="Toolbar">
     <Row>
       {/* action bar */}
-      <Col xxl={12} xl={12} lg={12} md={10} sm={12} xs={12}>
+      <Col xxl={12} xl={12} lg={12} md={10} sm={14} xs={12}>
         <Row>
           {/* refresh  action */}
           {onRefresh && (
@@ -127,7 +127,7 @@ const Toolbar = ({
       {/* end action bar */}
 
       {/* filter bar */}
-      <Col xxl={12} xl={12} lg={12} md={14} sm={12} xs={12}>
+      <Col xxl={12} xl={12} lg={12} md={14} sm={10} xs={12}>
         <Row type="flex" justify="end">
           {/* selected and  number summary */}
           <Col xxl={12} xl={12} lg={13} md={12} sm={0} xs={0}>
