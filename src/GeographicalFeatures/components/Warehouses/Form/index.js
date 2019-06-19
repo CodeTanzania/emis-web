@@ -28,12 +28,12 @@ class WarehouseForm extends Component {
    * @name handleSubmit
    * @description Handle create/edit action
    *
-   * @param {Object} e event object
+   * @param {object} event event object
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleSubmit = e => {
-    e.preventDefault();
+  handleSubmit = event => {
+    event.preventDefault();
 
     const {
       form: { validateFieldsAndScroll },

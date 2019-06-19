@@ -115,7 +115,7 @@ class Procedures extends Component {
    * @name searchProcedures
    * @description Search Procedures List based on supplied filter word
    *
-   * @param {Object} event  Event instance
+   * @param {object} event  Event instance
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -129,7 +129,7 @@ class Procedures extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} procedure procedure object to be edited
+   * @param {object} procedure procedure object to be edited
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -145,7 +145,7 @@ class Procedures extends Component {
    * @name openNotificationForm
    * @description Handle on notify procedures
    *
-   * @param {Object[]} procedures procedure list
+   * @param {object[]} procedures procedure list
    *
    * @version 0.1.0
    * @since 0.1.0

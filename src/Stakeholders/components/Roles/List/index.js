@@ -76,7 +76,7 @@ class RoleList extends Component {
    * @name handleOnSelectRole
    * @description Handle select a single role action
    *
-   * @param {Object} role selected role object
+   * @param {object} role selected role object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -91,7 +91,7 @@ class RoleList extends Component {
    * @name handleOnDeselectRole
    * @description Handle deselect a single role action
    *
-   * @param {Object} role roles to be removed from selected roles
+   * @param {object} role roles to be removed from selected roles
    * @returns {undefined} undefined
    *
    * @version 0.1.0

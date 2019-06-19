@@ -122,7 +122,7 @@ class Items extends Component {
    * @name searchItems
    * @description Search Items List based on supplied filter word
    *
-   * @param {Object} event - Event instance
+   * @param {object} event - Event instance
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -136,7 +136,7 @@ class Items extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} item item to be edited
+   * @param {object} item item to be edited
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -152,15 +152,13 @@ class Items extends Component {
    * @name handleShare
    * @description Handle share single item action
    *
-   * @param {Object} item item to be shared
+   * @param {object} item item to be shared
    *
    * @version 0.1.0
    * @since 0.1.0
    */
   handleShare = item => {
-    const message = `${item.name}\nMobile: ${item.mobile}\nEmail: ${
-      item.email
-    }`;
+    const message = `${item.name}\nMobile: ${item.mobile}\nEmail: ${item.email}`;
 
     this.setState({ notificationBody: message, showNotificationForm: true });
   };
@@ -170,7 +168,7 @@ class Items extends Component {
    * @name handleBulkShare
    * @description Handle share multiple focal People
    *
-   * @param {Object[]} items focal People list to be shared
+   * @param {object[]} items focal People list to be shared
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -190,7 +188,7 @@ class Items extends Component {
    * @name openNotificationForm
    * @description Handle on notify items
    *
-   * @param {Object[]} items List of items selected to be notified
+   * @param {object[]} items List of items selected to be notified
    *
    * @version 0.1.0
    * @since 0.1.0

@@ -2,6 +2,25 @@
   padding: 40px;
 }
 
-.AlertSources .searchBox {
-  width: 50%;
+
+@media screen and (max-width: 768px) {
+  .AlertSources {
+    padding: 30px;
+  }
+
+ .AlertSources .ant-btn-lg {
+  padding: 0 5px;
+  font-size: 14px;
+ }
 }
+
+@media screen and (max-width: 426px) {
+  .AlertSources {
+    padding: 20px;
+  }
+  .searchBox {
+    padding-bottom: 10px;
+  }
+}
+
+

@@ -36,7 +36,7 @@ class RolesFilters extends Component {
    * @name handleSubmit
    * @description Handle filter action
    *
-   * @param {Object} event onSubmit event
+   * @param {object} event onSubmit event
    *
    * @version 0.1.0
    * @since 0.1.0

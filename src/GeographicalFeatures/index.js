@@ -68,8 +68,8 @@ const routes = [
  * @name GeographicalFeatures
  * @description Home component which shows to navigation menu
  *
- * @param {Object} props props object
- * @param {Object} props.match match object from url router
+ * @param {object} props props object
+ * @param {object} props.match match object from url router
  *
  * @version 0.1.0
  * @since 0.1.0

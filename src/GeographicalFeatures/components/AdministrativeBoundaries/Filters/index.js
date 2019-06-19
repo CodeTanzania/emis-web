@@ -86,7 +86,7 @@ const levels = [
  * @name RolesFilters
  * @description Filter modal component for filtering administrative boundaries
  *
- * @param {Object} e event object
+ * @param {object} e event object
  *
  * @version 0.1.0
  * @since 0.1.0

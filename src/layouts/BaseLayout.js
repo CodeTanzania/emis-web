@@ -236,9 +236,9 @@ const breadcrumbNameMap = {
  * @name BaseLayout
  * @description Render base layout for EMIS dashboard
  *
- * @param {Object} props Properties inject by router
+ * @param {object} props Properties inject by router
  *
- * @returns {Object} BaseLayout component
+ * @returns {object} BaseLayout component
  * @version 0.1.0
  * @since 0.1.0
  */

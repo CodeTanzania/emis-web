@@ -1,18 +1,21 @@
-import { Avatar, Checkbox, Col, Icon, Row } from 'antd';
+import { Avatar, Checkbox, Col, Row, Modal } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import randomColor from 'randomcolor';
+import React, { Component } from 'react';
+import ListItemActions from '../../../../components/ListItemActions';
 import './styles.css';
 
+/* constants */
+const { confirm } = Modal;
 /**
  * @class
- * @name AlertSourcesListItem
- * @description Single Alert Source list item component. Render
- * single Source details
+ * @name AlertSourceListItem
+ * @description Single alert list item component. Render single alert details
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class AlertSourcesListItem extends Component {
+class AlertSourceListItem extends Component {
   state = {
     isHovered: false,
   };
@@ -23,14 +26,18 @@ class AlertSourcesListItem extends Component {
     email: PropTypes.string.isRequired,
     mobile: PropTypes.string.isRequired,
     website: PropTypes.string.isRequired,
-    onEdit: PropTypes.func.isRequired,
     onArchive: PropTypes.func.isRequired,
+    onEdit: PropTypes.func.isRequired,
+    onReload: PropTypes.func.isRequired,
+    isSelected: PropTypes.bool.isRequired,
+    onSelectItem: PropTypes.func.isRequired,
+    onDeselectItem: PropTypes.func.isRequired,
   };
 
   /**
    * @function
    * @name handleMouseEnter
-   * @description show item actions on hover
+   * @description Handle on MouseEnter ListItem event
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -41,8 +48,8 @@ class AlertSourcesListItem extends Component {
 
   /**
    * @function
-   * @name handleMouseLeave
-   * @description hide item actions on hover
+   * @name handleMouseEnter
+   * @description Handle on MouseLeave ListItem event
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -51,23 +58,86 @@ class AlertSourcesListItem extends Component {
     this.setState({ isHovered: false });
   };
 
+  /**
+   * @function
+   * @name handleToggleSelect
+   * @description Handle Toggling List Item checkbox
+   *
+   * @param {object} event - Event object
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleToggleSelect = event => {
+    const { isSelected } = this.state;
+    const { onSelectItem, onDeselectItem } = this.props;
+
+    this.setState({ isSelected: !isSelected });
+    if (event.target.checked) {
+      onSelectItem();
+    } else {
+      onDeselectItem();
+    }
+  };
+
+  /**
+   * @function
+   * @name showArchiveConfirm
+   * @description show confirm modal before archiving a alert
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  showArchiveConfirm = () => {
+    const { name, onArchive } = this.props;
+    confirm({
+      title: `Are you sure you want to archive ${name} ?`,
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        onArchive();
+      },
+    });
+  };
+
   render() {
-    const { name, url, email, mobile, website, onEdit, onArchive } = this.props;
+    const { name, url, email, mobile, website, onReload, onEdit } = this.props;
     const { isHovered } = this.state;
+    const { isSelected } = this.props;
+    const avatarBackground = randomColor();
+    let sideComponent = null;
+
+    if (isSelected) {
+      sideComponent = (
+        <Checkbox
+          className="Checkbox"
+          onChange={this.handleToggleSelect}
+          checked={isSelected}
+        />
+      );
+    } else {
+      sideComponent = isHovered ? (
+        <Checkbox
+          className="Checkbox"
+          onChange={this.handleToggleSelect}
+          checked={isSelected}
+        />
+      ) : (
+        <Avatar style={{ backgroundColor: avatarBackground }}>
+          {name.toUpperCase().charAt(0)}
+        </Avatar>
+      );
+    }
+
     return (
       <div
-        className="AlertSourcesListItem"
+        className="AlertSourceListItem"
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
         <Row>
-          <Col span={1}>
-            {isHovered ? (
-              <Checkbox className="Checkbox" />
-            ) : (
-              <Avatar>{name.toUpperCase().charAt(0)}</Avatar>
-            )}
-          </Col>
+          <Col span={1}>{sideComponent}</Col>
           <Col span={5}>{name}</Col>
           <Col span={3}>{email}</Col>
           <Col span={3}>{mobile}</Col>
@@ -75,28 +145,24 @@ class AlertSourcesListItem extends Component {
           <Col span={5}>{url}</Col>
           <Col span={3}>
             {isHovered && (
-              <Fragment>
-                <Icon
-                  type="edit"
-                  title="Update Alert Source"
-                  className="actionIcon"
-                  onClick={onEdit}
-                />
-
-                <Icon
-                  type="sync"
-                  title="Reload Alerts"
-                  className="actionIcon"
-                  onClick={() => {}}
-                />
-
-                <Icon
-                  type="database"
-                  title="Archive Source"
-                  className="actionIcon"
-                  onClick={onArchive}
-                />
-              </Fragment>
+              <ListItemActions
+                edit={{
+                  name: 'Edit AlertSource',
+                  title: 'Update AlertSource details',
+                  onClick: onEdit,
+                }}
+                reload={{
+                  name: 'Reload Alerts',
+                  title: 'Reload Alerts',
+                  onClick: onReload,
+                }}
+                archive={{
+                  name: 'Archive AlertSource',
+                  title:
+                    'Remove AlertSource from the list of Active AlertSources',
+                  onClick: this.showArchiveConfirm,
+                }}
+              />
             )}
           </Col>
         </Row>
@@ -105,4 +171,4 @@ class AlertSourcesListItem extends Component {
   }
 }
 
-export default AlertSourcesListItem;
+export default AlertSourceListItem;

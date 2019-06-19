@@ -10,7 +10,7 @@ import IndicatorListItem from '../ListItem';
  * @name IndicatorsList
  * @description render list of indicators
  *
- * @param {Object} props props object
+ * @param {object} props props object
  * @param {boolean} props.loading preload list of indictors
  * @param {Array} props.indicators array list of indictors
  * @param {Function} props.onEdit function for editing single indictor

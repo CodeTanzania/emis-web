@@ -11,7 +11,7 @@ import WardsListHeader from '../ListHeader';
  * @name WardsList
  * @description Render Wards list
  *
- * @param {Object} props props object
+ * @param {object} props props object
  * @param {boolean} props.loading preload list of wards
  * @param {Array} props.wards array list of wards
  * @param {Function} props.onEdit function for editing ward

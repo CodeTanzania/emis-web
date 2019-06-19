@@ -107,7 +107,7 @@ class Plans extends Component {
    * @name searchPlans
    * @description Search Plans List based on supplied filter word
    *
-   * @param {Object} event - Event instance
+   * @param {object} event - Event instance
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -121,7 +121,7 @@ class Plans extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} plan plan object
+   * @param {object} plan plan object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -137,7 +137,7 @@ class Plans extends Component {
    * @name openNotificationForm
    * @description Handle on notify plans
    *
-   * @param {Object[]} plans list of plans objects
+   * @param {object[]} plans list of plans objects
    *
    * @version 0.1.0
    * @since 0.1.0

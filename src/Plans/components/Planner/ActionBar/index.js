@@ -11,7 +11,7 @@ import './styles.css';
  * @name PlansActionBar
  * @description Render action bar for actions which are applicable to list content
  *
- * @param {Object} props props object
+ * @param {object} props props object
  * @param {number} props.page current page number
  * @param {number} props.total total number of plans from the API
  * @param {number} props.selectedItemCount total nunmber of selected plans

@@ -16,7 +16,7 @@ import './styles.css';
  * @description Render action bar for actions which are applicable to
  * list content
  *
- * @param {Object} props props object
+ * @param {object} props props object
  * @param {number} props.page current page
  * @param {number} props.total total number of Warehouses
  * @param {Function} props.onFilter filters Warehouses
@@ -44,7 +44,7 @@ const WarehousesActionBar = ({ page, total, onFilter }) => (
               },
               () => {
                 notifyError(
-                  `An Error occurred while refreshing warehouses, 
+                  `An Error occurred while refreshing warehouses,
                   please warehouses system administrator!`
                 );
               }

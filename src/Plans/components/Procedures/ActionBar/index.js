@@ -14,7 +14,7 @@ import './styles.css';
  * @name ProceduresActionBar
  * @description Render action bar for actions which are applicable to list content
  *
- * @param {Object} props props object
+ * @param {object} props props object
  * @param {number} props.page current page number
  * @param {number} props.total total number of procedures in the API
  * @param {Function} props.onNotify callback for notify action

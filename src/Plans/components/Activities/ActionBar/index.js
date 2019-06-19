@@ -14,7 +14,7 @@ import './styles.css';
  * @name ActivitiesActionBar
  * @description Render action bar for actions which are applicable to list content
  *
- * @param {Object} props prop object
+ * @param {object} props prop object
  * @param {number} props.page current results page number
  * @param {number} props.total total number of activities from the API
  * @param {Function} props.onNotify callback for notify action

@@ -124,7 +124,7 @@ class ItemCategories extends Component {
    * @name searchItemCategories
    * @description Search ItemCategories List based on supplied filter word
    *
-   * @param {Object} event - Event instance
+   * @param {object} event - Event instance
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -138,7 +138,7 @@ class ItemCategories extends Component {
    * @name handleEdit
    * @description Handle on Edit action for itemCategory list
    *
-   * @param {Object} itemCategory itemCategory to be edited
+   * @param {object} itemCategory itemCategory to be edited
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -154,15 +154,13 @@ class ItemCategories extends Component {
    * @name handleShare
    * @description Handle share single itemCategory action
    *
-   * @param {Object} itemCategory itemCategory to be shared
+   * @param {object} itemCategory itemCategory to be shared
    *
    * @version 0.1.0
    * @since 0.1.0
    */
   handleShare = itemCategory => {
-    const message = `${itemCategory.name}\nMobile: ${
-      itemCategory.mobile
-    }\nEmail: ${itemCategory.email}`;
+    const message = `${itemCategory.name}\nMobile: ${itemCategory.mobile}\nEmail: ${itemCategory.email}`;
 
     this.setState({ notificationBody: message, showNotificationForm: true });
   };
@@ -172,7 +170,7 @@ class ItemCategories extends Component {
    * @name handleBulkShare
    * @description Handle share multiple itemCategories
    *
-   * @param {Object[]} itemCategories itemCategories list to be shared
+   * @param {object[]} itemCategories itemCategories list to be shared
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -180,9 +178,7 @@ class ItemCategories extends Component {
   handleBulkShare = itemCategories => {
     const itemList = itemCategories.map(
       itemCategory =>
-        `${itemCategory.name}\nMobile: ${itemCategory.mobile}\nEmail: ${
-          itemCategory.email
-        }`
+        `${itemCategory.name}\nMobile: ${itemCategory.mobile}\nEmail: ${itemCategory.email}`
     );
 
     const message = itemList.join('\n\n\n');
@@ -195,7 +191,7 @@ class ItemCategories extends Component {
    * @name openNotificationForm
    * @description Handle on notify itemCategories
    *
-   * @param {Object[]} itemCategories List of itemCategories selected to be notified
+   * @param {object[]} itemCategories List of itemCategories selected to be notified
    *
    * @version 0.1.0
    * @since 0.1.0

@@ -11,7 +11,7 @@ import QuestionsListItem from '../ListItem';
  * @name QuestionsList
  * @description question list item component. Render question details
  *
- * @param {Object} props props object
+ * @param {object} props props object
  * @param {boolean} props.loading preload list of questions
  * @param {Array} props.questions array list of questions
  * @param {Function} props.onEdit function for editing single question

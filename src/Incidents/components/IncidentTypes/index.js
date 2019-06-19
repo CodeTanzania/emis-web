@@ -18,7 +18,6 @@ import './styles.css';
 const { Search } = Input;
 
 /**
- *
  * @class
  * @name IncidentTypes
  * @description  Render IncidentTypes list which have search box,
@@ -27,7 +26,6 @@ const { Search } = Input;
  * @version 0.1.0
  * @since 0.1.0
  */
-
 class IncidentTypes extends Component {
   state = {
     showFilters: false,
@@ -122,7 +120,7 @@ class IncidentTypes extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} incidenttype incidenttype passed when function is called
+   * @param {object} incidenttype incidenttype passed when function is called
    * @version 0.1.0
    * @since 0.1.0
    */

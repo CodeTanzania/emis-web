@@ -9,7 +9,7 @@ import './styles.css';
  * @name PlanOptions
  * @description Plan Options
  *
- * @param {Object} props props object
+ * @param {object} props props object
  * @param {Function} props.onEditPlan callback for edit action
  *
  * @version 0.1.0

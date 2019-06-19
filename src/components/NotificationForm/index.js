@@ -1,8 +1,11 @@
 import { Button, Form, Input, Icon, Tooltip } from 'antd';
+import { postCampaign } from '@codetanzania/emis-api-states';
+import compact from 'lodash/compact';
 import map from 'lodash/map';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import SearchableSelectInput from '../SearchableSelectInput';
+import { notifySuccess, notifyError } from '../../util';
 
 /* constants */
 const { TextArea } = Input;
@@ -29,7 +32,6 @@ class NotificationForm extends Component {
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
     body: PropTypes.string,
     onCancel: PropTypes.func.isRequired,
-    onNotify: PropTypes.func.isRequired,
     onSearchRecipients: PropTypes.func.isRequired,
     onSearchJurisdictions: PropTypes.func.isRequired,
     onSearchGroups: PropTypes.func.isRequired,
@@ -62,17 +64,43 @@ class NotificationForm extends Component {
 
     validateFieldsAndScroll((error, values) => {
       if (!error) {
+        // const send = {
+        //   criteria: { group: { $in: [] }, role: { $in: [] } },
+        //   subject: '',
+        //   body: '',
+        // };
         const notification = {
-          to: {
+          criteria: {
             _id: {
-              $in: values.recipients,
+              $in: compact(
+                [].concat(values.recipients).concat(values.agencies)
+              ),
+            },
+            group: {
+              $in: compact([].concat(values.groups)),
+            },
+            role: {
+              $in: compact([].concat(values.roles)),
+            },
+            location: {
+              $in: compact([].concat(values.features)),
             },
           },
           subject: values.subject,
-          body: values.body,
+          message: values.body,
         };
 
-        console.log(notification);
+        postCampaign(
+          notification,
+          () => {
+            notifySuccess('Notification Sent Successfully');
+          },
+          () => {
+            notifyError(
+              'An Error occurred when sending notification, please contact System Adminstrator'
+            );
+          }
+        );
       }
     });
   };
@@ -131,7 +159,7 @@ class NotificationForm extends Component {
         {/* notify recipients per jurisdictions */}
         {onSearchJurisdictions && moreFilters && (
           <Form.Item {...formItemLayout} label="Areas">
-            {getFieldDecorator('feature')(
+            {getFieldDecorator('features')(
               <SearchableSelectInput
                 onSearch={onSearchJurisdictions}
                 optionLabel="name"

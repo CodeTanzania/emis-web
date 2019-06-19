@@ -12,7 +12,7 @@ import './styles.css';
  * @description Render action bar for actions which are applicable to
  * list content
  *
- * @param {Object} props props object
+ * @param {object} props props object
  * @param {number} props.page current page
  * @param {number} props.total total number of AdminstrativeBoundaries
  * @param {Function} props.onFilter filters AdminstrativeBoundaries

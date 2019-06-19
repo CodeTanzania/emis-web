@@ -66,7 +66,7 @@ class RoleListItem extends Component {
    * @name handleToggleSelect
    * @description Handle Toggling List Item checkbox
    *
-   * @param {Object} event - Event object
+   * @param {object} event - Event object
    *
    * @version 0.1.0
    * @since 0.1.0

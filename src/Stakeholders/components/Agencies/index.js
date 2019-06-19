@@ -24,7 +24,7 @@ const { Search } = Input;
  * @description generate agency content to share from agency object
  *
  * @param {object} agency  agency to be converted to string content
- *
+ * @returns {string} Message content to be shared
  * @version 0.1.0
  * @since 0.1.0
  */
@@ -46,6 +46,7 @@ class Agencies extends Component {
     showNotificationForm: false,
     selectedAgencies: [],
     notificationBody: undefined,
+    cached: null,
   };
 
   static propTypes = {
@@ -68,6 +69,34 @@ class Agencies extends Component {
   componentDidMount() {
     getAgencies();
   }
+
+  /**
+   * @function
+   * @name handleOnCachedValues
+   * @description Cached selected values for filters
+   *
+   * @param {object} cached values to be cached from filter
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleOnCachedValues = cached => {
+    const previousCached = this.state.cached;
+    const values = { ...previousCached, ...cached };
+    this.setState({ cached: values });
+  };
+
+  /**
+   * @function
+   * @name handleClearCachedValues
+   * @description Clear cached values
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleClearCachedValues = () => {
+    this.setState({ cached: null });
+  };
 
   /**
    * @function
@@ -240,7 +269,9 @@ class Agencies extends Component {
       showNotificationForm,
       selectedAgencies,
       notificationBody,
+      cached,
     } = this.state;
+
     return (
       <div className="Agencies">
         <Row>
@@ -314,7 +345,12 @@ class Agencies extends Component {
           destroyOnClose
           maskClosable={false}
         >
-          <AgencyFilters onCancel={this.closeFiltersModal} />
+          <AgencyFilters
+            onCancel={this.closeFiltersModal}
+            cached={cached}
+            onCache={this.handleOnCachedValues}
+            onClearCache={this.handleClearCachedValues}
+          />
         </Modal>
         {/* end filter modal */}
 

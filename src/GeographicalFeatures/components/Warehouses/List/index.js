@@ -11,7 +11,7 @@ import WarehouseListItem from '../ListItem';
  * @name WarehouseList
  * @description Render warehouse list which have search box and actions
  *
- * @param {Object} props props object
+ * @param {object} props props object
  *
  * @version 0.1.0
  * @since 0.1.0

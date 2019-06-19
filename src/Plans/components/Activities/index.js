@@ -114,7 +114,7 @@ class Activities extends Component {
    * @name searchActivities
    * @description Search Activities List based on supplied filter word
    *
-   * @param {Object} event - Event instance
+   * @param {object} event - Event instance
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -128,7 +128,7 @@ class Activities extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} activity activity object
+   * @param {object} activity activity object
    * @version 0.1.0
    * @since 0.1.0
    */
@@ -143,7 +143,7 @@ class Activities extends Component {
    * @name openNotificationForm
    * @description Handle on notify activities
    *
-   * @param {Object[]} activities activities list
+   * @param {object[]} activities activities list
    *
    * @version 0.1.0
    * @since 0.1.0

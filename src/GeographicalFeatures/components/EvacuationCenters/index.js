@@ -127,7 +127,7 @@ class EvacuationCenters extends Component {
    * @name searchFeatures
    * @description Search Evacuation Centers List based on supplied filter word
    *
-   * @param {Object} event - Event instance
+   * @param {object} event - Event instance
    * @returns {undefined} - Nothing is returned
    *
    * @version 0.1.0
@@ -143,7 +143,7 @@ class EvacuationCenters extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} evacuationCenter evacuation center object
+   * @param {object} evacuationCenter evacuation center object
    *
    * @version 0.1.0
    * @since 0.1.0

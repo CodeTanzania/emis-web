@@ -4,7 +4,6 @@ import React, { Component, Fragment } from 'react';
 import './styles.css';
 
 /**
- *
  * @class
  * @name IncidentTypesListItem
  * @description Single incidenttype list item component. Render single

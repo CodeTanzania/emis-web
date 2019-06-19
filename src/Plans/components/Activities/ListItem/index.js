@@ -63,7 +63,7 @@ class ActivitiesListItem extends Component {
    * @name handleToggleSelect
    * @description Handle toggle list item checkbox
    *
-   * @param {Object} event checkbox toggle event
+   * @param {object} event checkbox toggle event
    *
    * @version 0.1.0
    * @since 0.1.0
