@@ -365,7 +365,6 @@ class FocalPeople extends Component {
               onSearchRoles={getRoles}
               body={notificationBody}
               onCancel={this.closeNotificationForm}
-              onNotify={() => {}}
             />
           </Modal>
           {/* end Notification modal */}
