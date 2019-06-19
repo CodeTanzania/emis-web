@@ -1,8 +1,8 @@
 import { httpActions } from '@codetanzania/emis-api-client';
 import {
-  paginateFocalPeople,
-  refreshFocalPeople,
-  deleteFocalPerson,
+  paginateCampaigns,
+  refreshCampaigns,
+  deleteCampaign,
 } from '@codetanzania/emis-api-states';
 import { List } from 'antd';
 import concat from 'lodash/concat';
@@ -16,80 +16,74 @@ import React, { Component, Fragment } from 'react';
 import ListHeader from '../../../../components/ListHeader';
 import { notifyError, notifySuccess } from '../../../../util';
 import Toolbar from '../../../../components/Toolbar';
-import NotificationListItem from '../ListItem';
+import CampaignListItem from '../ListItem';
 
-const { getFocalPeopleExportUrl } = httpActions;
+const { getCampaignsExportUrl } = httpActions;
 
 /* constants */
 const headerLayout = [
-  { span: 5, header: 'Title' },
-  { span: 3, header: 'Form' },
-  { span: 3, header: 'Sender' },
-  { span: 4, header: 'To' },
-  { span: 4, header: 'Subject' },
+  { span: 6, header: 'Title' },
+  { span: 4, header: 'Form' },
+  { span: 4, header: 'Sender' },
+  { span: 5, header: 'Sent' },
 ];
 
 /**
  * @class
- * @name NotificationList
- * @description Render NotificationList component which have actionBar
+ * @name CampaignList
+ * @description Render CampaignList component which have actionBar
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class NotificationList extends Component {
+class CampaignList extends Component {
   static propTypes = {
     loading: PropTypes.bool.isRequired,
-    notifications: PropTypes.arrayOf(
-      PropTypes.shape({ name: PropTypes.string })
-    ).isRequired,
+    campaigns: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+      .isRequired,
     page: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
     onEdit: PropTypes.func.isRequired,
-    onNotify: PropTypes.func.isRequired,
     onFilter: PropTypes.func.isRequired,
   };
 
   state = {
-    selectedNotification: [],
+    selectedCampaign: [],
     selectedPages: [],
   };
 
   /**
    * @function
-   * @name handleOnselectNotification
-   * @description Handle select a single notification action
+   * @name handleOnselectCampaign
+   * @description Handle select a single campaign action
    *
-   * @param {object} notification selected notification object
+   * @param {object} campaign selected campaign object
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleOnselectNotification = notification => {
-    const { selectedNotification } = this.state;
+  handleOnselectCampaign = campaign => {
+    const { selectedCampaign } = this.state;
     this.setState({
-      selectedNotification: concat([], selectedNotification, notification),
+      selectedCampaign: concat([], selectedCampaign, campaign),
     });
   };
 
   /**
    * @function
    * @name handleSelectAll
-   * @description Handle select all notifications actions from current page
+   * @description Handle select all campaigns actions from current page
    *
    * @version 0.1.0
    * @since 0.1.0
    */
   handleSelectAll = () => {
-    const { selectedNotification, selectedPages } = this.state;
-    const { notifications, page } = this.props;
-    const selectedList = uniqBy(
-      [...selectedNotification, ...notifications],
-      '_id'
-    );
+    const { selectedCampaign, selectedPages } = this.state;
+    const { campaigns, page } = this.props;
+    const selectedList = uniqBy([...selectedCampaign, ...campaigns], '_id');
     const pages = uniq([...selectedPages, page]);
     this.setState({
-      selectedNotification: selectedList,
+      selectedCampaign: selectedList,
       selectedPages: pages,
     });
   };
@@ -97,7 +91,7 @@ class NotificationList extends Component {
   /**
    * @function
    * @name handleDeselectAll
-   * @description Handle deselect all notifications in a current page
+   * @description Handle deselect all campaigns in a current page
    *
    * @returns {undefined}
    *
@@ -105,63 +99,55 @@ class NotificationList extends Component {
    * @since 0.1.0
    */
   handleDeselectAll = () => {
-    const { notifications, page } = this.props;
-    const { selectedNotification, selectedPages } = this.state;
-    const selectedList = uniqBy([...selectedNotification], '_id');
+    const { campaigns, page } = this.props;
+    const { selectedCampaign, selectedPages } = this.state;
+    const selectedList = uniqBy([...selectedCampaign], '_id');
     const pages = uniq([...selectedPages]);
 
     remove(pages, item => item === page);
 
-    notifications.forEach(notification => {
+    campaigns.forEach(campaign => {
       remove(
         selectedList,
-        item => item._id === notification._id // eslint-disable-line
+        item => item._id === campaign._id // eslint-disable-line
       );
     });
 
     this.setState({
-      selectedNotification: selectedList,
+      selectedCampaign: selectedList,
       selectedPages: pages,
     });
   };
 
   /**
    * @function
-   * @name handleOnDeselectNotification
-   * @description Handle deselect a single notification action
+   * @name handleOnDeselectCampaign
+   * @description Handle deselect a single campaign action
    *
-   * @param {object} notification notification to be removed from selected notifications
+   * @param {object} campaign campaign to be removed from selected campaigns
    * @returns {undefined}
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleOnDeselectNotification = notification => {
-    const { selectedNotification } = this.state;
-    const selectedList = [...selectedNotification];
+  handleOnDeselectCampaign = campaign => {
+    const { selectedCampaign } = this.state;
+    const selectedList = [...selectedCampaign];
 
     remove(
       selectedList,
-      item => item._id === notification._id // eslint-disable-line
+      item => item._id === campaign._id // eslint-disable-line
     );
 
-    this.setState({ selectedNotification: selectedList });
+    this.setState({ selectedCampaign: selectedList });
   };
 
   render() {
-    const {
-      notifications,
-      loading,
-      page,
-      total,
-      onEdit,
-      onNotify,
-      onFilter,
-    } = this.props;
-    const { selectedNotification, selectedPages } = this.state;
-    const selectedNotificationCount = intersectionBy(
-      this.state.selectedNotification,
-      notifications,
+    const { campaigns, loading, page, total, onEdit, onFilter } = this.props;
+    const { selectedCampaign, selectedPages } = this.state;
+    const selectedCampaignCount = intersectionBy(
+      this.state.selectedCampaign,
+      campaigns,
       '_id'
     ).length;
 
@@ -172,23 +158,22 @@ class NotificationList extends Component {
           itemName="Notification"
           page={page}
           total={total}
-          selectedItemsCount={selectedNotificationCount}
-          exportUrl={getFocalPeopleExportUrl({
-            filter: { _id: map(selectedNotification, '_id') },
+          selectedItemsCount={selectedCampaignCount}
+          exportUrl={getCampaignsExportUrl({
+            filter: { _id: map(selectedCampaign, '_id') },
           })}
           onFilter={onFilter}
-          onNotify={() => onNotify(selectedNotification)}
           onPaginate={nextPage => {
-            paginateFocalPeople(nextPage);
+            paginateCampaigns(nextPage);
           }}
           onRefresh={() =>
-            refreshFocalPeople(
+            refreshCampaigns(
               () => {
-                notifySuccess('Notification refreshed successfully');
+                notifySuccess('Notifications refreshed successfully');
               },
               () => {
                 notifyError(
-                  'An Error occurred while refreshing Notification please contact system administrator'
+                  'An Error occurred while refreshing Notifications please contact system administrator'
                 );
               }
             )
@@ -196,49 +181,50 @@ class NotificationList extends Component {
         />
         {/* end toolbar */}
 
-        {/* notification list header */}
+        {/* campaign list header */}
         <ListHeader
           headerLayout={headerLayout}
           onSelectAll={this.handleSelectAll}
           onDeselectAll={this.handleDeselectAll}
           isBulkSelected={selectedPages.includes(page)}
         />
-        {/* end notification list header */}
+        {/* end campaign list header */}
 
-        {/* notifications list */}
+        {/* campaigns list */}
         <List
           loading={loading}
-          dataSource={notifications}
-          renderItem={notification => {
+          dataSource={campaigns}
+          renderItem={campaign => {
             return (
-              <NotificationListItem
-                key={notification._id} // eslint-disable-line
-                name={notification.name}
-                email={notification.email}
-                mobile={notification.mobile}
+              <CampaignListItem
+                key={campaign._id} // eslint-disable-line
+                form={campaign.form}
+                title={campaign.title}
+                sent={campaign.statistics.sent}
+                sentAt={campaign.createdAt}
                 isSelected={
                   // eslint-disable-next-line
-                  map(selectedNotification, item => item._id).includes(
+                  map(selectedCampaign, item => item._id).includes(
                     // eslint-disable-next-line
-                    notification._id
+                    campaign._id
                   )
                 }
                 onSelectItem={() => {
-                  this.handleOnselectNotification(notification);
+                  this.handleOnselectCampaign(campaign);
                 }}
                 onDeselectItem={() => {
-                  this.handleOnDeselectNotification(notification);
+                  this.handleOnDeselectCampaign(campaign);
                 }}
-                onEdit={() => onEdit(notification)}
+                onEdit={() => onEdit(campaign)}
                 onArchive={() =>
-                  deleteFocalPerson(
-                    notification._id, // eslint-disable-line
+                  deleteCampaign(
+                    campaign._id, // eslint-disable-line
                     () => {
                       notifySuccess('Notification was archived successfully');
                     },
                     () => {
                       notifyError(
-                        'An Error occurred while archiving Notification please notification system administrator'
+                        'An Error occurred while archiving Notification please contact system administrator'
                       );
                     }
                   )
@@ -247,10 +233,10 @@ class NotificationList extends Component {
             );
           }}
         />
-        {/* end notifications list */}
+        {/* end campaigns list */}
       </Fragment>
     );
   }
 }
 
-export default NotificationList;
+export default CampaignList;
