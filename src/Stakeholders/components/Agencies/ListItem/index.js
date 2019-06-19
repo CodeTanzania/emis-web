@@ -7,13 +7,13 @@ import './styles.css';
 
 /* constants */
 const { confirm } = Modal;
-const sideSpan = { xxl: 1, xl: 1, lg: 1, md: 2, sm: 3, xs: 3 };
-const nameSpan = { xxl: 5, xl: 5, lg: 5, md: 7, sm: 12, xs: 12 };
+const sideSpan = { xxl: 1, xl: 1, lg: 1, md: 2, sm: 4, xs: 3 };
+const nameSpan = { xxl: 5, xl: 5, lg: 5, md: 7, sm: 14, xs: 14 };
 const abbreviationSpan = { xxl: 3, xl: 3, lg: 3, md: 3, sm: 0, xs: 0 };
 const areaSpan = { xxl: 4, xl: 4, lg: 4, md: 0, sm: 0, xs: 0 };
-const phoneSpan = { xxl: 4, xl: 4, lg: 4, md: 4, sm: 5, xs: 5 };
+const phoneSpan = { xxl: 4, xl: 4, lg: 4, md: 4, sm: 6, xs: 7 };
 const emailSpan = { xxl: 5, xl: 5, lg: 5, md: 6, sm: 0, xs: 0 };
-const isHoveredSpan = { xxl: 2, xl: 2, lg: 2, md: 2, sm: 4, xs: 4 };
+const isHoveredSpan = { xxl: 2, xl: 2, lg: 2, md: 2, sm: 0, xs: 0 };
 
 /**
  * @class
@@ -71,7 +71,7 @@ class AgencyListItem extends Component {
    * @name handleToggleSelect
    * @description Handle Toggling List Item checkbox
    *
-   * @param {Object} event - Event object
+   * @param {object} event - Event object
    *
    * @version 0.1.0
    * @since 0.1.0

@@ -23,17 +23,13 @@ const { Search } = Input;
  * @name generateShareAgencyContent
  * @description generate agency content to share from agency object
  *
- * @param {Object} agency  agency to be converted to string content
+ * @param {object} agency  agency to be converted to string content
  *
  * @version 0.1.0
  * @since 0.1.0
  */
 const generateShareAgencyContent = agency =>
-  `${agency.name}\nMobile: ${agency.mobile}\nEmail: ${agency.email}\nWebsite: ${
-    agency.website
-  }\nPhysical Address: ${agency.physicalAddress}\nPostal Address: ${
-    agency.postalAddress
-  }`;
+  `${agency.name}\nMobile: ${agency.mobile}\nEmail: ${agency.email}\nWebsite: ${agency.website}\nPhysical Address: ${agency.physicalAddress}\nPostal Address: ${agency.postalAddress}`;
 
 /**
  * @class
@@ -127,7 +123,7 @@ class Agencies extends Component {
    * @name searchAgencies
    * @description Search Agencies List based on supplied filter word
    *
-   * @param {Object} event - Event instance
+   * @param {object} event - Event instance
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -141,7 +137,7 @@ class Agencies extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} agency agency to be edited
+   * @param {object} agency agency to be edited
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -157,7 +153,7 @@ class Agencies extends Component {
    * @name openNotificationForm
    * @description Handle on notify agencies
    *
-   * @param {Object[]} agencies List of agencies selected to be notified
+   * @param {object[]} agencies List of agencies selected to be notified
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -174,7 +170,7 @@ class Agencies extends Component {
    * @name handleShare
    * @description Handle share single agency action
    *
-   * @param {Object} agency  to be shared
+   * @param {object} agency  to be shared
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -190,7 +186,7 @@ class Agencies extends Component {
    * @name handleBulkShare
    * @description Handle share multiple agencies
    *
-   * @param {Object[]} agencies agencies list to be shared
+   * @param {object[]} agencies agencies list to be shared
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -277,7 +273,7 @@ class Agencies extends Component {
           {/* primary actions */}
           <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
             <Row type="flex" justify="end">
-              <Col xxl={6} xl={6} lg={6} md={8} sm={24} xs={24}>
+              <Col xxl={4} xl={5} lg={7} md={8} sm={24} xs={24}>
                 <Button
                   type="primary"
                   icon="plus"

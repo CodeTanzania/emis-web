@@ -117,7 +117,7 @@ class Roles extends Component {
    * @name searchRoles
    * @description Search Roles List based on supplied filter word
    *
-   * @param {Object} event Event instance
+   * @param {object} event Event instance
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -131,7 +131,7 @@ class Roles extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} role - role to be edited
+   * @param {object} role - role to be edited
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -147,7 +147,7 @@ class Roles extends Component {
    * @name openNotificationForm
    * @description Handle on notify contacts
    *
-   * @param {Object[]} role List of contacts selected to be notified
+   * @param {object[]} role List of contacts selected to be notified
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -209,7 +209,7 @@ class Roles extends Component {
           {/* primary actions */}
           <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
             <Row type="flex" justify="end">
-              <Col xxl={6} xl={6} lg={6} md={8} sm={24} xs={24}>
+              <Col xxl={3} xl={5} lg={6} md={8} sm={24} xs={24}>
                 <Button
                   block
                   type="primary"

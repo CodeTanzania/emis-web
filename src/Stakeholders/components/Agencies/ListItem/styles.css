@@ -40,3 +40,9 @@
   color: #008EFA;
   background-color: #e8e8e8;
 }
+
+@media screen and (max-width: 768px) {
+  .AgencyListItem {
+    height: auto;
+ }
+}
