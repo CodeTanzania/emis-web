@@ -8,6 +8,11 @@ import './styles.css';
 
 /* constants */
 const { confirm } = Modal;
+const sideSpan = { xxl: 1, xl: 1, lg: 1, md: 2, sm: 3, xs: 3 };
+const nameSpan = { xxl: 6, xl: 6, lg: 6, md: 6, sm: 8, xs: 8 };
+const typeSpan = { xxl: 5, xl: 5, lg: 4, md: 4, sm: 6, xs: 6 };
+const descriptionSpan = { xxl: 10, xl: 10, lg: 10, md: 8, sm: 0, xs: 0 };
+const isHoveredSpan = { xxl: 2, xl: 2, lg: 2, md: 2, sm: 3, xs: 3 };
 
 /**
  * @class
@@ -138,13 +143,13 @@ class ListItem extends Component {
         onMouseLeave={this.handleMouseLeave}
       >
         <Row>
-          <Col span={1}>{sideComponent}</Col>
-          <Col span={6}>{name}</Col>
-          <Col span={4}>{type}</Col>
-          <Col span={10} title={description}>
+          <Col {...sideSpan}>{sideComponent}</Col>
+          <Col {...nameSpan}>{name}</Col>
+          <Col {...typeSpan}>{type}</Col>
+          <Col {...descriptionSpan} title={description}>
             {truncate(description, { length: 140 })}
           </Col>
-          <Col span={1}>
+          <Col {...isHoveredSpan}>
             {isHovered && (
               <ListItemActions
                 edit={{

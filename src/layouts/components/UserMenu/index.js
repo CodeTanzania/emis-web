@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import React from 'react';
 import ChangePasswordForm from '../../../Auth/components/ChangePassword';
+import './styles.css';
 
 class UserMenu extends React.Component {
   static propTypes = {
@@ -41,7 +42,7 @@ class UserMenu extends React.Component {
   };
 
   menu = (
-    <Menu>
+    <Menu className="UserProfileMenu">
       <Menu.Item key="1" onClick={this.showModal}>
         <Icon type="lock" />
         Change Password
@@ -88,7 +89,7 @@ class UserMenu extends React.Component {
           <ChangePasswordForm onCancel={this.handleCancel} />
         </Modal>
         <Dropdown overlay={this.menu}>
-          <Button style={{ marginLeft: 8, borderRadius: '50%' }} icon="user" />
+          <Button className="UserButton" icon="user" />
         </Dropdown>
       </div>
     );

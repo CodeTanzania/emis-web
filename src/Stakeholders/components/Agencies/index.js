@@ -25,7 +25,6 @@ const { Search } = Input;
  *
  * @param {object} agency  agency to be converted to string content
  * @returns {string} Message content to be shared
- 
  * @version 0.1.0
  * @since 0.1.0
  */
@@ -305,7 +304,7 @@ class Agencies extends Component {
           {/* primary actions */}
           <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
             <Row type="flex" justify="end">
-              <Col xxl={6} xl={6} lg={6} md={8} sm={24} xs={24}>
+              <Col xxl={4} xl={5} lg={7} md={8} sm={24} xs={24}>
                 <Button
                   type="primary"
                   icon="plus"
