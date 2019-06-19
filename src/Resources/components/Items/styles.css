@@ -1,3 +1,15 @@
 .ItemsList {
   padding: 0 40px;
 }
+
+@media screen and (max-width: 768px) {
+  .ItemsList {
+    padding: 0 30px;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .ItemsList {
+    padding: 0 20px;
+  }
+}

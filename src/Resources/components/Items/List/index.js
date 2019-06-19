@@ -19,10 +19,13 @@ import { notifyError, notifySuccess } from '../../../../util';
 import ListItem from '../ListItem';
 
 /* constants */
+const nameSpan = { xxl: 6, xl: 6, lg: 6, md: 6, sm: 8, xs: 8 };
+const typeSpan = { xxl: 5, xl: 5, lg: 4, md: 4, sm: 6, xs: 6 };
+const descriptionSpan = { xxl: 10, xl: 10, lg: 10, md: 8, sm: 0, xs: 0 };
 const headerLayout = [
-  { span: 6, header: 'Name' },
-  { span: 4, header: 'Type' },
-  { span: 10, header: 'Description' },
+  { ...nameSpan, header: 'Name' },
+  { ...typeSpan, header: 'Type' },
+  { ...descriptionSpan, header: 'Description' },
 ];
 const { getItemsExportUrl } = httpActions;
 
@@ -63,7 +66,7 @@ class ItemsList extends Component {
    * @name handleOnSelectItem
    * @description Handle select a single item action
    *
-   * @param {Object} item selected item object
+   * @param {object} item selected item object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -148,7 +151,7 @@ class ItemsList extends Component {
    * @name handleOnDeselectItem
    * @description Handle deselect a single item action
    *
-   * @param {Object} resourceItem item to be removed from selected items
+   * @param {object} resourceItem item to be removed from selected items
    * @returns {undefined} undefined
    *
    * @version 0.1.0
