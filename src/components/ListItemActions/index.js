@@ -8,23 +8,36 @@ import './styles.css';
  * @name ListItemActions
  * @description Render Dropdown component with has actions for list items
  *
- * @param {Object} props props object
- * @param {Object} props.edit on edit action callback
- * @param {Object} props.share on share action callback
- * @param {Object} props.archive on archive action callback
- * @param {Object} props.transfer on transfer action callback
- * @param {Object} props.adjust on adjust action callback
+ * @param {object} props props object
+ * @param {object} props.edit on edit action callback
+ * @param {object} props.share on share action callback
+ * @param {object} props.archive on archive action callback
+ * @param {object} props.transfer on transfer action callback
+ * @param {object} props.adjust on adjust action callback
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-const ListItemActions = ({ edit, share, archive, transfer, adjust }) => (
+const ListItemActions = ({
+  edit,
+  share,
+  archive,
+  transfer,
+  adjust,
+  reload,
+}) => (
   <Dropdown
     overlay={
       <Menu>
         {edit && (
           <Menu.Item key="edit" onClick={edit.onClick} title={edit.title}>
             <Icon type="edit" /> {edit.name}
+          </Menu.Item>
+        )}
+
+        {reload && (
+          <Menu.Item key="reload" onClick={reload.onClick} title={reload.title}>
+            <Icon type="sync" /> {reload.name}
           </Menu.Item>
         )}
 
@@ -84,6 +97,11 @@ ListItemActions.propTypes = {
     title: PropTypes.string,
     onClick: PropTypes.func,
   }),
+  reload: PropTypes.shape({
+    name: PropTypes.string,
+    title: PropTypes.string,
+    onClick: PropTypes.func,
+  }),
   share: PropTypes.shape({
     name: PropTypes.string,
     title: PropTypes.string,
@@ -108,6 +126,7 @@ ListItemActions.propTypes = {
 
 ListItemActions.defaultProps = {
   edit: null,
+  reload: null,
   share: null,
   archive: null,
   transfer: null,
