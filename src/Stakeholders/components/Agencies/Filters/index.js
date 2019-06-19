@@ -3,9 +3,14 @@ import {
   Connect,
   filterAgencies,
 } from '@codetanzania/emis-api-states';
-import { Button, Checkbox, Col, Form, Row } from 'antd';
+import { httpActions } from '@codetanzania/emis-api-client';
+import { Button, Form } from 'antd';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import SearchableSelectInput from '../../../../components/SearchableSelectInput';
+
+/* declarations */
+const { getPartyGroups } = httpActions;
 
 /**
  * @class
@@ -25,11 +30,16 @@ class AgenciesFilters extends Component {
     ),
     form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
     onCancel: PropTypes.func.isRequired,
-    groups: PropTypes.arrayOf(PropTypes.string).isRequired,
+    cached: PropTypes.shape({
+      groups: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })),
+    }),
+    onCache: PropTypes.func.isRequired,
+    onClearCache: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
     filter: null,
+    cached: null,
   };
 
   /**
@@ -66,17 +76,34 @@ class AgenciesFilters extends Component {
    * @since 0.1.0
    */
   handleClearFilter = () => {
-    const { onCancel } = this.props;
+    const { onCancel, onClearCache } = this.props;
     clearAgencyFilters();
+
+    onClearCache();
     onCancel();
+  };
+
+  /**
+   * @function
+   * @name cacheFilters
+   * @description cache lazy loaded value from filters
+   *
+   * @param {object} values Object with key value of what is to be cached
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  cacheFilters = values => {
+    const { onCache } = this.props;
+    onCache(values);
   };
 
   render() {
     const {
       form: { getFieldDecorator },
       onCancel,
-      groups,
       filter,
+      cached,
     } = this.props;
 
     const formItemLayout = {
@@ -101,19 +128,18 @@ class AgenciesFilters extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* start agency group filters */}
-        <Form.Item {...formItemLayout} label="By Agency Group">
+        <Form.Item {...formItemLayout} label="By Group(s)">
           {getFieldDecorator('group', {
             initialValue: filter ? filter.group : [],
           })(
-            <Checkbox.Group style={{ width: '100%' }}>
-              <Row>
-                {groups.map(group => (
-                  <Col span={8} style={{ margin: '10px 0' }} key={group}>
-                    <Checkbox value={group}>{group}</Checkbox>
-                  </Col>
-                ))}
-              </Row>
-            </Checkbox.Group>
+            <SearchableSelectInput
+              onSearch={getPartyGroups}
+              optionLabel="name"
+              optionValue="_id"
+              mode="multiple"
+              onCache={groups => this.cacheFilters({ groups })}
+              initialValue={cached && cached.groups ? cached.groups : []}
+            />
           )}
         </Form.Item>
         {/* end agency group filters */}
@@ -135,6 +161,5 @@ class AgenciesFilters extends Component {
 }
 
 export default Connect(Form.create()(AgenciesFilters), {
-  groups: 'agencies.schema.properties.group.enum',
   filter: 'agencies.filter',
 });
