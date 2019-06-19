@@ -42,7 +42,7 @@ class NotificationForm extends Component {
    * @name handleSubmit
    * @description Callback to handle form on submit event
    *
-   * @param {Object} event onSubmit event
+   * @param {object} event onSubmit event
    *
    * @version 0.1.0
    * @since 0.1.0

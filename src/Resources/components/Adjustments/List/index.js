@@ -66,7 +66,7 @@ class AdjustmentsList extends Component {
    * @name handleSelectAdjustment
    * @description Handle select single adjustment checkbox
    *
-   * @param {Object} adjustment selected adjustment object
+   * @param {object} adjustment selected adjustment object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -105,7 +105,7 @@ class AdjustmentsList extends Component {
    * @name handleDeselectAdjustment
    * @description Handle deselect a single adjustment checkbox
    *
-   * @param {Object} adjustment adjustment objected to be removed from
+   * @param {object} adjustment adjustment objected to be removed from
    * list of selected adjustments
    * @returns {undefined} undefined
    *

@@ -41,8 +41,8 @@ class ItemUnitForm extends Component {
    * @name onChangeColor
    * @description  call back function to handle color change
    *
-   * @param {Object} colors colors object
-   * @param {Object} colors.color current color
+   * @param {object} colors colors object
+   * @param {object} colors.color current color
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -60,7 +60,7 @@ class ItemUnitForm extends Component {
    * @name handleSubmit
    * @description  call back function to handle submit action
    *
-   * @param {Object} e event object
+   * @param {object} e event object
    *
    * @version 0.1.0
    * @since 0.1.0

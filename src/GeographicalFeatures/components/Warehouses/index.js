@@ -128,7 +128,7 @@ class Warehouses extends Component {
    * @name searchFeatures
    * @description Search Warehouses List based on supplied filter word
    *
-   * @param {Object} event - Event instance
+   * @param {object} event - Event instance
    * @returns {undefined} - Nothing is returned
    *
    * @version 0.1.0
@@ -144,7 +144,7 @@ class Warehouses extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} warehouse warehouse object passed in the function
+   * @param {object} warehouse warehouse object passed in the function
    *
    * @version 0.1.0
    * @since 0.1.0

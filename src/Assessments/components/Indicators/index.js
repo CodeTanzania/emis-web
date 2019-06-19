@@ -127,7 +127,7 @@ class Indicators extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} indicator indicator object
+   * @param {object} indicator indicator object
    * @version 0.1.0
    * @since 0.1.0
    */

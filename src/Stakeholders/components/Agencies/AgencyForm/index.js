@@ -181,7 +181,7 @@ class AgencyForm extends Component {
             </Form.Item>
             {/* end agency abbreviation */}
           </Col>
-                 
+
           <Col xxl={13} xl={13} lg={13} md={13} sm={24} xs={24}>
             <Row type="flex" justify="space-between">
               <Col xxl={11} xl={11} lg={11} md={11} sm={24} xs={24}>

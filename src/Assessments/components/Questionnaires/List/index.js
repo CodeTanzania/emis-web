@@ -10,7 +10,7 @@ import QuestionnairesListItem from '../ListItem';
  * @name IndicatorsList
  * @description Questionnaire list item component. Render questionnaire details
  *
- * @param {Object} props props object
+ * @param {object} props props object
  * @param {boolean} props.loading preload list of questionnaire
  * @param {Array} props.questionnaire array list of questionnaire
  * @param {Function} props.onEdit function for editing single questionnaire

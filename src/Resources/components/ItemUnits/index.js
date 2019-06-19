@@ -81,7 +81,7 @@ class ItemUnit extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} value - item to be edited
+   * @param {object} value - item to be edited
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -109,7 +109,7 @@ class ItemUnit extends Component {
    * @name searchRoles
    * @description Search item unit of measure List based on supplied filter word
    *
-   * @param {Object} event - Event instance
+   * @param {object} event - Event instance
    * @returns {undefined} - Nothing is returned
    *
    * @version 0.1.0

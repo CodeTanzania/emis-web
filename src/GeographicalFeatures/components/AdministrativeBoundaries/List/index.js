@@ -11,7 +11,7 @@ import AdminstrativeBoundaryListItem from '../ListItem';
  * @description Render AdminstrativeBoundary list which have search box and
  * actions
  *
- * @param {Object} props props object
+ * @param {object} props props object
  * @param {boolean} props.loading preload list of adminstrativeBoundaries
  * @param {Array} props.adminstrativeBoundaries array list of
  *  adminstrativeBoundaries

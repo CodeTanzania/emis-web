@@ -89,7 +89,7 @@ class Wards extends Component {
    * @name searchWards
    * @description Search wards List based on supplied filter word
    *
-   * @param {Object} event - Event instance
+   * @param {object} event - Event instance
    * @returns {undefined} - Nothing is returned
    *
    * @version 0.1.0
@@ -136,7 +136,7 @@ class Wards extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} ward ward object
+   * @param {object} ward ward object
    *
    * @version 0.1.0
    * @since 0.1.0

@@ -121,7 +121,7 @@ class Questions extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} question question object
+   * @param {object} question question object
    * @version 0.1.0
    * @since 0.1.0
    */

@@ -58,7 +58,7 @@ class StockList extends Component {
    * @name handleSelectStock
    * @description Handle selection of a single stock checkbox
    *
-   * @param {Object} stock selected stock object
+   * @param {object} stock selected stock object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -94,7 +94,7 @@ class StockList extends Component {
    * @name handleDeselectStock
    * @description Handle deselect as single stock checkbox action
    *
-   * @param {Object} stock deselected stock object
+   * @param {object} stock deselected stock object
    * @returns {undefined} undefined
    *
    * @version 0.1.0

@@ -10,8 +10,8 @@ const { Option } = Select;
  * @name SelectInput
  * @description Render Select input wrapper on top of antd select input
  *
- * @param {Object} props props object
- * @param {Object} props.options selectable options
+ * @param {object} props props object
+ * @param {object} props.options selectable options
  *
  * @version 0.1.0
  * @since 0.1.0

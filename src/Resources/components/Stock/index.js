@@ -118,7 +118,7 @@ class Stocks extends Component {
    * @name searchStocks
    * @description Search Stocks List based on supplied filter word
    *
-   * @param {Object} event Event instance
+   * @param {object} event Event instance
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -132,7 +132,7 @@ class Stocks extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} stock stock to be edited
+   * @param {object} stock stock to be edited
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -148,7 +148,7 @@ class Stocks extends Component {
    * @name handleAdjustment
    * @description Handle on adjustment action for list item
    *
-   * @param {Object} stock stock to be adjusted
+   * @param {object} stock stock to be adjusted
    *
    * @version 0.1.0
    * @since 0.1.0

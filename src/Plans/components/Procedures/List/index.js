@@ -40,7 +40,7 @@ class ProceduresList extends Component {
    * @name handleOnSelectProcedure
    * @description Handle select a single procedure action
    *
-   * @param {Object} procedure procedure object
+   * @param {object} procedure procedure object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -85,7 +85,7 @@ class ProceduresList extends Component {
    * @name handleOnDeselectProcedure
    * @description Handle deselect a single procedure action
    *
-   * @param {Object} procedure procedure object
+   * @param {object} procedure procedure object
    *
    * @returns {undefined} undefined
    *

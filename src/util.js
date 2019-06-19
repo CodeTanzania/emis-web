@@ -5,7 +5,7 @@ import { message } from 'antd';
  * @name notifyError
  * @description Show error message box
  *
- * @param {Object} error  error object
+ * @param {object} error  error object
  * @returns {undefined} undefined
  *
  * @version 0.1.0

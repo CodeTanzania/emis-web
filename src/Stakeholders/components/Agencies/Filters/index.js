@@ -37,7 +37,7 @@ class AgenciesFilters extends Component {
    * @name handleSubmit
    * @description Handle filter action
    *
-   * @param {Object} event onSubmit event object
+   * @param {object} event onSubmit event object
    *
    * @version 0.1.0
    * @since 0.1.0

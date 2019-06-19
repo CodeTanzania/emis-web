@@ -63,7 +63,7 @@ class ItemsList extends Component {
    * @name handleOnSelectItem
    * @description Handle select a single item action
    *
-   * @param {Object} item selected item object
+   * @param {object} item selected item object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -148,7 +148,7 @@ class ItemsList extends Component {
    * @name handleOnDeselectItem
    * @description Handle deselect a single item action
    *
-   * @param {Object} resourceItem item to be removed from selected items
+   * @param {object} resourceItem item to be removed from selected items
    * @returns {undefined} undefined
    *
    * @version 0.1.0

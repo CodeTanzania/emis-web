@@ -67,7 +67,7 @@ class WarehouseList extends React.Component {
    * @name handleOnSelectWarehouse
    * @description Handle select a single warehouse action
    *
-   * @param {Object} warehouse selected warehouse object
+   * @param {object} warehouse selected warehouse object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -84,7 +84,7 @@ class WarehouseList extends React.Component {
    * @name handleOnDeselectWarehouse
    * @description Handle deselect a single focalPerson action
    *
-   * @param {Object} warehouse focalPerson to be removed from selected focalPeople
+   * @param {object} warehouse focalPerson to be removed from selected focalPeople
    * @returns {undefined} undefined
    *
    * @version 0.1.0

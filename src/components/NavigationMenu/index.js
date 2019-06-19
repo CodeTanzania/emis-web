@@ -10,7 +10,7 @@ import './styles.css';
  * @description Navigation menu item that have icon(image) and name for
  * the module to navigate to
  *
- * @param {Object} props props object
+ * @param {object} props props object
  * @param {string} props.name  name/description/label for nav item
  * @param {string} props.icon  path to svg image used as nav icon
  * @param {string} props.path  path to navigate to when clicked
@@ -72,9 +72,9 @@ const NavigationMenuItem = ({ name, icon, path, disabled, description }) => (
  * @name NavigationMenu
  * @description Navigation Menu which renders provided routes
  *
- * @param {Object} props props object
- * @param {Object[]} props.routes list of all navigation routes
- * @param {Object} props.match match object from react router
+ * @param {object} props props object
+ * @param {object[]} props.routes list of all navigation routes
+ * @param {object} props.match match object from react router
  *
  * @version 0.1.0
  * @since 0.1.0

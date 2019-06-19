@@ -35,18 +35,17 @@ class IncidentTypesFilters extends Component {
   };
 
   /**
-   *
    * @function
    * @name handleSubmit
    * @description Handle filter action
    *
-   * @param {Object} e event object
+   * @param {object} event event object
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleSubmit = e => {
-    e.preventDefault();
+  handleSubmit = event => {
+    event.preventDefault();
     const {
       form: { validateFields },
       onCancel,

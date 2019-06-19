@@ -8,8 +8,8 @@ import './styles.css';
  * @name ListHeader
  * @description List header component
  *
- * @param {Object} props props object
- * @param {Object[]} props.headerLayout list of header items configs
+ * @param {object} props props object
+ * @param {object[]} props.headerLayout list of header items configs
  * @param {Function} props.onSelectAll callback to handle select all checkbox
  * @param {Function} props.onDeselectAll callback to handle deselect all checkbox
  * @param {boolean} props.isBulkSelected flag to show if current page results are

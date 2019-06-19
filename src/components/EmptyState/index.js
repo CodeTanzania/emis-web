@@ -8,7 +8,7 @@ import './styles.css';
  * @name EmptyState
  * @description Empty state component
  *
- * @param {Object} props props object
+ * @param {object} props props object
  * @param {string} props.icon path to state icon
  * @param {string} props.description state description
  * @param {string} props.buttonLabel state button label

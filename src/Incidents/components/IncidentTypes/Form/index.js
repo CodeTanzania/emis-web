@@ -21,7 +21,6 @@ const { Option } = Select;
  * @version 0.1.0
  * @since 0.1.0
  */
-
 class IncidentTypeForm extends Component {
   static propTypes = {
     isEditForm: PropTypes.bool.isRequired,
@@ -65,7 +64,7 @@ class IncidentTypeForm extends Component {
    * @name handleSubmit
    * @description Handle create/edit action
    *
-   * @param {Object} e event object
+   * @param {object} e event object
    * @version 0.1.0
    * @since 0.1.0
    */

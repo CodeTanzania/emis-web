@@ -11,9 +11,9 @@ const { Search } = Input;
  * @name Topbar
  * @description Topbar component which renders search input and primary actions
  *
- * @param {Object} props props object
- * @param {Object} props.search on Search callback
- * @param {Object[]} props.actions list of primary actions
+ * @param {object} props props object
+ * @param {object} props.search on Search callback
+ * @param {object[]} props.actions list of primary actions
  *
  * @version 0.1.0
  * @since 0.1.0

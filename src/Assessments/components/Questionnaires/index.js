@@ -121,7 +121,7 @@ class Questionnaires extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} questionnaire questionnaire object
+   * @param {object} questionnaire questionnaire object
    * @version 0.1.0
    * @since 0.1.0
    */

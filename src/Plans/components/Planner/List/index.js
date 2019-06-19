@@ -42,7 +42,7 @@ class PlansList extends Component {
    * @name handleOnSelectPlan
    * @description Handle select a single plan action
    *
-   * @param {Object} plan plan object
+   * @param {object} plan plan object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -102,7 +102,7 @@ class PlansList extends Component {
    * @function
    * @name handleOnDeselectPlan
    *
-   * @param {Object} plan plan object
+   * @param {object} plan plan object
    * @returns {undefined} undefined
    *
    * @version 0.1.0

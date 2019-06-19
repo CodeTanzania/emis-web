@@ -128,7 +128,7 @@ class Facilities extends Component {
    * @name searchFeatures
    * @description Search Facility List based on supplied filter word
    *
-   * @param {Object} event - Event instance
+   * @param {object} event - Event instance
    * @returns {undefined} - Nothing is returned
    *
    * @version 0.1.0
@@ -144,7 +144,7 @@ class Facilities extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} facility facility object
+   * @param {object} facility facility object
    *
    * @version 0.1.0
    * @since 0.1.0

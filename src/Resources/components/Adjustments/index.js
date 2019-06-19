@@ -89,7 +89,7 @@ class Adjustments extends Component {
    * @name searchRoles
    * @description Search Roles List based on supplied filter word
    *
-   * @param {Object} event - Event instance
+   * @param {object} event - Event instance
    * @returns {undefined} - Nothing is returned
    *
    * @version 0.1.0

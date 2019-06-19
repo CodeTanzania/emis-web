@@ -11,7 +11,7 @@ import CriticalInfrastructureListItem from '../ListItem';
  * @name CriticalInfrastructureList
  * @description Render Critical Infrastructure list
  *
- * @param {Object} props props object
+ * @param {object} props props object
  * @param {boolean} props.loading preload list of Critical Infrastructure
  * @param {Array} props.districts array list of Critical Infrastructure
  * @param {Function} props.onEdit function for editing Critical Infrastructure

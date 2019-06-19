@@ -38,7 +38,7 @@ class AdjustmentsFilters extends Component {
    * @name handleSubmit
    * @description Handle filter action
    *
-   * @param {Object} e event object
+   * @param {object} e event object
    * @version 0.1.0
    * @since 0.1.0
    */

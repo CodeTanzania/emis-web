@@ -76,7 +76,7 @@ class AdminstrativeBoundaries extends Component {
    * @function
    * @name searchAdminstrativeBoundaries
    *
-   * @param {Object} event - Event instance
+   * @param {object} event - Event instance
    * @returns {undefined} - Nothing is returned
    *
    * @version 0.1.0

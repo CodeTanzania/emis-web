@@ -40,7 +40,7 @@ class ActivitiesList extends Component {
    * @name handleOnSelectActivity
    * @description Handle select a single activity action
    *
-   * @param {Object} activity activity object
+   * @param {object} activity activity object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -85,7 +85,7 @@ class ActivitiesList extends Component {
    * @name handleOnDeselectActivity
    * @description Handle deselect a single activity action
    *
-   * @param {Object} activity activity object
+   * @param {object} activity activity object
    * @returns {undefined} undefined
    *
    * @version 0.1.0

@@ -66,7 +66,7 @@ class PlansListItem extends Component {
    * @name handleToggleSelect
    * @description Handle toggle select checkbox for list item
    *
-   * @param {Object} event Toggle checkbox event object
+   * @param {object} event Toggle checkbox event object
    *
    * @version 0.1.0
    * @since 0.1.0

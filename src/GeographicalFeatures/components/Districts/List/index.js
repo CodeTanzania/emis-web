@@ -11,7 +11,7 @@ import DistrictsListHeader from '../ListHeader';
  * @name DistrictsList
  * @description Render Districts list
  *
- * @param {Object} props props object
+ * @param {object} props props object
  * @param {boolean} props.loading preload list of district
  * @param {Array} props.districts array list of district
  * @param {Function} props.onEdit function for editing district

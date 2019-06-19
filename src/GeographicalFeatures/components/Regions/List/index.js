@@ -11,7 +11,7 @@ import RegionsListHeader from '../LIstHeader';
  * @name RegionsList
  * @description Render Region list
  *
- * @param {Object} props props object
+ * @param {object} props props object
  * @param {boolean} props.loading preload list of region
  * @param {Array} props.regions array list of region
  * @param {Function} props.onEdit function for editing region

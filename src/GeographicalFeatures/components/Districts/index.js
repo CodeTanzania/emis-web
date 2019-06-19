@@ -90,7 +90,7 @@ class Districts extends Component {
    * @name searchDistrict
    * @description Search Districts List based on supplied filter word
    *
-   * @param {Object} event - Event instance
+   * @param {object} event - Event instance
    * @returns {undefined} - Nothing is returned
    *
    * @version 0.1.0
@@ -137,7 +137,7 @@ class Districts extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} district object passed to the function
+   * @param {object} district object passed to the function
    *
    * @version 0.1.0
    * @since 0.1.0

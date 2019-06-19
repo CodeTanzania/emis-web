@@ -10,13 +10,12 @@ import './styles.css';
 
 // eslint-disable-next-line jsdoc/require-returns
 /**
- *
  * @function
  * @name IncidentTypesActionBar
  * @description  Render action bar for actions which are applicable to list
  * content
  *
- * @param {Object} props props object
+ * @param {object} props props object
  * @param {number} props.page current page
  * @param {number} props.total total number of incident types
  * @param {Function} props.onFilter function to filters incident types

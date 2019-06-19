@@ -34,7 +34,7 @@ class AlertSourceForm extends Component {
    * @name handleSubmit
    * @description  call back function to handle submit action
    *
-   * @param {Object} e event object
+   * @param {object} e event object
    *
    * @returns {undefined} does not return anything
    * @version 0.1.0

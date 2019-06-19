@@ -1,42 +1,42 @@
 .IncidentTypesListItem {
-    width: 100%;
-    border-bottom: 1px solid #e8e8e8;
-    padding: 15px 0;
-    height: 60px;
+  width: 100%;
+  border-bottom: 1px solid #e8e8e8;
+  padding: 15px 0;
+  height: 60px;
 }
 
 .IncidentTypesListItem .Checkbox {
-    padding: 0 8px;
+  padding: 0 8px;
 }
 
 .IncidentTypesListItem:hover {
-    background-color: #f5f5f5;
+  background-color: #f5f5f5;
 }
 
 .IncidentTypesListItem .actionIcon:hover {
-    color: #008EFA;
-    background-color: #e8e8e8;
+  color: #008efa;
+  background-color: #e8e8e8;
 }
 
 .IncidentTypesListItem .actionIcon {
-    padding-top: 8px;
-    margin-bottom: 5px;
-    width: 32px;
-    height: 32px;
-    font-size: 16px;
-    display: inline-block;
-    text-align: center;
-    border-radius: 50%;
-    cursor: pointer;
+  padding-top: 8px;
+  margin-bottom: 5px;
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .IncidentTypesListItem .actionIcon {
-    display: inline-block;
-    margin: 0 10px;
-    font-size: 16px;
+  display: inline-block;
+  margin: 0 10px;
+  font-size: 16px;
 }
 
 .IncidentTypesListItem .actionIcon:hover {
-    color: #008EFA;
-    background-color: #e8e8e8;
+  color: #008efa;
+  background-color: #e8e8e8;
 }
