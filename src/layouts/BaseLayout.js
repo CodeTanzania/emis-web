@@ -4,56 +4,56 @@ import PropTypes from 'prop-types';
 import { Link, Switch } from 'react-router-dom';
 import UserMenu from './components/UserMenu';
 import Alerts from '../Alerts';
-import AlertsActionsLayout from '../Alerts/layouts/Actions';
-import AlertsLayout from '../Alerts/layouts/Alerts';
-import AlertsFeedbackLayout from '../Alerts/layouts/Feedback';
-import AlertsFeedsLayout from '../Alerts/layouts/Feeds';
-import AlertsServiceRequestsLayout from '../Alerts/layouts/ServiceRequests';
-import AlertsSourcesLayout from '../Alerts/layouts/Sources';
+import AlertsActions from '../Alerts/layouts/Actions';
+import IssuedAlerts from '../Alerts/components/IssuedAlerts';
+import AlertsFeedback from '../Alerts/layouts/Feedback';
+import AlertsFeeds from '../Alerts/layouts/Feeds';
+import AlertsServiceRequests from '../Alerts/layouts/ServiceRequests';
+import AlertsSources from '../Alerts/components/AlertSources';
 import Assessments from '../Assessments';
-import AssessmentsIndicatorsLayout from '../Assessments/layouts/Indicators';
-import AssessmentsQuestionnairesLayout from '../Assessments/layouts/Questionnaires';
-import AssessmentsQuestionsLayout from '../Assessments/layouts/Questions';
-import AssessmentsResponsesLayout from '../Assessments/layouts/Responses';
+import AssessmentsIndicators from '../Assessments/layouts/Indicators';
+import AssessmentsQuestionnaires from '../Assessments/layouts/Questionnaires';
+import AssessmentsQuestions from '../Assessments/layouts/Questions';
+import AssessmentsResponses from '../Assessments/layouts/Responses';
 import PageNotFound from '../components/UIState/PageNotFound';
 import GeographicalFeatures from '../GeographicalFeatures';
-import AdministrativeBoundariesLayout from '../GeographicalFeatures/layouts/AdministrativeBoundaries';
-import DistrictsLayout from '../GeographicalFeatures/layouts/Districts';
-import EvacuationCentersLayout from '../GeographicalFeatures/layouts/EvacuationCenters';
-import GeographicalFeaturesFacilitiesLayout from '../GeographicalFeatures/layouts/Facilities';
-import GeographicalFeaturesInfrastructureLayout from '../GeographicalFeatures/layouts/Infrastructure';
-import RegionsLayout from '../GeographicalFeatures/layouts/Regions';
-import SubWardsLayout from '../GeographicalFeatures/layouts/SubWards';
-import WardsLayout from '../GeographicalFeatures/layouts/Wards';
-import GeographicalFeaturesWarehousesLayout from '../GeographicalFeatures/layouts/Warehouses';
+import AdministrativeBoundaries from '../GeographicalFeatures/components/AdministrativeBoundaries';
+import Districts from '../GeographicalFeatures/components/Districts';
+import EvacuationCenters from '../GeographicalFeatures/components/EvacuationCenters';
+import GeographicalFeaturesFacilities from '../GeographicalFeatures/components/Facilities';
+import GeographicalFeaturesInfrastructure from '../GeographicalFeatures/components/Infrastructure';
+import Regions from '../GeographicalFeatures/components/Regions';
+import SubWards from '../GeographicalFeatures/layouts/SubWards';
+import Wards from '../GeographicalFeatures/components/Wards';
+import GeographicalFeaturesWarehouses from '../GeographicalFeatures/components/Warehouses';
 import Home from '../Home';
 import Incidents from '../Incidents';
-import IncidentsActionsLayout from '../Incidents/layouts/Actions';
-import IncidentsAssessmentsLayout from '../Incidents/layouts/Assessments';
-import IncidentsCommandCenterLayout from '../Incidents/layouts/CommandCenter';
-import IncidentsFeedsLayout from '../Incidents/layouts/Feeds';
-import IncidentsIncidentTypesLayout from '../Incidents/layouts/IncidentTypes';
-import IncidentsLossDatabaseLayout from '../Incidents/layouts/LossDatabase';
+import IncidentsActions from '../Incidents/layouts/Actions';
+import IncidentsAssessments from '../Incidents/layouts/Assessments';
+import IncidentsCommandCenter from '../Incidents/layouts/CommandCenter';
+import IncidentsFeeds from '../Incidents/layouts/Feeds';
+import IncidentsIncidentTypes from '../Incidents/components/IncidentTypes';
+import IncidentsLossDatabase from '../Incidents/layouts/LossDatabase';
 import EmergencyPlans from '../Plans';
-import EmergencyPlanActivationsLayout from '../Plans/layouts/Activations';
-import EmergencyPlanActivitiesLayout from '../Plans/layouts/Activities';
-import EmergencyPlanDisseminationsLayout from '../Plans/layouts/Disseminations';
-import EmergencyPlanDrillsLayout from '../Plans/layouts/Drills';
-import EmergencyPlanPlannerLayout from '../Plans/layouts/Planner';
-import EmergencyPlanProceduresLayout from '../Plans/layouts/Procedures';
+import EmergencyPlanActivations from '../Plans/layouts/Activations';
+import EmergencyPlanActivities from '../Plans/components/Activities';
+import EmergencyPlanDisseminations from '../Plans/layouts/Disseminations';
+import EmergencyPlanDrills from '../Plans/layouts/Drills';
+import EmergencyPlanPlanner from '../Plans/components/Planner';
+import EmergencyPlanProcedures from '../Plans/components/Procedures';
 import Resources from '../Resources';
-import ResourcesAdjustmentsLayout from '../Resources/layouts/Adjustments';
-import ResourcesItemCategoriesLayout from '../Resources/layouts/ItemCategories';
-import ResourcesItemsLayout from '../Resources/layouts/Items';
-import ResourcesItemUnitLayout from '../Resources/layouts/ItemUnit';
-import ResourcesStockLayout from '../Resources/layouts/Stock';
-import ResourcesUtilizationLayout from '../Resources/layouts/Utilization';
-import ResourcesWarehousesLayout from '../Resources/layouts/Warehouses';
+import ResourcesAdjustments from '../Resources/components/Adjustments';
+import ResourcesItemCategories from '../Resources/components/ItemCategories';
+import ResourcesItems from '../Resources/components/Items';
+import ResourcesItemUnits from '../Resources/components/ItemUnits';
+import ResourcesStock from '../Resources/components/Stock';
+import ResourcesUtilization from '../Resources/layouts/Utilization';
+import ResourcesWarehouses from '../Resources/components/Warehouses';
 import Stakeholders from '../Stakeholders';
-import StakeholdersAgenciesLayout from '../Stakeholders/layouts/Agencies';
-import StakeholdersFocalPeopleLayout from '../Stakeholders/layouts/FocalPeople';
-import StakeholdersNotificationsLayout from '../Stakeholders/layouts/Notifications';
-import StakeholdersRolesLayout from '../Stakeholders/layouts/Roles';
+import StakeholdersAgencies from '../Stakeholders/components/Agencies';
+import StakeholdersFocalPeople from '../Stakeholders/components/FocalPeople';
+import StakeholdersNotifications from '../Stakeholders/components/Notifications';
+import StakeholdersRoles from '../Stakeholders/components/Roles';
 import SecureRoute from '../Auth/SecureRoute';
 import HeaderNavMenu from './components/HeaderNavMenu';
 import './styles.css';
@@ -314,27 +314,27 @@ const BaseLayout = props => {
           <SecureRoute exact path={`${baseUrl}/alerts`} component={Alerts} />
           <SecureRoute
             path={`${baseUrl}/alerts/issuedalerts`}
-            component={AlertsLayout}
+            component={IssuedAlerts}
           />
           <SecureRoute
             path={`${baseUrl}/alerts/actions`}
-            component={AlertsActionsLayout}
+            component={AlertsActions}
           />
           <SecureRoute
             path={`${baseUrl}/alerts/feeds`}
-            component={AlertsFeedsLayout}
+            component={AlertsFeeds}
           />
           <SecureRoute
             path={`${baseUrl}/alerts/feedback`}
-            component={AlertsFeedbackLayout}
+            component={AlertsFeedback}
           />
           <SecureRoute
             path={`${baseUrl}/alerts/sources`}
-            component={AlertsSourcesLayout}
+            component={AlertsSources}
           />
           <SecureRoute
             path={`${baseUrl}/alerts/servicerequests`}
-            component={AlertsServiceRequestsLayout}
+            component={AlertsServiceRequests}
           />
           <SecureRoute
             exact
@@ -343,19 +343,19 @@ const BaseLayout = props => {
           />
           <SecureRoute
             path={`${baseUrl}/assessments/indicators`}
-            component={AssessmentsIndicatorsLayout}
+            component={AssessmentsIndicators}
           />
           <SecureRoute
             path={`${baseUrl}/assessments/questionnaires`}
-            component={AssessmentsQuestionnairesLayout}
+            component={AssessmentsQuestionnaires}
           />
           <SecureRoute
             path={`${baseUrl}/assessments/questions`}
-            component={AssessmentsQuestionsLayout}
+            component={AssessmentsQuestions}
           />
           <SecureRoute
             path={`${baseUrl}/assessments/responses`}
-            component={AssessmentsResponsesLayout}
+            component={AssessmentsResponses}
           />
           <SecureRoute
             exact
@@ -364,39 +364,39 @@ const BaseLayout = props => {
           />
           <SecureRoute
             path={`${baseUrl}/geographicalfeatures/administrativeboundaries`}
-            component={AdministrativeBoundariesLayout}
+            component={AdministrativeBoundaries}
           />
           <SecureRoute
             path={`${baseUrl}/geographicalfeatures/districts`}
-            component={DistrictsLayout}
+            component={Districts}
           />
           <SecureRoute
             path={`${baseUrl}/geographicalfeatures/evacuationcenters`}
-            component={EvacuationCentersLayout}
+            component={EvacuationCenters}
           />
           <SecureRoute
             path={`${baseUrl}/geographicalfeatures/facilities`}
-            component={GeographicalFeaturesFacilitiesLayout}
+            component={GeographicalFeaturesFacilities}
           />
           <SecureRoute
             path={`${baseUrl}/geographicalfeatures/infrastructure`}
-            component={GeographicalFeaturesInfrastructureLayout}
+            component={GeographicalFeaturesInfrastructure}
           />
           <SecureRoute
             path={`${baseUrl}/geographicalfeatures/regions`}
-            component={RegionsLayout}
+            component={Regions}
           />
           <SecureRoute
             path={`${baseUrl}/geographicalfeatures/subwards`}
-            component={SubWardsLayout}
+            component={SubWards}
           />
           <SecureRoute
             path={`${baseUrl}/geographicalfeatures/warehouses`}
-            component={GeographicalFeaturesWarehousesLayout}
+            component={GeographicalFeaturesWarehouses}
           />
           <SecureRoute
             path={`${baseUrl}/geographicalfeatures/wards`}
-            component={WardsLayout}
+            component={Wards}
           />
           <SecureRoute
             exact
@@ -406,27 +406,27 @@ const BaseLayout = props => {
 
           <SecureRoute
             path={`${baseUrl}/incidents/commandcenter`}
-            component={IncidentsCommandCenterLayout}
+            component={IncidentsCommandCenter}
           />
           <SecureRoute
             path={`${baseUrl}/incidents/assessments`}
-            component={IncidentsAssessmentsLayout}
+            component={IncidentsAssessments}
           />
           <SecureRoute
             path={`${baseUrl}/incidents/actions`}
-            component={IncidentsActionsLayout}
+            component={IncidentsActions}
           />
           <SecureRoute
             path={`${baseUrl}/incidents/feeds`}
-            component={IncidentsFeedsLayout}
+            component={IncidentsFeeds}
           />
           <SecureRoute
             path={`${baseUrl}/incidents/lossdatabase`}
-            component={IncidentsLossDatabaseLayout}
+            component={IncidentsLossDatabase}
           />
           <SecureRoute
             path={`${baseUrl}/incidents/incidenttypes`}
-            component={IncidentsIncidentTypesLayout}
+            component={IncidentsIncidentTypes}
           />
           <SecureRoute
             exact
@@ -435,39 +435,39 @@ const BaseLayout = props => {
           />
           <SecureRoute
             path={`${baseUrl}/plans/planner`}
-            component={EmergencyPlanPlannerLayout}
+            component={EmergencyPlanPlanner}
           />
           <SecureRoute
             path={`${baseUrl}/plans/planner/:planId/:activityId`}
-            component={EmergencyPlanProceduresLayout}
+            component={EmergencyPlanProcedures}
           />
           <SecureRoute
             path={`${baseUrl}/plans/activations`}
-            component={EmergencyPlanActivationsLayout}
+            component={EmergencyPlanActivations}
           />
           <SecureRoute
             path={`${baseUrl}/plans/activities`}
-            component={EmergencyPlanActivitiesLayout}
+            component={EmergencyPlanActivities}
           />
           <SecureRoute
             path={`${baseUrl}/plans/activities/:activityId`}
-            component={EmergencyPlanProceduresLayout}
+            component={EmergencyPlanProcedures}
           />
           <SecureRoute
             path={`${baseUrl}/plans/planner/:planId`}
-            component={EmergencyPlanActivitiesLayout}
+            component={EmergencyPlanActivities}
           />
           <SecureRoute
             path={`${baseUrl}/plans/disseminations`}
-            component={EmergencyPlanDisseminationsLayout}
+            component={EmergencyPlanDisseminations}
           />
           <SecureRoute
             path={`${baseUrl}/plans/drills`}
-            component={EmergencyPlanDrillsLayout}
+            component={EmergencyPlanDrills}
           />
           <SecureRoute
             path={`${baseUrl}/plans/procedures`}
-            component={EmergencyPlanProceduresLayout}
+            component={EmergencyPlanProcedures}
           />
           <SecureRoute
             exact
@@ -477,32 +477,32 @@ const BaseLayout = props => {
           <SecureRoute
             exact
             path={`${baseUrl}/resources/items`}
-            component={ResourcesItemsLayout}
+            component={ResourcesItems}
           />
           <SecureRoute
             exact
             path={`${baseUrl}/resources/itemcategories`}
-            component={ResourcesItemCategoriesLayout}
+            component={ResourcesItemCategories}
           />
           <SecureRoute
             path={`${baseUrl}/resources/unitsofmeasure`}
-            component={ResourcesItemUnitLayout}
+            component={ResourcesItemUnits}
           />
           <SecureRoute
             path={`${baseUrl}/resources/warehouses`}
-            component={ResourcesWarehousesLayout}
+            component={ResourcesWarehouses}
           />
           <SecureRoute
             path={`${baseUrl}/resources/stocks`}
-            component={ResourcesStockLayout}
+            component={ResourcesStock}
           />
           <SecureRoute
             path={`${baseUrl}/resources/utilization`}
-            component={ResourcesUtilizationLayout}
+            component={ResourcesUtilization}
           />
           <SecureRoute
             path={`${baseUrl}/resources/adjustments`}
-            component={ResourcesAdjustmentsLayout}
+            component={ResourcesAdjustments}
           />
           <SecureRoute
             exact
@@ -511,19 +511,19 @@ const BaseLayout = props => {
           />
           <SecureRoute
             path={`${baseUrl}/stakeholders/notifications`}
-            component={StakeholdersNotificationsLayout}
+            component={StakeholdersNotifications}
           />
           <SecureRoute
             path={`${baseUrl}/stakeholders/focalpeople`}
-            component={StakeholdersFocalPeopleLayout}
+            component={StakeholdersFocalPeople}
           />
           <SecureRoute
             path={`${baseUrl}/stakeholders/agencies`}
-            component={StakeholdersAgenciesLayout}
+            component={StakeholdersAgencies}
           />
           <SecureRoute
             path={`${baseUrl}/stakeholders/roles`}
-            component={StakeholdersRolesLayout}
+            component={StakeholdersRoles}
           />
           <SecureRoute component={PageNotFound} />
         </Switch>
