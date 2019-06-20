@@ -5,7 +5,7 @@ import {
 } from '@codetanzania/emis-api-states';
 import { httpActions } from '@codetanzania/emis-api-client';
 import { List } from 'antd';
-import moment from 'moment';
+// import moment from 'moment';
 import concat from 'lodash/concat';
 import map from 'lodash/map';
 import uniq from 'lodash/uniq';
@@ -44,11 +44,11 @@ const { getAlertsExportUrl } = httpActions;
  * @version 0.1.0
  * @since 0.1.0
  */
-const dateSortDesc = (date1, date2) => {
-  if (date1 > date2) return -1;
-  if (date1 < date2) return 1;
-  return 0;
-};
+// const dateSortDesc = (date1, date2) => {
+//   if (date1 > date2) return -1;
+//   if (date1 < date2) return 1;
+//   return 0;
+// };
 
 /**
  * @function
@@ -62,12 +62,12 @@ const dateSortDesc = (date1, date2) => {
  * @version 0.1.0
  * @since 0.1.0
  */
-const sortByExpiredAt = alerts =>
-  alerts.sort(({ expiredAt: ISOdate1 }, { expiredAt: ISOdate2 }) => {
-    const date1 = moment(ISOdate1);
-    const date2 = moment(ISOdate2);
-    return dateSortDesc(date1, date2);
-  });
+// const sortByExpiredAt = alerts =>
+//   alerts.sort(({ expiredAt: ISOdate1 }, { expiredAt: ISOdate2 }) => {
+//     const date1 = moment(ISOdate1);
+//     const date2 = moment(ISOdate2);
+//     return dateSortDesc(date1, date2);
+//   });
 
 /**
  * @function
@@ -81,12 +81,12 @@ const sortByExpiredAt = alerts =>
  * @version 0.1.0
  * @since 0.1.0
  */
-const sortByUpdatedAt = alerts =>
-  alerts.sort(({ updatedAt: ISOdate1 }, { updatedAt: ISOdate2 }) => {
-    const date1 = moment(ISOdate1);
-    const date2 = moment(ISOdate2);
-    return dateSortDesc(date1, date2);
-  });
+// const sortByUpdatedAt = alerts =>
+//   alerts.sort(({ updatedAt: ISOdate1 }, { updatedAt: ISOdate2 }) => {
+//     const date1 = moment(ISOdate1);
+//     const date2 = moment(ISOdate2);
+//     return dateSortDesc(date1, date2);
+//   });
 
 /**
  * @class
@@ -231,7 +231,7 @@ class AlertList extends Component {
       onShare,
     } = this.props;
     const { selectedAlerts, selectedPages } = this.state;
-    const sortedAlerts = sortByUpdatedAt(sortByExpiredAt(alerts));
+    // const sortedAlerts = sortByUpdatedAt(sortByExpiredAt(alerts));
     const selectedAlertsCount = intersectionBy(
       this.state.selectedAlerts,
       alerts,
@@ -280,7 +280,7 @@ class AlertList extends Component {
         {/* alerts list */}
         <List
           loading={loading}
-          dataSource={sortedAlerts}
+          dataSource={alerts}
           renderItem={alert => {
             return (
               <AlertListItem
