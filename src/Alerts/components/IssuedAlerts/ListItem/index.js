@@ -1,8 +1,9 @@
 import { Avatar, Checkbox, Col, Row, Modal } from 'antd';
-import moment from 'moment';
 import PropTypes from 'prop-types';
 import randomColor from 'randomcolor';
 import React, { Component } from 'react';
+// eslint-disable-next-line import/named
+import { formatTime, timeAgo } from '../../../../util';
 import ListItemActions from '../../../../components/ListItemActions';
 import './styles.css';
 
@@ -10,33 +11,6 @@ import './styles.css';
 const { confirm } = Modal;
 
 // eslint-disable-next-line jsdoc/require-returns-check
-/**
- * @function
- * @name formatTime
- * @description formats date to ddd, MMM DD YYYY hA format
- *
- * @param {object} date date object
- * @returns {string} formatted date
- *
- * @version 0.1.0
- * @since 0.1.0
- */
-const formatTime = date => moment(date).format('ddd, MMM DD YYYY hA');
-
-// eslint-disable-next-line jsdoc/require-returns-check
-/**
- * @function
- * @name timeAgo
- * @description creates relative date
- *
- * @param {object} date date object
- * @returns {string} relative time
- *
- * @version 0.1.0
- * @since 0.1.0
- */
-const timeAgo = date => moment(date).fromNow();
-
 /**
  * @class
  * @name AlertListItem
