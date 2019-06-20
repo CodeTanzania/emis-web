@@ -1,6 +1,7 @@
 import { Button, Form, Input, Icon, Tooltip } from 'antd';
 import { Connect, postCampaign } from '@codetanzania/emis-api-states';
 import compact from 'lodash/compact';
+import isEmpty from 'lodash/isEmpty';
 import map from 'lodash/map';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
@@ -71,22 +72,47 @@ class NotificationForm extends Component {
         //   subject: '',
         //   body: '',
         // };
+
+        const criteria = {};
+
+        if (!isEmpty(values.agencies)) {
+          // eslint-disable-next-line
+          criteria._id = {
+            $in: compact([].concat(values.agencies)),
+          };
+        }
+
+        if (!isEmpty(values.groups)) {
+          criteria.group = {
+            $in: compact([].concat(values.groups)),
+          };
+        }
+
+        if (!isEmpty(values.roles)) {
+          criteria.role = {
+            $in: compact([].concat(values.roles)),
+          };
+        }
+
+        if (!isEmpty(values.features)) {
+          criteria.location = {
+            $in: compact([].concat(values.features)),
+          };
+        }
+
+        if (!isEmpty(values.recipients)) {
+          // eslint-disable-next-line
+          const agencies = criteria._id ? criteria._id.$in : [];
+
+          // eslint-disable-next-line
+          criteria._id = {
+            $in: compact([].concat(values.recipients).concat(agencies)), // eslint-disable-line
+          };
+        }
+
         const notification = {
           criteria: {
-            _id: {
-              $in: compact(
-                [].concat(values.recipients).concat(values.agencies)
-              ),
-            },
-            group: {
-              $in: compact([].concat(values.groups)),
-            },
-            role: {
-              $in: compact([].concat(values.roles)),
-            },
-            location: {
-              $in: compact([].concat(values.features)),
-            },
+            ...criteria,
           },
           subject: values.subject,
           message: values.body,
@@ -199,7 +225,6 @@ class NotificationForm extends Component {
                 optionLabel="name"
                 optionValue="_id"
                 mode="multiple"
-                initialValue={recipients}
               />
             )}
           </Form.Item>
@@ -215,7 +240,6 @@ class NotificationForm extends Component {
                 optionLabel="name"
                 optionValue="_id"
                 mode="multiple"
-                initialValue={recipients}
               />
             )}
           </Form.Item>
