@@ -1,5 +1,5 @@
 import { Button, Form, Input, Icon, Tooltip } from 'antd';
-import { postCampaign } from '@codetanzania/emis-api-states';
+import { Connect, postCampaign } from '@codetanzania/emis-api-states';
 import compact from 'lodash/compact';
 import map from 'lodash/map';
 import PropTypes from 'prop-types';
@@ -37,6 +37,7 @@ class NotificationForm extends Component {
     onSearchGroups: PropTypes.func.isRequired,
     onSearchRoles: PropTypes.func.isRequired,
     onSearchAgencies: PropTypes.func.isRequired,
+    posting: PropTypes.bool.isRequired,
   };
 
   static defaultProps = {
@@ -60,6 +61,7 @@ class NotificationForm extends Component {
 
     const {
       form: { validateFieldsAndScroll },
+      onCancel,
     } = this.props;
 
     validateFieldsAndScroll((error, values) => {
@@ -94,6 +96,7 @@ class NotificationForm extends Component {
           notification,
           () => {
             notifySuccess('Notification Sent Successfully');
+            onCancel();
           },
           () => {
             notifyError(
@@ -132,6 +135,7 @@ class NotificationForm extends Component {
       onSearchJurisdictions,
       onSearchGroups,
       onSearchRoles,
+      posting,
     } = this.props;
 
     const { moreFilters } = this.state;
@@ -162,7 +166,7 @@ class NotificationForm extends Component {
             {getFieldDecorator('features')(
               <SearchableSelectInput
                 onSearch={onSearchJurisdictions}
-                optionLabel="name"
+                optionLabel={feature => `${feature.name} (${feature.type})`}
                 optionValue="_id"
                 mode="multiple"
               />
@@ -274,7 +278,12 @@ class NotificationForm extends Component {
           <Button style={{ marginLeft: 8 }} onClick={onCancel}>
             Cancel
           </Button>
-          <Button style={{ marginLeft: 8 }} type="primary" htmlType="submit">
+          <Button
+            style={{ marginLeft: 8 }}
+            type="primary"
+            htmlType="submit"
+            loading={posting}
+          >
             Send
           </Button>
         </Form.Item>
@@ -284,4 +293,6 @@ class NotificationForm extends Component {
   }
 }
 
-export default Form.create()(NotificationForm);
+export default Connect(Form.create()(NotificationForm), {
+  posting: 'campaigns.posting',
+});

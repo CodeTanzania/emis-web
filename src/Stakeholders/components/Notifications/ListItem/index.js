@@ -3,29 +3,31 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import randomColor from 'randomcolor';
 import ListItemActions from '../../../../components/ListItemActions';
+// eslint-disable-next-line import/named
+import { formatTime, timeAgo } from '../../../../util';
 import './styles.css';
 
 const { confirm } = Modal;
 
 /**
  * @class
- * @name NotificationListItem
+ * @name CampaignListItem
  * @description Single role list item component. Render single role details
  *
  * @version 0.1.0
  * @since 0.1.0
  */
-class NotificationListItem extends Component {
+class CampaignListItem extends Component {
   state = {
     isHovered: false,
   };
 
   /* props validation */
   static propTypes = {
-    email: PropTypes.string.isRequired,
-    mobile: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    onEdit: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired,
+    form: PropTypes.string.isRequired,
+    sentAt: PropTypes.string.isRequired,
+    sent: PropTypes.string.isRequired,
     onArchive: PropTypes.func.isRequired,
     isSelected: PropTypes.bool.isRequired,
     onSelectItem: PropTypes.func.isRequired,
@@ -87,9 +89,9 @@ class NotificationListItem extends Component {
    * @since 0.1.0
    */
   showArchiveConfirm = () => {
-    const { name, onArchive } = this.props;
+    const { title, onArchive } = this.props;
     confirm({
-      title: `Are you sure you want to archive ${name} ?`,
+      title: `Are you sure you want to archive ${title} ?`,
       okText: 'Yes',
       okType: 'danger',
       cancelText: 'No',
@@ -100,7 +102,7 @@ class NotificationListItem extends Component {
   };
 
   render() {
-    const { email, name, mobile, onEdit } = this.props;
+    const { form, title, sentAt, sent } = this.props;
     const { isHovered } = this.state;
     const { isSelected } = this.props;
     let sideComponent = null;
@@ -123,7 +125,7 @@ class NotificationListItem extends Component {
         />
       ) : (
         <Avatar style={{ backgroundColor: avatarBackground }}>
-          {name.charAt(0).toUpperCase()}
+          {title.charAt(0).toUpperCase()}
         </Avatar>
       );
     }
@@ -136,32 +138,24 @@ class NotificationListItem extends Component {
       >
         <Row>
           <Col span={1}>{sideComponent}</Col>
-          <Col span={5} title="Notification title">
-            {name}
+          <Col span={6} title="Notification title">
+            {title}
           </Col>
-          <Col span={3} title="Notification form ">
-            {mobile}
+          <Col span={4} title="Notification form ">
+            {form}
           </Col>
-          <Col span={3} title="Notification sender">
-            {name}
+          <Col span={4} title="Sent Notifications">
+            {sent}
           </Col>
-          <Col span={4} title="Destination of notification">
-            {email}
-          </Col>
-          <Col span={4} title="Notification subject">
-            {email}
+          <Col span={5} title={formatTime(sentAt)}>
+            {timeAgo(sentAt)}
           </Col>
           <Col span={2}>
             {isHovered && (
               <ListItemActions
-                edit={{
-                  name: 'Edit Notification',
-                  title: 'Update Notification Details',
-                  onClick: onEdit,
-                }}
                 archive={{
-                  name: 'Archive Notification',
-                  title: 'Remove Notification from the list of active Roles',
+                  name: 'Archive Notifications',
+                  title: 'Remove Notifications from the list',
                   onClick: this.showArchiveConfirm,
                 }}
               />
@@ -173,4 +167,4 @@ class NotificationListItem extends Component {
   }
 }
 
-export default NotificationListItem;
+export default CampaignListItem;
