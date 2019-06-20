@@ -130,7 +130,7 @@ const Toolbar = ({
       <Col xxl={12} xl={12} lg={12} md={14} sm={10} xs={12}>
         <Row type="flex" justify="end">
           {/* selected and  number summary */}
-          <Col xxl={12} xl={12} lg={13} md={12} sm={0} xs={0}>
+          <Col xxl={10} xl={12} lg={13} md={12} sm={0} xs={0}>
             {selectedItemsCount > 0 && (
               <span
                 style={{ color: '#959595' }}
@@ -161,7 +161,7 @@ const Toolbar = ({
 
           {/* pagination */}
           {onPaginate && total > 0 && (
-            <Col xxl={4} xl={7} lg={9} md={9} sm={24} xs={24}>
+            <Col xxl={6} xl={7} lg={9} md={9} sm={24} xs={24}>
               <Pagination
                 simple
                 current={page}
