@@ -1,6 +1,7 @@
 import { httpActions } from '@codetanzania/emis-api-client';
 import { Connect, postAlert, putAlert } from '@codetanzania/emis-api-states';
 import { Button, Col, DatePicker, Form, Input, Row, Select } from 'antd';
+import map from 'lodash/map';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
@@ -290,16 +291,19 @@ class AlertForm extends Component {
               {...formItemLayout}
               label={<span title={areaTitle}>Area(s)</span>}
             >
-              {getFieldDecorator('area', {
+              {getFieldDecorator('locations', {
                 rules: [
                   { required: true, message: 'Affected area(s) is required' },
                 ],
+                initialValue: map(alert.locations, location => location._id), // eslint-disable-line
               })(
                 <SearchableSelectInput
                   placeholder="Please select affected area"
                   onSearch={getFeatures}
                   optionLabel="name"
                   optionValue="name"
+                  mode="multiple"
+                  initialValue={alert.locations}
                 />
               )}
             </Form.Item>
@@ -479,7 +483,7 @@ class AlertForm extends Component {
               {...formItemLayout}
               label={<span title={alertSourceTitle}>Alert Source</span>}
             >
-              {getFieldDecorator('source', {
+              {getFieldDecorator('agency', {
                 rules: [
                   { required: true, message: 'Alert Source is required' },
                 ],
