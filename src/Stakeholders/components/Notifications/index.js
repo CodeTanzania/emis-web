@@ -1,4 +1,8 @@
-import { Connect, getCampaigns } from '@codetanzania/emis-api-states';
+import {
+  Connect,
+  getCampaigns,
+  searchCampaigns,
+} from '@codetanzania/emis-api-states';
 import { httpActions } from '@codetanzania/emis-api-client';
 import PropTypes from 'prop-types';
 import { Modal } from 'antd';
@@ -89,6 +93,20 @@ class Campaign extends Component {
    */
   handleAfterCloseNotificationForm = () => {
     this.setState({ notificationBody: undefined });
+  };
+
+  /**
+   * @function
+   * @name searchFocalPeople
+   * @description Search FocalPeople List based on supplied filter word
+   *
+   * @param {object} event - Event instance
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  searchCampaigns = event => {
+    searchCampaigns(event.target.value);
   };
 
   render() {
