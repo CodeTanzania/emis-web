@@ -24,8 +24,8 @@ const { getCampaignsExportUrl } = httpActions;
 const headerLayout = [
   { span: 6, header: 'Title' },
   { span: 4, header: 'Form' },
-  { span: 4, header: 'Sender' },
-  { span: 5, header: 'Sent' },
+  { span: 4, header: 'Sent' },
+  { span: 5, header: 'Sent Date' },
 ];
 
 /**
