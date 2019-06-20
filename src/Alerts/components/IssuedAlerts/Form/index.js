@@ -295,7 +295,10 @@ class AlertForm extends Component {
                 rules: [
                   { required: true, message: 'Affected area(s) is required' },
                 ],
-                initialValue: map(alert.locations, location => location._id), // eslint-disable-line
+                initialValue:
+                  alert && alert.locations
+                    ? map(alert.locations, location => location._id) // eslint-disable-line
+                    : [],
               })(
                 <SearchableSelectInput
                   placeholder="Please select affected area"
@@ -303,7 +306,7 @@ class AlertForm extends Component {
                   optionLabel="name"
                   optionValue="name"
                   mode="multiple"
-                  initialValue={alert.locations}
+                  initialValue={alert && alert.locations ? alert.locations : []}
                 />
               )}
             </Form.Item>
