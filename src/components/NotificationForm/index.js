@@ -16,7 +16,7 @@ const { TextArea } = Input;
  * @name NotificationForm
  * @description Render notification form component
  *
- * @version 0.2.0
+ * @version 0.2.1
  * @since 0.1.0
  */
 class NotificationForm extends Component {
@@ -297,7 +297,7 @@ class NotificationForm extends Component {
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
           <Button type="link" onClick={this.toggleMoreFilters}>
-            More Options
+            {this.state.moreFilters ? 'Less Filters' : 'More Filters'}
           </Button>
           <Button style={{ marginLeft: 8 }} onClick={onCancel}>
             Cancel
