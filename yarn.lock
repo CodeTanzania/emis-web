@@ -4247,15 +4247,15 @@ eslint-plugin-import@2.17.3:
     read-pkg-up "^2.0.0"
     resolve "^1.11.0"
 
-eslint-plugin-jest@22.7.0:
-  version "22.7.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-22.7.0.tgz#a1d325bccb024b04f5354c56fe790baba54a454c"
-  integrity sha512-0U9nBd9V6+GKpM/KvRDcmMuPsewSsdM7NxCozgJkVAh8IrwHmQ0aw44/eYuVkhT8Fcdhsz0zYiyPtKg147eXMQ==
+eslint-plugin-jest@22.7.1:
+  version "22.7.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-22.7.1.tgz#5dcdf8f7a285f98040378220d6beca581f0ab2a1"
+  integrity sha512-CrT3AzA738neimv8G8iK2HCkrCwHnAJeeo7k5TEHK86VMItKl6zdJT/tHBDImfnVVAYsVs4Y6BUdBZQCCgfiyw==
 
-eslint-plugin-jsdoc@8.4.2:
-  version "8.4.2"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-8.4.2.tgz#5b4f72e79cbac9b505bb6ceb682d6ca289a221a5"
-  integrity sha512-x1UONtWuE58kR+9249A3a3tWOSmH5TqmwHSTcLs95AGXunECciDrBrq8cXJRUV630UBow9KGpVhl0p5dgIGNwQ==
+eslint-plugin-jsdoc@8.4.6:
+  version "8.4.6"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-8.4.6.tgz#33338714632c8bd596cca63c3a9eb3728100f266"
+  integrity sha512-05qlilEFDADuhXUwIn2p7gH3JrbDj/GJqNNGrYWuaXMyiGS/2n4CzwV6R18cRFln6eZYb8OFKeEmwm/PYaNZAg==
   dependencies:
     comment-parser "^0.5.5"
     debug "^4.1.1"
