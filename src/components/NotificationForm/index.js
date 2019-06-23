@@ -67,12 +67,6 @@ class NotificationForm extends Component {
 
     validateFieldsAndScroll((error, values) => {
       if (!error) {
-        // const send = {
-        //   criteria: { group: { $in: [] }, role: { $in: [] } },
-        //   subject: '',
-        //   body: '',
-        // };
-
         const criteria = {};
 
         if (!isEmpty(values.agencies)) {
