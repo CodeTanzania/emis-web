@@ -10,7 +10,6 @@ import React, { Component } from 'react';
 const { Option } = Select;
 
 /**
- *
  * @class
  * @name SearchableSelectInput
  * @description Searchable select input
@@ -78,7 +77,6 @@ export default class SearchableSelectInput extends Component {
   }
 
   /**
-   *
    * @function
    * @name handleSearch
    * @description Function called when searching in select box
@@ -96,7 +94,6 @@ export default class SearchableSelectInput extends Component {
   };
 
   /**
-   *
    * @function
    * @name handleChange
    * @description Function called when value of select box changes
@@ -122,7 +119,6 @@ export default class SearchableSelectInput extends Component {
   };
 
   /**
-   *
    * @function
    * @name handleOnDropdownVisibleChange
    * @description Function called when the select box is opened
@@ -150,10 +146,9 @@ export default class SearchableSelectInput extends Component {
   };
 
   /**
-   * Extract Option property based on provided prop
-   *
    * @function
    * @name getOptionProp
+   * @description Extract Option property based on provided prop
    *
    * @param {string|Function} prop The property name or value return from
    * a provided function
