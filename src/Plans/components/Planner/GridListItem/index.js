@@ -12,6 +12,8 @@ import './styles.css';
  * @param {object} props props object
  * @param {Function} props.onEditPlan callback for edit action
  *
+ * @returns {object} React element
+ *
  * @version 0.1.0
  * @since 0.1.0
  */

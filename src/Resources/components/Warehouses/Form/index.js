@@ -28,8 +28,14 @@ class WarehouseForm extends Component {
     warehouse: PropTypes.shape({
       name: PropTypes.string,
       level: PropTypes.string,
+      nature: PropTypes.string,
+      family: PropTypes.string,
+      type: PropTypes.string,
     }).isRequired,
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+    form: PropTypes.shape({
+      getFieldDecorator: PropTypes.func,
+      validateFieldsAndScroll: PropTypes.func,
+    }).isRequired,
     onCancel: PropTypes.func.isRequired,
     posting: PropTypes.bool.isRequired,
   };

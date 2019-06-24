@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 /**
- *
  * @class
  * @name RegionsFilters
  * @description Filter modal component for filtering region
@@ -25,7 +24,10 @@ class RegionsFilters extends Component {
         families: PropTypes.arrayOf(PropTypes.string),
       })
     ),
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+    form: PropTypes.shape({
+      getFieldDecorator: PropTypes.func,
+      validateFields: PropTypes.func,
+    }).isRequired,
     onCancel: PropTypes.func.isRequired,
     types: PropTypes.arrayOf(PropTypes.string).isRequired,
     natures: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -37,7 +39,6 @@ class RegionsFilters extends Component {
   };
 
   /**
-   *
    * @function
    * @name handleSubmit
    * @description Handle filter action

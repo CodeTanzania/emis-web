@@ -68,6 +68,7 @@ class AlertForm extends Component {
       response: PropTypes.arrayOf(
         PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
       ),
+      status: PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) }),
     }).isRequired,
     alert: PropTypes.shape({
       event: PropTypes.string,
@@ -80,12 +81,18 @@ class AlertForm extends Component {
       headline: PropTypes.string,
       expiredAt: PropTypes.string,
       expectedAt: PropTypes.string,
+      locations: PropTypes.arrayOf({ name: PropTypes.string }),
+      type: PropTypes.string,
+      response: PropTypes.string,
       _id: PropTypes.string,
     }),
     posting: PropTypes.bool.isRequired,
     onCancel: PropTypes.func.isRequired,
     isEditForm: PropTypes.bool.isRequired,
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+    form: PropTypes.shape({
+      getFieldDecorator: PropTypes.func,
+      validateFieldsAndScroll: PropTypes.func,
+    }).isRequired,
   };
 
   static defaultProps = {

@@ -17,15 +17,20 @@ import React, { Component } from 'react';
  */
 class AdjustmentsFilters extends Component {
   static propTypes = {
-    filter: PropTypes.objectOf(
-      PropTypes.shape({
-        type: PropTypes.arrayOf(PropTypes.string),
-        reason: PropTypes.arrayOf(PropTypes.string),
-      })
-    ),
+    filter: PropTypes.shape({
+      type: PropTypes.arrayOf(PropTypes.string),
+      reason: PropTypes.arrayOf(PropTypes.string),
+      updatedAt: PropTypes.shape({
+        from: PropTypes.string,
+        to: PropTypes.string,
+      }),
+    }),
     types: PropTypes.arrayOf(PropTypes.string).isRequired,
     reasons: PropTypes.arrayOf(PropTypes.string).isRequired,
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+    form: PropTypes.shape({
+      getFieldDecorator: PropTypes.func,
+      validateFields: PropTypes.func,
+    }).isRequired,
     onCancel: PropTypes.func.isRequired,
   };
 

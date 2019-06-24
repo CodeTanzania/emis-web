@@ -28,7 +28,10 @@ class WardForm extends Component {
       family: PropTypes.string,
       type: PropTypes.string,
     }).isRequired,
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+    form: PropTypes.shape({
+      getFieldDecorator: PropTypes.func,
+      validateFieldsAndScroll: PropTypes.func,
+    }).isRequired,
     onCancel: PropTypes.func.isRequired,
     posting: PropTypes.bool.isRequired,
     families: PropTypes.arrayOf(PropTypes.string).isRequired,

@@ -33,7 +33,11 @@ class ItemCategoryForm extends Component {
       abbreviation: PropTypes.string,
       description: PropTypes.string,
     }),
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+    form: PropTypes.shape({
+      getFieldDecorator: PropTypes.func,
+      setFieldsValue: PropTypes.func,
+      validateFieldsAndScroll: PropTypes.func,
+    }).isRequired,
     posting: PropTypes.bool.isRequired,
     onCancel: PropTypes.func.isRequired,
   };

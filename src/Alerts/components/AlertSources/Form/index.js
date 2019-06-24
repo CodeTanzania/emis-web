@@ -21,11 +21,15 @@ class AlertSourceForm extends Component {
       mobile: PropTypes.string,
       email: PropTypes.string,
       _id: PropTypes.string,
+      website: PropTypes.string,
     }).isRequired,
     isEditForm: PropTypes.bool.isRequired,
     posting: PropTypes.bool.isRequired,
     onCancel: PropTypes.func.isRequired,
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+    form: PropTypes.shape({
+      getFieldDecorator: PropTypes.func,
+      validateFieldsAndScroll: PropTypes.func,
+    }).isRequired,
   };
 
   // eslint-disable-next-line jsdoc/require-returns

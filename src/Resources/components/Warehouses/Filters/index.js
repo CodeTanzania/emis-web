@@ -23,7 +23,10 @@ class WarehousesFilters extends Component {
         phases: PropTypes.arrayOf(PropTypes.string),
       })
     ),
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+    form: PropTypes.shape({
+      getFieldDecorator: PropTypes.func,
+      validateFields: PropTypes.func,
+    }).isRequired,
     onCancel: PropTypes.func.isRequired,
     natures: PropTypes.arrayOf(PropTypes.string).isRequired,
     families: PropTypes.arrayOf(PropTypes.string).isRequired,

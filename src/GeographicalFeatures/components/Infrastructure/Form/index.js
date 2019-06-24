@@ -17,8 +17,12 @@ class CriticalInfrastructureForm extends Component {
     criticalInfrastructure: PropTypes.shape({
       name: PropTypes.string,
       type: PropTypes.string,
+      nature: PropTypes.string,
     }).isRequired,
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+    form: PropTypes.shape({
+      getFieldDecorator: PropTypes.func,
+      validateFieldsAndScroll: PropTypes.func,
+    }).isRequired,
     onCancel: PropTypes.func.isRequired,
     posting: PropTypes.bool.isRequired,
   };

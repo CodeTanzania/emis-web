@@ -20,7 +20,8 @@ const { TextArea } = Input;
 /**
  * @class
  * @name ProcedureForm
- * @description Render Procedure form for creating and updating procedure procedure details
+ * @description Render Procedure form for creating and updating procedure
+ * details
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -34,8 +35,22 @@ class ProcedureForm extends Component {
       abbreviation: PropTypes.string,
       mobile: PropTypes.string,
       email: PropTypes.string,
+      plan: PropTypes.string,
+      description: PropTypes.string,
+      activity: PropTypes.string,
+      primary: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })),
+      supportive: PropTypes.arrayOf(
+        PropTypes.shape({ name: PropTypes.string })
+      ),
+      resources: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })),
+      assessments: PropTypes.arrayOf(
+        PropTypes.shape({ name: PropTypes.string })
+      ),
     }).isRequired,
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+    form: PropTypes.shape({
+      getFieldDecorator: PropTypes.func,
+      validateFieldsAndScroll: PropTypes.func,
+    }).isRequired,
     onCancel: PropTypes.func.isRequired,
     posting: PropTypes.bool.isRequired,
   };

@@ -29,7 +29,10 @@ class NotificationForm extends Component {
       })
     ).isRequired,
     body: PropTypes.string,
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+    form: PropTypes.shape({
+      getFieldDecorator: PropTypes.func,
+      validateFieldsAndScroll: PropTypes.func,
+    }).isRequired,
     onCancel: PropTypes.func.isRequired,
   };
 

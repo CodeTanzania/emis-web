@@ -17,7 +17,10 @@ import React, { Component } from 'react';
  */
 class IndicatorsFilters extends Component {
   static propTypes = {
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+    form: PropTypes.shape({
+      getFieldDecorator: PropTypes.func,
+      validateFields: PropTypes.func,
+    }).isRequired,
     onCancel: PropTypes.func.isRequired,
     subjects: PropTypes.arrayOf(PropTypes.string).isRequired,
     filter: PropTypes.objectOf(

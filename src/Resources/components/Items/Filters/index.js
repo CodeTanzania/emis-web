@@ -23,7 +23,10 @@ class ItemsFilters extends Component {
         uoms: PropTypes.arrayOf(PropTypes.string),
       })
     ),
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+    form: PropTypes.shape({
+      getFieldDecorator: PropTypes.func,
+      validateFields: PropTypes.func,
+    }).isRequired,
     onCancel: PropTypes.func.isRequired,
     types: PropTypes.arrayOf(PropTypes.string).isRequired,
     uoms: PropTypes.arrayOf(PropTypes.string).isRequired,

@@ -44,7 +44,10 @@ class Activities extends Component {
     page: PropTypes.number.isRequired,
     showForm: PropTypes.bool.isRequired,
     total: PropTypes.number.isRequired,
-    match: PropTypes.shape({ url: PropTypes.string }).isRequired,
+    match: PropTypes.shape({
+      url: PropTypes.string,
+      params: PropTypes.shape({ planId: PropTypes.string }),
+    }).isRequired,
   };
 
   static defaultProps = {

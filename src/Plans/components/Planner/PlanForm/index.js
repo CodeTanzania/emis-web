@@ -27,8 +27,14 @@ class PlanForm extends Component {
       abbreviation: PropTypes.string,
       mobile: PropTypes.string,
       email: PropTypes.string,
+      incidentType: PropTypes.string,
+      owner: PropTypes.string,
+      boundary: PropTypes.string,
     }).isRequired,
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+    form: PropTypes.shape({
+      getFieldDecorator: PropTypes.func,
+      validateFieldsAndScroll: PropTypes.func,
+    }).isRequired,
     onCancel: PropTypes.func.isRequired,
     posting: PropTypes.bool.isRequired,
   };

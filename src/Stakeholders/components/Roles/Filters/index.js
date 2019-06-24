@@ -23,7 +23,10 @@ class RolesFilters extends Component {
       })
     ),
     properties: PropTypes.arrayOf(PropTypes.string).isRequired,
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+    form: PropTypes.shape({
+      getFieldDecorator: PropTypes.func,
+      validateFields: PropTypes.func,
+    }).isRequired,
     onCancel: PropTypes.func.isRequired,
   };
 

@@ -25,7 +25,10 @@ class DistrictsFilters extends Component {
         families: PropTypes.arrayOf(PropTypes.string),
       })
     ),
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+    form: PropTypes.shape({
+      getFieldDecorator: PropTypes.func,
+      validateFields: PropTypes.func,
+    }).isRequired,
     onCancel: PropTypes.func.isRequired,
     types: PropTypes.arrayOf(PropTypes.string).isRequired,
     natures: PropTypes.arrayOf(PropTypes.string).isRequired,

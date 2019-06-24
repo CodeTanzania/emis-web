@@ -24,7 +24,10 @@ class FacilitiesFilters extends Component {
         nature: PropTypes.arrayOf(PropTypes.string),
       })
     ),
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+    form: PropTypes.shape({
+      getFieldDecorator: PropTypes.func,
+      validateFields: PropTypes.func,
+    }).isRequired,
     onCancel: PropTypes.func.isRequired,
   };
 

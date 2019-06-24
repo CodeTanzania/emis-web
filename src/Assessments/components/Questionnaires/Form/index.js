@@ -28,8 +28,12 @@ class QuestionnaireForm extends Component {
       stage: PropTypes.string,
       assess: PropTypes.string,
       phase: PropTypes.string,
+      description: PropTypes.string,
     }),
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+    form: PropTypes.shape({
+      getFieldDecorator: PropTypes.func,
+      validateFieldsAndScroll: PropTypes.func,
+    }).isRequired,
     onCancel: PropTypes.func.isRequired,
     posting: PropTypes.bool.isRequired,
     assess: PropTypes.arrayOf(PropTypes.string).isRequired,

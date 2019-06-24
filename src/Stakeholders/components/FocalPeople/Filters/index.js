@@ -27,10 +27,16 @@ class FocalPeopleFilters extends Component {
         groups: PropTypes.arrayOf(PropTypes.string),
       })
     ),
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+    form: PropTypes.shape({
+      getFieldDecorator: PropTypes.func,
+      validateFields: PropTypes.func,
+    }).isRequired,
     onCancel: PropTypes.func.isRequired,
     cached: PropTypes.shape({
       groups: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })),
+      locations: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })),
+      roles: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })),
+      agencies: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })),
     }),
     onCache: PropTypes.func.isRequired,
     onClearCache: PropTypes.func.isRequired,

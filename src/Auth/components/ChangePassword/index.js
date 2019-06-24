@@ -22,6 +22,7 @@ class ChangePasswordForm extends Component {
       validateFields: PropTypes.func.isRequired,
       validateFieldsAndScroll: PropTypes.func.isRequired,
       getFieldDecorator: PropTypes.func.isRequired,
+      getFieldValue: PropTypes.func.isRequired,
     }).isRequired,
     user: PropTypes.shape({
       name: PropTypes.string.isRequired,

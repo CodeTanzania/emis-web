@@ -24,24 +24,22 @@ import React, { Component } from 'react';
 class AlertsFilters extends Component {
   static propTypes = {
     alertSchema: PropTypes.shape({
-      category: PropTypes.arrayOf(
+      category: PropTypes.shape(
         PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
       ),
-      urgency: PropTypes.arrayOf(
+      urgency: PropTypes.shape(
         PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
       ),
-      severity: PropTypes.arrayOf(
+      severity: PropTypes.shape(
         PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
       ),
-      certainty: PropTypes.arrayOf(
+      certainty: PropTypes.shape(
         PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
       ),
-      type: PropTypes.arrayOf(
+      response: PropTypes.shape(
         PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
       ),
-      response: PropTypes.arrayOf(
-        PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
-      ),
+      type: PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) }),
     }).isRequired,
     filter: PropTypes.objectOf(
       PropTypes.shape({
@@ -54,7 +52,10 @@ class AlertsFilters extends Component {
       })
     ),
     onCancel: PropTypes.func.isRequired,
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+    form: PropTypes.shape({
+      getFieldDecorator: PropTypes.func,
+      validateFields: PropTypes.func,
+    }).isRequired,
   };
 
   static defaultProps = {

@@ -25,7 +25,10 @@ class QuestionsFilters extends Component {
         stages: PropTypes.arrayOf(PropTypes.string).isRequired,
       })
     ),
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+    form: PropTypes.shape({
+      getFieldDecorator: PropTypes.func,
+      validateFields: PropTypes.func,
+    }).isRequired,
     onCancel: PropTypes.func.isRequired,
     assess: PropTypes.arrayOf(PropTypes.string).isRequired,
     phases: PropTypes.arrayOf(PropTypes.string).isRequired,

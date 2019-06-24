@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 /**
- *
  * @class
  * @name IncidentTypesFilters
  * @description Filter modal component for filtering incident types
@@ -18,7 +17,10 @@ import React, { Component } from 'react';
  */
 class IncidentTypesFilters extends Component {
   static propTypes = {
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+    form: PropTypes.shape({
+      getFieldDecorator: PropTypes.func,
+      validateFields: PropTypes.func,
+    }).isRequired,
     onCancel: PropTypes.func.isRequired,
     families: PropTypes.arrayOf(PropTypes.string).isRequired,
     natures: PropTypes.arrayOf(PropTypes.string).isRequired,
