@@ -123,7 +123,7 @@ class NotificationForm extends Component {
           },
           () => {
             notifyError(
-              'An Error occurred when sending notification, please contact System Adminstrator'
+              'An Error occurred when sending notification, please contact System Administrator'
             );
           }
         );
