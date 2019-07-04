@@ -1,7 +1,7 @@
 import React from 'react';
 import alertIcon from '../assets/icons/alerts.svg';
 import assessmentIcon from '../assets/icons/assessments-disabled.svg';
-import dashboardIcon from '../assets/icons/dashboards-disabled.svg';
+import dashboardIcon from '../assets/icons/dashboards.svg';
 import planIcon from '../assets/icons/emergencyplans-disabled.svg';
 import geographicalFeaturesIcon from '../assets/icons/geographicalfeatures-disabled.svg';
 import incidentIcon from '../assets/icons/incidents-disabled.svg';
@@ -55,10 +55,9 @@ const routes = [
   },
   {
     name: 'Dashboards',
-    path: '/app/dashboards',
+    path: '/app/overview',
     icon: dashboardIcon,
     description: modules.dashboards,
-    disabled: true,
   },
 ];
 

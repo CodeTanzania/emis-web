@@ -15,6 +15,7 @@ import AssessmentsIndicators from '../Assessments/layouts/Indicators';
 import AssessmentsQuestionnaires from '../Assessments/layouts/Questionnaires';
 import AssessmentsQuestions from '../Assessments/layouts/Questions';
 import AssessmentsResponses from '../Assessments/layouts/Responses';
+import OverviewDashboard from '../Dashboards';
 import PageNotFound from '../components/UIState/PageNotFound';
 import GeographicalFeatures from '../GeographicalFeatures';
 import AdministrativeBoundaries from '../GeographicalFeatures/components/AdministrativeBoundaries';
@@ -229,6 +230,7 @@ const breadcrumbNameMap = {
     title: 'Roles of Stakeholders',
   },
   '/app/stakeholders': { name: 'Stakeholders', title: 'Stakeholders module' },
+  '/app/overview': { name: 'Overview Dashboard', title: 'Overview Dashboard' },
 };
 
 /**
@@ -524,6 +526,10 @@ const BaseLayout = props => {
           <SecureRoute
             path={`${baseUrl}/stakeholders/roles`}
             component={StakeholdersRoles}
+          />
+          <SecureRoute
+            path={`${baseUrl}/overview`}
+            component={OverviewDashboard}
           />
           <SecureRoute component={PageNotFound} />
         </Switch>
