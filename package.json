@@ -28,7 +28,6 @@
     "@codetanzania/emis-api-states": "^0.12.0",
     "antd": "^3.19.8",
     "axios": "^0.19.0",
-    "customize-cra": "^0.2.14",
     "inflection": "^1.12.0",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
@@ -53,6 +52,7 @@
     "@commitlint/travis-cli": "8.0.0",
     "babel-plugin-import": "1.12.0",
     "commitizen": "3.1.1",
+    "customize-cra": "^0.2.14",
     "cz-conventional-changelog": "2.1.0",
     "eslint-config-airbnb": "17.1.1",
     "eslint-config-prettier": "6.0.0",
@@ -80,12 +80,7 @@
     "url": "https://github.com/CodeTanzania/emis-web/issues"
   },
   "homepage": ".",
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
+  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"],
   "engines": {
     "node": ">=8.11.1",
     "npm": ">=5.6.0"
@@ -96,19 +91,11 @@
     }
   },
   "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
+    "extends": ["@commitlint/config-conventional"]
   },
   "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "git add"
-    ],
-    ".{css,scss}": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.js": ["eslint --fix", "git add"],
+    ".{css,scss}": ["prettier --write", "git add"]
   },
   "husky": {
     "hooks": {
