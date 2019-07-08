@@ -4170,6 +4170,11 @@ escape-html@~1.0.3:
   resolved "https://registry.yarnpkg.com/escape-html/-/escape-html-1.0.3.tgz#0258eae4d3d0c0974de1c169188ef0051d1d1988"
   integrity sha1-Aljq5NPQwJdN4cFpGI7wBR0dGYg=
 
+escape-regex-string@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/escape-regex-string/-/escape-regex-string-1.0.6.tgz#f536d8997ab19ec395385dcf2ea28b4e080899eb"
+  integrity sha512-AcaPwAOKpF52ETT4uu4vmpqQphuQGjIEhdDwG/gAJYah8ixJlrSBFjhtLMT7frc9y3RWgOnLov9E0MsRBdeRbw==
+
 escape-string-regexp@1.0.5, escape-string-regexp@^1.0.2, escape-string-regexp@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
@@ -4291,13 +4296,14 @@ eslint-plugin-jest@22.7.2:
   resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-22.7.2.tgz#7ab118a66a34e46ae5e16a128b5d24fd28b43dca"
   integrity sha512-Aecqe3ulBVI7amgOycVI8ZPL8o0SnGHOf3zn2/Ciu8TXyXDHcjtwD3hOs3ss/Qh/VAwlW/DMcuiXg5btgF+XMA==
 
-eslint-plugin-jsdoc@10.2.0:
-  version "10.2.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-10.2.0.tgz#e6341417ed49c75d7eb4b5d5eb325eab3a77f2a9"
-  integrity sha512-Hxqc36IFc4MO9s92TnRWBvTGj2reWQ4fPCfxHRxK58vWWeaTJe3g1CWL6UWB13/U6tCXPLEYRfHUtLaYBcd+fw==
+eslint-plugin-jsdoc@14.1.0:
+  version "14.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-14.1.0.tgz#b7702852de1ec35ba1ee955b3efd8835d369b874"
+  integrity sha512-EmgZDOdSIzIzIs7xe4CniFrwMrlQGp05BjINiWTpXRFYhLVXt8nUg5qjJUstFiCaatjYgNp/f2O33JwMXgQazw==
   dependencies:
     comment-parser "^0.5.5"
     debug "^4.1.1"
+    escape-regex-string "^1.0.6"
     flat-map-polyfill "^0.3.8"
     jsdoctypeparser "4.0.0"
     lodash "^4.17.11"
