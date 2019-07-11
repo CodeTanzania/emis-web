@@ -85,6 +85,9 @@ const OverviewDashboard = () => {
           <Geographies geography={DarWards}>
             {(geographies, projection) =>
               geographies.map(geography => {
+                // console.log(geography.properties.Female_Pop);
+                // console.log(geography.properties.Male_Pop);
+                // console.log(geography.properties.Ward_Pop);
                 const defaultColor = randomColor({
                   hue: '#00ffff',
                   luminosity: 'light',
