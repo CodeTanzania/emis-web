@@ -6,13 +6,14 @@ import {
   Geography,
   ZoomableGroup,
 } from 'react-simple-maps';
-import randomColor from 'randomcolor';
-import { formatNumber } from '../util';
+import { formatNumber, getRGBAColor } from '../util';
 import DarWards from '../assets/maps/dar.wards.json';
 
 /* declarations */
 
 const { Text } = Typography;
+const DAR_POPULATION = 4365000;
+const BASE_COLOR = '#ff0000';
 
 /**
  * @function
@@ -38,7 +39,7 @@ const OverviewDashboard = () => {
               xOffset: -70,
               yOffset: -50,
             }}
-            width={800}
+            width={1000}
             height={850}
             style={{
               margin: '10px 50px',
@@ -51,15 +52,13 @@ const OverviewDashboard = () => {
                     // console.log(geography.properties.Female_Pop);
                     // console.log(geography.properties.Male_Pop);
 
-                    const defaultColor = randomColor({
-                      hue: '#00ffff',
-                      luminosity: 'light',
-                    });
-                    const hoverColor = randomColor({
-                      hue: '#00ffff',
-                      luminosity: 'dark',
-                    });
-                    const pressedColor = randomColor({ hue: '#00ffff' });
+                    const defaultColor = getRGBAColor(
+                      BASE_COLOR,
+                      (geography.properties.Ward_Pop / DAR_POPULATION) * 10
+                    );
+
+                    const hoverColor = getRGBAColor(BASE_COLOR, 0.55);
+                    const pressedColor = getRGBAColor(BASE_COLOR, 0.75);
 
                     return (
                       <Tooltip
@@ -102,6 +101,7 @@ const OverviewDashboard = () => {
           </ComposableMap>
           {/* end ward svg map */}
         </Col>
+        {/* Ward summary card */}
         <Col span={8}>
           <div style={{ margin: '20px 10px' }}>
             <Card title="Ward Summary">
@@ -129,7 +129,6 @@ const OverviewDashboard = () => {
                     <Text strong> Population : </Text>
                   </Col>
                   <Col span={12}>
-                    {' '}
                     {ward ? formatNumber(ward.Ward_Pop) : 'N/A'}
                   </Col>
                 </Row>
@@ -141,7 +140,6 @@ const OverviewDashboard = () => {
                     <Text strong> Male Population : </Text>
                   </Col>
                   <Col span={12}>
-                    {' '}
                     {ward ? formatNumber(ward.Male_Pop) : 'N/A'}
                   </Col>
                 </Row>
@@ -153,7 +151,6 @@ const OverviewDashboard = () => {
                     <Text strong> Female Population : </Text>
                   </Col>
                   <Col span={12}>
-                    {' '}
                     {ward ? formatNumber(ward.Female_Pop) : 'N/A'}
                   </Col>
                 </Row>
@@ -215,6 +212,7 @@ const OverviewDashboard = () => {
             </Card>
           </div>
         </Col>
+        {/* end ward summary card */}
       </Row>
     </div>
   );
