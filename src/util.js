@@ -77,3 +77,18 @@ export const formatTime = date => moment(date).format('ddd, MMM DD YYYY hA');
  * @since 0.1.0
  */
 export const timeAgo = date => moment(date).fromNow();
+
+/**
+ * @function
+ * @name formatNumber
+ * @description Format number to en-Us format i.e 2000 to 2,000
+ *
+ * @param {number|string} number Number to be formatted
+ *
+ * @returns {string} formatted number
+ *
+ * @version 0.1.0
+ * @since 0.1.0
+ */
+export const formatNumber = number =>
+  new Intl.NumberFormat('en-US').format(number);
