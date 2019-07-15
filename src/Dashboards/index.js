@@ -46,7 +46,7 @@ const OverviewDashboard = () => {
             }}
           >
             <ZoomableGroup center={[39.1037144, -6.7923668]}>
-              <Geographies geography={DarWards}>
+              <Geographies geography={DarWards} disableOptimization>
                 {(geographies, projection) =>
                   geographies.map(geography => {
                     // console.log(geography.properties.Female_Pop);
@@ -73,7 +73,10 @@ const OverviewDashboard = () => {
                           onClick={() => setWard(geography.properties)}
                           style={{
                             default: {
-                              fill: defaultColor,
+                              fill:
+                                ward && geography.properties.fid === ward.fid
+                                  ? pressedColor
+                                  : defaultColor,
                               stroke: '#607D8B',
                               strokeWidth: 0.75,
                               outline: 'none',
