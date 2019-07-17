@@ -9,7 +9,7 @@ import './styles.css';
 /**
  * @class
  * @name Signin
- * @description Signin component which shows signin form
+ * @description Sign in component which shows sign in form
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -29,7 +29,7 @@ class Signin extends Component {
   /**
    * @function
    * @name handleSubmit
-   * @description Handle submit event for signin function
+   * @description Handle submit event for sign in function
    * @param {object} event Submit event
    * @returns {undefined}
    * @version 0.1.0

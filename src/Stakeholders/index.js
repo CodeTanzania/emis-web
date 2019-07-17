@@ -7,7 +7,7 @@ import rolesIcon from '../assets/icons/stakeholders/roles.svg';
 import NavigationMenu from '../components/NavigationMenu';
 import modules from '../modules.json';
 
-/* contants */
+/* constants */
 const routes = [
   {
     name: 'Focal People',

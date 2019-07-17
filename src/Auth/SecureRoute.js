@@ -6,7 +6,8 @@ import PropTypes from 'prop-types';
 /**
  * @function
  * @name SecureRoute
- * @description Route which check authentication status and route to appropiate component
+ * @description Route which check authentication status and route to appropriate
+ *  component
  *
  * @param {object} props  React props
  * @param {object} props.Component Component to be rendered
