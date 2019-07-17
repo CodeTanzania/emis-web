@@ -10,7 +10,6 @@ import { formatNumber, getRGBAColor } from '../util';
 import DarWards from '../assets/maps/dar.wards.json';
 
 /* declarations */
-
 const { Text } = Typography;
 const DAR_POPULATION = 4365000;
 const BASE_COLOR = '#ff0000';
@@ -49,9 +48,6 @@ const OverviewDashboard = () => {
               <Geographies geography={DarWards} disableOptimization>
                 {(geographies, projection) =>
                   geographies.map(geography => {
-                    // console.log(geography.properties.Female_Pop);
-                    // console.log(geography.properties.Male_Pop);
-
                     const defaultColor = getRGBAColor(
                       BASE_COLOR,
                       (geography.properties.Ward_Pop / DAR_POPULATION) * 10
@@ -104,6 +100,7 @@ const OverviewDashboard = () => {
           </ComposableMap>
           {/* end ward svg map */}
         </Col>
+
         {/* Ward summary card */}
         <Col span={8}>
           <div style={{ margin: '20px 10px' }}>

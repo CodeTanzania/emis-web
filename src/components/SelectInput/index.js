@@ -2,7 +2,7 @@ import { Select } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-/* contants */
+/* constants */
 const { Option } = Select;
 
 /**
@@ -12,6 +12,8 @@ const { Option } = Select;
  *
  * @param {object} props props object
  * @param {object} props.options selectable options
+ *
+ * @returns {object} React Element
  *
  * @version 0.1.0
  * @since 0.1.0
