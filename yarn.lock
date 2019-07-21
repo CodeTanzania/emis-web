@@ -3027,7 +3027,7 @@ commander@~2.19.0:
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.19.0.tgz#f6198aa84e5b83c46054b94ddedbfed5ee9ff12a"
   integrity sha512-6tvAOO+D6OENvRAh524Dh9jcfKTYDQAqvqezbCW82xj5X0pSrcpxtvRKHLG0yBY6SD7PSDrJaj+0AiOcKVd1Xg==
 
-comment-parser@^0.6.0:
+comment-parser@^0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/comment-parser/-/comment-parser-0.6.1.tgz#88040c7c0a57c62e64962c3e888518620a42e7c9"
   integrity sha512-Putzd7Ilyvknmb1KxGf5el9uw0sPx9gEVnDrm8tlvXGN1i8Uaa2VBxB32hUhfzTlrEhhxNQ+pKq4ZNe8wNxjmw==
@@ -3609,17 +3609,6 @@ cyclist@~0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-0.2.2.tgz#1b33792e11e914a2fd6d6ed6447464444e5fa640"
   integrity sha1-GzN5LhHpFKL9bW7WRHRkRE5fpkA=
-
-cz-conventional-changelog@2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/cz-conventional-changelog/-/cz-conventional-changelog-2.1.0.tgz#2f4bc7390e3244e4df293e6ba351e4c740a7c764"
-  integrity sha1-L0vHOQ4yROTfKT5ro1Hkx0Cnx2Q=
-  dependencies:
-    conventional-commit-types "^2.0.0"
-    lodash.map "^4.5.1"
-    longest "^1.0.1"
-    right-pad "^1.0.1"
-    word-wrap "^1.0.3"
 
 cz-conventional-changelog@3.0.1:
   version "3.0.1"
@@ -4310,21 +4299,21 @@ eslint-plugin-import@2.18.2:
     read-pkg-up "^2.0.0"
     resolve "^1.11.0"
 
-eslint-plugin-jest@22.11.1:
-  version "22.11.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-22.11.1.tgz#04b586e2fddd07e55900a381255d6b3d9242ae87"
-  integrity sha512-kPF1Nmr5xMLz6DT7qEttz0TTeyx1x6SozIkNO9y4F2yxuWjHMp/e70fo742pR3y0MewgXQQMIIXeSKLB66iO7Q==
+eslint-plugin-jest@22.12.0:
+  version "22.12.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-22.12.0.tgz#6f83de048371ec8dda20f3195c76d1cd6fd8de71"
+  integrity sha512-Uoi4KvIJl59wgwjltgNhvVThQHbxs94TE3qUCg70aanjDk0IMWxKFa1K3F+9RHvcY0zddztbvX1IVDuR5a34ig==
 
-eslint-plugin-jsdoc@15.5.3:
-  version "15.5.3"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-15.5.3.tgz#44e408e3bf2f60f3ad18dc829f9b9a1e34f33154"
-  integrity sha512-lw8wYa1UFV53JLoqKOQR8YBkKlE/aguR+HGyytL9VKsVvm83DK8ReYnNNDRKik3MF661cGuaUuGfIEcdqg9l4A==
+eslint-plugin-jsdoc@15.5.5:
+  version "15.5.5"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-15.5.5.tgz#4fa8cfd1142684bef188b4ac490ae03f3b553d51"
+  integrity sha512-CnmbmgVqcEMUf5dPaHgyzF7uLSfSShTaVud3g9YVWSn5Qw+SgB8y3vp/pYdtzrO8/sVKyqFCEG3DW3Gx0KIo5w==
   dependencies:
-    comment-parser "^0.6.0"
+    comment-parser "^0.6.1"
     debug "^4.1.1"
     flat-map-polyfill "^0.3.8"
     jsdoctypeparser "5.0.1"
-    lodash "^4.17.14"
+    lodash "^4.17.15"
     regextras "^0.6.1"
 
 eslint-plugin-jsx-a11y@6.2.1:
@@ -7324,7 +7313,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-lodash@4.17.14, lodash@^4.17.14:
+lodash@4.17.14:
   version "4.17.14"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.14.tgz#9ce487ae66c96254fe20b599f21b6816028078ba"
   integrity sha512-mmKYbW3GLuJeX+iGP+Y7Gp1AiGHGbXHCOh/jZmrawMmsE7MS4znI3RL2FsjbqOyMayHInjOeykW7PEajUk1/xw==
@@ -7366,11 +7355,6 @@ loglevel@^1.4.1:
   version "1.6.3"
   resolved "https://registry.yarnpkg.com/loglevel/-/loglevel-1.6.3.tgz#77f2eb64be55a404c9fd04ad16d57c1d6d6b1280"
   integrity sha512-LoEDv5pgpvWgPF4kNYuIp0qqSJVWak/dML0RY74xlzMZiT9w77teNAwKYKWBTYjlokMirg+o3jBwp+vlLrcfAA==
-
-longest@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/longest/-/longest-1.0.1.tgz#30a0b2da38f73770e8294a0d22e6625ed77d0097"
-  integrity sha1-MKCy2jj3N3DoKUoNIuZiXtd9AJc=
 
 longest@^2.0.1:
   version "2.0.1"
