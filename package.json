@@ -40,7 +40,7 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "redux": "^4.0.4",
-    "redux-starter-kit": "^0.6.1",
+    "redux-starter-kit": "^0.6.2",
     "redux-thunk": "^2.3.0"
   },
   "eslintConfig": {
@@ -57,8 +57,8 @@
     "eslint-config-airbnb": "17.1.1",
     "eslint-config-prettier": "6.0.0",
     "eslint-plugin-import": "2.18.2",
-    "eslint-plugin-jest": "22.13.5",
-    "eslint-plugin-jsdoc": "15.6.2",
+    "eslint-plugin-jest": "22.13.6",
+    "eslint-plugin-jsdoc": "15.7.2",
     "eslint-plugin-jsx-a11y": "6.2.3",
     "eslint-plugin-prettier": "3.1.0",
     "eslint-plugin-react": "7.14.3",
