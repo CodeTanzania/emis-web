@@ -11,37 +11,30 @@
   ],
   "plugins": [
     "jest",
-    "jsdoc",
-    "prettier"
+  "jsdoc",
+  "prettier"
   ],
   "parser": "babel-eslint",
   "rules": {
-    "react/destructuring-assignment": [
-      true,
-      "always",
-      {
-        "ignoreClassFields": true
-      }
-    ],
     "prettier/prettier": "error",
     "react/jsx-filename-extension": [
       1,
-      {
-        "extensions": [
-          ".js",
-          ".jsx"
-        ]
-      }
+    {
+      "extensions": [
+        ".js",
+      ".jsx"
+      ]
+    }
     ],
     "import/no-extraneous-dependencies": [
       "error",
-      {
-        "devDependencies": [
-          "**/*.test.js",
-          "**/*.spec.js",
-          "**/stories/*"
-        ]
-      }
+    {
+      "devDependencies": [
+        "**/*.test.js",
+      "**/*.spec.js",
+      "**/stories/*"
+      ]
+    }
     ],
     "func-style": ["error", "expression"],
     "jest/no-disabled-tests": "warn",
