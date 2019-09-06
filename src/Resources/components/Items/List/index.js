@@ -180,11 +180,8 @@ class ItemsList extends Component {
       onShare,
     } = this.props;
     const { selectedItems, selectedPages } = this.state;
-    const selectedItemsCount = intersectionBy(
-      this.state.selectedItems,
-      items,
-      '_id'
-    ).length;
+    const selectedItemsCount = intersectionBy(selectedItems, items, '_id')
+      .length;
 
     return (
       <Fragment>

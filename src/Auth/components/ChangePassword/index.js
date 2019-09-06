@@ -45,7 +45,12 @@ class ChangePasswordForm extends Component {
    */
   handleSubmit = event => {
     event.preventDefault();
-    this.props.form.validateFieldsAndScroll((err, values) => {
+
+    const {
+      form: { validateFieldsAndScroll },
+    } = this.props;
+
+    validateFieldsAndScroll((err, values) => {
       const { user, onCancel } = this.props;
       if (!err) {
         const updatedUser = Object.assign({}, user, {
@@ -122,8 +127,9 @@ class ChangePasswordForm extends Component {
    * @since 0.1.0
    */
   validateToNextPassword = (rule, value, callback) => {
+    const { confirmDirty } = this.state;
     const { form } = this.props;
-    if (value && this.state.confirmDirty) {
+    if (value && confirmDirty) {
       form.validateFields(['confirm'], { force: true });
     }
     callback();

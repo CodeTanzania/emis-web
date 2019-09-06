@@ -8,7 +8,6 @@ import React from 'react';
 import { notifyError, notifySuccess } from '../../../../util';
 import './styles.css';
 
-// eslint-disable-next-line jsdoc/require-returns
 /**
  * @function
  * @name IncidentTypesActionBar
@@ -20,6 +19,7 @@ import './styles.css';
  * @param {number} props.total total number of incident types
  * @param {Function} props.onFilter function to filters incident types
  *
+ * @returns {object} React Component
  * @version 0.1.0
  * @since 0.1.0
  */

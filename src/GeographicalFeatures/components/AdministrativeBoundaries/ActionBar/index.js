@@ -4,9 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import './styles.css';
 
-// eslint-disable-next-line jsdoc/require-returns
 /**
- *
  * @function
  * @name AdminstrativeBoundariesActionBar
  * @description Render action bar for actions which are applicable to
@@ -17,6 +15,8 @@ import './styles.css';
  * @param {number} props.total total number of AdminstrativeBoundaries
  * @param {Function} props.onFilter filters AdminstrativeBoundaries
  *  when function is called
+ *
+ * @returns {object} React component
  *
  * @version 0.1.0
  * @since 0.1.0

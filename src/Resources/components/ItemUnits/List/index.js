@@ -144,7 +144,7 @@ class ItemUnitList extends Component {
     const { itemUnits, loading, total, page, onEdit } = this.props;
     const { selectedItemUnit, selectedPages } = this.state;
     const selectedItemUnitsCount = intersectionBy(
-      this.state.selectedItemUnit,
+      selectedItemUnit,
       itemUnits,
       '_id'
     ).length;

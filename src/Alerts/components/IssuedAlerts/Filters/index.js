@@ -12,10 +12,10 @@ import React, { Component } from 'react';
  * @name AlertsFilters
  * @description Filter modal component for filtering alerts
  *
- * @param {Object} props props object
- * @param {Object} props.alertSchema alert schema object
- * @param {Object} props.filter alert filter object
- * @param {Object} props.form antd form
+ * @param {object} props props object
+ * @param {object} props.alertSchema alert schema object
+ * @param {object} props.filter alert filter object
+ * @param {object} props.form antd form
  * @param {Function} props.onCancel function to cancel alert filters
  *
  * @version 0.1.0

@@ -8,7 +8,6 @@ import React from 'react';
 import { notifyError, notifySuccess } from '../../../../util';
 import './styles.css';
 
-// eslint-disable-next-line jsdoc/require-returns
 /**
  * @function
  * @name QuestionsActionBar
@@ -19,6 +18,8 @@ import './styles.css';
  * @param {number} props.page current page
  * @param {number} props.total total number of question
  * @param {Function} props.onFilter function to filters question
+ *
+ * @returns {object} React Components
  *
  * @version 0.1.0
  * @since 0.1.0

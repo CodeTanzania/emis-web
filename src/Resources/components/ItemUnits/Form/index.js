@@ -7,7 +7,6 @@ import './styles.css';
 
 const { TextArea } = Input;
 
-// eslint-disable-next-line jsdoc/require-returns
 /**
  * @class
  * @name ItemUnitForm
@@ -42,7 +41,6 @@ class ItemUnitForm extends Component {
     itemUnit: null,
   };
 
-  // eslint-disable-next-line jsdoc/require-returns
   /**
    * @function
    * @name onChangeColor
@@ -61,7 +59,6 @@ class ItemUnitForm extends Component {
     setFieldsValue({ color });
   };
 
-  // eslint-disable-next-line jsdoc/require-returns
   /**
    * @function
    * @name handleSubmit

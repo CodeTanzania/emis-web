@@ -161,7 +161,7 @@ class ItemCategoriesList extends Component {
     } = this.props;
     const { selectedItemCategories, selectedPages } = this.state;
     const selectedItemsCount = intersectionBy(
-      this.state.selectedItemCategories,
+      selectedItemCategories,
       itemCategories,
       '_id'
     ).length;

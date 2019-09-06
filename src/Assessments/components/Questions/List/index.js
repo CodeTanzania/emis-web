@@ -4,9 +4,7 @@ import React, { Fragment } from 'react';
 import QuestionsListHeader from '../ListHeader';
 import QuestionsListItem from '../ListItem';
 
-// eslint-disable-next-line jsdoc/require-returns
 /**
- *
  * @function
  * @name QuestionsList
  * @description question list item component. Render question details
@@ -15,7 +13,7 @@ import QuestionsListItem from '../ListItem';
  * @param {boolean} props.loading preload list of questions
  * @param {Array} props.questions array list of questions
  * @param {Function} props.onEdit function for editing single question
- *
+ * @returns {object} React component
  * @version 0.1.0
  * @since 0.1.0
  */

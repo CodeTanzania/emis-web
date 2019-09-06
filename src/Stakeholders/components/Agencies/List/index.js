@@ -182,7 +182,7 @@ class AgencyList extends Component {
     } = this.props;
     const { selectedAgencies, selectedPages } = this.state;
     const selectedAgenciesCount = intersectionBy(
-      this.state.selectedAgencies,
+      selectedAgencies,
       agencies,
       '_id'
     ).length;

@@ -38,7 +38,11 @@ class Signin extends Component {
   handleSubmit = event => {
     event.preventDefault();
     const { history } = this.props;
-    this.props.form.validateFields((err, values) => {
+    const {
+      form: { validateFields },
+    } = this.props;
+
+    validateFields((err, values) => {
       if (!err) {
         signin(
           values,

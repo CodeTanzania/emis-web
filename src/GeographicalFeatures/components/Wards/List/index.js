@@ -4,9 +4,7 @@ import React, { Fragment } from 'react';
 import WardsListItem from '../ListItem';
 import WardsListHeader from '../ListHeader';
 
-// eslint-disable-next-line jsdoc/require-returns
 /**
- *
  * @function
  * @name WardsList
  * @description Render Wards list
@@ -15,6 +13,8 @@ import WardsListHeader from '../ListHeader';
  * @param {boolean} props.loading preload list of wards
  * @param {Array} props.wards array list of wards
  * @param {Function} props.onEdit function for editing ward
+ *
+ * @returns {object} React Component
  *
  * @version 0.1.0
  * @since 0.1.0

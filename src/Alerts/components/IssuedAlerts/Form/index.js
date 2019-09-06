@@ -180,12 +180,13 @@ class AlertForm extends Component {
     });
   };
 
-  // eslint-disable-next-line jsdoc/require-returns
   /**
    * @function
    * @name renderSelectOptions
    * @description  display select options
    * @param {Array} options select options
+   *
+   * @returns {object[]} Selected options components
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -197,12 +198,13 @@ class AlertForm extends Component {
       </Option>
     ));
 
-  // eslint-disable-next-line jsdoc/require-returns
   /**
    * @function
    * @name renderAreaOptions
    * @description  display area options
    * @param {Array} options area options
+   *
+   * @returns {object[]}  Options components
    *
    * @version 0.1.0
    * @since 0.1.0

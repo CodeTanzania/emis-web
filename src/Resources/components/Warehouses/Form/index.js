@@ -10,7 +10,6 @@ import { notifyError, notifySuccess } from '../../../../util';
 
 const { Option } = Select;
 
-// eslint-disable-next-line jsdoc/require-returns
 /**
  * @class
  * @name WarehouseForm
@@ -92,13 +91,14 @@ class WarehouseForm extends Component {
     });
   };
 
-  // eslint-disable-next-line jsdoc/require-returns
   /**
    * @function
    * @name renderSelectOptions
    * @description  renders select options
    *
    * @param {Array} options array of select options
+   *
+   * @returns {object[]} selected options component
    *
    * @version 0.1.0
    * @since 0.1.0

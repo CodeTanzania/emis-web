@@ -64,7 +64,6 @@ export const notifyInfo = info => {
  */
 export const formatTime = date => moment(date).format('ddd, MMM DD YYYY hA');
 
-// eslint-disable-next-line jsdoc/require-returns-check
 /**
  * @function
  * @name timeAgo

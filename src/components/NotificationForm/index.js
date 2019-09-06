@@ -294,7 +294,7 @@ class NotificationForm extends Component {
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
           <Button type="link" onClick={this.toggleMoreFilters}>
-            {this.state.moreFilters ? 'Less Filters' : 'More Filters'}
+            {moreFilters ? 'Less Filters' : 'More Filters'}
           </Button>
           <Button style={{ marginLeft: 8 }} onClick={onCancel}>
             Cancel

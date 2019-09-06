@@ -167,7 +167,7 @@ class AlertSourceList extends Component {
     const { alertSources, loading, page, total, onEdit, onShare } = this.props;
     const { selectedAlertSources, selectedPages } = this.state;
     const selectedAlertSourcesCount = intersectionBy(
-      this.state.selectedAlertSources,
+      selectedAlertSources,
       alertSources,
       '_id'
     ).length;

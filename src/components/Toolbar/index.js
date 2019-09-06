@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import './styles.css';
 
-// eslint-disable-next-line jsdoc/require-returns
 /**
  * @function
  * @name Toolbar
@@ -23,6 +22,8 @@ import './styles.css';
  * @param {Function} props.onPaginate on paginate action callback
  * @param {Function} props.onRefresh on refresh action callback
  * @param {Function} props.onShare on share action callback
+ *
+ * @returns {object} React component
  *
  * @version 0.1.0
  * @since 0.1.0
