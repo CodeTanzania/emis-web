@@ -10458,7 +10458,7 @@ redux-immutable-state-invariant@^2.1.0:
     invariant "^2.1.0"
     json-stringify-safe "^5.0.1"
 
-redux-starter-kit@>=0.5.1, redux-starter-kit@^0.6.3:
+redux-starter-kit@>=0.5.1:
   version "0.6.3"
   resolved "https://registry.yarnpkg.com/redux-starter-kit/-/redux-starter-kit-0.6.3.tgz#bafde49b8ff35dff0f4f43700d7ed9973754c96e"
   integrity sha512-A+7UjgmFrWdKksHl8xTGxDw6Bv8QJ+wrTubBscFNs5gIezGHOdwjqTTSVX4xMgQkgPtVfSPj/Bo+5o6f71/eTA==
@@ -10469,6 +10469,18 @@ redux-starter-kit@>=0.5.1, redux-starter-kit@^0.6.3:
     redux-immutable-state-invariant "^2.1.0"
     redux-thunk "^2.2.0"
     selectorator "^4.0.3"
+
+redux-starter-kit@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/redux-starter-kit/-/redux-starter-kit-0.7.0.tgz#5ce75d0520113d12b5227413c514fe5e0364a158"
+  integrity sha512-pm+PGdOeOItOlqqdvmVm4VQjmFy7tZZKVxzCDX+PAhDH1AweRDk2YDsIifLok+jy7FX+ai0cyiuu7GTxAca3Eg==
+  dependencies:
+    immer "^2.1.5"
+    redux "^4.0.0"
+    redux-devtools-extension "^2.13.8"
+    redux-immutable-state-invariant "^2.1.0"
+    redux-thunk "^2.2.0"
+    reselect "^4.0.0"
 
 redux-thunk@>=2.3.0, redux-thunk@^2.2.0, redux-thunk@^2.3.0:
   version "2.3.0"
