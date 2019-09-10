@@ -27,17 +27,10 @@ const headerLayout = [
   { span: 4, header: 'Type' },
 ];
 
-// eslint-disable-next-line jsdoc/require-returns
 /**
  * @class
  * @name WarehouseList
  * @description Render warehouse list which have search box and actions
- *
- * @param {Object} props props object
- * @param {Array} props.warehouses array of warehouses
- * @param {boolean} props.loading represents loading status
- * @param {Function} props.onEdit call back function called
- * during editing a stock
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -156,7 +149,7 @@ class WarehouseList extends React.Component {
     const { warehouses, loading, onEdit, total, page, onFilter } = this.props;
     const { selectedWarehouse, selectedPages } = this.state;
     const selectedWarehouseCount = intersectionBy(
-      this.state.selectedWarehouse,
+      selectedWarehouse,
       warehouses,
       '_id'
     ).length;

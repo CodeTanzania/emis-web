@@ -41,7 +41,6 @@ const headerLayout = [
 
 const { getRolesExportUrl } = httpActions;
 
-// eslint-disable-next-line jsdoc/require-returns
 /**
  * @class
  * @name RoleList
@@ -162,11 +161,8 @@ class RoleList extends Component {
   render() {
     const { roles, loading, page, total, onEdit, onNotify } = this.props;
     const { selectedRoles, selectedPages } = this.state;
-    const selectedRolesCount = intersectionBy(
-      this.state.selectedRoles,
-      roles,
-      '_id'
-    ).length;
+    const selectedRolesCount = intersectionBy(selectedRoles, roles, '_id')
+      .length;
 
     return (
       <Fragment>

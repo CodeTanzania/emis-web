@@ -146,7 +146,7 @@ class CampaignList extends Component {
     const { campaigns, loading, page, total, onEdit, onFilter } = this.props;
     const { selectedCampaign, selectedPages } = this.state;
     const selectedCampaignCount = intersectionBy(
-      this.state.selectedCampaign,
+      selectedCampaign,
       campaigns,
       '_id'
     ).length;

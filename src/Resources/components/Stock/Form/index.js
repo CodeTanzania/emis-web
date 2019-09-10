@@ -9,7 +9,6 @@ import { notifyError, notifySuccess } from '../../../../util';
 /* constants */
 const { getAgencies, getWarehouses, getItems } = httpActions;
 
-// eslint-disable-next-line jsdoc/require-returns
 /**
  * @class
  * @name StockForm

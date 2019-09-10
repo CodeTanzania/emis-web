@@ -114,7 +114,7 @@ class ActivitiesList extends Component {
       onNotify,
     } = this.props;
     const { selectedActivities } = this.state;
-    const selectedActivitiesCount = this.state.selectedActivities.length;
+    const selectedActivitiesCount = selectedActivities.length;
 
     return (
       <Fragment>

@@ -131,7 +131,7 @@ class PlansList extends Component {
       onNotify,
     } = this.props;
     const { selectedPlans, isGridLayout } = this.state;
-    const selectedPlansCount = this.state.selectedPlans.length;
+    const selectedPlansCount = selectedPlans.length;
 
     return (
       <Fragment>

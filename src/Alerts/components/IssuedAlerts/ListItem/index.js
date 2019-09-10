@@ -10,7 +10,6 @@ import './styles.css';
 /* constants */
 const { confirm } = Modal;
 
-// eslint-disable-next-line jsdoc/require-returns-check
 /**
  * @class
  * @name AlertListItem

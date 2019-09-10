@@ -4,7 +4,6 @@ import React, { Fragment } from 'react';
 import IndicatorsListHeader from '../ListHeader';
 import IndicatorListItem from '../ListItem';
 
-// eslint-disable-next-line jsdoc/require-returns
 /**
  * @function
  * @name IndicatorsList
@@ -14,6 +13,8 @@ import IndicatorListItem from '../ListItem';
  * @param {boolean} props.loading preload list of indictors
  * @param {Array} props.indicators array list of indictors
  * @param {Function} props.onEdit function for editing single indictor
+ *
+ * @returns {object} React components
  *
  * @version 0.1.0
  * @since 0.1.0

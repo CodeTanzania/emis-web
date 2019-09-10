@@ -76,7 +76,7 @@ class FocalPeople extends Component {
    * @since 0.1.0
    */
   handleOnCachedValues = cached => {
-    const previousCached = this.state.cached;
+    const { cached: previousCached } = this.state;
     const values = { ...previousCached, ...cached };
     this.setState({ cached: values });
   };

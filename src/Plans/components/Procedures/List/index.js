@@ -115,7 +115,7 @@ class ProceduresList extends Component {
       onNotify,
     } = this.props;
     const { selectedProcedures } = this.state;
-    const selectedProceduresCount = this.state.selectedProcedures.length;
+    const selectedProceduresCount = selectedProcedures.length;
 
     return (
       <Fragment>

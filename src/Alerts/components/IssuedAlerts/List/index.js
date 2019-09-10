@@ -232,11 +232,8 @@ class AlertList extends Component {
     } = this.props;
     const { selectedAlerts, selectedPages } = this.state;
     // const sortedAlerts = sortByUpdatedAt(sortByExpiredAt(alerts));
-    const selectedAlertsCount = intersectionBy(
-      this.state.selectedAlerts,
-      alerts,
-      '_id'
-    ).length;
+    const selectedAlertsCount = intersectionBy(selectedAlerts, alerts, '_id')
+      .length;
 
     return (
       <Fragment>

@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { notifyError, notifySuccess } from '../../../../util';
 
-// eslint-disable-next-line jsdoc/require-returns
 /**
  * @class
  * @name AlertSourcesActionBar
@@ -32,7 +31,6 @@ class AlertSourceForm extends Component {
     }).isRequired,
   };
 
-  // eslint-disable-next-line jsdoc/require-returns
   /**
    * @function
    * @name handleSubmit
@@ -41,6 +39,7 @@ class AlertSourceForm extends Component {
    * @param {object} e event object
    *
    * @returns {undefined} does not return anything
+   *
    * @version 0.1.0
    * @since 0.1.0
    */

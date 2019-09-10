@@ -5,7 +5,6 @@ import React, { Component, Fragment } from 'react';
 import './styles.css';
 
 /**
- *
  * @class
  * @name DistrictsListItem
  * @description Single district list item component.

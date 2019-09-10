@@ -4,7 +4,6 @@ import React, { Fragment } from 'react';
 import QuestionnairesListHeader from '../ListHeader';
 import QuestionnairesListItem from '../ListItem';
 
-// eslint-disable-next-line jsdoc/require-returns
 /**
  * @function
  * @name IndicatorsList
@@ -14,6 +13,7 @@ import QuestionnairesListItem from '../ListItem';
  * @param {boolean} props.loading preload list of questionnaire
  * @param {Array} props.questionnaire array list of questionnaire
  * @param {Function} props.onEdit function for editing single questionnaire
+ * @returns {object} React component
  * @version 0.1.0
  * @since 0.1.0
  */

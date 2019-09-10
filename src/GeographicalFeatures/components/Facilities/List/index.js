@@ -4,9 +4,7 @@ import React, { Fragment } from 'react';
 import FacilityListHeader from '../ListHeader';
 import FacilityListItem from '../ListItem';
 
-// eslint-disable-next-line jsdoc/require-returns
 /**
- *
  * @function
  * @name FacilityList
  * @description Render facilities list
@@ -15,6 +13,8 @@ import FacilityListItem from '../ListItem';
  * @param {boolean} props.loading preload list of facilities
  * @param {Array} props.districts array list of facilities
  * @param {Function} props.onEdit function for editing facilities
+ *
+ * @returns {object} React Component
  *
  * @version 0.1.0
  * @since 0.1.0

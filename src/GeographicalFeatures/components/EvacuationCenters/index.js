@@ -18,7 +18,6 @@ import './styles.css';
 const { Search } = Input;
 
 /**
- *
  * @class
  * @name EvacuationCenters
  * @description Render features module which has search box,

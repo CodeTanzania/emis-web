@@ -188,7 +188,7 @@ class FocalPersonsList extends Component {
     } = this.props;
     const { selectedFocalPeople, selectedPages } = this.state;
     const selectedFocalPeopleCount = intersectionBy(
-      this.state.selectedFocalPeople,
+      selectedFocalPeople,
       focalPeople,
       '_id'
     ).length;

@@ -18,7 +18,6 @@ import './styles.css';
 const { Search } = Input;
 
 /**
- *
  * @class
  * @name CriticalInfrastructures
  * @description Render Critical Infrastructure module which has search box,
