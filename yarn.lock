@@ -3580,10 +3580,10 @@ curriable@^1.3.0:
   resolved "https://registry.yarnpkg.com/curriable/-/curriable-1.3.0.tgz#cb054bc7bbc1f440cbc613527b8a05b57e19e1ab"
   integrity sha512-7kfjDPRSF+pguU0TlfSFBMCd8XlmF29ZAiXcq/zaN4LhZvWdvV0Y72AvaWFqInXZG9Yg1kA1UMkpE9lFBKMpQA==
 
-customize-cra@0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/customize-cra/-/customize-cra-0.6.0.tgz#5eca0fff1d357f0299286990cb9252d5ed69c024"
-  integrity sha512-RzrJ/3Cg1piCMW7M028tpxcKism2Wmna7eCro1t/YHUMR8SnpM80JwqB1Ln6QdSAw4dz3SS9jZIJvw73LQONSQ==
+customize-cra@0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/customize-cra/-/customize-cra-0.6.1.tgz#3c055b72474b924af6df04917af1cafc4c99ff94"
+  integrity sha512-UTS9VNPeg/CpFhk8vCtQSzW3KKgad8lsoUsaXMJjdypc/9I0JXFcWFCuir7jdBTsLAO3/cwi/ExCvLJzG/p06Q==
   dependencies:
     lodash.flow "^3.5.0"
 
