@@ -4593,14 +4593,14 @@ eslint-plugin-jest@22.17.0:
   dependencies:
     "@typescript-eslint/experimental-utils" "^1.13.0"
 
-eslint-plugin-jsdoc@15.9.9:
-  version "15.9.9"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-15.9.9.tgz#0561156a0d9fe167eeca726ea8479259f77895d7"
-  integrity sha512-gN1Dp9xaZSNAyxyahUpsnK8hubE5rYSxPSSN3wG8ZuzfMnIhp5Qm54GTdhXrK2/SjS4rNJ+C6EZFmOPSfyRcTA==
+eslint-plugin-jsdoc@15.9.10:
+  version "15.9.10"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-15.9.10.tgz#7cf8e0f4d2bba3e540e80acf119306f3fe31fd26"
+  integrity sha512-m3jQQ7MJCnOksAhrQU5wSuPZQND1qvFNGBddhM2k3P9dJRg1N0fKHl79SE2ZV/ykd2RV1flsMHEa46kY2RCUPA==
   dependencies:
     comment-parser "^0.6.2"
     debug "^4.1.1"
-    jsdoctypeparser "^5.1.0"
+    jsdoctypeparser "^5.1.1"
     lodash "^4.17.15"
     object.entries-ponyfill "^1.0.1"
     regextras "^0.6.1"
@@ -7043,10 +7043,10 @@ jsbn@~0.1.0:
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
   integrity sha1-peZUwuWi3rXyAdls77yoDA7y9RM=
 
-jsdoctypeparser@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/jsdoctypeparser/-/jsdoctypeparser-5.1.0.tgz#472752f80ac40deac32058e2b3c79cdad4020252"
-  integrity sha512-26GzUAJQHInXKO7gqwh1aIyrP/QI2HpNFFRiIJgU+2hBXcfCzfRk5vFhUMbzEehrnJ8MnlP7QZKa8ltVObQm8w==
+jsdoctypeparser@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/jsdoctypeparser/-/jsdoctypeparser-5.1.1.tgz#99c57412fe736c70024bf54204ed1bb93cf4a49f"
+  integrity sha512-APGygIJrT5bbz5lsVt8vyLJC0miEbQf/z9ZBfTr4RYvdia8AhWMRlYgivvwHG5zKD/VW3d6qpChCy64hpQET3A==
 
 jsdom@^11.5.1:
   version "11.12.0"
