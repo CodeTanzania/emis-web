@@ -54,7 +54,7 @@
     "customize-cra": "0.8.0",
     "cz-conventional-changelog": "3.0.2",
     "eslint-config-airbnb": "17.1.1",
-    "eslint-config-prettier": "6.4.0",
+    "eslint-config-prettier": "6.5.0",
     "eslint-plugin-import": "2.18.2",
     "eslint-plugin-jest": "22.19.0",
     "eslint-plugin-jsdoc": "15.11.1",
