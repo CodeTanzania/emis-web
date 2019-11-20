@@ -16,6 +16,7 @@ import './styles.css';
  * @param {string} props.path  path to navigate to when clicked
  * @param {boolean} props.disabled flag to mark it navigation menu is disabled
  * @param {boolean} props.description module description
+ * @returns {object} React component
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -75,6 +76,7 @@ const NavigationMenuItem = ({ name, icon, path, disabled, description }) => (
  * @param {object} props props object
  * @param {object[]} props.routes list of all navigation routes
  * @param {object} props.match match object from react router
+ * @returns {object} React component
  *
  * @version 0.1.0
  * @since 0.1.0
