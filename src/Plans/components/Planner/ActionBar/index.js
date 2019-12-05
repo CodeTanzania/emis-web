@@ -9,6 +9,7 @@ import './styles.css';
  * @function
  * @name PlansActionBar
  * @description Render action bar for actions which are applicable to list content
+ * @returns {React.Component} react element
  *
  * @param {object} props props object
  * @param {number} props.page current page number

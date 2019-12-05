@@ -1,6 +1,6 @@
 import { List } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 import WardsListItem from '../ListItem';
 import WardsListHeader from '../ListHeader';
 
@@ -20,7 +20,7 @@ import WardsListHeader from '../ListHeader';
  * @since 0.1.0
  */
 const WardsList = ({ wards, loading, onEdit }) => (
-  <Fragment>
+  <>
     <WardsListHeader />
     <List
       loading={loading}
@@ -36,7 +36,7 @@ const WardsList = ({ wards, loading, onEdit }) => (
         />
       )}
     />
-  </Fragment>
+  </>
 );
 
 WardsList.propTypes = {

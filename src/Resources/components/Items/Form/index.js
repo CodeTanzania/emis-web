@@ -20,28 +20,6 @@ const { getItemCategories, getItemUnits } = httpActions;
  * @since 0.1.0
  */
 class ItemForm extends Component {
-  static propTypes = {
-    isEditForm: PropTypes.bool.isRequired,
-    item: PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-      maxStockAllowed: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      minStockAllowed: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      code: PropTypes.string,
-      uom: PropTypes.string,
-    }).isRequired,
-    form: PropTypes.shape({
-      getFieldDecorator: PropTypes.func,
-      validateFieldsAndScroll: PropTypes.func,
-    }).isRequired,
-    types: PropTypes.arrayOf(PropTypes.string).isRequired,
-    uoms: PropTypes.arrayOf(PropTypes.string).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    posting: PropTypes.bool.isRequired,
-  };
-
   /**
    * @function
    * @name handleSubmit
@@ -64,7 +42,7 @@ class ItemForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedItem = Object.assign({}, item, values);
+          const updatedItem = { ...item, ...values };
           putItem(
             updatedItem,
             () => {
@@ -125,6 +103,7 @@ class ItemForm extends Component {
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         <Row>
           <Col span={11}>
+            {/* eslint-disable */}
             {/* name */}
             <Form.Item {...formItemLayout} label="Name">
               {getFieldDecorator('name', {
@@ -190,6 +169,7 @@ class ItemForm extends Component {
           })(<TextArea autosize={{ minRows: 1, maxRows: 10 }} />)}
         </Form.Item>
         {/* end description */}
+        {/* eslint-enable */}
 
         {/* form actions */}
         <Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
@@ -208,6 +188,28 @@ class ItemForm extends Component {
     );
   }
 }
+
+ItemForm.propTypes = {
+  isEditForm: PropTypes.bool.isRequired,
+  item: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    maxStockAllowed: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    minStockAllowed: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    code: PropTypes.string,
+    uom: PropTypes.string,
+  }).isRequired,
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+  }).isRequired,
+  types: PropTypes.arrayOf(PropTypes.string).isRequired,
+  uoms: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  posting: PropTypes.bool.isRequired,
+};
 
 export default Connect(Form.create()(ItemForm), {
   types: 'items.schema.properties.type.enum',

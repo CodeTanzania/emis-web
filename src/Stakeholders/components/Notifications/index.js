@@ -6,7 +6,7 @@ import {
 import { httpActions } from '@codetanzania/emis-api-client';
 import PropTypes from 'prop-types';
 import { Modal } from 'antd';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import Topbar from '../../../components/Topbar';
 import CampaignList from './List';
 
@@ -31,23 +31,11 @@ const {
  * @since 0.1.0
  */
 class Campaign extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     showNotificationForm: false,
     selectedFocalPeople: [],
     notificationBody: undefined,
-  };
-
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    campaigns: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-      .isRequired,
-    page: PropTypes.number.isRequired,
-    searchQuery: PropTypes.string,
-    total: PropTypes.number.isRequired,
-  };
-
-  static defaultProps = {
-    searchQuery: undefined,
   };
 
   componentDidMount() {
@@ -117,7 +105,7 @@ class Campaign extends Component {
       notificationBody,
     } = this.state;
     return (
-      <Fragment>
+      <>
         {/* Topbar */}
         <Topbar
           search={{
@@ -175,10 +163,23 @@ class Campaign extends Component {
           </Modal>
           {/* end Notification modal */}
         </div>
-      </Fragment>
+      </>
     );
   }
 }
+
+Campaign.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  campaigns: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+    .isRequired,
+  page: PropTypes.number.isRequired,
+  searchQuery: PropTypes.string,
+  total: PropTypes.number.isRequired,
+};
+
+Campaign.defaultProps = {
+  searchQuery: undefined,
+};
 
 export default Connect(Campaign, {
   searchQuery: 'campaigns.q',

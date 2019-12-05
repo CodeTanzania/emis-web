@@ -1,6 +1,6 @@
 import { Avatar, Col, Row } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import './styles.css';
 
 /**
@@ -14,12 +14,7 @@ import './styles.css';
  * @since 0.1.0
  */
 class AdminstrativeBoundaryListItem extends Component {
-  /* props validation */
-  static propTypes = {
-    name: PropTypes.string.isRequired,
-    level: PropTypes.string.isRequired,
-  };
-
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     isHovered: false,
   };
@@ -47,11 +42,16 @@ class AdminstrativeBoundaryListItem extends Component {
           </Col>
           <Col span={9}>{name}</Col>
           <Col span={10}>{level}</Col>
-          <Col span={3}>{isHovered && <Fragment />}</Col>
+          <Col span={3}>{isHovered && <></>}</Col>
         </Row>
       </div>
     );
   }
 }
+
+AdminstrativeBoundaryListItem.propTypes = {
+  name: PropTypes.string.isRequired,
+  level: PropTypes.string.isRequired,
+};
 
 export default AdminstrativeBoundaryListItem;

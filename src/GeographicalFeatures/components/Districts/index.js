@@ -28,24 +28,10 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class Districts extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     showFilters: false,
     isEditForm: false,
-  };
-
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    districts: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-      .isRequired,
-    page: PropTypes.number.isRequired,
-    total: PropTypes.number.isRequired,
-    district: PropTypes.shape({ name: PropTypes.string }),
-    showForm: PropTypes.bool.isRequired,
-    posting: PropTypes.bool.isRequired,
-  };
-
-  static defaultProps = {
-    district: null,
   };
 
   componentDidMount() {
@@ -244,6 +230,21 @@ class Districts extends Component {
     );
   }
 }
+
+Districts.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  districts: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+    .isRequired,
+  page: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  district: PropTypes.shape({ name: PropTypes.string }),
+  showForm: PropTypes.bool.isRequired,
+  posting: PropTypes.bool.isRequired,
+};
+
+Districts.defaultProps = {
+  district: null,
+};
 
 export default Connect(Districts, {
   districts: 'features.list',

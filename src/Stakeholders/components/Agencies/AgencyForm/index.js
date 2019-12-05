@@ -21,30 +21,6 @@ const { TextArea } = Input;
  * @since 0.1.0
  */
 class AgencyForm extends Component {
-  static propTypes = {
-    isEditForm: PropTypes.bool.isRequired,
-    agency: PropTypes.shape({
-      name: PropTypes.string,
-      title: PropTypes.string,
-      abbreviation: PropTypes.string,
-      mobile: PropTypes.string,
-      email: PropTypes.string,
-      group: PropTypes.string,
-      location: PropTypes.string,
-      landline: PropTypes.string,
-      fax: PropTypes.string,
-      physicalAddress: PropTypes.string,
-      postalAddress: PropTypes.string,
-    }).isRequired,
-    form: PropTypes.shape({
-      getFieldDecorator: PropTypes.func,
-      validateFieldsAndScroll: PropTypes.func,
-    }).isRequired,
-    groups: PropTypes.arrayOf(PropTypes.string).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    posting: PropTypes.bool.isRequired,
-  };
-
   /**
    * @function
    * @name handleSubmit
@@ -67,7 +43,7 @@ class AgencyForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedAgency = Object.assign({}, agency, values);
+          const updatedAgency = { ...agency, ...values };
           putAgency(
             updatedAgency,
             () => {
@@ -130,6 +106,7 @@ class AgencyForm extends Component {
         <Row type="flex" justify="space-between">
           <Col xxl={10} xl={10} lg={10} md={10} sm={24} xs={24}>
             {/* agency name */}
+            {/* eslint-disable */}
             <Form.Item {...formItemLayout} label="Name">
               {getFieldDecorator('name', {
                 initialValue: isEditForm ? agency.name : undefined,
@@ -311,6 +288,7 @@ class AgencyForm extends Component {
             {/* end agency postal address */}
           </Col>
         </Row>
+        {/* eslint-enable */}
         {/* end agency physical Address, Postal Address section */}
 
         {/* form actions */}
@@ -330,5 +308,29 @@ class AgencyForm extends Component {
     );
   }
 }
+
+AgencyForm.propTypes = {
+  isEditForm: PropTypes.bool.isRequired,
+  agency: PropTypes.shape({
+    name: PropTypes.string,
+    title: PropTypes.string,
+    abbreviation: PropTypes.string,
+    mobile: PropTypes.string,
+    email: PropTypes.string,
+    group: PropTypes.string,
+    location: PropTypes.string,
+    landline: PropTypes.string,
+    fax: PropTypes.string,
+    physicalAddress: PropTypes.string,
+    postalAddress: PropTypes.string,
+  }).isRequired,
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+  }).isRequired,
+  groups: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  posting: PropTypes.bool.isRequired,
+};
 
 export default Form.create()(AgencyForm);

@@ -17,43 +17,7 @@ const { Option } = Select;
  * @version 0.1.0
  * @since 0.1.0
  */
-export default class SearchableSelectInput extends Component {
-  static propTypes = {
-    onChange: PropTypes.func,
-    onSearch: PropTypes.func.isRequired,
-    optionLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
-      .isRequired,
-    optionValue: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-      PropTypes.func,
-    ]).isRequired,
-    value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-      PropTypes.func,
-    ]),
-    initialValue: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.array,
-      PropTypes.number,
-      PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-      }),
-    ]),
-    isFilter: PropTypes.bool,
-    onCache: PropTypes.func,
-  };
-
-  static defaultProps = {
-    onChange: null,
-    value: undefined,
-    initialValue: undefined,
-    isFilter: false,
-    onCache: null,
-  };
-
+class SearchableSelectInput extends Component {
   constructor(props) {
     super(props);
     const { initialValue } = props;
@@ -178,6 +142,7 @@ export default class SearchableSelectInput extends Component {
     if (isFilter) {
       return (
         <Select
+          // eslint-disable-next-line react/jsx-props-no-spreading
           {...otherProps}
           showSearch
           mode="multiple"
@@ -198,6 +163,7 @@ export default class SearchableSelectInput extends Component {
 
     return (
       <Select
+        // eslint-disable-next-line react/jsx-props-no-spreading
         {...otherProps}
         showSearch
         onSearch={this.handleSearch}
@@ -212,3 +178,41 @@ export default class SearchableSelectInput extends Component {
     );
   }
 }
+
+SearchableSelectInput.propTypes = {
+  onChange: PropTypes.func,
+  onSearch: PropTypes.func.isRequired,
+  optionLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
+    .isRequired,
+  optionValue: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.func,
+  ]).isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.func,
+  ]),
+  initialValue: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.number,
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    }),
+  ]),
+  isFilter: PropTypes.bool,
+  onCache: PropTypes.func,
+};
+
+SearchableSelectInput.defaultProps = {
+  onChange: null,
+  value: undefined,
+  initialValue: undefined,
+  isFilter: false,
+  onCache: null,
+};
+
+export default SearchableSelectInput;

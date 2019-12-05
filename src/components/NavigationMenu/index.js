@@ -9,6 +9,7 @@ import './styles.css';
  * @name NavigationMenuItem
  * @description Navigation menu item that have icon(image) and name for
  * the module to navigate to
+ * @returns {object} react element
  *
  * @param {object} props props object
  * @param {string} props.name  name/description/label for nav item
@@ -71,6 +72,7 @@ const NavigationMenuItem = ({ name, icon, path, disabled, description }) => (
  * @function
  * @name NavigationMenu
  * @description Navigation Menu which renders provided routes
+ * @returns {object} react element
  *
  * @param {object} props props object
  * @param {object[]} props.routes list of all navigation routes
@@ -95,6 +97,7 @@ const NavigationMenu = ({ routes, match }) => {
     <div className="NavigationMenu">
       <Row type="flex" align="middle">
         {routes.map(route => (
+          // eslint-disable-next-line react/jsx-props-no-spreading
           <Col key={route.path} {...colSpan}>
             <NavigationMenuItem
               name={route.name}

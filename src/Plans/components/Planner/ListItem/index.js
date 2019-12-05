@@ -1,7 +1,7 @@
 import { Avatar, Checkbox, Col, Icon, Row } from 'antd';
 import PropTypes from 'prop-types';
 import randomColor from 'randomcolor';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import './styles.css';
 
@@ -14,27 +14,9 @@ import './styles.css';
  * @since 0.1.0
  */
 class PlansListItem extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     isHovered: false,
-  };
-
-  static propTypes = {
-    boundary: PropTypes.string.isRequired,
-    code: PropTypes.string.isRequired,
-    color: PropTypes.string,
-    incidentType: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-    owner: PropTypes.string.isRequired,
-    onArchive: PropTypes.func.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    isSelected: PropTypes.bool.isRequired,
-    onSelectItem: PropTypes.func.isRequired,
-    onDeselectItem: PropTypes.func.isRequired,
-    match: PropTypes.shape({ url: PropTypes.string }).isRequired,
-  };
-
-  static defaultProps = {
-    color: undefined,
   };
 
   /**
@@ -133,7 +115,7 @@ class PlansListItem extends Component {
           <Col span={4}>{boundary}</Col>
           <Col span={5}>
             {isHovered && (
-              <Fragment>
+              <>
                 <Link to={`${match.url}/${id}`}>
                   <Icon
                     type="bars"
@@ -164,7 +146,7 @@ class PlansListItem extends Component {
                   className="actionIcon"
                   onClick={onArchive}
                 />
-              </Fragment>
+              </>
             )}
           </Col>
         </Row>
@@ -172,5 +154,24 @@ class PlansListItem extends Component {
     );
   }
 }
+
+PlansListItem.propTypes = {
+  boundary: PropTypes.string.isRequired,
+  code: PropTypes.string.isRequired,
+  color: PropTypes.string,
+  incidentType: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  owner: PropTypes.string.isRequired,
+  onArchive: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  isSelected: PropTypes.bool.isRequired,
+  onSelectItem: PropTypes.func.isRequired,
+  onDeselectItem: PropTypes.func.isRequired,
+  match: PropTypes.shape({ url: PropTypes.string }).isRequired,
+};
+
+PlansListItem.defaultProps = {
+  color: undefined,
+};
 
 export default withRouter(PlansListItem);

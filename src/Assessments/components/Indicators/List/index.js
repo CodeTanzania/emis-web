@@ -1,6 +1,6 @@
 import { List } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 import IndicatorsListHeader from '../ListHeader';
 import IndicatorListItem from '../ListItem';
 
@@ -20,7 +20,7 @@ import IndicatorListItem from '../ListItem';
  * @since 0.1.0
  */
 const IndicatorsList = ({ indicators, loading, onEdit }) => (
-  <Fragment>
+  <>
     <IndicatorsListHeader />
     <List
       loading={loading}
@@ -36,7 +36,7 @@ const IndicatorsList = ({ indicators, loading, onEdit }) => (
         />
       )}
     />
-  </Fragment>
+  </>
 );
 
 IndicatorsList.propTypes = {

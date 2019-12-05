@@ -21,32 +21,6 @@ const { getPartyGroups, getJurisdictions, getRoles, getAgencies } = httpActions;
  * @since 0.1.0
  */
 class FocalPeopleFilters extends Component {
-  static propTypes = {
-    filter: PropTypes.objectOf(
-      PropTypes.shape({
-        groups: PropTypes.arrayOf(PropTypes.string),
-      })
-    ),
-    form: PropTypes.shape({
-      getFieldDecorator: PropTypes.func,
-      validateFields: PropTypes.func,
-    }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    cached: PropTypes.shape({
-      groups: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })),
-      locations: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })),
-      roles: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })),
-      agencies: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })),
-    }),
-    onCache: PropTypes.func.isRequired,
-    onClearCache: PropTypes.func.isRequired,
-  };
-
-  static defaultProps = {
-    filter: null,
-    cached: null,
-  };
-
   /**
    * @function
    * @name handleSubmit
@@ -134,6 +108,7 @@ class FocalPeopleFilters extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* start contact group filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By Area(s)">
           {getFieldDecorator('location', {
             initialValue: filter ? filter.location : [],
@@ -151,6 +126,7 @@ class FocalPeopleFilters extends Component {
         {/* end contact group filters */}
 
         {/* start contact group filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By Group(s)">
           {getFieldDecorator('group', {
             initialValue: filter ? filter.group : [],
@@ -168,6 +144,7 @@ class FocalPeopleFilters extends Component {
         {/* end contact group filters */}
 
         {/* start contact group filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By Role(s)">
           {getFieldDecorator('role', {
             initialValue: filter ? filter.role : [],
@@ -185,6 +162,7 @@ class FocalPeopleFilters extends Component {
         {/* end contact group filters */}
 
         {/* start contact group filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By Agencies">
           {getFieldDecorator('party', {
             initialValue: filter ? filter.party : [],
@@ -216,6 +194,32 @@ class FocalPeopleFilters extends Component {
     );
   }
 }
+
+FocalPeopleFilters.propTypes = {
+  filter: PropTypes.objectOf(
+    PropTypes.shape({
+      groups: PropTypes.arrayOf(PropTypes.string),
+    })
+  ),
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFields: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  cached: PropTypes.shape({
+    groups: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })),
+    locations: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })),
+    roles: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })),
+    agencies: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })),
+  }),
+  onCache: PropTypes.func.isRequired,
+  onClearCache: PropTypes.func.isRequired,
+};
+
+FocalPeopleFilters.defaultProps = {
+  filter: null,
+  cached: null,
+};
 
 export default Connect(Form.create()(FocalPeopleFilters), {
   filter: 'focalPeople.filter',

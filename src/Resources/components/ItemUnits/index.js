@@ -8,7 +8,7 @@ import {
 } from '@codetanzania/emis-api-states';
 import { Modal } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import Topbar from '../../../components/Topbar';
 import ItemUnitList from './List';
 import ItemUnitForm from './Form';
@@ -24,23 +24,7 @@ import './styles.css';
  * @since 0.1.0
  */
 class ItemUnit extends Component {
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    posting: PropTypes.bool.isRequired,
-    itemUnits: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-      .isRequired,
-    itemUnit: PropTypes.shape({ name: PropTypes.string }),
-    total: PropTypes.number.isRequired,
-    page: PropTypes.number.isRequired,
-    searchQuery: PropTypes.string,
-    showForm: PropTypes.bool.isRequired,
-  };
-
-  static defaultProps = {
-    searchQuery: undefined,
-    itemUnit: null,
-  };
-
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     isEditForm: false,
   };
@@ -132,7 +116,7 @@ class ItemUnit extends Component {
     } = this.props;
     const { isEditForm } = this.state;
     return (
-      <Fragment>
+      <>
         {/* Topbar */}
         <Topbar
           search={{
@@ -185,10 +169,27 @@ class ItemUnit extends Component {
           </Modal>
           {/* end create/edit form modal */}
         </div>
-      </Fragment>
+      </>
     );
   }
 }
+
+ItemUnit.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  posting: PropTypes.bool.isRequired,
+  itemUnits: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+    .isRequired,
+  itemUnit: PropTypes.shape({ name: PropTypes.string }),
+  total: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired,
+  searchQuery: PropTypes.string,
+  showForm: PropTypes.bool.isRequired,
+};
+
+ItemUnit.defaultProps = {
+  searchQuery: undefined,
+  itemUnit: null,
+};
 
 export default Connect(ItemUnit, {
   itemUnits: 'itemUnits.list',

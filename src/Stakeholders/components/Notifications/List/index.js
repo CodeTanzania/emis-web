@@ -12,7 +12,7 @@ import uniqBy from 'lodash/uniqBy';
 import remove from 'lodash/remove';
 import intersectionBy from 'lodash/intersectionBy';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import ListHeader from '../../../../components/ListHeader';
 import { notifyError, notifySuccess } from '../../../../util';
 import Toolbar from '../../../../components/Toolbar';
@@ -37,16 +37,7 @@ const headerLayout = [
  * @since 0.1.0
  */
 class CampaignList extends Component {
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    campaigns: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-      .isRequired,
-    page: PropTypes.number.isRequired,
-    total: PropTypes.number.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    onFilter: PropTypes.func.isRequired,
-  };
-
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     selectedCampaign: [],
     selectedPages: [],
@@ -152,7 +143,7 @@ class CampaignList extends Component {
     ).length;
 
     return (
-      <Fragment>
+      <>
         {/* toolbar */}
         <Toolbar
           itemName="Notification"
@@ -234,9 +225,19 @@ class CampaignList extends Component {
           }}
         />
         {/* end campaigns list */}
-      </Fragment>
+      </>
     );
   }
 }
+
+CampaignList.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  campaigns: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+    .isRequired,
+  page: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onFilter: PropTypes.func.isRequired,
+};
 
 export default CampaignList;

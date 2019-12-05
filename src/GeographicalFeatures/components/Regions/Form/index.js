@@ -20,25 +20,6 @@ const { Option } = Select;
  * @since 0.1.0
  */
 class RegionForm extends Component {
-  static propTypes = {
-    isEditForm: PropTypes.bool.isRequired,
-    region: PropTypes.shape({
-      name: PropTypes.string,
-      nature: PropTypes.string,
-      family: PropTypes.string,
-      type: PropTypes.string,
-    }).isRequired,
-    form: PropTypes.shape({
-      getFieldDecorator: PropTypes.func,
-      validateFieldsAndScroll: PropTypes.func,
-    }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    posting: PropTypes.bool.isRequired,
-    families: PropTypes.arrayOf(PropTypes.string).isRequired,
-    natures: PropTypes.arrayOf(PropTypes.string).isRequired,
-    types: PropTypes.arrayOf(PropTypes.string).isRequired,
-  };
-
   /**
    *
    * @function
@@ -62,7 +43,7 @@ class RegionForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedRegion = Object.assign({}, region, values);
+          const updatedRegion = { ...region, ...values };
           putFeature(
             updatedRegion,
             () => {
@@ -125,6 +106,7 @@ class RegionForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* region name */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Name">
           {getFieldDecorator('name', {
             initialValue: isEditForm ? region.name : undefined,
@@ -134,6 +116,7 @@ class RegionForm extends Component {
         {/* end region name */}
 
         {/* nature */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Nature">
           {getFieldDecorator('nature', {
             initialValue: isEditForm ? region.nature : undefined,
@@ -151,6 +134,7 @@ class RegionForm extends Component {
         {/* end nature */}
 
         {/* region type */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Type">
           {getFieldDecorator('type', {
             initialValue: isEditForm ? region.type : undefined,
@@ -168,6 +152,7 @@ class RegionForm extends Component {
         {/* end region type */}
 
         {/* region family */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Family">
           {getFieldDecorator('family', {
             initialValue: isEditForm ? region.family : undefined,
@@ -201,6 +186,25 @@ class RegionForm extends Component {
     );
   }
 }
+
+RegionForm.propTypes = {
+  isEditForm: PropTypes.bool.isRequired,
+  region: PropTypes.shape({
+    name: PropTypes.string,
+    nature: PropTypes.string,
+    family: PropTypes.string,
+    type: PropTypes.string,
+  }).isRequired,
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  posting: PropTypes.bool.isRequired,
+  families: PropTypes.arrayOf(PropTypes.string).isRequired,
+  natures: PropTypes.arrayOf(PropTypes.string).isRequired,
+  types: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 export default Connect(Form.create()(RegionForm), {
   natures: 'features.schema.properties.nature.enum',

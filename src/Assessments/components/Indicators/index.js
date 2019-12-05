@@ -25,31 +25,10 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class Indicators extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     showFilters: false,
     isEditForm: false,
-  };
-
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    indicators: PropTypes.arrayOf(
-      PropTypes.shape({
-        subject: PropTypes.string,
-        topic: PropTypes.string,
-        description: PropTypes.string,
-        color: PropTypes.string,
-        _id: PropTypes.string,
-      })
-    ).isRequired,
-    indicator: PropTypes.shape({ subject: PropTypes.string }),
-    total: PropTypes.number.isRequired,
-    page: PropTypes.number.isRequired,
-    posting: PropTypes.bool.isRequired,
-    showForm: PropTypes.bool.isRequired,
-  };
-
-  static defaultProps = {
-    indicator: null,
   };
 
   componentDidMount() {
@@ -104,7 +83,7 @@ class Indicators extends Component {
   /**
    *
    * @function closeForm
-   * @name
+   * @name closeForm
    * @description close indicator form
    *
    * @returns {undefined} - Nothing is returned
@@ -228,6 +207,28 @@ class Indicators extends Component {
     );
   }
 }
+
+Indicators.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  indicators: PropTypes.arrayOf(
+    PropTypes.shape({
+      subject: PropTypes.string,
+      topic: PropTypes.string,
+      description: PropTypes.string,
+      color: PropTypes.string,
+      _id: PropTypes.string,
+    })
+  ).isRequired,
+  indicator: PropTypes.shape({ subject: PropTypes.string }),
+  total: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired,
+  posting: PropTypes.bool.isRequired,
+  showForm: PropTypes.bool.isRequired,
+};
+
+Indicators.defaultProps = {
+  indicator: null,
+};
 
 export default Connect(Indicators, {
   indicators: 'indicators.list',

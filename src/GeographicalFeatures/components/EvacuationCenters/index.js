@@ -27,33 +27,13 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class EvacuationCenters extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     showFilters: false,
     isEditForm: false,
   };
 
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    showForm: PropTypes.bool.isRequired,
-    posting: PropTypes.bool.isRequired,
-    evacuationCenters: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string,
-        type: PropTypes.string,
-      })
-    ).isRequired,
-    evacuationCenter: PropTypes.shape({
-      name: PropTypes.string,
-      level: PropTypes.string,
-    }),
-    total: PropTypes.number.isRequired,
-    page: PropTypes.number.isRequired,
-  };
-
-  static defaultProps = {
-    evacuationCenter: null,
-  };
-
+  // eslint-disable-next-line react/no-deprecated
   componentWillMount() {
     getFeatures();
   }
@@ -247,6 +227,28 @@ class EvacuationCenters extends Component {
     );
   }
 }
+
+EvacuationCenters.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  showForm: PropTypes.bool.isRequired,
+  posting: PropTypes.bool.isRequired,
+  evacuationCenters: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      type: PropTypes.string,
+    })
+  ).isRequired,
+  evacuationCenter: PropTypes.shape({
+    name: PropTypes.string,
+    level: PropTypes.string,
+  }),
+  total: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired,
+};
+
+EvacuationCenters.defaultProps = {
+  evacuationCenter: null,
+};
 
 export default Connect(EvacuationCenters, {
   evacuationCenters: 'features.list',

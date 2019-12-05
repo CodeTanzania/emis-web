@@ -23,28 +23,6 @@ const { Option } = Select;
  * @since 0.1.0
  */
 class IndicatorForm extends Component {
-  static propTypes = {
-    isEditForm: PropTypes.bool.isRequired,
-    indicator: PropTypes.shape({
-      subject: PropTypes.string,
-      topic: PropTypes.string,
-      description: PropTypes.string,
-      color: PropTypes.string,
-    }),
-    form: PropTypes.shape({
-      getFieldDecorator: PropTypes.func,
-      setFieldsValue: PropTypes.func,
-      validateFieldsAndScroll: PropTypes.func,
-    }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    posting: PropTypes.bool.isRequired,
-    subjects: PropTypes.arrayOf(PropTypes.string).isRequired,
-  };
-
-  static defaultProps = {
-    indicator: null,
-  };
-
   /**
    * @function
    * @name onChangeColor
@@ -82,7 +60,7 @@ class IndicatorForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedContact = Object.assign({}, indicator, values);
+          const updatedContact = { ...indicator, ...values };
           putIndicator(
             updatedContact,
             () => {
@@ -143,6 +121,7 @@ class IndicatorForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/*  subject */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Subject">
           {getFieldDecorator('subject', {
             initialValue: isEditForm ? indicator.subject : undefined,
@@ -160,6 +139,7 @@ class IndicatorForm extends Component {
         {/* end subject */}
 
         {/* Topic */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Topic">
           {getFieldDecorator('topic', {
             initialValue: isEditForm ? indicator.topic : undefined,
@@ -169,6 +149,7 @@ class IndicatorForm extends Component {
         {/* end topic */}
 
         {/* indicators description */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Indicator Summary">
           {getFieldDecorator('description', {
             initialValue: isEditForm ? indicator.description : undefined,
@@ -184,6 +165,7 @@ class IndicatorForm extends Component {
         {/* color code */}
         <Row>
           <Col span={19}>
+            {/* eslint-disable-next-line react/jsx-props-no-spreading */}
             <Form.Item {...formItemLayout} label="Color Code">
               {getFieldDecorator('color', {
                 initialValue: isEditForm ? indicator.color : undefined,
@@ -218,6 +200,28 @@ class IndicatorForm extends Component {
     );
   }
 }
+
+IndicatorForm.propTypes = {
+  isEditForm: PropTypes.bool.isRequired,
+  indicator: PropTypes.shape({
+    subject: PropTypes.string,
+    topic: PropTypes.string,
+    description: PropTypes.string,
+    color: PropTypes.string,
+  }),
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    setFieldsValue: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  posting: PropTypes.bool.isRequired,
+  subjects: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+IndicatorForm.defaultProps = {
+  indicator: null,
+};
 
 export default Connect(Form.create()(IndicatorForm), {
   subjects: 'indicators.schema.properties.subject.enum',

@@ -1,7 +1,7 @@
 import { Avatar, Checkbox, Col, Icon, Row } from 'antd';
 import PropTypes from 'prop-types';
 import randomColor from 'randomcolor';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import './styles.css';
 
 /**
@@ -13,24 +13,9 @@ import './styles.css';
  * @since 0.1.0
  */
 class ProceduresListItem extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     isHovered: false,
-  };
-
-  static propTypes = {
-    activity: PropTypes.string.isRequired,
-    code: PropTypes.string.isRequired,
-    color: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    incidentType: PropTypes.string.isRequired,
-    isSelected: PropTypes.bool.isRequired,
-    name: PropTypes.string.isRequired,
-    owner: PropTypes.string.isRequired,
-    phase: PropTypes.string.isRequired,
-    onArchive: PropTypes.func.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    onSelectItem: PropTypes.func.isRequired,
-    onDeselectItem: PropTypes.func.isRequired,
   };
 
   /**
@@ -134,7 +119,7 @@ class ProceduresListItem extends Component {
           <Col span={5}>{owner}</Col>
           <Col span={3}>
             {isHovered && (
-              <Fragment>
+              <>
                 <Icon
                   type="edit"
                   title="Update Procedure"
@@ -152,7 +137,7 @@ class ProceduresListItem extends Component {
                   className="actionIcon"
                   onClick={onArchive}
                 />
-              </Fragment>
+              </>
             )}
           </Col>
         </Row>
@@ -160,5 +145,21 @@ class ProceduresListItem extends Component {
     );
   }
 }
+
+ProceduresListItem.propTypes = {
+  activity: PropTypes.string.isRequired,
+  code: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  incidentType: PropTypes.string.isRequired,
+  isSelected: PropTypes.bool.isRequired,
+  name: PropTypes.string.isRequired,
+  owner: PropTypes.string.isRequired,
+  phase: PropTypes.string.isRequired,
+  onArchive: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onSelectItem: PropTypes.func.isRequired,
+  onDeselectItem: PropTypes.func.isRequired,
+};
 
 export default ProceduresListItem;

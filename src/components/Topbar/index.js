@@ -10,6 +10,7 @@ const { Search } = Input;
  * @function
  * @name Topbar
  * @description Topbar component which renders search input and primary actions
+ * @returns {object} react element
  *
  * @param {object} props props object
  * @param {object} props.search on Search callback
@@ -22,6 +23,7 @@ const Topbar = ({ search, actions }) => (
   <Row className="Topbar">
     {/* search box */}
     <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <Search {...search} allowClear className="TopbarSearch" />
     </Col>
     {/* end search box */}
@@ -34,6 +36,7 @@ const Topbar = ({ search, actions }) => (
 
           return (
             <Col xxl={6} xl={7} lg={10} md={12} sm={24} xs={24} key={label}>
+              {/* eslint-disable-next-line react/jsx-props-no-spreading */}
               <Button {...props} type="primary" block>
                 {label}
               </Button>

@@ -28,30 +28,12 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class Procedures extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     showFilters: false,
     isEditForm: false,
     showNotificationForm: false,
     selectedProcedures: [],
-  };
-
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    posting: PropTypes.bool.isRequired,
-    procedures: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-      .isRequired,
-    procedure: PropTypes.shape({ name: PropTypes.string }),
-    page: PropTypes.number.isRequired,
-    showForm: PropTypes.bool.isRequired,
-    total: PropTypes.number.isRequired,
-    match: PropTypes.shape({
-      url: PropTypes.string,
-      params: PropTypes.shape({ activityId: PropTypes.string }),
-    }).isRequired,
-  };
-
-  static defaultProps = {
-    procedure: null,
   };
 
   componentDidMount() {
@@ -305,6 +287,25 @@ class Procedures extends Component {
     );
   }
 }
+
+Procedures.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  posting: PropTypes.bool.isRequired,
+  procedures: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+    .isRequired,
+  procedure: PropTypes.shape({ name: PropTypes.string }),
+  page: PropTypes.number.isRequired,
+  showForm: PropTypes.bool.isRequired,
+  total: PropTypes.number.isRequired,
+  match: PropTypes.shape({
+    url: PropTypes.string,
+    params: PropTypes.shape({ activityId: PropTypes.string }),
+  }).isRequired,
+};
+
+Procedures.defaultProps = {
+  procedure: null,
+};
 
 export default Connect(withRouter(Procedures), {
   procedures: 'procedures.list',

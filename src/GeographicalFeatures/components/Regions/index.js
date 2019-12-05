@@ -28,24 +28,10 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class Regions extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     isEditForm: false,
     showFilters: false,
-  };
-
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    posting: PropTypes.bool.isRequired,
-    regions: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-      .isRequired,
-    page: PropTypes.number.isRequired,
-    total: PropTypes.number.isRequired,
-    region: PropTypes.shape({ name: PropTypes.string }),
-    showForm: PropTypes.bool.isRequired,
-  };
-
-  static defaultProps = {
-    region: null,
   };
 
   componentDidMount() {
@@ -244,6 +230,21 @@ class Regions extends Component {
     );
   }
 }
+
+Regions.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  posting: PropTypes.bool.isRequired,
+  regions: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+    .isRequired,
+  page: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  region: PropTypes.shape({ name: PropTypes.string }),
+  showForm: PropTypes.bool.isRequired,
+};
+
+Regions.defaultProps = {
+  region: null,
+};
 
 export default Connect(Regions, {
   regions: 'features.list',

@@ -21,35 +21,6 @@ const { TextArea } = Input;
  * @since 0.1.0
  */
 class FocalPersonForm extends Component {
-  static propTypes = {
-    isEditForm: PropTypes.bool.isRequired,
-    focalPerson: PropTypes.shape({
-      name: PropTypes.string,
-      title: PropTypes.string,
-      abbreviation: PropTypes.string,
-      mobile: PropTypes.string,
-      email: PropTypes.string,
-      party: PropTypes.shape({
-        name: PropTypes.string,
-        title: PropTypes.string,
-      }),
-      group: PropTypes.string,
-      location: PropTypes.string,
-      role: PropTypes.string,
-      landline: PropTypes.string,
-      fax: PropTypes.string,
-      physicalAddress: PropTypes.string,
-      postalAddress: PropTypes.string,
-    }).isRequired,
-    form: PropTypes.shape({
-      getFieldDecorator: PropTypes.func,
-      validateFieldsAndScroll: PropTypes.func,
-    }).isRequired,
-    groups: PropTypes.arrayOf(PropTypes.string).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    posting: PropTypes.bool.isRequired,
-  };
-
   /**
    * @function
    * @name handleSubmit
@@ -72,7 +43,7 @@ class FocalPersonForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedFocalPerson = Object.assign({}, focalPerson, values);
+          const updatedFocalPerson = { ...focalPerson, ...values };
           putFocalPerson(
             updatedFocalPerson,
             () => {
@@ -135,6 +106,7 @@ class FocalPersonForm extends Component {
         <Row type="flex" justify="space-between">
           <Col xxl={10} xl={10} lg={10} md={10} sm={24} xs={24}>
             {/* focalPerson name */}
+            {/* eslint-disable */}
             <Form.Item {...formItemLayout} label="Name">
               {getFieldDecorator('name', {
                 initialValue: isEditForm ? focalPerson.name : undefined,
@@ -357,6 +329,7 @@ class FocalPersonForm extends Component {
             {/* end focalPerson postal address */}
           </Col>
         </Row>
+        {/* eslint-enable */}
         {/* end focalPerson physical Address, Postal Address section */}
 
         {/* form actions */}
@@ -376,5 +349,34 @@ class FocalPersonForm extends Component {
     );
   }
 }
+
+FocalPersonForm.propTypes = {
+  isEditForm: PropTypes.bool.isRequired,
+  focalPerson: PropTypes.shape({
+    name: PropTypes.string,
+    title: PropTypes.string,
+    abbreviation: PropTypes.string,
+    mobile: PropTypes.string,
+    email: PropTypes.string,
+    party: PropTypes.shape({
+      name: PropTypes.string,
+      title: PropTypes.string,
+    }),
+    group: PropTypes.string,
+    location: PropTypes.string,
+    role: PropTypes.string,
+    landline: PropTypes.string,
+    fax: PropTypes.string,
+    physicalAddress: PropTypes.string,
+    postalAddress: PropTypes.string,
+  }).isRequired,
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+  }).isRequired,
+  groups: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  posting: PropTypes.bool.isRequired,
+};
 
 export default Form.create()(FocalPersonForm);

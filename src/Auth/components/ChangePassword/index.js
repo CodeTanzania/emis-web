@@ -13,23 +13,9 @@ import { notifyError, notifySuccess } from '../../../util';
  * @since 0.1.0
  */
 class ChangePasswordForm extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     confirmDirty: false,
-  };
-
-  static propTypes = {
-    form: PropTypes.shape({
-      validateFields: PropTypes.func.isRequired,
-      validateFieldsAndScroll: PropTypes.func.isRequired,
-      getFieldDecorator: PropTypes.func.isRequired,
-      getFieldValue: PropTypes.func.isRequired,
-    }).isRequired,
-    user: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      email: PropTypes.string.isRequired,
-    }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    posting: PropTypes.bool.isRequired,
   };
 
   /**
@@ -53,9 +39,7 @@ class ChangePasswordForm extends Component {
     validateFieldsAndScroll((err, values) => {
       const { user, onCancel } = this.props;
       if (!err) {
-        const updatedUser = Object.assign({}, user, {
-          password: values.password,
-        });
+        const updatedUser = { ...user, password: values.password };
 
         putFocalPerson(
           updatedUser,
@@ -161,6 +145,7 @@ class ChangePasswordForm extends Component {
       },
     };
     return (
+      // eslint-disable-next-line react/jsx-props-no-spreading
       <Form {...formItemLayout} onSubmit={this.handleSubmit}>
         {/* New Password input */}
         <Form.Item label="New Password" hasFeedback>
@@ -211,6 +196,21 @@ class ChangePasswordForm extends Component {
     );
   }
 }
+
+ChangePasswordForm.propTypes = {
+  form: PropTypes.shape({
+    validateFields: PropTypes.func.isRequired,
+    validateFieldsAndScroll: PropTypes.func.isRequired,
+    getFieldDecorator: PropTypes.func.isRequired,
+    getFieldValue: PropTypes.func.isRequired,
+  }).isRequired,
+  user: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  posting: PropTypes.bool.isRequired,
+};
 
 export default Connect(
   Form.create({ name: 'changepassword' })(ChangePasswordForm),

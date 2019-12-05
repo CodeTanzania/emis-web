@@ -11,7 +11,7 @@ import remove from 'lodash/remove';
 import uniq from 'lodash/uniq';
 import intersectionBy from 'lodash/intersectionBy';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import RoleListHeader from '../../../../components/ListHeader';
 import Toolbar from '../../../../components/Toolbar';
 import { notifyError, notifySuccess } from '../../../../util';
@@ -50,21 +50,7 @@ const { getRolesExportUrl } = httpActions;
  * @since 0.1.0
  */
 class RoleList extends Component {
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    roles: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string,
-        abbreviation: PropTypes.string,
-        description: PropTypes.string,
-      })
-    ).isRequired,
-    total: PropTypes.number.isRequired,
-    page: PropTypes.number.isRequired,
-    onNotify: PropTypes.func.isRequired,
-  };
-
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     selectedRoles: [],
     selectedPages: [],
@@ -165,7 +151,7 @@ class RoleList extends Component {
       .length;
 
     return (
-      <Fragment>
+      <>
         {/* toolbar */}
         <Toolbar
           itemName="Role"
@@ -238,9 +224,24 @@ class RoleList extends Component {
             />
           )}
         />
-      </Fragment>
+      </>
     );
   }
 }
+
+RoleList.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  roles: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      abbreviation: PropTypes.string,
+      description: PropTypes.string,
+    })
+  ).isRequired,
+  total: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired,
+  onNotify: PropTypes.func.isRequired,
+};
 
 export default RoleList;

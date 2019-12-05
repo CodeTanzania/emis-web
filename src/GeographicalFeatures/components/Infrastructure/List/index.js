@@ -1,6 +1,6 @@
 import { List } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 import CriticalInfrastructureListHeader from '../ListHeader';
 import CriticalInfrastructureListItem from '../ListItem';
 
@@ -24,7 +24,7 @@ const CriticalInfrastructureList = ({
   loading,
   onEdit,
 }) => (
-  <Fragment>
+  <>
     <CriticalInfrastructureListHeader />
     <List
       loading={loading}
@@ -38,7 +38,7 @@ const CriticalInfrastructureList = ({
         />
       )}
     />
-  </Fragment>
+  </>
 );
 
 CriticalInfrastructureList.propTypes = {

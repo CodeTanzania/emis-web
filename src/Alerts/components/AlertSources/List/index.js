@@ -12,7 +12,7 @@ import uniqBy from 'lodash/uniqBy';
 import remove from 'lodash/remove';
 import intersectionBy from 'lodash/intersectionBy';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import ListHeader from '../../../../components/ListHeader';
 import { notifyError, notifySuccess } from '../../../../util';
 import Toolbar from '../../../../components/Toolbar';
@@ -38,23 +38,7 @@ const { getAlertSourcesExportUrl } = httpActions;
  * @since 0.1.0
  */
 class AlertSourceList extends Component {
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    alertSources: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string,
-        url: PropTypes.string,
-        mobile: PropTypes.string,
-        email: PropTypes.string,
-        _id: PropTypes.string,
-      })
-    ).isRequired,
-    page: PropTypes.number.isRequired,
-    total: PropTypes.number.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    onShare: PropTypes.func.isRequired,
-  };
-
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     selectedAlertSources: [],
     selectedPages: [],
@@ -173,7 +157,7 @@ class AlertSourceList extends Component {
     ).length;
 
     return (
-      <Fragment>
+      <>
         {/* toolbar */}
         <Toolbar
           itemName="AlertSource"
@@ -257,9 +241,26 @@ class AlertSourceList extends Component {
           }}
         />
         {/* end alertSources list */}
-      </Fragment>
+      </>
     );
   }
 }
+
+AlertSourceList.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  alertSources: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      url: PropTypes.string,
+      mobile: PropTypes.string,
+      email: PropTypes.string,
+      _id: PropTypes.string,
+    })
+  ).isRequired,
+  page: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onShare: PropTypes.func.isRequired,
+};
 
 export default AlertSourceList;

@@ -1,6 +1,6 @@
 import { List } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 import RegionsListItem from '../ListItem';
 import RegionsListHeader from '../LIstHeader';
 
@@ -21,7 +21,7 @@ import RegionsListHeader from '../LIstHeader';
  * @since 0.1.0
  */
 const RegionsList = ({ regions, loading, onEdit }) => (
-  <Fragment>
+  <>
     <RegionsListHeader />
     <List
       loading={loading}
@@ -37,7 +37,7 @@ const RegionsList = ({ regions, loading, onEdit }) => (
         />
       )}
     />
-  </Fragment>
+  </>
 );
 
 RegionsList.propTypes = {

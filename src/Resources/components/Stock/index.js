@@ -10,7 +10,7 @@ import {
 } from '@codetanzania/emis-api-states';
 import { Modal } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import Topbar from '../../../components/Topbar';
 import StockForm from './Form';
 import AdjustmentForm from './AdjustmentForm';
@@ -27,36 +27,9 @@ import './styles.css';
  * @since 0.1.0
  */
 class Stocks extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     isEditForm: false,
-  };
-
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    posting: PropTypes.bool.isRequired,
-    postingAdjustment: PropTypes.bool.isRequired,
-    stocks: PropTypes.arrayOf(
-      PropTypes.shape({
-        stock: PropTypes.object,
-        item: PropTypes.object,
-        quantity: PropTypes.number,
-        _id: PropTypes.string,
-      })
-    ).isRequired,
-    stock: PropTypes.shape({
-      stock: PropTypes.object,
-      item: PropTypes.object,
-      quantity: PropTypes.number,
-      _id: PropTypes.string,
-    }),
-    page: PropTypes.number.isRequired,
-    showForm: PropTypes.bool.isRequired,
-    showAdjustmentForm: PropTypes.bool.isRequired,
-    total: PropTypes.number.isRequired,
-  };
-
-  static defaultProps = {
-    stock: null,
   };
 
   componentDidMount() {
@@ -185,7 +158,7 @@ class Stocks extends Component {
     const { isEditForm } = this.state;
 
     return (
-      <Fragment>
+      <>
         {/* Topbar */}
         <Topbar
           search={{
@@ -249,10 +222,38 @@ class Stocks extends Component {
             />
           </Modal>
         </div>
-      </Fragment>
+      </>
     );
   }
 }
+
+Stocks.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  posting: PropTypes.bool.isRequired,
+  postingAdjustment: PropTypes.bool.isRequired,
+  stocks: PropTypes.arrayOf(
+    PropTypes.shape({
+      stock: PropTypes.object,
+      item: PropTypes.object,
+      quantity: PropTypes.number,
+      _id: PropTypes.string,
+    })
+  ).isRequired,
+  stock: PropTypes.shape({
+    stock: PropTypes.object,
+    item: PropTypes.object,
+    quantity: PropTypes.number,
+    _id: PropTypes.string,
+  }),
+  page: PropTypes.number.isRequired,
+  showForm: PropTypes.bool.isRequired,
+  showAdjustmentForm: PropTypes.bool.isRequired,
+  total: PropTypes.number.isRequired,
+};
+
+Stocks.defaultProps = {
+  stock: null,
+};
 
 export default Connect(Stocks, {
   stocks: 'stocks.list',

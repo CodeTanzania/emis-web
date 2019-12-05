@@ -1,6 +1,6 @@
 import { List } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 import IncidentTypesListHeader from '../ListHeader';
 import IncidentTypesListItem from '../ListItem';
 
@@ -19,7 +19,7 @@ import IncidentTypesListItem from '../ListItem';
  * @since 0.1.0
  */
 const IncidentTypesList = ({ incidenttypes, loading, onEdit }) => (
-  <Fragment>
+  <>
     <IncidentTypesListHeader />
     <List
       loading={loading}
@@ -37,7 +37,7 @@ const IncidentTypesList = ({ incidenttypes, loading, onEdit }) => (
         />
       )}
     />
-  </Fragment>
+  </>
 );
 
 /* props validation */

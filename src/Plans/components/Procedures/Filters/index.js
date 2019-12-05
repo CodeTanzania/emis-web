@@ -16,26 +16,6 @@ import React, { Component } from 'react';
  * @since 0.1.0
  */
 class ProceduresFilters extends Component {
-  static propTypes = {
-    filter: PropTypes.objectOf(
-      PropTypes.shape({
-        types: PropTypes.arrayOf(PropTypes.string),
-        phases: PropTypes.arrayOf(PropTypes.string),
-      })
-    ),
-    form: PropTypes.shape({
-      getFieldDecorator: PropTypes.func,
-      validateFields: PropTypes.func,
-    }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    types: PropTypes.arrayOf(PropTypes.string).isRequired,
-    phases: PropTypes.arrayOf(PropTypes.string).isRequired,
-  };
-
-  static defaultProps = {
-    filter: null,
-  };
-
   /**
    * @function
    * @name handleSubmit
@@ -106,6 +86,7 @@ class ProceduresFilters extends Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         {/* start procedure type filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By Procedure type">
           {getFieldDecorator('type', {
             initialValue: filter ? filter.type : [],
@@ -124,6 +105,7 @@ class ProceduresFilters extends Component {
         {/* end procedure type filters */}
 
         {/* start emergency phase filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By Emergency Phases">
           {getFieldDecorator('phases', {
             initialValue: filter ? filter.phases : [],
@@ -156,6 +138,26 @@ class ProceduresFilters extends Component {
     );
   }
 }
+
+ProceduresFilters.propTypes = {
+  filter: PropTypes.objectOf(
+    PropTypes.shape({
+      types: PropTypes.arrayOf(PropTypes.string),
+      phases: PropTypes.arrayOf(PropTypes.string),
+    })
+  ),
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFields: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  types: PropTypes.arrayOf(PropTypes.string).isRequired,
+  phases: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+ProceduresFilters.defaultProps = {
+  filter: null,
+};
 
 export default Connect(Form.create()(ProceduresFilters), {
   types: 'procedures.schema.properties.type.enum',
