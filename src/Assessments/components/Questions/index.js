@@ -28,24 +28,10 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class Questions extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     showFilters: false,
     isEditForm: false,
-  };
-
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    questions: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-      .isRequired,
-    page: PropTypes.number.isRequired,
-    total: PropTypes.number.isRequired,
-    posting: PropTypes.bool.isRequired,
-    question: PropTypes.shape({ name: PropTypes.string }),
-    showForm: PropTypes.bool.isRequired,
-  };
-
-  static defaultProps = {
-    question: null,
   };
 
   componentDidMount() {
@@ -102,7 +88,7 @@ class Questions extends Component {
   /**
    *
    * @function closeForm
-   * @name
+   * @name closeForm
    * @description close question form
    *
    * @returns {undefined} - Nothing is returned
@@ -228,6 +214,21 @@ class Questions extends Component {
     );
   }
 }
+
+Questions.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  questions: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+    .isRequired,
+  page: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  posting: PropTypes.bool.isRequired,
+  question: PropTypes.shape({ name: PropTypes.string }),
+  showForm: PropTypes.bool.isRequired,
+};
+
+Questions.defaultProps = {
+  question: null,
+};
 
 export default Connect(Questions, {
   questions: 'questions.list',

@@ -11,22 +11,6 @@ import { notifyError, notifySuccess } from '../../../../util';
 const { Option } = Select;
 
 class WarehouseForm extends Component {
-  static propTypes = {
-    isEditForm: PropTypes.bool.isRequired,
-    nature: PropTypes.arrayOf(PropTypes.string).isRequired,
-    warehouse: PropTypes.shape({
-      name: PropTypes.string,
-      level: PropTypes.string,
-      nature: PropTypes.string,
-    }).isRequired,
-    form: PropTypes.shape({
-      getFieldDecorator: PropTypes.func,
-      validateFieldsAndScroll: PropTypes.func,
-    }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    posting: PropTypes.bool.isRequired,
-  };
-
   /**
    * @function
    * @name handleSubmit
@@ -48,12 +32,13 @@ class WarehouseForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedWarehouse = Object.assign({}, warehouse, {
+          const updatedWarehouse = {
+            ...warehouse,
             ...values,
             continent: 'Africa',
             country: 'Tanzania',
             family: 'Warehouse',
-          });
+          };
           putFeature(
             updatedWarehouse,
             () => {
@@ -121,6 +106,7 @@ class WarehouseForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* warehouse name */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Name">
           {getFieldDecorator('name', {
             initialValue: isEditForm ? warehouse.name : undefined,
@@ -130,6 +116,7 @@ class WarehouseForm extends Component {
         {/* end warehouse name */}
 
         {/* warehouse nature */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Nature">
           {getFieldDecorator('nature', {
             initialValue: isEditForm ? warehouse.nature : undefined,
@@ -157,6 +144,22 @@ class WarehouseForm extends Component {
     );
   }
 }
+
+WarehouseForm.propTypes = {
+  isEditForm: PropTypes.bool.isRequired,
+  nature: PropTypes.arrayOf(PropTypes.string).isRequired,
+  warehouse: PropTypes.shape({
+    name: PropTypes.string,
+    level: PropTypes.string,
+    nature: PropTypes.string,
+  }).isRequired,
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  posting: PropTypes.bool.isRequired,
+};
 
 export default Form.create()(
   Connect(WarehouseForm, {

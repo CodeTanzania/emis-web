@@ -16,24 +16,6 @@ import React, { Component } from 'react';
  * @since 0.1.0
  */
 class RolesFilters extends Component {
-  static propTypes = {
-    filter: PropTypes.objectOf(
-      PropTypes.shape({
-        types: PropTypes.arrayOf(PropTypes.string),
-      })
-    ),
-    properties: PropTypes.arrayOf(PropTypes.string).isRequired,
-    form: PropTypes.shape({
-      getFieldDecorator: PropTypes.func,
-      validateFields: PropTypes.func,
-    }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-  };
-
-  static defaultProps = {
-    filter: null,
-  };
-
   /**
    * @function
    * @name handleSubmit
@@ -103,6 +85,7 @@ class RolesFilters extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* start role properties filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By Types">
           {getFieldDecorator('type', {
             initialValue: filter ? filter.type : [],
@@ -135,6 +118,25 @@ class RolesFilters extends Component {
     );
   }
 }
+
+RolesFilters.propTypes = {
+  filter: PropTypes.objectOf(
+    PropTypes.shape({
+      types: PropTypes.arrayOf(PropTypes.string),
+    })
+  ),
+  properties: PropTypes.arrayOf(PropTypes.string).isRequired,
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFields: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+};
+
+RolesFilters.defaultProps = {
+  filter: null,
+};
+
 export default Form.create()(
   Connect(RolesFilters, {
     properties: 'roles.schema.properties.type.enum',

@@ -8,7 +8,7 @@ import uniqBy from 'lodash/uniqBy';
 import remove from 'lodash/remove';
 import map from 'lodash/map';
 import intersectionBy from 'lodash/intersectionBy';
-import React, { Fragment, Component } from 'react';
+import React, { Component } from 'react';
 import StockListItem from '../ListItem';
 import Toolbar from '../../../../components/Toolbar';
 import { notifyError, notifySuccess } from '../../../../util';
@@ -32,22 +32,7 @@ const { getStocksExportUrl } = httpActions;
  * @since 0.1.0
  */
 class StockList extends Component {
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    stocks: PropTypes.arrayOf(
-      PropTypes.shape({
-        stock: PropTypes.object,
-        item: PropTypes.object,
-        quantity: PropTypes.number,
-        _id: PropTypes.string,
-      })
-    ).isRequired,
-    page: PropTypes.number.isRequired,
-    total: PropTypes.number.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    onAdjust: PropTypes.func.isRequired,
-  };
-
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     selectedStocks: [],
     selectedPages: [],
@@ -143,7 +128,7 @@ class StockList extends Component {
       .length;
 
     return (
-      <Fragment>
+      <>
         {/* Toolbar */}
         <Toolbar
           itemName="stock"
@@ -208,9 +193,25 @@ class StockList extends Component {
           }}
         />
         {/* end stock list */}
-      </Fragment>
+      </>
     );
   }
 }
+
+StockList.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  stocks: PropTypes.arrayOf(
+    PropTypes.shape({
+      stock: PropTypes.object,
+      item: PropTypes.object,
+      quantity: PropTypes.number,
+      _id: PropTypes.string,
+    })
+  ).isRequired,
+  page: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onAdjust: PropTypes.func.isRequired,
+};
 
 export default StockList;

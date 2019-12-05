@@ -20,25 +20,6 @@ const { Option } = Select;
  * @since 0.1.0
  */
 class WardForm extends Component {
-  static propTypes = {
-    isEditForm: PropTypes.bool.isRequired,
-    ward: PropTypes.shape({
-      name: PropTypes.string,
-      nature: PropTypes.string,
-      family: PropTypes.string,
-      type: PropTypes.string,
-    }).isRequired,
-    form: PropTypes.shape({
-      getFieldDecorator: PropTypes.func,
-      validateFieldsAndScroll: PropTypes.func,
-    }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    posting: PropTypes.bool.isRequired,
-    families: PropTypes.arrayOf(PropTypes.string).isRequired,
-    natures: PropTypes.arrayOf(PropTypes.string).isRequired,
-    types: PropTypes.arrayOf(PropTypes.string).isRequired,
-  };
-
   /**
    * Handle submit form action
    *
@@ -61,7 +42,7 @@ class WardForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedRegion = Object.assign({}, ward, values);
+          const updatedRegion = { ...ward, ...values };
           putFeature(
             updatedRegion,
             () => {
@@ -124,6 +105,7 @@ class WardForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* ward name */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Name">
           {getFieldDecorator('name', {
             initialValue: isEditForm ? ward.name : undefined,
@@ -133,6 +115,7 @@ class WardForm extends Component {
         {/* end ward name */}
 
         {/* nature */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Nature">
           {getFieldDecorator('nature', {
             initialValue: isEditForm ? ward.nature : undefined,
@@ -150,6 +133,7 @@ class WardForm extends Component {
         {/* end nature */}
 
         {/* ward type */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Type">
           {getFieldDecorator('type', {
             initialValue: isEditForm ? ward.type : undefined,
@@ -167,6 +151,7 @@ class WardForm extends Component {
         {/* end ward type */}
 
         {/* ward family */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Family">
           {getFieldDecorator('family', {
             initialValue: isEditForm ? ward.family : undefined,
@@ -200,6 +185,25 @@ class WardForm extends Component {
     );
   }
 }
+
+WardForm.propTypes = {
+  isEditForm: PropTypes.bool.isRequired,
+  ward: PropTypes.shape({
+    name: PropTypes.string,
+    nature: PropTypes.string,
+    family: PropTypes.string,
+    type: PropTypes.string,
+  }).isRequired,
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  posting: PropTypes.bool.isRequired,
+  families: PropTypes.arrayOf(PropTypes.string).isRequired,
+  natures: PropTypes.arrayOf(PropTypes.string).isRequired,
+  types: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 export default Connect(Form.create()(WardForm), {
   natures: 'features.schema.properties.nature.enum',

@@ -21,20 +21,9 @@ const isHoveredSpan = { xxl: 2, xl: 2, lg: 2, md: 2, sm: 2, xs: 2 };
  * @since 0.1.0
  */
 class RoleListItem extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     isHovered: false,
-  };
-
-  /* props validation */
-  static propTypes = {
-    abbreviation: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    onArchive: PropTypes.func.isRequired,
-    isSelected: PropTypes.bool.isRequired,
-    onSelectItem: PropTypes.func.isRequired,
-    onDeselectItem: PropTypes.func.isRequired,
   };
 
   /**
@@ -140,6 +129,7 @@ class RoleListItem extends Component {
         onMouseLeave={this.handleMouseLeave}
       >
         <Row>
+          {/* eslint-disable */}
           <Col {...sideSpan}>{sideComponent}</Col>
           <Col {...nameSpan} title="Role name">
             {name}
@@ -151,6 +141,7 @@ class RoleListItem extends Component {
             {description}
           </Col>
           <Col {...isHoveredSpan}>
+            {/* eslint-enable */}
             {isHovered && (
               <ListItemActions
                 edit={{
@@ -171,5 +162,16 @@ class RoleListItem extends Component {
     );
   }
 }
+
+RoleListItem.propTypes = {
+  abbreviation: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onArchive: PropTypes.func.isRequired,
+  isSelected: PropTypes.bool.isRequired,
+  onSelectItem: PropTypes.func.isRequired,
+  onDeselectItem: PropTypes.func.isRequired,
+};
 
 export default RoleListItem;

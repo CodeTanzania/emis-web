@@ -40,6 +40,7 @@ const generateShareAgencyContent = agency =>
  * @since 0.1.0
  */
 class Agencies extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     showFilters: false,
     isEditForm: false,
@@ -47,23 +48,6 @@ class Agencies extends Component {
     selectedAgencies: [],
     notificationBody: undefined,
     cached: null,
-  };
-
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    posting: PropTypes.bool.isRequired,
-    agencies: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-      .isRequired,
-    agency: PropTypes.shape({ name: PropTypes.string }),
-    page: PropTypes.number.isRequired,
-    showForm: PropTypes.bool.isRequired,
-    searchQuery: PropTypes.string,
-    total: PropTypes.number.isRequired,
-  };
-
-  static defaultProps = {
-    agency: null,
-    searchQuery: undefined,
   };
 
   componentDidMount() {
@@ -395,6 +379,23 @@ class Agencies extends Component {
     );
   }
 }
+
+Agencies.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  posting: PropTypes.bool.isRequired,
+  agencies: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+    .isRequired,
+  agency: PropTypes.shape({ name: PropTypes.string }),
+  page: PropTypes.number.isRequired,
+  showForm: PropTypes.bool.isRequired,
+  searchQuery: PropTypes.string,
+  total: PropTypes.number.isRequired,
+};
+
+Agencies.defaultProps = {
+  agency: null,
+  searchQuery: undefined,
+};
 
 export default Connect(Agencies, {
   agencies: 'agencies.list',

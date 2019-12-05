@@ -5,6 +5,7 @@ import EmptyState from '../../components/EmptyState';
  * @function
  * @name AlertFeedbackLayout
  * @description Render alert feedback layout
+ * @returns {object} react element
  *
  * @version 0.1.0
  * @since 0.1.0

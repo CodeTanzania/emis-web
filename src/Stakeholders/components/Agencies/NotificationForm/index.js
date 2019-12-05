@@ -18,28 +18,6 @@ const { getFocalPeople } = httpActions;
  * @since 0.1.0
  */
 class NotificationForm extends Component {
-  static propTypes = {
-    selectedAgencies: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string,
-        title: PropTypes.string,
-        abbreviation: PropTypes.string,
-        mobile: PropTypes.string,
-        email: PropTypes.string,
-      })
-    ).isRequired,
-    body: PropTypes.string,
-    form: PropTypes.shape({
-      getFieldDecorator: PropTypes.func,
-      validateFieldsAndScroll: PropTypes.func,
-    }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-  };
-
-  static defaultProps = {
-    body: undefined,
-  };
-
   /**
    * @function
    * @name handleSubmit
@@ -104,6 +82,7 @@ class NotificationForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* notification recipients */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Recipients">
           {getFieldDecorator('recipients', {
             rules: [
@@ -127,6 +106,7 @@ class NotificationForm extends Component {
         {/* end notification recipients */}
 
         {/* notification subject */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Subject">
           {getFieldDecorator('subject', {
             rules: [{ required: true, message: 'Agency subject is required' }],
@@ -135,6 +115,7 @@ class NotificationForm extends Component {
         {/* notification subject */}
 
         {/* notification body */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Message">
           {getFieldDecorator('body', {
             rules: [
@@ -165,5 +146,27 @@ class NotificationForm extends Component {
     );
   }
 }
+
+NotificationForm.propTypes = {
+  selectedAgencies: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      title: PropTypes.string,
+      abbreviation: PropTypes.string,
+      mobile: PropTypes.string,
+      email: PropTypes.string,
+    })
+  ).isRequired,
+  body: PropTypes.string,
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+};
+
+NotificationForm.defaultProps = {
+  body: undefined,
+};
 
 export default Form.create()(NotificationForm);

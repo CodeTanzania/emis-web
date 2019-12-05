@@ -11,22 +11,6 @@ import { notifyError, notifySuccess } from '../../../../util';
 const { Option } = Select;
 
 class CriticalInfrastructureForm extends Component {
-  static propTypes = {
-    isEditForm: PropTypes.bool.isRequired,
-    nature: PropTypes.arrayOf(PropTypes.string).isRequired,
-    criticalInfrastructure: PropTypes.shape({
-      name: PropTypes.string,
-      type: PropTypes.string,
-      nature: PropTypes.string,
-    }).isRequired,
-    form: PropTypes.shape({
-      getFieldDecorator: PropTypes.func,
-      validateFieldsAndScroll: PropTypes.func,
-    }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    posting: PropTypes.bool.isRequired,
-  };
-
   /**
    * Handle submit form action
    *
@@ -50,16 +34,13 @@ class CriticalInfrastructureForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedCriticalInfrastructure = Object.assign(
-            {},
-            criticalInfrastructure,
-            {
-              ...values,
-              continent: 'Africa',
-              country: 'Tanzania',
-              family: 'CriticalInfrastructure',
-            }
-          );
+          const updatedCriticalInfrastructure = {
+            ...criticalInfrastructure,
+            ...values,
+            continent: 'Africa',
+            country: 'Tanzania',
+            family: 'CriticalInfrastructure',
+          };
           putFeature(
             updatedCriticalInfrastructure,
             () => {
@@ -129,6 +110,7 @@ class CriticalInfrastructureForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* Critical Infrastructure name */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Name">
           {getFieldDecorator('name', {
             initialValue: isEditForm ? criticalInfrastructure.name : undefined,
@@ -143,6 +125,7 @@ class CriticalInfrastructureForm extends Component {
         {/* end Critical Infrastructure name */}
 
         {/* Critical Infrastructure nature */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Nature">
           {getFieldDecorator('nature', {
             initialValue: isEditForm
@@ -175,6 +158,22 @@ class CriticalInfrastructureForm extends Component {
     );
   }
 }
+
+CriticalInfrastructureForm.propTypes = {
+  isEditForm: PropTypes.bool.isRequired,
+  nature: PropTypes.arrayOf(PropTypes.string).isRequired,
+  criticalInfrastructure: PropTypes.shape({
+    name: PropTypes.string,
+    type: PropTypes.string,
+    nature: PropTypes.string,
+  }).isRequired,
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  posting: PropTypes.bool.isRequired,
+};
 
 export default Form.create()(
   Connect(CriticalInfrastructureForm, {

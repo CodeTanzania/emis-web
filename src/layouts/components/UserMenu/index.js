@@ -7,12 +7,7 @@ import ChangePasswordForm from '../../../Auth/components/ChangePassword';
 import './styles.css';
 
 class UserMenu extends React.Component {
-  static propTypes = {
-    history: PropTypes.shape({
-      push: PropTypes.func.isRequired,
-    }).isRequired,
-  };
-
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     visible: false,
     confirmLoading: false,
@@ -95,5 +90,11 @@ class UserMenu extends React.Component {
     );
   }
 }
+
+UserMenu.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default withRouter(UserMenu);

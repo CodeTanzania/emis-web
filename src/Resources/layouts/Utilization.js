@@ -5,7 +5,7 @@ import EmptyState from '../../components/EmptyState';
  * @function
  * @name ResourcesUtilizationLayout
  * @description Render resources utilizations layout
- *
+ * @returns {React.Component} React element
  * @version 0.1.0
  * @since 0.1.0
  */

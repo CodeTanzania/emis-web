@@ -1,6 +1,6 @@
 import { List } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 import QuestionnairesListHeader from '../ListHeader';
 import QuestionnairesListItem from '../ListItem';
 
@@ -18,7 +18,7 @@ import QuestionnairesListItem from '../ListItem';
  * @since 0.1.0
  */
 const QuestionnairesList = ({ questionnaires, loading, onEdit }) => (
-  <Fragment>
+  <>
     <QuestionnairesListHeader />
     <List
       loading={loading}
@@ -34,7 +34,7 @@ const QuestionnairesList = ({ questionnaires, loading, onEdit }) => (
         />
       )}
     />
-  </Fragment>
+  </>
 );
 
 QuestionnairesList.propTypes = {

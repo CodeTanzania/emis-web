@@ -25,40 +25,9 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class AlertSources extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     isEditForm: false,
-  };
-
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    alertSource: PropTypes.shape({
-      name: PropTypes.string,
-      mobile: PropTypes.string,
-      email: PropTypes.string,
-      url: PropTypes.string,
-      website: PropTypes.string,
-      _id: PropTypes.string,
-    }),
-    alertSources: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string,
-        mobile: PropTypes.string,
-        email: PropTypes.string,
-        url: PropTypes.string,
-        website: PropTypes.string,
-        _id: PropTypes.string,
-      })
-    ).isRequired,
-    posting: PropTypes.bool.isRequired,
-    page: PropTypes.number.isRequired,
-    showForm: PropTypes.bool.isRequired,
-    total: PropTypes.number.isRequired,
-    searchQuery: PropTypes.string,
-  };
-
-  static defaultProps = {
-    alertSource: null,
-    searchQuery: undefined,
   };
 
   componentDidMount() {
@@ -216,6 +185,38 @@ class AlertSources extends Component {
     );
   }
 }
+
+AlertSources.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  alertSource: PropTypes.shape({
+    name: PropTypes.string,
+    mobile: PropTypes.string,
+    email: PropTypes.string,
+    url: PropTypes.string,
+    website: PropTypes.string,
+    _id: PropTypes.string,
+  }),
+  alertSources: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      mobile: PropTypes.string,
+      email: PropTypes.string,
+      url: PropTypes.string,
+      website: PropTypes.string,
+      _id: PropTypes.string,
+    })
+  ).isRequired,
+  posting: PropTypes.bool.isRequired,
+  page: PropTypes.number.isRequired,
+  showForm: PropTypes.bool.isRequired,
+  total: PropTypes.number.isRequired,
+  searchQuery: PropTypes.string,
+};
+
+AlertSources.defaultProps = {
+  alertSource: null,
+  searchQuery: undefined,
+};
 
 export default Connect(AlertSources, {
   alertSources: 'alertSources.list',

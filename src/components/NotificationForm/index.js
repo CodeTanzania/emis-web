@@ -20,34 +20,7 @@ const { TextArea } = Input;
  * @since 0.1.0
  */
 class NotificationForm extends Component {
-  static propTypes = {
-    recipients: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string,
-        title: PropTypes.string,
-        abbreviation: PropTypes.string,
-        mobile: PropTypes.string,
-        email: PropTypes.string,
-      })
-    ).isRequired,
-    form: PropTypes.shape({
-      getFieldDecorator: PropTypes.func,
-      validateFieldsAndScroll: PropTypes.func,
-    }).isRequired,
-    body: PropTypes.string,
-    onCancel: PropTypes.func.isRequired,
-    onSearchRecipients: PropTypes.func.isRequired,
-    onSearchJurisdictions: PropTypes.func.isRequired,
-    onSearchGroups: PropTypes.func.isRequired,
-    onSearchRoles: PropTypes.func.isRequired,
-    onSearchAgencies: PropTypes.func.isRequired,
-    posting: PropTypes.bool.isRequired,
-  };
-
-  static defaultProps = {
-    body: undefined,
-  };
-
+  // eslint-disable-next-line react/state-in-constructor
   state = { moreFilters: false };
 
   /**
@@ -184,6 +157,7 @@ class NotificationForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* notify recipients per jurisdictions */}
+        {/* eslint-disable */}
         {onSearchJurisdictions && moreFilters && (
           <Form.Item {...formItemLayout} label="Areas">
             {getFieldDecorator('features')(
@@ -289,6 +263,7 @@ class NotificationForm extends Component {
             initialValue: body,
           })(<TextArea autosize={{ minRows: 6, maxRows: 10 }} />)}
         </Form.Item>
+        {/* eslint-enable */}
         {/* end notification body */}
 
         {/* form actions */}
@@ -313,6 +288,34 @@ class NotificationForm extends Component {
     );
   }
 }
+
+NotificationForm.propTypes = {
+  recipients: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      title: PropTypes.string,
+      abbreviation: PropTypes.string,
+      mobile: PropTypes.string,
+      email: PropTypes.string,
+    })
+  ).isRequired,
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+  }).isRequired,
+  body: PropTypes.string,
+  onCancel: PropTypes.func.isRequired,
+  onSearchRecipients: PropTypes.func.isRequired,
+  onSearchJurisdictions: PropTypes.func.isRequired,
+  onSearchGroups: PropTypes.func.isRequired,
+  onSearchRoles: PropTypes.func.isRequired,
+  onSearchAgencies: PropTypes.func.isRequired,
+  posting: PropTypes.bool.isRequired,
+};
+
+NotificationForm.defaultProps = {
+  body: undefined,
+};
 
 export default Connect(Form.create()(NotificationForm), {
   posting: 'campaigns.posting',

@@ -18,20 +18,9 @@ const { confirm } = Modal;
  * @since 0.1.0
  */
 class CampaignListItem extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     isHovered: false,
-  };
-
-  /* props validation */
-  static propTypes = {
-    title: PropTypes.string.isRequired,
-    form: PropTypes.string.isRequired,
-    sentAt: PropTypes.string.isRequired,
-    sent: PropTypes.string.isRequired,
-    onArchive: PropTypes.func.isRequired,
-    isSelected: PropTypes.bool.isRequired,
-    onSelectItem: PropTypes.func.isRequired,
-    onDeselectItem: PropTypes.func.isRequired,
   };
 
   /**
@@ -166,5 +155,16 @@ class CampaignListItem extends Component {
     );
   }
 }
+
+CampaignListItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  form: PropTypes.string.isRequired,
+  sentAt: PropTypes.string.isRequired,
+  sent: PropTypes.string.isRequired,
+  onArchive: PropTypes.func.isRequired,
+  isSelected: PropTypes.bool.isRequired,
+  onSelectItem: PropTypes.func.isRequired,
+  onDeselectItem: PropTypes.func.isRequired,
+};
 
 export default CampaignListItem;

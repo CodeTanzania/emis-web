@@ -1,6 +1,6 @@
 import { Icon, Avatar, Col, Row, Checkbox } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import './styles.css';
 
 /**
@@ -13,15 +13,7 @@ import './styles.css';
  * @since 0.1.0
  */
 class IndicatorListItem extends Component {
-  /* props validation */
-  static propTypes = {
-    subject: PropTypes.string.isRequired,
-    topic: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    color: PropTypes.string.isRequired,
-    onEdit: PropTypes.func.isRequired,
-  };
-
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     isHovered: false,
   };
@@ -58,7 +50,7 @@ class IndicatorListItem extends Component {
           <Col span={8}>{description}</Col>
           <Col span={3}>
             {isHovered && (
-              <Fragment>
+              <>
                 <Icon
                   type="edit"
                   title="Update indicator"
@@ -70,7 +62,7 @@ class IndicatorListItem extends Component {
                   title="Archive indicator"
                   className="actionIcon"
                 />
-              </Fragment>
+              </>
             )}
           </Col>
         </Row>
@@ -78,5 +70,13 @@ class IndicatorListItem extends Component {
     );
   }
 }
+
+IndicatorListItem.propTypes = {
+  subject: PropTypes.string.isRequired,
+  topic: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  onEdit: PropTypes.func.isRequired,
+};
 
 export default IndicatorListItem;

@@ -17,24 +17,6 @@ import React, { Component } from 'react';
  * @since 0.1.0
  */
 class EvacuationCentersFilters extends Component {
-  static propTypes = {
-    nature: PropTypes.arrayOf(PropTypes.string).isRequired,
-    filter: PropTypes.objectOf(
-      PropTypes.shape({
-        nature: PropTypes.arrayOf(PropTypes.string),
-      })
-    ),
-    form: PropTypes.shape({
-      getFieldDecorator: PropTypes.func,
-      validateFields: PropTypes.func,
-    }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-  };
-
-  static defaultProps = {
-    filter: null,
-  };
-
   /**
    *
    * @function
@@ -105,6 +87,7 @@ class EvacuationCentersFilters extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* start evacuation centers nature filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By Nature">
           {getFieldDecorator('nature', {
             initialValue: filter ? filter.nature : [],
@@ -137,6 +120,25 @@ class EvacuationCentersFilters extends Component {
     );
   }
 }
+
+EvacuationCentersFilters.propTypes = {
+  nature: PropTypes.arrayOf(PropTypes.string).isRequired,
+  filter: PropTypes.objectOf(
+    PropTypes.shape({
+      nature: PropTypes.arrayOf(PropTypes.string),
+    })
+  ),
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFields: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+};
+
+EvacuationCentersFilters.defaultProps = {
+  filter: null,
+};
+
 export default Form.create()(
   Connect(EvacuationCentersFilters, {
     filter: 'features.filter',

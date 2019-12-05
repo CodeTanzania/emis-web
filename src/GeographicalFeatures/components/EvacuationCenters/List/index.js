@@ -1,6 +1,6 @@
 import { List } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 import EvacuationCenterListHeader from '../ListHeader';
 import EvacuationCenterListItem from '../ListItem';
 
@@ -20,7 +20,7 @@ import EvacuationCenterListItem from '../ListItem';
  * @since 0.1.0
  */
 const EvacuationCenterList = ({ evacuationCenters, loading, onEdit }) => (
-  <Fragment>
+  <>
     <EvacuationCenterListHeader />
     <List
       loading={loading}
@@ -34,7 +34,7 @@ const EvacuationCenterList = ({ evacuationCenters, loading, onEdit }) => (
         />
       )}
     />
-  </Fragment>
+  </>
 );
 
 EvacuationCenterList.propTypes = {

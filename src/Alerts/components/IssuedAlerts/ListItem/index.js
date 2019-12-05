@@ -19,32 +19,9 @@ const { confirm } = Modal;
  * @since 0.1.0
  */
 class AlertListItem extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     isHovered: false,
-  };
-
-  static propTypes = {
-    abbreviation: PropTypes.string.isRequired,
-    headline: PropTypes.string,
-    description: PropTypes.string,
-    event: PropTypes.string.isRequired,
-    source: PropTypes.string.isRequired,
-    color: PropTypes.string.isRequired,
-    certainty: PropTypes.string.isRequired,
-    expiredAt: PropTypes.string.isRequired,
-    expectedAt: PropTypes.string.isRequired,
-    severity: PropTypes.func.isRequired,
-    urgency: PropTypes.func.isRequired,
-    onArchive: PropTypes.func.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    isSelected: PropTypes.bool.isRequired,
-    onSelectItem: PropTypes.func.isRequired,
-    onDeselectItem: PropTypes.func.isRequired,
-  };
-
-  static defaultProps = {
-    description: '',
-    headline: '',
   };
 
   /**
@@ -199,5 +176,29 @@ class AlertListItem extends Component {
     );
   }
 }
+
+AlertListItem.propTypes = {
+  abbreviation: PropTypes.string.isRequired,
+  headline: PropTypes.string,
+  description: PropTypes.string,
+  event: PropTypes.string.isRequired,
+  source: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  certainty: PropTypes.string.isRequired,
+  expiredAt: PropTypes.string.isRequired,
+  expectedAt: PropTypes.string.isRequired,
+  severity: PropTypes.func.isRequired,
+  urgency: PropTypes.func.isRequired,
+  onArchive: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  isSelected: PropTypes.bool.isRequired,
+  onSelectItem: PropTypes.func.isRequired,
+  onDeselectItem: PropTypes.func.isRequired,
+};
+
+AlertListItem.defaultProps = {
+  description: '',
+  headline: '',
+};
 
 export default AlertListItem;

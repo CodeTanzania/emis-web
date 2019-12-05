@@ -21,30 +21,6 @@ const { TextArea } = Input;
  * @since 0.1.0
  */
 class QuestionnaireForm extends Component {
-  static propTypes = {
-    isEditForm: PropTypes.bool.isRequired,
-    questionnaire: PropTypes.shape({
-      title: PropTypes.string,
-      stage: PropTypes.string,
-      assess: PropTypes.string,
-      phase: PropTypes.string,
-      description: PropTypes.string,
-    }),
-    form: PropTypes.shape({
-      getFieldDecorator: PropTypes.func,
-      validateFieldsAndScroll: PropTypes.func,
-    }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    posting: PropTypes.bool.isRequired,
-    assess: PropTypes.arrayOf(PropTypes.string).isRequired,
-    phases: PropTypes.arrayOf(PropTypes.string).isRequired,
-    stages: PropTypes.arrayOf(PropTypes.string).isRequired,
-  };
-
-  static defaultProps = {
-    questionnaire: null,
-  };
-
   /**
    *
    * @function
@@ -67,7 +43,7 @@ class QuestionnaireForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedQuestionnaire = Object.assign({}, questionnaire, values);
+          const updatedQuestionnaire = { ...questionnaire, ...values };
           putQuestionnaire(
             updatedQuestionnaire,
             () => {
@@ -132,6 +108,7 @@ class QuestionnaireForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* title */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Title">
           {getFieldDecorator('title', {
             initialValue: isEditForm ? questionnaire.title : undefined,
@@ -141,6 +118,7 @@ class QuestionnaireForm extends Component {
         {/* end title */}
 
         {/* phase */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Emergency Phase">
           {getFieldDecorator('phase', {
             initialValue: isEditForm ? questionnaire.phase : undefined,
@@ -158,6 +136,7 @@ class QuestionnaireForm extends Component {
         {/* end phase */}
 
         {/* assess */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Assess">
           {getFieldDecorator('assess', {
             initialValue: isEditForm ? questionnaire.assess : undefined,
@@ -175,6 +154,7 @@ class QuestionnaireForm extends Component {
         {/* end assess */}
 
         {/* stage */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Stage">
           {getFieldDecorator('stage', {
             initialValue: isEditForm ? questionnaire.stage : undefined,
@@ -192,6 +172,7 @@ class QuestionnaireForm extends Component {
         {/* end stage */}
 
         {/* description */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Questionnaire Summary">
           {getFieldDecorator('description', {
             initialValue: isEditForm ? questionnaire.description : undefined,
@@ -222,6 +203,30 @@ class QuestionnaireForm extends Component {
     );
   }
 }
+
+QuestionnaireForm.propTypes = {
+  isEditForm: PropTypes.bool.isRequired,
+  questionnaire: PropTypes.shape({
+    title: PropTypes.string,
+    stage: PropTypes.string,
+    assess: PropTypes.string,
+    phase: PropTypes.string,
+    description: PropTypes.string,
+  }),
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  posting: PropTypes.bool.isRequired,
+  assess: PropTypes.arrayOf(PropTypes.string).isRequired,
+  phases: PropTypes.arrayOf(PropTypes.string).isRequired,
+  stages: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+QuestionnaireForm.defaultProps = {
+  questionnaire: null,
+};
 
 export default Connect(Form.create()(QuestionnaireForm), {
   assess: 'questionnaires.schema.properties.assess.enum',

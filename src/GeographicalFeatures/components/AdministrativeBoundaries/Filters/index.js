@@ -92,11 +92,6 @@ const levels = [
  * @since 0.1.0
  */
 class AdministrativeBoundariesFilters extends Component {
-  static propTypes = {
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-  };
-
   handleSubmit = e => {
     e.preventDefault();
   };
@@ -129,6 +124,7 @@ class AdministrativeBoundariesFilters extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* start administrative boundaries categories filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By Categories">
           {getFieldDecorator('types')(
             <Checkbox.Group style={{ width: '100%' }}>
@@ -145,6 +141,7 @@ class AdministrativeBoundariesFilters extends Component {
         {/* end administrative Boundaries categories filters */}
 
         {/* start administrative Boundaries levels filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By Levels">
           {getFieldDecorator('types')(
             <Checkbox.Group style={{ width: '100%' }}>
@@ -161,6 +158,7 @@ class AdministrativeBoundariesFilters extends Component {
         {/* end administrative boundaries levels filters */}
 
         {/* start administrative boundaries types filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By Types">
           {getFieldDecorator('types')(
             <Checkbox.Group style={{ width: '100%' }}>
@@ -193,4 +191,10 @@ class AdministrativeBoundariesFilters extends Component {
     );
   }
 }
+
+AdministrativeBoundariesFilters.propTypes = {
+  form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+};
+
 export default Form.create()(AdministrativeBoundariesFilters);

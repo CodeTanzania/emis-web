@@ -48,57 +48,6 @@ const alertSourceTitle =
  * @since 0.1.0
  */
 class AlertForm extends Component {
-  static propTypes = {
-    alertSchema: PropTypes.shape({
-      category: PropTypes.arrayOf(
-        PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
-      ),
-      urgency: PropTypes.arrayOf(
-        PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
-      ),
-      severity: PropTypes.arrayOf(
-        PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
-      ),
-      certainty: PropTypes.arrayOf(
-        PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
-      ),
-      type: PropTypes.arrayOf(
-        PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
-      ),
-      response: PropTypes.arrayOf(
-        PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
-      ),
-      status: PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) }),
-    }).isRequired,
-    alert: PropTypes.shape({
-      event: PropTypes.string,
-      category: PropTypes.string,
-      urgency: PropTypes.string,
-      area: PropTypes.string,
-      severity: PropTypes.string,
-      certainty: PropTypes.string,
-      instruction: PropTypes.string,
-      headline: PropTypes.string,
-      expiredAt: PropTypes.string,
-      expectedAt: PropTypes.string,
-      locations: PropTypes.arrayOf({ name: PropTypes.string }),
-      type: PropTypes.string,
-      response: PropTypes.string,
-      _id: PropTypes.string,
-    }),
-    posting: PropTypes.bool.isRequired,
-    onCancel: PropTypes.func.isRequired,
-    isEditForm: PropTypes.bool.isRequired,
-    form: PropTypes.shape({
-      getFieldDecorator: PropTypes.func,
-      validateFieldsAndScroll: PropTypes.func,
-    }).isRequired,
-  };
-
-  static defaultProps = {
-    alert: null,
-  };
-
   componentDidMount() {
     getFeatures();
   }
@@ -151,7 +100,7 @@ class AlertForm extends Component {
           source: 'testing',
         };
         if (isEditForm) {
-          const updatedAlert = Object.assign({}, alert, payload);
+          const updatedAlert = { ...alert, ...payload };
           putAlert(
             updatedAlert,
             () => {
@@ -250,6 +199,7 @@ class AlertForm extends Component {
         <Row justify="space-between" type="flex">
           <Col span={11}>
             {/* Alert event */}
+            {/* eslint-disable */}
             <Form.Item
               {...formItemLayout}
               label={<span title={eventTitle}>Event</span>}
@@ -509,6 +459,7 @@ class AlertForm extends Component {
               )}
             </Form.Item>
             {/* end alert source */}
+            {/* eslint-enable */}
           </Col>
         </Row>
 
@@ -529,6 +480,57 @@ class AlertForm extends Component {
     );
   }
 }
+
+AlertForm.propTypes = {
+  alertSchema: PropTypes.shape({
+    category: PropTypes.arrayOf(
+      PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
+    ),
+    urgency: PropTypes.arrayOf(
+      PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
+    ),
+    severity: PropTypes.arrayOf(
+      PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
+    ),
+    certainty: PropTypes.arrayOf(
+      PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
+    ),
+    type: PropTypes.arrayOf(
+      PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
+    ),
+    response: PropTypes.arrayOf(
+      PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
+    ),
+    status: PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) }),
+  }).isRequired,
+  alert: PropTypes.shape({
+    event: PropTypes.string,
+    category: PropTypes.string,
+    urgency: PropTypes.string,
+    area: PropTypes.string,
+    severity: PropTypes.string,
+    certainty: PropTypes.string,
+    instruction: PropTypes.string,
+    headline: PropTypes.string,
+    expiredAt: PropTypes.string,
+    expectedAt: PropTypes.string,
+    locations: PropTypes.arrayOf({ name: PropTypes.string }),
+    type: PropTypes.string,
+    response: PropTypes.string,
+    _id: PropTypes.string,
+  }),
+  posting: PropTypes.bool.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  isEditForm: PropTypes.bool.isRequired,
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+  }).isRequired,
+};
+
+AlertForm.defaultProps = {
+  alert: null,
+};
 
 export default Form.create()(
   Connect(AlertForm, {

@@ -7,6 +7,7 @@ import './styles.css';
  * @function
  * @name ListItemActions
  * @description Render Dropdown component with has actions for list items
+ * @returns {object} react element
  *
  * @param {object} props props object
  * @param {object} props.edit on edit action callback

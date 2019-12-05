@@ -22,46 +22,6 @@ import React, { Component } from 'react';
  * @since 0.1.0
  */
 class AlertsFilters extends Component {
-  static propTypes = {
-    alertSchema: PropTypes.shape({
-      category: PropTypes.shape(
-        PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
-      ),
-      urgency: PropTypes.shape(
-        PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
-      ),
-      severity: PropTypes.shape(
-        PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
-      ),
-      certainty: PropTypes.shape(
-        PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
-      ),
-      response: PropTypes.shape(
-        PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
-      ),
-      type: PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) }),
-    }).isRequired,
-    filter: PropTypes.objectOf(
-      PropTypes.shape({
-        category: PropTypes.arrayOf(PropTypes.string),
-        urgency: PropTypes.arrayOf(PropTypes.string),
-        severity: PropTypes.arrayOf(PropTypes.string),
-        certainty: PropTypes.arrayOf(PropTypes.string),
-        type: PropTypes.arrayOf(PropTypes.string),
-        response: PropTypes.arrayOf(PropTypes.string),
-      })
-    ),
-    onCancel: PropTypes.func.isRequired,
-    form: PropTypes.shape({
-      getFieldDecorator: PropTypes.func,
-      validateFields: PropTypes.func,
-    }).isRequired,
-  };
-
-  static defaultProps = {
-    filter: null,
-  };
-
   /**
    * @function
    * @name handleSubmit
@@ -132,6 +92,7 @@ class AlertsFilters extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* start alert types filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By  Message Types">
           {getFieldDecorator('type', {
             initialValue: filter ? filter.type : [],
@@ -150,6 +111,7 @@ class AlertsFilters extends Component {
         {/* end alert types filters */}
 
         {/* start alert categories filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By  Categories">
           {getFieldDecorator('category', {
             initialValue: filter ? filter.category : [],
@@ -168,6 +130,7 @@ class AlertsFilters extends Component {
         {/* end alert categories filters */}
 
         {/* start alert responses filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By  Response Type">
           {getFieldDecorator('response', {
             initialValue: filter ? filter.response : [],
@@ -186,6 +149,7 @@ class AlertsFilters extends Component {
         {/* end alert responses filters */}
 
         {/* start alert urgency filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By  Urgency">
           {getFieldDecorator('urgency', {
             initialValue: filter ? filter.urgency : [],
@@ -204,6 +168,7 @@ class AlertsFilters extends Component {
         {/* end alert urgency filters */}
 
         {/* start alert severity filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By  Severity">
           {getFieldDecorator('severity', {
             initialValue: filter ? filter.severity : [],
@@ -222,6 +187,7 @@ class AlertsFilters extends Component {
         {/* end alert severity filters */}
 
         {/* start alert cetainity filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By  Certainity">
           {getFieldDecorator('certainty', {
             initialValue: filter ? filter.certainty : [],
@@ -254,6 +220,46 @@ class AlertsFilters extends Component {
     );
   }
 }
+
+AlertsFilters.propTypes = {
+  alertSchema: PropTypes.shape({
+    category: PropTypes.shape(
+      PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
+    ),
+    urgency: PropTypes.shape(
+      PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
+    ),
+    severity: PropTypes.shape(
+      PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
+    ),
+    certainty: PropTypes.shape(
+      PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
+    ),
+    response: PropTypes.shape(
+      PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) })
+    ),
+    type: PropTypes.shape({ enum: PropTypes.arrayOf(PropTypes.string) }),
+  }).isRequired,
+  filter: PropTypes.objectOf(
+    PropTypes.shape({
+      category: PropTypes.arrayOf(PropTypes.string),
+      urgency: PropTypes.arrayOf(PropTypes.string),
+      severity: PropTypes.arrayOf(PropTypes.string),
+      certainty: PropTypes.arrayOf(PropTypes.string),
+      type: PropTypes.arrayOf(PropTypes.string),
+      response: PropTypes.arrayOf(PropTypes.string),
+    })
+  ),
+  onCancel: PropTypes.func.isRequired,
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFields: PropTypes.func,
+  }).isRequired,
+};
+
+AlertsFilters.defaultProps = {
+  filter: null,
+};
 export default Form.create()(
   Connect(AlertsFilters, {
     alertSchema: 'alerts.schema.properties',

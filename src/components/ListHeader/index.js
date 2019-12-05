@@ -7,6 +7,7 @@ import './styles.css';
  * @function
  * @name ListHeader
  * @description List header component
+ * @returns {object} react element
  *
  * @param {object} props props object
  * @param {object[]} props.headerLayout list of header items configs
@@ -40,6 +41,7 @@ const ListHeader = ({
     </Col>
 
     {headerLayout.map(item => (
+      // eslint-disable-next-line react/jsx-props-no-spreading
       <Col key={item.header} {...item}>
         <h4 className="title">{item.header}</h4>
       </Col>

@@ -7,6 +7,7 @@ import './styles.css';
  * @function
  * @name EmptyState
  * @description Empty state component
+ * @returns {object} react element
  *
  * @param {object} props props object
  * @param {string} props.icon path to state icon

@@ -16,26 +16,6 @@ import React, { Component } from 'react';
  * @since 0.1.0
  */
 class IncidentTypesFilters extends Component {
-  static propTypes = {
-    form: PropTypes.shape({
-      getFieldDecorator: PropTypes.func,
-      validateFields: PropTypes.func,
-    }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    families: PropTypes.arrayOf(PropTypes.string).isRequired,
-    natures: PropTypes.arrayOf(PropTypes.string).isRequired,
-    filter: PropTypes.objectOf(
-      PropTypes.shape({
-        families: PropTypes.arrayOf(PropTypes.string).isRequired,
-        natures: PropTypes.arrayOf(PropTypes.string).isRequired,
-      })
-    ),
-  };
-
-  static defaultProps = {
-    filter: null,
-  };
-
   /**
    * @function
    * @name handleSubmit
@@ -107,6 +87,7 @@ class IncidentTypesFilters extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* start families filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By Emergency Families">
           {getFieldDecorator('family', {
             initialValue: filter ? filter.families : [],
@@ -125,6 +106,7 @@ class IncidentTypesFilters extends Component {
         {/* end families filters */}
 
         {/* start natures filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By Nature ">
           {getFieldDecorator('nature', {
             initialValue: filter ? filter.natures : [],
@@ -157,6 +139,26 @@ class IncidentTypesFilters extends Component {
     );
   }
 }
+
+IncidentTypesFilters.propTypes = {
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFields: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  families: PropTypes.arrayOf(PropTypes.string).isRequired,
+  natures: PropTypes.arrayOf(PropTypes.string).isRequired,
+  filter: PropTypes.objectOf(
+    PropTypes.shape({
+      families: PropTypes.arrayOf(PropTypes.string).isRequired,
+      natures: PropTypes.arrayOf(PropTypes.string).isRequired,
+    })
+  ),
+};
+
+IncidentTypesFilters.defaultProps = {
+  filter: null,
+};
 
 export default Connect(Form.create()(IncidentTypesFilters), {
   natures: 'incidentTypes.schema.properties.nature.enum',

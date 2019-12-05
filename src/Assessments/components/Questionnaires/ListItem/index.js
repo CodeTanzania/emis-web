@@ -1,6 +1,6 @@
 import { Avatar, Checkbox, Col, Icon, Row } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import randomColor from 'randomcolor';
 import './styles.css';
 
@@ -15,16 +15,9 @@ import './styles.css';
  * @since 0.1.0
  */
 class QuestionnairesListItem extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     isHovered: false,
-  };
-
-  static propTypes = {
-    title: PropTypes.string.isRequired,
-    phase: PropTypes.string.isRequired,
-    assess: PropTypes.string.isRequired,
-    stage: PropTypes.string.isRequired,
-    onEdit: PropTypes.func.isRequired,
   };
 
   handleMouseEnter = () => {
@@ -61,7 +54,7 @@ class QuestionnairesListItem extends Component {
           <Col span={3}>{stage}</Col>
           <Col span={3}>
             {isHovered && (
-              <Fragment>
+              <>
                 <Icon
                   type="edit"
                   title="Update Questionnaire"
@@ -78,7 +71,7 @@ class QuestionnairesListItem extends Component {
                   title="Archive Questionnaire"
                   className="actionIcon"
                 />
-              </Fragment>
+              </>
             )}
           </Col>
         </Row>
@@ -86,5 +79,13 @@ class QuestionnairesListItem extends Component {
     );
   }
 }
+
+QuestionnairesListItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  phase: PropTypes.string.isRequired,
+  assess: PropTypes.string.isRequired,
+  stage: PropTypes.string.isRequired,
+  onEdit: PropTypes.func.isRequired,
+};
 
 export default QuestionnairesListItem;
