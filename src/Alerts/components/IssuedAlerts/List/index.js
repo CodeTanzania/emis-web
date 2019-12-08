@@ -13,7 +13,7 @@ import uniqBy from 'lodash/uniqBy';
 import remove from 'lodash/remove';
 import intersectionBy from 'lodash/intersectionBy';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import ListHeader from '../../../../components/ListHeader';
 import { notifyError, notifySuccess } from '../../../../util';
 import Toolbar from '../../../../components/Toolbar';
@@ -98,17 +98,7 @@ const { getAlertsExportUrl } = httpActions;
  * @since 0.1.0
  */
 class AlertList extends Component {
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    alerts: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-      .isRequired,
-    page: PropTypes.number.isRequired,
-    total: PropTypes.number.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    onShare: PropTypes.func.isRequired,
-    onFilter: PropTypes.func.isRequired,
-  };
-
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     selectedAlerts: [],
     selectedPages: [],
@@ -236,7 +226,7 @@ class AlertList extends Component {
       .length;
 
     return (
-      <Fragment>
+      <>
         {/* toolbar */}
         <Toolbar
           itemName="Alert"
@@ -327,9 +317,20 @@ class AlertList extends Component {
           }}
         />
         {/* end alerts list */}
-      </Fragment>
+      </>
     );
   }
 }
+
+AlertList.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  alerts: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+    .isRequired,
+  page: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onShare: PropTypes.func.isRequired,
+  onFilter: PropTypes.func.isRequired,
+};
 
 export default AlertList;

@@ -27,33 +27,13 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class CriticalInfrastructures extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     showFilters: false,
     isEditForm: false,
   };
 
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    showForm: PropTypes.bool.isRequired,
-    posting: PropTypes.bool.isRequired,
-    criticalInfrastructures: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string,
-        type: PropTypes.string,
-      })
-    ).isRequired,
-    criticalInfrastructure: PropTypes.shape({
-      name: PropTypes.string,
-      level: PropTypes.string,
-    }),
-    total: PropTypes.number.isRequired,
-    page: PropTypes.number.isRequired,
-  };
-
-  static defaultProps = {
-    criticalInfrastructure: null,
-  };
-
+  // eslint-disable-next-line react/no-deprecated
   componentWillMount() {
     getFeatures();
   }
@@ -251,6 +231,28 @@ class CriticalInfrastructures extends Component {
     );
   }
 }
+
+CriticalInfrastructures.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  showForm: PropTypes.bool.isRequired,
+  posting: PropTypes.bool.isRequired,
+  criticalInfrastructures: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      type: PropTypes.string,
+    })
+  ).isRequired,
+  criticalInfrastructure: PropTypes.shape({
+    name: PropTypes.string,
+    level: PropTypes.string,
+  }),
+  total: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired,
+};
+
+CriticalInfrastructures.defaultProps = {
+  criticalInfrastructure: null,
+};
 
 export default Connect(CriticalInfrastructures, {
   criticalInfrastructures: 'features.list',

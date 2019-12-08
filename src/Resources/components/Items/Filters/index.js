@@ -16,26 +16,6 @@ import React, { Component } from 'react';
  * @since 0.1.0
  */
 class ItemsFilters extends Component {
-  static propTypes = {
-    filter: PropTypes.objectOf(
-      PropTypes.shape({
-        types: PropTypes.arrayOf(PropTypes.string),
-        uoms: PropTypes.arrayOf(PropTypes.string),
-      })
-    ),
-    form: PropTypes.shape({
-      getFieldDecorator: PropTypes.func,
-      validateFields: PropTypes.func,
-    }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    types: PropTypes.arrayOf(PropTypes.string).isRequired,
-    uoms: PropTypes.arrayOf(PropTypes.string).isRequired,
-  };
-
-  static defaultProps = {
-    filter: null,
-  };
-
   /**
    * @function
    * @name handleSubmit
@@ -106,6 +86,7 @@ class ItemsFilters extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* start type filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By Types">
           {getFieldDecorator('type', {
             initialValue: filter ? filter.type : [],
@@ -124,6 +105,7 @@ class ItemsFilters extends Component {
         {/* end type filters */}
 
         {/* start unit of measure filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By Unit of Measurement">
           {getFieldDecorator('uom', {
             initialValue: filter ? filter.uom : [],
@@ -156,6 +138,26 @@ class ItemsFilters extends Component {
     );
   }
 }
+
+ItemsFilters.propTypes = {
+  filter: PropTypes.objectOf(
+    PropTypes.shape({
+      types: PropTypes.arrayOf(PropTypes.string),
+      uoms: PropTypes.arrayOf(PropTypes.string),
+    })
+  ),
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFields: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  types: PropTypes.arrayOf(PropTypes.string).isRequired,
+  uoms: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+ItemsFilters.defaultProps = {
+  filter: null,
+};
 
 export default Connect(Form.create()(ItemsFilters), {
   types: 'items.schema.properties.type.enum',

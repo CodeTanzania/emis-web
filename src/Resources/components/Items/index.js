@@ -9,7 +9,7 @@ import {
 } from '@codetanzania/emis-api-states';
 import { Modal } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import NotificationForm from '../../../components/NotificationForm';
 import Topbar from '../../../components/Topbar';
 import ItemFilters from './Filters';
@@ -29,37 +29,13 @@ const { getItems: getItemsFromAPI } = httpActions;
  * @since 0.1.0
  */
 class Items extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     showFilters: false,
     isEditForm: false,
     showNotificationForm: false,
     selectedItems: [],
     notificationBody: undefined,
-  };
-
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    posting: PropTypes.bool.isRequired,
-    items: PropTypes.arrayOf(
-      PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        maxStockAllowed: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        minStockAllowed: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
-      })
-    ).isRequired,
-    item: PropTypes.shape({ name: PropTypes.string }),
-    page: PropTypes.number.isRequired,
-    showForm: PropTypes.bool.isRequired,
-    searchQuery: PropTypes.string,
-    total: PropTypes.number.isRequired,
-  };
-
-  static defaultProps = {
-    item: null,
-    searchQuery: undefined,
   };
 
   componentDidMount() {
@@ -255,7 +231,7 @@ class Items extends Component {
       notificationBody,
     } = this.state;
     return (
-      <Fragment>
+      <>
         {/* Topbar */}
         <Topbar
           search={{
@@ -345,10 +321,35 @@ class Items extends Component {
           </Modal>
           {/* end create/edit form modal */}
         </div>
-      </Fragment>
+      </>
     );
   }
 }
+
+Items.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  posting: PropTypes.bool.isRequired,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      maxStockAllowed: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      minStockAllowed: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  item: PropTypes.shape({ name: PropTypes.string }),
+  page: PropTypes.number.isRequired,
+  showForm: PropTypes.bool.isRequired,
+  searchQuery: PropTypes.string,
+  total: PropTypes.number.isRequired,
+};
+
+Items.defaultProps = {
+  item: null,
+  searchQuery: undefined,
+};
 
 export default Connect(Items, {
   items: 'items.list',

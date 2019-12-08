@@ -12,7 +12,7 @@ import map from 'lodash/map';
 import uniq from 'lodash/uniq';
 import uniqBy from 'lodash/uniqBy';
 import remove from 'lodash/remove';
-import React, { Fragment } from 'react';
+import React from 'react';
 import ListHeader from '../../../../components/ListHeader';
 import Toolbar from '../../../../components/Toolbar';
 import WarehouseListItem from '../ListItem';
@@ -36,20 +36,7 @@ const headerLayout = [
  * @since 0.1.0
  */
 class WarehouseList extends React.Component {
-  static propTypes = {
-    page: PropTypes.number.isRequired,
-    total: PropTypes.number.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    onFilter: PropTypes.func.isRequired,
-    loading: PropTypes.bool.isRequired,
-    warehouses: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string,
-        level: PropTypes.string,
-      })
-    ).isRequired,
-  };
-
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     selectedWarehouse: [],
     selectedPages: [],
@@ -154,7 +141,7 @@ class WarehouseList extends React.Component {
       '_id'
     ).length;
     return (
-      <Fragment>
+      <>
         {/* toolbar */}
         <Toolbar
           itemName="Warehouse"
@@ -228,9 +215,23 @@ class WarehouseList extends React.Component {
             />
           )}
         />
-      </Fragment>
+      </>
     );
   }
 }
+
+WarehouseList.propTypes = {
+  page: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onFilter: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  warehouses: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      level: PropTypes.string,
+    })
+  ).isRequired,
+};
 
 export default WarehouseList;

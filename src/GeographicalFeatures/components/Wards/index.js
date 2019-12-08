@@ -27,24 +27,10 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class Wards extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     showFilters: false,
     isEditForm: false,
-  };
-
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    wards: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-      .isRequired,
-    page: PropTypes.number.isRequired,
-    total: PropTypes.number.isRequired,
-    posting: PropTypes.bool.isRequired,
-    ward: PropTypes.shape({ name: PropTypes.string }),
-    showForm: PropTypes.bool.isRequired,
-  };
-
-  static defaultProps = {
-    ward: null,
   };
 
   componentDidMount() {
@@ -231,6 +217,21 @@ class Wards extends Component {
     );
   }
 }
+
+Wards.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  wards: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+    .isRequired,
+  page: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  posting: PropTypes.bool.isRequired,
+  ward: PropTypes.shape({ name: PropTypes.string }),
+  showForm: PropTypes.bool.isRequired,
+};
+
+Wards.defaultProps = {
+  ward: null,
+};
 
 export default Connect(Wards, {
   wards: 'features.list',

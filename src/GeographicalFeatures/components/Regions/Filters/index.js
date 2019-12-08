@@ -16,28 +16,6 @@ import React, { Component } from 'react';
  * @since 0.1.0
  */
 class RegionsFilters extends Component {
-  static propTypes = {
-    filter: PropTypes.objectOf(
-      PropTypes.shape({
-        types: PropTypes.arrayOf(PropTypes.string),
-        natures: PropTypes.arrayOf(PropTypes.string),
-        families: PropTypes.arrayOf(PropTypes.string),
-      })
-    ),
-    form: PropTypes.shape({
-      getFieldDecorator: PropTypes.func,
-      validateFields: PropTypes.func,
-    }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    types: PropTypes.arrayOf(PropTypes.string).isRequired,
-    natures: PropTypes.arrayOf(PropTypes.string).isRequired,
-    families: PropTypes.arrayOf(PropTypes.string).isRequired,
-  };
-
-  static defaultProps = {
-    filter: null,
-  };
-
   /**
    * @function
    * @name handleSubmit
@@ -110,6 +88,7 @@ class RegionsFilters extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* start nature filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By Region nature">
           {getFieldDecorator('nature', {
             initialValue: filter ? filter.nature : [],
@@ -128,6 +107,7 @@ class RegionsFilters extends Component {
         {/* end nature filters */}
 
         {/* start type filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By Region type">
           {getFieldDecorator('type', {
             initialValue: filter ? filter.type : [],
@@ -146,6 +126,7 @@ class RegionsFilters extends Component {
         {/* end type filters */}
 
         {/* start family filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By Family">
           {getFieldDecorator('family', {
             initialValue: filter ? filter.family : [],
@@ -178,6 +159,28 @@ class RegionsFilters extends Component {
     );
   }
 }
+
+RegionsFilters.propTypes = {
+  filter: PropTypes.objectOf(
+    PropTypes.shape({
+      types: PropTypes.arrayOf(PropTypes.string),
+      natures: PropTypes.arrayOf(PropTypes.string),
+      families: PropTypes.arrayOf(PropTypes.string),
+    })
+  ),
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFields: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  types: PropTypes.arrayOf(PropTypes.string).isRequired,
+  natures: PropTypes.arrayOf(PropTypes.string).isRequired,
+  families: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+RegionsFilters.defaultProps = {
+  filter: null,
+};
 
 export default Connect(Form.create()(RegionsFilters), {
   natures: 'features.schema.properties.nature.enum',

@@ -26,26 +26,12 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class Plans extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     showFilters: false,
     isEditForm: false,
     showNotificationForm: false,
     selectedPlans: [],
-  };
-
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    posting: PropTypes.bool.isRequired,
-    plans: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-      .isRequired,
-    plan: PropTypes.shape({ name: PropTypes.string }),
-    page: PropTypes.number.isRequired,
-    showForm: PropTypes.bool.isRequired,
-    total: PropTypes.number.isRequired,
-  };
-
-  static defaultProps = {
-    plan: null,
   };
 
   componentDidMount() {
@@ -273,6 +259,21 @@ class Plans extends Component {
     );
   }
 }
+
+Plans.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  posting: PropTypes.bool.isRequired,
+  plans: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+    .isRequired,
+  plan: PropTypes.shape({ name: PropTypes.string }),
+  page: PropTypes.number.isRequired,
+  showForm: PropTypes.bool.isRequired,
+  total: PropTypes.number.isRequired,
+};
+
+Plans.defaultProps = {
+  plan: null,
+};
 
 export default Connect(Plans, {
   plans: 'plans.list',

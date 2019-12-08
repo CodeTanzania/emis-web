@@ -1,7 +1,7 @@
 import { Avatar, Checkbox, Col, Icon, Row } from 'antd';
 import PropTypes from 'prop-types';
 import randomColor from 'randomcolor';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import './styles.css';
 
@@ -14,24 +14,9 @@ import './styles.css';
  * @since 0.1.0
  */
 class ActivitiesListItem extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     isHovered: false,
-  };
-
-  static propTypes = {
-    code: PropTypes.string.isRequired,
-    color: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    incidentType: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-    match: PropTypes.shape({ url: PropTypes.string.isRequired }).isRequired,
-    name: PropTypes.string.isRequired,
-    phase: PropTypes.string.isRequired,
-    onArchive: PropTypes.func.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    isSelected: PropTypes.bool.isRequired,
-    onSelectItem: PropTypes.func.isRequired,
-    onDeselectItem: PropTypes.func.isRequired,
   };
 
   /**
@@ -133,7 +118,7 @@ class ActivitiesListItem extends Component {
           <Col span={6}>{phase}</Col>
           <Col span={3}>
             {isHovered && (
-              <Fragment>
+              <>
                 <Link to={`${match.url}/${id}`}>
                   <Icon
                     type="bars"
@@ -159,7 +144,7 @@ class ActivitiesListItem extends Component {
                   className="actionIcon"
                   onClick={onArchive}
                 />
-              </Fragment>
+              </>
             )}
           </Col>
         </Row>
@@ -167,5 +152,21 @@ class ActivitiesListItem extends Component {
     );
   }
 }
+
+ActivitiesListItem.propTypes = {
+  code: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  incidentType: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  match: PropTypes.shape({ url: PropTypes.string.isRequired }).isRequired,
+  name: PropTypes.string.isRequired,
+  phase: PropTypes.string.isRequired,
+  onArchive: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  isSelected: PropTypes.bool.isRequired,
+  onSelectItem: PropTypes.func.isRequired,
+  onDeselectItem: PropTypes.func.isRequired,
+};
 
 export default withRouter(ActivitiesListItem);

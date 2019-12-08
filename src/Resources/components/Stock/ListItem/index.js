@@ -13,22 +13,9 @@ import './styles.css';
  * @since 0.1.0
  */
 class StockListItem extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     isHovered: false,
-  };
-
-  static propTypes = {
-    itemName: PropTypes.string.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    onAdjust: PropTypes.func.isRequired,
-    warehouseName: PropTypes.string.isRequired,
-    color: PropTypes.string.isRequired,
-    quantity: PropTypes.number.isRequired,
-    uom: PropTypes.string.isRequired,
-    owner: PropTypes.shape({ name: PropTypes.string }).isRequired,
-    isSelected: PropTypes.bool.isRequired,
-    onSelectItem: PropTypes.func.isRequired,
-    onDeselectItem: PropTypes.func.isRequired,
   };
 
   /**
@@ -150,5 +137,19 @@ class StockListItem extends Component {
     );
   }
 }
+
+StockListItem.propTypes = {
+  itemName: PropTypes.string.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onAdjust: PropTypes.func.isRequired,
+  warehouseName: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  quantity: PropTypes.number.isRequired,
+  uom: PropTypes.string.isRequired,
+  owner: PropTypes.shape({ name: PropTypes.string }).isRequired,
+  isSelected: PropTypes.bool.isRequired,
+  onSelectItem: PropTypes.func.isRequired,
+  onDeselectItem: PropTypes.func.isRequired,
+};
 
 export default StockListItem;

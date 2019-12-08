@@ -56,7 +56,7 @@ const routes = [
  * @name Resources
  * @description Resources component which allow navigation to resource
  * sub modules
- *
+ * @returns {React.Component} react element
  * @param {object} props props object
  * @param {object} props.match route params
  *

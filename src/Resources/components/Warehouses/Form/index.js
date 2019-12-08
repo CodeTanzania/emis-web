@@ -19,26 +19,6 @@ const { Option } = Select;
  * @since 0.1.0
  */
 class WarehouseForm extends Component {
-  static propTypes = {
-    isEditForm: PropTypes.bool.isRequired,
-    families: PropTypes.arrayOf(PropTypes.string).isRequired,
-    natures: PropTypes.arrayOf(PropTypes.string).isRequired,
-    types: PropTypes.arrayOf(PropTypes.string).isRequired,
-    warehouse: PropTypes.shape({
-      name: PropTypes.string,
-      level: PropTypes.string,
-      nature: PropTypes.string,
-      family: PropTypes.string,
-      type: PropTypes.string,
-    }).isRequired,
-    form: PropTypes.shape({
-      getFieldDecorator: PropTypes.func,
-      validateFieldsAndScroll: PropTypes.func,
-    }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    posting: PropTypes.bool.isRequired,
-  };
-
   /**
    * @function
    * @name handleSubmit
@@ -62,7 +42,7 @@ class WarehouseForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedWarehouse = Object.assign({}, warehouse, values);
+          const updatedWarehouse = { ...warehouse, ...values };
           putWarehouse(
             updatedWarehouse,
             () => {
@@ -144,6 +124,7 @@ class WarehouseForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* warehouse name */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Name">
           {getFieldDecorator('name', {
             initialValue: isEditForm ? warehouse.name : undefined,
@@ -153,6 +134,7 @@ class WarehouseForm extends Component {
         {/* end warehouse name */}
 
         {/* warehouse nature */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Nature">
           {getFieldDecorator('nature', {
             initialValue: isEditForm ? warehouse.nature : undefined,
@@ -164,6 +146,7 @@ class WarehouseForm extends Component {
         {/* end warehouse nature */}
 
         {/* warehouse family */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Family">
           {getFieldDecorator('family', {
             initialValue: isEditForm ? warehouse.family : undefined,
@@ -175,6 +158,7 @@ class WarehouseForm extends Component {
         {/* end warehouse family */}
 
         {/* warehouse type */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Type">
           {getFieldDecorator('type', {
             initialValue: isEditForm ? warehouse.type : undefined,
@@ -200,6 +184,26 @@ class WarehouseForm extends Component {
     );
   }
 }
+
+WarehouseForm.propTypes = {
+  isEditForm: PropTypes.bool.isRequired,
+  families: PropTypes.arrayOf(PropTypes.string).isRequired,
+  natures: PropTypes.arrayOf(PropTypes.string).isRequired,
+  types: PropTypes.arrayOf(PropTypes.string).isRequired,
+  warehouse: PropTypes.shape({
+    name: PropTypes.string,
+    level: PropTypes.string,
+    nature: PropTypes.string,
+    family: PropTypes.string,
+    type: PropTypes.string,
+  }).isRequired,
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  posting: PropTypes.bool.isRequired,
+};
 
 export default Form.create()(
   Connect(WarehouseForm, {

@@ -15,17 +15,6 @@ import './styles.css';
  * @since 0.1.0
  */
 class Signin extends Component {
-  static propTypes = {
-    form: PropTypes.shape({
-      validateFields: PropTypes.func.isRequired,
-      getFieldDecorator: PropTypes.func.isRequired,
-    }).isRequired,
-    history: PropTypes.shape({
-      push: PropTypes.func.isRequired,
-    }).isRequired,
-    loading: PropTypes.bool.isRequired,
-  };
-
   /**
    * @function
    * @name handleSubmit
@@ -120,6 +109,17 @@ class Signin extends Component {
     );
   }
 }
+
+Signin.propTypes = {
+  form: PropTypes.shape({
+    validateFields: PropTypes.func.isRequired,
+    getFieldDecorator: PropTypes.func.isRequired,
+  }).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+  loading: PropTypes.bool.isRequired,
+};
 
 export default Connect(Form.create({ name: 'normal_login' })(Signin), {
   loading: 'app.signing',

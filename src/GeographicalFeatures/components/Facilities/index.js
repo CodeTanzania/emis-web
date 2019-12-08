@@ -28,33 +28,13 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class Facilities extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     showFilters: false,
     isEditForm: false,
   };
 
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    showForm: PropTypes.bool.isRequired,
-    posting: PropTypes.bool.isRequired,
-    facilities: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string,
-        type: PropTypes.string,
-      })
-    ).isRequired,
-    facility: PropTypes.shape({
-      name: PropTypes.string,
-      level: PropTypes.string,
-    }),
-    total: PropTypes.number.isRequired,
-    page: PropTypes.number.isRequired,
-  };
-
-  static defaultProps = {
-    facility: null,
-  };
-
+  // eslint-disable-next-line react/no-deprecated
   componentWillMount() {
     getFeatures();
   }
@@ -248,6 +228,28 @@ class Facilities extends Component {
     );
   }
 }
+
+Facilities.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  showForm: PropTypes.bool.isRequired,
+  posting: PropTypes.bool.isRequired,
+  facilities: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      type: PropTypes.string,
+    })
+  ).isRequired,
+  facility: PropTypes.shape({
+    name: PropTypes.string,
+    level: PropTypes.string,
+  }),
+  total: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired,
+};
+
+Facilities.defaultProps = {
+  facility: null,
+};
 
 export default Connect(Facilities, {
   facilities: 'features.list',

@@ -17,24 +17,6 @@ import React, { Component } from 'react';
  * @since 0.1.0
  */
 class WarehousesFilters extends Component {
-  static propTypes = {
-    nature: PropTypes.arrayOf(PropTypes.string).isRequired,
-    filter: PropTypes.objectOf(
-      PropTypes.shape({
-        nature: PropTypes.arrayOf(PropTypes.string),
-      })
-    ),
-    form: PropTypes.shape({
-      getFieldDecorator: PropTypes.func,
-      validateFields: PropTypes.func,
-    }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-  };
-
-  static defaultProps = {
-    filter: null,
-  };
-
   /**
    *
    * @function
@@ -106,6 +88,7 @@ class WarehousesFilters extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* start warehouses nature filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By Nature">
           {getFieldDecorator('nature', {
             initialValue: filter ? filter.nature : [],
@@ -138,6 +121,24 @@ class WarehousesFilters extends Component {
     );
   }
 }
+
+WarehousesFilters.propTypes = {
+  nature: PropTypes.arrayOf(PropTypes.string).isRequired,
+  filter: PropTypes.objectOf(
+    PropTypes.shape({
+      nature: PropTypes.arrayOf(PropTypes.string),
+    })
+  ),
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFields: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+};
+
+WarehousesFilters.defaultProps = {
+  filter: null,
+};
 export default Form.create()(
   Connect(WarehousesFilters, {
     filter: 'features.filter',

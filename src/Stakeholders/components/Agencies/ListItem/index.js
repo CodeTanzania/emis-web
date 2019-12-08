@@ -24,22 +24,9 @@ const isHoveredSpan = { xxl: 2, xl: 2, lg: 2, md: 2, sm: 0, xs: 0 };
  * @since 0.1.0
  */
 class AgencyListItem extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     isHovered: false,
-  };
-
-  static propTypes = {
-    abbreviation: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    area: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    mobile: PropTypes.string.isRequired,
-    onArchive: PropTypes.func.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    isSelected: PropTypes.bool.isRequired,
-    onSelectItem: PropTypes.func.isRequired,
-    onDeselectItem: PropTypes.func.isRequired,
-    onShare: PropTypes.func.isRequired,
   };
 
   /**
@@ -153,6 +140,7 @@ class AgencyListItem extends Component {
         onMouseLeave={this.handleMouseLeave}
       >
         <Row>
+          {/* eslint-disable */}
           <Col {...sideSpan}>{sideComponent}</Col>
           <Col {...nameSpan}>{name}</Col>
           <Col {...abbreviationSpan}>{abbreviation}</Col>
@@ -160,6 +148,7 @@ class AgencyListItem extends Component {
           <Col {...phoneSpan}>{mobile}</Col>
           <Col {...emailSpan}>{email}</Col>
           <Col {...isHoveredSpan}>
+            {/* eslint-enable */}
             {isHovered && (
               <ListItemActions
                 edit={{
@@ -185,5 +174,19 @@ class AgencyListItem extends Component {
     );
   }
 }
+
+AgencyListItem.propTypes = {
+  abbreviation: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  area: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  mobile: PropTypes.string.isRequired,
+  onArchive: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  isSelected: PropTypes.bool.isRequired,
+  onSelectItem: PropTypes.func.isRequired,
+  onDeselectItem: PropTypes.func.isRequired,
+  onShare: PropTypes.func.isRequired,
+};
 
 export default AgencyListItem;

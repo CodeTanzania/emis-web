@@ -11,13 +11,14 @@ const headerLayout = [
  * @function
  * @name WarehouseListHeader
  * @description display warehouse list metadata
- *
+ * @returns {React.Component} react element
  * @version 0.1.0
  * @since 0.1.0
  */
 const WarehouseListHeader = () => (
   <Row className="WarehouseListHeader">
     {headerLayout.map(item => (
+      // eslint-disable-next-line react/jsx-props-no-spreading
       <Col key={item.header} {...item}>
         <h4 className="title">{item.header}</h4>
       </Col>

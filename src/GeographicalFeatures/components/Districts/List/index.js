@@ -1,6 +1,6 @@
 import { List } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 import DistrictsListItem from '../ListItem';
 import DistrictsListHeader from '../ListHeader';
 
@@ -20,7 +20,7 @@ import DistrictsListHeader from '../ListHeader';
  * @since 0.1.0
  */
 const DistrictsList = ({ districts, loading, onEdit }) => (
-  <Fragment>
+  <>
     <DistrictsListHeader />
     <List
       loading={loading}
@@ -36,7 +36,7 @@ const DistrictsList = ({ districts, loading, onEdit }) => (
         />
       )}
     />
-  </Fragment>
+  </>
 );
 
 DistrictsList.propTypes = {

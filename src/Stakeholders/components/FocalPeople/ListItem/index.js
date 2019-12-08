@@ -25,25 +25,9 @@ const isHoveredSpan = { xxl: 1, xl: 1, lg: 1, md: 1, sm: 2, xs: 2 };
  * @since 0.1.0
  */
 class FocalPeopleListItem extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     isHovered: false,
-  };
-
-  static propTypes = {
-    abbreviation: PropTypes.string.isRequired,
-    agency: PropTypes.string.isRequired,
-    agencyAbbreviation: PropTypes.string.isRequired,
-    location: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    role: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    mobile: PropTypes.string.isRequired,
-    onArchive: PropTypes.func.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    isSelected: PropTypes.bool.isRequired,
-    onSelectItem: PropTypes.func.isRequired,
-    onDeselectItem: PropTypes.func.isRequired,
-    onShare: PropTypes.func.isRequired,
   };
 
   /**
@@ -160,6 +144,7 @@ class FocalPeopleListItem extends Component {
         onMouseLeave={this.handleMouseLeave}
       >
         <Row>
+          {/* eslint-disable */}
           <Col {...sideSpan}>{sideComponent}</Col>
           <Col {...nameSpan}>{name}</Col>
           <Col {...roleSpan} title={agency}>
@@ -169,6 +154,7 @@ class FocalPeopleListItem extends Component {
           <Col {...emailSpan}>{email}</Col>
           <Col {...areaSpan}>{location}</Col>
           <Col {...isHoveredSpan}>
+            {/* eslint-enable */}
             {isHovered && (
               <ListItemActions
                 edit={{
@@ -194,5 +180,22 @@ class FocalPeopleListItem extends Component {
     );
   }
 }
+
+FocalPeopleListItem.propTypes = {
+  abbreviation: PropTypes.string.isRequired,
+  agency: PropTypes.string.isRequired,
+  agencyAbbreviation: PropTypes.string.isRequired,
+  location: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  role: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  mobile: PropTypes.string.isRequired,
+  onArchive: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  isSelected: PropTypes.bool.isRequired,
+  onSelectItem: PropTypes.func.isRequired,
+  onDeselectItem: PropTypes.func.isRequired,
+  onShare: PropTypes.func.isRequired,
+};
 
 export default FocalPeopleListItem;

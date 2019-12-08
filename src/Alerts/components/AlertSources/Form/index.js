@@ -13,24 +13,6 @@ import { notifyError, notifySuccess } from '../../../../util';
  * @since 0.1.0
  */
 class AlertSourceForm extends Component {
-  static propTypes = {
-    alertSource: PropTypes.shape({
-      name: PropTypes.string,
-      url: PropTypes.string,
-      mobile: PropTypes.string,
-      email: PropTypes.string,
-      _id: PropTypes.string,
-      website: PropTypes.string,
-    }).isRequired,
-    isEditForm: PropTypes.bool.isRequired,
-    posting: PropTypes.bool.isRequired,
-    onCancel: PropTypes.func.isRequired,
-    form: PropTypes.shape({
-      getFieldDecorator: PropTypes.func,
-      validateFieldsAndScroll: PropTypes.func,
-    }).isRequired,
-  };
-
   /**
    * @function
    * @name handleSubmit
@@ -55,7 +37,7 @@ class AlertSourceForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedContact = Object.assign({}, alertSource, values);
+          const updatedContact = { ...alertSource, ...values };
           putAlertSource(
             updatedContact,
             () => {
@@ -115,6 +97,7 @@ class AlertSourceForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* Alert Source name */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Organization name">
           {getFieldDecorator('name', {
             initialValue: isEditForm ? alertSource.name : undefined,
@@ -129,6 +112,7 @@ class AlertSourceForm extends Component {
         {/* end organization name */}
 
         {/* Alert source website */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Website">
           {getFieldDecorator('website', {
             initialValue: isEditForm ? alertSource.website : undefined,
@@ -140,6 +124,7 @@ class AlertSourceForm extends Component {
         {/* end Alert source website */}
 
         {/* Alert Source url */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Feed">
           {getFieldDecorator('url', {
             initialValue: isEditForm ? alertSource.url : undefined,
@@ -153,6 +138,7 @@ class AlertSourceForm extends Component {
         {/* end Alert Source url */}
 
         {/* Alert Source number */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Phone Number">
           {getFieldDecorator('mobile', {
             initialValue: isEditForm ? alertSource.mobile : undefined,
@@ -162,6 +148,7 @@ class AlertSourceForm extends Component {
         {/* end Alert Source number */}
 
         {/* Alert Source email */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Email">
           {getFieldDecorator('email', {
             initialValue: isEditForm ? alertSource.email : undefined,
@@ -193,5 +180,23 @@ class AlertSourceForm extends Component {
     );
   }
 }
+
+AlertSourceForm.propTypes = {
+  alertSource: PropTypes.shape({
+    name: PropTypes.string,
+    url: PropTypes.string,
+    mobile: PropTypes.string,
+    email: PropTypes.string,
+    _id: PropTypes.string,
+    website: PropTypes.string,
+  }).isRequired,
+  isEditForm: PropTypes.bool.isRequired,
+  posting: PropTypes.bool.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+  }).isRequired,
+};
 
 export default Form.create()(AlertSourceForm);

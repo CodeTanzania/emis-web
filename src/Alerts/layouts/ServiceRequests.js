@@ -5,6 +5,7 @@ import EmptyState from '../../components/EmptyState';
  * @function
  * @name AlertsServiceRequestLayout
  * @description Render alert service requests layout
+ * @returns {object} react element
  *
  * @version 0.1.0
  * @since 0.1.0

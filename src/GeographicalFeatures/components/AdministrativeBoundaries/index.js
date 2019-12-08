@@ -20,22 +20,12 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class AdminstrativeBoundaries extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     showFilters: false,
   };
 
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    adminstrativeBoundaries: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string,
-        level: PropTypes.string,
-      })
-    ).isRequired,
-    total: PropTypes.number.isRequired,
-    page: PropTypes.number.isRequired,
-  };
-
+  // eslint-disable-next-line react/no-deprecated
   componentWillMount() {
     getFeatures();
   }
@@ -132,6 +122,18 @@ class AdminstrativeBoundaries extends Component {
     );
   }
 }
+
+AdminstrativeBoundaries.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  adminstrativeBoundaries: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      level: PropTypes.string,
+    })
+  ).isRequired,
+  total: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired,
+};
 
 export default Connect(AdminstrativeBoundaries, {
   adminstrativeBoundaries: 'features.list',

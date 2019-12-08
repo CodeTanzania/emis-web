@@ -8,7 +8,7 @@ import {
 } from '@codetanzania/emis-api-states';
 import { Modal } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import Topbar from '../../../components/Topbar';
 import WarehouseList from './List';
 import WarehouseForm from './Form';
@@ -26,35 +26,13 @@ import './styles.css';
  * @since 0.1.0
  */
 class Warehouses extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     showFilters: false,
     isEditForm: false,
   };
 
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    showForm: PropTypes.bool.isRequired,
-    posting: PropTypes.bool.isRequired,
-    warehouses: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string,
-        level: PropTypes.string,
-      })
-    ).isRequired,
-    warehouse: PropTypes.shape({
-      name: PropTypes.string,
-      level: PropTypes.string,
-    }),
-    total: PropTypes.number.isRequired,
-    page: PropTypes.number.isRequired,
-    searchQuery: PropTypes.string,
-  };
-
-  static defaultProps = {
-    warehouse: null,
-    searchQuery: undefined,
-  };
-
+  // eslint-disable-next-line react/no-deprecated
   componentWillMount() {
     getWarehouses();
   }
@@ -174,7 +152,7 @@ class Warehouses extends Component {
     } = this.props;
     const { showFilters, isEditForm } = this.state;
     return (
-      <Fragment>
+      <>
         {/* Topbar */}
         <Topbar
           search={{
@@ -240,10 +218,34 @@ class Warehouses extends Component {
           </Modal>
           {/* end create/edit form modal */}
         </div>
-      </Fragment>
+      </>
     );
   }
 }
+
+Warehouses.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  showForm: PropTypes.bool.isRequired,
+  posting: PropTypes.bool.isRequired,
+  warehouses: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      level: PropTypes.string,
+    })
+  ).isRequired,
+  warehouse: PropTypes.shape({
+    name: PropTypes.string,
+    level: PropTypes.string,
+  }),
+  total: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired,
+  searchQuery: PropTypes.string,
+};
+
+Warehouses.defaultProps = {
+  warehouse: null,
+  searchQuery: undefined,
+};
 
 export default Connect(Warehouses, {
   warehouses: 'warehouses.list',

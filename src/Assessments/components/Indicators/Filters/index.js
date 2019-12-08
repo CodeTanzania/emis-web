@@ -16,25 +16,6 @@ import React, { Component } from 'react';
  * @since 0.1.0
  */
 class IndicatorsFilters extends Component {
-  static propTypes = {
-    form: PropTypes.shape({
-      getFieldDecorator: PropTypes.func,
-      validateFields: PropTypes.func,
-    }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    subjects: PropTypes.arrayOf(PropTypes.string).isRequired,
-    filter: PropTypes.objectOf(
-      PropTypes.shape({
-        families: PropTypes.arrayOf(PropTypes.string).isRequired,
-        natures: PropTypes.arrayOf(PropTypes.string).isRequired,
-      })
-    ),
-  };
-
-  static defaultProps = {
-    filter: null,
-  };
-
   /**
    * @function
    * @name handleSubmit
@@ -104,6 +85,7 @@ class IndicatorsFilters extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* start subject filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By Subject">
           {getFieldDecorator('subject', {
             initialValue: filter ? filter.subject : [],
@@ -136,6 +118,26 @@ class IndicatorsFilters extends Component {
     );
   }
 }
+
+IndicatorsFilters.propTypes = {
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFields: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  subjects: PropTypes.arrayOf(PropTypes.string).isRequired,
+  filter: PropTypes.objectOf(
+    PropTypes.shape({
+      families: PropTypes.arrayOf(PropTypes.string).isRequired,
+      natures: PropTypes.arrayOf(PropTypes.string).isRequired,
+    })
+  ),
+};
+
+IndicatorsFilters.defaultProps = {
+  filter: null,
+};
+
 export default Connect(Form.create()(IndicatorsFilters), {
   subjects: 'indicators.schema.properties.subject.enum',
   filter: 'indicators.filter',

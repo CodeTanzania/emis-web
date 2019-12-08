@@ -9,7 +9,7 @@ import {
 } from '@codetanzania/emis-api-states';
 import { Modal } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import NotificationForm from '../../../components/NotificationForm';
 import Topbar from '../../../components/Topbar';
 import FocalPersonFilters from './Filters';
@@ -35,6 +35,7 @@ const {
  * @since 0.1.0
  */
 class FocalPeople extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     showFilters: false,
     isEditForm: false,
@@ -42,23 +43,6 @@ class FocalPeople extends Component {
     selectedFocalPeople: [],
     notificationBody: undefined,
     cached: null,
-  };
-
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    posting: PropTypes.bool.isRequired,
-    focalPeople: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-      .isRequired,
-    focalPerson: PropTypes.shape({ name: PropTypes.string }),
-    page: PropTypes.number.isRequired,
-    showForm: PropTypes.bool.isRequired,
-    searchQuery: PropTypes.string,
-    total: PropTypes.number.isRequired,
-  };
-
-  static defaultProps = {
-    focalPerson: null,
-    searchQuery: undefined,
   };
 
   componentDidMount() {
@@ -290,7 +274,7 @@ class FocalPeople extends Component {
       cached,
     } = this.state;
     return (
-      <Fragment>
+      <>
         {/* Topbar */}
         <Topbar
           search={{
@@ -389,10 +373,27 @@ class FocalPeople extends Component {
           </Modal>
           {/* end create/edit form modal */}
         </div>
-      </Fragment>
+      </>
     );
   }
 }
+
+FocalPeople.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  posting: PropTypes.bool.isRequired,
+  focalPeople: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+    .isRequired,
+  focalPerson: PropTypes.shape({ name: PropTypes.string }),
+  page: PropTypes.number.isRequired,
+  showForm: PropTypes.bool.isRequired,
+  searchQuery: PropTypes.string,
+  total: PropTypes.number.isRequired,
+};
+
+FocalPeople.defaultProps = {
+  focalPerson: null,
+  searchQuery: undefined,
+};
 
 export default Connect(FocalPeople, {
   focalPeople: 'focalPeople.list',

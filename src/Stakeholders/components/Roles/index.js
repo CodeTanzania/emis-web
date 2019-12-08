@@ -25,6 +25,7 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class Roles extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     showFilters: false,
     isEditForm: false,
@@ -33,30 +34,7 @@ class Roles extends Component {
     notificationBody: undefined,
   };
 
-  static propTypes = {
-    showForm: PropTypes.bool.isRequired,
-    posting: PropTypes.bool.isRequired,
-    loading: PropTypes.bool.isRequired,
-    total: PropTypes.number.isRequired,
-    page: PropTypes.number.isRequired,
-    role: PropTypes.shape({
-      name: PropTypes.string,
-      abbreviation: PropTypes.string,
-      description: PropTypes.string,
-    }),
-    roles: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string,
-        abbreviation: PropTypes.string,
-        description: PropTypes.string,
-      })
-    ).isRequired,
-  };
-
-  static defaultProps = {
-    role: null,
-  };
-
+  // eslint-disable-next-line react/no-deprecated
   componentWillMount() {
     getRoles();
   }
@@ -292,6 +270,30 @@ class Roles extends Component {
     );
   }
 }
+
+Roles.propTypes = {
+  showForm: PropTypes.bool.isRequired,
+  posting: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
+  total: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired,
+  role: PropTypes.shape({
+    name: PropTypes.string,
+    abbreviation: PropTypes.string,
+    description: PropTypes.string,
+  }),
+  roles: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      abbreviation: PropTypes.string,
+      description: PropTypes.string,
+    })
+  ).isRequired,
+};
+
+Roles.defaultProps = {
+  role: null,
+};
 
 export default Connect(Roles, {
   roles: 'roles.list',

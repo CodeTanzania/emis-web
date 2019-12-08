@@ -4,7 +4,7 @@ import concat from 'lodash/concat';
 import map from 'lodash/map';
 import remove from 'lodash/remove';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { notifyError, notifySuccess } from '../../../../util';
 import ActivitiesActionBar from '../ActionBar';
 import ActivitiesListHeader from '../ListHeader';
@@ -20,17 +20,7 @@ import ActivitiesListItem from '../ListItem';
  * @since 0.1.0
  */
 class ActivitiesList extends Component {
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    activities: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-      .isRequired,
-    page: PropTypes.number.isRequired,
-    total: PropTypes.number.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    onFilter: PropTypes.func.isRequired,
-    onNotify: PropTypes.func.isRequired,
-  };
-
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     selectedActivities: [],
   };
@@ -117,7 +107,7 @@ class ActivitiesList extends Component {
     const selectedActivitiesCount = selectedActivities.length;
 
     return (
-      <Fragment>
+      <>
         {/* list action bar */}
         <ActivitiesActionBar
           total={total}
@@ -177,9 +167,20 @@ class ActivitiesList extends Component {
           )}
         />
         {/* end activities list */}
-      </Fragment>
+      </>
     );
   }
 }
+
+ActivitiesList.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  activities: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+    .isRequired,
+  page: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onFilter: PropTypes.func.isRequired,
+  onNotify: PropTypes.func.isRequired,
+};
 
 export default ActivitiesList;

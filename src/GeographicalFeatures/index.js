@@ -67,7 +67,7 @@ const routes = [
  * @function
  * @name GeographicalFeatures
  * @description Home component which shows to navigation menu
- *
+ * @returns {React.Component} react element
  * @param {object} props props object
  * @param {object} props.match match object from url router
  *

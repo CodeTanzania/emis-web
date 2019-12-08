@@ -27,25 +27,10 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class IncidentTypes extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     showFilters: false,
     isEditForm: false,
-  };
-
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    incidenttypes: PropTypes.arrayOf(
-      PropTypes.shape({ name: PropTypes.string })
-    ).isRequired,
-    incidenttype: PropTypes.shape({ name: PropTypes.string }),
-    page: PropTypes.number.isRequired,
-    total: PropTypes.number.isRequired,
-    posting: PropTypes.bool.isRequired,
-    showForm: PropTypes.bool.isRequired,
-  };
-
-  static defaultProps = {
-    incidenttype: null,
   };
 
   componentDidMount() {
@@ -226,6 +211,21 @@ class IncidentTypes extends Component {
     );
   }
 }
+
+IncidentTypes.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  incidenttypes: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+    .isRequired,
+  incidenttype: PropTypes.shape({ name: PropTypes.string }),
+  page: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  posting: PropTypes.bool.isRequired,
+  showForm: PropTypes.bool.isRequired,
+};
+
+IncidentTypes.defaultProps = {
+  incidenttype: null,
+};
 
 export default Connect(IncidentTypes, {
   incidenttypes: 'incidentTypes.list',
