@@ -1,4 +1,8 @@
 {
-  "extends": ["config:base", ":semanticCommitTypeAll(chore)"],
-  "assignees": ["BenMaruchu", "lykmapipo"]
+  "extends": ["config:base"],
+  "assignees": ["BenMaruchu", "lykmapipo"],
+  "automerge": true,
+  "major": {
+    "automerge": false
+  }
 }
