@@ -51,7 +51,7 @@
     "@commitlint/travis-cli": "8.2.0",
     "babel-plugin-import": "1.12.2",
     "commitizen": "4.0.3",
-    "customize-cra": "0.8.0",
+    "customize-cra": "0.9.1",
     "cz-conventional-changelog": "3.0.2",
     "eslint-config-airbnb": "18.0.1",
     "eslint-config-prettier": "6.5.0",
