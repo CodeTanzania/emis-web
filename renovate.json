@@ -1,6 +1,5 @@
 {
   "extends": ["config:base"],
-  "assignees": ["BenMaruchu", "lykmapipo"],
   "automerge": true,
   "major": {
     "automerge": false
