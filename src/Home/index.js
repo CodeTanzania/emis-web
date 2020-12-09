@@ -25,13 +25,17 @@ const routes = [
     description: modules.assessments,
     disabled: true,
   },
-  { name: 'Emergency Plans', path: '/plans', icon: planIcon, disabled: true },
+  {
+    name: 'Emergency Plans',
+    path: '/plans',
+    icon: planIcon,
+    description: modules.emergencyPlans,
+  },
   {
     name: 'Geographical Features',
     path: '/app/geographicalfeatures',
     icon: geographicalFeaturesIcon,
-    description: modules.geographicalfeatures,
-    disabled: true,
+    description: modules.geographicalFeatures,
   },
   {
     name: 'Incidents',
