@@ -32,7 +32,7 @@
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
-    "randomcolor": "^0.5.4",
+    "randomcolor": "^0.6.0",
     "rc-color-picker": "^1.2.6",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
