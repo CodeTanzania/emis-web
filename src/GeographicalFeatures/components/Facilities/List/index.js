@@ -1,26 +1,26 @@
 import { List } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 import FacilityListHeader from '../ListHeader';
 import FacilityListItem from '../ListItem';
 
-// eslint-disable-next-line jsdoc/require-returns
 /**
- *
  * @function
  * @name FacilityList
  * @description Render facilities list
  *
- * @param {Object} props props object
+ * @param {object} props props object
  * @param {boolean} props.loading preload list of facilities
  * @param {Array} props.districts array list of facilities
  * @param {Function} props.onEdit function for editing facilities
+ *
+ * @returns {object} React Component
  *
  * @version 0.1.0
  * @since 0.1.0
  */
 const FacilityList = ({ facilities, loading, onEdit }) => (
-  <Fragment>
+  <>
     <FacilityListHeader />
     <List
       loading={loading}
@@ -34,7 +34,7 @@ const FacilityList = ({ facilities, loading, onEdit }) => (
         />
       )}
     />
-  </Fragment>
+  </>
 );
 
 FacilityList.propTypes = {

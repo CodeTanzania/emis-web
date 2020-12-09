@@ -1,0 +1,26 @@
+.Alerts {
+  padding: 40px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .Alerts {
+    padding: 30px;
+  }
+
+ .Alerts .ant-btn-lg {
+  padding: 0 5px;
+  font-size: 14px;
+ }
+}
+
+@media screen and (max-width: 426px) {
+  .Alerts {
+    padding: 20px;
+  }
+  .searchBox {
+    padding-bottom: 10px;
+  }
+}
+
+

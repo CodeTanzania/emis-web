@@ -10,10 +10,11 @@ const { Search } = Input;
  * @function
  * @name Topbar
  * @description Topbar component which renders search input and primary actions
+ * @returns {object} react element
  *
- * @param {Object} props props object
- * @param {Object} props.search on Search callback
- * @param {Object[]} props.actions list of primary actions
+ * @param {object} props props object
+ * @param {object} props.search on Search callback
+ * @param {object[]} props.actions list of primary actions
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -21,20 +22,22 @@ const { Search } = Input;
 const Topbar = ({ search, actions }) => (
   <Row className="Topbar">
     {/* search box */}
-    <Col span={12}>
-      <Search {...search} allowClear />
+    <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+      <Search {...search} allowClear className="TopbarSearch" />
     </Col>
     {/* end search box */}
 
     {/* primary actions */}
-    <Col span={12}>
+    <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
       <Row type="flex" justify="end">
         {actions.map(action => {
           const { label, ...props } = action;
 
           return (
-            <Col span={5} xl={7} xxl={5} key={label}>
-              <Button {...props} type="primary">
+            <Col xxl={6} xl={7} lg={10} md={12} sm={24} xs={24} key={label}>
+              {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+              <Button {...props} type="primary" block>
                 {label}
               </Button>
             </Col>

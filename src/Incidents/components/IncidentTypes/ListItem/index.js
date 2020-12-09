@@ -1,10 +1,9 @@
 import { Avatar, Checkbox, Col, Icon, Row } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import './styles.css';
 
 /**
- *
  * @class
  * @name IncidentTypesListItem
  * @description Single incidenttype list item component. Render single
@@ -14,18 +13,9 @@ import './styles.css';
  * @since 0.1.0
  */
 class IncidentTypesListItem extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     isHovered: false,
-  };
-
-  static propTypes = {
-    color: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    nature: PropTypes.string.isRequired,
-    family: PropTypes.string.isRequired,
-    cap: PropTypes.string.isRequired,
-    code: PropTypes.string.isRequired,
-    onEdit: PropTypes.func.isRequired,
   };
 
   handleMouseEnter = () => {
@@ -63,7 +53,7 @@ class IncidentTypesListItem extends Component {
           <Col span={3}>{cap}</Col>
           <Col span={3}>
             {isHovered && (
-              <Fragment>
+              <>
                 <Icon
                   type="edit"
                   title="Update Incident Types"
@@ -75,7 +65,7 @@ class IncidentTypesListItem extends Component {
                   title="Archive Incident Types"
                   className="actionIcon"
                 />
-              </Fragment>
+              </>
             )}
           </Col>
         </Row>
@@ -83,5 +73,15 @@ class IncidentTypesListItem extends Component {
     );
   }
 }
+
+IncidentTypesListItem.propTypes = {
+  color: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  nature: PropTypes.string.isRequired,
+  family: PropTypes.string.isRequired,
+  cap: PropTypes.string.isRequired,
+  code: PropTypes.string.isRequired,
+  onEdit: PropTypes.func.isRequired,
+};
 
 export default IncidentTypesListItem;

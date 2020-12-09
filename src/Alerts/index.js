@@ -12,7 +12,7 @@ import modules from '../modules.json';
 const routes = [
   {
     name: 'Issued Alerts',
-    path: '/alerts',
+    path: '/issuedalerts',
     icon: issuedAlertsIcon,
     description: modules.alertsIssued,
   },
@@ -57,7 +57,9 @@ const routes = [
  * @name Alerts
  * @description Alerts component which shows to navigation Nav
  *
- * @param {Object} match object with routes information
+ * @param {object} match object with routes information
+ *
+ * @returns {object} React element
  *
  * @version 0.1.0
  * @since 0.1.0

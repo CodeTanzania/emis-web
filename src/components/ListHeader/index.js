@@ -7,9 +7,10 @@ import './styles.css';
  * @function
  * @name ListHeader
  * @description List header component
+ * @returns {object} react element
  *
- * @param {Object} props props object
- * @param {Object[]} props.headerLayout list of header items configs
+ * @param {object} props props object
+ * @param {object[]} props.headerLayout list of header items configs
  * @param {Function} props.onSelectAll callback to handle select all checkbox
  * @param {Function} props.onDeselectAll callback to handle deselect all checkbox
  * @param {boolean} props.isBulkSelected flag to show if current page results are
@@ -25,7 +26,7 @@ const ListHeader = ({
   isBulkSelected,
 }) => (
   <Row className="ListHeader">
-    <Col xl={{ span: 1 }} xxl={{ span: 1 }}>
+    <Col xxl={1} xl={1} lg={1} md={2} sm={3} xs={3}>
       <Checkbox
         className="checkbox"
         checked={isBulkSelected}
@@ -40,6 +41,7 @@ const ListHeader = ({
     </Col>
 
     {headerLayout.map(item => (
+      // eslint-disable-next-line react/jsx-props-no-spreading
       <Col key={item.header} {...item}>
         <h4 className="title">{item.header}</h4>
       </Col>

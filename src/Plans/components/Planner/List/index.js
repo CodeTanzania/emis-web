@@ -4,7 +4,7 @@ import concat from 'lodash/concat';
 import map from 'lodash/map';
 import remove from 'lodash/remove';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { notifyError, notifySuccess } from '../../../../util';
 import PlansActionBar from '../ActionBar';
 import PlansGridListItem from '../GridListItem';
@@ -21,17 +21,7 @@ import PlansListItem from '../ListItem';
  * @since 0.1.0
  */
 class PlansList extends Component {
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    plans: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-      .isRequired,
-    page: PropTypes.number.isRequired,
-    total: PropTypes.number.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    onFilter: PropTypes.func.isRequired,
-    onNotify: PropTypes.func.isRequired,
-  };
-
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     selectedPlans: [],
     isGridLayout: false,
@@ -42,7 +32,7 @@ class PlansList extends Component {
    * @name handleOnSelectPlan
    * @description Handle select a single plan action
    *
-   * @param {Object} plan plan object
+   * @param {object} plan plan object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -102,7 +92,7 @@ class PlansList extends Component {
    * @function
    * @name handleOnDeselectPlan
    *
-   * @param {Object} plan plan object
+   * @param {object} plan plan object
    * @returns {undefined} undefined
    *
    * @version 0.1.0
@@ -131,10 +121,10 @@ class PlansList extends Component {
       onNotify,
     } = this.props;
     const { selectedPlans, isGridLayout } = this.state;
-    const selectedPlansCount = this.state.selectedPlans.length;
+    const selectedPlansCount = selectedPlans.length;
 
     return (
-      <Fragment>
+      <>
         {/*  action bar */}
         <PlansActionBar
           total={total}
@@ -177,7 +167,7 @@ class PlansList extends Component {
             )}
           />
         ) : (
-          <Fragment>
+          <>
             {/* plan list header */}
             <PlansListHeader />
             {/* end plan list header */}
@@ -223,11 +213,22 @@ class PlansList extends Component {
               )}
             />
             {/* // end plans list */}
-          </Fragment>
+          </>
         )}
-      </Fragment>
+      </>
     );
   }
 }
+
+PlansList.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  plans: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+    .isRequired,
+  page: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onFilter: PropTypes.func.isRequired,
+  onNotify: PropTypes.func.isRequired,
+};
 
 export default PlansList;

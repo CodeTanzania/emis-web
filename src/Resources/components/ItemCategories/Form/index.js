@@ -16,7 +16,7 @@ const { TextArea } = Input;
 
 /**
  * @class
- * @value ItemCategoryForm
+ * @name ItemCategoryForm
  * @description Render Item Category form for creating/editing Item Categories
  *
  * @version 0.1.0
@@ -24,24 +24,6 @@ const { TextArea } = Input;
  */
 
 class ItemCategoryForm extends Component {
-  static propTypes = {
-    isEditForm: PropTypes.bool.isRequired,
-    itemCategory: PropTypes.shape({
-      _id: PropTypes.string,
-      value: PropTypes.string,
-      color: PropTypes.string,
-      abbreviation: PropTypes.string,
-      description: PropTypes.string,
-    }),
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
-    posting: PropTypes.bool.isRequired,
-    onCancel: PropTypes.func.isRequired,
-  };
-
-  static defaultProps = {
-    itemCategory: null,
-  };
-
   /**
    * @function
    * @name onChangeColor
@@ -63,7 +45,7 @@ class ItemCategoryForm extends Component {
    * @name handleSubmit
    * @description Handle create/edit action
    *
-   * @param {Object} e event object
+   * @param {object} e event object
    * @version 0.1.0
    * @since 0.1.0
    */
@@ -81,7 +63,7 @@ class ItemCategoryForm extends Component {
       const values = { ...data, color };
       if (!error) {
         if (isEditForm) {
-          const updateItemCategory = Object.assign({}, itemCategory, values);
+          const updateItemCategory = { ...itemCategory, ...values };
           putItemCategory(
             updateItemCategory,
             () => {
@@ -144,6 +126,7 @@ class ItemCategoryForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* Item Categories value */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Name ">
           {getFieldDecorator('value', {
             initialValue: isEditForm ? itemCategory.value : undefined,
@@ -155,6 +138,7 @@ class ItemCategoryForm extends Component {
         <Row>
           {/* Item Categories abbreviation */}
           <Col span={19}>
+            {/* eslint-disable-next-line react/jsx-props-no-spreading */}
             <Form.Item {...formItemLayout} label="Code">
               {getFieldDecorator('abbreviation', {
                 initialValue: isEditForm
@@ -168,6 +152,7 @@ class ItemCategoryForm extends Component {
 
           {/* Item Categories color */}
           <Col span={4} offset={1}>
+            {/* eslint-disable-next-line react/jsx-props-no-spreading */}
             <Form.Item {...formItemLayout} label="Color">
               {getFieldDecorator('color')(
                 <ColorPicker
@@ -182,6 +167,7 @@ class ItemCategoryForm extends Component {
         </Row>
 
         {/* Item Categories value */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Description ">
           {getFieldDecorator('description', {
             initialValue: isEditForm ? itemCategory.description : undefined,
@@ -206,5 +192,27 @@ class ItemCategoryForm extends Component {
     );
   }
 }
+
+ItemCategoryForm.propTypes = {
+  isEditForm: PropTypes.bool.isRequired,
+  itemCategory: PropTypes.shape({
+    _id: PropTypes.string,
+    value: PropTypes.string,
+    color: PropTypes.string,
+    abbreviation: PropTypes.string,
+    description: PropTypes.string,
+  }),
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    setFieldsValue: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+  }).isRequired,
+  posting: PropTypes.bool.isRequired,
+  onCancel: PropTypes.func.isRequired,
+};
+
+ItemCategoryForm.defaultProps = {
+  itemCategory: null,
+};
 
 export default Form.create()(ItemCategoryForm);

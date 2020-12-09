@@ -8,17 +8,18 @@ import React from 'react';
 import { notifyError, notifySuccess } from '../../../../util';
 import './styles.css';
 
-// eslint-disable-next-line jsdoc/require-returns
 /**
  * @function
  * @name QuestionnairesActionBar
  * @description Render action bar for actions which are applicable to list
  * content
  *
- * @param {Object} props props object
+ * @param {object} props props object
  * @param {number} props.page current page
  * @param {number} props.total total number of questionnaires
  * @param {Function} props.onFilter function to filters questionnaires
+ *
+ * @returns {object} React Component
  *
  * @version 0.1.0
  * @since 0.1.0

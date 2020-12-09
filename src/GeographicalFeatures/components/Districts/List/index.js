@@ -1,26 +1,26 @@
 import { List } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 import DistrictsListItem from '../ListItem';
 import DistrictsListHeader from '../ListHeader';
 
-// eslint-disable-next-line jsdoc/require-returns
 /**
- *
  * @function
  * @name DistrictsList
  * @description Render Districts list
  *
- * @param {Object} props props object
+ * @param {object} props props object
  * @param {boolean} props.loading preload list of district
  * @param {Array} props.districts array list of district
  * @param {Function} props.onEdit function for editing district
+ *
+ * @returns {object} React component
  *
  * @version 0.1.0
  * @since 0.1.0
  */
 const DistrictsList = ({ districts, loading, onEdit }) => (
-  <Fragment>
+  <>
     <DistrictsListHeader />
     <List
       loading={loading}
@@ -36,7 +36,7 @@ const DistrictsList = ({ districts, loading, onEdit }) => (
         />
       )}
     />
-  </Fragment>
+  </>
 );
 
 DistrictsList.propTypes = {

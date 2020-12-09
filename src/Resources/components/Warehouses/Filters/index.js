@@ -16,30 +16,12 @@ import React, { Component } from 'react';
  * @since 0.1.0
  */
 class WarehousesFilters extends Component {
-  static propTypes = {
-    filter: PropTypes.objectOf(
-      PropTypes.shape({
-        types: PropTypes.arrayOf(PropTypes.string),
-        phases: PropTypes.arrayOf(PropTypes.string),
-      })
-    ),
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    natures: PropTypes.arrayOf(PropTypes.string).isRequired,
-    families: PropTypes.arrayOf(PropTypes.string).isRequired,
-    types: PropTypes.arrayOf(PropTypes.string).isRequired,
-  };
-
-  static defaultProps = {
-    filter: null,
-  };
-
   /**
    * @function
    * @name handleSubmit
    * @description Handle filter action
    *
-   * @param {Object} e event object
+   * @param {object} e event object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -105,6 +87,7 @@ class WarehousesFilters extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* start warehouses nature filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By Nature">
           {getFieldDecorator('nature', {
             initialValue: filter ? filter.nature : [],
@@ -123,6 +106,7 @@ class WarehousesFilters extends Component {
         {/* end warehouse nature filters */}
 
         {/* start warehouses family filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By Family">
           {getFieldDecorator('family', {
             initialValue: filter ? filter.family : [],
@@ -141,6 +125,7 @@ class WarehousesFilters extends Component {
         {/* end warehouse family filters */}
 
         {/* start warehouses type filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By Types">
           {getFieldDecorator('type', {
             initialValue: filter ? filter.type : [],
@@ -173,6 +158,28 @@ class WarehousesFilters extends Component {
     );
   }
 }
+
+WarehousesFilters.propTypes = {
+  filter: PropTypes.objectOf(
+    PropTypes.shape({
+      types: PropTypes.arrayOf(PropTypes.string),
+      phases: PropTypes.arrayOf(PropTypes.string),
+    })
+  ),
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFields: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  natures: PropTypes.arrayOf(PropTypes.string).isRequired,
+  families: PropTypes.arrayOf(PropTypes.string).isRequired,
+  types: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+WarehousesFilters.defaultProps = {
+  filter: null,
+};
+
 export default Form.create()(
   Connect(WarehousesFilters, {
     filter: 'warehouses.filter',

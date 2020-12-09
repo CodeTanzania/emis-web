@@ -4,7 +4,7 @@ import concat from 'lodash/concat';
 import map from 'lodash/map';
 import remove from 'lodash/remove';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { notifyError, notifySuccess } from '../../../../util';
 import ProceduresActionBar from '../ActionBar';
 import ProceduresListHeader from '../ListHeader';
@@ -20,17 +20,7 @@ import ProceduresListItem from '../ListItem';
  * @since 0.1.0
  */
 class ProceduresList extends Component {
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    procedures: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-      .isRequired,
-    page: PropTypes.number.isRequired,
-    total: PropTypes.number.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    onFilter: PropTypes.func.isRequired,
-    onNotify: PropTypes.func.isRequired,
-  };
-
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     selectedProcedures: [],
   };
@@ -40,7 +30,7 @@ class ProceduresList extends Component {
    * @name handleOnSelectProcedure
    * @description Handle select a single procedure action
    *
-   * @param {Object} procedure procedure object
+   * @param {object} procedure procedure object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -85,7 +75,7 @@ class ProceduresList extends Component {
    * @name handleOnDeselectProcedure
    * @description Handle deselect a single procedure action
    *
-   * @param {Object} procedure procedure object
+   * @param {object} procedure procedure object
    *
    * @returns {undefined} undefined
    *
@@ -115,10 +105,10 @@ class ProceduresList extends Component {
       onNotify,
     } = this.props;
     const { selectedProcedures } = this.state;
-    const selectedProceduresCount = this.state.selectedProcedures.length;
+    const selectedProceduresCount = selectedProcedures.length;
 
     return (
-      <Fragment>
+      <>
         {/* list action bar */}
         <ProceduresActionBar
           total={total}
@@ -181,9 +171,20 @@ class ProceduresList extends Component {
           )}
         />
         {/* end procedures list */}
-      </Fragment>
+      </>
     );
   }
 }
+
+ProceduresList.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  procedures: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+    .isRequired,
+  page: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onFilter: PropTypes.func.isRequired,
+  onNotify: PropTypes.func.isRequired,
+};
 
 export default ProceduresList;

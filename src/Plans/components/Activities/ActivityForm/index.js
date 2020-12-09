@@ -24,27 +24,12 @@ const { TextArea } = Input;
  * @since 0.1.0
  */
 class ActivityForm extends Component {
-  static propTypes = {
-    isEditForm: PropTypes.bool.isRequired,
-    activity: PropTypes.shape({
-      name: PropTypes.string,
-      title: PropTypes.string,
-      abbreviation: PropTypes.string,
-      mobile: PropTypes.string,
-      email: PropTypes.string,
-    }).isRequired,
-    phases: PropTypes.arrayOf(PropTypes.string).isRequired,
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    posting: PropTypes.bool.isRequired,
-  };
-
   /**
    * @function
    * @name handleSubmit
    * @description Handle submit form action
    *
-   * @param {Object} event onSubmit event object
+   * @param {object} event onSubmit event object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -61,7 +46,7 @@ class ActivityForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedActivity = Object.assign({}, activity, values);
+          const updatedActivity = { ...activity, ...values };
           putActivity(
             updatedActivity,
             () => {
@@ -122,6 +107,7 @@ class ActivityForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* activity plan select input */}
+        {/* eslint-disable */}
         <Form.Item label="Plan" {...formItemLayout}>
           {getFieldDecorator('plan', {
             initialValue: isEditForm
@@ -266,6 +252,7 @@ class ActivityForm extends Component {
             />
           )}
         </Form.Item>
+        {/* eslint-enable */}
         {/* end assessment select input */}
 
         {/* form actions */}
@@ -285,6 +272,31 @@ class ActivityForm extends Component {
     );
   }
 }
+
+ActivityForm.propTypes = {
+  isEditForm: PropTypes.bool.isRequired,
+  activity: PropTypes.shape({
+    name: PropTypes.string,
+    title: PropTypes.string,
+    abbreviation: PropTypes.string,
+    mobile: PropTypes.string,
+    email: PropTypes.string,
+    description: PropTypes.string,
+    phase: PropTypes.string,
+    plan: PropTypes.shape({ name: PropTypes.string }),
+    primary: PropTypes.arrayOf({ name: PropTypes.string }),
+    supportive: PropTypes.arrayOf({ name: PropTypes.string }),
+    resources: PropTypes.arrayOf({ name: PropTypes.string }),
+    assessments: PropTypes.arrayOf({ name: PropTypes.string }),
+  }).isRequired,
+  phases: PropTypes.arrayOf(PropTypes.string).isRequired,
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  posting: PropTypes.bool.isRequired,
+};
 
 export default Connect(Form.create()(ActivityForm), {
   phases: 'activities.schema.properties.phase.enum',

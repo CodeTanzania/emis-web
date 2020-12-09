@@ -17,19 +17,7 @@ const { confirm } = Modal;
  * @since 0.1.0
  */
 class WarehouseListItem extends Component {
-  /* props validation */
-  static propTypes = {
-    name: PropTypes.string.isRequired,
-    family: PropTypes.string.isRequired,
-    nature: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    isSelected: PropTypes.bool.isRequired,
-    onSelectItem: PropTypes.func.isRequired,
-    onDeselectItem: PropTypes.func.isRequired,
-    onArchive: PropTypes.func.isRequired,
-  };
-
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     isHovered: false,
   };
@@ -47,7 +35,7 @@ class WarehouseListItem extends Component {
    * @name handleToggleSelect
    * @description Handle Toggling List Item checkbox
    *
-   * @param {Object} event - Event object
+   * @param {object} event - Event object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -146,5 +134,17 @@ class WarehouseListItem extends Component {
     );
   }
 }
+
+WarehouseListItem.propTypes = {
+  name: PropTypes.string.isRequired,
+  family: PropTypes.string.isRequired,
+  nature: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  isSelected: PropTypes.bool.isRequired,
+  onSelectItem: PropTypes.func.isRequired,
+  onDeselectItem: PropTypes.func.isRequired,
+  onArchive: PropTypes.func.isRequired,
+};
 
 export default WarehouseListItem;

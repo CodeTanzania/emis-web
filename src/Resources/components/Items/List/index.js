@@ -12,17 +12,20 @@ import remove from 'lodash/remove';
 import uniq from 'lodash/uniq';
 import uniqBy from 'lodash/uniqBy';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import ListHeader from '../../../../components/ListHeader';
 import Toolbar from '../../../../components/Toolbar';
 import { notifyError, notifySuccess } from '../../../../util';
 import ListItem from '../ListItem';
 
 /* constants */
+const nameSpan = { xxl: 6, xl: 6, lg: 6, md: 6, sm: 8, xs: 8 };
+const typeSpan = { xxl: 5, xl: 5, lg: 4, md: 4, sm: 6, xs: 6 };
+const descriptionSpan = { xxl: 10, xl: 10, lg: 10, md: 8, sm: 0, xs: 0 };
 const headerLayout = [
-  { span: 6, header: 'Name' },
-  { span: 4, header: 'Type' },
-  { span: 10, header: 'Description' },
+  { ...nameSpan, header: 'Name' },
+  { ...typeSpan, header: 'Type' },
+  { ...descriptionSpan, header: 'Description' },
 ];
 const { getItemsExportUrl } = httpActions;
 
@@ -36,23 +39,7 @@ const { getItemsExportUrl } = httpActions;
  * @since 0.1.0
  */
 class ItemsList extends Component {
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    items: PropTypes.arrayOf(
-      PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
-      })
-    ).isRequired,
-    page: PropTypes.number.isRequired,
-    total: PropTypes.number.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    onFilter: PropTypes.func.isRequired,
-    onShare: PropTypes.func.isRequired,
-  };
-
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     selectedItems: [],
     selectedPages: [],
@@ -63,7 +50,7 @@ class ItemsList extends Component {
    * @name handleOnSelectItem
    * @description Handle select a single item action
    *
-   * @param {Object} item selected item object
+   * @param {object} item selected item object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -148,7 +135,7 @@ class ItemsList extends Component {
    * @name handleOnDeselectItem
    * @description Handle deselect a single item action
    *
-   * @param {Object} resourceItem item to be removed from selected items
+   * @param {object} resourceItem item to be removed from selected items
    * @returns {undefined} undefined
    *
    * @version 0.1.0
@@ -177,14 +164,11 @@ class ItemsList extends Component {
       onShare,
     } = this.props;
     const { selectedItems, selectedPages } = this.state;
-    const selectedItemsCount = intersectionBy(
-      this.state.selectedItems,
-      items,
-      '_id'
-    ).length;
+    const selectedItemsCount = intersectionBy(selectedItems, items, '_id')
+      .length;
 
     return (
-      <Fragment>
+      <>
         {/* toolbar */}
         <Toolbar
           itemName="item"
@@ -266,9 +250,26 @@ class ItemsList extends Component {
           )}
         />
         {/* end items list */}
-      </Fragment>
+      </>
     );
   }
 }
+
+ItemsList.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  page: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onFilter: PropTypes.func.isRequired,
+  onShare: PropTypes.func.isRequired,
+};
 
 export default ItemsList;

@@ -28,27 +28,12 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class Activities extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     showFilters: false,
     isEditForm: false,
     showNotificationForm: false,
     selectedActivities: [],
-  };
-
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    posting: PropTypes.bool.isRequired,
-    activities: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-      .isRequired,
-    activity: PropTypes.shape({ name: PropTypes.string }),
-    page: PropTypes.number.isRequired,
-    showForm: PropTypes.bool.isRequired,
-    total: PropTypes.number.isRequired,
-    match: PropTypes.shape({ url: PropTypes.string }).isRequired,
-  };
-
-  static defaultProps = {
-    activity: null,
   };
 
   componentDidMount() {
@@ -114,7 +99,7 @@ class Activities extends Component {
    * @name searchActivities
    * @description Search Activities List based on supplied filter word
    *
-   * @param {Object} event - Event instance
+   * @param {object} event - Event instance
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -128,7 +113,7 @@ class Activities extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} activity activity object
+   * @param {object} activity activity object
    * @version 0.1.0
    * @since 0.1.0
    */
@@ -143,7 +128,7 @@ class Activities extends Component {
    * @name openNotificationForm
    * @description Handle on notify activities
    *
-   * @param {Object[]} activities activities list
+   * @param {object[]} activities activities list
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -300,6 +285,25 @@ class Activities extends Component {
     );
   }
 }
+
+Activities.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  posting: PropTypes.bool.isRequired,
+  activities: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+    .isRequired,
+  activity: PropTypes.shape({ name: PropTypes.string }),
+  page: PropTypes.number.isRequired,
+  showForm: PropTypes.bool.isRequired,
+  total: PropTypes.number.isRequired,
+  match: PropTypes.shape({
+    url: PropTypes.string,
+    params: PropTypes.shape({ planId: PropTypes.string }),
+  }).isRequired,
+};
+
+Activities.defaultProps = {
+  activity: null,
+};
 
 export default Connect(withRouter(Activities), {
   activities: 'activities.list',

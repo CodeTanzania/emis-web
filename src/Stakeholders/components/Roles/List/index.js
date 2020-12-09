@@ -11,22 +11,29 @@ import remove from 'lodash/remove';
 import uniq from 'lodash/uniq';
 import intersectionBy from 'lodash/intersectionBy';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import RoleListHeader from '../../../../components/ListHeader';
 import Toolbar from '../../../../components/Toolbar';
 import { notifyError, notifySuccess } from '../../../../util';
 import RoleListItem from '../ListItem';
 
 /* constants */
+const nameSpan = { xxl: 7, xl: 7, lg: 7, md: 7, sm: 16, xs: 16 };
+const abbreviationSpan = { xxl: 3, xl: 3, lg: 3, md: 3, sm: 3, xs: 3 };
+const descriptionSpan = { xxl: 11, xl: 11, lg: 11, md: 10, sm: 0, xs: 0 };
 const headerLayout = [
   {
-    span: 7,
+    ...nameSpan,
     header: 'Name',
     title: 'Roles name associated with focal people',
   },
-  { span: 3, header: 'Abbreviation', title: 'A shortened form of roles' },
   {
-    span: 10,
+    ...abbreviationSpan,
+    header: 'Abbreviation',
+    title: 'A shortened form of roles',
+  },
+  {
+    ...descriptionSpan,
     header: 'Description',
     title: 'Explanation of roles',
   },
@@ -34,7 +41,6 @@ const headerLayout = [
 
 const { getRolesExportUrl } = httpActions;
 
-// eslint-disable-next-line jsdoc/require-returns
 /**
  * @class
  * @name RoleList
@@ -44,21 +50,7 @@ const { getRolesExportUrl } = httpActions;
  * @since 0.1.0
  */
 class RoleList extends Component {
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    roles: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string,
-        abbreviation: PropTypes.string,
-        description: PropTypes.string,
-      })
-    ).isRequired,
-    total: PropTypes.number.isRequired,
-    page: PropTypes.number.isRequired,
-    onNotify: PropTypes.func.isRequired,
-  };
-
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     selectedRoles: [],
     selectedPages: [],
@@ -69,7 +61,7 @@ class RoleList extends Component {
    * @name handleOnSelectRole
    * @description Handle select a single role action
    *
-   * @param {Object} role selected role object
+   * @param {object} role selected role object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -84,7 +76,7 @@ class RoleList extends Component {
    * @name handleOnDeselectRole
    * @description Handle deselect a single role action
    *
-   * @param {Object} role roles to be removed from selected roles
+   * @param {object} role roles to be removed from selected roles
    * @returns {undefined} undefined
    *
    * @version 0.1.0
@@ -155,14 +147,11 @@ class RoleList extends Component {
   render() {
     const { roles, loading, page, total, onEdit, onNotify } = this.props;
     const { selectedRoles, selectedPages } = this.state;
-    const selectedRolesCount = intersectionBy(
-      this.state.selectedRoles,
-      roles,
-      '_id'
-    ).length;
+    const selectedRolesCount = intersectionBy(selectedRoles, roles, '_id')
+      .length;
 
     return (
-      <Fragment>
+      <>
         {/* toolbar */}
         <Toolbar
           itemName="Role"
@@ -235,9 +224,24 @@ class RoleList extends Component {
             />
           )}
         />
-      </Fragment>
+      </>
     );
   }
 }
+
+RoleList.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  roles: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      abbreviation: PropTypes.string,
+      description: PropTypes.string,
+    })
+  ).isRequired,
+  total: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired,
+  onNotify: PropTypes.func.isRequired,
+};
 
 export default RoleList;

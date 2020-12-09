@@ -28,27 +28,13 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class Questionnaires extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     showFilters: false,
     isEditForm: false,
   };
 
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    questionnaires: PropTypes.arrayOf(
-      PropTypes.shape({ name: PropTypes.string })
-    ).isRequired,
-    page: PropTypes.number.isRequired,
-    total: PropTypes.number.isRequired,
-    posting: PropTypes.bool.isRequired,
-    questionnaire: PropTypes.shape({ name: PropTypes.string }),
-    showForm: PropTypes.bool.isRequired,
-  };
-
-  static defaultProps = {
-    questionnaire: null,
-  };
-
+  // eslint-disable-next-line react/no-deprecated
   componentWillMount() {
     getQuestionnaires();
   }
@@ -121,7 +107,7 @@ class Questionnaires extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} questionnaire questionnaire object
+   * @param {object} questionnaire questionnaire object
    * @version 0.1.0
    * @since 0.1.0
    */
@@ -223,6 +209,21 @@ class Questionnaires extends Component {
     );
   }
 }
+
+Questionnaires.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  questionnaires: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+    .isRequired,
+  page: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  posting: PropTypes.bool.isRequired,
+  questionnaire: PropTypes.shape({ name: PropTypes.string }),
+  showForm: PropTypes.bool.isRequired,
+};
+
+Questionnaires.defaultProps = {
+  questionnaire: null,
+};
 
 export default Connect(Questionnaires, {
   questionnaires: 'questionnaires.list',

@@ -9,7 +9,6 @@ import { notifyError, notifySuccess } from '../../../../util';
 /* constants */
 const { getAgencies, getWarehouses, getItems } = httpActions;
 
-// eslint-disable-next-line jsdoc/require-returns
 /**
  * @class
  * @name StockForm
@@ -19,25 +18,12 @@ const { getAgencies, getWarehouses, getItems } = httpActions;
  * @since 0.1.0
  */
 class StockForm extends Component {
-  static propTypes = {
-    isEditForm: PropTypes.bool.isRequired,
-    stock: PropTypes.shape({
-      stock: PropTypes.object,
-      item: PropTypes.object,
-      quantity: PropTypes.number,
-      _id: PropTypes.string,
-    }).isRequired,
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    posting: PropTypes.bool.isRequired,
-  };
-
   /**
    * @function
    * @name handleSubmit
    * @description  call back function to handle submit action
    *
-   * @param {Object} e event object
+   * @param {object} e event object
    *
    * @returns {undefined} does not return anything
    * @version 0.1.0
@@ -55,7 +41,7 @@ class StockForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedStock = Object.assign({}, stock, values);
+          const updatedStock = { ...stock, ...values };
           putStock(
             updatedStock,
             () => {
@@ -115,6 +101,7 @@ class StockForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* stock stakeholder */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Agency">
           {getFieldDecorator('owner', {
             initialValue:
@@ -133,6 +120,7 @@ class StockForm extends Component {
         {/* end stock stakeholder */}
 
         {/* stock Item */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Item">
           {getFieldDecorator('item', {
             initialValue: isEditForm ? stock.item._id : undefined, // eslint-disable-line
@@ -150,6 +138,7 @@ class StockForm extends Component {
         {/* end stock Item */}
 
         {/* stock Warehouse */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Warehouse">
           {getFieldDecorator('store', {
             initialValue: isEditForm ? stock.store._id : undefined, // eslint-disable-line
@@ -167,6 +156,7 @@ class StockForm extends Component {
         {/* end stock number */}
 
         {/* stock quantity */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Quantity">
           {getFieldDecorator('quantity', {
             initialValue: isEditForm ? stock.quantity : undefined,
@@ -191,5 +181,23 @@ class StockForm extends Component {
     );
   }
 }
+
+StockForm.propTypes = {
+  isEditForm: PropTypes.bool.isRequired,
+  stock: PropTypes.shape({
+    stock: PropTypes.object,
+    item: PropTypes.object,
+    quantity: PropTypes.number,
+    owner: PropTypes.string,
+    store: PropTypes.string,
+    _id: PropTypes.string,
+  }).isRequired,
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  posting: PropTypes.bool.isRequired,
+};
 
 export default Form.create()(StockForm);

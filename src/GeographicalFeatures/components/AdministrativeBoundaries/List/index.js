@@ -1,6 +1,6 @@
 import { List } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 import AdminstrativeBoundaryListHeader from '../ListHeader';
 import AdminstrativeBoundaryListItem from '../ListItem';
 
@@ -10,8 +10,9 @@ import AdminstrativeBoundaryListItem from '../ListItem';
  * @name AdminstrativeBoundaryList
  * @description Render AdminstrativeBoundary list which have search box and
  * actions
+ * @returns {React.Component} react element
  *
- * @param {Object} props props object
+ * @param {object} props props object
  * @param {boolean} props.loading preload list of adminstrativeBoundaries
  * @param {Array} props.adminstrativeBoundaries array list of
  *  adminstrativeBoundaries
@@ -20,7 +21,7 @@ import AdminstrativeBoundaryListItem from '../ListItem';
  * @since 0.1.0
  */
 const AdminstrativeBoundaryList = ({ adminstrativeBoundaries, loading }) => (
-  <Fragment>
+  <>
     <AdminstrativeBoundaryListHeader />
     <List
       loading={loading}
@@ -33,7 +34,7 @@ const AdminstrativeBoundaryList = ({ adminstrativeBoundaries, loading }) => (
         />
       )}
     />
-  </Fragment>
+  </>
 );
 
 AdminstrativeBoundaryList.propTypes = {

@@ -28,33 +28,13 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class Facilities extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     showFilters: false,
     isEditForm: false,
   };
 
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    showForm: PropTypes.bool.isRequired,
-    posting: PropTypes.bool.isRequired,
-    facilities: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string,
-        type: PropTypes.string,
-      })
-    ).isRequired,
-    facility: PropTypes.shape({
-      name: PropTypes.string,
-      level: PropTypes.string,
-    }),
-    total: PropTypes.number.isRequired,
-    page: PropTypes.number.isRequired,
-  };
-
-  static defaultProps = {
-    facility: null,
-  };
-
+  // eslint-disable-next-line react/no-deprecated
   componentWillMount() {
     getFeatures();
   }
@@ -128,7 +108,7 @@ class Facilities extends Component {
    * @name searchFeatures
    * @description Search Facility List based on supplied filter word
    *
-   * @param {Object} event - Event instance
+   * @param {object} event - Event instance
    * @returns {undefined} - Nothing is returned
    *
    * @version 0.1.0
@@ -144,7 +124,7 @@ class Facilities extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} facility facility object
+   * @param {object} facility facility object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -248,6 +228,28 @@ class Facilities extends Component {
     );
   }
 }
+
+Facilities.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  showForm: PropTypes.bool.isRequired,
+  posting: PropTypes.bool.isRequired,
+  facilities: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      type: PropTypes.string,
+    })
+  ).isRequired,
+  facility: PropTypes.shape({
+    name: PropTypes.string,
+    level: PropTypes.string,
+  }),
+  total: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired,
+};
+
+Facilities.defaultProps = {
+  facility: null,
+};
 
 export default Connect(Facilities, {
   facilities: 'features.list',

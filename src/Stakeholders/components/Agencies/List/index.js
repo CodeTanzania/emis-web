@@ -12,19 +12,25 @@ import uniqBy from 'lodash/uniqBy';
 import remove from 'lodash/remove';
 import intersectionBy from 'lodash/intersectionBy';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import ListHeader from '../../../../components/ListHeader';
 import { notifyError, notifySuccess } from '../../../../util';
 import Toolbar from '../../../../components/Toolbar';
 import AgencyListItem from '../ListItem';
 
 /* constants */
+const nameSpan = { xxl: 5, xl: 5, lg: 5, md: 7, sm: 14, xs: 14 };
+const abbreviationSpan = { xxl: 3, xl: 3, lg: 3, md: 3, sm: 0, xs: 0 };
+const areaSpan = { xxl: 4, xl: 4, lg: 4, md: 0, sm: 0, xs: 0 };
+const phoneSpan = { xxl: 4, xl: 4, lg: 4, md: 4, sm: 6, xs: 6 };
+const emailSpan = { xxl: 5, xl: 5, lg: 5, md: 6, sm: 0, xs: 0 };
+
 const headerLayout = [
-  { span: 5, header: 'Name' },
-  { span: 3, header: 'Abbreviation' },
-  { span: 3, header: 'Area' },
-  { span: 4, header: 'Mobile Number' },
-  { span: 4, header: 'Email Address' },
+  { ...nameSpan, header: 'Name' },
+  { ...abbreviationSpan, header: 'Abbreviation' },
+  { ...areaSpan, header: 'Area' },
+  { ...phoneSpan, header: 'Phone Number' },
+  { ...emailSpan, header: 'Email' },
 ];
 const { getAgenciesExportUrl } = httpActions;
 
@@ -38,19 +44,7 @@ const { getAgenciesExportUrl } = httpActions;
  * @since 0.1.0
  */
 class AgencyList extends Component {
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    agencies: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-      .isRequired,
-    page: PropTypes.number.isRequired,
-    total: PropTypes.number.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    onNotify: PropTypes.func.isRequired,
-    onBulkShare: PropTypes.func.isRequired,
-    onShare: PropTypes.func.isRequired,
-    onFilter: PropTypes.func.isRequired,
-  };
-
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     selectedAgencies: [],
     selectedPages: [],
@@ -61,7 +55,7 @@ class AgencyList extends Component {
    * @name handleOnSelectAgency
    * @description Handle select a single agency action
    *
-   * @param {Object} agency selected agency object
+   * @param {object} agency selected agency object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -144,7 +138,7 @@ class AgencyList extends Component {
    * @name handleOnDeselectAgency
    * @description Handle deselect a single agency action
    *
-   * @param {Object} agency agency to be removed from selected agencies
+   * @param {object} agency agency to be removed from selected agencies
    * @returns {undefined}
    *
    * @version 0.1.0
@@ -176,13 +170,13 @@ class AgencyList extends Component {
     } = this.props;
     const { selectedAgencies, selectedPages } = this.state;
     const selectedAgenciesCount = intersectionBy(
-      this.state.selectedAgencies,
+      selectedAgencies,
       agencies,
       '_id'
     ).length;
 
     return (
-      <Fragment>
+      <>
         {/* toolbar */}
         <Toolbar
           itemName="Agency"
@@ -260,9 +254,22 @@ class AgencyList extends Component {
           }}
         />
         {/* end agencies list */}
-      </Fragment>
+      </>
     );
   }
 }
+
+AgencyList.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  agencies: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+    .isRequired,
+  page: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onNotify: PropTypes.func.isRequired,
+  onBulkShare: PropTypes.func.isRequired,
+  onShare: PropTypes.func.isRequired,
+  onFilter: PropTypes.func.isRequired,
+};
 
 export default AgencyList;

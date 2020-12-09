@@ -20,29 +20,13 @@ const { Option } = Select;
  * @since 0.1.0
  */
 class DistrictForm extends Component {
-  static propTypes = {
-    isEditForm: PropTypes.bool.isRequired,
-    district: PropTypes.shape({
-      name: PropTypes.string,
-      nature: PropTypes.string,
-      family: PropTypes.string,
-      type: PropTypes.string,
-    }).isRequired,
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    posting: PropTypes.bool.isRequired,
-    families: PropTypes.arrayOf(PropTypes.string).isRequired,
-    natures: PropTypes.arrayOf(PropTypes.string).isRequired,
-    types: PropTypes.arrayOf(PropTypes.string).isRequired,
-  };
-
   /**
    * Handle submit form action
    *
    * @function
    * @name handleSubmit
    *
-   * @param {Object} e event object
+   * @param {object} e event object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -59,7 +43,7 @@ class DistrictForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedRegion = Object.assign({}, district, values);
+          const updatedRegion = { ...district, ...values };
           putFeature(
             updatedRegion,
             () => {
@@ -122,6 +106,7 @@ class DistrictForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* district name */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Name">
           {getFieldDecorator('name', {
             initialValue: isEditForm ? district.name : undefined,
@@ -131,6 +116,7 @@ class DistrictForm extends Component {
         {/* end district name */}
 
         {/* nature */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Nature">
           {getFieldDecorator('nature', {
             initialValue: isEditForm ? district.nature : undefined,
@@ -148,6 +134,7 @@ class DistrictForm extends Component {
         {/* end nature */}
 
         {/* district type */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Type">
           {getFieldDecorator('type', {
             initialValue: isEditForm ? district.type : undefined,
@@ -165,6 +152,7 @@ class DistrictForm extends Component {
         {/* end district type */}
 
         {/* district family */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Family">
           {getFieldDecorator('family', {
             initialValue: isEditForm ? district.family : undefined,
@@ -198,6 +186,25 @@ class DistrictForm extends Component {
     );
   }
 }
+
+DistrictForm.propTypes = {
+  isEditForm: PropTypes.bool.isRequired,
+  district: PropTypes.shape({
+    name: PropTypes.string,
+    nature: PropTypes.string,
+    family: PropTypes.string,
+    type: PropTypes.string,
+  }).isRequired,
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  posting: PropTypes.bool.isRequired,
+  families: PropTypes.arrayOf(PropTypes.string).isRequired,
+  natures: PropTypes.arrayOf(PropTypes.string).isRequired,
+  types: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 export default Connect(Form.create()(DistrictForm), {
   natures: 'features.schema.properties.nature.enum',

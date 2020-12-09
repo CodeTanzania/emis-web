@@ -18,7 +18,6 @@ import './styles.css';
 const { Search } = Input;
 
 /**
- *
  * @class
  * @name EvacuationCenters
  * @description Render features module which has search box,
@@ -28,33 +27,13 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class EvacuationCenters extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     showFilters: false,
     isEditForm: false,
   };
 
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    showForm: PropTypes.bool.isRequired,
-    posting: PropTypes.bool.isRequired,
-    evacuationCenters: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string,
-        type: PropTypes.string,
-      })
-    ).isRequired,
-    evacuationCenter: PropTypes.shape({
-      name: PropTypes.string,
-      level: PropTypes.string,
-    }),
-    total: PropTypes.number.isRequired,
-    page: PropTypes.number.isRequired,
-  };
-
-  static defaultProps = {
-    evacuationCenter: null,
-  };
-
+  // eslint-disable-next-line react/no-deprecated
   componentWillMount() {
     getFeatures();
   }
@@ -127,7 +106,7 @@ class EvacuationCenters extends Component {
    * @name searchFeatures
    * @description Search Evacuation Centers List based on supplied filter word
    *
-   * @param {Object} event - Event instance
+   * @param {object} event - Event instance
    * @returns {undefined} - Nothing is returned
    *
    * @version 0.1.0
@@ -143,7 +122,7 @@ class EvacuationCenters extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} evacuationCenter evacuation center object
+   * @param {object} evacuationCenter evacuation center object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -248,6 +227,28 @@ class EvacuationCenters extends Component {
     );
   }
 }
+
+EvacuationCenters.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  showForm: PropTypes.bool.isRequired,
+  posting: PropTypes.bool.isRequired,
+  evacuationCenters: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      type: PropTypes.string,
+    })
+  ).isRequired,
+  evacuationCenter: PropTypes.shape({
+    name: PropTypes.string,
+    level: PropTypes.string,
+  }),
+  total: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired,
+};
+
+EvacuationCenters.defaultProps = {
+  evacuationCenter: null,
+};
 
 export default Connect(EvacuationCenters, {
   evacuationCenters: 'features.list',

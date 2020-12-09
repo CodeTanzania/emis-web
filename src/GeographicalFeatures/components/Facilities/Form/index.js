@@ -11,25 +11,13 @@ import { notifyError, notifySuccess } from '../../../../util';
 const { Option } = Select;
 
 class FacilityForm extends Component {
-  static propTypes = {
-    isEditForm: PropTypes.bool.isRequired,
-    nature: PropTypes.arrayOf(PropTypes.string).isRequired,
-    facility: PropTypes.shape({
-      name: PropTypes.string,
-      type: PropTypes.string,
-    }).isRequired,
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    posting: PropTypes.bool.isRequired,
-  };
-
   /**
    * Handle submit form action
    *
    * @function
    * @name handleSubmit
    *
-   * @param {Object} e event object
+   * @param {object} e event object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -46,12 +34,13 @@ class FacilityForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedFacility = Object.assign({}, facility, {
+          const updatedFacility = {
+            ...facility,
             ...values,
             continent: 'Africa',
             country: 'Tanzania',
             family: 'FacilityForm',
-          });
+          };
           putFeature(
             updatedFacility,
             () => {
@@ -119,6 +108,7 @@ class FacilityForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* Facility name */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Name">
           {getFieldDecorator('name', {
             initialValue: isEditForm ? facility.name : undefined,
@@ -133,6 +123,7 @@ class FacilityForm extends Component {
         {/* end Facility name */}
 
         {/* Facility nature */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Nature">
           {getFieldDecorator('nature', {
             initialValue: isEditForm ? facility.nature : undefined,
@@ -163,6 +154,22 @@ class FacilityForm extends Component {
     );
   }
 }
+
+FacilityForm.propTypes = {
+  isEditForm: PropTypes.bool.isRequired,
+  nature: PropTypes.arrayOf(PropTypes.string).isRequired,
+  facility: PropTypes.shape({
+    name: PropTypes.string,
+    type: PropTypes.string,
+    nature: PropTypes.string,
+  }).isRequired,
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  posting: PropTypes.bool.isRequired,
+};
 
 export default Form.create()(
   Connect(FacilityForm, {

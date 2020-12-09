@@ -11,25 +11,13 @@ import { notifyError, notifySuccess } from '../../../../util';
 const { Option } = Select;
 
 class EvacuationCenterForm extends Component {
-  static propTypes = {
-    isEditForm: PropTypes.bool.isRequired,
-    nature: PropTypes.arrayOf(PropTypes.string).isRequired,
-    evacuationCenter: PropTypes.shape({
-      name: PropTypes.string,
-      type: PropTypes.string,
-    }).isRequired,
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    posting: PropTypes.bool.isRequired,
-  };
-
   /**
    *
    * @function
    * @name handleSubmit
    * @description Handle filter action
    *
-   * @param {Object} e event object
+   * @param {object} e event object
    * @version 0.1.0
    * @since 0.1.0
    */
@@ -45,12 +33,13 @@ class EvacuationCenterForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedEvacuationCenter = Object.assign({}, evacuationCenter, {
+          const updatedEvacuationCenter = {
+            ...evacuationCenter,
             ...values,
             continent: 'Africa',
             country: 'Tanzania',
             family: 'EvacuationCenter',
-          });
+          };
           putFeature(
             updatedEvacuationCenter,
             () => {
@@ -118,6 +107,7 @@ class EvacuationCenterForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* Evacuation Center name */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Name">
           {getFieldDecorator('name', {
             initialValue: isEditForm ? evacuationCenter.name : undefined,
@@ -129,6 +119,7 @@ class EvacuationCenterForm extends Component {
         {/* end Evacuation Center name */}
 
         {/* Evacuation Center nature */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Nature">
           {getFieldDecorator('nature', {
             initialValue: isEditForm ? evacuationCenter.nature : undefined,
@@ -159,6 +150,22 @@ class EvacuationCenterForm extends Component {
     );
   }
 }
+
+EvacuationCenterForm.propTypes = {
+  isEditForm: PropTypes.bool.isRequired,
+  nature: PropTypes.arrayOf(PropTypes.string).isRequired,
+  evacuationCenter: PropTypes.shape({
+    name: PropTypes.string,
+    type: PropTypes.string,
+    nature: PropTypes.string,
+  }).isRequired,
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  posting: PropTypes.bool.isRequired,
+};
 
 export default Form.create()(
   Connect(EvacuationCenterForm, {

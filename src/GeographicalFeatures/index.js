@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import districtIcon from '../assets/icons/district.svg';
-import EvacuationIcon from '../assets/icons/evacuationCenter.svg';
+import districtIcon from '../assets/icons/geographicalfeatures/district.svg';
+import EvacuationIcon from '../assets/icons/geographicalfeatures/evacuationcenters.svg';
 import facilitiesIcon from '../assets/icons/geographicalfeatures/facilities.svg';
 import infrastructureIcon from '../assets/icons/geographicalfeatures/infrastructures.svg';
 import warehousesIcon from '../assets/icons/geographicalfeatures/warehouse.svg';
-import regionIcon from '../assets/icons/region.svg';
-import subwardIcon from '../assets/icons/subward.svg';
-import wardIcon from '../assets/icons/ward.svg';
+import regionIcon from '../assets/icons/geographicalfeatures/region.svg';
+import subwardIcon from '../assets/icons/geographicalfeatures/subward.svg';
+import wardIcon from '../assets/icons/geographicalfeatures/ward.svg';
 import NavigationMenu from '../components/NavigationMenu';
 import modules from '../modules.json';
 
@@ -67,9 +67,9 @@ const routes = [
  * @function
  * @name GeographicalFeatures
  * @description Home component which shows to navigation menu
- *
- * @param {Object} props props object
- * @param {Object} props.match match object from url router
+ * @returns {React.Component} react element
+ * @param {object} props props object
+ * @param {object} props.match match object from url router
  *
  * @version 0.1.0
  * @since 0.1.0

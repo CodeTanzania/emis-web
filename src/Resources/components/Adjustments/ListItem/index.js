@@ -14,21 +14,7 @@ import './styles.css';
  * @since 0.1.0
  */
 class AdjustmentListItem extends Component {
-  /* props validation */
-  static propTypes = {
-    itemName: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    warehouseName: PropTypes.string.isRequired,
-    quantity: PropTypes.string.isRequired,
-    cost: PropTypes.string.isRequired,
-    reason: PropTypes.string.isRequired,
-    color: PropTypes.string.isRequired,
-    isSelected: PropTypes.bool.isRequired,
-    onSelectItem: PropTypes.func.isRequired,
-    onDeselectItem: PropTypes.func.isRequired,
-    creationDate: PropTypes.string.isRequired,
-  };
-
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     isHovered: false,
   };
@@ -62,7 +48,7 @@ class AdjustmentListItem extends Component {
    * @name handleToggleSelect
    * @description Handle toggling list item checkbox
    *
-   * @param {Object} event Event object
+   * @param {object} event Event object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -137,5 +123,19 @@ class AdjustmentListItem extends Component {
     );
   }
 }
+
+AdjustmentListItem.propTypes = {
+  itemName: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  warehouseName: PropTypes.string.isRequired,
+  quantity: PropTypes.string.isRequired,
+  cost: PropTypes.string.isRequired,
+  reason: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  isSelected: PropTypes.bool.isRequired,
+  onSelectItem: PropTypes.func.isRequired,
+  onDeselectItem: PropTypes.func.isRequired,
+  creationDate: PropTypes.string.isRequired,
+};
 
 export default AdjustmentListItem;

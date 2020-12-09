@@ -1,6 +1,6 @@
 import { Badge, Button, Card, Col, Popover, Row } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import './styles.css';
 
@@ -9,14 +9,16 @@ import './styles.css';
  * @name PlanOptions
  * @description Plan Options
  *
- * @param {Object} props props object
+ * @param {object} props props object
  * @param {Function} props.onEditPlan callback for edit action
+ *
+ * @returns {object} React element
  *
  * @version 0.1.0
  * @since 0.1.0
  */
 const PlanOptions = ({ onEditPlan }) => (
-  <Fragment>
+  <>
     <div>
       <Button icon="poweroff" className="b-0">
         Activate
@@ -37,7 +39,7 @@ const PlanOptions = ({ onEditPlan }) => (
         Archive Plan
       </Button>
     </div>
-  </Fragment>
+  </>
 );
 
 /**
@@ -50,32 +52,8 @@ const PlanOptions = ({ onEditPlan }) => (
  * @since 0.1.0
  */
 class PlansGridListItem extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = { showPopover: false };
-
-  static propTypes = {
-    activityCount: PropTypes.number,
-    color: PropTypes.string,
-    description: PropTypes.string,
-    family: PropTypes.string,
-    id: PropTypes.string.isRequired,
-    incidentType: PropTypes.string.isRequired,
-    jurisdiction: PropTypes.string.isRequired,
-    level: PropTypes.string.isRequired,
-    match: PropTypes.shape({ url: PropTypes.string }).isRequired,
-    nature: PropTypes.string,
-    onEditPlan: PropTypes.func.isRequired,
-    owner: PropTypes.string,
-    updatedAt: PropTypes.string.isRequired,
-  };
-
-  static defaultProps = {
-    activityCount: 0,
-    color: '#0071fc',
-    nature: 'N/A',
-    family: 'N/A',
-    owner: 'N/A',
-    description: '',
-  };
 
   /**
    * @function
@@ -210,6 +188,31 @@ class PlansGridListItem extends Component {
     );
   }
 }
+
+PlansGridListItem.propTypes = {
+  activityCount: PropTypes.number,
+  color: PropTypes.string,
+  description: PropTypes.string,
+  family: PropTypes.string,
+  id: PropTypes.string.isRequired,
+  incidentType: PropTypes.string.isRequired,
+  jurisdiction: PropTypes.string.isRequired,
+  level: PropTypes.string.isRequired,
+  match: PropTypes.shape({ url: PropTypes.string }).isRequired,
+  nature: PropTypes.string,
+  onEditPlan: PropTypes.func.isRequired,
+  owner: PropTypes.string,
+  updatedAt: PropTypes.string.isRequired,
+};
+
+PlansGridListItem.defaultProps = {
+  activityCount: 0,
+  color: '#0071fc',
+  nature: 'N/A',
+  family: 'N/A',
+  owner: 'N/A',
+  description: '',
+};
 
 PlanOptions.propTypes = {
   onEditPlan: PropTypes.func.isRequired,

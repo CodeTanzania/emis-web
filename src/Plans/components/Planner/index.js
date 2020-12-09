@@ -26,26 +26,12 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class Plans extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     showFilters: false,
     isEditForm: false,
     showNotificationForm: false,
     selectedPlans: [],
-  };
-
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    posting: PropTypes.bool.isRequired,
-    plans: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-      .isRequired,
-    plan: PropTypes.shape({ name: PropTypes.string }),
-    page: PropTypes.number.isRequired,
-    showForm: PropTypes.bool.isRequired,
-    total: PropTypes.number.isRequired,
-  };
-
-  static defaultProps = {
-    plan: null,
   };
 
   componentDidMount() {
@@ -107,7 +93,7 @@ class Plans extends Component {
    * @name searchPlans
    * @description Search Plans List based on supplied filter word
    *
-   * @param {Object} event - Event instance
+   * @param {object} event - Event instance
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -121,7 +107,7 @@ class Plans extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} plan plan object
+   * @param {object} plan plan object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -137,7 +123,7 @@ class Plans extends Component {
    * @name openNotificationForm
    * @description Handle on notify plans
    *
-   * @param {Object[]} plans list of plans objects
+   * @param {object[]} plans list of plans objects
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -273,6 +259,21 @@ class Plans extends Component {
     );
   }
 }
+
+Plans.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  posting: PropTypes.bool.isRequired,
+  plans: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+    .isRequired,
+  plan: PropTypes.shape({ name: PropTypes.string }),
+  page: PropTypes.number.isRequired,
+  showForm: PropTypes.bool.isRequired,
+  total: PropTypes.number.isRequired,
+};
+
+Plans.defaultProps = {
+  plan: null,
+};
 
 export default Connect(Plans, {
   plans: 'plans.list',

@@ -19,4 +19,27 @@
 
 .Toolbar .pagination {
   padding-top: 8px;
+  float: right;
+}
+
+
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 12px;
+   }
+
+   .ant-pagination-simple .ant-pagination-simple-pager, .ant-pagination-simple .ant-pagination-prev, .ant-pagination-simple .ant-pagination-next, .ant-pagination-simple .ant-pagination-simple-pager input {
+    margin: 0px;
+  }
+   
+}
+ 
+ @media screen and (max-width: 426px) {
+  body {
+    font-size: 12px;
+   }  
+
+   .ant-pagination-simple .ant-pagination-simple-pager, .ant-pagination-simple .ant-pagination-prev, .ant-pagination-simple .ant-pagination-next, .ant-pagination-simple .ant-pagination-simple-pager input {
+    margin: 0px;
+  }
 }

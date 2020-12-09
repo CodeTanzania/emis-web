@@ -17,32 +17,13 @@ import React, { Component } from 'react';
  * @since 0.1.0
  */
 class QuestionsFilters extends Component {
-  static propTypes = {
-    filter: PropTypes.objectOf(
-      PropTypes.shape({
-        assess: PropTypes.arrayOf(PropTypes.string).isRequired,
-        phases: PropTypes.arrayOf(PropTypes.string).isRequired,
-        stages: PropTypes.arrayOf(PropTypes.string).isRequired,
-      })
-    ),
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    assess: PropTypes.arrayOf(PropTypes.string).isRequired,
-    phases: PropTypes.arrayOf(PropTypes.string).isRequired,
-    stages: PropTypes.arrayOf(PropTypes.string).isRequired,
-  };
-
-  static defaultProps = {
-    filter: null,
-  };
-
   /**
    *
    * @function
    * @name handleSubmit
    * @description Handle filter action
    *
-   * @param {Object} e event object
+   * @param {object} e event object
    * @version 0.1.0
    * @since 0.1.0
    */
@@ -108,6 +89,7 @@ class QuestionsFilters extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* start stage filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By Stage ">
           {getFieldDecorator('stage', {
             initialValue: filter ? filter.stage : [],
@@ -126,6 +108,7 @@ class QuestionsFilters extends Component {
         {/* end stages filters */}
 
         {/* start emergency phase filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By Emergency Phases">
           {getFieldDecorator('phase', {
             initialValue: filter ? filter.phase : [],
@@ -144,6 +127,7 @@ class QuestionsFilters extends Component {
         {/* end emergency phase filters */}
 
         {/* start assess filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By Assessed">
           {getFieldDecorator('assess', {
             initialValue: filter ? filter.assess : [],
@@ -176,6 +160,28 @@ class QuestionsFilters extends Component {
     );
   }
 }
+
+QuestionsFilters.propTypes = {
+  filter: PropTypes.objectOf(
+    PropTypes.shape({
+      assess: PropTypes.arrayOf(PropTypes.string).isRequired,
+      phases: PropTypes.arrayOf(PropTypes.string).isRequired,
+      stages: PropTypes.arrayOf(PropTypes.string).isRequired,
+    })
+  ),
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFields: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  assess: PropTypes.arrayOf(PropTypes.string).isRequired,
+  phases: PropTypes.arrayOf(PropTypes.string).isRequired,
+  stages: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+QuestionsFilters.defaultProps = {
+  filter: null,
+};
 
 export default Connect(Form.create()(QuestionsFilters), {
   assess: 'questions.schema.properties.assess.enum',

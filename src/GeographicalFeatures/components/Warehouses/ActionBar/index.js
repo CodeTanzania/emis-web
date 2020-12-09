@@ -8,7 +8,6 @@ import React from 'react';
 import { notifyError, notifySuccess } from '../../../../util';
 import './styles.css';
 
-// eslint-disable-next-line jsdoc/require-returns
 /**
  *
  * @function
@@ -16,11 +15,13 @@ import './styles.css';
  * @description Render action bar for actions which are applicable to
  * list content
  *
- * @param {Object} props props object
+ * @param {object} props props object
  * @param {number} props.page current page
  * @param {number} props.total total number of Warehouses
  * @param {Function} props.onFilter filters Warehouses
  *  when function is called
+ *
+ * @returns {object} React Component
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -44,7 +45,7 @@ const WarehousesActionBar = ({ page, total, onFilter }) => (
               },
               () => {
                 notifyError(
-                  `An Error occurred while refreshing warehouses, 
+                  `An Error occurred while refreshing warehouses,
                   please warehouses system administrator!`
                 );
               }

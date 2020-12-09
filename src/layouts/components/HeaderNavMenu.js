@@ -3,27 +3,33 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import alertIcon from '../../assets/icons/alerts.svg';
-import assessmentIcon from '../../assets/icons/assessments.svg';
+import assessmentIcon from '../../assets/icons/assessments-disabled.svg';
 import dashboardIcon from '../../assets/icons/dashboards-disabled.svg';
-import planIcon from '../../assets/icons/emergencyplans.svg';
-import geographicalFeaturesIcon from '../../assets/icons/geographicalfeatures.svg';
+import planIcon from '../../assets/icons/emergencyplans-disabled.svg';
+import geographicalFeaturesIcon from '../../assets/icons/geographicalfeatures-disabled.svg';
 import incidentIcon from '../../assets/icons/incidents-disabled.svg';
-import resourceIcon from '../../assets/icons/resources.svg';
+import resourceIcon from '../../assets/icons/resources-disabled.svg';
 import stakeholderIcon from '../../assets/icons/stakeholders.svg';
 import './styles.css';
 
 /* constants */
 const routes = [
   { name: 'Alerts', path: '/alerts', icon: alertIcon },
-  { name: 'Assessments', path: '/assessments', icon: assessmentIcon },
-  { name: 'Emergency Plans', path: '/plans', icon: planIcon },
+  {
+    name: 'Assessments',
+    path: '/assessments',
+    icon: assessmentIcon,
+    disabled: true,
+  },
+  { name: 'Emergency Plans', path: '/plans', icon: planIcon, disabled: true },
   {
     name: 'Geographical Features',
     path: '/geographicalfeatures',
     icon: geographicalFeaturesIcon,
+    disabled: true,
   },
   { name: 'Incidents', path: '/incidents', icon: incidentIcon, disabled: true },
-  { name: 'Resources', path: '/resources', icon: resourceIcon },
+  { name: 'Resources', path: '/resources', icon: resourceIcon, disabled: true },
   { name: 'Stakeholders', path: '/stakeholders', icon: stakeholderIcon },
   {
     name: 'Dashboards',
@@ -39,12 +45,13 @@ const routes = [
  * @description Navigation menu item that have icon(image) and name for the
  * module to navigate to
  *
- * @param {Object} props props object
+ * @param {object} props props object
  * @param {string} props.name  name/description/label for nav item
  * @param {string} props.icon  path to svg image used as nav icon
  * @param {string} props.path  path to navigate to when clicked
  * @param {boolean} props.disabled flag to mark navigation item if is disabled
  *
+ * @returns {object} Navigation item
  * @version 0.1.0
  * @since 0.1.0
  */
@@ -67,6 +74,8 @@ const NavItem = ({ name, icon, path, disabled }) => (
  * @function
  * @name Home
  * @description Home route which shows to navigation icon
+ *
+ * @returns {object} Module Navigation Menu
  *
  * @version 0.1.0
  * @since 0.1.0

@@ -7,7 +7,6 @@ import './styles.css';
 
 const { TextArea } = Input;
 
-// eslint-disable-next-line jsdoc/require-returns
 /**
  * @class
  * @name ItemUnitForm
@@ -17,32 +16,13 @@ const { TextArea } = Input;
  * @since 0.1.0
  */
 class ItemUnitForm extends Component {
-  static propTypes = {
-    isEditForm: PropTypes.bool.isRequired,
-    itemUnit: PropTypes.shape({
-      name: PropTypes.string,
-      type: PropTypes.string,
-      maxStockAllowed: PropTypes.string,
-      minStockAllowed: PropTypes.string,
-    }),
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    posting: PropTypes.bool.isRequired,
-    types: PropTypes.arrayOf(PropTypes.string).isRequired,
-  };
-
-  static defaultProps = {
-    itemUnit: null,
-  };
-
-  // eslint-disable-next-line jsdoc/require-returns
   /**
    * @function
    * @name onChangeColor
    * @description  call back function to handle color change
    *
-   * @param {Object} colors colors object
-   * @param {Object} colors.color current color
+   * @param {object} colors colors object
+   * @param {object} colors.color current color
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -54,13 +34,12 @@ class ItemUnitForm extends Component {
     setFieldsValue({ color });
   };
 
-  // eslint-disable-next-line jsdoc/require-returns
   /**
    * @function
    * @name handleSubmit
    * @description  call back function to handle submit action
    *
-   * @param {Object} e event object
+   * @param {object} e event object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -77,7 +56,7 @@ class ItemUnitForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedItem = Object.assign({}, itemUnit, values);
+          const updatedItem = { ...itemUnit, ...values };
           putItemUnit(
             updatedItem,
             () => {
@@ -139,6 +118,7 @@ class ItemUnitForm extends Component {
         <Row type="flex" justify="space-between">
           <Col span={16}>
             {/* name */}
+            {/* eslint-disable-next-line react/jsx-props-no-spreading */}
             <Form.Item {...formItemLayout} label="Name">
               {getFieldDecorator('value', {
                 initialValue: isEditForm ? itemUnit.value : undefined,
@@ -154,6 +134,7 @@ class ItemUnitForm extends Component {
           </Col>
           <Col span={7}>
             {/* abbreviation */}
+            {/* eslint-disable-next-line react/jsx-props-no-spreading */}
             <Form.Item {...formItemLayout} label="Abbreviation">
               {getFieldDecorator('abbreviation', {
                 initialValue: isEditForm ? itemUnit.abbreviation : undefined,
@@ -167,6 +148,7 @@ class ItemUnitForm extends Component {
         </Row>
 
         {/* description */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="Description">
           {getFieldDecorator('description', {
             initialValue: isEditForm ? itemUnit.description : undefined,
@@ -192,5 +174,30 @@ class ItemUnitForm extends Component {
     );
   }
 }
+
+ItemUnitForm.propTypes = {
+  isEditForm: PropTypes.bool.isRequired,
+  itemUnit: PropTypes.shape({
+    name: PropTypes.string,
+    type: PropTypes.string,
+    maxStockAllowed: PropTypes.string,
+    minStockAllowed: PropTypes.string,
+    value: PropTypes.string,
+    abbreviation: PropTypes.string,
+    description: PropTypes.string,
+  }),
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    setFieldsValue: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  posting: PropTypes.bool.isRequired,
+  types: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+ItemUnitForm.defaultProps = {
+  itemUnit: null,
+};
 
 export default Form.create()(ItemUnitForm);

@@ -19,20 +19,9 @@ const { confirm } = Modal;
  * @since 0.1.0
  */
 class ListItem extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     isHovered: false,
-  };
-
-  static propTypes = {
-    abbreviation: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    color: PropTypes.string.isRequired,
-    onArchive: PropTypes.func.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    isSelected: PropTypes.bool.isRequired,
-    onSelectItem: PropTypes.func.isRequired,
-    onDeselectItem: PropTypes.func.isRequired,
   };
 
   /**
@@ -64,7 +53,7 @@ class ListItem extends Component {
    * @name handleToggleSelect
    * @description Handle Toggling List ItemCategory checkbox
    *
-   * @param {Object} event - Event object
+   * @param {object} event - Event object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -164,5 +153,17 @@ class ListItem extends Component {
     );
   }
 }
+
+ListItem.propTypes = {
+  abbreviation: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  onArchive: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  isSelected: PropTypes.bool.isRequired,
+  onSelectItem: PropTypes.func.isRequired,
+  onDeselectItem: PropTypes.func.isRequired,
+};
 
 export default ListItem;

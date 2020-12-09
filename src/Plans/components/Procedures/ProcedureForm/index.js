@@ -20,32 +20,19 @@ const { TextArea } = Input;
 /**
  * @class
  * @name ProcedureForm
- * @description Render Procedure form for creating and updating procedure procedure details
+ * @description Render Procedure form for creating and updating procedure
+ * details
  *
  * @version 0.1.0
  * @since 0.1.0
  */
 class ProcedureForm extends Component {
-  static propTypes = {
-    isEditForm: PropTypes.bool.isRequired,
-    procedure: PropTypes.shape({
-      name: PropTypes.string,
-      title: PropTypes.string,
-      abbreviation: PropTypes.string,
-      mobile: PropTypes.string,
-      email: PropTypes.string,
-    }).isRequired,
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    posting: PropTypes.bool.isRequired,
-  };
-
   /**
    * @function
    * @name handleSubmit
    * @description Handle submit form action
    *
-   * @param {Object} event onSubmit event object
+   * @param {object} event onSubmit event object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -62,7 +49,7 @@ class ProcedureForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedProcedure = Object.assign({}, procedure, values);
+          const updatedProcedure = { ...procedure, ...values };
           putProcedure(
             updatedProcedure,
             () => {
@@ -122,6 +109,7 @@ class ProcedureForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* procedure plan select input */}
+        {/* eslint-disable */}
         <Form.Item label="Plan" {...formItemLayout}>
           {getFieldDecorator('plan', {
             initialValue: isEditForm
@@ -270,6 +258,7 @@ class ProcedureForm extends Component {
             />
           )}
         </Form.Item>
+        {/* eslint-enable */}
         {/* end Questionnaires select input */}
 
         {/* form actions */}
@@ -289,5 +278,29 @@ class ProcedureForm extends Component {
     );
   }
 }
+
+ProcedureForm.propTypes = {
+  isEditForm: PropTypes.bool.isRequired,
+  procedure: PropTypes.shape({
+    name: PropTypes.string,
+    title: PropTypes.string,
+    abbreviation: PropTypes.string,
+    mobile: PropTypes.string,
+    email: PropTypes.string,
+    plan: PropTypes.string,
+    description: PropTypes.string,
+    activity: PropTypes.string,
+    primary: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })),
+    supportive: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })),
+    resources: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })),
+    assessments: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })),
+  }).isRequired,
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  posting: PropTypes.bool.isRequired,
+};
 
 export default Form.create()(ProcedureForm);

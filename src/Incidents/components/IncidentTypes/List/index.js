@@ -1,25 +1,25 @@
 import { List } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 import IncidentTypesListHeader from '../ListHeader';
 import IncidentTypesListItem from '../ListItem';
 
-// eslint-disable-next-line jsdoc/require-returns
 /**
- *
  * @function
  * @name IncidentTypesList
  * @description Incident Types list item component. Render Incident Type list
  *
- * @param {Object} props props object
+ * @param {object} props props object
  * @param {boolean} props.loading preload list of incident types
- * @param {Array} props.incidenttype array list of incident types
+ * @param {object[]} props.incidenttype array list of incident types
  * @param {Function} props.onEdit function for editing single incident types
+ * @returns {object} React Component
+ *
  * @version 0.1.0
  * @since 0.1.0
  */
 const IncidentTypesList = ({ incidenttypes, loading, onEdit }) => (
-  <Fragment>
+  <>
     <IncidentTypesListHeader />
     <List
       loading={loading}
@@ -37,9 +37,10 @@ const IncidentTypesList = ({ incidenttypes, loading, onEdit }) => (
         />
       )}
     />
-  </Fragment>
+  </>
 );
 
+/* props validation */
 IncidentTypesList.propTypes = {
   loading: PropTypes.bool.isRequired,
   incidenttypes: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))

@@ -14,7 +14,7 @@ import './styles.css';
  * @name AgenciesActionBar
  * @description Render action bar for actions which are applicable to list content
  *
- * @param {Object} props props object
+ * @param {object} props props object
  * @param {number} props.page current page
  * @param {number} props.total total number of agencies
  * @param {number} props.selectedItemCount total Number of selected items

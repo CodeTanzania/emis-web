@@ -17,19 +17,7 @@ const { confirm } = Modal;
  * @since 0.1.0
  */
 class ItemUnitListItem extends Component {
-  /* props validation */
-  static propTypes = {
-    name: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    color: PropTypes.string.isRequired,
-    abbreviation: PropTypes.number.isRequired,
-    isSelected: PropTypes.bool.isRequired,
-    onSelectItem: PropTypes.func.isRequired,
-    onDeselectItem: PropTypes.func.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    onArchive: PropTypes.func.isRequired,
-  };
-
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     isHovered: false,
   };
@@ -63,7 +51,7 @@ class ItemUnitListItem extends Component {
    * @name handleToggleSelect
    * @description Handle toggling list item checkbox
    *
-   * @param {Object} event Event object
+   * @param {object} event Event object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -111,6 +99,7 @@ class ItemUnitListItem extends Component {
       isSelected,
       onEdit,
     } = this.props;
+
     const { isHovered } = this.state;
     let sideComponent = null;
 
@@ -175,5 +164,17 @@ class ItemUnitListItem extends Component {
     );
   }
 }
+
+ItemUnitListItem.propTypes = {
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  abbreviation: PropTypes.number.isRequired,
+  isSelected: PropTypes.bool.isRequired,
+  onSelectItem: PropTypes.func.isRequired,
+  onDeselectItem: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onArchive: PropTypes.func.isRequired,
+};
 
 export default ItemUnitListItem;

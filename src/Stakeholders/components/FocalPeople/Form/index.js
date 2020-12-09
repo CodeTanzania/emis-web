@@ -1,19 +1,14 @@
 import { httpActions } from '@codetanzania/emis-api-client';
-import {
-  Connect,
-  postFocalPerson,
-  putFocalPerson,
-} from '@codetanzania/emis-api-states';
+import { postFocalPerson, putFocalPerson } from '@codetanzania/emis-api-states';
 import { Button, Col, Form, Input, Row } from 'antd';
 import upperFirst from 'lodash/upperFirst';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import SearchableSelectInput from '../../../../components/SearchableSelectInput';
-import SelectInput from '../../../../components/SelectInput';
 import { notifyError, notifySuccess } from '../../../../util';
 
 /* constants */
-const { getAgencies, getFeatures, getRoles } = httpActions;
+const { getAgencies, getFeatures, getRoles, getPartyGroups } = httpActions;
 const { TextArea } = Input;
 
 /**
@@ -26,27 +21,12 @@ const { TextArea } = Input;
  * @since 0.1.0
  */
 class FocalPersonForm extends Component {
-  static propTypes = {
-    isEditForm: PropTypes.bool.isRequired,
-    focalPerson: PropTypes.shape({
-      name: PropTypes.string,
-      title: PropTypes.string,
-      abbreviation: PropTypes.string,
-      mobile: PropTypes.string,
-      email: PropTypes.string,
-    }).isRequired,
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
-    groups: PropTypes.arrayOf(PropTypes.string).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    posting: PropTypes.bool.isRequired,
-  };
-
   /**
    * @function
    * @name handleSubmit
    * @description Handle submit form action
    *
-   * @param {Object} event onSubmit event object
+   * @param {object} event onSubmit event object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -63,7 +43,7 @@ class FocalPersonForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedFocalPerson = Object.assign({}, focalPerson, values);
+          const updatedFocalPerson = { ...focalPerson, ...values };
           putFocalPerson(
             updatedFocalPerson,
             () => {
@@ -99,7 +79,6 @@ class FocalPersonForm extends Component {
       posting,
       onCancel,
       form: { getFieldDecorator },
-      groups,
     } = this.props;
 
     const formItemLayout = {
@@ -125,9 +104,10 @@ class FocalPersonForm extends Component {
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* focalPerson name, phone number and email section */}
         <Row type="flex" justify="space-between">
-          <Col span={10}>
+          <Col xxl={10} xl={10} lg={10} md={10} sm={24} xs={24}>
             {/* focalPerson name */}
-            <Form.Item {...formItemLayout} label="Full Name">
+            {/* eslint-disable */}
+            <Form.Item {...formItemLayout} label="Name">
               {getFieldDecorator('name', {
                 initialValue: isEditForm ? focalPerson.name : undefined,
                 rules: [
@@ -140,9 +120,9 @@ class FocalPersonForm extends Component {
             </Form.Item>
             {/* end focalPerson name */}
           </Col>
-          <Col span={13}>
+          <Col xxl={13} xl={13} lg={13} md={13} sm={24} xs={24}>
             <Row type="flex" justify="space-between">
-              <Col span={11}>
+              <Col xxl={11} xl={11} lg={11} md={11} sm={24} xs={24}>
                 {/* focalPerson mobile number */}
                 <Form.Item {...formItemLayout} label="Phone Number">
                   {getFieldDecorator('mobile', {
@@ -154,7 +134,7 @@ class FocalPersonForm extends Component {
                 </Form.Item>
                 {/* end focalPerson mobile number */}
               </Col>
-              <Col span={12}>
+              <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24} span={12}>
                 {/* focalPerson email */}
                 <Form.Item {...formItemLayout} label="Email">
                   {getFieldDecorator('email', {
@@ -180,7 +160,7 @@ class FocalPersonForm extends Component {
 
         {/* focalPerson organization, group and area section */}
         <Row type="flex" justify="space-between">
-          <Col span={10}>
+          <Col xxl={10} xl={10} lg={10} md={10} sm={24} xs={24}>
             {/* focalPerson organization */}
             <Form.Item {...formItemLayout} label="Organization/Agency">
               {getFieldDecorator('party', {
@@ -204,24 +184,38 @@ class FocalPersonForm extends Component {
             {/* end focalPerson organization */}
           </Col>
 
-          <Col span={13}>
+          <Col xxl={13} xl={13} lg={13} md={13} sm={24} xs={24}>
             <Row type="flex" justify="space-between">
-              <Col span={11}>
+              <Col xxl={11} xl={11} lg={11} md={11} sm={24} xs={24}>
                 {/* focalPerson group */}
                 <Form.Item {...formItemLayout} label="Group">
                   {getFieldDecorator('group', {
-                    initialValue: isEditForm ? focalPerson.group : undefined,
+                    initialValue:
+                      isEditForm && focalPerson.group
+                        ? focalPerson.group._id // eslint-disable-line
+                        : undefined,
                     rules: [
                       {
                         required: true,
                         message: 'Focal Person group is required',
                       },
                     ],
-                  })(<SelectInput options={groups} />)}
+                  })(
+                    <SearchableSelectInput
+                      onSearch={getPartyGroups}
+                      optionLabel="name"
+                      optionValue="_id"
+                      initialValue={
+                        isEditForm && focalPerson.group
+                          ? focalPerson.group
+                          : undefined
+                      }
+                    />
+                  )}
                 </Form.Item>
                 {/* end focalPerson group */}
               </Col>
-              <Col span={12}>
+              <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
                 {/* focalPerson location */}
                 <Form.Item {...formItemLayout} label="Area">
                   {getFieldDecorator('location', {
@@ -259,7 +253,7 @@ class FocalPersonForm extends Component {
 
         {/* focalPerson role, landline and fax section */}
         <Row type="flex" justify="space-between">
-          <Col span={10}>
+          <Col xxl={10} xl={10} lg={10} md={10} sm={24} xs={24}>
             {/* focalPerson role */}
             <Form.Item {...formItemLayout} label="Role">
               {getFieldDecorator('role', {
@@ -285,9 +279,9 @@ class FocalPersonForm extends Component {
             </Form.Item>
             {/* end focalPerson role */}
           </Col>
-          <Col span={13}>
+          <Col xxl={13} xl={13} lg={13} md={13} sm={24} xs={24}>
             <Row type="flex" justify="space-between">
-              <Col span={11}>
+              <Col xxl={11} xl={11} lg={11} md={11} sm={24} xs={24}>
                 {/* focalPerson landline number */}
                 <Form.Item {...formItemLayout} label="Landline/Other Number">
                   {getFieldDecorator('landline', {
@@ -296,7 +290,7 @@ class FocalPersonForm extends Component {
                 </Form.Item>
                 {/* end focalPerson landline number */}
               </Col>
-              <Col span={12}>
+              <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
                 {/* focalPerson fax */}
                 <Form.Item {...formItemLayout} label="Fax">
                   {getFieldDecorator('fax', {
@@ -312,7 +306,7 @@ class FocalPersonForm extends Component {
 
         {/* focalPerson Physical Address, Postal Address section */}
         <Row type="flex" justify="space-between">
-          <Col span={10}>
+          <Col xxl={10} xl={10} lg={10} md={10} sm={24} xs={24}>
             {/* focalPerson physical Address */}
             <Form.Item {...formItemLayout} label="Physical Address">
               {getFieldDecorator('physicalAddress', {
@@ -323,7 +317,7 @@ class FocalPersonForm extends Component {
             </Form.Item>
             {/* end focalPerson physical Address */}
           </Col>
-          <Col span={13}>
+          <Col xxl={13} xl={13} lg={13} md={13} sm={24} xs={24}>
             {/* focalPerson postal address */}
             <Form.Item {...formItemLayout} label="Postal Address">
               {getFieldDecorator('postalAddress', {
@@ -335,6 +329,7 @@ class FocalPersonForm extends Component {
             {/* end focalPerson postal address */}
           </Col>
         </Row>
+        {/* eslint-enable */}
         {/* end focalPerson physical Address, Postal Address section */}
 
         {/* form actions */}
@@ -355,6 +350,33 @@ class FocalPersonForm extends Component {
   }
 }
 
-export default Connect(Form.create()(FocalPersonForm), {
-  groups: 'focalPeople.schema.properties.group.enum',
-});
+FocalPersonForm.propTypes = {
+  isEditForm: PropTypes.bool.isRequired,
+  focalPerson: PropTypes.shape({
+    name: PropTypes.string,
+    title: PropTypes.string,
+    abbreviation: PropTypes.string,
+    mobile: PropTypes.string,
+    email: PropTypes.string,
+    party: PropTypes.shape({
+      name: PropTypes.string,
+      title: PropTypes.string,
+    }),
+    group: PropTypes.string,
+    location: PropTypes.string,
+    role: PropTypes.string,
+    landline: PropTypes.string,
+    fax: PropTypes.string,
+    physicalAddress: PropTypes.string,
+    postalAddress: PropTypes.string,
+  }).isRequired,
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+  }).isRequired,
+  groups: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  posting: PropTypes.bool.isRequired,
+};
+
+export default Form.create()(FocalPersonForm);

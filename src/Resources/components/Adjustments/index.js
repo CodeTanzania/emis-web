@@ -5,7 +5,7 @@ import {
 } from '@codetanzania/emis-api-states';
 import { Modal } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import Topbar from '../../../components/Topbar';
 import AdjustmentList from './List';
 import AdjustmentFilters from './Filters';
@@ -21,31 +21,7 @@ import './styles.css';
  * @since 0.1.0
  */
 class Adjustments extends Component {
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    adjustments: PropTypes.arrayOf(
-      PropTypes.shape({
-        _id: PropTypes.string,
-        item: PropTypes.shape({
-          name: PropTypes.string,
-          color: PropTypes.color,
-        }),
-        type: PropTypes.string,
-        quantity: PropTypes.number,
-        cost: PropTypes.number,
-        reason: PropTypes.string,
-        store: PropTypes.shape({ name: PropTypes.string }),
-      })
-    ).isRequired,
-    total: PropTypes.number.isRequired,
-    page: PropTypes.number.isRequired,
-    searchQuery: PropTypes.string,
-  };
-
-  static defaultProps = {
-    searchQuery: undefined,
-  };
-
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     showFilters: false,
   };
@@ -89,7 +65,7 @@ class Adjustments extends Component {
    * @name searchRoles
    * @description Search Roles List based on supplied filter word
    *
-   * @param {Object} event - Event instance
+   * @param {object} event - Event instance
    * @returns {undefined} - Nothing is returned
    *
    * @version 0.1.0
@@ -103,7 +79,7 @@ class Adjustments extends Component {
     const { adjustments, loading, total, page, searchQuery } = this.props;
     const { showFilters } = this.state;
     return (
-      <Fragment>
+      <>
         {/* Topbar */}
         <Topbar
           search={{
@@ -139,10 +115,35 @@ class Adjustments extends Component {
           </Modal>
           {/* end adjustments filters */}
         </div>
-      </Fragment>
+      </>
     );
   }
 }
+
+Adjustments.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  adjustments: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string,
+      item: PropTypes.shape({
+        name: PropTypes.string,
+        color: PropTypes.color,
+      }),
+      type: PropTypes.string,
+      quantity: PropTypes.number,
+      cost: PropTypes.number,
+      reason: PropTypes.string,
+      store: PropTypes.shape({ name: PropTypes.string }),
+    })
+  ).isRequired,
+  total: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired,
+  searchQuery: PropTypes.string,
+};
+
+Adjustments.defaultProps = {
+  searchQuery: undefined,
+};
 
 export default Connect(Adjustments, {
   adjustments: 'adjustments.list',

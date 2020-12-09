@@ -23,17 +23,13 @@ const { Search } = Input;
  * @name generateShareAgencyContent
  * @description generate agency content to share from agency object
  *
- * @param {Object} agency  agency to be converted to string content
- *
+ * @param {object} agency  agency to be converted to string content
+ * @returns {string} Message content to be shared
  * @version 0.1.0
  * @since 0.1.0
  */
 const generateShareAgencyContent = agency =>
-  `${agency.name}\nMobile: ${agency.mobile}\nEmail: ${agency.email}\nWebsite: ${
-    agency.website
-  }\nPhysical Address: ${agency.physicalAddress}\nPostal Address: ${
-    agency.postalAddress
-  }`;
+  `${agency.name}\nMobile: ${agency.mobile}\nEmail: ${agency.email}\nWebsite: ${agency.website}\nPhysical Address: ${agency.physicalAddress}\nPostal Address: ${agency.postalAddress}`;
 
 /**
  * @class
@@ -44,34 +40,47 @@ const generateShareAgencyContent = agency =>
  * @since 0.1.0
  */
 class Agencies extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     showFilters: false,
     isEditForm: false,
     showNotificationForm: false,
     selectedAgencies: [],
     notificationBody: undefined,
-  };
-
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    posting: PropTypes.bool.isRequired,
-    agencies: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-      .isRequired,
-    agency: PropTypes.shape({ name: PropTypes.string }),
-    page: PropTypes.number.isRequired,
-    showForm: PropTypes.bool.isRequired,
-    searchQuery: PropTypes.string,
-    total: PropTypes.number.isRequired,
-  };
-
-  static defaultProps = {
-    agency: null,
-    searchQuery: undefined,
+    cached: null,
   };
 
   componentDidMount() {
     getAgencies();
   }
+
+  /**
+   * @function
+   * @name handleOnCachedValues
+   * @description Cached selected values for filters
+   *
+   * @param {object} cached values to be cached from filter
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleOnCachedValues = cached => {
+    const { cached: previousCached } = this.state;
+    const values = { ...previousCached, ...cached };
+    this.setState({ cached: values });
+  };
+
+  /**
+   * @function
+   * @name handleClearCachedValues
+   * @description Clear cached values
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleClearCachedValues = () => {
+    this.setState({ cached: null });
+  };
 
   /**
    * @function
@@ -127,7 +136,7 @@ class Agencies extends Component {
    * @name searchAgencies
    * @description Search Agencies List based on supplied filter word
    *
-   * @param {Object} event - Event instance
+   * @param {object} event - Event instance
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -141,7 +150,7 @@ class Agencies extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} agency agency to be edited
+   * @param {object} agency agency to be edited
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -157,7 +166,7 @@ class Agencies extends Component {
    * @name openNotificationForm
    * @description Handle on notify agencies
    *
-   * @param {Object[]} agencies List of agencies selected to be notified
+   * @param {object[]} agencies List of agencies selected to be notified
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -174,7 +183,7 @@ class Agencies extends Component {
    * @name handleShare
    * @description Handle share single agency action
    *
-   * @param {Object} agency  to be shared
+   * @param {object} agency  to be shared
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -190,7 +199,7 @@ class Agencies extends Component {
    * @name handleBulkShare
    * @description Handle share multiple agencies
    *
-   * @param {Object[]} agencies agencies list to be shared
+   * @param {object[]} agencies agencies list to be shared
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -244,11 +253,13 @@ class Agencies extends Component {
       showNotificationForm,
       selectedAgencies,
       notificationBody,
+      cached,
     } = this.state;
+
     return (
       <div className="Agencies">
         <Row>
-          <Col span={12}>
+          <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
             {/* search input component */}
             <Search
               size="large"
@@ -256,6 +267,7 @@ class Agencies extends Component {
               onChange={this.searchAgencies}
               allowClear
               value={searchQuery}
+              className="searchBox"
             />
             {/* end search input component */}
           </Col>
@@ -274,16 +286,21 @@ class Agencies extends Component {
           </Col> */}
 
           {/* primary actions */}
-          <Col span={2} offset={9}>
-            <Button
-              type="primary"
-              icon="plus"
-              size="large"
-              title="Add New Agency"
-              onClick={this.openAgencyForm}
-            >
-              New Agency
-            </Button>
+          <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
+            <Row type="flex" justify="end">
+              <Col xxl={4} xl={5} lg={7} md={8} sm={24} xs={24}>
+                <Button
+                  type="primary"
+                  icon="plus"
+                  size="large"
+                  title="Add New Agency"
+                  onClick={this.openAgencyForm}
+                  block
+                >
+                  New Agency
+                </Button>
+              </Col>
+            </Row>
           </Col>
           {/* end primary actions */}
         </Row>
@@ -312,7 +329,12 @@ class Agencies extends Component {
           destroyOnClose
           maskClosable={false}
         >
-          <AgencyFilters onCancel={this.closeFiltersModal} />
+          <AgencyFilters
+            onCancel={this.closeFiltersModal}
+            cached={cached}
+            onCache={this.handleOnCachedValues}
+            onClearCache={this.handleClearCachedValues}
+          />
         </Modal>
         {/* end filter modal */}
 
@@ -357,6 +379,23 @@ class Agencies extends Component {
     );
   }
 }
+
+Agencies.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  posting: PropTypes.bool.isRequired,
+  agencies: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+    .isRequired,
+  agency: PropTypes.shape({ name: PropTypes.string }),
+  page: PropTypes.number.isRequired,
+  showForm: PropTypes.bool.isRequired,
+  searchQuery: PropTypes.string,
+  total: PropTypes.number.isRequired,
+};
+
+Agencies.defaultProps = {
+  agency: null,
+  searchQuery: undefined,
+};
 
 export default Connect(Agencies, {
   agencies: 'agencies.list',

@@ -18,7 +18,6 @@ import './styles.css';
 const { Search } = Input;
 
 /**
- *
  * @class
  * @name IncidentTypes
  * @description  Render IncidentTypes list which have search box,
@@ -27,27 +26,11 @@ const { Search } = Input;
  * @version 0.1.0
  * @since 0.1.0
  */
-
 class IncidentTypes extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     showFilters: false,
     isEditForm: false,
-  };
-
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    incidenttypes: PropTypes.arrayOf(
-      PropTypes.shape({ name: PropTypes.string })
-    ).isRequired,
-    incidenttype: PropTypes.shape({ name: PropTypes.string }),
-    page: PropTypes.number.isRequired,
-    total: PropTypes.number.isRequired,
-    posting: PropTypes.bool.isRequired,
-    showForm: PropTypes.bool.isRequired,
-  };
-
-  static defaultProps = {
-    incidenttype: null,
   };
 
   componentDidMount() {
@@ -122,7 +105,7 @@ class IncidentTypes extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} incidenttype incidenttype passed when function is called
+   * @param {object} incidenttype incidenttype passed when function is called
    * @version 0.1.0
    * @since 0.1.0
    */
@@ -228,6 +211,21 @@ class IncidentTypes extends Component {
     );
   }
 }
+
+IncidentTypes.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  incidenttypes: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+    .isRequired,
+  incidenttype: PropTypes.shape({ name: PropTypes.string }),
+  page: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  posting: PropTypes.bool.isRequired,
+  showForm: PropTypes.bool.isRequired,
+};
+
+IncidentTypes.defaultProps = {
+  incidenttype: null,
+};
 
 export default Connect(IncidentTypes, {
   incidenttypes: 'incidentTypes.list',

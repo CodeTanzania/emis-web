@@ -19,3 +19,24 @@
   overflow-y: auto;
   overflow-x: hidden;
 }
+
+@media screen and (max-width: 768px) {
+  .ant-layout-header {
+    padding: 0 20px;
+  }
+}
+ 
+ @media screen and (max-width: 426px) {
+  .ant-layout-header {
+    padding: 0 20px;
+  }
+
+  .BaseLayoutHeader .Breadcrumb {
+    font-size: 14px;
+  }
+
+  .ant-dropdown-menu-item {
+    font-size: 12px;
+    padding: 10px;
+  }
+}

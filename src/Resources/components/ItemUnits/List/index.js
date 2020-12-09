@@ -12,7 +12,7 @@ import uniq from 'lodash/uniq';
 import uniqBy from 'lodash/uniqBy';
 import intersectionBy from 'lodash/intersectionBy';
 import PropTypes from 'prop-types';
-import React, { Fragment, Component } from 'react';
+import React, { Component } from 'react';
 import ItemUnitListItem from '../ListItem';
 import ListHeader from '../../../../components/ListHeader';
 import Toolbar from '../../../../components/Toolbar';
@@ -36,18 +36,7 @@ const { getItemUnitsExportUrl } = httpActions;
  * @since 0.1.0
  */
 class ItemUnitList extends Component {
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    itemUnits: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string,
-      })
-    ).isRequired,
-    total: PropTypes.number.isRequired,
-    page: PropTypes.number.isRequired,
-    onEdit: PropTypes.func.isRequired,
-  };
-
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     selectedItemUnit: [],
     selectedPages: [],
@@ -58,7 +47,7 @@ class ItemUnitList extends Component {
    * @name handleSelectItemUnit
    * @description Handle select single  item unit of measure checkbox
    *
-   * @param {Object} itemUnit selected  item unit of measure object
+   * @param {object} itemUnit selected  item unit of measure object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -94,7 +83,7 @@ class ItemUnitList extends Component {
    * @name handleDeselectItemUnit
    * @description Handle deselect a single  item unit of measure checkbox
    *
-   * @param {Object} itemUnit  item unit of measure objected to be removed from
+   * @param {object} itemUnit  item unit of measure objected to be removed from
    * list of selected adjustments
    * @returns {undefined} undefined
    *
@@ -144,13 +133,13 @@ class ItemUnitList extends Component {
     const { itemUnits, loading, total, page, onEdit } = this.props;
     const { selectedItemUnit, selectedPages } = this.state;
     const selectedItemUnitsCount = intersectionBy(
-      this.state.selectedItemUnit,
+      selectedItemUnit,
       itemUnits,
       '_id'
     ).length;
 
     return (
-      <Fragment>
+      <>
         {/* toolbar */}
         <Toolbar
           itemName="unit of measure"
@@ -194,7 +183,7 @@ class ItemUnitList extends Component {
           renderItem={itemUnit => (
             <ItemUnitListItem
               key={itemUnit.id}
-              name={itemUnit.value}
+              name={itemUnit.name}
               abbreviation={itemUnit.abbreviation}
               description={itemUnit.description}
               color={itemUnit.color}
@@ -226,9 +215,21 @@ class ItemUnitList extends Component {
           )}
         />
         {/* end Item Unit Of Measure list */}
-      </Fragment>
+      </>
     );
   }
 }
+
+ItemUnitList.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  itemUnits: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+    })
+  ).isRequired,
+  total: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired,
+  onEdit: PropTypes.func.isRequired,
+};
 
 export default ItemUnitList;

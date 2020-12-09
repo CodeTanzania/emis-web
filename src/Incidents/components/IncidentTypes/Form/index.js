@@ -21,29 +21,7 @@ const { Option } = Select;
  * @version 0.1.0
  * @since 0.1.0
  */
-
 class IncidentTypeForm extends Component {
-  static propTypes = {
-    isEditForm: PropTypes.bool.isRequired,
-    incidenttype: PropTypes.shape({
-      name: PropTypes.string,
-      nature: PropTypes.string,
-      color: PropTypes.string,
-      cap: PropTypes.string,
-      code: PropTypes.string,
-    }),
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
-    families: PropTypes.arrayOf(PropTypes.string).isRequired,
-    natures: PropTypes.arrayOf(PropTypes.string).isRequired,
-    caps: PropTypes.arrayOf(PropTypes.string).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    posting: PropTypes.bool.isRequired,
-  };
-
-  static defaultProps = {
-    incidenttype: null,
-  };
-
   /**
    * @function
    * @name onChangeColor
@@ -65,7 +43,7 @@ class IncidentTypeForm extends Component {
    * @name handleSubmit
    * @description Handle create/edit action
    *
-   * @param {Object} e event object
+   * @param {object} e event object
    * @version 0.1.0
    * @since 0.1.0
    */
@@ -81,7 +59,7 @@ class IncidentTypeForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedIncidentType = Object.assign({}, incidenttype, values);
+          const updatedIncidentType = { ...incidenttype, ...values };
           putIncidentType(
             updatedIncidentType,
             () => {
@@ -145,6 +123,7 @@ class IncidentTypeForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* incident types name */}
+        {/* eslint-disable */}
         <Form.Item {...formItemLayout} label="Name ">
           {getFieldDecorator('name', {
             initialValue: isEditForm ? incidenttype.name : undefined,
@@ -232,6 +211,7 @@ class IncidentTypeForm extends Component {
             <ColorPicker animation="slide-up" onChange={this.onChangeColor} />
           </Col>
         </Row>
+        {/* eslint-disable */}
         {/* end incident types color code */}
 
         {/* form actions */}
@@ -251,6 +231,32 @@ class IncidentTypeForm extends Component {
     );
   }
 }
+
+IncidentTypeForm.propTypes = {
+  isEditForm: PropTypes.bool.isRequired,
+  incidenttype: PropTypes.shape({
+    name: PropTypes.string,
+    nature: PropTypes.string,
+    color: PropTypes.string,
+    cap: PropTypes.string,
+    code: PropTypes.string,
+    family: PropTypes.string,
+  }),
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    setFieldsValue: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+  }).isRequired,
+  families: PropTypes.arrayOf(PropTypes.string).isRequired,
+  natures: PropTypes.arrayOf(PropTypes.string).isRequired,
+  caps: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  posting: PropTypes.bool.isRequired,
+};
+
+IncidentTypeForm.defaultProps = {
+  incidenttype: null,
+};
 
 export default Connect(Form.create()(IncidentTypeForm), {
   natures: 'incidentTypes.schema.properties.nature.enum',

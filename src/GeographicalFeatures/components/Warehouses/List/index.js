@@ -1,23 +1,23 @@
 import { List } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 import WarehouseListHeader from '../ListHeader';
 import WarehouseListItem from '../ListItem';
 
-// eslint-disable-next-line jsdoc/require-returns
 /**
- *
  * @function
  * @name WarehouseList
  * @description Render warehouse list which have search box and actions
  *
- * @param {Object} props props object
+ * @param {object} props props object
+ *
+ * @returns {object} React Compnent
  *
  * @version 0.1.0
  * @since 0.1.0
  */
 const WarehouseList = ({ warehouses, loading, onEdit }) => (
-  <Fragment>
+  <>
     <WarehouseListHeader />
     <List
       loading={loading}
@@ -31,7 +31,7 @@ const WarehouseList = ({ warehouses, loading, onEdit }) => (
         />
       )}
     />
-  </Fragment>
+  </>
 );
 
 WarehouseList.propTypes = {

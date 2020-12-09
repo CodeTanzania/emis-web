@@ -4,14 +4,13 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import './styles.css';
 
-// eslint-disable-next-line jsdoc/require-returns
 /**
  * @function
  * @name Toolbar
  * @description Render action bar for actions which are applicable to list
  * content
  *
- * @param {Object} props props object
+ * @param {object} props props object
  * @param {string} props.itemName names for items/ modules used by toolbar
  * @param {number} props.page current page
  * @param {number} props.total total number of results from the API
@@ -23,6 +22,8 @@ import './styles.css';
  * @param {Function} props.onPaginate on paginate action callback
  * @param {Function} props.onRefresh on refresh action callback
  * @param {Function} props.onShare on share action callback
+ *
+ * @returns {object} React component
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -43,11 +44,11 @@ const Toolbar = ({
   <div className="Toolbar">
     <Row>
       {/* action bar */}
-      <Col span={12}>
+      <Col xxl={12} xl={12} lg={12} md={10} sm={14} xs={12}>
         <Row>
           {/* refresh  action */}
           {onRefresh && (
-            <Col span={2} xl={{ span: 2 }} xxl={{ span: 2 }}>
+            <Col xxl={2} xl={2} lg={3} md={4} sm={6} xs={6}>
               <Button
                 shape="circle"
                 icon="reload"
@@ -62,7 +63,7 @@ const Toolbar = ({
 
           {/* notify action */}
           {onNotify && (
-            <Col span={2} xl={{ span: 2 }} xxl={{ span: 2 }}>
+            <Col xxl={2} xl={2} lg={3} md={4} sm={6} xs={6}>
               <Button
                 type="circle"
                 icon="mail"
@@ -79,7 +80,7 @@ const Toolbar = ({
 
           {/* export action */}
           {exportUrl && (
-            <Col span={2} xl={{ span: 2 }} xxl={{ span: 2 }}>
+            <Col xxl={2} xl={2} lg={3} md={4} sm={6} xs={6}>
               <a href={exportUrl} download>
                 <Button
                   type="circle"
@@ -95,7 +96,7 @@ const Toolbar = ({
 
           {/* bulk share action */}
           {selectedItemsCount > 0 && onShare && (
-            <Col span={2} xl={{ span: 2 }} xxl={{ span: 2 }}>
+            <Col xxl={2} xl={2} lg={3} md={4} sm={6} xs={6}>
               <Button
                 type="circle"
                 icon="share-alt"
@@ -110,7 +111,7 @@ const Toolbar = ({
 
           {/* bulk archive action */}
           {selectedItemsCount > 0 && onArchive && (
-            <Col span={1} xl={{ span: 1 }} xxl={{ span: 1 }}>
+            <Col xxl={1} xl={1} lg={1} md={4} sm={6} xs={6}>
               <Button
                 type="circle"
                 icon="hdd"
@@ -127,10 +128,10 @@ const Toolbar = ({
       {/* end action bar */}
 
       {/* filter bar */}
-      <Col span={12}>
+      <Col xxl={12} xl={12} lg={12} md={14} sm={10} xs={12}>
         <Row type="flex" justify="end">
           {/* selected and  number summary */}
-          <Col span={13}>
+          <Col xxl={10} xl={12} lg={13} md={12} sm={0} xs={0}>
             {selectedItemsCount > 0 && (
               <span
                 style={{ color: '#959595' }}
@@ -146,7 +147,7 @@ const Toolbar = ({
 
           {/* filter action */}
           {onFilter && (
-            <Col span={4} xl={{ span: 3 }} xxl={{ span: 2 }}>
+            <Col xxl={2} xl={2} lg={2} md={3} sm={0} xs={0}>
               <Button
                 type="circle"
                 icon="filter"
@@ -161,7 +162,7 @@ const Toolbar = ({
 
           {/* pagination */}
           {onPaginate && total > 0 && (
-            <Col span={4} xl={{ span: 7 }} xxl={{ span: 5 }}>
+            <Col xxl={6} xl={7} lg={9} md={9} sm={24} xs={24}>
               <Pagination
                 simple
                 current={page}

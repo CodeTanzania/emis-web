@@ -25,34 +25,12 @@ const { Option } = Select;
  */
 
 class QuestionForm extends Component {
-  static propTypes = {
-    isEditForm: PropTypes.bool.isRequired,
-    question: PropTypes.shape({
-      label: PropTypes.string,
-      stage: PropTypes.string,
-      type: PropTypes.string,
-      assess: PropTypes.string,
-      phase: PropTypes.string,
-    }),
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    posting: PropTypes.bool.isRequired,
-    assess: PropTypes.arrayOf(PropTypes.string).isRequired,
-    phases: PropTypes.arrayOf(PropTypes.string).isRequired,
-    stages: PropTypes.arrayOf(PropTypes.string).isRequired,
-    types: PropTypes.arrayOf(PropTypes.string).isRequired,
-  };
-
-  static defaultProps = {
-    question: null,
-  };
-
   /**
    * @function
    * @name handleSubmit
    * @description Handle create/edit action
    *
-   * @param {Object} e event object
+   * @param {object} e event object
    * @version 0.1.0
    * @since 0.1.0
    */
@@ -68,7 +46,7 @@ class QuestionForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedQuestion = Object.assign({}, question, values);
+          const updatedQuestion = { ...question, ...values };
           putQuestion(
             updatedQuestion,
             () => {
@@ -132,6 +110,7 @@ class QuestionForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* question name */}
+        {/* eslint-disable */}
         <Form.Item {...formItemLayout} label="Name">
           {getFieldDecorator('name', {
             initialValue: isEditForm ? question.name : undefined,
@@ -232,6 +211,7 @@ class QuestionForm extends Component {
             </Select>
           )}
         </Form.Item>
+        {/* eslint-enable */}
         {/* end stage */}
 
         {/* form actions */}
@@ -251,6 +231,33 @@ class QuestionForm extends Component {
     );
   }
 }
+
+QuestionForm.propTypes = {
+  isEditForm: PropTypes.bool.isRequired,
+  question: PropTypes.shape({
+    label: PropTypes.string,
+    stage: PropTypes.string,
+    type: PropTypes.string,
+    assess: PropTypes.string,
+    name: PropTypes.string,
+    phase: PropTypes.string,
+    indicator: PropTypes.string,
+  }),
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  posting: PropTypes.bool.isRequired,
+  assess: PropTypes.arrayOf(PropTypes.string).isRequired,
+  phases: PropTypes.arrayOf(PropTypes.string).isRequired,
+  stages: PropTypes.arrayOf(PropTypes.string).isRequired,
+  types: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+QuestionForm.defaultProps = {
+  question: null,
+};
 
 export default Connect(Form.create()(QuestionForm), {
   assess: 'questions.schema.properties.assess.enum',

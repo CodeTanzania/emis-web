@@ -1,7 +1,7 @@
 import { Avatar, Checkbox, Col, Icon, Row } from 'antd';
 import PropTypes from 'prop-types';
 import randomColor from 'randomcolor';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import './styles.css';
 
 /**
@@ -14,16 +14,9 @@ import './styles.css';
  * @since 0.1.0
  */
 class WardsListItem extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     isHovered: false,
-  };
-
-  static propTypes = {
-    name: PropTypes.string.isRequired,
-    nature: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    family: PropTypes.string.isRequired,
-    onEdit: PropTypes.func.isRequired,
   };
 
   handleMouseEnter = () => {
@@ -61,7 +54,7 @@ class WardsListItem extends Component {
           <Col span={4}>{family}</Col>
           <Col span={3}>
             {isHovered && (
-              <Fragment>
+              <>
                 <Icon
                   type="edit"
                   title="Update Ward"
@@ -73,7 +66,7 @@ class WardsListItem extends Component {
                   title="Archive Ward"
                   className="actionIcon"
                 />
-              </Fragment>
+              </>
             )}
           </Col>
         </Row>
@@ -81,5 +74,13 @@ class WardsListItem extends Component {
     );
   }
 }
+
+WardsListItem.propTypes = {
+  name: PropTypes.string.isRequired,
+  nature: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  family: PropTypes.string.isRequired,
+  onEdit: PropTypes.func.isRequired,
+};
 
 export default WardsListItem;

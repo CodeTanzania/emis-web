@@ -1,6 +1,6 @@
 import { Icon, Avatar, Col, Row, Checkbox } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import './styles.css';
 
 /**
@@ -14,13 +14,7 @@ import './styles.css';
  * @since 0.1.0
  */
 class FacilityListItem extends Component {
-  /* props validation */
-  static propTypes = {
-    name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    onEdit: PropTypes.func.isRequired,
-  };
-
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     isHovered: false,
   };
@@ -54,7 +48,7 @@ class FacilityListItem extends Component {
           <Col span={10}>{type}</Col>
           <Col span={3}>
             {isHovered && (
-              <Fragment>
+              <>
                 <Icon
                   type="edit"
                   title="Update Facility"
@@ -66,7 +60,7 @@ class FacilityListItem extends Component {
                   title="Archive Facility"
                   className="actionIcon"
                 />
-              </Fragment>
+              </>
             )}
           </Col>
         </Row>
@@ -74,5 +68,11 @@ class FacilityListItem extends Component {
     );
   }
 }
+
+FacilityListItem.propTypes = {
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  onEdit: PropTypes.func.isRequired,
+};
 
 export default FacilityListItem;

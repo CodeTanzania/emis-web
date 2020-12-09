@@ -5,7 +5,7 @@ import {
 import { httpActions } from '@codetanzania/emis-api-client';
 import { List } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Fragment, Component } from 'react';
+import React, { Component } from 'react';
 import intersectionBy from 'lodash/intersectionBy';
 import concat from 'lodash/concat';
 import map from 'lodash/map';
@@ -38,27 +38,7 @@ const { getAdjustmentsExportUrl } = httpActions;
  * @since 0.1.0
  */
 class AdjustmentsList extends Component {
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    adjustments: PropTypes.arrayOf(
-      PropTypes.shape({
-        _id: PropTypes.string,
-        item: PropTypes.shape({
-          name: PropTypes.string,
-          color: PropTypes.color,
-        }),
-        type: PropTypes.string,
-        quantity: PropTypes.number,
-        cost: PropTypes.number,
-        reason: PropTypes.string,
-        store: PropTypes.shape({ name: PropTypes.string }),
-      })
-    ).isRequired,
-    total: PropTypes.number.isRequired,
-    page: PropTypes.number.isRequired,
-    onFilter: PropTypes.func.isRequired,
-  };
-
+  // eslint-disable-next-line react/state-in-constructor
   state = { selectedAdjustments: [], selectedPages: [] };
 
   /**
@@ -66,7 +46,7 @@ class AdjustmentsList extends Component {
    * @name handleSelectAdjustment
    * @description Handle select single adjustment checkbox
    *
-   * @param {Object} adjustment selected adjustment object
+   * @param {object} adjustment selected adjustment object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -105,7 +85,7 @@ class AdjustmentsList extends Component {
    * @name handleDeselectAdjustment
    * @description Handle deselect a single adjustment checkbox
    *
-   * @param {Object} adjustment adjustment objected to be removed from
+   * @param {object} adjustment adjustment objected to be removed from
    * list of selected adjustments
    * @returns {undefined} undefined
    *
@@ -161,7 +141,7 @@ class AdjustmentsList extends Component {
     ).length;
 
     return (
-      <Fragment>
+      <>
         {/* toolbar */}
         <Toolbar
           itemName="adjustment"
@@ -226,9 +206,30 @@ class AdjustmentsList extends Component {
           )}
         />
         {/* end adjustments list */}
-      </Fragment>
+      </>
     );
   }
 }
+
+AdjustmentsList.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  adjustments: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string,
+      item: PropTypes.shape({
+        name: PropTypes.string,
+        color: PropTypes.color,
+      }),
+      type: PropTypes.string,
+      quantity: PropTypes.number,
+      cost: PropTypes.number,
+      reason: PropTypes.string,
+      store: PropTypes.shape({ name: PropTypes.string }),
+    })
+  ).isRequired,
+  total: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired,
+  onFilter: PropTypes.func.isRequired,
+};
 
 export default AdjustmentsList;

@@ -5,13 +5,13 @@ import React from 'react';
 import { notifyError, notifySuccess } from '../../../../util';
 import './styles.css';
 
-// eslint-disable-next-line jsdoc/require-returns
 /**
  * @function
  * @name PlansActionBar
  * @description Render action bar for actions which are applicable to list content
+ * @returns {React.Component} react element
  *
- * @param {Object} props props object
+ * @param {object} props props object
  * @param {number} props.page current page number
  * @param {number} props.total total number of plans from the API
  * @param {number} props.selectedItemCount total nunmber of selected plans

@@ -28,24 +28,10 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class Regions extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     isEditForm: false,
     showFilters: false,
-  };
-
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    posting: PropTypes.bool.isRequired,
-    regions: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-      .isRequired,
-    page: PropTypes.number.isRequired,
-    total: PropTypes.number.isRequired,
-    region: PropTypes.shape({ name: PropTypes.string }),
-    showForm: PropTypes.bool.isRequired,
-  };
-
-  static defaultProps = {
-    region: null,
   };
 
   componentDidMount() {
@@ -58,7 +44,7 @@ class Regions extends Component {
    * @name searchDistrict
    * @description Search Regions List based on supplied filter word
    *
-   * @param {Object} event - Event instance
+   * @param {object} event - Event instance
    * @returns {undefined} - Nothing is returned
    *
    * @version 0.1.0
@@ -137,7 +123,7 @@ class Regions extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} region region object
+   * @param {object} region region object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -244,6 +230,21 @@ class Regions extends Component {
     );
   }
 }
+
+Regions.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  posting: PropTypes.bool.isRequired,
+  regions: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+    .isRequired,
+  page: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  region: PropTypes.shape({ name: PropTypes.string }),
+  showForm: PropTypes.bool.isRequired,
+};
+
+Regions.defaultProps = {
+  region: null,
+};
 
 export default Connect(Regions, {
   regions: 'features.list',

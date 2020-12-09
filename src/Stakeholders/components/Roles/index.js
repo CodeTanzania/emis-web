@@ -25,6 +25,7 @@ const { Search } = Input;
  * @since 0.1.0
  */
 class Roles extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     showFilters: false,
     isEditForm: false,
@@ -33,30 +34,7 @@ class Roles extends Component {
     notificationBody: undefined,
   };
 
-  static propTypes = {
-    showForm: PropTypes.bool.isRequired,
-    posting: PropTypes.bool.isRequired,
-    loading: PropTypes.bool.isRequired,
-    total: PropTypes.number.isRequired,
-    page: PropTypes.number.isRequired,
-    role: PropTypes.shape({
-      name: PropTypes.string,
-      abbreviation: PropTypes.string,
-      description: PropTypes.string,
-    }),
-    roles: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string,
-        abbreviation: PropTypes.string,
-        description: PropTypes.string,
-      })
-    ).isRequired,
-  };
-
-  static defaultProps = {
-    role: null,
-  };
-
+  // eslint-disable-next-line react/no-deprecated
   componentWillMount() {
     getRoles();
   }
@@ -117,7 +95,7 @@ class Roles extends Component {
    * @name searchRoles
    * @description Search Roles List based on supplied filter word
    *
-   * @param {Object} event Event instance
+   * @param {object} event Event instance
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -131,7 +109,7 @@ class Roles extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} role - role to be edited
+   * @param {object} role - role to be edited
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -147,7 +125,7 @@ class Roles extends Component {
    * @name openNotificationForm
    * @description Handle on notify contacts
    *
-   * @param {Object[]} role List of contacts selected to be notified
+   * @param {object[]} role List of contacts selected to be notified
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -195,27 +173,33 @@ class Roles extends Component {
     return (
       <div className="RoleList">
         <Row>
-          <Col span={12}>
+          <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
             <Search
               size="large"
               placeholder="Search for roles here ..."
               onChange={this.searchRoles}
               allowClear
               title="Search roles"
+              className="SearchBox"
             />
             {/* end search input component */}
           </Col>
           {/* primary actions */}
-          <Col span={3} offset={9}>
-            <Button
-              type="primary"
-              icon="plus"
-              size="large"
-              title="Add new role"
-              onClick={this.openForm}
-            >
-              New Role
-            </Button>
+          <Col xxl={12} xl={12} lg={12} md={12} sm={24} xs={24}>
+            <Row type="flex" justify="end">
+              <Col xxl={3} xl={5} lg={6} md={8} sm={24} xs={24}>
+                <Button
+                  block
+                  type="primary"
+                  icon="plus"
+                  size="large"
+                  title="Add new role"
+                  onClick={this.openForm}
+                >
+                  New Role
+                </Button>
+              </Col>
+            </Row>
           </Col>
           {/* end primary actions */}
         </Row>
@@ -286,6 +270,30 @@ class Roles extends Component {
     );
   }
 }
+
+Roles.propTypes = {
+  showForm: PropTypes.bool.isRequired,
+  posting: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
+  total: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired,
+  role: PropTypes.shape({
+    name: PropTypes.string,
+    abbreviation: PropTypes.string,
+    description: PropTypes.string,
+  }),
+  roles: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      abbreviation: PropTypes.string,
+      description: PropTypes.string,
+    })
+  ).isRequired,
+};
+
+Roles.defaultProps = {
+  role: null,
+};
 
 export default Connect(Roles, {
   roles: 'roles.list',

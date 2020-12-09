@@ -9,7 +9,7 @@ import {
 } from '@codetanzania/emis-api-states';
 import { Modal } from 'antd';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import NotificationForm from '../../../components/NotificationForm';
 import Topbar from '../../../components/Topbar';
 import FocalPersonFilters from './Filters';
@@ -18,7 +18,13 @@ import FocalPeopleList from './List';
 import './styles.css';
 
 /* constants */
-const { getFocalPeople: getFocalPeopleFromAPI } = httpActions;
+const {
+  getFocalPeople: getFocalPeopleFromAPI,
+  getJurisdictions,
+  getPartyGroups,
+  getRoles,
+  getAgencies,
+} = httpActions;
 
 /**
  * @class
@@ -29,34 +35,47 @@ const { getFocalPeople: getFocalPeopleFromAPI } = httpActions;
  * @since 0.1.0
  */
 class FocalPeople extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     showFilters: false,
     isEditForm: false,
     showNotificationForm: false,
     selectedFocalPeople: [],
     notificationBody: undefined,
-  };
-
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    posting: PropTypes.bool.isRequired,
-    focalPeople: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
-      .isRequired,
-    focalPerson: PropTypes.shape({ name: PropTypes.string }),
-    page: PropTypes.number.isRequired,
-    showForm: PropTypes.bool.isRequired,
-    searchQuery: PropTypes.string,
-    total: PropTypes.number.isRequired,
-  };
-
-  static defaultProps = {
-    focalPerson: null,
-    searchQuery: undefined,
+    cached: null,
   };
 
   componentDidMount() {
     getFocalPeople();
   }
+
+  /**
+   * @function
+   * @name handleOnCachedValues
+   * @description Cached selected values for filters
+   *
+   * @param {object} cached values to be cached from filter
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleOnCachedValues = cached => {
+    const { cached: previousCached } = this.state;
+    const values = { ...previousCached, ...cached };
+    this.setState({ cached: values });
+  };
+
+  /**
+   * @function
+   * @name handleClearCachedValues
+   * @description Clear cached values
+   *
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  handleClearCachedValues = () => {
+    this.setState({ cached: null });
+  };
 
   /**
    * @function
@@ -114,7 +133,7 @@ class FocalPeople extends Component {
    * @name searchFocalPeople
    * @description Search FocalPeople List based on supplied filter word
    *
-   * @param {Object} event - Event instance
+   * @param {object} event - Event instance
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -128,7 +147,7 @@ class FocalPeople extends Component {
    * @name handleEdit
    * @description Handle on Edit action for list item
    *
-   * @param {Object} focalPerson focalPerson to be edited
+   * @param {object} focalPerson focalPerson to be edited
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -144,13 +163,14 @@ class FocalPeople extends Component {
    * @name handleShare
    * @description Handle share single focalPerson action
    *
-   * @param {Object} focalPerson focalPerson to be shared
+   * @param {object} focalPerson focalPerson to be shared
    *
    * @version 0.1.0
    * @since 0.1.0
    */
   handleShare = focalPerson => {
     const message = `${focalPerson.name}\nMobile: ${
+      // eslint-disable-line
       focalPerson.mobile
     }\nEmail: ${focalPerson.email}`;
 
@@ -162,7 +182,7 @@ class FocalPeople extends Component {
    * @name handleBulkShare
    * @description Handle share multiple focal People
    *
-   * @param {Object[]} focalPeople focal People list to be shared
+   * @param {object[]} focalPeople focal People list to be shared
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -171,6 +191,7 @@ class FocalPeople extends Component {
     const focalPersonList = focalPeople.map(
       focalPerson =>
         `${focalPerson.name}\nMobile: ${focalPerson.mobile}\nEmail: ${
+          // eslint-disable-line
           focalPerson.email
         }`
     );
@@ -185,7 +206,7 @@ class FocalPeople extends Component {
    * @name openNotificationForm
    * @description Handle on notify focalPeople
    *
-   * @param {Object[]} focalPeople List of focalPeople selected to be notified
+   * @param {object[]} focalPeople List of focalPeople selected to be notified
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -250,14 +271,15 @@ class FocalPeople extends Component {
       showNotificationForm,
       selectedFocalPeople,
       notificationBody,
+      cached,
     } = this.state;
     return (
-      <Fragment>
+      <>
         {/* Topbar */}
         <Topbar
           search={{
             size: 'large',
-            placeholder: 'Search for focal persons here ...',
+            placeholder: 'Search for focal people here ...',
             onChange: this.searchFocalPeople,
             value: searchQuery,
           }}
@@ -290,35 +312,43 @@ class FocalPeople extends Component {
 
           {/* filter modal */}
           <Modal
-            title="Filter Focal Persons"
+            title="Filter Focal People"
             visible={showFilters}
             onCancel={this.closeFiltersModal}
             footer={null}
             destroyOnClose
             maskClosable={false}
-            width="50%"
+            className="FormModal"
           >
-            <FocalPersonFilters onCancel={this.closeFiltersModal} />
+            <FocalPersonFilters
+              onCancel={this.closeFiltersModal}
+              cached={cached}
+              onCache={this.handleOnCachedValues}
+              onClearCache={this.handleClearCachedValues}
+            />
           </Modal>
           {/* end filter modal */}
 
           {/* Notification Modal modal */}
           <Modal
-            title="Notify Focal Persons"
+            title="Notify Focal People"
             visible={showNotificationForm}
             onCancel={this.closeNotificationForm}
             footer={null}
             destroyOnClose
             maskClosable={false}
-            width="40%"
+            className="FormModal"
             afterClose={this.handleAfterCloseNotificationForm}
           >
             <NotificationForm
               recipients={selectedFocalPeople}
               onSearchRecipients={getFocalPeopleFromAPI}
+              onSearchJurisdictions={getJurisdictions}
+              onSearchGroups={getPartyGroups}
+              onSearchAgencies={getAgencies}
+              onSearchRoles={getRoles}
               body={notificationBody}
               onCancel={this.closeNotificationForm}
-              onNotify={() => {}}
             />
           </Modal>
           {/* end Notification modal */}
@@ -327,7 +357,7 @@ class FocalPeople extends Component {
           <Modal
             title={isEditForm ? 'Edit Focal Person' : 'Add New Focal Person'}
             visible={showForm}
-            width="50%"
+            className="FormModal"
             footer={null}
             onCancel={this.closeFocalPersonForm}
             destroyOnClose
@@ -343,10 +373,27 @@ class FocalPeople extends Component {
           </Modal>
           {/* end create/edit form modal */}
         </div>
-      </Fragment>
+      </>
     );
   }
 }
+
+FocalPeople.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  posting: PropTypes.bool.isRequired,
+  focalPeople: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+    .isRequired,
+  focalPerson: PropTypes.shape({ name: PropTypes.string }),
+  page: PropTypes.number.isRequired,
+  showForm: PropTypes.bool.isRequired,
+  searchQuery: PropTypes.string,
+  total: PropTypes.number.isRequired,
+};
+
+FocalPeople.defaultProps = {
+  focalPerson: null,
+  searchQuery: undefined,
+};
 
 export default Connect(FocalPeople, {
   focalPeople: 'focalPeople.list',

@@ -21,6 +21,7 @@ const headerLayout = [
 const QuestionsListHeader = () => (
   <Row className="QuestionsListHeader">
     {headerLayout.map(item => (
+      // eslint-disable-next-line react/jsx-props-no-spreading
       <Col key={item.header} {...item}>
         <h4 className="title">{item.header}</h4>
       </Col>

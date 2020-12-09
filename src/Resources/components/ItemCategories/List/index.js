@@ -12,7 +12,7 @@ import remove from 'lodash/remove';
 import uniq from 'lodash/uniq';
 import uniqBy from 'lodash/uniqBy';
 import PropTypes from 'prop-types';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import ListHeader from '../../../../components/ListHeader';
 import Toolbar from '../../../../components/Toolbar';
 import { notifyError, notifySuccess } from '../../../../util';
@@ -35,23 +35,7 @@ const { getItemCategoriesExportUrl } = httpActions;
  * @since 0.1.0
  */
 class ItemCategoriesList extends Component {
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    itemCategories: PropTypes.arrayOf(
-      PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        value: PropTypes.string.isRequired,
-        abbreviation: PropTypes.string.isRequired,
-        color: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
-      })
-    ).isRequired,
-    page: PropTypes.number.isRequired,
-    total: PropTypes.number.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    onShare: PropTypes.func.isRequired,
-  };
-
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     selectedItemCategories: [],
     selectedPages: [],
@@ -62,7 +46,7 @@ class ItemCategoriesList extends Component {
    * @name handleOnSelectItem
    * @description Handle select a single itemCategory action
    *
-   * @param {Object} itemCategory selected itemCategory object
+   * @param {object} itemCategory selected itemCategory object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -132,7 +116,7 @@ class ItemCategoriesList extends Component {
    * @name handleOnDeselectItem
    * @description Handle deselect a single itemCategory action
    *
-   * @param {Object} itemCategory itemCategory to be removed from selected itemCategories
+   * @param {object} itemCategory itemCategory to be removed from selected itemCategories
    * @returns {undefined} undefined
    *
    * @version 0.1.0
@@ -161,13 +145,13 @@ class ItemCategoriesList extends Component {
     } = this.props;
     const { selectedItemCategories, selectedPages } = this.state;
     const selectedItemsCount = intersectionBy(
-      this.state.selectedItemCategories,
+      selectedItemCategories,
       itemCategories,
       '_id'
     ).length;
 
     return (
-      <Fragment>
+      <>
         {/* toolbar */}
         <Toolbar
           itemName="item category"
@@ -253,9 +237,26 @@ class ItemCategoriesList extends Component {
           )}
         />
         {/* end itemCategories list */}
-      </Fragment>
+      </>
     );
   }
 }
+
+ItemCategoriesList.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  itemCategories: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired,
+      abbreviation: PropTypes.string.isRequired,
+      color: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  page: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onShare: PropTypes.func.isRequired,
+};
 
 export default ItemCategoriesList;

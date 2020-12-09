@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 /**
- *
  * @class
  * @name IncidentTypesFilters
  * @description Filter modal component for filtering incident types
@@ -17,36 +16,18 @@ import React, { Component } from 'react';
  * @since 0.1.0
  */
 class IncidentTypesFilters extends Component {
-  static propTypes = {
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    families: PropTypes.arrayOf(PropTypes.string).isRequired,
-    natures: PropTypes.arrayOf(PropTypes.string).isRequired,
-    filter: PropTypes.objectOf(
-      PropTypes.shape({
-        families: PropTypes.arrayOf(PropTypes.string).isRequired,
-        natures: PropTypes.arrayOf(PropTypes.string).isRequired,
-      })
-    ),
-  };
-
-  static defaultProps = {
-    filter: null,
-  };
-
   /**
-   *
    * @function
    * @name handleSubmit
    * @description Handle filter action
    *
-   * @param {Object} e event object
+   * @param {object} event event object
    *
    * @version 0.1.0
    * @since 0.1.0
    */
-  handleSubmit = e => {
-    e.preventDefault();
+  handleSubmit = event => {
+    event.preventDefault();
     const {
       form: { validateFields },
       onCancel,
@@ -106,6 +87,7 @@ class IncidentTypesFilters extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* start families filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By Emergency Families">
           {getFieldDecorator('family', {
             initialValue: filter ? filter.families : [],
@@ -124,6 +106,7 @@ class IncidentTypesFilters extends Component {
         {/* end families filters */}
 
         {/* start natures filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By Nature ">
           {getFieldDecorator('nature', {
             initialValue: filter ? filter.natures : [],
@@ -156,6 +139,26 @@ class IncidentTypesFilters extends Component {
     );
   }
 }
+
+IncidentTypesFilters.propTypes = {
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFields: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  families: PropTypes.arrayOf(PropTypes.string).isRequired,
+  natures: PropTypes.arrayOf(PropTypes.string).isRequired,
+  filter: PropTypes.objectOf(
+    PropTypes.shape({
+      families: PropTypes.arrayOf(PropTypes.string).isRequired,
+      natures: PropTypes.arrayOf(PropTypes.string).isRequired,
+    })
+  ),
+};
+
+IncidentTypesFilters.defaultProps = {
+  filter: null,
+};
 
 export default Connect(Form.create()(IncidentTypesFilters), {
   natures: 'incidentTypes.schema.properties.nature.enum',

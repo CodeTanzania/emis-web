@@ -16,29 +16,12 @@ import React, { Component } from 'react';
  * @since 0.1.0
  */
 class AdjustmentsFilters extends Component {
-  static propTypes = {
-    filter: PropTypes.objectOf(
-      PropTypes.shape({
-        type: PropTypes.arrayOf(PropTypes.string),
-        reason: PropTypes.arrayOf(PropTypes.string),
-      })
-    ),
-    types: PropTypes.arrayOf(PropTypes.string).isRequired,
-    reasons: PropTypes.arrayOf(PropTypes.string).isRequired,
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-  };
-
-  static defaultProps = {
-    filter: null,
-  };
-
   /**
    * @function
    * @name handleSubmit
    * @description Handle filter action
    *
-   * @param {Object} e event object
+   * @param {object} e event object
    * @version 0.1.0
    * @since 0.1.0
    */
@@ -147,6 +130,7 @@ class AdjustmentsFilters extends Component {
         </Row>
 
         {/* start adjustment reasons filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By  Reasons">
           {getFieldDecorator('reason', {
             initialValue: filter ? filter.reason : [],
@@ -165,6 +149,7 @@ class AdjustmentsFilters extends Component {
         {/* end adjustment reason filters */}
 
         {/* start adjustment type filters */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item {...formItemLayout} label="By Types">
           {getFieldDecorator('type', {
             initialValue: filter ? filter.type : [],
@@ -197,6 +182,29 @@ class AdjustmentsFilters extends Component {
     );
   }
 }
+
+AdjustmentsFilters.propTypes = {
+  filter: PropTypes.shape({
+    type: PropTypes.arrayOf(PropTypes.string),
+    reason: PropTypes.arrayOf(PropTypes.string),
+    updatedAt: PropTypes.shape({
+      from: PropTypes.string,
+      to: PropTypes.string,
+    }),
+  }),
+  types: PropTypes.arrayOf(PropTypes.string).isRequired,
+  reasons: PropTypes.arrayOf(PropTypes.string).isRequired,
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFields: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+};
+
+AdjustmentsFilters.defaultProps = {
+  filter: null,
+};
+
 export default Form.create()(
   Connect(AdjustmentsFilters, {
     types: 'adjustments.schema.properties.type.enum',

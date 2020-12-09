@@ -19,26 +19,12 @@ const { getFeatures, getIncidentTypes, getFocalPeople } = httpActions;
  * @since 0.1.0
  */
 class PlanForm extends Component {
-  static propTypes = {
-    isEditForm: PropTypes.bool.isRequired,
-    plan: PropTypes.shape({
-      name: PropTypes.string,
-      title: PropTypes.string,
-      abbreviation: PropTypes.string,
-      mobile: PropTypes.string,
-      email: PropTypes.string,
-    }).isRequired,
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    posting: PropTypes.bool.isRequired,
-  };
-
   /**
    * @function
    * @name handleSubmit
    * @description Handle submit form action
    *
-   * @param {Object} event onSubmit event object
+   * @param {object} event onSubmit event object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -55,7 +41,7 @@ class PlanForm extends Component {
     validateFieldsAndScroll((error, values) => {
       if (!error) {
         if (isEditForm) {
-          const updatedPlan = Object.assign({}, plan, values);
+          const updatedPlan = { ...plan, ...values };
           putPlan(
             updatedPlan,
             () => {
@@ -115,6 +101,7 @@ class PlanForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* plan incident type */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item label="Incident Type" {...formItemLayout}>
           {getFieldDecorator('incidentType', {
             rules: [
@@ -137,6 +124,7 @@ class PlanForm extends Component {
         {/* end plan incident type */}
 
         {/* plan owner */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item label="Owner" {...formItemLayout}>
           {getFieldDecorator('owner', {
             rules: [
@@ -159,6 +147,7 @@ class PlanForm extends Component {
         {/* end plan owner */}
 
         {/* plan boundary input */}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Form.Item label="Plan Applicable Area" {...formItemLayout}>
           {getFieldDecorator('boundary', {
             rules: [
@@ -199,5 +188,25 @@ class PlanForm extends Component {
     );
   }
 }
+
+PlanForm.propTypes = {
+  isEditForm: PropTypes.bool.isRequired,
+  plan: PropTypes.shape({
+    name: PropTypes.string,
+    title: PropTypes.string,
+    abbreviation: PropTypes.string,
+    mobile: PropTypes.string,
+    email: PropTypes.string,
+    incidentType: PropTypes.string,
+    owner: PropTypes.string,
+    boundary: PropTypes.string,
+  }).isRequired,
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  posting: PropTypes.bool.isRequired,
+};
 
 export default Form.create()(PlanForm);

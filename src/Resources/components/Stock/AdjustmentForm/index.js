@@ -17,26 +17,12 @@ const { TextArea } = Input;
  * @since 0.1.0
  */
 class AdjustmentForm extends Component {
-  static propTypes = {
-    reasons: PropTypes.arrayOf(PropTypes.string).isRequired,
-    types: PropTypes.arrayOf(PropTypes.string).isRequired,
-    form: PropTypes.shape({ getFieldDecorator: PropTypes.func }).isRequired,
-    onCancel: PropTypes.func.isRequired,
-    posting: PropTypes.bool.isRequired,
-    stock: PropTypes.shape({
-      stock: PropTypes.object,
-      item: PropTypes.object,
-      quantity: PropTypes.number,
-      _id: PropTypes.string,
-    }).isRequired,
-  };
-
   /**
    * @function
    * @name handleSubmit
    * @description Handle on submit action for adjustment form
    *
-   * @param {Object} event onSubmit event object
+   * @param {object} event onSubmit event object
    *
    * @version 0.1.0
    * @since 0.1.0
@@ -107,6 +93,7 @@ class AdjustmentForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit} autoComplete="off">
         {/* adjustment type */}
+        {/* eslint-disable */}
         <Form.Item {...formItemLayout} label="Adjustment Action">
           {getFieldDecorator('type', {
             rules: [
@@ -170,6 +157,7 @@ class AdjustmentForm extends Component {
             ],
           })(<TextArea autosize={{ minRows: 1, maxRows: 10 }} />)}
         </Form.Item>
+        {/* eslint-enable */}
         {/* end adjustment remarks */}
 
         {/* form actions */}
@@ -189,6 +177,23 @@ class AdjustmentForm extends Component {
     );
   }
 }
+
+AdjustmentForm.propTypes = {
+  reasons: PropTypes.arrayOf(PropTypes.string).isRequired,
+  types: PropTypes.arrayOf(PropTypes.string).isRequired,
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func,
+    validateFieldsAndScroll: PropTypes.func,
+  }).isRequired,
+  onCancel: PropTypes.func.isRequired,
+  posting: PropTypes.bool.isRequired,
+  stock: PropTypes.shape({
+    stock: PropTypes.object,
+    item: PropTypes.object,
+    quantity: PropTypes.number,
+    _id: PropTypes.string,
+  }).isRequired,
+};
 
 export default Connect(Form.create()(AdjustmentForm), {
   reasons: 'adjustments.schema.properties.reason.enum',

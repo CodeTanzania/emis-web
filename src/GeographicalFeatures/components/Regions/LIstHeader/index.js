@@ -13,6 +13,7 @@ const headerLayout = [
  * @function
  * @name RegionsListHeader
  * @description Render list headers
+ * @returns {React.Component} react element
  *
  * @version 0.1.0
  * @since 0.1.0
@@ -20,6 +21,7 @@ const headerLayout = [
 const RegionsListHeader = () => (
   <Row className="RegionsListHeader">
     {headerLayout.map(item => (
+      // eslint-disable-next-line react/jsx-props-no-spreading
       <Col key={item.header} {...item}>
         <h4 className="title">{item.header}</h4>
       </Col>
