@@ -65,7 +65,7 @@
     "husky": "4.3.5",
     "lint-staged": "9.5.0",
     "prettier": "2.2.1",
-    "react-app-rewired": "2.1.5",
+    "react-app-rewired": "2.1.8",
     "react-scripts": "3.3.0"
   },
   "contributors": [
