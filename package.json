@@ -59,7 +59,7 @@
     "eslint-plugin-jest": "23.20.0",
     "eslint-plugin-jsdoc": "23.0.0",
     "eslint-plugin-jsx-a11y": "6.2.3",
-    "eslint-plugin-prettier": "3.3.0",
+    "eslint-plugin-prettier": "3.4.0",
     "eslint-plugin-react": "7.17.0",
     "generate-changelog": "1.8.0",
     "husky": "4.3.6",
