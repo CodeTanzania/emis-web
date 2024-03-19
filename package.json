@@ -46,9 +46,9 @@
     "extends": "react-app"
   },
   "devDependencies": {
-    "@commitlint/cli": "11.0.0",
-    "@commitlint/config-conventional": "11.0.0",
-    "@commitlint/travis-cli": "11.0.0",
+    "@commitlint/cli": "19.2.1",
+    "@commitlint/config-conventional": "19.1.0",
+    "@commitlint/travis-cli": "19.2.1",
     "babel-plugin-import": "1.13.0",
     "commitizen": "4.2.2",
     "customize-cra": "1.0.0",
